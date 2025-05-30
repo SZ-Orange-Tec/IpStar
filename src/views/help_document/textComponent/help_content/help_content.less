@@ -1,0 +1,76 @@
+.pc-help_content {
+  width: 100%;
+
+  &>.fingerprint_browser {
+    width: 100%;
+  }
+
+  &>.Code_API_Access {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 24px;
+
+    & h3 {
+      font-size: 22px;
+      
+      // font-weight: normal;
+      color: #373E52;
+      line-height: 45px;
+      font-style: italic;
+    }
+
+    & h4 {
+      font-size: 16px;
+      
+      font-weight: 600;
+      color: #373E52;
+      line-height: 45px;
+      margin-left: 33px;
+      margin-top: 31px;
+    }
+
+    & .p_box {
+      position: relative;
+      width: 1026px;
+      box-sizing: border-box;
+      padding: 19px;
+      margin-left: 33px;
+      background-color: #F8F9FA;
+      border-radius: 5px;
+      margin-bottom: 30px;
+
+      &::before {
+        position: absolute;
+        top: 25px;
+        left: 7px;
+        content: "";
+        width: 2px;
+        height: 12px;
+        background-color: #FC750D;
+      }
+
+      &>p {
+        font-size: 14px;
+        
+        font-weight: 400;
+        color: #666666;
+        line-height: 23px;
+
+        &>a {
+          color: @color;
+          margin-right: 40px;
+        }
+      }
+
+      &>p.note {
+        font-size: 16px;
+        
+        font-weight: 500;
+        color: #373E52;
+      }
+    }
+  }
+
+}

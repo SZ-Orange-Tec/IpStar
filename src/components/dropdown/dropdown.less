@@ -1,0 +1,24 @@
+.pc-dropDown {
+  position: relative;
+
+  .dropMenu {
+    box-sizing: border-box;
+    border-radius: 8px;
+    height: 0px;
+    overflow: hidden;
+    // max-height: 300px;
+    opacity: 0;
+    box-shadow: var(--pop-shadow);
+    position: absolute;
+    z-index: var(--popper-index);
+    background-color: hsl(var(--background));
+  }
+
+  .dropMenu[placement="bottom"] {
+    margin-top: 4px;
+  }
+  .dropMenu[placement="top-start"] {
+    margin-bottom: 4px;
+    transform: scaleX();
+  }
+}

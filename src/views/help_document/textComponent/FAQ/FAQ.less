@@ -1,0 +1,75 @@
+.pc-FAQ {
+  width: 100%;
+
+  &>.document_FAQ_text {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 24px;
+
+    &>h3 {
+      font-size: 22px;
+      font-family: Roboto;
+      // font-weight: normal;
+      color: #373E52;
+      line-height: 45px;
+      font-style: italic;
+    }
+
+    &>h4 {
+      font-size: 16px;
+      font-family: Inter;
+      font-weight: 600;
+      color: #373E52;
+      line-height: 45px;
+      margin-left: 33px;
+      margin-top: 31px;
+    }
+  }
+
+  & .p_box {
+    position: relative;
+    width: 1026px;
+    box-sizing: border-box;
+    padding: 19px;
+    margin-left: 33px;
+    background-color: #F8F9FA;
+    border-radius: 5px;
+
+    &::before {
+      position: absolute;
+      top: 24px;
+      left: 7px;
+      content: "";
+      width: 2px;
+      height: 12px;
+      background-color: #FC750D;
+    }
+
+    &>p {
+      font-size: 16px;
+      font-family: Roboto;
+      font-weight: 400;
+      color: #666666;
+      line-height: 23px;
+    }
+    &>p.dot{
+      position: relative;
+      margin-top: 10px;
+      &::before {
+        position: absolute;
+        top: 6px;
+        left: -12px;
+        content: "";
+        width: 2px;
+        height: 12px;
+        background-color: #FC750D;
+      }
+    }
+
+    &>p.note {
+      margin-top: 15px;
+    }
+  }
+}

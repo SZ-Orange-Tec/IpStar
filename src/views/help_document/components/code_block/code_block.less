@@ -1,0 +1,108 @@
+.pc-code_block {
+  position: relative;
+
+  &>.copy_btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #9999aa;
+    cursor: pointer;
+
+    &>p {
+      text-align: center;
+      line-height: 35px;
+      font-size: 18px;
+      
+      color: #fff;
+
+      &>span {
+        position: absolute;
+        top: 5px;
+        left: 0px;
+        width: 60px;
+        height: 30px;
+        line-height: 28px;
+        font-size: 14px;
+        border-radius: 5px;
+        animation: slide-in-right 1.5s ease-in-out 0s 1 normal none;
+        background-color: #9999aa;
+      }
+    }
+  }
+
+  /* required class */
+  .my-editor {
+    width: 100%;
+    /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
+    background-color: #F8F9FA;
+    color: #879CEB;
+
+    /* you must provide font-family font-size line-height. Example: */
+    font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 10px 0px;
+  }
+
+  /* optional class for removing the outline */
+  .prism-editor__textarea:focus {
+    outline: none;
+  }
+
+  /* not required: */
+  .height-300 {
+    height: 100%;
+  }
+
+  @keyframes slide-in-right {
+
+    0% {
+      left: 0px;
+      opacity: 0;
+    }
+
+    20% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    30% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    40% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    50% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    60% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    70% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    80% {
+      left: -40px;
+      opacity: 1;
+    }
+
+    100% {
+      left: 0px;
+      opacity: 0;
+    }
+  }
+
+}

@@ -1,0 +1,23 @@
+.chat-message {
+  z-index: var(--message-index);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  & > div.container {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 4px;
+    background-color: hsl(var(--tooltip-background));
+    color: hsl(var(--tooltip-foreground));
+    & > img {
+      width: 20px;
+      height: 20px;
+    }
+    & > p {
+      white-space: nowrap;
+      font-size: 14px;
+    }
+  }
+}

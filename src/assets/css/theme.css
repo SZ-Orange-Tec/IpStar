@@ -1,0 +1,100 @@
+:root {
+  --popper-index: 50;
+  --dialog-index: 100;
+  --message-index: 150;
+}
+:root[data-theme="light"] {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+
+  --neutral: 0 0% 45.1%;
+
+  --primary: 217.612 87.013% 54.706%;
+  --primary-foreground: 0 0% 100%;
+
+  --success: 142 71 45%;
+  --warn: 0 90.6% 70.8%;
+
+  --shadow: 0 4px 4px 0 rgba(102, 102, 102, 0.25);
+  --pop-shadow: 0 0 10px 0 rgba(102, 102, 102, 0.25);
+
+  --input-border: 240 3% 92%;
+  --input-border-focus: 217.612 87.013% 54.706%;
+  --input-border-hover: 0 0% 70%;
+
+  --card_background: 0 0% 100%;
+  --card-border: 240 3% 92%;
+
+  --dialog-background: 216 33 97%;
+  --dialog-wrap: 0 0% 0%;
+
+  /* tooltip */
+  --tooltip-background: 0 0% 0%;
+  --tooltip-foreground: 0 0% 100%;
+  /* message */
+  --tooltip-background: 0 0% 0%;
+  --tooltip-foreground: 0 0% 100%;
+  /* popper */
+  --popper-background: ;
+}
+:root[data-theme="dark"] {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+
+  --neutral: 0 0% 45.1%;
+  --accent: 215 28 17%;
+
+  --main-background: 20 14.3% 4.1%;
+
+  --primary: 217.612 87.013% 54.706%;
+  --primary-foreground: 0 0% 100%;
+
+  --success: 160, 84%, 39%;
+  --warn: 0 90.6% 70.8%;
+  /* 紫色 */
+  --major: 160, 84%, 39%;
+
+  --shadow: 0 4px 4px 0 rgba(102, 102, 102, 0.25);
+  --pop-shadow: 0 0 10px 0 #262626;
+
+  --border: 210, 4%, 11%;
+
+
+  --input-border: 0 0% 25.1%;
+  --input-border-focus: 217.612 87.013% 54.706%;
+
+  --card_background: 225 45 9%;
+  --card-border: 233, 15%, 12%;
+
+  --page-background: 230, 18%, 7%;
+  --page-neutral: 233, 15%, 12%;
+  --page-card:240, 7%, 14%;
+
+  /* 聊天室 */
+  --room-background: 0 0 96%;
+  --ask-background: 220.9 39.3% 11%;
+  --answer-background: 220.9 39.3% 11%;
+  /* tooltip */
+  --tooltip-background: 0 0% 100%;
+  --tooltip-foreground: 0 0% 0%;
+
+  --shadow: 0 4px 4px 0 rgba(102, 102, 102, 0.25);
+  --pop-shadow: 0 0 10px 0 #262626;
+
+  --input_border: 0 0% 25.1%;
+  --input_border_focus: 217.612 87.013% 54.706%;
+
+  --card_background: 225 45 9%;
+  --card-border: 215 28 17%;
+
+  --dialog-background: 240 5.9% 10%;
+  --dialog-wrap: 0 0% 0%;
+
+  /* 聊天室 */
+  --room-background: 0 0 96%;
+  --ask-background: 220.9 39.3% 11%;
+  --answer-background: 220.9 39.3% 11%;
+  /* tooltip */
+  --tooltip-background: 0 0% 100%;
+  --tooltip-foreground: 0 0% 0%;
+}

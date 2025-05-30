@@ -1,0 +1,128 @@
+.pc-home {
+  &>.open_column {
+    width: 100vw;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0px 50px;
+    background-color: #4E4E4E;
+
+    &>.text_sum {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+
+      &>p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, .6);
+        
+        margin-right: 30px;
+
+        &>img {
+          width: 10px;
+          height: 10px;
+          vertical-align: -1px;
+          margin-right: 2px;
+        }
+      }
+    }
+
+    &>.img_sum {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      &>img {
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+      }
+
+      &>img:nth-child(1) {
+        margin-right: 13px;
+      }
+    }
+  }
+
+  .fixed {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, .1);
+  }
+
+  .i-enter {
+    transition: all .3s linear;
+    // transform: rotateX(-100deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+
+  .i-enter-to {
+    transition: all .3s linear;
+    // transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+
+  .i-leave {
+    transition: all 1s linear;
+    // transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+
+  .i-leave-to {
+    transition: all 1s linear;
+    // transform: translateZ(600px) translateY(-300px);
+    opacity: 0;
+  }
+
+  .slide-right-enter-active,
+  .slide-right-leave-active,
+  .slide-left-enter-active,
+  .slide-left-leave-active {
+    will-change: transform;
+    transition: all 500ms;
+    position: absolute;
+    z-index: 10;
+  }
+
+  // 右滑初始装状态
+  .slide-right-enter {
+    // opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  // 右滑执行状态
+  .slide-right-leave-active {
+    // opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  // 右滑最终状态
+  .slide-right-enter-to {
+    // opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  // 左滑初始装状态
+  .slide-left-enter {
+    // opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  // 左滑执行状态
+  .slide-left-leave-active {
+    // opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  // 左滑最终状态
+  .slide-right-enter-to {
+    // opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

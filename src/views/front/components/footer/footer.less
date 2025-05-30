@@ -1,0 +1,112 @@
+.footer {
+  // width: 100vw;
+  @color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+
+  .box{
+    // width: 100%;
+    padding: 0 40px;
+    .container{
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      
+      .title{
+        line-height: 1.5;
+        font-weight: 500;
+        font-family: Space Grotesk;
+      }
+      .description{
+        line-height: 1.5;
+        color: hsl(var(--foreground) / 60%);
+      }
+      .green{
+        color: hsl(var(--success));
+      }
+    
+    }
+  }
+
+  .explore{
+    background-color: hsl(var(--page-neutral));
+    padding-bottom: 40px;
+
+    .trans{
+      margin-top: 0;
+      position: absolute;
+      top: 0;
+      left: -20px;
+      width: calc(100% + 40px);
+      transform: translateY(-100%);
+      border-width: 0 60px 40px 60px;
+      border-style: solid;
+      border-color: transparent transparent hsl(var(--page-neutral)) transparent;
+    }
+  }
+
+  .serve{
+    background-color: hsl(var(--page-background));
+    .container{
+      padding: 64px 0;
+      max-width: 1400px;
+      padding-left: 80px;
+      
+      .flex-2{
+        flex: 2;
+        // margin-left: 40px;
+        // padding-left: 40px;
+        border-left: 1px solid hsl(var(--foreground) / 10%);
+      }
+      .between{
+        align-items: flex-start;
+      }
+
+      .list{
+        padding: 0 60px;
+        ul{
+          &>li{
+            height: 32px;
+            display: flex;
+            align-items: center;
+            color: hsl(var(--foreground) / 60%);
+            &:hover{
+              color: hsl(var(--primary));
+            }
+          }
+          &>li.btn{
+            border-radius: 6px;
+            color: hsl(var(--foreground) / 80%);
+            background-color: hsl(var(--neutral) / 50%);
+            padding: 0 12px;
+            &:hover{
+              color: hsl(var(--foreground));
+              background-color: hsl(var(--neutral) / 60%);
+            }
+          }
+        }
+        .description{
+          color: hsl(var(--foreground) / 60%);
+        }
+
+        .copy_btn{
+          border-radius: 8px;
+          background-color: hsl(var(--foreground));
+          color: hsl(var(--background));
+          button{
+            border-radius: 0 8px 8px 0;
+          }
+        }
+      }
+      
+    }
+
+  }
+  .copyright{
+    height: 40px;
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+
+
+}

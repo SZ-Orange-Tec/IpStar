@@ -1,0 +1,41 @@
+
+.button{
+  @apply border-none outline-none focus:outline-none bg-transparent rounded-md
+}
+
+.circle{
+  @apply rounded-full 
+}
+.icon{
+  /* @apply  */
+}
+
+.primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transition: background-color 0.2s;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid hsl(var(--primary));
+}
+.primary:hover {
+  background-color: hsl(var(--primary) / 80%);
+}
+
+.neutral{
+  background-color: hsl(var(--neutral));
+  color: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--foreground) / 60%);
+}
+
+.ghost{
+  color: hsl(var(--foreground));
+}
+.ghost:hover:not(.disabled){
+  background-color: hsl(var(--neutral) / 10%);
+}
+
+.disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}

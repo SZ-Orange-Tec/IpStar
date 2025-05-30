@@ -1,0 +1,23 @@
+.pc-JAVA_code {
+  width: 1026px;
+  box-sizing: border-box;
+  margin-left: 33px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+.pc-JAVA_code h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #373E52;
+  line-height: 45px;
+  margin-top: 31px;
+}
+.pc-JAVA_code h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #373E52;
+  line-height: 45px;
+}
+.pc-JAVA_code > .codeOne {
+  margin-bottom: 20px;
+}

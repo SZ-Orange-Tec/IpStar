@@ -1,0 +1,210 @@
+.pc-relation {
+  width: 100vw;
+  @color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+
+  .contact_us {
+    box-sizing: border-box;
+    width: 100%;
+    height: 500px;
+    // padding: 0 40px;
+    // background: url('../../../assets/pc_img/contact_img/banner.webp') no-repeat;
+    // background-size: 100% 100%;
+    background-color: #FFFDFA;
+
+    &>.contact_us_heat {
+      max-width: 1266px;
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 100px;
+      position: relative;
+
+      &>h1 {
+        font-size: 30px;
+        
+        font-weight: 500;
+        color: #183B56;
+        margin-bottom: 15px;
+      }
+
+      &>p {
+        width: 542px;
+        font-size: 20px;
+        
+        font-weight: 500;
+        color: #5A7184;
+        line-height: 47px;
+      }
+
+      &>.email_contact {
+        position: absolute;
+        top: 100px;
+        right: 0px;
+        width: 487px;
+        // height: 578px;
+        box-sizing: border-box;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0px 0 62px 0px rgba(252,183,17,0.08),0 0 5px #f9f9f9;
+        border-radius: 2px;
+        border-radius: 8px;
+        color: #183B56;
+        &>h4 {
+          // text-align: center;
+          font-size: 28px;
+          
+          font-weight: 500;
+          margin-bottom: 30px;
+        }
+  
+        &>.input_sum {
+          width: 100%;
+  
+          &>.input_hr {
+            width: 100%;
+  
+            // background-color: red;
+            &>p {
+              font-size: 16px;
+              
+              font-weight: 500;
+            }
+  
+            &>input,&>textarea {
+              margin-top: 8px;
+              box-sizing: border-box;
+              width: 100%;
+              height: 40px;
+              font-size: 14px;
+              line-height: 20px;
+              padding:5px 14px;
+              outline: none;
+              border: 1px solid #dedede;
+              border-radius: 5px;
+              transition: border-color .2s;
+              &::placeholder{
+                color: #dcdcdc;
+              }
+              &:hover{
+                border-color: #ccc;
+              }
+              &:focus{
+                border-color: @color;
+              }
+            }
+  
+            &>textarea {
+              height: 146px;
+              max-width: 100%;
+              resize: none;
+            }
+          }
+          &>.input_hr+.input_hr{
+            margin-top: 12px;
+          }
+        }
+        
+  
+        &>.el-button {
+          margin-top: 12px;
+          width: 100%;
+          height: 45px;
+          font-size: 14px;
+          
+          font-weight: 500;
+          background-color: #FCB711;
+          color: #fff;
+          border: none;
+          transition: background-color .1s;
+          &:hover{
+            background-color: #f3aa00;
+          }
+          &:focus{
+            background-color: #FCB711;
+          }
+        }
+      }
+    }
+  }
+
+  &>.message_us {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 80px 40px 150px;
+    // height: 673px;
+    background-color: #fdfdfd;
+
+    &>.message_us_heat {
+      margin: 0 auto;
+      max-width: 1266px;
+      width: 100%;
+
+      &>li {
+        // width: 300px;
+        // height: 66px;
+        display: flex;
+        align-items: flex-start;
+        &>img {
+          width: 75px;
+          height: 75px;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+
+        &>.text_sum {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          padding-top: 6px;
+
+          &>p:nth-child(1) {
+            font-size: 20px;
+            
+            font-weight: 500;
+            color: #333333;
+          }
+
+          &>p:nth-child(2) {
+            margin-top: 4px;
+            font-size: 16px;
+            
+            font-weight: 400;
+            color: #999999;
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          &>.img_sum {
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+
+            &>img {
+              width: 30px;
+              height: 30px;
+              cursor: pointer;
+            }
+            &>img+img{
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::v-deep ::-webkit-scrollbar {
+    position: absolute;
+    z-index: 10;
+    width: 7px;
+  }
+
+  ::v-deep ::-webkit-scrollbar-thumb {
+    background-color: #EDF3FC;
+  }
+}

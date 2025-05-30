@@ -1,0 +1,10 @@
+.input{
+  @apply outline-none focus:outline-none rounded-md h-10 px-3 text-sm;
+  border: 1px solid hsl(var(--input-border));
+}
+.input:hover{
+  border-color: hsl(var(--input-border-hover));
+}
+.input:focus{
+  border-color: hsl(var(--input-border-focus));
+}

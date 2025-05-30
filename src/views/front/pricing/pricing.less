@@ -1,0 +1,192 @@
+.pc-pricing {
+  // padding-top: 80px;
+@color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+  .pricing_content {
+    width: 100vw;
+    background-color: #fdfdfd;
+    padding-bottom: 100px;
+
+    & > .price {
+      padding: 40px 0 120px;
+      background-color: #fffdfa;
+      & > .introduce {
+        width: 1094px;
+        margin: 0 auto;
+        padding-right: 30px;
+        & > p {
+          font-size: 40px;
+
+          font-weight: 500;
+          color: #12182c;
+          line-height: 55px;
+          white-space: nowrap;
+
+          & > span {
+            color: @color;
+          }
+        }
+        & > i {
+          margin-top: 30px;
+          display: flex;
+          align-items: center;
+          font-size: 32px;
+
+          font-weight: 500;
+          color: #12182c;
+        }
+      }
+      & > .price_main {
+        width: 100%;
+        margin-top: 40px;
+      }
+    }
+
+    & > .attern_payment {
+      width: 100%;
+      height: 169px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      padding-top: 55px;
+      background-color: #e6e6e6;
+      margin-bottom: 25px;
+
+      & > div {
+        img {
+          height: 26px;
+        }
+        img + img {
+          margin-left: 50px;
+        }
+      }
+
+      & > h1 {
+        text-align: center;
+        font-size: 12px;
+
+        font-weight: 400;
+        color: #333333;
+        line-height: 34px;
+        margin-top: 39px;
+      }
+
+      // &>img {
+      //   display: block;
+      //   margin: 0 auto;
+      //   width: 860px;
+      //   height: 36px;
+      // }
+    }
+
+    & > .area {
+      width: 100%;
+
+      & > .area_content {
+        width: 1077px;
+        height: 557px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding-top: 73px;
+        background: url("../../../assets/pc_img/pricing_img/area\ background.png")
+          no-repeat;
+        background-size: 100% 100%;
+
+        & > h1 {
+          font-size: 32px;
+
+          font-weight: 600;
+          color: #333333;
+          line-height: 34px;
+          text-align: center;
+          transform: skew(-8deg);
+          margin-bottom: 109px;
+        }
+
+        & > .area_nation {
+          width: 919px;
+          height: 356px;
+          margin: 0 auto;
+          box-sizing: border-box;
+          padding: 71px 0px 0px 0px;
+
+          & > ul {
+            width: 100%;
+            height: 152px;
+            box-sizing: border-box;
+            padding-left: 107px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+
+            & > li {
+              width: 33%;
+              height: 47px;
+              display: flex;
+
+              & > img {
+                width: 47px;
+                height: 47px;
+              }
+
+              & > .text {
+                margin-left: 11px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                & > p {
+                  font-size: 16px;
+                  font-family: Roboto;
+                  // font-weight: 100;
+                  color: #333333;
+                }
+
+                & > span {
+                  font-size: 14px;
+                  font-family: Roboto;
+                  // font-weight: 100;
+                  color: #999999;
+                }
+              }
+            }
+          }
+
+          & > h1 {
+            font-size: 20px;
+
+            font-weight: normal;
+            color: #333333;
+            text-align: center;
+            margin-top: 70px;
+
+            & > span {
+              color: @color;
+            }
+
+            & > i {
+              display: inline-block;
+              width: 20px;
+              height: 10px;
+              vertical-align: 1px;
+              background: url("../../../assets/pc_img/pricing_img/Arrow\ to\ the\ right.png")
+                no-repeat;
+              background-size: 100% 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    /*高宽分别对应横竖滚动条的尺寸*/
+    width: 4px;
+    height: 0px;
+    color: transparent;
+  }
+}

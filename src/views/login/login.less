@@ -1,0 +1,68 @@
+.pc-login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../assets/pc_img/login_img/backgound.png") no-repeat;
+  background-size: 100% 100%;
+
+  & > .container {
+    box-sizing: border-box;
+    width: 530px;
+    height: 580px;
+    padding: 20px 52px;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 58px 7px rgba(147, 172, 216, 0.15);
+    border-radius: 12px;
+    position: relative;
+
+    .back {
+      position: absolute;
+      top: 20px;
+      left: 52px;
+      // align-self: flex-start;
+      font-size: 14px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 6px;
+      background-color: transparent;
+      transition: background-color 0.3s;
+      i {
+        font-weight: bold;
+      }
+      strong {
+        font-size: 500;
+        line-height: 1;
+      }
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+    .header {
+      margin-top: 50px;
+      strong {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+
+    .main {
+      width: 370px;
+      margin: 0 auto;
+    }
+
+    .loading {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.8);
+      color: #fdb713;
+      z-index: 3;
+      .chat-loading {
+        width: 25px;
+      }
+    }
+  }
+}
