@@ -5,10 +5,10 @@
 
     <!-- introduce 介绍 -->
     <ul v-if="vantage" class="vantage vh_center">
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ $t("PCProductList.vantage[0]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ $t("PCProductList.vantage[1]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ $t("PCProductList.vantage[2]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ $t("PCProductList.vantage[3]") }}</li>
+      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[0]") }}</li>
+      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[1]") }}</li>
+      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[2]") }}</li>
+      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
     </ul>
     <div class="list" :style="{ 'max-width': maxWidth }">
       <div class="priceList" ref="productRef" @wheel="scrollPlugin">
@@ -26,7 +26,7 @@
 
                 <!-- 折扣 -->
                 <p class="font-semibold">
-                  {{ item.trial ? $t("PCProductList.free") : item.discount_rate + $t("PCProductList.discount") }}
+                  {{ item.trial ? t("Free") : item.discount_rate + "%" + t("OFF") }}
                 </p>
 
                 <!-- 免费 -->
@@ -34,10 +34,10 @@
                   <p class="price">
                     {{ item.pack_title.split(" ")[0] }}<em>{{ item.pack_title.split(" ")[1] }}</em>
                   </p>
-                  <p class="delete">{{ $t("PCProductList.freeText") }}</p>
+                  <p class="delete">{{ t("PCProductList.freeText") }}</p>
                   <p class="total">
-                    <em>{{ $t("PCProducts.tableHeader.duration") }}: </em>
-                    <strong>{{ item.prices[0].days }} {{ $t("PCProductList.days") }}</strong>
+                    <em>{{ t("PCProducts.tableHeader.duration") }}: </em>
+                    <strong>{{ item.prices[0].days }} {{ t("PCProductList.Day") }}</strong>
                   </p>
                 </template>
                 <!-- 不限量 -->
@@ -53,7 +53,7 @@
                     <span class="text-sm">/GB</span>
                   </p>
                   <p class="total vh_center space-x-1">
-                    <span>{{ $t("PCProductList.total") }}:</span>
+                    <span>{{ t("Total") }}:</span>
                     <span>${{ item.prices[item.select].price / 100 }}</span>
                   </p>
                   <div class="number w-full">
@@ -62,56 +62,56 @@
                 </template>
               </div>
 
-              <!-- <p class="title v_center" v-if="item.unlimit">{{ $t("PCProductList.unlimited_rights[0]") }}</p> -->
+              <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
 
               <ul class="rights column space-y-5 text-sm font-medium" v-if="item.unlimit">
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.unlimited_rights[1]") }}</p>
+                  <p>{{ t("PCProductList.unlimited_rights[1]") }}</p>
                 </li>
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.unlimited_rights[2]") }}</p>
+                  <p>{{ t("PCProductList.unlimited_rights[2]") }}</p>
                 </li>
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.unlimited_rights[3]") }}</p>
+                  <p>{{ t("PCProductList.unlimited_rights[3]") }}</p>
                 </li>
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.unlimited_rights[4]") }}</p>
+                  <p>{{ t("PCProductList.unlimited_rights[4]") }}</p>
                 </li>
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.unlimited_rights[5]") }}</p>
+                  <p>{{ t("PCProductList.unlimited_rights[5]") }}</p>
                 </li>
               </ul>
 
               <ul class="rights column space-y-5 text-sm font-medium" v-else>
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.rights[0]") }}</p>
+                  <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.rights[1]") }}</p>
+                  <p>{{ t("productList_spec.right2") }}</p>
                 </li>
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.rights[3]") }}</p>
+                  <p>{{ t("productList_spec.right3") }}</p>
                 </li>
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.rights[4]") }}</p>
+                  <p>{{ t("productList_spec.right4") }}</p>
                 </li>
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
-                  <p>{{ $t("PCProductList.rights[5]") }}</p>
+                  <p>{{ t("productList_spec.right5") }}</p>
                 </li>
               </ul>
 
               <IpButton @click="click_pay(item)" type="ghost" circle class="border-btn rounded-full px-4 font-medium">
-                {{ item.trial ? $t("PCProductList.get") : $t("PCProductList.purchase") }}
+                {{ item.trial ? t("Get") : t("Order") }}
               </IpButton>
             </div>
           </li>
@@ -130,34 +130,34 @@
     <PayPopup ref="pay_popup" v-if="order_data" :order_data="order_data">
       <template #detail>
         <div class="order_detail">
-          <h2>{{ $t("PCPayPopup.detail.title") }}</h2>
+          <h2>{{ t("PCPayPopup.detail.title") }}</h2>
           <ul class="detail">
             <li class="between">
-              <span>{{ $t("PCPayPopup.detail.traffic") }}</span>
+              <span>{{ t("PCPayPopup.detail.traffic") }}</span>
               <span>{{ product?.pack_size }}</span>
             </li>
             <li class="between">
-              <span>{{ $t("PCPayPopup.detail.unit_price") }}</span>
+              <span>{{ t("PCPayPopup.detail.unit_price") }}</span>
               <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
               <span v-else>--</span>
             </li>
             <li class="between">
-              <span>{{ $t("PCPayPopup.detail.discount") }}</span>
+              <span>{{ t("PCPayPopup.detail.discount") }}</span>
               <span>{{ product?.discount_rate }}%</span>
             </li>
             <li class="between">
-              <span>{{ $t("PCPayPopup.detail.time") }}</span>
-              <span>{{ product?.days }} {{ $t("PCProductList.days") }}</span>
+              <span>{{ t("PCPayPopup.detail.time") }}</span>
+              <span>{{ product?.days }} {{ t("PCProductList.days") }}</span>
             </li>
             <li class="between">
-              <span>{{ $t("PCPayPopup.detail.total") }}</span>
+              <span>{{ t("PCPayPopup.detail.total") }}</span>
               <span>
                 <i>${{ product?.origin_price / 100 }}</i> ${{ product?.price / 100 }}</span
               >
             </li>
           </ul>
           <div class="btn vh_center">
-            <!-- <el-button :loading="loading" @click="FoundOrder">{{$t('PCPayPopup.detail.submit')}}</el-button> -->
+            <!-- <el-button :loading="loading" @click="FoundOrder">{{t('PCPayPopup.detail.submit')}}</el-button> -->
           </div>
         </div>
       </template>
@@ -178,7 +178,7 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
-
+import { useI18n } from "vue-i18n"
 const props = defineProps({
   tabbar: {
     type: Boolean,
@@ -195,6 +195,8 @@ const props = defineProps({
 })
 
 const router = useRouter()
+
+const { t } = useI18n()
 
 // refs
 const product = ref(null)

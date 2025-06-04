@@ -41,7 +41,7 @@
 
           <!-- 登录 -->
           <div class="btn_sum" v-if="!token">
-            <IpButton type="primary" class="h-10 text-base px-5" @click="$router.push('/sign_in')">{{ t("Sign_in") }}</IpButton>
+            <IpButton type="primary" class="h-10 text-base px-5" @click="$router.push('/login')">{{ t("Sign_in") }}</IpButton>
             <!-- <el-button @click="$router.push('/sign_in')">{{$t('PCHeader.btnSumOne')}} <i class="el-icon-right"></i> </el-button> -->
             <!-- <el-button type="primary" @click="$router.push('/register')">{{$t('PCHeader.btnSumTwo')}}</el-button> -->
           </div>
@@ -58,11 +58,11 @@
             </template>
             <template #menu>
               <ul class="menu p-2 text-sm">
-                <li class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Overview") }}</li>
-                <li class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Products") }}</li>
-                <li class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Billings") }}</li>
+                <li @click="navigate('/overview')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Overview") }}</li>
+                <li @click="navigate('/products')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Products") }}</li>
+                <li @click="navigate('/billings')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Billings") }}</li>
                 <li class="menu-split my-1"></li>
-                <li class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Sign_out") }}</li>
+                <li @click="signOut" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Sign_out") }}</li>
               </ul>
             </template>
           </DropDown>
@@ -113,21 +113,10 @@ async function toggleLang(locale) {
 
   setI18nLanguage(locale)
 }
-// 用户选择语言
-function localeCommand(val) {
-  // const lang = val === '1' ? 'zh' : val === '2' ? 'en' : val === '3' ? 'ru' : ''
-  // if (lang === store.state.lang) return
-  // store.dispatch('switchLanguage', +val)
-}
 
-// 点击用户菜单
-function handleCommand(res) {
-  if (res === "Sign_out") {
-    // 退出
-    OutLogin()
-    return
-  }
-  router.push(res)
+// 退出
+function signOut() {
+  OutLogin()
 }
 </script>
 

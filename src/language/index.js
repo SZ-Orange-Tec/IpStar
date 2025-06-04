@@ -6,7 +6,6 @@ import en from "./language/local_en"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
 
-console.log(zh.PCHelp.domList)
 const language = navigator.language
 const langMap = {
   "zh-CN": "zh",
@@ -18,17 +17,10 @@ const locale = localStorage.getItem("lang") || langMap[language]
 const i18n = createI18n({
   locale: locale, // 语言标识,第一次登录默认是中文
   messages: {
-    zh: {
-      ...zh,
-      // ...HomeMessage.zh,
-    }, // 中文
-    en: {
-      ...en,
-      // ...HomeMessage.en,
-    }, // 英语
-    // ru: { ...require('./language/local_ru'), ...enEl } // 俄语
-    // 要多少语言就自己添加多少
+    zh: { ...zh },
+    en: { ...en },
   },
+  warnHtmlMessage: false,
 })
 localStorage.setItem("lang", locale)
 
@@ -59,5 +51,4 @@ export async function loadLocaleMessages(path, locale = i18n.global.locale) {
   return nextTick()
 }
 
-console.log(i18n)
 export default i18n

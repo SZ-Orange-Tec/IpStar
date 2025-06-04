@@ -1,47 +1,50 @@
 <template>
-  <div class="pc-help">
-    <div class="help_heart">
-      <!-- 标题 -->
-      <div class="title">
-        <h1>{{$t('PCHelp.title')}}</h1>
-      </div>
-      <!-- 选项块 -->
-      <div class="help_select">
-        <div class="block" :class="{select:index===idx}" v-for="item,index in domList" :key="index" @click="selectBlock(index)">
-          <h1>{{item.h1}}</h1>
-          <p>{{item.p}}</p>
-        </div>
-      </div>
-      <!-- @mouseout="mousemove" @mouseleave="mouseleave" -->
-      <button @click="gotoDocum">
-        <p>{{$t('PCHelp.btnTxt')}}</p>
-        <div class="arrow-wrapper">
-          <div class="arrow"></div>
-        </div>
-        <!-- <div class="test"  :style="`top:${layerY}px;left:${layerX}px;`"></div> -->
-      </button>
-      <!-- 文档块 -->
-      <div class="txt_document" v-if="idx===0">
-        <!-- left -->
-        <div class="left" v-for="item,index in GettingList" :key="index">
-          <div class="box" v-for="j,i in item" :key="i" @click="collapseClick(j.id)">
-            <Collapse :bol="collapseIdx===j.id" :info="j"/>
+  <div class="help">
+    <div class="box">
+      <div class="container column_center space-y-10">
+        <p class="text-3xl title">{{ $t("help_spec.title") }}</p>
+
+        <!-- 选项块 -->
+        <div class="select w-full space-x-10">
+          <div
+            class="flex-1 block pointer transition-color space-y-4"
+            :class="{ select: index === idx }"
+            v-for="(item, index) in domList"
+            :key="index"
+            @click="selectBlock(index)"
+          >
+            <h1 class="text-lg title">{{ item.h1 }}</h1>
+            <p class="text-sm description">{{ item.p }}</p>
           </div>
         </div>
-      </div>
-      <div class="txt_document" v-if="idx===1">
-        <!-- left -->
-        <div class="left" v-for="item,index in IntegrationList" :key="index">
-          <div class="box" v-for="j,i in item" :key="i" @click="collapseClick(j.id)">
-            <Collapse :bol="collapseIdx===j.id" :info="j"/>
+
+        <IpButton type="primary" class="px-10 h-10" @click="gotoDocum">
+          <p>{{ $t("help_spec.more") }}</p>
+        </IpButton>
+
+        <!-- 文档块 -->
+        <div class="txt_document w-full space-x-10" v-if="idx === 0">
+          <!-- left -->
+          <div class="left" v-for="(item, index) in GettingList" :key="index">
+            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
+              <Collapse :bol="collapseIdx === j.id" :info="j" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="txt_document" v-if="idx===2">
-        <!-- left -->
-        <div class="left" v-for="item,index in FAQlist" :key="index">
-          <div class="box" v-for="j,i in item" :key="i" @click="collapseClick(j.id)">
-            <Collapse :bol="collapseIdx===j.id" :info="j"/>
+        <div class="txt_document w-full space-x-10" v-if="idx === 1">
+          <!-- left -->
+          <div class="left" v-for="(item, index) in IntegrationList" :key="index">
+            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
+              <Collapse :bol="collapseIdx === j.id" :info="j" />
+            </div>
+          </div>
+        </div>
+        <div class="txt_document w-full space-x-10" v-if="idx === 2">
+          <!-- left -->
+          <div class="left" v-for="(item, index) in FAQlist" :key="index">
+            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
+              <Collapse :bol="collapseIdx === j.id" :info="j" />
+            </div>
           </div>
         </div>
       </div>
@@ -50,35 +53,35 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
+import { onMounted, ref, watch } from "vue"
 import Collapse from "../components/collapse/collapse.vue"
 import settingStore from "@/store/setting"
+import IpButton from "@/components/button/button.vue"
 
-const {lang}=settingStore()
+const { en } = settingStore()
 
-const idx=ref(0)
-const collapseIdx=ref(0)
-const domList=ref([])
-const GettingList=ref([])
-const IntegrationList=ref([])
-const FAQlist=ref([])
+const idx = ref(0)
+const collapseIdx = ref(0)
+const domList = ref([])
+const GettingList = ref([])
+const IntegrationList = ref([])
+const FAQlist = ref([])
 
-
-function mousemove (e) {
+function mousemove(e) {
   this.layerY = e.offsetY
   this.layerX = e.offsetX
 }
-function mouseleave (e) {
+function mouseleave(e) {
   this.layerY = e.offsetY
   this.layerX = e.offsetX
 }
 // 切换帮助中心
-function selectBlock (index) {
+function selectBlock(index) {
   this.idx = index
   this.collapseIdx = null
 }
 // 当前展开的问答
-function collapseClick (id) {
+function collapseClick(id) {
   if (this.collapseIdx === id) {
     this.collapseIdx = null
     return
@@ -86,43 +89,42 @@ function collapseClick (id) {
   this.collapseIdx = id
 }
 // 文档跳转
-function gotoDocum () {
+function gotoDocum() {
   if (this.idx === 0) {
-    this.$store.commit('setIsdocument', 'Getting')
-    this.$store.commit('setDocumentIdx', '0-0')
-    this.$router.push('/help_document')
+    this.$store.commit("setIsdocument", "Getting")
+    this.$store.commit("setDocumentIdx", "0-0")
+    this.$router.push("/help_document")
   } else if (this.idx === 1) {
-    this.$store.commit('setIsdocument', 'Help')
-    this.$store.commit('setDocumentIdx', '1-0')
-    this.$router.push('/help_document')
+    this.$store.commit("setIsdocument", "Help")
+    this.$store.commit("setDocumentIdx", "1-0")
+    this.$router.push("/help_document")
   } else if (this.idx === 2) {
-    this.$store.commit('setIsdocument', 'FAQ')
-    this.$store.commit('setDocumentIdx', '2-0')
-    this.$router.push('/help_document')
+    this.$store.commit("setIsdocument", "FAQ")
+    this.$store.commit("setDocumentIdx", "2-0")
+    this.$router.push("/help_document")
   }
 }
 // 获取数据
-async function getInfo(){
+async function getInfo() {
   const {
-    default:{
-      dom,
-      Getting,
-      Integration,
-      FAQ
-    }
-  } = lang.value==='en' ? await import('./info.en') : await import('./info.zh')
+    default: { dom, Getting, Integration, FAQ },
+  } = en.value ? await import("./info.en") : await import("./info.zh")
 
-  domList.value=dom
-  GettingList.value=Getting
-  IntegrationList.value=Integration
-  FAQlist.value=FAQ
+  domList.value = dom
+  GettingList.value = Getting
+  IntegrationList.value = Integration
+  FAQlist.value = FAQ
 }
 
-onMounted(()=>{
+watch(en, () => {
+  getInfo()
+})
+
+onMounted(() => {
   getInfo()
 })
 </script>
 
 <style lang="less" scoped>
-  @import url('./help.less');
+@import url("./help.less");
 </style>

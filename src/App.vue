@@ -1,11 +1,10 @@
 <template>
-  <div>
+  <div class="relative">
     <router-view v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
   </div>
 </template>
-
 
 <script setup>
 // import { onMounted } from 'vue';
@@ -21,6 +20,4 @@
 // })
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>

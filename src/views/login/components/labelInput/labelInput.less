@@ -1,0 +1,56 @@
+.label-input {
+  position: relative;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid hsl(var(--input_border_hover));
+  border-radius: 8px;
+  background-color: hsl(var(--dialog-background));
+
+  .label {
+    position: absolute;
+    top: 11px;
+    left: 10px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 6px;
+    background-color: hsl(var(--dialog-background));
+    color: hsl(var(--foreground) / 50%);
+    font-size: 16px;
+    transition: all 0.1s;
+  }
+
+  .label.inputed {
+    top: -10px;
+    font-size: 14px;
+  }
+
+  .input_box {
+    height: 100%;
+    .input {
+      height: 100%;
+      background-color: hsl(var(--dialog-background));
+      color: hsl(var(--foreground));
+    }
+    .edit {
+      color: hsl(var(--primary));
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.pc-label-input.focus {
+  border-color: hsl(var(--primary));
+  .label {
+    color: hsl(var(--primary));
+  }
+}
+
+.pc-label-input.readonly {
+  border-color: hsl(var(--input_border_hover));
+  .label {
+    color: hsl(var(--foreground) / 40%);
+  }
+}

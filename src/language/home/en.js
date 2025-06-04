@@ -1,9 +1,10 @@
 import header from "../components/header/en"
 import footer from "../components/footer/en"
+import productList from "../components/productList/en"
 export default {
   ...header,
   ...footer,
-
+  ...productList,
   home_spec: {
     intro_title: 'We Offer Affordable <span class="primary_text">High-Quality</span> <br /> Residential lP Proxy Services.',
     intro_desc:

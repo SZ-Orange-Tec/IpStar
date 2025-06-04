@@ -1,49 +1,39 @@
 .pc-login_password {
   padding-top: 40px;
-  @color: #FDB713;
-  @color-show: #d09712;
-  @color-black: #191D26;
   .form {
-    font-size: 14px;
-    line-height: 1.5;
+    &>p{
+      white-space: nowrap;
+    }
+    .input_box {
+      background-color: #2d2d35;
+      height: 54px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      .icon{
+        color:hsl(var(--foreground) / 50%);
+      }
+      input{
+        background: transparent;
+        outline: none;
+        border: none;
+        &:focus{
+          outline: none;
+          border: none;
+        }
+      }
+      &:focus-within{
+        border-color: hsl(var(--foreground) / 50%);
+      }
+    }
   }
-
   & > .btn {
-    margin-top: 36px;
     width: 100%;
-    height: 44px;
-    font-size: 14px;
+    height: 50px;
+    border-radius: 8px;
+    background: linear-gradient(to right,#418bfe,#19ecaa);
 
-    font-weight: 500;
-    color: #ffffff;
-    background: @color-black;
-    box-shadow: 0px 1px 31px 4px rgba(253, 183, 19, 0.1);
-    border-radius: 5px;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    border: none !important;
-
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      background-color: @color;
-      transform: scaleX(0);
-      transform-origin: right center;
-    }
-
-    &:hover::before {
-      transform: scaleX(1);
-      transform-origin: left center;
-      transition: transform 0.24s ease-in-out;
-    }
   }
   & > .btn.disabled {
-    background-color: @color;
+    background: linear-gradient(to right,#275399,#1ba076);
   }
 }

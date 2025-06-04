@@ -1,31 +1,28 @@
 .pc-login_code {
-  padding-top: 60px;
-  font-size: 14px;
-@color: #FDB713;
-  @color-show: #d09712;
-  @color-black: #191D26;
-  & > p {
-    word-break: break-all;
+  padding-top: 36px;
+  .form{
+    & > p{
+      word-break: break-all;
+    }
   }
   .input_group {
     width: 100%;
     overflow: hidden;
     ul {
       width: 100%;
-      background-color: #fff;
+      // background-color: #fff;
       li {
-        font-size: 14px;
-        line-height: 1.5;
         text-align: center;
-        height: 40px;
+        height: 54px;
         border-radius: 6px;
-        border: 1px solid #e4e4e7;
+        border: 1px solid transparent;
         position: relative;
+        background-color: #2d2d35;
         .tick {
           position: absolute;
           width: 1px;
           height: 16px;
-          background-color: #000;
+          background-color: hsl(var(--foreground) / 50%);
           animation: tok 0.8s step-end infinite;
           @keyframes tok {
             0% {
@@ -42,7 +39,8 @@
         .num {
           // width: 20px;
           // height: 20px;
-          background-color: #fff;
+          // background-color: #fff;
+          background-color: #2d2d35;
           position: absolute;
           left: 50%;
           top: 50%;
@@ -50,7 +48,7 @@
         }
       }
       li.focus {
-        border-color: #a1a1aa;
+        border-color: hsl(var(--foreground) / 50%);
       }
     }
     input {
@@ -63,46 +61,39 @@
   }
 
   & > .btn {
-    margin-top: 36px !important;
     width: 100%;
-    height: 44px;
-    font-size: 14px;
+    height: 50px;
+    border-radius: 8px;
+    background: linear-gradient(to right,#418bfe,#19ecaa);
 
-    font-weight: 500;
-    color: #ffffff;
-    background: @color-black;
-    box-shadow: 0px 1px 31px 4px rgba(253, 183, 19, 0.1);
-    border-radius: 5px;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    border: none !important;
-
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-      background-color: @color;
-      transform: scaleX(0);
-      transform-origin: right center;
-    }
-
-    &:hover:not(.disabled, .notResend) {
-      &::before {
-        transform: scaleX(1);
-        transform-origin: left center;
-        transition: transform 0.24s ease-in-out;
-      }
-    }
   }
   & > .btn.disabled {
-    background-color: @color;
+    // background-color: @color;
   }
   & > .notResend {
     opacity: 0.5;
+  }
+
+  .resend{
+    height: 32px;
+    align-self: flex-end;
+    color: hsl(var(--foreground) / 80%);
+    &:hover{
+      background-color: transparent;
+      color: hsl(var(--foreground));
+    }
+
+  }
+  .back{
+    margin-top: 48px;
+    background-color: #2d2d35;
+    height: 40px;
+    border-radius: 8px;
+    color: hsl(var(--foreground) / 80%);
+    line-height: 1;
+    &:hover{
+      background-color: #222227;
+      color: hsl(var(--foreground));
+    }
   }
 }

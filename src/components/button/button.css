@@ -13,7 +13,6 @@
 .primary {
   background-color: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  transition: background-color 0.2s;
   cursor: pointer;
   user-select: none;
   border: 1px solid hsl(var(--primary));
@@ -26,6 +25,9 @@
   background-color: hsl(var(--neutral));
   color: hsl(var(--primary-foreground));
   border: 1px solid hsl(var(--foreground) / 60%);
+}
+.neutral:hover{
+  background-color: hsl(var(--neutral) / 80%);
 }
 
 .ghost{

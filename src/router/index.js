@@ -35,6 +35,7 @@ const routes = [
   // 登录板块
   {
     path: "/login",
+    name: "login",
     component: () => import("@/views/login/login.vue"),
   },
   // 后台板块
