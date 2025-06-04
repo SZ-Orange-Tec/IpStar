@@ -8,7 +8,7 @@
       </div>
       <div class="column">
         <ul>
-          <template v-for="(item, index) in column_list" :key="index">
+          <template v-for="(item, index) in menuData" :key="index">
             <li class="v_center pointer" v-if="index === 1 || index === 4">
               <em>{{ index === 1 ? "PLANS" : "PROXIES" }}</em>
             </li>
@@ -20,7 +20,7 @@
         </ul>
       </div>
       <p class="tip">
-        {{ $t("PCLayout.tip[0]") }}<span @click="$router.push('/help_document')">{{ $t("PCLayout.tip[1]") }}</span>
+        {{ $t("PCLayout.tip[0]") }}<span @click="$router.push('/doc')">{{ $t("PCLayout.tip[1]") }}</span>
       </p>
     </div>
     <!-- right -->
@@ -47,7 +47,7 @@
             <p>{{ $t("PCLayout.rightBox[0]") }}</p>
           </div>
           <!-- 文档 -->
-          <div class="document_icon" @mousemove="DocMousemove" @mouseleave="DocMouseleave" @click="gotoDocum">
+          <div class="document_icon" @mousemove="DocMousemove" @mouseleave="DocMouseleave" @click="toDocument">
             <img :src="imgBol ? documenIcon[0] : documenIcon[1]" alt="Help Center" />
             <p>{{ $t("PCLayout.rightBox[2]") }}</p>
           </div>
@@ -82,7 +82,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from "vue"
+import { ref, watch, onMounted } from "vue"
 import { useRouter, useRoute } from "vue-router"
 import detect from "@/utils/detect"
 import settingsStore from "@/store/setting"
@@ -90,7 +90,7 @@ import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 
 const { getUserInfo } = userStore()
-const { lang } = settingsStore()
+const { lang, en } = settingsStore()
 const { path, isProduc, isMask, registerAward } = layoutStore()
 const router = useRouter()
 const route = useRoute()
@@ -108,60 +108,65 @@ const documenIcon = [
   new URL("@/assets/pc_img/layout_img/Help Center bright.png", import.meta.url),
 ]
 
-// 侧边栏数据
-const column_list = ref([
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/gaikuang_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/gaikuang.png", import.meta.url),
-    name: "Overview", // 注意：这里需要使用 t 函数进行国际化
-    path: "/overview",
-    width: 26,
-    height: 26,
-    isShow: true,
-  },
-  {},
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/chanping_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/chanping.png", import.meta.url),
-    name: "Products",
-    path: "/products",
-    width: 27,
-    height: 26,
-    isShow: true,
-  },
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/dingdan_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/dingdan.png", import.meta.url),
-    name: "Billings",
-    path: "/billings",
-    isShow: true,
-  },
-  {},
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/tiqu_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/tiqu.png", import.meta.url),
-    name: "Obtain Proxy",
-    path: "/obtain_proxy",
-    isShow: true,
-  },
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/api_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/api.png", import.meta.url),
-    name: "API",
-    path: "/api",
-    isShow: true,
-  },
-  {
-    url_bright: new URL("../../assets/pc_img/layout_img/shezhi_light.png", import.meta.url),
-    url_dark: new URL("../../assets/pc_img/layout_img/shezhi.png", import.meta.url),
-    name: "Settings",
-    path: "/settings",
-    isShow: true,
-  },
-])
+// 侧边栏
+
+const menuData = ref([])
+function getSlideList() {
+  menuData.value = [
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/gaikuang_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/gaikuang.png", import.meta.url),
+      name: "Overview", // 注意：这里需要使用 t 函数进行国际化
+      path: "/overview",
+      width: 26,
+      height: 26,
+      isShow: true,
+    },
+    {},
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/chanping_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/chanping.png", import.meta.url),
+      name: "Products",
+      path: "/products",
+      width: 27,
+      height: 26,
+      isShow: true,
+    },
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/dingdan_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/dingdan.png", import.meta.url),
+      name: "Billings",
+      path: "/billings",
+      isShow: true,
+    },
+    {},
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/tiqu_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/tiqu.png", import.meta.url),
+      name: "Obtain Proxy",
+      path: "/proxy",
+      isShow: true,
+    },
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/api_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/api.png", import.meta.url),
+      name: "API",
+      path: "/api",
+      isShow: true,
+    },
+    {
+      url_bright: new URL("../../assets/pc_img/layout_img/shezhi_light.png", import.meta.url),
+      url_dark: new URL("../../assets/pc_img/layout_img/shezhi.png", import.meta.url),
+      name: "Settings",
+      path: "/settings",
+      isShow: true,
+    },
+  ]
+}
+getSlideList()
 
 // 方法
-const nav_exchange = (index, item) => {
+function nav_exchange(index, item) {
   if (item.name === "Products") {
     // store.commit("layout/setIsProduc", false)
   }
@@ -170,41 +175,39 @@ const nav_exchange = (index, item) => {
   router.push(item.path)
 }
 
-const animationFn = () => {
+function animationFn() {
   bol.value = true
 }
 
-const animationFn1 = () => {
+function animationFn1() {
   bol.value = false
 }
 
-const gotoPay = () => {
+function gotoPay() {
   // store.commit("layout/setIsProduc", true)
   router.push("/products")
 }
 
-const DocMousemove = () => {
+function DocMousemove() {
   imgBol.value = false
 }
 
-const DocMouseleave = () => {
+function DocMouseleave() {
   imgBol.value = true
 }
 
-const gotoDocum = () => {
-  // store.commit("setIsdocument", "Getting")
-  // store.commit("setDocumentIdx", "0-0")
-  router.push("/help_document")
+function toDocument() {
+  router.push("/doc")
 }
 
-const maskFn = (bol) => {
+function maskFn(bol) {
   detect.gift()
   localStorage.setItem("mask", false)
   // store.commit("layout/setIsMask", "false")
   if (!bol) {
     // store.commit("setIsdocument", "Help")
     // store.commit("setDocumentIdx", "1-0")
-    router.push("/help_document")
+    router.push("/doc")
   }
 }
 
@@ -216,7 +219,7 @@ watch(
       place_name.value = "Help" // 需要使用 t 函数进行国际化
       return
     }
-    column_list.value.forEach((item, index) => {
+    menuData.value.forEach((item, index) => {
       if (item.path === val) {
         idx.value = index
         place_name.value = item.name
@@ -240,30 +243,6 @@ watch(
 // 生命周期钩子
 onMounted(() => {
   getUserInfo()
-  // 预加载组件
-  // import("@/views/layout/overview/overview.vue")
-  // import("@/views/layout/products/products.vue")
-  // import("@/views/layout/billings/billings.vue")
-  // import("@/views/layout/obtain_proxy/obtain_proxy.vue")
-  // import("@/views/layout/settings/settings.vue")
-  // import("@/views/layout/api_config/api_config.vue")
-})
-
-// Meta 信息
-defineOptions({
-  name: "LayOut",
-  metaInfo: {
-    meta: [
-      {
-        name: "keyWords",
-        content: "layout",
-      },
-      {
-        name: "description",
-        content: "This is the layout page",
-      },
-    ],
-  },
 })
 </script>
 

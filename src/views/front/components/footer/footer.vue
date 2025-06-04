@@ -149,12 +149,12 @@ function goTologin(key) {
   }
   switch (key) {
     case 1:
-      router.push("/help_document")
+      router.push("/doc")
       // store.commit("setDocumentIdx", "0-2")
       break
 
     case 2:
-      router.push("/help_document")
+      router.push("/doc")
       // store.commit("setDocumentIdx", "1-3-0")
       break
 
@@ -180,7 +180,7 @@ function goToApi() {
 // 跳转观看新手文档
 function help_document(val) {
   // store.commit("setDocumentIdx", val)
-  router.push("/help_document")
+  router.push("/doc")
 }
 
 function toTwitter() {

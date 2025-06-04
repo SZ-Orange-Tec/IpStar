@@ -265,7 +265,7 @@ function changeCountry(status) {
 function goToDocument() {
   // store.commit("setIsdocument", "Help")
   // store.commit("setDocumentIdx", "1-0")
-  router.push("/help_document")
+  router.push("/doc")
 }
 
 function sortOptions(arr) {

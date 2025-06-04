@@ -60,7 +60,7 @@ const captcha = ref({
   image: "",
 })
 const code = ref("")
-const status = ref("reset") // account, password, code, reset
+const status = ref("account") // account, password, code, reset
 
 // 方法定义
 function whatsapp() {

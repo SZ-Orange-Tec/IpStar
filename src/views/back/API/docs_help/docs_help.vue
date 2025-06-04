@@ -3,8 +3,8 @@
     <!-- 索引栏 -->
     <div v-show="isPurchase" class="docs_help_sidebar">
       <ul class="document_bar">
-        <li v-for="item,index in column" :key="index" @click="jump(item.id)">
-          <p :class="{h:item.type==='title',color:activeStep===item.id}">{{item.text}}</p>
+        <li v-for="(item, index) in column" :key="index" @click="jump(item.id)">
+          <p :class="{ h: item.type === 'title', color: activeStep === item.id }">{{ item.text }}</p>
         </li>
       </ul>
       <!-- 开关 -->
@@ -15,35 +15,45 @@
 
     <!-- 文档 -->
     <div class="container" ref="container">
-      <div class="for" v-for="item,index in APIARR" :key="index">
-        <h3 v-if="item.titleType==='h3'" :id="item.id">{{item.title}}</h3>
-        <p :class="{color:item.pIdx===idx}" v-show="item.type==='bigParagraph'" v-for="i,idx in item.text" :key="idx">{{i}}
-          <template v-if="item.aIdx===idx">
-            <a href="javascript:;" v-if="isPurchase">{{item.a[idx]}}</a>
+      <div class="for" v-for="(item, index) in APIARR" :key="index">
+        <h3 v-if="item.titleType === 'h3'" :id="item.id">{{ item.title }}</h3>
+        <p :class="{ color: item.pIdx === idx }" v-show="item.type === 'bigParagraph'" v-for="(i, idx) in item.text" :key="idx">
+          {{ i }}
+          <template v-if="item.aIdx === idx">
+            <a href="javascript:;" v-if="isPurchase">{{ item.a[idx] }}</a>
             <a href="javascript:;" v-if="!isPurchase"> http://***/v1/</a>
-            <span class="upgrade" @click="$router.push('/products')" v-if="!isPurchase">({{$t('PCHomePage.upgrade.buy')}})</span>
+            <span class="upgrade" @click="$router.push('/products')" v-if="!isPurchase">({{ $t("PCHomePage.upgrade.buy") }})</span>
           </template>
         </p>
-        <ul v-if="item.type==='request'" class="proxy_endpoints">
-          <li v-for="j,jdx in item.content" :key="jdx"><span>{{j.span}}</span>
-            <p>{{j.p}}</p>
+        <ul v-if="item.type === 'request'" class="proxy_endpoints">
+          <li v-for="(j, jdx) in item.content" :key="jdx">
+            <span>{{ j.span }}</span>
+            <p>{{ j.p }}</p>
           </li>
         </ul>
-        <h4 v-if="item.titleType==='h4'" :id="item.id">{{item.title}}</h4>
-        <div class="code_set" v-if="item.type==='codeBlock'">
+        <h4 v-if="item.titleType === 'h4'" :id="item.id">{{ item.title }}</h4>
+        <div class="code_set" v-if="item.type === 'codeBlock'">
           <!-- 代码块 -->
-          <prism-editor class="my-editor height-300" aria-disabled v-model="item.codeText" :highlight="highlighter" :tabSize="4" readonly line-numbers></prism-editor>
+          <prism-editor
+            class="my-editor height-300"
+            aria-disabled
+            v-model="item.codeText"
+            :highlight="highlighter"
+            :tabSize="4"
+            readonly
+            line-numbers
+          ></prism-editor>
         </div>
-        <div class="me_table" v-if="item.type==='table'">
+        <div class="me_table" v-if="item.type === 'table'">
           <table>
             <thead>
               <tr>
-                <th v-for="th,thdx in item.thead" :key="thdx">{{th}}</th>
+                <th v-for="(th, thdx) in item.thead" :key="thdx">{{ th }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="tbody,bodydx in item.tbody" :key="bodydx">
-                <td v-for="td,tdx in tbody" :key="tdx">{{td}}</td>
+              <tr v-for="(tbody, bodydx) in item.tbody" :key="bodydx">
+                <td v-for="(td, tdx) in tbody" :key="tdx">{{ td }}</td>
               </tr>
             </tbody>
           </table>
@@ -54,64 +64,63 @@
       <!-- en 国家代码 -->
       <table class="code_table">
         <tbody>
-          <tr v-for="item,index in enCodeList.Country" :key="index">
-            <td v-for="i in item" :key="i">{{i}}</td>
+          <tr v-for="(item, index) in enCodeList.Country" :key="index">
+            <td v-for="i in item" :key="i">{{ i }}</td>
           </tr>
         </tbody>
       </table>
       <h2 id="us_state_code">US State Code</h2>
       <table class="code_table">
         <tbody>
-          <tr v-for="item,index in enCodeList.UsState" :key="index">
-            <td v-for="i in item" :key="i">{{i}}</td>
+          <tr v-for="(item, index) in enCodeList.UsState" :key="index">
+            <td v-for="i in item" :key="i">{{ i }}</td>
           </tr>
         </tbody>
       </table>
       <h2 id="zg_code">国家代码</h2>
       <table class="code_table">
         <tbody>
-          <tr v-for="item,index in cnCodeList.nation" :key="index">
-            <td v-for="i in item" :key="i">{{i}}</td>
+          <tr v-for="(item, index) in cnCodeList.nation" :key="index">
+            <td v-for="i in item" :key="i">{{ i }}</td>
           </tr>
         </tbody>
       </table>
       <h2 id="mg_code">美国州代码</h2>
       <table class="code_table">
         <tbody>
-          <tr v-for="item,index in cnCodeList.philadelphia" :key="index">
-            <td v-for="i in item" :key="i">{{i}}</td>
+          <tr v-for="(item, index) in cnCodeList.philadelphia" :key="index">
+            <td v-for="i in item" :key="i">{{ i }}</td>
           </tr>
         </tbody>
       </table>
       <div class="tip" v-if="!isPurchase">
-        {{$t('PCHomePage.upgrade.see_doc[0]')}} <span @click="$router.push('/products')">{{$t('PCHomePage.upgrade.see_doc[1]')}}</span>
+        {{ $t("PCHomePage.upgrade.see_doc[0]") }} <span @click="$router.push('/products')">{{ $t("PCHomePage.upgrade.see_doc[1]") }}</span>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import enCode from './json/code_en.json'
-import cnCode from './json/code_cn.json'
-import enAPI from './json/enAPI'
-import cnAPI from './json/cnAPI'
+import enCode from "./json/code_en.json"
+import cnCode from "./json/code_cn.json"
+import enAPI from "./json/enAPI"
+import cnAPI from "./json/cnAPI"
 // import Prism Editor
-import { PrismEditor } from 'vue-prism-editor'
-import 'vue-prism-editor/dist/prismeditor.min.css'
+import { PrismEditor } from "vue-prism-editor"
+import "vue-prism-editor/dist/prismeditor.min.css"
 
 // import highlighting library
-import { highlight, languages } from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-javascript'
-import 'prismjs/themes/prism-tomorrow.css'
-import { mapState } from 'vuex'
+import { highlight, languages } from "prismjs/components/prism-core"
+import "prismjs/components/prism-clike"
+import "prismjs/components/prism-javascript"
+import "prismjs/themes/prism-tomorrow.css"
+import { mapState } from "vuex"
 export default {
-  name: 'DocsHelp',
+  name: "DocsHelp",
   components: {
-    PrismEditor
+    PrismEditor,
   },
-  data () {
+  data() {
     return {
       enCodeList: enCode,
       cnCodeList: cnCode,
@@ -119,20 +128,20 @@ export default {
       // 索引栏
       // drawer: true,
       // 侧边书签
-      column: this.$t('PCDocsHelp.column'),
+      column: this.$t("PCDocsHelp.column"),
       idx: 0,
-      activeStep: 'basic_api', // 默认选中的锚点的key值
+      activeStep: "basic_api", // 默认选中的锚点的key值
       offsetTop: 0,
       // 记录当前经过的标题
       bookmark: [],
-      oldScrollTop: 0
+      oldScrollTop: 0,
     }
   },
   computed: {
-    ...mapState(['lang']),
-    isPurchase () {
+    ...mapState(["lang"]),
+    isPurchase() {
       return this.$store.state.user_info.pack_remain > 0
-    }
+    },
   },
   // mounted () {
   //   window.addEventListener('scroll', this.scroll, true)
@@ -155,22 +164,22 @@ export default {
   // },
   methods: {
     // 代码块高亮
-    highlighter (code) {
+    highlighter(code) {
       return highlight(code, languages.js)
     },
     // 事件委托
-    dom ($event) {
-      const dom = document.querySelector('.docs_help_sidebar')
+    dom($event) {
+      const dom = document.querySelector(".docs_help_sidebar")
       if (!dom.contains($event.target)) {
         // 点击在dom外
         this.drawer = false
       }
     },
     // 侧边栏选中
-    sidebarFn (index, { scrollTop }) {
+    sidebarFn(index, { scrollTop }) {
       this.idx = index
-      const dom = document.querySelector('.pc-docs_help')
-      const step = parseInt((scrollTop) / (2 * 20))
+      const dom = document.querySelector(".pc-docs_help")
+      const step = parseInt(scrollTop / (2 * 20))
       let current = 0
       let start = dom.scrollTop
       let t = setInterval(() => {
@@ -257,7 +266,7 @@ export default {
     //   //   return anchor.id
     //   // })
     // },
-    jump (id) {
+    jump(id) {
       this.activeStep = id // 设置选中的锚点为当前点击的
       const container = this.$refs.container
       // const box = document.querySelector('.pc-docs_help')
@@ -266,25 +275,25 @@ export default {
       this.offsetTop = scrollItem.offsetTop
       container.scrollTo({
         top: scrollItem.offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       })
-    }
+    },
   },
   watch: {
     lang: {
-      handler (val) {
-        let arr = val === 'en' ? enAPI : cnAPI
+      handler(val) {
+        let arr = val === "en" ? enAPI : cnAPI
         if (!this.isPurchase) {
           arr = arr.slice(0, 7)
         }
         this.APIARR = arr
       },
-      immediate: true
-    }
-  }
+      immediate: true,
+    },
+  },
 }
 </script>
 
 <style lang="less" scoped>
-@import url('./docs_help.less');
+@import url("./docs_help.less");
 </style>

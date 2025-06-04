@@ -10,7 +10,7 @@
 
         <div class="my-16 v_center space-x-5">
           <IpButton type="primary" class="h-12 w-40 text-base" @click="giftPacks">{{ t("home_spec.try") }}</IpButton>
-          <IpButton type="neutral" class="h-12 w-40 text-base px-3" @click="$router.push('/help_document')">
+          <IpButton type="neutral" class="h-12 w-40 text-base px-3" @click="$router.push('/doc')">
             <div class="between w-full h-full">
               <span>{{ t("home_spec.tutorials") }}</span>
               <button>

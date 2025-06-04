@@ -93,15 +93,15 @@ function gotoDocum() {
   if (this.idx === 0) {
     this.$store.commit("setIsdocument", "Getting")
     this.$store.commit("setDocumentIdx", "0-0")
-    this.$router.push("/help_document")
+    this.$router.push("/doc")
   } else if (this.idx === 1) {
     this.$store.commit("setIsdocument", "Help")
     this.$store.commit("setDocumentIdx", "1-0")
-    this.$router.push("/help_document")
+    this.$router.push("/doc")
   } else if (this.idx === 2) {
     this.$store.commit("setIsdocument", "FAQ")
     this.$store.commit("setDocumentIdx", "2-0")
-    this.$router.push("/help_document")
+    this.$router.push("/doc")
   }
 }
 // 获取数据

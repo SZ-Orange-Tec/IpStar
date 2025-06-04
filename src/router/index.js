@@ -45,30 +45,26 @@ const routes = [
     component: () => import(/* webpackPrefetch:true */ "@/views/back/layout.vue"),
     children: [
       {
-        path: "/",
-        redirect: "/overview",
-      },
-      {
         path: "/overview",
-        name: "概述",
+        name: "overview",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/overview/overview.vue"),
       },
       {
         path: "/products",
-        name: "产品",
+        name: "products",
         meta: { index: 12, keepAlive: false },
         component: () => import("@/views/back/products/products.vue"),
       },
       {
         path: "/billings",
-        name: "订单",
+        name: "billings",
         meta: { index: 13, keepAlive: false },
         component: () => import("@/views/back/billings/billings.vue"),
       },
       {
-        path: "/obtain_proxy",
-        name: "代理",
+        path: "/proxy",
+        name: "proxy",
         meta: { index: 15, keepAlive: false },
         component: () => import("@/views/back/proxy/proxy.vue"),
       },
@@ -78,12 +74,12 @@ const routes = [
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/API/api.vue"),
       },
-      // {
-      //   path: "/settings",
-      //   name: "设置",
-      //   meta: { index: 14, keepAlive: false },
-      //   component: () => import("@/views/layout/settings/settings.vue"),
-      // },
+      {
+        path: "/settings",
+        name: "settings",
+        meta: { index: 14, keepAlive: false },
+        component: () => import("@/views/back/settings/settings.vue"),
+      },
 
       // {
       //   path: '/configure',
@@ -93,12 +89,12 @@ const routes = [
       // }
     ],
   },
-  // {
-  //   path: "/help_document",
-  //   name: "帮助文档",
-  //   meta: { index: 5, keepAlive: false },
-  //   component: () => import("@/views/help_document/help_document.vue"),
-  // },
+  {
+    path: "/doc",
+    name: "doc",
+    meta: { index: 5, keepAlive: false },
+    component: () => import("@/views/doc/doc.vue"),
+  },
 ]
 
 const router = createRouter({

@@ -4,6 +4,10 @@
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 10px;
+  @color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+  color: hsl(var(--background));
 
   &>.my_tabs {
     width: 100%;
@@ -286,87 +290,36 @@
 
 
   .min_dialog {
-    &>::v-deep .el-dialog {
-      border-radius: 10px;
-
-      .el-dialog__header {
-        padding: 0px;
-      }
-
-      .el-dialog__body {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-
-        .content_password {
-          display: inline-block;
-
-          &>.el-form {
-
-            &>.el-form-item {
-              height: 70px;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-
-              &>.el-form-item__label {
-                text-align: left;
-                width: 100% !important;
-                font-size: 16px;
-                
-                font-weight: 400;
-                color: @color-black;
-              }
-
-              &>.el-form-item__content {
-                margin-left: 0 !important;
-
-                &>.el-input {
-                  width: 244px;
-                  height: 42px;
-
-                  &>.el-input__inner {
-                    height: 100% !important;
-                    border-radius: 10px;
-                  }
-                }
-              }
-            }
-          }
+    padding: 0 50px;
+    color: hsl(var(--foreground));
+    :deep(.dialog_container) {
+      margin: 10vh auto;
+    }
+  
+    .container {
+      padding: 30px 60px;
+      border-radius: 12px;
+      max-width: 660px;
+      width: 400px;
+      // height: 600px;
+      background-color: hsl(var(--dialog-background));
+      position: relative;
+      transform-origin: right center;
+  
+      .close {
+        margin-top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: transparent;
+        color: hsl(var(--foreground) / 60%);
+        &:hover {
+          color: hsl(var(--foreground) / 100%);
+          background-color: hsl(var(--accent));
         }
-      }
-
-
-      .el-dialog__footer {
-        display: flex;
-        justify-content: center;
-
-        &>.dialog-footer {
-          display: flex;
-
-          &>.el-button {
-            width: 107px;
-            height: 42px;
-            font-size: 18px;
-            
-            font-weight: 400;
-            color: #FFFFFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
-            border-color: @color ;
-            background-color: @color;
-          }
-
-          &>.el-button:nth-child(2) {
-            margin-left: 30px;
-          }
-        }
-
-
       }
     }
   }

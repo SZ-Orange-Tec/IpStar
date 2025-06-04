@@ -1,0 +1,45 @@
+.doc {
+  height: 100vh;
+  color: hsl(var(--background));
+
+
+  .slide{
+    width: 200px;
+    height: 100%;
+    padding: 20px;
+    border-right: 1px solid #eaeaea;
+
+    .menu{
+      .menu_item{
+        .menu_name{
+          color: hsl(var(--background));
+
+          .icon{
+            color: hsl(var(--background) / 60%);
+          }
+        }
+        .menu_child{
+          color: hsl(var(--background) / 80%);
+          height: 0;
+          overflow: hidden;
+          .menu_child_item{
+            &:hover{
+              color: hsl(var(--primary));
+            }
+          }
+          .pitch{
+            color: hsl(var(--primary));
+          }
+        }
+      }
+    }
+  }
+
+  &>.text_content {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+  
+}

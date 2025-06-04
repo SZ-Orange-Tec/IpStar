@@ -86,7 +86,7 @@
         <div class="notice" v-if="noticeText">
           <h2>{{ $t("PCOverview.notice") }}</h2>
           <div class="notice_box">
-            <div ref="noticeText" :class="{ scroll: isNoticeScroll }">
+            <div ref="noticeTextRef" :class="{ scroll: isNoticeScroll }">
               <p>{{ noticeText }}</p>
             </div>
             <div class="mark"></div>
@@ -94,17 +94,10 @@
         </div>
 
         <div class="date_flow">
-          <!-- <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
-            <el-table-column prop="date" label="Date"></el-table-column>
-            <el-table-column prop="flow" label="Traffic">
-              <template #default="scope">
-                <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
-              </template>
-            </el-table-column>
-          </el-table> -->
-          <!-- <div class="null_data" v-else>
-            <el-empty description="No Data"></el-empty>
-          </div> -->
+          <ip-table :data="tableData">
+            <ip-table-column label="Date" prop="date" />
+            <ip-table-column label="Traffic" prop="flow" />
+          </ip-table>
         </div>
       </div>
     </div>
@@ -120,6 +113,25 @@
       </div>
 
       <div class="table">
+        <ip-table :data="network">
+          <ip-table-column label="Country" prop="country">
+            <template #default="scope">
+              <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
+              <span style="margin-left: 10px">{{ lang === "zh" ? scope.row.country_cn : scope.row.country }}</span>
+            </template>
+          </ip-table-column>
+          <ip-table-column label="Code" prop="code">
+            <template #default="scope">
+              <p style="text-transform: uppercase">{{ scope.row.code }}</p>
+            </template>
+          </ip-table-column>
+          <ip-table-column label="IP Count" prop="ips_count" />
+          <ip-table-column label="Network">
+            <template #default="scope">
+              <tableProgress :percent="scope.row.avaiable" type="network"></tableProgress>
+            </template>
+          </ip-table-column>
+        </ip-table>
         <!-- <el-table :data="network" border :header-row-style="tableHeaderStyle">
           <el-table-column :label="$t('PCOverview.table.country')">
             <template #default="scope">
@@ -153,6 +165,13 @@
 
     <!-- 余额明细 -->
     <div class="balance" v-show="activeIndex === 2">
+      <ip-table :data="balanceData">
+        <ip-table-column label="Date" prop="date" />
+        <ip-table-column label="Traffic" prop="flow" />
+        <ip-table-column label="New IP" prop="newIp" />
+        <ip-table-column label="IP" prop="ip" />
+        <ip-table-column label="Request" prop="request" />
+      </ip-table>
       <!-- <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
         <el-table-column prop="id" :label="$t('PCOverview.balanceHeader.id')"></el-table-column>
         <el-table-column prop="datetime" :label="$t('PCOverview.balanceHeader.date')"></el-table-column>
@@ -200,7 +219,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onBeforeUnmount, nextTick, watch } from "vue"
+import { ref, reactive, onMounted, onBeforeUnmount, nextTick, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import {
   platCustomerReportOverview,
@@ -219,9 +238,12 @@ import Picker from "../components/picker/picker.vue"
 import tableProgress from "../components/progress/progress.vue"
 import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
 import userStore from "@/store/user"
+import IpTable from "@/components/table/table.vue"
+import IpTableColumn from "@/components/table/table-column.vue"
+import settingStore from "@/store/setting"
 
 const { unlimited } = userStore()
-const { lang } = userStore()
+const { lang } = settingStore()
 
 const { t } = useI18n()
 
@@ -262,6 +284,23 @@ const ipStartDate = ref("")
 const ipdefault = ref([])
 const DAY = 1000 * 60 * 60 * 24
 
+const pickerOptions = {
+  disabledDate(time) {
+    const now = getDate(new Date())
+    const DAY = 1000 * 60 * 60 * 24
+    const yesterday = new Date(now + " 00:00:00").getTime() - DAY
+    const str = time.getTime()
+    return str + DAY * 30 < yesterday || str > yesterday
+  },
+  onPick: ({ maxDate, minDate }) => {
+    if (maxDate) {
+      this.ipStartDate = ""
+    } else {
+      this.ipStartDate = minDate
+    }
+  },
+}
+
 // 流量数据
 const quantityOfFlow = reactive({
   remain: {
@@ -276,6 +315,14 @@ const quantityOfFlow = reactive({
   },
 })
 
+// 消耗数据相关
+const balanceColumns = ref([
+  { title: "Date", key: "date" },
+  { title: "Traffic", key: "flow" },
+  { title: "New IP", key: "newIp" },
+  { title: "IP", key: "ip" },
+  { title: "Request", key: "request" },
+])
 // 表格样式
 const tableHeaderStyle = {
   "background-color": "#f9f7f5",
@@ -362,6 +409,7 @@ const getNotice = async () => {
 }
 
 // 通知滚动
+const noticeTextRef = ref(null)
 const noticeScroll = () => {
   const notice = noticeTextRef.value
   const limit = notice.parentNode.clientHeight
