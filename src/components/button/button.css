@@ -23,11 +23,12 @@
 
 .neutral{
   background-color: hsl(var(--neutral));
-  color: hsl(var(--primary-foreground));
+  color: hsl(var(--primary-foreground) / 80%);
   border: 1px solid hsl(var(--foreground) / 60%);
 }
 .neutral:hover{
   background-color: hsl(var(--neutral) / 80%);
+  color: hsl(var(--primary-foreground));
 }
 
 .ghost{

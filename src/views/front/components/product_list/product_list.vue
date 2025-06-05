@@ -11,7 +11,7 @@
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
     </ul>
     <div class="list" :style="{ 'max-width': maxWidth }">
-      <div class="priceList" ref="productRef" @wheel="scrollPlugin">
+      <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex space-x-3">
           <li v-for="item in product_list" :key="item.id" :class="item.hot ? 'popular' : 'common'">
             <div class="card column_center space-y-10">
@@ -117,6 +117,18 @@
           </li>
         </ul>
       </div>
+      <!-- 骨架屏 -->
+      <div v-else class="priceList">
+        <ul class="flex space-x-3">
+          <li class="" v-for="item in 6" :key="item">
+            <div class="card skeletion space-y-5">
+              <div style="width: 40%"></div>
+              <div style="width: 100%" v-for="col in 12" :key="col"></div>
+              <div style="width: 60%"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
       <IpButton v-show="isLeft" type="ghost" circle class="arrow-btn rounded-full font-medium left" @click="scrollPluginValue('left')">
         <ChevronLeft :size="30" :stroke-width="2" />
       </IpButton>
@@ -127,7 +139,7 @@
     </div>
 
     <!-- 支付弹窗 -->
-    <PayPopup ref="pay_popup" v-if="order_data" :order_data="order_data">
+    <PayPopup ref="payPopupRef" v-model="isPayPopup" v-if="isPayPopup" :order_data="order_data">
       <template #detail>
         <div class="order_detail">
           <h2>{{ t("PCPayPopup.detail.title") }}</h2>
@@ -157,7 +169,12 @@
             </li>
           </ul>
           <div class="btn vh_center">
-            <!-- <el-button :loading="loading" @click="FoundOrder">{{t('PCPayPopup.detail.submit')}}</el-button> -->
+            <ip-button type="primary" class="px-3 h-10" @click="FoundOrder">
+              <div class="v_center space-x-2">
+                <span class="ip-loading" v-if="loading"></span>
+                <span>{{ t("PCPayPopup.detail.submit") }}</span>
+              </div>
+            </ip-button>
           </div>
         </div>
       </template>
@@ -179,6 +196,7 @@ import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
+
 const props = defineProps({
   tabbar: {
     type: Boolean,
@@ -194,43 +212,18 @@ const props = defineProps({
   },
 })
 
+const { token } = loginStore()
 const router = useRouter()
 
 const { t } = useI18n()
 
-// refs
-const product = ref(null)
+// 产品相关
 const loading = ref(false)
 const product_list = ref([])
-const isLeft = ref(false)
-const isRight = ref(false)
-const order_data = ref(null)
-const pay_popup = ref(null)
-const productRef = ref(null)
 
-// constants
-const packWidth = 210 + 14
 let group1 = []
 let group2 = []
 let group3 = []
-
-// computed
-const maxWidth = computed(() => {
-  return props.pack * packWidth - 14 + "px"
-})
-
-// store
-const { token } = loginStore()
-
-// methods
-function changeActive(index) {
-  const group = "group" + (index + 1)
-  product_list.value = eval(group)
-  nextTick(() => {
-    initScrollTag()
-  })
-}
-
 async function GetProductList() {
   try {
     const { data } = await platProductsV2()
@@ -294,6 +287,23 @@ async function GetProductList() {
   }
 }
 
+// 切换tab
+function changeActive(index) {
+  const group = "group" + (index + 1)
+  product_list.value = eval(group)
+  nextTick(() => {
+    initScrollTag()
+  })
+}
+
+// 滑动相关
+const productRef = ref(null)
+const isLeft = ref(false)
+const isRight = ref(false)
+const packWidth = 210 + 14
+const maxWidth = computed(() => {
+  return props.pack * packWidth - 14 + "px"
+})
 const scrollPlugin = throttle(
   function (e) {
     if (/macintosh|mac os x/i.test(navigator.userAgent)) return
@@ -377,6 +387,11 @@ const initScrollTag = debounce(function () {
   }
 }, 100)
 
+// 支付相关
+const isPayPopup = ref(false)
+const order_data = ref(null)
+const payPopupRef = ref(null)
+let product
 function click_pay(item) {
   if (!token.value) {
     router.push("/login")
@@ -399,15 +414,14 @@ function click_pay(item) {
 
   productData.origin_price = productData.price * (productData.discount_rate / 100) + productData.price
   productData.origin_price = Math.round(productData.origin_price)
-  product.value = Object.freeze(productData)
 
-  pay_popup.value.isDetail = true
-  pay_popup.value.isShow = true
+  product = productData
+
+  isPayPopup.value = true
 }
-
 async function FoundOrder() {
   loading.value = true
-  const item = product.value
+  const item = product
   try {
     const { data } = await platCustomerOrder({
       pcode: item.code,
@@ -423,11 +437,10 @@ async function FoundOrder() {
     }
   } finally {
     loading.value = false
-    pay_popup.value.isDetail = false
+    payPopupRef.value.toggleDetail(false)
   }
 }
 
-// lifecycle hooks
 onMounted(() => {
   GetProductList()
   window.addEventListener("resize", initScrollTag)

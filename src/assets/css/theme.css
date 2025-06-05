@@ -70,6 +70,10 @@
   --page-neutral: 233, 15%, 12%;
   --page-card:240, 7%, 14%;
 
+  --layout-background:230, 18%, 7%;
+  --layout-neutral: 233, 15%, 12%;
+  --layout-card:240, 7%, 14%;
+
   /* 聊天室 */
   --room-background: 0 0 96%;
   --ask-background: 220.9 39.3% 11%;

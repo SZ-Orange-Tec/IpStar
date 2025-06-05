@@ -1,15 +1,30 @@
 <template>
   <div class="pc-picker">
-    <!-- <el-date-picker v-model="dateArr" type="daterange" :default-value="new Date()" :picker-options="pickerOptions" range-separator="to" format="dd.MM.yyyy" prefix-icon="null" start-placeholder="start time" end-placeholder="end time" @change="input">
-    </el-date-picker> -->
+    <el-date-picker
+      v-model="dateArr"
+      type="daterange"
+      :default-value="new Date()"
+      :picker-options="pickerOptions"
+      range-separator="to"
+      format="dd.MM.yyyy"
+      prefix-icon="null"
+      start-placeholder="start time"
+      end-placeholder="end time"
+      @change="input"
+    >
+    </el-date-picker>
     <img src="../../../../../assets/pc_img/layout_img/calendar.png" alt="" class="icon_calendar" />
     <img src="../../../../../assets/pc_img/layout_img/calendar.png" alt="" class="icon_calendar" />
   </div>
 </template>
 
 <script>
+import { ElDatePicker } from "element-plus"
 export default {
   name: "PicKer",
+  components: {
+    ElDatePicker,
+  },
   props: {
     defaultDate: {
       type: Array,

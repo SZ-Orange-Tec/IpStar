@@ -3,8 +3,7 @@
     <!-- 我的订阅 -->
     <div class="subscribe" v-show="activeIndex === 0">
       <!-- left_echarts -->
-      <div class="echarts_left column">
-        <!-- 已有&&流出 -->
+      <div class="echarts_left column space-y-5">
         <div class="flow">
           <!-- 现有流量 -->
           <div class="box column">
@@ -52,36 +51,36 @@
           </div>
         </div>
 
-        <!-- 日流出 echarts -->
-        <div class="outflow_echart">
+        <div class="outflow_echart flex-1 w-full">
           <!-- 时间选择 -->
           <div class="myEchart" v-show="tableData.length > 0"></div>
           <div class="null_data" v-show="!tableData.length > 0">
-            <!-- <el-empty description="No Data"></el-empty> -->
+            <el-empty description="No Data"></el-empty>
           </div>
           <Picker class="echart_picker" @dateChange="dateChange" />
         </div>
+
         <!-- 实时流出 echarts-->
-        <div class="day_echart">
+        <div class="day_echart flex-1 w-full">
           <div class="line_echart" v-show="!Nodata"></div>
           <div class="null_data" v-show="Nodata">
-            <!-- <el-empty description="No Data"></el-empty> -->
+            <el-empty description="No Data"></el-empty>
           </div>
-          <!-- <el-date-picker
+          <el-date-picker
             v-model="timeVal"
             type="date"
             prefix-icon="null"
             class="picker"
             @change="input"
-            format="dd.MM.yyyy"
+            format="DD.MM.YYYY"
             :clearable="false"
             placeholder="option date"
           >
-          </el-date-picker> -->
+          </el-date-picker>
           <img src="../../../assets/pc_img/layout_img/calendar.png" alt="calendar" />
         </div>
       </div>
-      <!-- date flow -->
+
       <div class="right column">
         <div class="notice" v-if="noticeText">
           <h2>{{ $t("PCOverview.notice") }}</h2>
@@ -94,16 +93,27 @@
         </div>
 
         <div class="date_flow">
-          <ip-table :data="tableData">
+          <!-- <ip-table :data="tableData">
             <ip-table-column label="Date" prop="date" />
             <ip-table-column label="Traffic" prop="flow" />
-          </ip-table>
+          </ip-table> -->
+          <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
+            <el-table-column prop="date" label="Date"></el-table-column>
+            <el-table-column prop="flow" label="Traffic">
+              <template #default="scope">
+                <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div class="null_data" v-else>
+            <el-empty description="No Data"></el-empty>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 平台在线IP -->
-    <div class="ip" v-show="activeIndex === 1">
+    <div class="ip w-full" v-show="activeIndex === 1">
       <div class="ip_echart">
         <div id="ipEchart" v-show="hasIpData"></div>
         <div class="null_data" v-show="!hasIpData">
@@ -112,27 +122,8 @@
         <Picker class="echart_picker" :defaultDate="ipdefault" :pickerOptions="pickerOptions" @dateChange="ipDateChange" />
       </div>
 
-      <div class="table">
-        <ip-table :data="network">
-          <ip-table-column label="Country" prop="country">
-            <template #default="scope">
-              <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
-              <span style="margin-left: 10px">{{ lang === "zh" ? scope.row.country_cn : scope.row.country }}</span>
-            </template>
-          </ip-table-column>
-          <ip-table-column label="Code" prop="code">
-            <template #default="scope">
-              <p style="text-transform: uppercase">{{ scope.row.code }}</p>
-            </template>
-          </ip-table-column>
-          <ip-table-column label="IP Count" prop="ips_count" />
-          <ip-table-column label="Network">
-            <template #default="scope">
-              <tableProgress :percent="scope.row.avaiable" type="network"></tableProgress>
-            </template>
-          </ip-table-column>
-        </ip-table>
-        <!-- <el-table :data="network" border :header-row-style="tableHeaderStyle">
+      <div class="table w-full">
+        <el-table :data="network" border :header-row-style="tableHeaderStyle">
           <el-table-column :label="$t('PCOverview.table.country')">
             <template #default="scope">
               <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
@@ -155,7 +146,7 @@
               <tableProgress :percent="scope.row.used" type="load"></tableProgress>
             </template>
           </el-table-column>
-        </el-table> -->
+        </el-table>
         <div class="more vh_center pointer" v-if="network.length < page.total" @click="viewMore">
           <i class="el-icon-loading" v-show="isNetwork"></i>
           {{ $t("PCOverview.viewmore") }}
@@ -164,15 +155,8 @@
     </div>
 
     <!-- 余额明细 -->
-    <div class="balance" v-show="activeIndex === 2">
-      <ip-table :data="balanceData">
-        <ip-table-column label="Date" prop="date" />
-        <ip-table-column label="Traffic" prop="flow" />
-        <ip-table-column label="New IP" prop="newIp" />
-        <ip-table-column label="IP" prop="ip" />
-        <ip-table-column label="Request" prop="request" />
-      </ip-table>
-      <!-- <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
+    <div class="balance w-full" v-show="activeIndex === 2">
+      <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
         <el-table-column prop="id" :label="$t('PCOverview.balanceHeader.id')"></el-table-column>
         <el-table-column prop="datetime" :label="$t('PCOverview.balanceHeader.date')"></el-table-column>
         <el-table-column prop="pack_size" :label="$t('PCOverview.balanceHeader.traffic')">
@@ -195,9 +179,9 @@
             <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("PCOverview.balanceHeader.rewards") }}</span>
           </template>
         </el-table-column>
-      </el-table> -->
+      </el-table>
       <!-- 分页 -->
-      <!-- <el-pagination
+      <el-pagination
         class="pagination"
         @current-change="handleCurrentChange"
         :current-page="tabPage"
@@ -205,14 +189,14 @@
         layout="total, prev, pager, next, jumper"
         :total="tabTotal"
       >
-      </el-pagination> -->
+      </el-pagination>
     </div>
 
     <div class="place v_center">
       <i @click="updateActiveIndex(0)" v-if="activeIndex !== 0" class="el-icon-arrow-left pointer"></i>
       <span>{{ $t("PCHeader.userDropdown.dropdownOne") }}</span>
       <div class="search" v-if="activeIndex === 2">
-        <!-- <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="dd.MM.yyyy" /> -->
+        <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="DD.MM.YYYY" />
       </div>
     </div>
   </div>
@@ -238,9 +222,10 @@ import Picker from "../components/picker/picker.vue"
 import tableProgress from "../components/progress/progress.vue"
 import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
 import userStore from "@/store/user"
-import IpTable from "@/components/table/table.vue"
-import IpTableColumn from "@/components/table/table-column.vue"
+// import IpTable from "@/components/table/table.vue"
+// import IpTableColumn from "@/components/table/table-column.vue"
 import settingStore from "@/store/setting"
+import { ElDatePicker, ElPagination, ElEmpty, ElTable, ElTableColumn } from "element-plus"
 
 const { unlimited } = userStore()
 const { lang } = settingStore()
@@ -262,11 +247,182 @@ const network = ref([])
 const balanceData = ref([])
 const iplist = ref([])
 
-// echarts实例
+// 按天图表 echarts
 let echart = null
 let loadingEchart = null
 let loadingTable = null
 let loadingLine = null
+// 初始化 实时echarts
+async function setEchart(xData, serData) {
+  const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+
+  const myEchart = echart.init(document.querySelector(".myEchart"))
+  const option = {
+    title: {
+      text: t("PCOverview.EchartTextOne"),
+      textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
+      padding: [38, 0, 0, 35],
+    },
+    grid: { left: 60, top: 100, bottom: 40, right: 60, containLabel: true },
+
+    dataZoom: [
+      {
+        show: true,
+        start: 0,
+        end: 100,
+        bottom: 10,
+        right: 8,
+        left: 30,
+        height: 20,
+        borderColor: "transparent",
+        showDetail: false,
+        fillerColor: "rgba(244, 177, 34, .3)",
+        backgroundColor: "rgba(244, 177, 34, 0.1)",
+        handleStyle: {
+          color: "rgba(244, 177, 34, 0.57)",
+        },
+        moveHandleSize: 0,
+        moveHandleStyle: {
+          opacity: 1,
+        },
+        dataBackground: {
+          areaStyle: {
+            color: "rgba(244, 177, 34, 1)",
+          },
+        },
+      },
+      {
+        type: "inside",
+        dataBackground: "#0ff",
+        showDetail: false,
+      },
+    ],
+    xAxis: {
+      type: "category",
+      axisLine: {
+        lineStyle: {
+          color: "#B5B5B5",
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        margin: 30,
+        fontFamily: "Roboto",
+        fontSize: 12,
+        color: "#666",
+      },
+      data: xData(),
+    },
+    yAxis: {
+      // max: 4,
+      axisLabel: {
+        fontFamily: "Roboto",
+        fontSize: 12,
+        color: "#666",
+        margin: 30,
+        formatter(val) {
+          return `${val}GB`
+        },
+      },
+      axisTick: {
+        // y轴刻度线
+        show: false,
+      },
+      splitLine: {
+        lineStyle: {
+          color: "#B5B5B5",
+          type: "dashed", // 虚线
+        },
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+      padding: [12, 17, 20, 23],
+      textStyle: { color: "#424242" },
+      renderMode: "html",
+      className: "tooltip",
+      axisPointer: {
+        lineStyle: {
+          color: "#FDB713",
+        },
+      },
+      formatter() {
+        return null
+      },
+    },
+    series: [
+      {
+        type: "line",
+        smooth: true,
+        showSymbol: false, // 开启移入显示 具体数值
+        areaStyle: {
+          // 覆盖区域的渐变色
+          normal: {
+            color: {
+              type: "linear",
+              x: 1,
+              y: 0,
+              x2: 0,
+              y2: 0,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: "rgba(244, 177, 34, 0)", // 0% 处的颜色
+                },
+                {
+                  offset: 0.5,
+                  color: "rgba(244, 177, 34, 0.5)", // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "rgba(244, 177, 34, 0)", // 100% 处的颜色
+                },
+              ],
+              global: false, // 缺省为 false
+            },
+          },
+        },
+        showAllSymbol: true,
+        // symbol: 'image://路径',
+        symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
+        symbolSize: 20,
+        label: {
+          show: true,
+          position: "top",
+          textStyle: {
+            color: "#191D26",
+            fontSize: 14,
+          },
+          formatter: function (res) {
+            if (res.value) {
+              return res.value + "GB"
+            } else {
+              return 0
+            }
+          },
+        },
+        // 关闭 提示框
+        // tooltip: {
+        //   show: false
+        // },
+        lineStyle: {
+          normal: {
+            color: "#FDB713",
+          },
+        },
+        data: serData(),
+      },
+    ],
+  }
+  myEchart.setOption(option)
+  // this.loadingEchart.close()
+  // this.dateEchartResize = () => {
+  //   myEchart.resize()
+  // }
+  // window.addEventListener("resize", this.dateEchartResize)
+}
 
 // 分页相关
 const page = reactive({
