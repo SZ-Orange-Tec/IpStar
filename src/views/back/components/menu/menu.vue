@@ -4,13 +4,13 @@
       <img src="@/assets/pc_img/layout_img/ipflare-logo.png" alt="logo" />
     </div>
     <div class="column flex-1">
-      <ul>
+      <ul class="space-y-1">
         <template v-for="(item, index) in menuData" :key="index">
-          <li class="v_center pointer" v-if="index === 1 || index === 4">
+          <li class="v_center pointer grey text-xs" v-if="index === 1 || index === 4">
             <em>{{ index === 1 ? "PLANS" : "PROXIES" }}</em>
           </li>
-          <li class="v_center pointer" v-else :class="{ pitch_on: idx === index }" v-show="item.isShow" @click="jumpPath(index, item)">
-            <img :src="idx !== index ? item.url_dark : item.url_bright" alt="" />
+          <li class="v_center pointer space-x-2" v-else :class="{ pitch_on: idx === index }" v-show="item.isShow" @click="jumpPath(index, item)">
+            <component :is="item.icon" :size="18"></component>
             <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
           </li>
         </template>
@@ -23,72 +23,63 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
-import { useRouter } from "vue-router"
+import { ref, watch } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import layoutStore from "@/store/layout"
 import { useI18n } from "vue-i18n"
+import { Settings, ClipboardList, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck } from "lucide-vue-next"
 
 const { isProduc } = layoutStore()
 const router = useRouter()
+const route = useRoute()
 const { t } = useI18n()
 
 // 响应式状态
 const idx = ref(0)
-const bol = ref(false)
-const transitionName = ref(null)
 
 const menuData = ref([])
 function getSlideList() {
   menuData.value = [
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/gaikuang_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/gaikuang.png", import.meta.url),
+      icon: ChartLine,
       name: t("menu_spec.Overview"),
       path: "/overview",
-      width: 26,
-      height: 26,
       isShow: true,
     },
     {},
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/chanping_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/chanping.png", import.meta.url),
+      icon: ShoppingCart,
       name: t("menu_spec.Products"),
       path: "/products",
-      width: 27,
-      height: 26,
       isShow: true,
     },
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/dingdan_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/dingdan.png", import.meta.url),
+      icon: ClipboardList,
       name: t("menu_spec.Billings"),
       path: "/billings",
       isShow: true,
     },
     {},
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/tiqu_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/tiqu.png", import.meta.url),
+      icon: PrinterCheck,
       name: t("menu_spec.Proxy"),
       path: "/proxy",
       isShow: true,
     },
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/api_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/api.png", import.meta.url),
+      icon: LaptopMinimalCheck,
       name: t("menu_spec.API"),
       path: "/api",
       isShow: true,
     },
     {
-      url_bright: new URL("@/assets/pc_img/layout_img/shezhi_light.png", import.meta.url),
-      url_dark: new URL("@/assets/pc_img/layout_img/shezhi.png", import.meta.url),
+      icon: Settings,
       name: t("menu_spec.Settings"),
       path: "/settings",
       isShow: true,
     },
   ]
+  focusPath(route.path)
 }
 function jumpPath(index, item) {
   if (item.path === "/products") {
@@ -97,6 +88,23 @@ function jumpPath(index, item) {
   idx.value = index
   router.push(item.path)
 }
+function focusPath(path) {
+  if (!menuData.value.length) return
+
+  const index = menuData.value.findIndex((i) => i.path === path)
+  if (index < 0) return
+
+  idx.value = index
+}
+watch(
+  route.path,
+  (val) => {
+    focusPath(val)
+  },
+  {
+    immediate: true,
+  }
+)
 
 getSlideList()
 </script>

@@ -38,37 +38,30 @@
         // padding-left: 51px;
 
         &:not(.pitch_on):hover {
-          background-color: #fdefe360;
+          background-color: hsl(var(--foreground) / 10%);
           // p{
           //   color: #E8710980;
           // }
         }
-        img{
-          width: 27px;
-          height: 27px;
-          margin-right: 12px;
-        }
-        p{
-          font-size: 16px;
-          // color: #333;
-          line-height: 25px;
-        }
-        em{
-          font-family: SourceHanSansCN, SourceHanSansCN;
-          font-size: 12px;
-          font-weight: 500;
-          // color: #AAACB7;
-          margin-top: 6px;
-        }
       }
-      &>li+li{
-        margin-top: 4px;
+      .grey{
+        color: hsl(var(--foreground) / 50%);
       }
       &>.pitch_on {
-        background-color: #fdefe3;
-        p{
-          color: #E87109;
-        }
+        color: hsl(var(--primary));
+        background-color: hsl(var(--foreground) / 10%);
+        // position: relative;
+        // &::before{
+        //   content: "";
+        //   height: 1px;
+        //   width: 100%;
+        //   background-color: hsl(var(--primary) / 50%);
+        //   position: absolute;
+        //   bottom: 0;
+        //   left: 0;
+        // }
+        // border-bottom: 1px solid hsl(var(--primary));
+        
       }
     }
   }
