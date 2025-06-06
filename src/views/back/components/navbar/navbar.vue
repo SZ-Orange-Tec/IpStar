@@ -45,6 +45,7 @@ const { t } = useI18n()
 
 const pathMap = {
   "/products": t("menu_spec.Products"),
+  "/overview": t("menu_spec.Overview"),
 }
 const name = computed(() => pathMap[route.path] ?? "")
 

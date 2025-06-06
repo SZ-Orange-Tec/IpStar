@@ -1,5 +1,5 @@
 <template>
-  <div class="products column">
+  <div class="products column h-full">
     <NavBar>
       <template #default="{ title }">
         <div>{{ title }}</div>

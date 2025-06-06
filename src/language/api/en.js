@@ -3,7 +3,4 @@ import navbar from "../components/navbar/en"
 export default {
   ...menu,
   ...navbar,
-  Settings: "Settings",
-  whitelist: "Whitelist",
-  Password: "Password",
 }

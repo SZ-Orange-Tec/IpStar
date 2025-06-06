@@ -1,3 +1,6 @@
+// element dark
+import "element-plus/theme-chalk/dark/css-vars.css"
+
 import "@/assets/css/theme.css"
 import router from "./router"
 import i18n from "./language/index"

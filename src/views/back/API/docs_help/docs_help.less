@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   // height: calc(100% - 24px);
-  background-color: #fff;
+  // background-color: #fff;
   // margin-bottom: 24px;
   // padding: 0px 88px 0 20px;
   // box-sizing: border-box;
@@ -12,6 +12,8 @@
   border-radius: 10px;
   display: flex;
   overflow: hidden;
+  @color:hsl(var(--primary));
+  color: hsl(var(--foreground) / 80%);
 
   &>.docs_help_sidebar {
     // position: fixed;
@@ -23,11 +25,11 @@
     height: 100%;
     box-sizing: border-box;
     // padding: 14px 0px;
-    background-color: #fff;
+    // background-color: #fff;
     // box-shadow: 0px 0px 10px 2px rgba(40, 84, 131, 0.2);
     border-radius: 10px 0px 0px 10px;
     transition: all .4s linear;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid hsl(var(--foreground) / 10%);
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -58,7 +60,8 @@
           font-size: 14px;
           
           font-weight: 400;
-          color: #666666;
+          // color: #666666;
+          color: hsl(var(--foreground) / 60%);
           line-height: 45px;
           box-sizing: border-box;
           padding-left: 8px;
@@ -76,7 +79,7 @@
           font-size: 16px;
           
           font-weight: 400;
-          color: #666666;
+          color: hsl(var(--foreground) / 80%);
           padding-left: 0px;
 
           &:hover {
@@ -140,7 +143,7 @@
         font-size: 16px;
         
         font-weight: bold;
-        color: #373E52;
+        color: hsl(var(--foreground) / 80%);
         line-height: 60px;
       }
   
@@ -149,7 +152,7 @@
         font-size: 16px;
         
         font-weight: 400;
-        color: #666666;
+        color: hsl(var(--foreground) / 80%);
         line-height: 45px;
         margin-left: 10px;
   
@@ -168,7 +171,7 @@
         font-size: 16px;
         
         font-weight: 400;
-        color: #666666;
+        color: hsl(var(--foreground) / 80%);
         text-indent: 2em;
         line-height: 35px;
         display: flex;
@@ -176,10 +179,6 @@
   
         &>a {
           color: @color;
-  
-          &:hover {
-            color: @color-black !important;
-          }
         }
   
         &>.upgrade{
@@ -202,6 +201,7 @@
         // width: 100%;
         margin-left: 13px;
         background-color: #5C5C5C;
+        background-color: hsl(var(--neutral) / 30%);
         border-radius: 5px;
         display: flex;
         flex-direction: column;
@@ -216,7 +216,8 @@
             font-size: 14px;
             
             font-weight: 400;
-            color: #FFFFFF;
+            // color: #FFFFFF;
+            color: hsl(var(--foreground) / 80%);
             box-sizing: border-box;
             padding-left: 54px;
             width: 150px;
@@ -226,9 +227,7 @@
           &>p {
             flex: 10;
             font-size: 14px;
-            
             font-weight: 400;
-            color: #FFFFFF;
             word-break: break-all;
           }
         }
@@ -248,7 +247,7 @@
         overflow: hidden;
         border-radius: 5px;
         box-sizing: border-box;
-        border: 1px solid #DADEEE;
+        border: 1px solid hsl(var(--foreground) / 10%);
   
         &>table {
           width: 100%;
@@ -257,14 +256,14 @@
   
             &>tr {
               height: 42px;
-              background-color: #5C5C5C;
+              // background-color: #5C5C5C;
+              color: hsl(var(--foreground) / 80%);
   
               &>th {
                 // border: 1px solid #000;
                 font-size: 14px;
                 
                 font-weight: 400;
-                color: #FFFFFF;
                 min-width: 100px;
                 max-width: 150px;
   
@@ -280,7 +279,7 @@
           &>tbody {
   
             &>tr {
-              border-bottom: 1px solid #DADEEE;
+              border-bottom: 1px solid hsl(var(--foreground) / 10%);
   
               &>td {
                 padding: 15px 0px;
@@ -288,7 +287,7 @@
                 font-size: 14px;
                 
                 font-weight: 400;
-                color: #373E52;
+                color: hsl(var(--foreground) / 80%);
                 // border: 1px solid #000;
   
                 &:last-child {
@@ -329,13 +328,14 @@
             
             font-weight: 400;
             color: #666666;
+            color: hsl(var(--foreground) / 80%);
             padding-left: 20px;
             box-sizing: border-box;
           }
         }
   
         &>tr:nth-child(2n+1) {
-          background-color: #f8f8fe;
+          background-color: hsl(var(--neutral) / 30%);
         }
       }
     }
@@ -344,7 +344,7 @@
       font-size: 18px;
       
       font-weight: 400;
-      color: #333333;
+
       display: flex;
       align-items: center;
       margin-top: 24px;
@@ -365,7 +365,9 @@
     ::v-deep .my-editor {
       width: 100%;
       /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
-      background-color: #F8F9FA;
+      
+      background-color: hsl(var(--neutral) / 30%);
+      border-radius: 8px;
       color: #879CEB;
   
       /* you must provide font-family font-size line-height. Example: */

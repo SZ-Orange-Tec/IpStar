@@ -6,7 +6,7 @@
 
       <div class="menu space-y-2" ref="menuRef">
         <div class="menu_item" v-for="(item, index) in menuData" :key="item.id">
-          <div class="menu_name between h-10 text-lg pointer transition-color" @click="toggleMenu(index)">
+          <div class="menu_name between h-10 text-base pointer transition-color" @click="toggleMenu(index)">
             <span>{{ item.label }}</span>
             <ChevronRight :size="16" v-if="item.children.length > 0" class="icon" />
           </div>

@@ -1,141 +1,35 @@
-.pc-billings {
-  width: 100%;
-  // height: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  background-color: #fff;
+.billings {
 
-  &>.billings {
-    width: 100%;
-    height: 850px;
 
-    &>.message_buy {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 24px;
+  .main{
+    min-height: 0;
+    padding: 0 12px;
+    border-radius: 8px;
+    background-color: hsl(var(--layout-background));
+    overflow: auto;
 
-      &>p {
-        font-size: 18px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #999;
-      }
-
-      &>.el-button {
-        width: 126px;
-        height: 38px;
-        font-size: 16px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #FFFFFF;
-        margin-top: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 15px;
-        background-color: #77ADE5;
-
-        &>span>img {
-          width: 27px;
-          height: 26px;
-          vertical-align: -5px;
-          margin-right: 12px;
-        }
-      }
-    }
-
-    &>.pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 60px;
-    }
-
-    &>.el-table {
-      // width: 1600px;
-
-      &>.el-table__body-wrapper {
-        width: 100%;
-
-      }
-    }
-
-    ::v-deep .el-table__cell {
-      text-align: center;
-      height: 53px;
-      font-size: 14px;
-      font-family: Microsoft YaHei;
-      font-weight: 400;
-      color: #999999;
-      border: none !important;
-    }
-
-    ::v-deep .cell {
-      & .succeed_img {
-        color: #19BE6B;
-      }
-
-      & .error_img {
-        color: #ed3f14;
-      }
-
-      & .warning_img {
-        color: #ffc640;
-      }
-
-      & .el-button {
-        padding: 5px 20px;
-        font-size: 12px;
-      }
-    }
-
-    ::v-deep .el-table .two-row {
-      background-color: #F8FCFF;
-    }
-
-    ::v-deep .el-table__body tr.current-row>td.el-table__cell {
-      background-color: #E5E5E5;
-    }
-
-    ::v-deep th.el-table__cell {
-      height: 40px;
-      font-size: 14px;
+    .el-table{
+      --el-table-header-bg-color:hsl(var(--layout-background));
+      --el-table-bg-color: hsl(var(--layout-background));
+      --el-table-text-color:hsl(var(--foreground) / 80%);
+      --el-table-header-text-color:hsl(var(--foreground));
+      --el-table-border-color:hsl(var(--foreground) / 10%);
+      --el-table-current-row-bg-color:transparent;
+      --el-table-tr-bg-color:transparent;
+      --el-table-row-hover-bg-color:hsl(var(--layout-neutral) / 10%);
       
-      font-weight: 400;
-      color: #fff;
-      background-color: #5c5c5c;
     }
 
-    ::v-deep .el-table--border::after,
-    .el-table--group::after,
-    .el-table::before {
-      background-color: transparent;
+    .pagination{
+      padding: 20px 0;
     }
-
-
-    ::v-deep ::-webkit-scrollbar {
-      position: absolute;
-      z-index: 10;
-      width: 7px;
+    .el-pagination{
+      --el-pagination-button-color:hsl(var(--foreground) / 60%);
+      --el-pagination-bg-color:transparent;
+      --el-pagination-text-color:hsl(var(--foreground));
+      --el-pagination-button-disabled-bg-color:transparent;
+      --el-pagination-button-disabled-color:hsl(var(--foreground) / 30%);
+      --el-input-bg-color:transparent;
     }
-
-    ::v-deep ::-webkit-scrollbar-thumb {
-      background-color: #EDF3FC;
-    }
-  }
-
-  ::-webkit-scrollbar {
-    /*滚动条整体样式*/
-    /*高宽分别对应横竖滚动条的尺寸*/
-    width: 4px;
-    height: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #98bbd8 !important;
-    // border-radius: 0px !important;
   }
 }

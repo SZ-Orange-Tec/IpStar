@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-api_config">
+  <div class="api_config column">
     <!-- 计数 -->
     <h4>{{ $t("PCConfigure.count") }}</h4>
     <div class="countbox">
@@ -18,11 +18,11 @@
           <span>{{ max_count }}</span>
         </p>
       </div>
-      <el-input-number class="number" v-model="count" :min="min_count" :max="max_count"></el-input-number>
+      <el-input-number class="number h-10" v-model="count" :min="min_count" :max="max_count"></el-input-number>
     </div>
 
     <!-- 表单 -->
-    <el-form :inline="true" :model="formInline" label-position="top" class="formInline">
+    <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
       <el-form-item :label="$t('PCConfigure.country')">
         <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
           <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
@@ -56,10 +56,12 @@
 
     <!-- 网址 -->
     <h4>{{ $t("PCConfigure.url_tip") }}</h4>
-    <div class="website">
-      <el-input v-model="url" :placeholder="$t('PCConfigure.input_tip')"></el-input>
-      <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("PCConfigure.copy_link") }}</el-button>
-      <el-button id="primary-border" @click="openUrl">{{ $t("PCConfigure.open_link") }}</el-button>
+    <div class="website v_center w-full space-x-5">
+      <div class="v_center flex-1">
+        <el-input class="flex-1" v-model="url" :placeholder="$t('PCConfigure.input_tip')" style="height: 40px"></el-input>
+        <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("PCConfigure.copy_link") }}</el-button>
+      </div>
+      <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("PCConfigure.open_link") }}</el-button>
     </div>
     <div class="tip">
       <div>{{ $t("PCConfigure.url_note.tag") }}</div>
@@ -71,17 +73,17 @@
 
     <!-- 参数声明 -->
     <h4>{{ $t("PCConfigure.parameter") }}</h4>
-    <div class="params">
+    <div class="params w-full">
       <ul>
-        <li><span>count</span> COUNT</li>
-        <li><span>resptype</span> FORMAT:TXT JSON</li>
-        <li><span>regions</span> COUNTRY</li>
-        <li><span>protocol</span> PROTOCOL</li>
+        <li class="v_center"><span>count</span> COUNT</li>
+        <li class="v_center"><span>resptype</span> FORMAT:TXT JSON</li>
+        <li class="v_center"><span>regions</span> COUNTRY</li>
+        <li class="v_center"><span>protocol</span> PROTOCOL</li>
       </ul>
     </div>
 
     <h4>{{ $t("PCConfigure.Example") }}</h4>
-    <div class="example">
+    <div class="example w-full">
       <template v-if="formInline.format === '0'">
         {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
       </template>
@@ -93,7 +95,7 @@
     </div>
 
     <h4>{{ $t("PCConfigure.result_comment") }}</h4>
-    <div class="params">
+    <div class="params w-full">
       <ul v-if="formInline.format === '2'">
         <li><span>serve</span>SERVE</li>
         <li><span>port</span>PORT</li>
@@ -110,13 +112,18 @@
 </template>
 
 <script>
-import { debounce } from "@/utils/tool"
-import enOptions from "../proxy/json/cascader.json"
-import cnOptions from "../proxy/json/cncascader.json"
-import { mapState } from "vuex"
-import md5 from "js-md5"
+import { debounce } from "@/utils/tools"
+import enOptions from "../../proxy/json/cascader.json"
+import cnOptions from "../../proxy/json/cncascader.json"
+
+import settingStore from "@/store/setting"
 // 国家国旗
 import "flag-icon-css/css/flag-icons.css"
+import userStore from "@/store/user"
+import layoutStore from "@/store/layout"
+import { ElMessageBox } from "element-plus"
+import "element-plus/es/components/message-box/style/css"
+import Message from "@/components/message/message"
 // import { PrismEditor } from 'vue-prism-editor'
 
 let allCountry = []
@@ -180,18 +187,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(["lang"]),
     mid_count() {
       return this.max_count / 2
     },
     percentWidth() {
       return Math.round((this.count / this.max_count) * 100)
-    },
-    apikey() {
-      return this.$store.state.user_info.api_key
-    },
-    isPurchase() {
-      return this.$store.state.user_info.pack_remain > 0
     },
   },
   watch: {
@@ -290,9 +290,9 @@ export default {
       arr.splice(0, 0, first)
     },
     // 生成url
-    generateURL() {
+    async generateURL() {
       if (!this.isPurchase) {
-        this.$confirm(this.$t("PCConfigure.messagebox.message"), this.$t("PCConfigure.messagebox.title"), {
+        ElMessageBox.confirm(this.$t("PCConfigure.messagebox.message"), this.$t("PCConfigure.messagebox.title"), {
           confirmButtonText: this.$t("PCConfigure.messagebox.confirm"),
           cancelButtonText: this.$t("PCConfigure.messagebox.cancel"),
           type: "warning",
@@ -303,15 +303,16 @@ export default {
         return
       }
       const baseUrl = "https://service.ipflare.com/v1/obtain_proxy_endpoints"
-      const apikey = this.apikey
+      const apiKey = this.apiKey
       const count = this.count
       const protocol = this.formInline.protocol
       const region = this.formInline.country === "ALL" ? "" : this.formInline.country
       const resptype = this.formInline.format
       const keepTime = this.formInline.IPtime
-      // conso
-      const sign = md5(apikey + protocol + count + region)
-      const params = `?apikey=${apikey}&count=${count}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&rd=${Date.now()}`
+      // console.log(key)
+      const { default: md5 } = await import(/*webpackChunkName:'js-md5'*/ "js-md5")
+      const sign = md5(apiKey + protocol + count + region)
+      const params = `?apikey=${apiKey}&count=${count}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&rd=${Date.now()}`
 
       // if (keepTime !== '0') {
       //   params += '&autoswitch=' + 1
@@ -327,10 +328,16 @@ export default {
         navigator.clipboard
           .writeText(text)
           .then(() => {
-            this.$message.success("Copy Success")
+            Message({
+              type: "success",
+              message: "Copy Success",
+            })
           })
           .catch((err) => {
-            this.$message.error("Copy failed\n" + err.message)
+            Message({
+              type: "warning",
+              message: "Copy failed\n" + err.message,
+            })
           })
       } else {
         const text = this.url
@@ -349,6 +356,19 @@ export default {
       if (!this.url) return
       window.open(this.url)
     },
+  },
+  setup() {
+    const { lang } = settingStore()
+    const { isProduc } = layoutStore()
+    const { apiKey, is_purchase: isPurchase } = userStore()
+    console.log(apiKey)
+
+    return {
+      lang,
+      apiKey,
+      isProduc,
+      isPurchase,
+    }
   },
 }
 </script>

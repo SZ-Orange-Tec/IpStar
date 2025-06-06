@@ -1,4 +1,8 @@
+import menu from "../components/menu/zh"
+import navbar from "../components/navbar/zh"
 export default {
+  ...menu,
+  ...navbar,
   Order: "订单",
   Payment_time: "支付时间",
   Place_order_time: "下单时间",

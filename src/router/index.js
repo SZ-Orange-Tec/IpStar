@@ -70,7 +70,7 @@ const routes = [
       },
       {
         path: "/api",
-        name: "API",
+        name: "api",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/API/api.vue"),
       },

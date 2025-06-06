@@ -9,6 +9,7 @@
     :maxlength="maxlength"
     @focus="focus"
     @blur="blur"
+    @input="change"
   />
 </template>
 
@@ -38,6 +39,7 @@ const props = defineProps({
 
 const { maxlength, placeholder, type } = toRefs(props)
 
+const emit = defineEmits(["input"])
 // 只读
 const readonly = ref(true)
 function focus() {
@@ -45,6 +47,9 @@ function focus() {
 }
 function blur() {
   readonly.value = true
+}
+function change(e) {
+  emit("input", e.target.value)
 }
 
 defineExpose({

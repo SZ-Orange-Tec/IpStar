@@ -3,7 +3,4 @@ import navbar from "../components/navbar/zh"
 export default {
   ...menu,
   ...navbar,
-  Settings: "设置",
-  whitelist: "白名单",
-  Password: "密码",
 }

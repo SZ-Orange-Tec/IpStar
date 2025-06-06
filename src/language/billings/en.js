@@ -1,4 +1,8 @@
+import menu from "../components/menu/en"
+import navbar from "../components/navbar/en"
 export default {
+  ...menu,
+  ...navbar,
   Order: "Order",
   Payment_time: "Payment Time",
   Place_order_time: "Place Order Time",

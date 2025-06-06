@@ -14,6 +14,8 @@
     border-radius: 12px;
     max-width: 660px;
     width: 600px;
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
     // height: 600px;
     // background-color: hsl(var(--dialog-background));
       position: relative;
@@ -49,10 +51,12 @@
         font-weight: 600;
         line-height: 38px;
       }
-  
-      &>p {
-        color: hsl(var(--foreground) / 50%);
+      
+      p{
+        font-size: 14px;
+        color: #666;
       }
+
     }
   
     &>.btn_sum {

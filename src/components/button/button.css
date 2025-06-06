@@ -38,6 +38,22 @@
   background-color: hsl(var(--neutral) / 10%);
 }
 
+.link{
+  color: hsl(var(--primary));
+}
+.link:hover:not(.disabled){
+  color: hsl(var(--primary) / 80%);
+}
+
+.border{
+  border-radius: 6px;
+  border: 1px solid hsl(var(--input-border));
+}
+.border:hover{
+  border-color: hsl(var(--primary) / 60%);
+  color: hsl(var(--primary));
+}
+
 .disabled{
   opacity: 0.5;
   cursor: not-allowed;

@@ -167,7 +167,7 @@ function goTologin(key) {
 // 去看API 文档
 function goToApi() {
   if (isLogin.value) {
-    router.push("/docs_help")
+    router.push("/doc")
   } else {
     router.push("/login")
     Message({

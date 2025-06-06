@@ -32,7 +32,7 @@ function close() {
 
   target.style.backgroundColor = "hsl(var(--dialog-wrap) / 0%)"
   anime({
-    targets: target.children[0],
+    targets: target,
     opacity: {
       value: [1, 0],
       easing: "easeInQuart",
@@ -53,7 +53,7 @@ function open() {
   target.style.backgroundColor = "hsl(var(--dialog-wrap) / 70%)"
 
   anime({
-    targets: target.children[0],
+    targets: target,
     opacity: {
       value: [0, 1],
       easing: "easeOutQuad",

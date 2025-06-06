@@ -1,29 +1,28 @@
 <template>
-  <div class="pc-picker">
+  <div class="pc-picker v_center">
+    <Calendar :size="16" />
     <el-date-picker
       v-model="dateArr"
       type="daterange"
       :default-value="new Date()"
       :picker-options="pickerOptions"
       range-separator="to"
-      format="dd.MM.yyyy"
+      format="dd.MM.YYYY"
       prefix-icon="null"
       start-placeholder="start time"
       end-placeholder="end time"
       @change="input"
     >
     </el-date-picker>
-    <img src="../../../../../assets/pc_img/layout_img/calendar.png" alt="" class="icon_calendar" />
-    <img src="../../../../../assets/pc_img/layout_img/calendar.png" alt="" class="icon_calendar" />
   </div>
 </template>
 
 <script>
-import { ElDatePicker } from "element-plus"
+import { Calendar } from "lucide-vue-next"
 export default {
   name: "PicKer",
   components: {
-    ElDatePicker,
+    Calendar,
   },
   props: {
     defaultDate: {

@@ -2,13 +2,14 @@ import { computed, reactive, toRefs } from "vue"
 import { platCustomer } from "../api/login"
 
 const state = reactive({
-  userInfo: localStorage.getItem("userInfo") || "",
+  userInfo: JSON.parse(localStorage.getItem("userInfo") ?? "{}") || "",
 })
 
 const getters = {
   username: computed(() => state.userInfo.username),
   unlimited: computed(() => state.userInfo?.unlimited ?? false),
   is_purchase: computed(() => state.userInfo?.is_purchase ?? false),
+  apiKey: computed(() => state.userInfo?.api_key ?? ""),
 }
 
 const actions = {

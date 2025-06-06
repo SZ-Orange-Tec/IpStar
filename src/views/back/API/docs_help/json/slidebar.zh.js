@@ -1,0 +1,22 @@
+export default [
+  { text: "基本 API", type: "title", scrollTop: 0, id: "basic_api" },
+  { text: "1.1 obtain_proxy_endpoints", scrollTop: 100, id: "obtain_proxy_endpoints" },
+  { text: "1.2 whitelist/getlist", scrollTop: 2750, id: "whitelist_getlist" },
+  { text: "1.3 whitelist/add", scrollTop: 3940, id: "whitelist_add" },
+  { text: "1.4 whitelist/remove", scrollTop: 4905, id: "whitelist_remove" },
+  { text: "1.5 whitelist/clear", scrollTop: 5800, id: "whitelist_clear" },
+  { text: "合作伙伴的API", type: "title", scrollTop: 6600, id: "partner_api" },
+  { text: "2.1 login", scrollTop: 6840, id: "login" },
+  { text: "2.2 add_sub_user", scrollTop: 7910, id: "add_sub_user" },
+  { text: "2.3 update_sub_user", scrollTop: 9130, id: "update_sub_user" },
+  { text: "2.4 enable_sub_user", scrollTop: 10110, id: "enable_sub_user" },
+  { text: "2.5 charge_user", scrollTop: 10758, id: "charge_user" },
+  { text: "2.6 get_user_info", scrollTop: 11480, id: "get_user_info" },
+  { text: "2.7 data_report", scrollTop: 13010, id: "data_report" },
+  { text: "2.8 detail_report", scrollTop: 13840, id: "detail_report" },
+  { text: "2.9 balance_report", scrollTop: 14660, id: "balance_report" },
+  { text: "Country code", scrollTop: 15570, id: "country_code" },
+  { text: "US State Code", scrollTop: 17080, id: "us_state_code" },
+  { text: "国家代码", scrollTop: 17460, id: "zg_code" }, // 18129
+  { text: "美国州代码", scrollTop: 19170, id: "mg_code" },
+]

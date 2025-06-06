@@ -1,7 +1,7 @@
 <template>
   <div class="pc-docs_help" @click="dom">
     <!-- 索引栏 -->
-    <div v-show="isPurchase" class="docs_help_sidebar">
+    <div v-show="!isPurchase" class="docs_help_sidebar">
       <ul class="document_bar">
         <li v-for="(item, index) in column" :key="index" @click="jump(item.id)">
           <p :class="{ h: item.type === 'title', color: activeStep === item.id }">{{ item.text }}</p>
@@ -106,15 +106,13 @@ import cnCode from "./json/code_cn.json"
 import enAPI from "./json/enAPI"
 import cnAPI from "./json/cnAPI"
 // import Prism Editor
-import { PrismEditor } from "vue-prism-editor"
-import "vue-prism-editor/dist/prismeditor.min.css"
-
-// import highlighting library
-import { highlight, languages } from "prismjs/components/prism-core"
-import "prismjs/components/prism-clike"
-import "prismjs/components/prism-javascript"
-import "prismjs/themes/prism-tomorrow.css"
-import { mapState } from "vuex"
+import { PrismEditor } from "vue-prism-editor" //
+import "vue-prism-editor/dist/prismeditor.min.css" // import the styles somewhere
+// import highlighting library (you can use any library you want just return html string)
+import prism from "prismjs"
+import "prismjs/themes/prism-tomorrow.css" // import syntax highlighting styles
+import settingStore from "@/store/setting"
+import userStore from "@/store/user"
 export default {
   name: "DocsHelp",
   components: {
@@ -128,7 +126,7 @@ export default {
       // 索引栏
       // drawer: true,
       // 侧边书签
-      column: this.$t("PCDocsHelp.column"),
+      column: [],
       idx: 0,
       activeStep: "basic_api", // 默认选中的锚点的key值
       offsetTop: 0,
@@ -136,12 +134,6 @@ export default {
       bookmark: [],
       oldScrollTop: 0,
     }
-  },
-  computed: {
-    ...mapState(["lang"]),
-    isPurchase() {
-      return this.$store.state.user_info.pack_remain > 0
-    },
   },
   // mounted () {
   //   window.addEventListener('scroll', this.scroll, true)
@@ -163,10 +155,6 @@ export default {
   //   console.log(newArr, 'newArr')
   // },
   methods: {
-    // 代码块高亮
-    highlighter(code) {
-      return highlight(code, languages.js)
-    },
     // 事件委托
     dom($event) {
       const dom = document.querySelector(".docs_help_sidebar")
@@ -278,18 +266,26 @@ export default {
         behavior: "smooth",
       })
     },
-  },
-  watch: {
-    lang: {
-      handler(val) {
-        let arr = val === "en" ? enAPI : cnAPI
-        if (!this.isPurchase) {
-          arr = arr.slice(0, 7)
-        }
-        this.APIARR = arr
-      },
-      immediate: true,
+    async getSlideBar() {
+      const { default: column } = this.en ? await import("./json/slidebar.en") : await import("./json/slidebar.zh")
+      this.column = column
     },
+    async getApiCode() {
+      const { default: api } = this.en ? await import("./json/enAPI") : await import("./json/cnAPI")
+      this.APIARR = api
+    },
+  },
+  mounted() {
+    this.getSlideBar()
+    this.getApiCode()
+  },
+  setup() {
+    const { lang, en } = settingStore()
+    const { is_purchase: isPurchase } = userStore()
+    const highlighter = (code) => {
+      return prism.highlight(code, prism.languages.js)
+    }
+    return { lang, en, isPurchase, highlighter }
   },
 }
 </script>

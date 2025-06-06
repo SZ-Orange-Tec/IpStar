@@ -1,0 +1,355 @@
+.pc-settings {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+  @color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+  color: hsl(var(--background));
+
+  &>.my_tabs {
+    width: 100%;
+    height: 42px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px 10px 0px 0px;
+
+    &>.tab_pane {
+      width: 110px;
+      height: 100%;
+      font-size: 18px;
+      color: @color-black;
+      
+      font-weight: 400;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background-color: #EDF2F5;
+      transition: all .3s linear;
+    }
+
+    &>.tab_pane:nth-child(2) {
+      border-radius: 0px 0px 10px 0px;
+    }
+
+    &>.pitchon {
+      background-color: @color;
+      color: #FEFEFF;
+    }
+  }
+
+  &>.tab_content {
+    width: 100%;
+  }
+
+  &>.tab_content:nth-child(2) {
+    box-sizing: border-box;
+    padding: 36px 58px 0px 58px;
+
+    &>.headPortrait {
+      width: 100%;
+      height: 74px;
+      display: flex;
+      align-items: center;
+
+      &>.img_head {
+        width: 74px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #EDF2F5;
+        border-radius: 10px;
+
+        &>img {
+          width: 61px;
+          height: 100%;
+
+        }
+      }
+
+      &>span {
+        width: 108px;
+        height: 36px;
+        text-align: center;
+        line-height: 36px;
+        margin-left: 11px;
+        font-size: 12px;
+        
+        font-weight: 400;
+        color: @color-black;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: #EDF2F5;
+        transition: all .2s linear;
+
+        &:hover {
+          box-shadow: 0 12px 20px -12px rgba(0, 0, 0, .35);
+        }
+      }
+    }
+
+    &>.user_info {
+      width: 100%;
+
+      &>.name_email {
+        width: 100%;
+        height: 70px;
+        margin-top: 23px;
+        display: flex;
+
+        &>div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          &>p {
+            font-size: 16px;
+            
+            font-weight: 400;
+            color: @color-black;
+          }
+
+          &>.el-input {
+            width: 244px;
+            height: 42px;
+
+            &>::v-deep .el-input__inner {
+              height: 100% !important;
+              border-radius: 10px;
+            }
+          }
+        }
+
+        &>.name {
+          margin-right: 20px;
+        }
+      }
+
+      &>.api_key {
+        width: 100%;
+        margin-top: 26px;
+
+        &>.column {
+          width: 100%;
+          height: 70px;
+          margin-bottom: 27px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          &>p {
+            font-size: 16px;
+            
+            font-weight: 400;
+            color: @color-black;
+          }
+
+          &>.input {
+            display: flex;
+            align-items: center;
+
+            &>.el-input {
+              width: 508px;
+              height: 42px;
+
+              &>::v-deep .el-input__inner {
+                height: 100% !important;
+                border-radius: 10px;
+              }
+            }
+
+            &>.el-button {
+              min-width: 114px;
+              height: 42px;
+              line-height: 0;
+              font-size: 18px;
+              
+              font-weight: 400;
+              color: #FFFFFF;
+              margin-left: 20px;
+              border-radius: 5px;
+              background-color: @color;
+            }
+
+            &>.color {
+              color: #666;
+              background-color: #E7E7E7 !important;
+            }
+
+            &>span {
+              margin-left: 15px;
+
+              & .el-popover__reference-wrapper {
+                img {
+                  width: 20px;
+                  height: 20px;
+                  cursor: pointer;
+                }
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  &>.tab_content:nth-child(3) {
+    position: relative;
+    padding: 30px 56px 0px 56px;
+    box-sizing: border-box;
+
+    &>.el-button {
+      width: 108px;
+      height: 36px;
+      font-size: 14px;
+      
+      font-weight: 400;
+      color: #666;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      background-color: #E7E7E7;
+    }
+
+
+    ::v-deep .el-table tr {
+      display: inline-block;
+      width: 753px;
+      height: 42px;
+      display: flex;
+
+      &>th {
+        flex: 1;
+        font-size: 14px;
+        text-align: center;
+        padding-top: 8px;
+        
+        font-weight: 400;
+        color: #FFFFFF;
+        border: none;
+        background-color: #5c5c5c;
+      }
+
+      &>th.gutter {
+        display: none;
+      }
+
+      &>td {
+        flex: 1;
+        font-size: 14px;
+        text-align: center;
+        
+        font-weight: 400;
+        color: #333333;
+        // border: none;
+
+        & .el-button {
+          width: 78px;
+          height: 26px;
+          font-size: 14px;
+          
+          font-weight: 400;
+          line-height: 0;
+          color: #666;
+          border-radius: 10px;
+          padding: 0px;
+          background-color: #E7E7E7;
+        }
+      }
+    }
+
+    .message {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &>span {
+      position: absolute;
+      left: 817px;
+      top: 88px;
+
+      & .el-popover__reference-wrapper {
+        img {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+
+
+  .min_dialog {
+    padding: 0 50px;
+    color: hsl(var(--foreground));
+    :deep(.dialog_container) {
+      margin: 10vh auto;
+    }
+  
+    .container {
+      padding: 30px 60px;
+      border-radius: 12px;
+      max-width: 660px;
+      width: 400px;
+      // height: 600px;
+      background-color: hsl(var(--dialog-background));
+      position: relative;
+      transform-origin: right center;
+  
+      .close {
+        margin-top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: transparent;
+        color: hsl(var(--foreground) / 60%);
+        &:hover {
+          color: hsl(var(--foreground) / 100%);
+          background-color: hsl(var(--accent));
+        }
+      }
+    }
+  }
+
+  .passwordDialog {
+    &>::v-deep .el-dialog {
+      margin-top: 30vh !important;
+
+      &>.el-dialog__header {
+        padding: 15px;
+      }
+
+      &>.el-dialog__body {
+        padding: 0px 15px;
+      }
+
+      &>.el-dialog__footer {
+        padding-bottom: 10px;
+        padding-right: 15px;
+
+      }
+    }
+  }
+
+  ::v-deep input::-webkit-outer-spin-button,
+  ::v-deep input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+  }
+
+  ::v-deep input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
