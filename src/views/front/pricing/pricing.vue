@@ -2,13 +2,13 @@
   <div class="pricing">
     <!-- pricing_content -->
 
-    <div class="box price">
+    <div class="box price relative">
       <div class="container">
         <div class="column_center space-y-10">
           <div class="text-3xl column_center space-y-5">
-            <p v-html="t('pricing_spec.des')" class="text-center"></p>
+            <p v-html="t('pricing_spec.des')" class="text-center title"></p>
 
-            <span class="text-lg">IPs: 50M+/day</span>
+            <span class="text-xl description green">IPs: 50M+/day</span>
           </div>
 
           <div class="price_main">
@@ -16,6 +16,11 @@
           </div>
         </div>
       </div>
+      <!-- <div class="w-full background" style="padding-top: 67.9%">
+        <div class="img w-full">
+          <img src="@/assets/images/pricing/background.png" alt="" />
+        </div>
+      </div> -->
     </div>
 
     <div class="box split payment">

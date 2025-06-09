@@ -7,16 +7,18 @@ export default {
   Support: "支持",
   Contact_us: "联系我们",
   Follow_us_on: "关注我们",
+  Send_message: "发送信息",
 
-  name: "名称",
-  email: "邮箱",
+  Email: "邮箱",
 
   relation_spec: {
-    title: "联系我们",
-    desc: "如果您有任何问题或建议，请随时与我们联系。您可以使用<br/>英文、中文、俄文或其他任何一种语言和我们交流。",
+    title: "直接给我们发<span class='primary_text'>信息</span>!",
 
-    form_title: "联系我们",
+    full_name: "名称",
     help: "有什么可以帮你的吗?",
-    Start_chat: "开始聊天",
+
+    serve: "我们如何更好地为您提供服务？",
+    serve_des: "如果您有任何问题或建议，请随时与我们联系。您可以用英语、中文、俄语或其他语言与我们交流。",
+    start_chat: "开始聊天",
   },
 }

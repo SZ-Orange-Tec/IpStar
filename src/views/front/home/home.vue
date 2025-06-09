@@ -36,9 +36,23 @@
         <div class="intro1 img_box">
           <img src="@/assets/images/home/intro1.png" />
         </div>
-        <div class="intro2 img_box">
-          <img src="@/assets/images/home/intro2.png" />
+        <div class="intro2 img_box space-y-4">
+          <div class="v_center space-x-2">
+            <img src="@/assets/images/home/intro_avatar.png" width="45" height="45" alt="" />
+            <p>Noah Johnoson</p>
+          </div>
+
+          <div class="v_center space-x-2">
+            <StarIcon :size="14" fill="hsl(var(--success))" color="hsl(var(--success))" v-for="item in 5" :key="item" />
+            <span class="text-xs description">5.0</span>
+          </div>
+
+          <p class="text-lg title">IPStar is stable and <br />easy to use</p>
+          <p class="text-xs description">"Fast speed and strong anonymit-<br />yhighly recommended.</p>
         </div>
+        <!-- <div class="intro2 img_box">
+          <img src="@/assets/images/home/intro2.png" />
+        </div> -->
         <div class="intro3 img_box">
           <img src="@/assets/images/home/intro3.png" />
         </div>

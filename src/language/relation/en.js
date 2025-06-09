@@ -8,15 +8,17 @@ export default {
   Contact_us: "Contact Us",
   Follow_us_on: "Follow Us On",
 
-  name: "Name",
-  email: "Email",
+  Email: "Email",
 
   relation_spec: {
-    title: "Contact Us",
-    desc: "If you have any questions or suggestions, please contact us at any <br/> time. You can use English, Chinese, Russian, or any other language <br/> to communicate with us.",
+    title: "Send us <span class='primary_text'>information</span> directly!",
 
-    form_title: "Contact Us",
+    full_name: "Full name",
     help: "What can we help you with?",
-    Start_chat: "Start Chat",
+
+    serve: "How can we serve you better?",
+    serve_des:
+      "If you have any questions or suggestion, please don't hesitate to contactus. You can communicate with us in English, Chinese, Russian or any otherlcnguage.",
+    start_chat: "Start Chat",
   },
 }

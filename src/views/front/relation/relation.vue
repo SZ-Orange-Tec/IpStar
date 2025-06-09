@@ -1,70 +1,65 @@
 <template>
   <div class="relation">
     <div class="box contact_us">
-      <div class="container flex" style="justify-content: space-between">
-        <div class="space-y-10">
-          <div class="column space-y-5">
-            <p class="text-3xl">{{ t("relation_spec.title") }}</p>
-            <p class="text-base" v-html="t('relation_spec.desc')"></p>
-          </div>
+      <div class="container flex space-x-5" style="justify-content: space-between">
+        <div class="email space-y-10 column">
+          <p class="text-3xl title" v-html="t('relation_spec.title')"></p>
 
-          <ul class="way column space-y-3">
-            <li class="v_center space-x-5">
-              <img @click="toCrisp" src="../../../assets/pc_img/contact_img/phone call.png" alt="phone call" />
-              <div @click="toCrisp" class="space-y-1">
-                <p>{{ t("Contact_us") }}</p>
-                <p>{{ t("relation_spec.Start_chat") }}</p>
-              </div>
-            </li>
-            <li class="v_center space-x-5">
-              <img @click="toEmail" src="../../../assets/pc_img/contact_img/mailbox.png" alt="mailbox" />
-              <div @click="toEmail" class="space-y-1">
-                <p>{{ t("Support") }}</p>
-                <p>support@ipflare.com</p>
-              </div>
-            </li>
-            <li class="v_center space-x-5">
-              <img src="../../../assets/pc_img/contact_img/shield.png" alt="shield" />
-              <div class="space-y-1">
-                <p>{{ t("Follow_us_on") }}</p>
-                <IpButton type="ghost" circle class="w-10 h-10" @click="toTwitter">
-                  <Twitter :size="16" color="hsl(var(--primary))" />
-                </IpButton>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="email space-y-5">
-          <p class="text-2xl">{{ t("PCRelation.emailContact.h4") }}</p>
           <div class="space-y-5 w-full">
             <div class="space-y-2">
-              <p class="text-sm font-semibold">{{ t("PCRelation.emailContact.inputHr.pOne") }}</p>
-              <input
-                class="w-full transition-color text-sm"
-                v-model.trim="fullName"
-                :placeholder="t('PCRelation.emailContact.inputHr.placeholderOne')"
-              />
+              <p class="label text-sm">{{ t("PCRelation.emailContact.inputHr.pOne") }}</p>
+              <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
             <div class="space-y-2">
-              <p class="text-sm font-semibold">{{ t("PCRelation.emailContact.inputHr.pTwo") }}</p>
-              <input
-                class="w-full transition-color text-sm"
-                v-model.trim="email"
-                :placeholder="t('PCRelation.emailContact.inputHr.placeholderTwo')"
-              />
+              <p class="label text-sm">{{ t("Email") }}</p>
+              <input class="w-full transition-color text-sm" v-model.trim="email" :placeholder="t('Email')" />
             </div>
             <div class="space-y-2">
-              <p class="text-sm font-semibold">{{ t("PCRelation.emailContact.inputHr.pThree") }}</p>
+              <p class="label text-sm">{{ t("relation_spec.help") }}</p>
               <textarea class="w-full transition-color text-sm" v-model.trim="content"></textarea>
             </div>
           </div>
 
-          <IpButton type="primary" class="w-full h-10" @click="leave_word">
-            {{ t("PCRelation.emailContact.btnText") }}
+          <IpButton type="primary" class="px-5 h-10" @click="leave_word">
+            <div class="v_center space-x-2">
+              <p>{{ t("Send_message") }}</p>
+              <ArrowRight :size="16" />
+            </div>
           </IpButton>
         </div>
+
+        <div class="column concat">
+          <div class="top flex space-x-2" style="align-items: flex-start">
+            <img class="flex-shrink-0" src="@/assets/images/relation/icon.png" width="30" height="30" alt="" />
+            <div class="column space-y-2">
+              <p class="title text-base">{{ t("relation_spec.serve") }}</p>
+              <p class="description text-sm">{{ t("relation_spec.serve_des") }}</p>
+            </div>
+          </div>
+
+          <div class="bottom flex w-full">
+            <div class="way flex-1 vh_center space-x-2">
+              <span>{{ t("relation_spec.start_chat") }}</span>
+              <IpButton @click="toCrisp" type="ghost" circle class="w-8 h-8">
+                <MessageCircleMore :size="20" color="hsl(var(--success))" :stroke-width="2" />
+              </IpButton>
+            </div>
+
+            <div class="way flex-1 vh_center pointer" @click="toEmail">support@ipflare.com</div>
+
+            <div class="way flex-1 vh_center space-x-2">
+              <span>{{ t("Follow_us_on") }}</span>
+              <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
+                <Twitter :size="20" color="hsl(var(--primary))" :stroke-width="2" />
+              </IpButton>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="background">
+      <img src="@/assets/images/relation/background.png" alt="" class="w-full h-full" style="object-fit: cover" />
     </div>
   </div>
 </template>
@@ -77,7 +72,7 @@ import { platCustomerLeaveMessage } from "@/api/home"
 import settingStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { Twitter } from "lucide-vue-next"
+import { Twitter, ArrowRight, MessageCircleMore } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
 

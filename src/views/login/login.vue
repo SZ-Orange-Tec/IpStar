@@ -1,5 +1,22 @@
 <template>
   <div class="login">
+    <div class="background">
+      <img class="bck" src="@/assets/images/login/video_bck.png" @load="startLoadVideo = true" alt="" />
+      <video
+        v-if="startLoadVideo"
+        type="video/mp4"
+        poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="bck"
+        src="https://websites.godaddy.com/categories/v4/videos/raw/video/uA41GmyyG8IMaxXdb"
+        style="opacity: 0"
+        @canplaythrough="videoLoaded"
+      ></video>
+    </div>
+
     <div class="container column">
       <div class="title">{{ t("Sign_in") }}</div>
 
@@ -62,18 +79,23 @@ const captcha = ref({
 const code = ref("")
 const status = ref("account") // account, password, code, reset
 
+// 视频加载完成
+const startLoadVideo = ref(false)
+function videoLoaded(e) {
+  e.target.style.opacity = 1
+}
 // 方法定义
-function whatsapp() {
-  window.open("https://web.whatsapp.com/send?phone=85253457877")
-}
+// function whatsapp() {
+//   window.open("https://web.whatsapp.com/send?phone=85253457877")
+// }
 
-function facebook() {
-  window.open("https://www.facebook.com/profile.php?id=100087652609159")
-}
+// function facebook() {
+//   window.open("https://www.facebook.com/profile.php?id=100087652609159")
+// }
 
-function scisp_chat() {
-  window.$crisp.push(["do", "chat:open"])
-}
+// function scisp_chat() {
+//   window.$crisp.push(["do", "chat:open"])
+// }
 
 async function getGraphicCode() {
   const { data } = await platCaptcha({
@@ -189,23 +211,6 @@ function back() {
 onMounted(() => {
   import("@/views/back/layout.vue")
 })
-
-// meta信息
-// defineOptions({
-//   name: "LOGIN",
-//   metaInfo: {
-//     meta: [
-//       {
-//         name: "keyWords",
-//         content: "login",
-//       },
-//       {
-//         name: "description",
-//         content: "This is the login page",
-//       },
-//     ],
-//   },
-// })
 </script>
 
 <style lang="less" scoped>
