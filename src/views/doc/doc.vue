@@ -1,8 +1,9 @@
 <template>
   <div class="doc flex">
     <div class="slide flex-shrink-0 space-y-10">
-      <img v-if="!isCollapse" :src="logos[0]" alt="logo" @click="$router.push('/home')" />
-      <img v-else :src="logos[1]" alt="logo" @click="$router.push('/home')" class="minLogo" />
+      <!-- <img v-if="!isCollapse" :src="logos[0]" alt="logo" @click="$router.push('/home')" />
+      <img v-else :src="logos[1]" alt="logo" @click="$router.push('/home')" class="minLogo" /> -->
+      <div class="text-2xl">IPSTAR</div>
 
       <div class="menu space-y-2" ref="menuRef">
         <div class="menu_item" v-for="(item, index) in menuData" :key="item.id">

@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">Next</div>
+    <div class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">{{ t("Next") }}</div>
 
     <p class="other_login_title text-sm">{{ t("login_spec.Or") }}</p>
     <div class="other_login between space-x-5">

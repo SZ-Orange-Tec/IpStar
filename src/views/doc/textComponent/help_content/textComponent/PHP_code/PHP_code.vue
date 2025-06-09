@@ -9,14 +9,10 @@
 </template>
 
 <script>
-export default {
-  name: 'PCPHPCode',
-  components: {
-    CodeText: () => ../../../../components/code_block/code_block.vue
-  },
-  data () {
-    return {
-      codeOne: `
+import { toRefs, defineAsyncComponent } from "vue"
+const CodeText = defineAsyncComponent(() => import("../../../../components/code_block/code_block.vue"))
+
+const codeOne = `
      <?php
         /**
          * $server 代理服务地址
@@ -103,8 +99,8 @@ export default {
             curl_close($ch);
             return $response;
         }
-      `,
-      codeTwo: `
+      `
+const codeTwo = `
         <?php
 
         $req = [
@@ -144,9 +140,6 @@ export default {
             }
         }
       `
-    }
-  }
-}
 </script>
 
 <style lang="less" scoped>

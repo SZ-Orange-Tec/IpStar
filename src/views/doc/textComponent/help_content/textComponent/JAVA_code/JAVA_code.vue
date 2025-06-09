@@ -8,15 +8,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'PCJAVACode',
-  components: {
-    CodeText: () => ../../../../components/code_block/code_block.vue
-  },
-  data () {
-    return {
-      codeOne: `
+<script setup>
+import { toRefs, defineAsyncComponent } from "vue"
+const CodeText = defineAsyncComponent(() => import("../../../../components/code_block/code_block.vue"))
+
+const codeOne = `
       package main;
 
         import java.io.IOException;
@@ -96,8 +92,8 @@ export default {
              // httpProxyWithOkHttp("请求地址", "请求参数", "代理地址", 9319, "用户", "密码");
           }
         }
-      `,
-      codeTwo: `
+      `
+const codeTwo = `
       package main;
 
         import java.io.IOException;
@@ -158,9 +154,6 @@ export default {
         }
       }
       `
-    }
-  }
-}
 </script>
 
 <style lang="less" scoped>

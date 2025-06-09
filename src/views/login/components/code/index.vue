@@ -51,7 +51,7 @@ const props = defineProps({
 })
 const { modelValue, account } = toRefs(props)
 
-const emit = defineEmits(["update:modelValue", "next"])
+const emit = defineEmits(["update:modelValue", "next", "back"])
 
 const btnLoading = ref(false)
 const point = ref(-1)

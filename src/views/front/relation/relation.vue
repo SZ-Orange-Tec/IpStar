@@ -78,6 +78,8 @@ import settingStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import { Twitter } from "lucide-vue-next"
+import { ElMessageBox } from "element-plus"
+import "element-plus/es/components/message-box/style/css"
 
 const { t } = useI18n()
 const { en } = settingStore()
@@ -112,15 +114,20 @@ const leave_word = () => {
       email: email.value,
       content: content.value,
     }).then(() => {
-      Confirm({
-        title: en ? "warm prompt" : "温馨提示",
-        message: en ? "We have received your messages, and we will contact you as soon as possible." : "我们已经收到您的消息，我们将尽快与您联系。",
-        confirm_text: en ? "OK" : "确定",
-        showClose: false,
-        success: () => {
-          fullName.value = ""
-          email.value = ""
-          content.value = ""
+      const title = en.value ? "warm prompt" : "温馨提示"
+      const message = en.value
+        ? "We have received your messages, and we will contact you as soon as possible."
+        : "我们已经收到您的消息，我们将尽快与您联系。"
+      const confirmText = en.value ? "OK" : "确定"
+
+      ElMessageBox.confirm(message, title, {
+        confirmButtonText: confirmText,
+        callback: (action) => {
+          if (action === "confirm") {
+            fullName.value = ""
+            email.value = ""
+            content.value = ""
+          }
         },
       })
     })

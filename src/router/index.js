@@ -1,12 +1,14 @@
 import { createWebHistory, createRouter } from "vue-router"
 import { loadLocaleMessages } from "../language"
 
+import loginStore from "../store/login"
+const { isLogin } = loginStore()
+
 const routes = [
-  { path: "/", redirect: "/front" },
+  { path: "/", redirect: "/home" },
 
   // 前台板块
   {
-    path: "/front",
     name: "首页",
     component: () => import("@/views/front/front.vue"),
     children: [
@@ -95,6 +97,12 @@ const routes = [
     meta: { index: 5, keepAlive: false },
     component: () => import("@/views/doc/doc.vue"),
   },
+  {
+    path: "/commitment",
+    // name: 'commitment',
+    meta: { keepAlive: false },
+    component: () => import("@/views/front/commitment/commitment.vue"),
+  },
 ]
 
 const router = createRouter({
@@ -102,10 +110,17 @@ const router = createRouter({
   routes,
 })
 
+const loginPath = /\/overview|\/products|\/billings|\/proxy|\/api|\/settings/
+
 router.beforeEach(async (to, from, next) => {
   if (to.name) {
     await loadLocaleMessages(to.name)
   }
+
+  if (!isLogin.value && loginPath.test(to.path)) {
+    next("/login")
+  }
+
   next()
 })
 

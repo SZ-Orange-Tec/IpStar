@@ -264,7 +264,7 @@ async function click_pay() {
 }
 
 async function initStripe(clientSecret) {
-  const stripeInstance = await loadStripe(process.env.VUE_APP_SECRET_KEY)
+  const stripeInstance = await loadStripe(import.meta.env.VITE_SECRET_KEY)
   stripe.value = stripeInstance
 
   const appearance = {
@@ -362,7 +362,7 @@ function setLoading(isLoading) {
 }
 
 function Paypal() {
-  loadScript({ "client-id": process.env.VUE_APP_SECRET_PAYPAL }).then((Paypal) => {
+  loadScript({ "client-id": import.meta.env.VITE_SECRET_PAYPAL }).then((Paypal) => {
     Paypal.Buttons({
       createOrder,
       onApprove,

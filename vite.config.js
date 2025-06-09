@@ -10,6 +10,8 @@ const __dirname = path.resolve()
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/",
+
   build: {
     sourcemap: true,
   },

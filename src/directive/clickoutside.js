@@ -2,16 +2,17 @@ const weak = new Map()
 
 const handleFun = (e) => {
   weak.forEach((allFun, el) => {
-    allFun.forEach(fun => {
+    allFun.forEach((fun) => {
       fun(e, el)
     })
   })
 }
-document.addEventListener('click', handleFun)
+document.addEventListener("click", handleFun)
 
 export default {
-  bind (el, binding) {
-    const fun = (e, el) => { // 判断所点击dom是否为el的节点
+  mounted(el, binding) {
+    const fun = (e, el) => {
+      // 判断所点击dom是否为el的节点
       if (!el.contains(e.target)) {
         binding.value(e)
       }
@@ -20,7 +21,7 @@ export default {
     set.add(fun)
     weak.set(el, set)
   },
-  unbind (el) {
+  beforeUnmount(el) {
     weak.delete(el)
-  }
+  },
 }

@@ -117,16 +117,16 @@ import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
 const { isLogin } = loginStore()
-const { setIsProduc } = layoutStore()
+const { isProduc } = layoutStore()
 const router = useRouter()
 const { t } = useI18n()
 
-const { lang } = settingsStore()
+const { lang, documentIdx } = settingsStore()
 
 // 去购买
 function goToPay() {
   if (isLogin.value) {
-    setIsProduc.value = true
+    isProduc.value = true
     router.push("/products")
   } else {
     Message({
@@ -151,15 +151,17 @@ function goTologin(key) {
     case 1:
       router.push("/doc")
       // store.commit("setDocumentIdx", "0-2")
+      documentIdx.value = "0-2"
       break
 
     case 2:
       router.push("/doc")
       // store.commit("setDocumentIdx", "1-3-0")
+      documentIdx.value = "1-3-0"
       break
 
     default:
-      router.push("/layout")
+      router.push("/overview")
       break
   }
 }

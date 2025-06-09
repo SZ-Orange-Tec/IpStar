@@ -123,7 +123,7 @@
         <ul class="four v_center space-x-4">
           <li class="flex-1">
             <div class="img_box">
-              <!-- <img src="@/assets/images/home/choose1.png" alt="" /> -->
+              <img src="@/assets/images/home/four1.png" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
@@ -132,7 +132,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <!-- <img src="@/assets/images/home/choose2.png" alt="" /> -->
+              <img src="@/assets/images/home/four2.png" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
@@ -141,7 +141,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <!-- <img src="@/assets/images/home/choose3.png" alt="" /> -->
+              <img src="@/assets/images/home/four3.png" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
@@ -150,7 +150,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <!-- <img src="@/assets/images/home/choose4.png" alt="" /> -->
+              <img src="@/assets/images/home/four4.png" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
@@ -178,7 +178,32 @@
     <!-- world -->
     <div class="world box">
       <div class="container">
-        <div></div>
+        <div class="w-full relative" style="padding-top: 39.8%">
+          <div class="bg">
+            <img src="@/assets/images/home/world.webp" class="bg" alt="" />
+          </div>
+
+          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 20%; top: 30%" alt="" />
+          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 30%; bottom: 13%" alt="" />
+          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 50%; top: 43%" alt="" />
+          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="right: 22%; top: 46%" alt="" />
+          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="right: 25%; bottom: 25%" alt="" />
+
+          <div class="box content">
+            <div class="container column h-full">
+              <div class="text space-y-2 text-2xl font-bold">
+                <p class="v_center space-x-2">
+                  <span class="green">{{ ipsCount }} M+</span>
+                  <span>IPS</span>
+                </p>
+                <p class="v_center space-x-2">
+                  <span class="green">{{ countryCount }}</span>
+                  <span>{{ t("home_spec.world_span") }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -246,6 +271,8 @@ import { useI18n } from "vue-i18n"
 import Message from "@/components/message/message.js"
 import IpButton from "@/components/button/button.vue"
 import { MoveRight, Star as StarIcon, ToggleLeft, Dot } from "lucide-vue-next"
+import { ElMessageBox } from "element-plus"
+import "element-plus/es/components/message-box/style/css"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -341,9 +368,19 @@ function merchantScroll() {
 function giftPacks() {
   // 领取礼包
   if (token.value) {
+    ElMessageBox.confirm(t("PCHomePage.giftBag.tip.message"), t("PCHomePage.giftBag.tip.title"), {
+      cancelButtonText: t("PCHomePage.giftBag.tip.cancel"),
+      confirmButtonText: t("PCHomePage.giftBag.tip.confirm"),
+      center: true,
+      callback: (action) => {
+        if (action === "confirm") {
+          window.$crisp.push(["do", "chat:open"])
+        }
+      },
+    })
     return
   }
-  router.push("/sign_in")
+  router.push("/login")
   // ElNotification({
   //   title: "Hint",
   //   message: h("i", { style: "color: green" }, t("PCHomePage.hintTwo")),

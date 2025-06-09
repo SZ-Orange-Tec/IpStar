@@ -22,10 +22,11 @@
           <!-- 已有&&流出 -->
           <div class="flow space-x-5">
             <!-- 现有流量 -->
-            <div class="box column space-y-3">
-              <div class="box_top between">
+            <div class="box column space-y-5">
+              <div class="box_top w-full between">
                 <h2>{{ $t("PCOverview.residualFlowText") }}</h2>
-                <img src="../../../assets/pc_img/layout_img/residual flow.png" width="70" height="70" />
+                <img src="@/assets/images/overview/Gauge.png" width="48" />
+                <!-- <Gauge :size="50" color="#ffcc53" /> -->
               </div>
               <div class="box_bottom v_center">
                 <div class="number">
@@ -37,28 +38,35 @@
               </div>
             </div>
             <!-- 今日消耗 -->
-            <div class="box column space-y-3">
-              <div class="box_top between">
+            <div class="box column space-y-5">
+              <div class="box_top w-full between">
                 <h2>{{ $t("PCOverview.consumptionTodayText") }}</h2>
-                <img src="../../../assets/pc_img/layout_img/consumption today.png" width="70" height="70" />
+                <img src="@/assets/images/overview/control.png" width="48" />
+                <!-- <SlidersVertical :size="40" color="hsl(var(--major))" /> -->
               </div>
-              <div class="box_bottom v_center pointer">
+              <div class="box_bottom between pointer">
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.consume.num" :unit="quantityOfFlow.consume.unit" />
                 </p>
-                <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("PCOverview.detail") }}</div>
+                <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(2)">
+                  {{ $t("PCOverview.detail") }}
+                </ip-button>
+                <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("PCOverview.detail") }}</div> -->
               </div>
             </div>
             <!-- 当前在线 IP 总数 -->
-            <div class="box column space-y-3">
+            <div class="box column space-y-5">
               <div class="box_top between">
                 <h2>{{ $t("PCOverview.onlineIp") }}</h2>
               </div>
-              <div class="box_bottom v_center">
+              <div class="box_bottom between w-full">
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.remain.count" :unit="quantityOfFlow.consume.count" />
                 </p>
-                <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("PCOverview.detail") }}</div>
+                <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(1)">
+                  {{ $t("PCOverview.detail") }}
+                </ip-button>
+                <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("PCOverview.detail") }}</div> -->
               </div>
             </div>
           </div>
@@ -219,7 +227,7 @@ import NavBar from "../components/navbar/navbar.vue"
 import Picker from "../components/picker/picker.vue"
 import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
 import tableProgress from "../components/progress/progress.vue"
-import { Calendar, ChevronLeft } from "lucide-vue-next"
+import { Calendar, ChevronLeft, Gauge, SlidersVertical } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 // import * as echarts from 'echarts'
 let echart = null
@@ -233,6 +241,8 @@ export default {
     Calendar,
     ChevronLeft,
     IpButton,
+    Gauge,
+    SlidersVertical,
   },
   data() {
     this.page = {

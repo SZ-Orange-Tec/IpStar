@@ -41,8 +41,9 @@ export default {
 
     world_title: '全球<span class="primary_text">点对点</span>代理',
     world_desc: "提供各种位置，满足您的业务需求。",
+    world_span: "国家和地区",
 
-    app_title: "更多强大的lpflare功能<br />等待您开发",
+    app_title: "更多强大的lpStar功能<br />等待您开发",
     e_commerce: "电子商务",
     any_game: "任何游戏",
     file_transfer: "文件传输",
@@ -51,6 +52,6 @@ export default {
     finance: "金融",
 
     package_title: "选择适合您需求的套餐",
-    package_desc: "Ipflare为您提供各种高质量的套餐",
+    package_desc: "IpStar为您提供各种高质量的套餐",
   },
 }

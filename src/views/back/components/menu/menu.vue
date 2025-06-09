@@ -1,8 +1,6 @@
 <template>
   <div class="menu column h-full space-y-5">
-    <div class="logo" @click="$router.push('/home')">
-      <img src="@/assets/pc_img/layout_img/ipflare-logo.png" alt="logo" />
-    </div>
+    <div class="logo text-2xl pointer" @click="$router.push('/home')">IPSTAR</div>
     <div class="column flex-1">
       <ul class="space-y-1">
         <template v-for="(item, index) in menuData" :key="index">

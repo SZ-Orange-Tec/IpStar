@@ -43,6 +43,7 @@ export default {
 
     world_title: 'Worldwide <span class="primary_text">Point to Point</span> Proxy',
     world_desc: "Wide range of locations available tailored to your business needs.",
+    world_span: "Countries And Districts",
 
     app_title: "More Powerful Features Of lpflare <br /> Are Waiting For You To Develop",
     e_commerce: "E-commerce",

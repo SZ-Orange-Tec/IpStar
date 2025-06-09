@@ -15,7 +15,7 @@
           @back="back"
           v-else-if="status === 'password'"
         />
-        <VerifyCode v-model="code" :account="account" @next="next" v-else-if="status === 'code'" />
+        <VerifyCode v-model="code" :account="account" @next="next" @back="back" v-else-if="status === 'code'" />
         <ResetPassword v-model="password" @next="next" v-else-if="status === 'reset'" />
       </div>
     </div>

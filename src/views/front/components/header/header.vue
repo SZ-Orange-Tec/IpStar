@@ -49,10 +49,10 @@
           <!-- 用户 -->
           <DropDown v-else placement="bottom">
             <template #label="{ open }">
-              <IpButton circle :class="{ open: open }" type="ghost">
+              <IpButton :class="{ open: open }" type="ghost" class="px-2 h-10">
                 <div class="v_center shrink-0 space-x-2">
                   <CircleUser :size="25" :stroke-width="2" />
-                  <p>{{ username }}</p>
+                  <p class="username">{{ username }}</p>
                 </div>
               </IpButton>
             </template>
