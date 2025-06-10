@@ -1,5 +1,5 @@
 <template>
-  <div class="api h-full">
+  <div class="api h-full column">
     <NavBar>
       <template #default>
         <div class="place v_center space-x-5">

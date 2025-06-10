@@ -1,7 +1,7 @@
 <template>
-  <div class="pc-docs_help" @click="dom">
+  <div class="pc-docs_help h-full" @click="dom">
     <!-- 索引栏 -->
-    <div v-show="!isPurchase" class="docs_help_sidebar">
+    <div v-show="isPurchase" class="docs_help_sidebar">
       <ul class="document_bar">
         <li v-for="(item, index) in column" :key="index" @click="jump(item.id)">
           <p :class="{ h: item.type === 'title', color: activeStep === item.id }">{{ item.text }}</p>
