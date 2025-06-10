@@ -215,7 +215,6 @@ import {
   Notice,
 } from "@/api/layout"
 import { formatSizeUnits, getDate, addZero } from "@/utils/tools"
-import "flag-icon-css/css/flag-icons.css"
 
 // 组件引入
 import Picker from "../components/picker/picker.vue"
@@ -902,6 +901,9 @@ onMounted(async () => {
 
   // 获取通知
   getNotice()
+
+  // 加载国家国旗
+  import("flag-icon-css/css/flag-icons.css")
 })
 
 // 清理工作

@@ -1,44 +1,31 @@
 <template>
   <div class="pc-home">
     <Header />
-    
+
     <router-view />
 
-    <Footer v-if="isFooter" />
+    <Footer />
   </div>
 </template>
 
-<script>
-import Header from './components/header/header.vue'
-import Footer from './components/footer/footer.vue'
+<script setup>
+import Header from "./components/header/header.vue"
+import Footer from "./components/footer/footer.vue"
+import { onMounted } from "vue"
 
-export default {
-  // name: 'PCHome',
-  components: {
-    Header,
-    Footer
-  },
-  data () {
-    return {
-      isFooter: true
-    }
-  },
-  mounted () {
-    // this.scroll_window()
-  },
-  methods: {
-    // 访问 facebook
-    facebook () {
-      window.open('https://www.facebook.com/profile.php?id=100087652609159')
-    },
-    // what
-    whatsapp () {
-      window.open('https://web.whatsapp.com/send?phone=85253457877')
-    }
-  }
+// 预加载
+function loadLogin() {
+  import(/* webpackChunkName: "login" */ "@/views/login/login.vue")
+  import("@/assets/images/login/video_bck.webp").then((res) => {
+    console.log(res)
+  })
 }
+
+onMounted(() => {
+  loadLogin()
+})
 </script>
 
 <style lang="less" scoped>
-@import url('./front.less');
+@import url("./front.less");
 </style>

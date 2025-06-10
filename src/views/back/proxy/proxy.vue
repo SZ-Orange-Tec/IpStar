@@ -130,7 +130,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue"
+import { ref, computed, watch, onMounted } from "vue"
 
 import { debounce } from "@/utils/tools"
 import enOptions from "./json/cascader.json"
@@ -142,7 +142,6 @@ import settingStore from "@/store/setting"
 import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 // 国家国旗
-import "flag-icon-css/css/flag-icons.css"
 import NavBar from "../components/navbar/navbar.vue"
 import IpButton from "@/components/button/button.vue"
 import { ShoppingCart } from "lucide-vue-next"
@@ -350,6 +349,11 @@ watch(
   },
   { immediate: true }
 )
+
+onMounted(() => {
+  // 加载国家国旗
+  import("flag-icon-css/css/flag-icons.css")
+})
 </script>
 
 <style lang="less" scoped>

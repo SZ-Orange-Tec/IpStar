@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router"
 import { loadLocaleMessages } from "../language"
-
+import Front from "@/views/front/front.vue"
+import Home from "@/views/front/home/home.vue"
 import loginStore from "../store/login"
 const { isLogin } = loginStore()
 
@@ -10,12 +11,12 @@ const routes = [
   // 前台板块
   {
     name: "首页",
-    component: () => import("@/views/front/front.vue"),
+    component: Front,
     children: [
       {
         path: "/home",
         name: "home",
-        component: () => import("@/views/front/home/home.vue"),
+        component: Home,
       },
       {
         path: "/pricing",
@@ -44,7 +45,7 @@ const routes = [
   {
     name: "back",
     meta: { index: 4, keepAlive: true },
-    component: () => import(/* webpackPrefetch:true */ "@/views/back/layout.vue"),
+    component: () => import("@/views/back/layout.vue"),
     children: [
       {
         path: "/overview",
@@ -108,6 +109,9 @@ const routes = [
 const router = createRouter({
   history: createWebHistory("/"),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
 })
 
 const loginPath = /\/overview|\/products|\/billings|\/proxy|\/api|\/settings/

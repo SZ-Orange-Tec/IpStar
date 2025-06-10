@@ -10,34 +10,34 @@
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es.js'
-import clickoutside from '@/directive/clickoutside'
+import anime from "animejs/lib/anime.es.js"
+import clickoutside from "@/directive/clickoutside"
 export default {
-  name: 'PCDropDown',
+  name: "PCDropDown",
   directives: {
-    clickoutside
+    clickoutside,
   },
   props: {
     trigger: String,
     placement: {
       type: String,
-      default: 'bottom'
-    }
+      default: "bottom",
+    },
   },
-  data () {
+  data() {
     // this.open = false
     return {
       open: false,
-      position: {}
+      position: {},
     }
   },
   computed: {
-    direction () {
-      return this.placement.split('-')[0]
-    }
+    direction() {
+      return this.placement.split("-")[0]
+    },
   },
   methods: {
-    toggleMenu () {
+    toggleMenu() {
       const open = this.open
 
       if (!open) {
@@ -46,7 +46,7 @@ export default {
         this.closeMenu()
       }
     },
-    openMenu () {
+    openMenu() {
       const target = this.$refs.menu
 
       this.computePosition()
@@ -56,17 +56,18 @@ export default {
         opacity: {
           value: [0.5, 1],
           duration: 200,
-          easing: 'easeOutQuad'
+          easing: "easeOutQuad",
         },
         height: {
           value: target.scrollHeight,
           duration: 200,
-          easing: 'easeOutExpo'
-        }
+          easing: "easeOutExpo",
+        },
       })
       this.open = true
+      this.$emit("onChange", true)
     },
-    closeMenu () {
+    closeMenu() {
       const target = this.$refs.menu
 
       anime({
@@ -74,40 +75,41 @@ export default {
         opacity: {
           value: 0,
           duration: 200,
-          easing: 'easeOutQuad'
+          easing: "easeOutQuad",
         },
         height: {
           value: 0,
           duration: 200,
-          easing: 'easeOutExpo'
-        }
+          easing: "easeOutExpo",
+        },
       })
       this.open = false
+      this.$emit("onChange", false)
     },
-    computePosition () {
+    computePosition() {
       // 计算剩余空间
       const compute = (placement) => {
         switch (placement) {
-          case 'bottom':
+          case "bottom":
             return {
-              top: '100%',
-              left: '50%',
-              transform: 'translateX(-50%)'
+              top: "100%",
+              left: "50%",
+              transform: "translateX(-50%)",
             }
-          case 'bottom-start':
+          case "bottom-start":
             return {
-              top: '100%',
-              left: '0%'
+              top: "100%",
+              left: "0%",
             }
-          case 'bottom-end':
+          case "bottom-end":
             return {
-              top: '100%',
-              right: '0%'
+              top: "100%",
+              right: "0%",
             }
-          case 'start-top':
+          case "start-top":
             return {
-              bottom: '100%',
-              left: 0
+              bottom: "100%",
+              left: 0,
             }
           default:
             return {}
@@ -122,26 +124,25 @@ export default {
       const menuWidth = this.$refs.menu.clientWidth
       const difference = menuWidth - labelWidth
 
-      if (placement === 'bottom-start' && difference > window.innerWidth - right) {
+      if (placement === "bottom-start" && difference > window.innerWidth - right) {
         const space = difference / 2 < window.innerWidth - right
-        this.position = compute(space ? 'bottom' : 'bottom-end')
-      } else if (placement === 'bottom-end' && difference > left) {
+        this.position = compute(space ? "bottom" : "bottom-end")
+      } else if (placement === "bottom-end" && difference > left) {
         const space = difference / 2 < left
-        this.position = compute(space ? 'bottom' : 'bottom-start')
-      } else if (placement === 'bottom') {
+        this.position = compute(space ? "bottom" : "bottom-start")
+      } else if (placement === "bottom") {
         if (difference / 2 > left) {
-          this.position = compute('bottom-start')
+          this.position = compute("bottom-start")
         } else if (difference / 2 > window.innerWidth - right) {
-          this.position = compute('bottom-end')
+          this.position = compute("bottom-end")
         }
       }
-    }
+    },
   },
-  mounted () {
-  }
+  mounted() {},
 }
 </script>
 
 <style lang="less" scoped>
-@import './dropDown.less';
+@import "./dropDown.less";
 </style>

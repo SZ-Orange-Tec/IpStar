@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-collapse" :style="`height:${bol ? height : titleDom}px;`">
+  <div class="pc-collapse" ref="collapseRef" :style="`height:${bol ? height : titleDom}px;`">
     <header class="title dom between text-sm" :class="{ select: bol }">
       <p class="title">{{ info?.title }}</p>
       <ChevronRight :size="18" :class="{ down: bol }" style="transition: transform 0.3s" />
@@ -42,80 +42,88 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, watch, nextTick, onMounted } from "vue"
+import { useRouter } from "vue-router"
 import { ChevronRight } from "lucide-vue-next"
-export default {
-  name: "PCCollapse",
-  components: {
-    ChevronRight,
+import settingStore from "@/store/setting"
+import loginStore from "@/store/login"
+
+const props = defineProps({
+  bol: {
+    type: Boolean,
   },
-  props: {
-    bol: {
-      type: Boolean,
-    },
-    info: {
-      type: Object,
-    },
+  info: {
+    type: Object,
   },
-  data() {
-    return {
-      height: null,
-      titleDom: null,
-    }
-  },
-  computed: {
-    token() {
-      return this.$store.state.token
-    },
-  },
-  mounted() {
-    this.dom()
-  },
-  methods: {
-    // 下载之前验证是否登录
-    beforeDownload(e) {
-      if (!this.token) {
-        this.$message.warning(this.$t("PCHomePage.clickPay"))
-        e.preventDefault()
-      }
-    },
-    goto(idx) {
-      const routeUrl = this.$router.resolve({
-        path: "/doc",
-        query: { isdocument: "Help", documentIdx: idx },
-      })
-      window.open(routeUrl.href)
-    },
-    dom() {
-      const domHeight = this.$el.children[1].offsetHeight
-      this.titleDom = this.$el.children[0].offsetHeight
-      this.height = domHeight + this.titleDom + 6
-    },
-    // 跳转代码
-    gotoDocum() {
-      const routeUrl = this.$router.resolve({
-        path: "/doc",
-        query: { isdocument: "Help", documentIdx: "1-3-0" },
-      })
-      window.open(routeUrl.href)
-    },
-    open(url) {
-      window.open(url)
-    },
-    fn() {},
-  },
-  watch: {
-    bol: {
-      handler(val) {
-        if (!val) return
-        this.$nextTick(() => {
-          this.dom()
-        })
-      },
-      deep: true,
-    },
-  },
+})
+
+const { token } = loginStore()
+const router = useRouter()
+const { isDocument, documentIdx } = settingStore()
+
+const height = ref(null)
+const titleDom = ref(null)
+const collapseRef = ref(null)
+
+// 下载之前验证是否登录
+function beforeDownload(e) {
+  if (!token.value) {
+    ElMessage.warning(t("PCHomePage.clickPay"))
+    e.preventDefault()
+  }
 }
+
+function goto(idx) {
+  // const routeUrl = router.resolve({
+  //   path: "/doc",
+  //   query: { isdocument: "Help", documentIdx: idx },
+  // })
+  // window.open(routeUrl.href)
+  isDocument.value = "Help"
+  documentIdx.value = idx
+  router.push("/doc")
+}
+
+function dom() {
+  const domHeight = collapseRef.value.children[1].scrollHeight
+  titleDom.value = collapseRef.value.children[0].offsetHeight
+  height.value = domHeight + titleDom.value + 6
+}
+
+// 跳转代码
+function gotoDocum() {
+  // const routeUrl = router.resolve({
+  //   path: "/doc",
+  //   query: { isdocument: "Help", documentIdx: "1-3-0" },
+  // })
+  // window.open(routeUrl.href)
+  isDocument.value = "Help"
+  documentIdx.value = "1-3-0"
+  router.push("/doc")
+}
+
+function open(url) {
+  window.open(url)
+}
+
+function fn() {}
+
+watch(
+  () => props.bol,
+  (val) => {
+    if (!val) return
+    nextTick(() => {
+      dom()
+    })
+  },
+  { deep: true }
+)
+
+// 初始化
+onMounted(() => {
+  dom()
+})
 </script>
 
 <style lang="less" scoped>

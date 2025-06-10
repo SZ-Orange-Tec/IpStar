@@ -5,14 +5,14 @@
         <p class="text-sm">{{ t("login_spec.label2") }}</p>
         <div class="v_center input_box space-x-2 px-3 transition-color">
           <Lock :size="18" class="flex-shrink-0 icon" />
-          <input type="text" v-model="pwd" class="flex-1 text-sm" ref="passwordRef" :placeholder="t('Password')" />
+          <input type="text" v-model.trim="pwd" class="flex-1 text-sm" ref="passwordRef" :placeholder="t('Password')" />
         </div>
       </div>
 
       <div class="w-full flex space-x-3">
         <div class="flex-1 v_center input_box space-x-2 px-3 transition-color">
           <ShieldCheck :size="18" class="flex-shrink-0 icon" />
-          <input type="text" v-model="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
+          <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
         </div>
         <div class="image">
           <img :src="image" class="image shink-0" height="52" alt="graphic code" @click="emit('updateCaptcha')" />

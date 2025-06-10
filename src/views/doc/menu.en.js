@@ -5,7 +5,7 @@ export default [
     scrollTop: 0,
     name: "Getting",
     hierarchy: 1,
-    expand: false,
+    // expand: false,
     // icon: require('@/assets/pc_img/help_document_img/getting.png'),
     children: [
       {
@@ -48,7 +48,7 @@ export default [
     scrollTop: 0,
     name: "Help",
     hierarchy: 1,
-    expand: false,
+    // expand: false,
     // icon: require('@/assets/pc_img/help_document_img/help center.png'),
     children: [
       {
@@ -175,7 +175,7 @@ export default [
     scrollTop: 0,
     name: "FAQ",
     hierarchy: 1,
-    expand: false,
+    // expand: false,
     // icon: require('@/assets/pc_img/help_document_img/FAQ.png'),
     children: [
       {

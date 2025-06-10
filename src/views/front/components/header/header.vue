@@ -4,7 +4,7 @@
       <h1 class="text-2xl">IPSTAR</h1>
 
       <div class="v_center h-full space-x-3">
-        <ul class="navigator v_center text-base px-3 h-full">
+        <ul class="navigator v_center text-base px-3 h-full" @mouseenter="loadFront">
           <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
             {{ $t("Home") }}
           </li>
@@ -47,7 +47,7 @@
           </div>
 
           <!-- 用户 -->
-          <DropDown v-else placement="bottom">
+          <DropDown v-else placement="bottom" @onChange="userDropChange">
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="px-2 h-10">
                 <div class="v_center shrink-0 space-x-2">
@@ -112,6 +112,26 @@ async function toggleLang(locale) {
   }
 
   setI18nLanguage(locale)
+}
+
+// 用户下拉菜单
+function userDropChange(status) {
+  if (status) {
+    loadBack()
+  }
+}
+// 预加载后台
+async function loadBack() {
+  await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
+  await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
+  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
+  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
+}
+// 预加载前台
+async function loadFront() {
+  await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
+  await import(/*webpackChunkName:'relation'*/ "@/views/front/relation/relation.vue")
+  await import(/*webpackChunkName:'help'*/ "@/views/front/help/help.vue")
 }
 
 // 退出

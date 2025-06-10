@@ -118,7 +118,7 @@ import cnOptions from "../../proxy/json/cncascader.json"
 
 import settingStore from "@/store/setting"
 // 国家国旗
-import "flag-icon-css/css/flag-icons.css"
+
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
 import { ElMessageBox } from "element-plus"
@@ -369,6 +369,9 @@ export default {
       isProduc,
       isPurchase,
     }
+  },
+  mounted() {
+    import("flag-icon-css/css/flag-icons.css")
   },
 }
 </script>

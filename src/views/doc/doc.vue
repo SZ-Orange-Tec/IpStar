@@ -94,7 +94,8 @@ function toggleMenu(index) {
 function pitchOnMenu(key) {
   // 选择菜单
   if (!key) return
-  isDocument.value = key
+  // isDocument.value = key
+  documentIdx.value = key
   const arr = key.split("-")
   if (arr.length === 2) {
     selectDocument(menuData.value[arr[0]].children[arr[1]], key)
@@ -213,18 +214,23 @@ function assistScroll(dom, scrollTop) {
 }
 
 async function init() {
-  const { documentIdx, isdocument } = route.query
-  if (route.query.documentIdx) {
-    isDocument.value = isdocument
-    documentIdx.value = documentIdx
-  }
   const { default: data } = en.value ? await import("./menu.en") : await import("./menu.zh")
+
+  data.forEach((item) => (item.expand = false))
+
   if (!is_purchase.value) {
     menuData.value = [data[0], data[2]]
   } else {
     menuData.value = data
   }
-  pitchOnMenu("0-0")
+
+  nextTick(() => {
+    const index = +documentIdx.value.split("-")[0]
+    if (!isNaN(index)) {
+      toggleMenu(index)
+      pitchOnMenu(documentIdx.value)
+    }
+  })
 }
 init()
 

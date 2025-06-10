@@ -220,7 +220,7 @@ import {
 } from "@/api/layout"
 import { formatSizeUnits, getDate, addZero } from "@/utils/tools"
 // 国家国旗
-import "flag-icon-css/css/flag-icons.css"
+
 import userStore from "@/store/user"
 import settingStore from "@/store/setting"
 import NavBar from "../components/navbar/navbar.vue"
@@ -355,6 +355,8 @@ export default {
     this.getCountryList()
     // 通知
     this.getNotice()
+    // 加载国家国旗
+    import("flag-icon-css/css/flag-icons.css")
   },
   methods: {
     // 获取通知

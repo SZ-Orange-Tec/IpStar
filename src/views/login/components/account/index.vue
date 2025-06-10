@@ -4,7 +4,7 @@
       <p class="text-sm">{{ t("login_spec.label1") }}</p>
       <div class="v_center input_box transition-color">
         <MailIcon :size="18" class="flex-shrink-0 icon" />
-        <input type="text" v-model="email" class="flex-1 text-sm" :placeholder="t('Email')" />
+        <input type="text" v-model.trim="email" class="flex-1 text-sm" :placeholder="t('Email')" />
       </div>
     </div>
 

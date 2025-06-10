@@ -58,9 +58,11 @@ import Collapse from "../components/collapse/collapse.vue"
 import settingStore from "@/store/setting"
 import IpButton from "@/components/button/button.vue"
 import { useI18n } from "vue-i18n"
+import { useRouter } from "vue-router"
 
+const router = useRouter()
 const { t } = useI18n()
-const { en } = settingStore()
+const { en, isDocument, documentIdx } = settingStore()
 
 const idx = ref(0)
 const collapseIdx = ref(0)
@@ -69,41 +71,33 @@ const GettingList = ref([])
 const IntegrationList = ref([])
 const FAQlist = ref([])
 
-function mousemove(e) {
-  this.layerY = e.offsetY
-  this.layerX = e.offsetX
-}
-function mouseleave(e) {
-  this.layerY = e.offsetY
-  this.layerX = e.offsetX
-}
 // 切换帮助中心
 function selectBlock(index) {
-  this.idx = index
-  this.collapseIdx = null
+  idx.value = index
+  collapseIdx.value = null
 }
 // 当前展开的问答
 function collapseClick(id) {
-  if (this.collapseIdx === id) {
-    this.collapseIdx = null
+  if (collapseIdx.value === id) {
+    collapseIdx.value = null
     return
   }
-  this.collapseIdx = id
+  collapseIdx.value = id
 }
 // 文档跳转
 function gotoDocum() {
-  if (this.idx === 0) {
-    this.$store.commit("setIsdocument", "Getting")
-    this.$store.commit("setDocumentIdx", "0-0")
-    this.$router.push("/doc")
-  } else if (this.idx === 1) {
-    this.$store.commit("setIsdocument", "Help")
-    this.$store.commit("setDocumentIdx", "1-0")
-    this.$router.push("/doc")
-  } else if (this.idx === 2) {
-    this.$store.commit("setIsdocument", "FAQ")
-    this.$store.commit("setDocumentIdx", "2-0")
-    this.$router.push("/doc")
+  if (idx.value === 0) {
+    isDocument.value = "Getting"
+    documentIdx.value = "0-0"
+    router.push("/doc")
+  } else if (idx.value === 1) {
+    isDocument.value = "Help"
+    documentIdx.value = "1-0"
+    router.push("/doc")
+  } else if (idx.value === 2) {
+    isDocument.value = "FAQ"
+    documentIdx.value = "2-0"
+    router.push("/doc")
   }
 }
 // 获取数据

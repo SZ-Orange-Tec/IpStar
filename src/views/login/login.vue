@@ -1,7 +1,7 @@
 <template>
-  <div class="login v_center" style="justify-content: flex-end">
+  <div class="login vh_center">
     <div class="background">
-      <img class="bck" src="@/assets/images/login/video_bck.webp" @load="startLoadVideo = true" alt="" />
+      <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
       <video
         v-if="startLoadVideo"
         type="video/mp4"
@@ -18,7 +18,7 @@
     </div>
 
     <div class="container column">
-      <div class="title">{{ t("Sign_in") }}</div>
+      <div class="title w-full text-center">{{ t("Sign_in") }}</div>
 
       <div class="w-full">
         <Account v-model="account" @next="next" v-if="status === 'account'" />
@@ -56,7 +56,7 @@ import loginStore from "@/store/login"
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
-import { ref, onMounted } from "vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
@@ -79,23 +79,26 @@ const captcha = ref({
 const code = ref("")
 const status = ref("account") // account, password, code, reset
 
+// 预加载后台
+async function loadBack() {
+  await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
+  await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
+  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
+  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
+  await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
+  await import(/*webpackChunkName:'api'*/ "@/views/back/API/api.vue")
+  await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
+}
+
 // 视频加载完成
 const startLoadVideo = ref(false)
 function videoLoaded(e) {
   e.target.style.opacity = 1
 }
-// 方法定义
-// function whatsapp() {
-//   window.open("https://web.whatsapp.com/send?phone=85253457877")
-// }
-
-// function facebook() {
-//   window.open("https://www.facebook.com/profile.php?id=100087652609159")
-// }
-
-// function scisp_chat() {
-//   window.$crisp.push(["do", "chat:open"])
-// }
+function bgLoaded() {
+  startLoadVideo.value = true
+  loadBack()
+}
 
 async function getGraphicCode() {
   const { data } = await platCaptcha({
@@ -207,10 +210,6 @@ function back() {
       break
   }
 }
-
-onMounted(() => {
-  import("@/views/back/layout.vue")
-})
 </script>
 
 <style lang="less" scoped>
