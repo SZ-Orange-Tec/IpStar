@@ -1,11 +1,10 @@
 <template>
   <div class="pc-collapse" :style="`height:${bol ? height : titleDom}px;`">
-    <header class="title dom" :class="{ select: bol }">
-      <h1>{{ info?.title }}</h1>
-      <img v-if="bol" src="@/assets/pc_img/help_img/Pull up.png" alt="drop-down" />
-      <img v-else src="@/assets/pc_img/help_img/drop-down.png" alt="drop-down" />
+    <header class="title dom between text-sm" :class="{ select: bol }">
+      <p class="title">{{ info?.title }}</p>
+      <ChevronRight :size="18" :class="{ down: bol }" style="transition: transform 0.3s" />
     </header>
-    <div class="content_text" @click.stop="fn" v-if="info?.type !== 'download'">
+    <div class="content_text text-sm space-y-3" @click.stop="fn" v-if="info?.type !== 'download'">
       <p v-for="(item, index) in info?.p" :key="index">
         <span v-if="item.type !== 'a'">{{ item.txt }}</span
         ><i v-if="item.type === 'followUp'" @click="goto(item.idx)">...>></i>
@@ -44,8 +43,12 @@
 </template>
 
 <script>
+import { ChevronRight } from "lucide-vue-next"
 export default {
   name: "PCCollapse",
+  components: {
+    ChevronRight,
+  },
   props: {
     bol: {
       type: Boolean,

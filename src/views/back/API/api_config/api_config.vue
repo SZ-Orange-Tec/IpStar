@@ -64,7 +64,7 @@
       <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("PCConfigure.open_link") }}</el-button>
     </div>
     <div class="tip">
-      <div>{{ $t("PCConfigure.url_note.tag") }}</div>
+      <div class="flex-shrink-0">{{ $t("PCConfigure.url_note.tag") }}</div>
       <ol>
         <li>{{ $t("PCConfigure.url_note.first") }}</li>
         <li>{{ $t("PCConfigure.url_note.second") }}</li>

@@ -2,13 +2,13 @@
   <div class="help">
     <div class="box">
       <div class="container column_center space-y-10">
-        <p class="text-3xl title">{{ $t("help_spec.title") }}</p>
+        <p class="text-3xl title" v-html="t('help_spec.title')"></p>
 
         <!-- 选项块 -->
         <div class="select w-full space-x-10">
           <div
-            class="flex-1 block pointer transition-color space-y-4"
-            :class="{ select: index === idx }"
+            class="flex-1 select-item pointer transition-color space-y-4"
+            :class="{ active: index === idx }"
             v-for="(item, index) in domList"
             :key="index"
             @click="selectBlock(index)"
@@ -18,8 +18,8 @@
           </div>
         </div>
 
-        <IpButton type="primary" class="px-10 h-10" @click="gotoDocum">
-          <p>{{ $t("help_spec.more") }}</p>
+        <IpButton type="primary" class="btn px-10 h-10" @click="gotoDocum">
+          <p>{{ t("help_spec.more") }}</p>
         </IpButton>
 
         <!-- 文档块 -->
@@ -57,7 +57,9 @@ import { onMounted, ref, watch } from "vue"
 import Collapse from "../components/collapse/collapse.vue"
 import settingStore from "@/store/setting"
 import IpButton from "@/components/button/button.vue"
+import { useI18n } from "vue-i18n"
 
+const { t } = useI18n()
 const { en } = settingStore()
 
 const idx = ref(0)

@@ -60,4 +60,25 @@
 body{
   font-family:  PingFang SC, Noto Sans SC, sans-serif;
   color: hsl(var(--foreground));
+
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  /* 间距和行高 */
+  letter-spacing: 0.05em;  /* 字母间距 */
+  word-spacing: 0.1em;     /* 单词间距 */
+
+  /* 段落样式 */
+  text-align: justify;
+  text-justify: inter-ideograph; /* 特别为中文优化的对齐 */
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
 }

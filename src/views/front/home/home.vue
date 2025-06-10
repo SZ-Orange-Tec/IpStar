@@ -48,7 +48,7 @@
           </div>
 
           <p class="text-lg title">IPStar is stable and <br />easy to use</p>
-          <p class="text-xs description">"Fast speed and strong anonymit-<br />yhighly recommended.</p>
+          <p class="text-xs description">"Fast speed and strong anony-<br />mity highly recommended.</p>
         </div>
         <!-- <div class="intro2 img_box">
           <img src="@/assets/images/home/intro2.png" />
@@ -197,22 +197,24 @@
             <img src="@/assets/images/home/world.webp" class="bg" alt="" />
           </div>
 
-          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 20%; top: 30%" alt="" />
-          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 30%; bottom: 13%" alt="" />
-          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="left: 50%; top: 43%" alt="" />
-          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="right: 22%; top: 46%" alt="" />
-          <img src="@/assets/images/home/light.png" class="light" width="32" height="32" style="right: 25%; bottom: 25%" alt="" />
+          <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
+            <img :src="item.icon" width="36" alt="" />
+            <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
+              <span>{{ item.value }} </span>
+              <span class="primary_text">IPS+</span>
+            </div>
+          </div>
 
-          <div class="box content">
+          <div class="content">
             <div class="container column h-full">
               <div class="text space-y-2 text-2xl font-bold">
                 <p class="v_center space-x-2">
-                  <span class="green">{{ ipsCount }} M+</span>
-                  <span>IPS</span>
-                </p>
-                <p class="v_center space-x-2">
                   <span class="green">{{ countryCount }}</span>
                   <span>{{ t("home_spec.world_span") }}</span>
+                </p>
+                <p class="v_center space-x-2">
+                  <span class="green">{{ ipsCount }} M+</span>
+                  <span>IPS</span>
                 </p>
               </div>
             </div>
@@ -274,7 +276,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, defineAsyncComponent } from "vue"
+import { ref, computed, onMounted } from "vue"
 import { platDataIndex, platDataConfig } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
@@ -353,10 +355,15 @@ const IpMap = async function () {
   const { data } = await platDataIndex()
   ipsCount.value = 50 // data.ips_count
   countryCount.value = data.country_count
+
+  const countryImg = await import.meta.glob("@/assets/images/home/country/*", { eager: true })
+
   mapData.value = data.countries.map((item) => {
+    const key = `/src/assets/images/home/country/${item.country}.png`
     return {
       name: item.country,
       value: (item.ip_count / 10000).toFixed(2),
+      icon: countryImg[key].default,
     }
   })
 }
@@ -440,26 +447,6 @@ onMounted(() => {
   // scroll()
   getDataConfig()
   IpMap()
-})
-
-// 定义组件
-const hlNumberCounter = defineAsyncComponent(() => import("../components/NumberCounter/NumberCounter.vue"))
-
-// meta信息
-defineOptions({
-  name: "PCHomePage",
-  metaInfo: {
-    meta: [
-      {
-        name: "keyWords",
-        content: "home",
-      },
-      {
-        name: "description",
-        content: "This is the home page",
-      },
-    ],
-  },
 })
 </script>
 

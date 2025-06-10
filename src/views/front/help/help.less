@@ -1,6 +1,7 @@
 .help {
 
   background-color: hsl(var(--page-background));
+  min-height: 675px;
   &>.box{
     // width: 100%;
     padding: 0 40px;
@@ -30,21 +31,38 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
 
-      &>.block {
+      &>.select-item {
         padding: 12px 20px 20px;
         border-radius: 8px;
-        background-color: hsl(var(--foreground));
-        color: hsl(var(--background));
-        &>.description{
-          opacity: 0.8;
+        background-color: hsl(var(--foreground) / 10%);
+        border: 1px solid transparent;
+        .title{
+          color: hsl(var(--foreground) / 80%);
+          font-weight: 400;
+        }
+        .description{
+          color: hsl(var(--foreground) / 60%);
+          font-weight: 300;
+          letter-spacing: 0.5px;
+        }
+        &:hover:not(.active){
+          border-color: hsl(var(--foreground) / 10%);
         }
       }
 
-      &>.select {
-        box-shadow: 0px 0px 36px 4px rgba(253, 180, 24, 0.15);
-        background: linear-gradient(0deg, #FDB713, #FD884F);
-        color: hsl(var(--primary-foreground));
+      &>.active {
+        border-color: hsl(var(--foreground) / 30%);
+        .title{
+          color: hsl(var(--foreground) / 90%);
+        }
+        .description{
+          color: hsl(var(--foreground) / 70%);
+        }
       }
+    }
+
+    &>.btn{
+      margin-top: 90px;
     }
 
     &>.txt_document {

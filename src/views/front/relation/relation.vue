@@ -59,7 +59,7 @@
     </div>
 
     <div class="background">
-      <img src="@/assets/images/relation/background.png" alt="" class="w-full h-full" style="object-fit: cover" />
+      <img src="@/assets/images/relation/background.webp" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" />
     </div>
   </div>
 </template>
@@ -78,23 +78,6 @@ import "element-plus/es/components/message-box/style/css"
 
 const { t } = useI18n()
 const { en } = settingStore()
-
-// meta信息
-// defineOptions({
-//   name: "RelaTion",
-//   metaInfo: {
-//     meta: [
-//       {
-//         name: "keyWords",
-//         content: "relation",
-//       },
-//       {
-//         name: "description",
-//         content: "This is the relation page",
-//       },
-//     ],
-//   },
-// })
 
 // 响应式数据
 const fullName = ref("")
@@ -134,6 +117,9 @@ const leave_word = () => {
   }
 }
 
+function bgLoaded(e) {
+  e.target.parentNode.style.opacity = 1
+}
 // twitter
 function toTwitter() {
   window.open("https://twitter.com/Ipflare913")

@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="login v_center" style="justify-content: flex-end">
     <div class="background">
-      <img class="bck" src="@/assets/images/login/video_bck.png" @load="startLoadVideo = true" alt="" />
+      <img class="bck" src="@/assets/images/login/video_bck.webp" @load="startLoadVideo = true" alt="" />
       <video
         v-if="startLoadVideo"
         type="video/mp4"

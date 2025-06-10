@@ -20,7 +20,7 @@ const i18n = createI18n({
     zh: { ...zh },
     en: { ...en },
   },
-  warnHtmlMessage: false,
+  warnHtmlMessage: true,
 })
 localStorage.setItem("lang", locale)
 
