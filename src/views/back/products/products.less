@@ -10,14 +10,38 @@
       padding: 40px;
     }
 
-    .el-table{
-      --el-table-header-bg-color:hsl(var(--layout-background));
-      --el-table-bg-color: hsl(var(--layout-background));
-      --el-table-text-color:hsl(var(--foreground));
-      --el-table-header-text-color:hsl(var(--foreground));
-      --el-table-border-color:hsl(var(--foreground) / 10%);
-      
+    .table{
+      :deep(.el-table){
+        border-radius: 8px;
+        thead{
+          .el-table__cell{
+            background-color: hsl(var(--primary));
+            .cell{
+              color: hsl(var(--foreground));
+            }
+          }
+
+        }
+        tbody{
+          &>tr:nth-child(even){
+            .el-table__cell{
+              // background-color: hsl(var(--primary) / 10%);
+              // background-color: #f0f9ff;
+              background-color: #eff6ff;
+            }
+          }
+        }
+      }
     }
+
+    // .el-table{
+    //   --el-table-header-bg-color:hsl(var(--layout-background));
+    //   --el-table-bg-color: hsl(var(--layout-background));
+    //   --el-table-text-color:hsl(var(--foreground));
+    //   --el-table-header-text-color:hsl(var(--foreground));
+    //   --el-table-border-color:hsl(var(--foreground) / 10%);
+      
+    // }
     .el-pagination{
       --el-pagination-bg-color:transparent;
       --el-pagination-text-color:hsl(var(--foreground));

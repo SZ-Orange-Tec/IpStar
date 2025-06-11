@@ -10,11 +10,17 @@
     background-color: hsl(var(--layout-background));
     overflow: auto;
 
+    .card{
+      background-color: hsl(var(--foreground));
+      color: hsl(var(--background) / 70%);
+      border-radius: 8px;
+      padding: 16px;
+    }
     .filter{
       display: grid;
       grid-template-columns: repeat(3,1fr);
       grid-template-rows: repeat(2 ,1fr);
-      gap: 12px;
+      gap: 12px 40px;
     }
 
     .line {
@@ -28,42 +34,39 @@
     .grey{
       border-radius: 8px;
       padding: 20px;
-      background-color: hsl(var(--neutral) / 20%);
-      color:hsl(var(--foreground) / 60%);
+      background-color: hsl(var(--neutral) / 30%);
+      color:hsl(var(--background) / 80%);
       letter-spacing: 1px;
       .tip{
-        color:hsl(var(--foreground) / 40%)
+        color:hsl(var(--background) / 50%)
       }
     }
 
-    .el-select{
-      --el-fill-color-blank:transparent;
-      --el-border-color:hsl(var(--input-border));
-      --el-color-primary:hsl(var(--primary));
-      :deep(.el-select__wrapper){
-        min-height: 42px;
+    .table{
+      max-width: 100%;
+      :deep(.el-table){
+        width: 100%;
+        max-height: 100%;
         border-radius: 8px;
-        border: 1px solid transparent;
-        color: hsl(var(--foreground)) !important;
+        thead{
+          .el-table__cell{
+            background-color: hsl(var(--primary));
+            .cell{
+              color: hsl(var(--foreground));
+            }
+          }
+
+        }
+        tbody{
+          &>tr:nth-child(even){
+            .el-table__cell{
+              // background-color: hsl(var(--primary) / 10%);
+              // background-color: #f0f9ff;
+              background-color: #eff6ff;
+            }
+          }
+        }
       }
-    }
-    .el-cascader{
-      --el-input-bg-color:transparent;
-      :v-deep(.el-input__wrapper){
-        background-color: transparent;
-        box-shadow: none;
-        border: 1px ;
-      }
-    }
-    .el-table{
-      --el-table-header-bg-color:hsl(var(--layout-background));
-      --el-table-bg-color: hsl(var(--layout-background));
-      --el-table-text-color:hsl(var(--foreground) / 80%);
-      --el-table-header-text-color:hsl(var(--foreground));
-      --el-table-border-color:hsl(var(--foreground) / 10%);
-      --el-table-current-row-bg-color:transparent;
-      --el-table-tr-bg-color:transparent;
-      --el-table-row-hover-bg-color:hsl(var(--layout-neutral) / 10%);
     }
   }
 

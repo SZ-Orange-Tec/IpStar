@@ -9,7 +9,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full main column flex-1">
+    <div class="w-full main column" :class="{ 'flex-1': active === 1 }">
       <ApiConfig v-show="active === 0"></ApiConfig>
 
       <DocsHelp v-show="active === 1"></DocsHelp>

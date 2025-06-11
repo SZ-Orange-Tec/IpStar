@@ -3,7 +3,12 @@
     <div class="slide flex-shrink-0 space-y-10">
       <!-- <img v-if="!isCollapse" :src="logos[0]" alt="logo" @click="$router.push('/home')" />
       <img v-else :src="logos[1]" alt="logo" @click="$router.push('/home')" class="minLogo" /> -->
-      <div class="text-2xl">IPSTAR</div>
+      <div class="text-2xl space-x-2 v_center">
+        <ip-button type="border" icon class="h-8 w-8" @click="router.go(-1)">
+          <ChevronLeft />
+        </ip-button>
+        <span>IPSTAR</span>
+      </div>
 
       <div class="menu space-y-2" ref="menuRef">
         <div class="menu_item" v-for="(item, index) in menuData" :key="item.id">
@@ -42,8 +47,9 @@ import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
-import { ChevronRight } from "lucide-vue-next"
+import { ChevronRight, ChevronLeft } from "lucide-vue-next"
 import anime from "animejs/lib/anime.es"
+import IpButton from "@/components/button/button.vue"
 
 const { isDocument, documentIdx, en } = settingStore()
 const { is_purchase } = userStore()

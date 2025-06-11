@@ -47,7 +47,7 @@
 
 .border{
   border-radius: 6px;
-  border: 1px solid hsl(var(--input-border));
+  border: 1px solid hsl(var(--border));
 }
 .border:hover{
   border-color: hsl(var(--primary) / 60%);

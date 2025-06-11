@@ -8,115 +8,120 @@
 
     <div class="w-full main flex-1 p-5">
       <div class="space-y-5 h-full column" v-if="is_purchase">
-        <div class="filter w-full">
-          <div class="column space-y-2">
-            <p class="text-sm">{{ $t("PCObtainProxy.heads[0]") }}</p>
-            <el-select
-              size="medium"
-              filterable
-              v-model="countryVal"
-              :filter-method="dataFilter"
-              @visible-change="changeCountry"
-              placeholder="国家"
-              style="width: 232px"
-            >
-              <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
-                <div>
-                  <span :class="['flag-icon', 'flag-icon-' + item.value.toLowerCase()]"></span>
-                  {{ item.label }}
-                </div>
-              </el-option>
-            </el-select>
-          </div>
+        <div class="card column w-full">
+          <div class="filter">
+            <div class="column space-y-2">
+              <p class="text-sm font-medium">{{ $t("PCObtainProxy.heads[0]") }}</p>
+              <el-select
+                filterable
+                v-model="countryVal"
+                :filter-method="dataFilter"
+                @visible-change="changeCountry"
+                placeholder="国家"
+                style="width: 232px"
+              >
+                <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
+                  <div>
+                    <span :class="['flag-icon', 'flag-icon-' + item.value.toLowerCase()]"></span>
+                    {{ item.label }}
+                  </div>
+                </el-option>
+              </el-select>
+            </div>
 
-          <div class="column space-y-2">
-            <p class="text-sm">{{ $t("PCObtainProxy.heads[1]") }}</p>
-            <el-cascader v-model="protocolVal" :options="protocolData" :append-to-body="false" @change="protocolChange"></el-cascader>
-          </div>
+            <div class="column space-y-2">
+              <p class="text-sm font-medium">{{ $t("PCObtainProxy.heads[1]") }}</p>
+              <el-cascader v-model="protocolVal" :options="protocolData" :append-to-body="false" @change="protocolChange"></el-cascader>
+            </div>
 
-          <div class="column space-y-2">
-            <p class="text-sm">{{ $t("PCObtainProxy.heads[2]") }}</p>
-            <div class="space-x-3 v_center">
-              <el-cascader v-model="IPtime" :options="IPtimeOption" :append-to-body="false" @change="IPtimeChange"></el-cascader>
-              <el-popover placement="bottom" width="300" :offset="-100" trigger="hover">
-                <div>
-                  <p>{{ $t("PCObtainProxy.popover") }}</p>
+            <div class="column space-y-2">
+              <p class="text-sm font-medium">{{ $t("PCObtainProxy.heads[2]") }}</p>
+              <div class="space-x-3 v_center">
+                <el-cascader v-model="IPtime" :options="IPtimeOption" :append-to-body="false" @change="IPtimeChange"></el-cascader>
+                <el-popover placement="bottom" width="300" :offset="-100" trigger="hover">
+                  <div>
+                    <p>{{ $t("PCObtainProxy.popover") }}</p>
+                  </div>
+                  <template #reference>
+                    <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
+                  </template>
+                </el-popover>
+              </div>
+            </div>
+
+            <div class="column space-y-2">
+              <p class="text-sm font-medium">{{ $t("PCObtainProxy.heads[3]") }}</p>
+              <el-input
+                type="text"
+                placeholder="The maximum number is 500"
+                v-model.trim="countVal"
+                @input="countChange"
+                style="width: 232px"
+              ></el-input>
+            </div>
+
+            <div class="column space-y-2">
+              <p class="text-sm font-medium" style="height: 20px"></p>
+              <ip-button @click="generate" :loading="btnLoading" class="px-10 h-10">
+                <div class="v_center space-x-2">
+                  <span class="ip-loading" v-if="btnLoading"></span>
+                  <p>{{ $t("PCObtainProxy.heads_btn") }}</p>
                 </div>
-                <template #reference>
-                  <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
-                </template>
-              </el-popover>
+              </ip-button>
             </div>
           </div>
+        </div>
 
-          <div class="column space-y-2">
-            <p class="text-sm">{{ $t("PCObtainProxy.heads[3]") }}</p>
-            <ip-input
-              type="text"
-              placeholder="The maximum number is 500"
-              v-model.trim="countVal"
-              @input="countChange"
-              style="width: 232px"
-            ></ip-input>
-          </div>
+        <!-- <div class="line w-full"></div> -->
 
-          <div class="column space-y-2">
-            <p class="text-sm" style="height: 20px"></p>
-            <ip-button @click="generate" :loading="btnLoading" class="px-10 h-10">
-              <div class="v_center space-x-2">
-                <span class="ip-loading" v-if="btnLoading"></span>
-                <p>{{ $t("PCObtainProxy.heads_btn") }}</p>
+        <div class="card w-full space-y-4 flex-1">
+          <div class="v_center space-x-5 text-sm w-full">
+            <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8 font-medium">
+              <div class="space-x-2 v_center">
+                <ArrowLeftRight :size="18" />
+                <p>{{ isTxt ? $t("PCObtainProxy.btnSum[1]") : $t("PCObtainProxy.btnSum[0]") }}</p>
               </div>
             </ip-button>
+            <ip-button type="border" @click="copy" class="px-5 h-8 font-medium">{{ $t("PCObtainProxy.btnSum[2]") }}</ip-button>
           </div>
-        </div>
 
-        <div class="line w-full"></div>
+          <p class="text-sm v_center space-x-2 w-full">
+            <span>{{ $t("PCObtainProxy.Format[0]") }}</span>
+            <IpButton type="link" @click="goToDocument">{{ $t("PCObtainProxy.Format[1]") }}</IpButton>
+            <span>{{ $t("PCObtainProxy.Format[2]") }}</span>
+          </p>
 
-        <div class="v_center space-x-5 text-sm w-full">
-          <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8">
-            <div class="space-x-2 v_center">
-              <ArrowLeftRight :size="18" />
-              <p>{{ isTxt ? $t("PCObtainProxy.btnSum[1]") : $t("PCObtainProxy.btnSum[0]") }}</p>
+          <!-- 搜索内容显示区 -->
+          <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt">
+            <p class="tip">{{ $t("PCObtainProxy.tips") }}</p>
+            <div class="space-y-3">
+              <p v-for="(item, index) in content" :key="index">{{ item }}</p>
             </div>
-          </ip-button>
-          <ip-button type="border" @click="copy" class="px-5 h-8">{{ $t("PCObtainProxy.btnSum[2]") }}</ip-button>
-        </div>
-
-        <p class="text-sm v_center space-x-2 w-full">
-          <span>{{ $t("PCObtainProxy.Format[0]") }}</span>
-          <IpButton type="link" @click="goToDocument">{{ $t("PCObtainProxy.Format[1]") }}</IpButton>
-          <span>{{ $t("PCObtainProxy.Format[2]") }}</span>
-        </p>
-
-        <!-- 搜索内容显示区 -->
-        <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt">
-          <p class="tip">{{ $t("PCObtainProxy.tips") }}</p>
-          <div class="space-y-3">
-            <p v-for="(item, index) in content" :key="index">{{ item }}</p>
           </div>
+
+          <!-- 表格 -->
+          <div class="table w-full" v-else>
+            <el-table class="w-full" :data="tableData" height="455">
+              <el-table-column prop="server" :label="$t('PCObtainProxy.table.label[0]')"></el-table-column>
+              <el-table-column prop="port" :label="$t('PCObtainProxy.table.label[1]')"></el-table-column>
+              <el-table-column prop="user" :label="$t('PCObtainProxy.table.label[2]')"></el-table-column>
+              <el-table-column prop="password" :label="$t('PCObtainProxy.table.label[3]')"></el-table-column>
+              <template #append>
+                <div class="text-center">{{ $t("PCObtainProxy.table.bottom_txt") }}</div>
+              </template>
+            </el-table>
+          </div>
+
+          <p class="v_center space-x-2 text-sm" v-show="is_purchase">
+            <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" />
+            <span>{{ $t("PCObtainProxy.channels.p") }}</span>
+            <IpButton type="link">{{ $t("PCObtainProxy.channels.i") }}</IpButton>
+          </p>
         </div>
-
-        <!-- 表格 -->
-        <el-table class="w-full" :data="tableData" v-else height="455" border>
-          <el-table-column prop="server" :label="$t('PCObtainProxy.table.label[0]')"></el-table-column>
-          <el-table-column prop="port" :label="$t('PCObtainProxy.table.label[1]')"></el-table-column>
-          <el-table-column prop="user" :label="$t('PCObtainProxy.table.label[2]')"></el-table-column>
-          <el-table-column prop="password" :label="$t('PCObtainProxy.table.label[3]')"></el-table-column>
-          <template #append>
-            <div class="text-center">{{ $t("PCObtainProxy.table.bottom_txt") }}</div>
-          </template>
-        </el-table>
-
-        <p class="v_center space-x-2 text-sm" v-show="is_purchase">
-          <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" />
-          <span>{{ $t("PCObtainProxy.channels.p") }}</span>
-          <IpButton type="link">{{ $t("PCObtainProxy.channels.i") }}</IpButton>
-        </p>
       </div>
 
       <div class="h-full column_center space-y-4" v-else style="justify-content: center">
-        <img src="../../../assets/pc_img/layout_img/null commodity.png" alt="null commodity" />
+        <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
         <p>{{ $t("PCObtainProxy.nullCommodity.p") }}</p>
         <ip-button type="primary" @click="toBuy" class="px-3 h-10">
           <div class="v_center space-x-2">

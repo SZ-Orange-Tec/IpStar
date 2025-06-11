@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <div class="date_flow">
+          <div class="date_flow table">
             <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
               <el-table-column prop="date" label="Date"></el-table-column>
               <el-table-column prop="flow" label="Traffic">
@@ -140,7 +140,7 @@
         </div>
 
         <div class="table w-full">
-          <el-table :data="network" border :header-row-style="tableHeaderStyle">
+          <el-table :data="network" border>
             <el-table-column :label="$t('PCOverview.table.country')">
               <template #default="scope">
                 <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
@@ -172,7 +172,7 @@
       </div>
 
       <!-- 余额明细 -->
-      <div class="balance w-full" v-show="activeIndex === 2">
+      <div class="balance w-full table" v-show="activeIndex === 2">
         <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
           <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
           <el-table-column prop="id" :label="$t('PCOverview.balanceHeader.id')"></el-table-column>
@@ -194,15 +194,16 @@
           </el-table-column>
         </el-table>
         <!-- 分页 -->
-        <el-pagination
-          class="pagination"
-          @current-change="handleCurrentChange"
-          :current-page="tabPage"
-          :page-size="tabSize"
-          layout="total, prev, pager, next, jumper"
-          :total="tabTotal"
-        >
-        </el-pagination>
+        <div class="pagination vh_center">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :current-page="tabPage"
+            :page-size="tabSize"
+            layout="total, prev, pager, next, jumper"
+            :total="tabTotal"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>

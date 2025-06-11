@@ -8,9 +8,9 @@
 
     <div class="w-full main column flex-1">
       <!-- 购买订单 -->
-      <div class="flex-1 w-full">
-        <el-table :data="tableData" style="height: 100%">
-          <el-table-column prop="order" :label="$t('Order')"></el-table-column>
+      <div class="flex-1 w-full table">
+        <el-table :data="tableData">
+          <el-table-column prop="order" :label="$t('Order')" width="180"></el-table-column>
           <el-table-column prop="createTime" :label="$t('Place_order_time')"></el-table-column>
           <el-table-column prop="payTime" :label="$t('Payment_time')"></el-table-column>
           <el-table-column prop="days" :label="$t('Validity_period')"></el-table-column>
@@ -32,15 +32,17 @@
 
       <!-- <el-empty style="height: 100%" description="No Data" v-else></el-empty> -->
 
-      <el-pagination
-        class="pagination"
-        @current-change="handleCurrentChange"
-        :current-page="page"
-        :page-size="size"
-        layout="total, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
+      <div class="pagination">
+        <el-pagination
+          class="pagination"
+          @current-change="handleCurrentChange"
+          :current-page="page"
+          :page-size="size"
+          layout="total, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
     </div>
 
     <!-- 支付 控件 -->

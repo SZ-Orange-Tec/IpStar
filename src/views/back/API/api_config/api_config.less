@@ -1,24 +1,31 @@
 .api_config {
   width: 100%;
   // height: 100%;
-  min-height: 100%;
+  // min-height: 100%;
   border-radius: 16px;
   // background-color: #fff;
   box-sizing: border-box;
-  padding: 20px 70px;
+  // padding: 20px 70px;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
   @color: hsl(var(--primary));
+  
 
-  & > h4 {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    color: hsl(var(--foreground) / 90%);
-    margin-bottom: 12px;
+  .card{
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background) / 70%);
+    border-radius: 8px;
+    padding: 20px;
+    & > h4 {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      margin-bottom: 12px;
+    }
   }
-  & > .countbox {
+
+  .countbox {
     width: 100%;
     display: flex;
     .count {
@@ -120,7 +127,8 @@
     }
   }
 
-  & > .website {
+  .website {
+    margin-top: 8px;
 
     :deep(.el-input > input:focus) {
       border-color: @color;
@@ -132,7 +140,7 @@
     }
   }
 
-  & > .params {
+  .params {
     padding: 20px 20px 10px;
     margin-bottom: 30px;
     border: 1px dashed #dddfe6;
@@ -164,9 +172,10 @@
       }
     }
   }
-  & > .tip {
+  .tip {
     font-size: 12px;
-    color: hsl(var(--foreground) / 60%);
+    // color: hsl(var(--foreground) / 60%);
+    opacity: 0.6;
     margin: 10px 0 30px;
     white-space: pre-wrap;
     display: flex;
@@ -180,12 +189,12 @@
     }
   }
 
-  & > .example {
+  .example {
     border-radius: 8px;
     padding: 20px;
     font-size: 14px;
-    background-color: hsl(var(--foreground) / 10%);
-    color: hsl(var(--foreground) / 90%);
+    background-color: hsl(var(--background) / 10%);
+    color: hsl(var(--background) / 70%);
     margin-bottom: 30px;
     white-space: pre-wrap;
   }

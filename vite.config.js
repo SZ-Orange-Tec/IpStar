@@ -6,7 +6,7 @@ import AutoImport from "unplugin-auto-import/vite"
 import Components from "unplugin-vue-components/vite"
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
 // 分析打包
-import { visualizer } from "rollup-plugin-visualizer"
+// import { visualizer } from "rollup-plugin-visualizer"
 import tailwindcss from "tailwindcss"
 import path from "path"
 const __dirname = path.resolve()
@@ -29,11 +29,11 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    visualizer({
-      emitFile: false,
-      filename: "analysis-chart.html",
-      open: true,
-    }),
+    // visualizer({
+    //   emitFile: false,
+    //   filename: "analysis-chart.html",
+    //   open: true,
+    // }),
     // sentryVitePlugin({
     //   org: "xiaoju",
     //   project: "ipstar"

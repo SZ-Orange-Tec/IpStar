@@ -1,112 +1,116 @@
 <template>
-  <div class="api_config column">
-    <!-- 计数 -->
-    <h4>{{ $t("PCConfigure.count") }}</h4>
-    <div class="countbox">
-      <div class="count">
-        <div class="process" ref="process" @mousedown="clickCount">
-          <div class="percent" :style="{ width: percentWidth + '%' }">
-            <!-- <el-tooltip :content="count+''" placement="top" :open-delay="200"> -->
-            <div class="bar" @mousedown.stop="moveStart"></div>
-            <div class="tip">{{ count }}</div>
-            <!-- </el-tooltip> -->
-          </div>
-        </div>
-        <p class="between">
-          <span>{{ min_count }}</span>
-          <span>{{ mid_count }}</span>
-          <span>{{ max_count }}</span>
-        </p>
-      </div>
-      <el-input-number class="number h-10" v-model="count" :min="min_count" :max="max_count"></el-input-number>
-    </div>
-
-    <!-- 表单 -->
-    <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
-      <el-form-item :label="$t('PCConfigure.country')">
-        <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
-          <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
-            <div>
-              <span :class="['flag-icon', 'flag-icon-' + item.value.toLowerCase()]"></span>
-              {{ item.label }}
+  <div class="api_config column space-y-3">
+    <div class="card w-full">
+      <!-- 计数 -->
+      <h4>{{ $t("PCConfigure.count") }}</h4>
+      <div class="countbox">
+        <div class="count">
+          <div class="process" ref="process" @mousedown="clickCount">
+            <div class="percent" :style="{ width: percentWidth + '%' }">
+              <!-- <el-tooltip :content="count+''" placement="top" :open-delay="200"> -->
+              <div class="bar" @mousedown.stop="moveStart"></div>
+              <div class="tip">{{ count }}</div>
+              <!-- </el-tooltip> -->
             </div>
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label="$t('PCConfigure.protocol')">
-        <el-select v-model="formInline.protocol" placeholder="协议">
-          <el-option label="SOCKS5" value="0"></el-option>
-          <el-option label="HTTP/HTTPS" value="1"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label="$t('PCConfigure.ip_duration')">
-        <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
-          <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item :label="$t('PCConfigure.format')">
-        <el-select v-model="formInline.format" placeholder="格式">
-          <el-option v-for="item in formatList" :key="item.label" :value="item.value" :label="item.label"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button id="primary-button" type="primary" @click="generateURL">{{ $t("PCConfigure.generate_Link") }}</el-button>
-      </el-form-item>
-    </el-form>
-
-    <!-- 网址 -->
-    <h4>{{ $t("PCConfigure.url_tip") }}</h4>
-    <div class="website v_center w-full space-x-5">
-      <div class="v_center flex-1">
-        <el-input class="flex-1" v-model="url" :placeholder="$t('PCConfigure.input_tip')" style="height: 40px"></el-input>
-        <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("PCConfigure.copy_link") }}</el-button>
+          </div>
+          <p class="between">
+            <span>{{ min_count }}</span>
+            <span>{{ mid_count }}</span>
+            <span>{{ max_count }}</span>
+          </p>
+        </div>
+        <el-input-number class="number h-10" v-model="count" :min="min_count" :max="max_count"></el-input-number>
       </div>
-      <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("PCConfigure.open_link") }}</el-button>
-    </div>
-    <div class="tip">
-      <div class="flex-shrink-0">{{ $t("PCConfigure.url_note.tag") }}</div>
-      <ol>
-        <li>{{ $t("PCConfigure.url_note.first") }}</li>
-        <li>{{ $t("PCConfigure.url_note.second") }}</li>
-      </ol>
+
+      <!-- 表单 -->
+      <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
+        <el-form-item :label="$t('PCConfigure.country')">
+          <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
+            <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
+              <div>
+                <span :class="['flag-icon', 'flag-icon-' + item.value.toLowerCase()]"></span>
+                {{ item.label }}
+              </div>
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t('PCConfigure.protocol')">
+          <el-select v-model="formInline.protocol" placeholder="协议">
+            <el-option label="SOCKS5" value="0"></el-option>
+            <el-option label="HTTP/HTTPS" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t('PCConfigure.ip_duration')">
+          <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
+            <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t('PCConfigure.format')">
+          <el-select v-model="formInline.format" placeholder="格式">
+            <el-option v-for="item in formatList" :key="item.label" :value="item.value" :label="item.label"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button id="primary-button" type="primary" @click="generateURL">{{ $t("PCConfigure.generate_Link") }}</el-button>
+        </el-form-item>
+      </el-form>
+
+      <!-- 网址 -->
+      <p>{{ $t("PCConfigure.url_tip") }}</p>
+      <div class="website v_center w-full space-x-5">
+        <div class="v_center flex-1">
+          <el-input class="flex-1" v-model="url" :placeholder="$t('PCConfigure.input_tip')" style="height: 40px"></el-input>
+          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("PCConfigure.copy_link") }}</el-button>
+        </div>
+        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("PCConfigure.open_link") }}</el-button>
+      </div>
+      <div class="tip">
+        <div class="flex-shrink-0">{{ $t("PCConfigure.url_note.tag") }}</div>
+        <ol>
+          <li>{{ $t("PCConfigure.url_note.first") }}</li>
+          <li>{{ $t("PCConfigure.url_note.second") }}</li>
+        </ol>
+      </div>
     </div>
 
-    <!-- 参数声明 -->
-    <h4>{{ $t("PCConfigure.parameter") }}</h4>
-    <div class="params w-full">
-      <ul>
-        <li class="v_center"><span>count</span> COUNT</li>
-        <li class="v_center"><span>resptype</span> FORMAT:TXT JSON</li>
-        <li class="v_center"><span>regions</span> COUNTRY</li>
-        <li class="v_center"><span>protocol</span> PROTOCOL</li>
-      </ul>
-    </div>
+    <div class="card w-full">
+      <!-- 参数声明 -->
+      <h4>{{ $t("PCConfigure.parameter") }}</h4>
+      <div class="params w-full">
+        <ul>
+          <li class="v_center"><span>count</span> COUNT</li>
+          <li class="v_center"><span>resptype</span> FORMAT:TXT JSON</li>
+          <li class="v_center"><span>regions</span> COUNTRY</li>
+          <li class="v_center"><span>protocol</span> PROTOCOL</li>
+        </ul>
+      </div>
 
-    <h4>{{ $t("PCConfigure.Example") }}</h4>
-    <div class="example w-full">
-      <template v-if="formInline.format === '0'">
-        {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
-      </template>
-      <template v-else-if="formInline.format === '1'"> {"code":0,"msg":"","data":["serve : port : username : password"]} </template>
-      <template v-else-if="formInline.format === '2'">
-        serve : port : username : password <br />
-        ***.com : 8080 : u2084sjtsait-V4PKcdfWCe-0-AG-N : n856naue
-      </template>
-    </div>
+      <h4>{{ $t("PCConfigure.Example") }}</h4>
+      <div class="example w-full">
+        <template v-if="formInline.format === '0'">
+          {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
+        </template>
+        <template v-else-if="formInline.format === '1'"> {"code":0,"msg":"","data":["serve : port : username : password"]} </template>
+        <template v-else-if="formInline.format === '2'">
+          serve : port : username : password <br />
+          ***.com : 8080 : u2084sjtsait-V4PKcdfWCe-0-AG-N : n856naue
+        </template>
+      </div>
 
-    <h4>{{ $t("PCConfigure.result_comment") }}</h4>
-    <div class="params w-full">
-      <ul v-if="formInline.format === '2'">
-        <li><span>serve</span>SERVE</li>
-        <li><span>port</span>PORT</li>
-        <li><span>username</span>USERNAME</li>
-        <li><span>password</span>PASSWORD</li>
-      </ul>
-      <ul v-else>
-        <li><span>code</span> Status Code</li>
-        <li><span>Msg</span> Messages</li>
-        <li><span>data</span> IP-list</li>
-      </ul>
+      <h4>{{ $t("PCConfigure.result_comment") }}</h4>
+      <div class="params w-full">
+        <ul v-if="formInline.format === '2'">
+          <li><span>serve</span>SERVE</li>
+          <li><span>port</span>PORT</li>
+          <li><span>username</span>USERNAME</li>
+          <li><span>password</span>PASSWORD</li>
+        </ul>
+        <ul v-else>
+          <li><span>code</span> Status Code</li>
+          <li><span>Msg</span> Messages</li>
+          <li><span>data</span> IP-list</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

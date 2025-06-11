@@ -21,8 +21,8 @@
       </div>
 
       <!-- 购买记录表 -->
-      <div class="h-full column space-y-5" v-if="tabTotal > 0 && !isProduc">
-        <div class="table_box flex-1 w-full">
+      <div class="h-full column space-y-5" v-else-if="tabTotal > 0 && !isProduc">
+        <div class="table flex-1 w-full">
           <el-table :data="tableData" style="width: 100%; height: 100%">
             <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>
             <el-table-column prop="price" :label="$t('Price')" min-width="120"></el-table-column>
@@ -65,7 +65,7 @@
 
       <!-- 无购买记录 状态 -->
       <div class="h-full column_center space-y-4" v-else-if="!isProduc" style="justify-content: center">
-        <img src="../../../assets/pc_img/layout_img/null commodity.png" width="400" alt="null commodity" />
+        <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
         <p>{{ $t("product_spec.no") }}</p>
         <ip-button type="primary" @click="toBuy" class="px-3 h-10">
           <div class="v_center space-x-2">
