@@ -36,9 +36,15 @@
       z-index: 1;
 
       .email{
+        background-color: hsl(var(--page-neutral));
+        padding: 20px 32px;
+        border: 1px solid hsl(var(--neutral) / 40%);
+        // box-shadow: 0 0 5px hsl(var(--neutral) / 50%);
         margin-bottom: 60px;
-        width: 400px;
+        // width: 450px;
+        min-width: 450px;
         border-radius: 8px;
+        // color: hsl(var(--background));
         // background-color: hsl(var(--foreground));
         // color: hsl(var(--background));
         &>p{
@@ -46,7 +52,7 @@
           letter-spacing: 1px;
         }
         .label{
-          color: hsl(var(--foreground) / 80%);
+          color: hsl(var(--foreground) / 90%);
         }
         input{
           width: 100%;

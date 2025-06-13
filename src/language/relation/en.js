@@ -7,6 +7,7 @@ export default {
   Support: "Support",
   Contact_us: "Contact Us",
   Follow_us_on: "Follow Us On",
+  Send_message: "Send Message",
 
   Email: "Email",
 

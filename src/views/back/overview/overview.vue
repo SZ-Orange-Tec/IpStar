@@ -24,14 +24,14 @@
             <!-- 现有流量 -->
             <div class="box column space-y-5">
               <div class="box_top w-full between">
-                <h2>{{ $t("PCOverview.residualFlowText") }}</h2>
+                <h2>{{ $t("overview_spec.Residual_Traffic") }}</h2>
                 <img src="@/assets/images/overview/Gauge.png" width="48" />
                 <!-- <Gauge :size="50" color="#ffcc53" /> -->
               </div>
               <div class="box_bottom v_center">
                 <div class="number">
                   <div v-if="unlimited">
-                    <span>{{ $t("PCProductList.unlimited") }}</span>
+                    <span>{{ $t("Unlimited") }}</span>
                   </div>
                   <NumberCounter v-else :value="quantityOfFlow.remain.num" :unit="quantityOfFlow.remain.unit" />
                 </div>
@@ -40,7 +40,7 @@
             <!-- 今日消耗 -->
             <div class="box column space-y-5">
               <div class="box_top w-full between">
-                <h2>{{ $t("PCOverview.consumptionTodayText") }}</h2>
+                <h2>{{ $t("overview_spec.Consumption_Today") }}</h2>
                 <img src="@/assets/images/overview/control.png" width="48" />
                 <!-- <SlidersVertical :size="40" color="hsl(var(--major))" /> -->
               </div>
@@ -49,24 +49,24 @@
                   <NumberCounter :value="quantityOfFlow.consume.num" :unit="quantityOfFlow.consume.unit" />
                 </p>
                 <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(2)">
-                  {{ $t("PCOverview.detail") }}
+                  {{ $t("Details") }}
                 </ip-button>
-                <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("PCOverview.detail") }}</div> -->
+                <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("overview_spec.detail") }}</div> -->
               </div>
             </div>
             <!-- 当前在线 IP 总数 -->
             <div class="box column space-y-5">
               <div class="box_top between">
-                <h2>{{ $t("PCOverview.onlineIp") }}</h2>
+                <h2>{{ $t("overview_spec.Total_IPs_Available") }}</h2>
               </div>
               <div class="box_bottom between w-full">
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.remain.count" :unit="quantityOfFlow.consume.count" />
                 </p>
                 <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(1)">
-                  {{ $t("PCOverview.detail") }}
+                  {{ $t("Details") }}
                 </ip-button>
-                <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("PCOverview.detail") }}</div> -->
+                <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("overview_spec.detail") }}</div> -->
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@
         <!-- date flow -->
         <div class="right column space-y-5">
           <div class="notice" v-if="noticeText">
-            <h2 class="text-base font-bold">{{ $t("PCOverview.notice") }}</h2>
+            <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
             <div class="notice_box">
               <div ref="noticeText" :class="{ scroll: isNoticeScroll }">
                 <p class="text-sm">{{ noticeText }}</p>
@@ -115,8 +115,8 @@
 
           <div class="date_flow table">
             <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
-              <el-table-column prop="date" label="Date"></el-table-column>
-              <el-table-column prop="flow" label="Traffic">
+              <el-table-column prop="date" :label="$t('Date')"></el-table-column>
+              <el-table-column prop="flow" :label="$t('Traffic')">
                 <template #default="scope">
                   <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
                 </template>
@@ -141,24 +141,24 @@
 
         <div class="table w-full">
           <el-table :data="network" border>
-            <el-table-column :label="$t('PCOverview.table.country')">
+            <el-table-column :label="$t('overview_spec.Country_or_Region')">
               <template #default="scope">
                 <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
                 <span style="margin-left: 10px">{{ lang === "zh" ? scope.row.country_cn : scope.row.country }}</span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('PCOverview.table.code')">
+            <el-table-column :label="$t('overview_spec.Country_Code')">
               <template #default="scope">
                 <p style="text-transform: uppercase">{{ scope.row.code }}</p>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('PCOverview.table.ip_count')" prop="ips_count"></el-table-column>
-            <el-table-column :label="$t('PCOverview.table.network')">
+            <el-table-column :label="$t('overview_spec.Number_of_country_IPs')" prop="ips_count"></el-table-column>
+            <el-table-column :label="$t('overview_spec.Network_Status')">
               <template #default="scope">
                 <tableProgress :percent="scope.row.avaiable" type="network"></tableProgress>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('PCOverview.table.load')">
+            <el-table-column :label="$t('Load')">
               <template #default="scope">
                 <tableProgress :percent="scope.row.used" type="load"></tableProgress>
               </template>
@@ -166,7 +166,7 @@
           </el-table>
           <div class="more vh_center pointer" v-if="network.length < page.total" @click="viewMore">
             <i class="el-icon-loading" v-show="isNetwork"></i>
-            {{ $t("PCOverview.viewmore") }}
+            {{ $t("overview_spec.View_More") }}
           </div>
         </div>
       </div>
@@ -175,21 +175,21 @@
       <div class="balance w-full table" v-show="activeIndex === 2">
         <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
           <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
-          <el-table-column prop="id" :label="$t('PCOverview.balanceHeader.id')"></el-table-column>
-          <el-table-column prop="datetime" :label="$t('PCOverview.balanceHeader.date')"></el-table-column>
-          <el-table-column prop="pack_size" :label="$t('PCOverview.balanceHeader.traffic')">
+          <el-table-column prop="id" label="ID"></el-table-column>
+          <el-table-column prop="datetime" :label="$t('Date')"></el-table-column>
+          <el-table-column prop="pack_size" :label="$t('Traffic')">
             <template #default="scope">
               <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="new_ip_count" :label="$t('PCOverview.balanceHeader.newIp')"></el-table-column>
-          <el-table-column prop="request_ip_count" :label="$t('PCOverview.balanceHeader.ip')"></el-table-column>
-          <el-table-column prop="request_count" :label="$t('PCOverview.balanceHeader.request')"></el-table-column>
-          <el-table-column :label="$t('PCOverview.balanceHeader.type')">
+          <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')"></el-table-column>
+          <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')"></el-table-column>
+          <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')"></el-table-column>
+          <el-table-column :label="$t('Type')">
             <template #default="scope">
-              <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("PCOverview.balanceHeader.consumption") }}</span>
-              <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("PCOverview.balanceHeader.recharge") }}</span>
-              <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("PCOverview.balanceHeader.rewards") }}</span>
+              <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
+              <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
+              <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -447,7 +447,7 @@ export default {
       const myEchart = echart.init(document.querySelector(".myEchart"))
       const option = {
         title: {
-          text: this.$t("PCOverview.EchartTextOne"),
+          text: this.$t("overview_spec.EchartTextOne"),
           textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
           padding: [38, 0, 0, 35],
         },
@@ -619,7 +619,7 @@ export default {
       const myEchart = echart.init(document.querySelector(".line_echart"))
       const option = {
         title: {
-          text: this.$t("PCOverview.EchartTextTwo"),
+          text: this.$t("overview_spec.EchartTextTwo"),
           textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
           padding: [38, 0, 0, 35],
         },
@@ -799,7 +799,7 @@ export default {
         echart = _.init(ipdom)
       }
       const lang = this.lang
-      const title = this.$t("PCOverview.onlineIp")
+      const title = this.$t("overview_spec.onlineIp")
       // console.log(title)
       const option = {
         title: {

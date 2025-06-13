@@ -2,7 +2,7 @@
   <div class="billings column h-full">
     <NavBar>
       <template #default="{ title }">
-        <div>{{ title }}</div>
+        <div class="white">{{ title }}</div>
       </template>
     </NavBar>
 

@@ -44,8 +44,12 @@ const { isProduc } = layoutStore()
 const { t } = useI18n()
 
 const pathMap = {
-  "/products": t("menu_spec.Products"),
   "/overview": t("menu_spec.Overview"),
+  "/products": t("menu_spec.Products"),
+  "/billings": t("menu_spec.Billings"),
+  "/proxy": t("menu_spec.Proxy"),
+  "/api": t("menu_spec.API"),
+  "/settings": t("menu_spec.Settings"),
 }
 const name = computed(() => pathMap[route.path] ?? "")
 

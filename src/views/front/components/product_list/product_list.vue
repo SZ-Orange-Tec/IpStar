@@ -13,7 +13,7 @@
     <div class="list" :style="{ 'max-width': maxWidth }">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex space-x-3">
-          <li v-for="item in product_list" :key="item.id" :class="item.hot ? 'popular' : 'common'">
+          <li v-for="item in product_list" :key="item.id" :class="item.hot ? 'popular' : 'common'" class="transition-color">
             <div class="card column_center space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
@@ -110,9 +110,14 @@
                 </li>
               </ul>
 
-              <IpButton @click="click_pay(item)" type="ghost" circle class="border-btn rounded-full px-4 font-medium">
+              <IpButton @click="click_pay(item)" type="link" circle class="border-btn rounded-full px-4 font-medium">
                 {{ item.trial ? t("Get") : t("Order") }}
               </IpButton>
+            </div>
+
+            <div class="hot text-center vh_center text-xs font-medium" v-if="item.hot">{{ t("Most_popular") }}</div>
+            <div class="bg_img">
+              <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>
           </li>
         </ul>

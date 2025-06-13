@@ -8,6 +8,8 @@ export default {
   Back: "Back",
   Re_send: "Re-send",
 
+  Home: "Home",
+
   login_spec: {
     Or: "Or sign in with",
     label1: "50M+ real residential IPs cover 200+ countries around the word.",

@@ -2,20 +2,20 @@
   <div class="relation">
     <div class="box contact_us">
       <div class="container flex space-x-5" style="justify-content: space-between">
-        <div class="email space-y-10 column">
+        <div class="email space-y-6 column">
           <p class="text-3xl title" v-html="t('relation_spec.title')"></p>
 
           <div class="space-y-5 w-full">
-            <div class="space-y-2">
-              <p class="label text-sm">{{ t("PCRelation.emailContact.inputHr.pOne") }}</p>
+            <div class="space-y-1">
+              <p class="label text-xs font-bold">{{ t("PCRelation.emailContact.inputHr.pOne") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
-            <div class="space-y-2">
-              <p class="label text-sm">{{ t("Email") }}</p>
+            <div class="space-y-1">
+              <p class="label text-xs font-bold">{{ t("Email") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="email" :placeholder="t('Email')" />
             </div>
-            <div class="space-y-2">
-              <p class="label text-sm">{{ t("relation_spec.help") }}</p>
+            <div class="space-y-1">
+              <p class="label text-xs font-bold">{{ t("relation_spec.help") }}</p>
               <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help')"></textarea>
             </div>
           </div>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="background">
-      <img src="@/assets/images/relation/background.webp" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" />
+      <img src="@/assets/images/relation/background.png" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" />
     </div>
   </div>
 </template>

@@ -15,13 +15,14 @@
       }
       .title{
         line-height: 1.5;
-        font-weight: 500;
+        font-weight: bold;
         font-family: Space Grotesk;
       }
       .description{
         line-height: 1.5;
         font-weight: 500;
-        color: hsl(var(--foreground) / 60%);
+        color: #12F7D6;
+        // color: hsl(var(--major));
       }
       .green{
         color: hsl(var(--success));
@@ -31,27 +32,145 @@
   }
   .price{
 
-    // .background{
-    //   position: absolute;
-    //   top: -250px;
-    //   left: 0;
-    //   z-index: 0;
-    //   .img{
-    //     position: absolute;
-    //     inset: 0;
-    //     img{
-    //       width: 100%;
-    //     }
-    //   }
-    // }
-
     .container{
       padding: 64px 0;
       position: relative;
       z-index: 1;
+      .float_img{
+        position: absolute;
+        opacity: 0;
+        transition: opacity .3s;
+      }
+      .star{
+        right: 150px;
+        top: -10px;
+      }
+      .star_move{
+        left: 150px;
+        top: 20px;
+      }
+    }
+
+    .background{
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity .3s;
+      .img{
+        left: 0;
+        position: absolute;
+      }
     }
 
     
+  }
+  .pay{
+    background-color: #0E0F14;
+    .primary_text{
+      color: hsl(var(--primary));
+      font-weight: 300;
+    }
+    .scroll{
+      padding: 40px 0 20px;
+      background:linear-gradient(to bottom,#0E0F14,#09070A);
+    }
+  }
+
+  .world{
+    // width: 100%;
+    // padding: 0;
+    background-color: #0a070a;
+    // background: linear-gradient(to bottom,#09070a,hsl(var(--page-background)));
+    &>.container{
+      // max-width: 100%;
+      position: relative;
+      padding: 64px 0;
+      .bg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .country{
+        position: absolute;
+
+        .country-box{
+          color: hsl(var(--foreground) / 60%);
+          border-radius: 999px;
+          // border: 1px solid hsl(var(--foreground) / 10%);
+          box-shadow: 0 0 0 1px hsl(var(--foreground) / 10%);
+          cursor: default;
+          .dot{
+            box-sizing: border-box;
+            width: 20px;
+            height: 20px;
+            background-color: hsl(var(--foreground) / 10%);
+            border-radius: 50%;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            transition: all .1s;
+            transform-origin: center center;
+            
+            &::before{
+              content: "";
+              display: block;
+              height: 50%;
+              width: 50%;
+              border-radius: 50%;
+              background-color: hsl(var(--success));
+            }
+          }
+          &:hover{
+            box-shadow: 20px 20px 40px #3B82F6;
+            box-shadow: 0 0 0 1px #3B82F6,0 10px 30px -5px  #3B82F6;
+            .dot{
+              width: 20px;
+              height: 20px;
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .Canada{
+        top: 15%;
+        left: 16%;
+      }
+      .France{
+        top: 19%;
+        left: 48%;
+      }
+      .Brazil{
+        left: 34%;
+        bottom: 30%;
+      }
+      .Australia{
+        left: 83%;
+        bottom: 20%;
+      }
+      .Malaysia{
+        left: 76%;
+        bottom: 36%;
+      }
+
+      .content{
+        position: absolute;
+        inset: 0;
+        .container{
+          .text{
+            padding: 20px 0;
+            align-self: flex-end;
+            // transform: translateY(20px);
+            p{
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
   }
 
   .country{

@@ -20,6 +20,7 @@ export default {
     adv3: "支持指纹<br />浏览器。",
     adv4: "支持API<br />提取。",
 
+    why: "为什么选择 <span class='primary_text'>IpStar</span>",
     why1_title: "50M+网络代理",
     why1_desc: "IP池中超过2000万高质量代理IP，并持续更新",
     why2_title: "住宅代理",

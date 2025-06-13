@@ -11,14 +11,14 @@
       ></div>
     </div>
     <template v-if="type === 'network'">
-      <span v-if="percent >= 80">{{ $t("PCOverview.process.Excellent") }}</span>
-      <span v-else-if="percent >= 50">{{ $t("PCOverview.process.Good") }}</span>
-      <span v-else-if="percent < 50">{{ $t("PCOverview.process.Average") }}</span>
+      <span v-if="percent >= 80">{{ $t("Excellent") }}</span>
+      <span v-else-if="percent >= 50">{{ $t("Good") }}</span>
+      <span v-else-if="percent < 50">{{ $t("Average") }}</span>
     </template>
     <template v-else-if="type === 'load'">
-      <span v-if="percent < 50">{{ $t("PCOverview.process.Low") }}</span>
-      <span v-else-if="percent < 80">{{ $t("PCOverview.process.Medium") }}</span>
-      <span v-else>{{ $t("PCOverview.process.High") }}</span>
+      <span v-if="percent < 50">{{ $t("Low") }}</span>
+      <span v-else-if="percent < 80">{{ $t("Medium") }}</span>
+      <span v-else>{{ $t("High") }}</span>
     </template>
   </div>
 </template>

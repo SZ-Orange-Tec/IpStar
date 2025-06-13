@@ -14,8 +14,8 @@
           <ShieldCheck :size="18" class="flex-shrink-0 icon" />
           <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
         </div>
-        <div class="image">
-          <img :src="image" class="image shink-0" height="52" alt="graphic code" @click="emit('updateCaptcha')" />
+        <div class="image flex-shink-0" style="height: 52px">
+          <img :src="image" class="image" height="52" alt="graphic code" @click="emit('updateCaptcha')" />
         </div>
       </div>
     </div>

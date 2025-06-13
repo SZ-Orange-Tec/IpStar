@@ -5,6 +5,7 @@ export default {
   OFF: "折扣",
   Get: "获取",
   Order: "订购",
+  Most_popular: "最受欢迎",
   productList_spec: {
     right1: "含美欧和其他地区",
     right2: "国家可以选择",

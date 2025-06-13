@@ -8,6 +8,8 @@ export default {
   Back: "返回",
   Re_send: "重新发送",
 
+  Home: "首页",
+
   login_spec: {
     Or: "其他方式登录",
     label1: "5000多万真实住宅ip覆盖全球200多个国家。",

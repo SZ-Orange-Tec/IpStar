@@ -90,7 +90,8 @@ function handlerGoogleLogin() {
   window.open(
     "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&include_granted_scopes=true&response_type=token&state=3EAB37D9D5310BFE&redirect_uri=" +
       window.location.origin +
-      "/google.html&client_id=93460351239-lpknvoier4sf0r2larho3l8n87po6o48.apps.googleusercontent.com",
+      "/google.html&client_id=" +
+      import.meta.env.VITE_GOOGLE_CLIENT_ID,
     "Google",
     "width=500, height=600,left=700,top=150"
   )

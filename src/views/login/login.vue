@@ -1,7 +1,7 @@
 <template>
   <div class="login vh_center">
     <div class="background">
-      <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
+      <!-- <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
       <video
         v-if="startLoadVideo"
         type="video/mp4"
@@ -14,7 +14,8 @@
         src="https://websites.godaddy.com/categories/v4/videos/raw/video/uA41GmyyG8IMaxXdb"
         style="opacity: 0"
         @canplaythrough="videoLoaded"
-      ></video>
+      ></video> -->
+      <StarPlay />
     </div>
 
     <div class="container column">
@@ -37,9 +38,17 @@
       </div>
     </div>
 
-    <div class="welcome text-3xl">
-      <div>{{ t("login_spec.your") }}</div>
-      <div class="liner">IP STAR!</div>
+    <div class="welcome space-y-5">
+      <ip-button type="border" class="back_btn" @click="toHome">
+        <div class="v_center space-x-1">
+          <ChevronLeft :size="22"></ChevronLeft>
+          <span class="text-base">{{ t("Home") }}</span>
+        </div>
+      </ip-button>
+      <div class="text-3xl">
+        <div>{{ t("login_spec.your") }}</div>
+        <div class="liner">IP STAR!</div>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +69,9 @@ import { ref } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
+import IpButton from "@/components/button/button.vue"
+import { ChevronLeft } from "lucide-vue-next"
+import StarPlay from "../front/home/star.vue"
 
 const { t } = useI18n()
 
@@ -208,6 +220,14 @@ function back() {
     default:
       console.log(status.value)
       break
+  }
+}
+
+function toHome() {
+  try {
+    router.go(-1)
+  } catch (err) {
+    router.replace("/home")
   }
 }
 </script>

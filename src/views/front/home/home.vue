@@ -1,10 +1,10 @@
 <template>
   <div class="home w-full">
     <!-- 介绍 -->
-    <div class="introduce box">
+    <div class="introduce box relative">
       <div class="container column_center">
         <div class="column_center space-y-5">
-          <p class="text-center title text-3xl" v-html="t('home_spec.intro_title')"></p>
+          <p class="text-center title text-3xl font-bold" v-html="t('home_spec.intro_title')"></p>
           <p class="text-center description" v-html="t('home_spec.intro_desc')"></p>
         </div>
 
@@ -29,7 +29,7 @@
           <div class="column_center px-5">
             <strong class="title text-2xl">1220</strong>
             <span class="description text-sm">{{ t("home_spec.online") }}</span>
-            <span class="description text-sm">{{ t("home_spec.users") }}</span>
+            <span class="description text-sm">IP</span>
           </div>
         </div>
 
@@ -57,10 +57,31 @@
           <img src="@/assets/images/home/intro3.png" />
         </div>
       </div>
+
+      <div class="background">
+        <!-- <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
+        <video
+          v-if="startLoadVideo"
+          type="video/mp4"
+          poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
+          autoplay
+          loop
+          muted
+          playsinline
+          class="bck"
+          src="/back1.mp4"
+          style="opacity: 0"
+          @canplaythrough="videoLoaded"
+        ></video> -->
+        <StarPlay />
+      </div>
+      <!-- <div class="background">
+        <StarPlay />
+      </div> -->
     </div>
 
     <!-- 优势 split -->
-    <div class="advantage box split mt-10">
+    <div class="advantage box split">
       <div class="container column_center">
         <div class="h-full relative">
           <ul class="v_center space-x-10">
@@ -90,7 +111,7 @@
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center">
-        <p class="title text-3xl">Why Choose <span class="primary_text">IpStar</span></p>
+        <p class="title text-3xl font-bold" v-html="t('home_spec.why')"></p>
 
         <ul class="three v_center space-x-8">
           <li class="flex-1">
@@ -128,7 +149,7 @@
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
               <p class="description text-xs">{{ t("home_spec.more") }}</p>
             </div>
-            <p class="title text-3xl" v-html="t('home_spec.automatic')"></p>
+            <p class="title text-3xl font-bold" v-html="t('home_spec.automatic')"></p>
           </div>
 
           <p class="description" v-html="t('home_spec.instant')"></p>
@@ -180,7 +201,7 @@
       <div class="container column_center">
         <div class="h-full relative">
           <div class="column_center space-x-5">
-            <p class="title text-3xl" v-html="t('home_spec.world_title')"></p>
+            <p class="title text-3xl font-bold" v-html="t('home_spec.world_title')"></p>
             <p class="description text-sm" v-html="t('home_spec.world_desc')"></p>
           </div>
 
@@ -197,14 +218,6 @@
             <img src="@/assets/images/home/world.webp" class="bg" alt="" />
           </div>
 
-          <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-            <img :src="item.icon" width="36" alt="" />
-            <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
-              <span>{{ item.value }} </span>
-              <span class="primary_text">IPS+</span>
-            </div>
-          </div>
-
           <div class="content">
             <div class="container column h-full">
               <div class="text space-y-2 text-2xl font-bold">
@@ -219,6 +232,15 @@
               </div>
             </div>
           </div>
+
+          <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
+            <img :src="item.icon" width="36" alt="" />
+            <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
+              <div class="dot vh_center"></div>
+              <span>{{ item.value }} </span>
+              <span class="primary_text">IPS+</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -226,9 +248,9 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <p class="title text-3xl text-center" v-html="t('home_spec.app_title')"></p>
+        <p class="title text-3xl font-bold text-center" v-html="t('home_spec.app_title')"></p>
 
-        <ul class="v_center space-x-5 mt-8">
+        <ul class="v_center space-x-5 mt-8" style="flex-wrap: wrap">
           <li class="v_center">
             <Dot :size="30" class="green" />
             <p class="description">{{ t("home_spec.e_commerce") }}</p>
@@ -254,6 +276,8 @@
             <p class="description">{{ t("home_spec.finance") }}</p>
           </li>
         </ul>
+
+        <img src="@/assets/images/home/app.png" alt="" />
       </div>
     </div>
 
@@ -261,7 +285,7 @@
     <div class="package box">
       <div class="container">
         <div class="column_center space-y-5">
-          <p class="title text-3xl text-center" v-html="t('home_spec.package_title')"></p>
+          <p class="title text-3xl font-bold text-center" v-html="t('home_spec.package_title')"></p>
           <p class="description text-base green">{{ t("home_spec.package_desc") }}</p>
         </div>
 
@@ -289,6 +313,7 @@ import IpButton from "@/components/button/button.vue"
 import { MoveRight, Star as StarIcon, ToggleLeft, Dot } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
+import StarPlay from "./star.vue"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -313,6 +338,15 @@ const direction = ref("右")
 const merchantTime = ref(null)
 const isgift = ref(false)
 const isAward = ref(false)
+
+// 视频加载完成
+const startLoadVideo = ref(false)
+function videoLoaded(e) {
+  e.target.style.opacity = 1
+}
+function bgLoaded() {
+  startLoadVideo.value = true
+}
 
 // 转换computed
 const ulWidth = computed(() => {

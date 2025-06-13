@@ -39,11 +39,11 @@ function initCrisp() {
 }
 
 // 路由重定向
-const route = useRoute()
-const router = useRouter()
-if (!route.path || route.path === "/") {
-  router.replace("/home")
-}
+// const route = useRoute()
+// const router = useRouter()
+// if (!route.path || route.path === "/") {
+//   router.replace("/home")
+// }
 
 onMounted(() => {
   initCrisp()

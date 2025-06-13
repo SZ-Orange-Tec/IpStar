@@ -21,6 +21,7 @@ export default {
     adv3: "Support fingerprint<br />browsers.",
     adv4: "Support APl quto<br />extract.",
 
+    why: "Why Choose <span class='primary_text'>IpStar</span>",
     why1_title: "50M+Network lPs",
     why1_desc: "There are more than 20 million high qualityproxy lP in the lP pool , and the pool iscontinuously updating",
     why2_title: "Residential Proxies",
@@ -33,7 +34,7 @@ export default {
       "Get instant access after payment - no waiting for account activation <br /> or proxies setup.supporting a variety of communication protocols,<br />includingsocks5,http https,and custom protocols",
 
     four1_title: "Reliable Proxy Affordability",
-    four1_desc: 'With professional expertise and intelligentmatching system, we will help you find a trulyreliable and cost-effective" home',
+    four1_desc: "With our expertise and intelligent matching system, we will help you find truly reliable and cost-effective residential agents.",
     four2_title: "Easy Integration",
     four2_desc: "Make the connection simpler, no technicalbackground required, and easy to enable.",
     four3_title: "Unlimited Speed & Access",

@@ -5,6 +5,7 @@ export default {
   OFF: "OFF",
   Get: "Get",
   Order: "Order",
+  Most_popular: "Most Popular",
   productList_spec: {
     right1: "200+Regions, Include US",
     right2: "Regions-Select Available",
