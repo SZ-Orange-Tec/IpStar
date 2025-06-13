@@ -1,5 +1,5 @@
 <template>
-  <div class="help">
+  <div class="help relative">
     <div class="box">
       <div class="container column_center space-y-10">
         <p class="text-3xl title" v-html="t('help_spec.title')"></p>
@@ -49,6 +49,9 @@
         </div>
       </div>
     </div>
+    <div class="background">
+      <StarPlay />
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,7 @@ import settingStore from "@/store/setting"
 import IpButton from "@/components/button/button.vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
+import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const router = useRouter()
 const { t } = useI18n()

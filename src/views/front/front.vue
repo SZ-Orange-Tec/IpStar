@@ -12,6 +12,7 @@
 import Header from "./components/header/header.vue"
 import Footer from "./components/footer/footer.vue"
 import { onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
 
 // 预加载
 function loadLogin() {
@@ -19,6 +20,13 @@ function loadLogin() {
   import("@/assets/images/login/video_bck.webp").then((res) => {
     console.log(res)
   })
+}
+
+// 路由重定向
+const route = useRoute()
+const router = useRouter()
+if (!route.path || route.path === "/") {
+  router.replace("/home")
 }
 
 onMounted(() => {

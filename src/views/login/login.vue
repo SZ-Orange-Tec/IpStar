@@ -71,7 +71,7 @@ import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import { ChevronLeft } from "lucide-vue-next"
-import StarPlay from "../front/home/star.vue"
+import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const { t } = useI18n()
 

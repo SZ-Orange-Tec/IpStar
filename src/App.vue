@@ -8,7 +8,6 @@
 
 <script setup>
 import { onMounted } from "vue"
-import { useRoute, useRouter } from "vue-router"
 
 // function captureError(e){
 //   console.log('enter')
@@ -26,7 +25,7 @@ function initCrisp() {
     locale: localStorage.getItem("lang"),
   }
   window.$crisp = []
-  window.CRISP_WEBSITE_ID = "49fbe609-c4f4-409a-9b94-2a7410735fb2"
+  window.CRISP_WEBSITE_ID = "5f7424dc-8221-4aaa-841e-0f255962b76e"
   ;(function () {
     const d = document
     const s = d.createElement("script")
@@ -37,13 +36,6 @@ function initCrisp() {
   // 更换颜色
   window.$crisp.push(["config", "color:theme", ["orange"]])
 }
-
-// 路由重定向
-// const route = useRoute()
-// const router = useRouter()
-// if (!route.path || route.path === "/") {
-//   router.replace("/home")
-// }
 
 onMounted(() => {
   initCrisp()

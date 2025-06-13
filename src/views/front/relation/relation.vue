@@ -45,7 +45,7 @@
               </IpButton>
             </div>
 
-            <div class="way flex-1 vh_center pointer" @click="toEmail">support@ipflare.com</div>
+            <div class="way flex-1 vh_center pointer" @click="toEmail">support@ipstar.io</div>
 
             <div class="way flex-1 vh_center space-x-2">
               <span>{{ t("Follow_us_on") }}</span>
@@ -59,7 +59,8 @@
     </div>
 
     <div class="background">
-      <img src="@/assets/images/relation/background.png" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" />
+      <StarPlay />
+      <!-- <img src="@/assets/images/relation/background.png" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" /> -->
     </div>
   </div>
 </template>
@@ -75,6 +76,7 @@ import IpButton from "@/components/button/button.vue"
 import { Twitter, ArrowRight, MessageCircleMore } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
+import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const { t } = useI18n()
 const { en } = settingStore()
@@ -142,7 +144,7 @@ function toCrisp() {
 
 // 邮箱跳转
 function toEmail() {
-  window.open("mailto:support@ipflare.com")
+  window.open("mailto:support@ipstar.io")
 }
 </script>
 

@@ -11,13 +11,13 @@
         <div class="card column w-full">
           <div class="filter">
             <div class="column space-y-2">
-              <p class="text-sm font-medium">{{ $t("Country") }}</p>
+              <p class="text-sm font-medium">{{ t("Country") }}</p>
               <el-select
                 filterable
                 v-model="countryVal"
                 :filter-method="dataFilter"
                 @visible-change="changeCountry"
-                :placeholder="$t('Country')"
+                :placeholder="t('Country')"
                 style="width: 232px"
               >
                 <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
@@ -30,17 +30,17 @@
             </div>
 
             <div class="column space-y-2">
-              <p class="text-sm font-medium">{{ $t("Protocol") }}</p>
+              <p class="text-sm font-medium">{{ t("Protocol") }}</p>
               <el-cascader v-model="protocolVal" :options="protocolData" :append-to-body="false" @change="protocolChange"></el-cascader>
             </div>
 
             <div class="column space-y-2">
-              <p class="text-sm font-medium">{{ $t("Duration") }}</p>
+              <p class="text-sm font-medium">IP {{ t("Duration") }}</p>
               <div class="space-x-3 v_center">
                 <el-cascader v-model="IPtime" :options="IPtimeOption" :append-to-body="false" @change="IPtimeChange"></el-cascader>
                 <el-popover placement="bottom" width="300" :offset="-100" trigger="hover">
                   <div>
-                    <p>{{ $t("proxy_spec.duration_tip") }}</p>
+                    <p>{{ t("proxy_spec.duration_tip") }}</p>
                   </div>
                   <template #reference>
                     <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
@@ -50,7 +50,7 @@
             </div>
 
             <div class="column space-y-2">
-              <p class="text-sm font-medium">{{ $t("Count") }}</p>
+              <p class="text-sm font-medium">{{ t("Count") }}</p>
               <el-input
                 type="text"
                 placeholder="The maximum number is 500"
@@ -65,7 +65,7 @@
               <ip-button @click="generate" :loading="btnLoading" class="px-10 h-10">
                 <div class="v_center space-x-2">
                   <span class="ip-loading" v-if="btnLoading"></span>
-                  <p>{{ $t("Extract") }}</p>
+                  <p>{{ t("Extract") }}</p>
                 </div>
               </ip-button>
             </div>
@@ -79,21 +79,21 @@
             <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8 font-medium">
               <div class="space-x-2 v_center">
                 <ArrowLeftRight :size="18" />
-                <p>{{ isTxt ? $t("Show_as_text") : $t("Show_as_table") }}</p>
+                <p>{{ !isTxt ? t("Show_as_text") : t("Show_as_table") }}</p>
               </div>
             </ip-button>
-            <ip-button type="border" @click="copy" class="px-5 h-8 font-medium">{{ $t("Copy_to_clipboard") }}</ip-button>
+            <ip-button type="border" @click="copy" class="px-5 h-8 font-medium">{{ t("Copy_to_clipboard") }}</ip-button>
           </div>
 
           <p class="text-sm v_center space-x-2 w-full">
-            <span>{{ $t("proxy_spec.list_tip.front") }}</span>
-            <IpButton type="link" @click="goToDocument">{{ $t("proxy_spec.list_tip.btn") }}</IpButton>
-            <span>{{ $t("proxy_spec.list_tip.back") }}</span>
+            <span>{{ t("proxy_spec.list_tip.front") }}</span>
+            <IpButton type="link" @click="goToDocument">{{ t("proxy_spec.list_tip.btn") }}</IpButton>
+            <span>{{ t("proxy_spec.list_tip.back") }}</span>
           </p>
 
           <!-- 搜索内容显示区 -->
           <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt">
-            <p class="tip">{{ $t("Server") }} : {{ $t("Port") }} : {{ $t("User") }} : {{ $t("Password") }}</p>
+            <p class="tip">{{ t("Server") }} : {{ t("Port") }} : {{ t("User") }} : {{ t("Password") }}</p>
             <div class="space-y-3">
               <p v-for="(item, index) in content" :key="index">{{ item }}</p>
             </div>
@@ -102,31 +102,31 @@
           <!-- 表格 -->
           <div class="table w-full" v-else>
             <el-table class="w-full" :data="tableData" height="455">
-              <el-table-column prop="server" :label="$t('Server')"></el-table-column>
-              <el-table-column prop="port" :label="$t('Port')"></el-table-column>
-              <el-table-column prop="user" :label="$t('User')"></el-table-column>
-              <el-table-column prop="password" :label="$t('Password')"></el-table-column>
+              <el-table-column prop="server" :label="t('Server')"></el-table-column>
+              <el-table-column prop="port" :label="t('Port')"></el-table-column>
+              <el-table-column prop="user" :label="t('User')"></el-table-column>
+              <el-table-column prop="password" :label="t('Password')"></el-table-column>
               <template #append>
-                <div class="text-center">{{ $t("No_data") }}</div>
+                <div class="text-center">{{ t("No_data") }}</div>
               </template>
             </el-table>
           </div>
 
           <p class="v_center space-x-2 text-sm" v-show="is_purchase">
             <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" />
-            <span>{{ $t("proxy_spec.api_tip.front") }}</span>
-            <IpButton type="link">{{ $t("proxy_spec.api_tip.btn") }}</IpButton>
+            <span>{{ t("proxy_spec.api_tip.front") }}</span>
+            <IpButton type="link" @click="goToDocument">{{ t("proxy_spec.api_tip.btn") }}</IpButton>
           </p>
         </div>
       </div>
 
       <div class="h-full column_center space-y-4" v-else style="justify-content: center">
         <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
-        <p>{{ $t("proxy_spec.no_order") }}</p>
+        <p>{{ t("proxy_spec.no_order") }}</p>
         <ip-button type="primary" @click="toBuy" class="px-3 h-10">
           <div class="v_center space-x-2">
             <ShoppingCart :size="20" />
-            <span>{{ $t("Buy_now") }}</span>
+            <span>{{ t("Buy_now") }}</span>
           </div>
         </ip-button>
       </div>

@@ -59,25 +59,8 @@
       </div>
 
       <div class="background">
-        <!-- <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
-        <video
-          v-if="startLoadVideo"
-          type="video/mp4"
-          poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
-          autoplay
-          loop
-          muted
-          playsinline
-          class="bck"
-          src="/back1.mp4"
-          style="opacity: 0"
-          @canplaythrough="videoLoaded"
-        ></video> -->
         <StarPlay />
       </div>
-      <!-- <div class="background">
-        <StarPlay />
-      </div> -->
     </div>
 
     <!-- 优势 split -->
@@ -313,7 +296,7 @@ import IpButton from "@/components/button/button.vue"
 import { MoveRight, Star as StarIcon, ToggleLeft, Dot } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
-import StarPlay from "./star.vue"
+import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const router = useRouter()
 const { t } = useI18n()

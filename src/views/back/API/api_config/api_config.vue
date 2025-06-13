@@ -2,7 +2,7 @@
   <div class="api_config column space-y-3">
     <div class="card w-full">
       <!-- 计数 -->
-      <h4>{{ $t("PCConfigure.count") }}</h4>
+      <h4>{{ $t("Count") }}</h4>
       <div class="countbox">
         <div class="count">
           <div class="process" ref="process" @mousedown="clickCount">
@@ -24,7 +24,7 @@
 
       <!-- 表单 -->
       <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
-        <el-form-item :label="$t('PCConfigure.country')">
+        <el-form-item :label="$t('Country')">
           <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
             <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
               <div>
@@ -34,48 +34,48 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('PCConfigure.protocol')">
+        <el-form-item :label="$t('Protocol')">
           <el-select v-model="formInline.protocol" placeholder="协议">
             <el-option label="SOCKS5" value="0"></el-option>
             <el-option label="HTTP/HTTPS" value="1"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('PCConfigure.ip_duration')">
+        <el-form-item :label="'IP ' + $t('Duration')">
           <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
             <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('PCConfigure.format')">
+        <el-form-item :label="$t('Format')">
           <el-select v-model="formInline.format" placeholder="格式">
             <el-option v-for="item in formatList" :key="item.label" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button id="primary-button" type="primary" @click="generateURL">{{ $t("PCConfigure.generate_Link") }}</el-button>
+          <el-button id="primary-button" type="primary" @click="generateURL">{{ $t("Generate") }} API {{ $t("Link") }}</el-button>
         </el-form-item>
       </el-form>
 
       <!-- 网址 -->
-      <p>{{ $t("PCConfigure.url_tip") }}</p>
+      <p>{{ $t("api_spec.url") }} {{ $t("api_spec.base") }}</p>
       <div class="website v_center w-full space-x-5">
         <div class="v_center flex-1">
-          <el-input class="flex-1" v-model="url" :placeholder="$t('PCConfigure.input_tip')" style="height: 40px"></el-input>
-          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("PCConfigure.copy_link") }}</el-button>
+          <el-input class="flex-1" v-model="url" :placeholder="$t('api_spec.placeholder')" style="height: 40px"></el-input>
+          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("Copy_link") }}</el-button>
         </div>
-        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("PCConfigure.open_link") }}</el-button>
+        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("Open_link") }}</el-button>
       </div>
       <div class="tip">
-        <div class="flex-shrink-0">{{ $t("PCConfigure.url_note.tag") }}</div>
+        <div class="flex-shrink-0">{{ $t("Note") }}:</div>
         <ol>
-          <li>{{ $t("PCConfigure.url_note.first") }}</li>
-          <li>{{ $t("PCConfigure.url_note.second") }}</li>
+          <li>{{ $t("api_spec.note1") }}</li>
+          <li>{{ $t("api_spec.note2") }}</li>
         </ol>
       </div>
     </div>
 
     <div class="card w-full">
       <!-- 参数声明 -->
-      <h4>{{ $t("PCConfigure.parameter") }}</h4>
+      <h4>{{ $t("Parameter") }} {{ $t("Declaration") }}</h4>
       <div class="params w-full">
         <ul>
           <li class="v_center"><span>count</span> COUNT</li>
@@ -85,7 +85,7 @@
         </ul>
       </div>
 
-      <h4>{{ $t("PCConfigure.Example") }}</h4>
+      <h4>{{ $t("Example") }}</h4>
       <div class="example w-full">
         <template v-if="formInline.format === '0'">
           {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
@@ -97,7 +97,7 @@
         </template>
       </div>
 
-      <h4>{{ $t("PCConfigure.result_comment") }}</h4>
+      <h4>{{ $t("Result") }}</h4>
       <div class="params w-full">
         <ul v-if="formInline.format === '2'">
           <li><span>serve</span>SERVE</li>
@@ -115,269 +115,219 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, watch, onMounted } from "vue"
 import { debounce } from "@/utils/tools"
-import enOptions from "../../proxy/json/cascader.json"
-import cnOptions from "../../proxy/json/cncascader.json"
-
+// import enOptions from "../../proxy/json/cascader.json"
+// import cnOptions from "../../proxy/json/cncascader.json"
 import settingStore from "@/store/setting"
-// 国家国旗
-
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
 import Message from "@/components/message/message"
-// import { PrismEditor } from 'vue-prism-editor'
+import { useI18n } from "vue-i18n"
+import { useRouter } from "vue-router"
 
-let allCountry = []
-export default {
-  name: "PCApiConfig",
-  // components: {
-  //   PrismEditor
-  // },
-  data() {
-    this.min_count = 1
-    this.max_count = 500
-    this.IPtimeOption = [
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[0]"),
-        value: "0",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[1]"),
-        value: "5",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[2]"),
-        value: "10",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[3]"),
-        value: "30",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[4]"),
-        value: "60",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[5]"),
-        value: "120",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[6]"),
-        value: "180",
-      },
-      {
-        label: this.$t("PCObtainProxy.IPtimeOption[7]"),
-        value: "360",
-      },
-    ]
-    this.formatList = [
-      { value: "0", label: this.$t("PCConfigure.formatList[0]") },
-      { value: "1", label: this.$t("PCConfigure.formatList[1]") },
-      { value: "2", label: this.$t("PCConfigure.formatList[2]") },
-    ]
-    return {
-      count: 50,
-      formInline: {
-        country: "",
-        protocol: "1",
-        format: "0",
-        IPtime: "0",
-      },
-      countryData: [],
-      url: "",
-    }
-  },
-  computed: {
-    mid_count() {
-      return this.max_count / 2
-    },
-    percentWidth() {
-      return Math.round((this.count / this.max_count) * 100)
-    },
-  },
-  watch: {
-    lang: {
-      handler(val) {
-        if (val === "zh") {
-          const cn = JSON.parse(JSON.stringify(cnOptions))
-          this.sortOptions(cn)
-          this.countryData = Object.freeze(cn)
-          this.formInline.country = cn[0].value
-          allCountry = cn
-        } else {
-          const en = JSON.parse(JSON.stringify(enOptions))
-          this.sortOptions(en)
-          this.countryData = Object.freeze(en)
-          this.formInline.country = en[0].value
-          allCountry = en
-        }
-      },
-      immediate: true,
-    },
-    formInline: {
-      handler() {
-        this.url = ""
-      },
-      deep: true,
-    },
-  },
-  methods: {
-    moveStart(e) {
-      const total = this.$refs.process.clientWidth
-      const unit = total / this.max_count
-      const startCount = this.count
-      const startX = e.clientX
-      const fun = (e) => {
-        const nowX = e.clientX
-        const trans = nowX - startX
-        if (this.min_count < this.count && this.count < this.max_count) {
-          const percent = Math.round(((unit * startCount + trans) / total) * 100)
-          this.count = Math.round((percent / 100) * this.max_count)
-        } else if ((this.min_count === this.count && trans > 0) || (this.count === this.max_count && trans < 0)) {
-          const percent = Math.round(((unit * startCount + trans) / total) * 100)
-          this.count = Math.round((percent / 100) * this.max_count)
-        }
-      }
-      const remove = () => {
-        document.body.removeEventListener("mousemove", fun)
-        document.body.removeEventListener("mouseup", remove)
-      }
-      document.body.addEventListener("mousemove", fun, { passive: false })
-      document.body.addEventListener("mouseup", remove)
-      // e.stopPropagation()
-      e.preventDefault()
-    },
-    clickCount(e) {
-      const findTarget = (dom) => {
-        if (dom.className === "process") return dom
-        return findTarget(dom.parentNode)
-      }
-      const target = findTarget(e.target)
-      const total = target.clientWidth
-      const offsetX = e.offsetX
-      const percent = Math.round((offsetX / total) * 100)
-      this.count = Math.round((percent / 100) * this.max_count)
-    },
-    // 搜索规则
-    dataFilter: debounce(function (val) {
-      const reg = new RegExp(val.toUpperCase())
-      if (val) {
-        const arr = allCountry.filter((item) => reg.test(item.label.toUpperCase()))
-        this.countryData = Object.freeze(arr)
-      } else {
-        this.countryData = Object.freeze(allCountry)
-      }
-    }, 300),
-    changeCountry(status) {
-      if (status) {
-        this.countryData = Object.freeze(allCountry)
-      }
-    },
-    // 遍历国家排序
-    sortOptions(arr) {
-      const first = arr.splice(0, 1)[0]
-      let temp
-      for (let i = 0; i < arr.length - 1; i++) {
-        for (let j = 0; j < arr.length - i - 1; j++) {
-          const a = arr[j].value
-          const b = arr[j + 1].value
-          if (a > b) {
-            temp = arr[j]
-            arr[j] = arr[j + 1]
-            arr[j + 1] = temp
-          }
-        }
-      }
-      arr.splice(0, 0, first)
-    },
-    // 生成url
-    async generateURL() {
-      if (!this.isPurchase) {
-        ElMessageBox.confirm(this.$t("PCConfigure.messagebox.message"), this.$t("PCConfigure.messagebox.title"), {
-          confirmButtonText: this.$t("PCConfigure.messagebox.confirm"),
-          cancelButtonText: this.$t("PCConfigure.messagebox.cancel"),
-          type: "warning",
-        }).then(() => {
-          this.$store.commit("layout/setIsProduc", true)
-          this.$router.push("/products?buy=1")
-        })
-        return
-      }
-      const baseUrl = "https://service.ipflare.com/v1/obtain_proxy_endpoints"
-      const apiKey = this.apiKey
-      const count = this.count
-      const protocol = this.formInline.protocol
-      const region = this.formInline.country === "ALL" ? "" : this.formInline.country
-      const resptype = this.formInline.format
-      const keepTime = this.formInline.IPtime
-      // console.log(key)
-      const { default: md5 } = await import(/*webpackChunkName:'js-md5'*/ "js-md5")
-      const sign = md5(apiKey + protocol + count + region)
-      const params = `?apikey=${apiKey}&count=${count}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&rd=${Date.now()}`
+const router = useRouter()
+const { en } = settingStore()
+const { isProduc } = layoutStore()
+const { apiKey, is_purchase: isPurchase } = userStore()
 
-      // if (keepTime !== '0') {
-      //   params += '&autoswitch=' + 1
-      // }
+const { t } = useI18n()
 
-      this.url = baseUrl + params
-    },
-    // 复制链接
-    copyUrl() {
-      if (!this.url) return
-      if ("clipboard" in navigator && window.isSecureContext) {
-        const text = this.url
-        navigator.clipboard
-          .writeText(text)
-          .then(() => {
-            Message({
-              type: "success",
-              message: "Copy Success",
-            })
-          })
-          .catch((err) => {
-            Message({
-              type: "warning",
-              message: "Copy failed\n" + err.message,
-            })
-          })
-      } else {
-        const text = this.url
-        const input = document.createElement("textarea")
-        input.value = text
-        document.body.appendChild(input)
-        input.select()
-        document.execCommand("Copy")
-        this.$message.success("Copy Success")
+// 表单
+const formInline = ref({
+  // form
+  country: "",
+  protocol: "1",
+  format: "0",
+  IPtime: "0",
+})
 
-        input.remove() // 删除动态创建的节点
-      }
-    },
-    // 打开链接
-    openUrl() {
-      if (!this.url) return
-      window.open(this.url)
-    },
-  },
-  setup() {
-    const { lang } = settingStore()
-    const { isProduc } = layoutStore()
-    const { apiKey, is_purchase: isPurchase } = userStore()
-    console.log(apiKey)
+const IPtime = ref("0") // duration
+const IPtimeOption = ref()
+const formatList = [
+  // format
+  { value: "0", label: "JSON" },
+  { value: "1", label: t("Simplified") + " JSON" },
+  { value: "2", label: "TXT" },
+]
+const url = ref("")
 
-    return {
-      lang,
-      apiKey,
-      isProduc,
-      isPurchase,
-    }
-  },
-  mounted() {
-    import("flag-icon-css/css/flag-icons.css")
-  },
+// 国家相关
+let allCountry = [] // 国家
+const countryData = ref(null)
+// 获取国家/时长数据
+async function getData() {
+  let { country, duration } = en.value ? await import("../../proxy/info/en") : await import("../../proxy/info/zh")
+  allCountry = country
+  countryData.value = sortCountry(country)
+  formInline.value = {
+    ...formInline.value,
+    country: country[0].value,
+  }
+
+  IPtimeOption.value = duration
+
+  // 加载国家国旗
+  import("flag-icon-css/css/flag-icons.css")
 }
+//按首字母排序国家
+function sortCountry(arr) {
+  const first = arr[0]
+  arr = arr.slice(1)
+  let temp
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      const a = arr[j].value.charAt(0)
+      const b = arr[j + 1].value.charAt(0)
+      if (a > b) {
+        temp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = temp
+      }
+    }
+  }
+  return [first].concat(arr)
+}
+function dataFilter(val) {
+  const reg = new RegExp(val.toUpperCase())
+  if (val) {
+    const arr = allCountry.filter((item) => reg.test(item.label.toUpperCase()))
+    countryData.value = Object.freeze(arr)
+  } else {
+    countryData.value = Object.freeze(allCountry)
+  }
+}
+const debouncedDataFilter = debounce(dataFilter, 300)
+function changeCountry(status) {
+  if (status) {
+    countryData.value = Object.freeze(allCountry)
+  }
+}
+
+watch(
+  formInline,
+  () => {
+    url.value = ""
+  },
+  { deep: true }
+)
+
+// 滑动块
+const min_count = ref(1) // 数量
+const max_count = ref(500)
+const count = ref(50)
+const mid_count = computed(() => max_count.value / 2)
+const percentWidth = computed(() => Math.round((count.value / max_count.value) * 100))
+function moveStart(e) {
+  const total = e.target.closest(".process").clientWidth
+  const unit = total / max_count.value
+  const startCount = count.value
+  const startX = e.clientX
+  const fun = (e) => {
+    const nowX = e.clientX
+    const trans = nowX - startX
+    if (min_count.value < count.value && count.value < max_count.value) {
+      const percent = Math.round(((unit * startCount + trans) / total) * 100)
+      count.value = Math.round((percent / 100) * max_count.value)
+    } else if ((min_count.value === count.value && trans > 0) || (count.value === max_count.value && trans < 0)) {
+      const percent = Math.round(((unit * startCount + trans) / total) * 100)
+      count.value = Math.round((percent / 100) * max_count.value)
+    }
+  }
+  const remove = () => {
+    document.body.removeEventListener("mousemove", fun)
+    document.body.removeEventListener("mouseup", remove)
+  }
+  document.body.addEventListener("mousemove", fun, { passive: false })
+  document.body.addEventListener("mouseup", remove)
+  e.preventDefault()
+}
+function clickCount(e) {
+  const findTarget = (dom) => {
+    if (dom.className === "process") return dom
+    return findTarget(dom.parentNode)
+  }
+  const target = findTarget(e.target)
+  const total = target.clientWidth
+  const offsetX = e.offsetX
+  const percent = Math.round((offsetX / total) * 100)
+  count.value = Math.round((percent / 100) * max_count.value)
+}
+
+async function generateURL() {
+  if (!isPurchase.value) {
+    ElMessageBox.confirm(
+      en.value ? "Your balance is low, are you heading to a subscription package?" : "您的余额不足，是否前往购买套餐?",
+      t("Prompt"),
+      {
+        confirmButtonText: t("OK"),
+        cancelButtonText: t("Cancel"),
+        type: "warning",
+      }
+    ).then(() => {
+      isProduc.value = true
+      router.push("/products")
+    })
+    return
+  }
+  const baseUrl = "https://service.ipflare.com/v1/obtain_proxy_endpoints"
+  const countVal = count.value
+  const protocol = formInline.value.protocol
+  const region = formInline.value.country === "ALL" ? "" : formInline.value.country
+  const resptype = formInline.value.format
+  const keepTime = formInline.value.IPtime
+  const { default: md5 } = await import(/*webpackChunkName:'js-md5'*/ "js-md5")
+  const sign = md5(apiKey.value + protocol + countVal + region)
+  const params = `?apikey=${
+    apiKey.value
+  }&count=${countVal}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&rd=${Date.now()}`
+  url.value = baseUrl + params
+}
+
+function copyUrl() {
+  if (!url.value) return
+  if ("clipboard" in navigator && window.isSecureContext) {
+    const text = url.value
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        Message({
+          type: "success",
+          message: en.value ? "Copy Success" : "复制成功",
+        })
+      })
+      .catch((err) => {
+        Message({
+          type: "warning",
+          message: (en.value ? "Copy failed\n" : "复制失败\n") + err.message,
+        })
+      })
+  } else {
+    const text = url.value
+    const input = document.createElement("textarea")
+    input.value = text
+    document.body.appendChild(input)
+    input.select()
+    document.execCommand("Copy")
+    Message({
+      type: "success",
+      message: en.value ? "Copy Success" : "复制成功",
+    })
+    input.remove()
+  }
+}
+
+function openUrl() {
+  if (!url.value) return
+  window.open(url.value)
+}
+
+onMounted(() => {
+  getData()
+})
 </script>
 
 <style lang="less" scoped>

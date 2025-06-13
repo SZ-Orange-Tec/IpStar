@@ -10,7 +10,7 @@ const routes = [
 
   // 前台板块
   {
-    name: "首页",
+    name: "front",
     component: Front,
     children: [
       {
@@ -103,6 +103,12 @@ const routes = [
     // name: 'commitment',
     meta: { keepAlive: false },
     component: () => import("@/views/front/commitment/commitment.vue"),
+  },
+  {
+    path: "/payment_success",
+    // name: '支付成功',
+    meta: { keepAlive: false },
+    component: () => import("@/views/payment_success/payment_success.vue"),
   },
 ]
 

@@ -7,7 +7,8 @@
         <ip-button type="border" icon class="h-8 w-8" @click="router.go(-1)">
           <ChevronLeft />
         </ip-button>
-        <span>IPSTAR</span>
+        <!-- <span>IPSTAR</span> -->
+        <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
       </div>
 
       <div class="menu space-y-2" ref="menuRef">

@@ -1,6 +1,8 @@
 <template>
   <div class="menu column h-full space-y-5">
-    <div class="logo text-2xl pointer" @click="$router.push('/home')">IPSTAR</div>
+    <div class="logo text-2xl pointer" @click="$router.push('/home')">
+      <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
+    </div>
     <div class="column flex-1">
       <ul class="space-y-1">
         <template v-for="(item, index) in menuData" :key="index">

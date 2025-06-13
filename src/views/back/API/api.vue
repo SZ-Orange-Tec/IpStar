@@ -3,8 +3,8 @@
     <NavBar>
       <template #default>
         <div class="place v_center space-x-5">
-          <span @click="active = 0" class="pointer" :class="{ active: active === 0 }">{{ $t("PCLayout.columnList[4]") }}</span>
-          <span @click="active = 1" class="pointer" :class="{ active: active === 1 }">{{ $t("PCLayout.columnList[5]") }}</span>
+          <span @click="active = 0" class="pointer" :class="{ active: active === 0 }">API {{ t("Construction") }}</span>
+          <span @click="active = 1" class="pointer" :class="{ active: active === 1 }">API {{ t("Reference") }}</span>
         </div>
       </template>
     </NavBar>
@@ -23,6 +23,9 @@ import DocsHelp from "./docs_help/docs_help.vue"
 // import IpButton from "@/components/button/button.vue"
 import NavBar from "../components/navbar/navbar.vue"
 import { ref } from "vue"
+import { useI18n } from "vue-i18n"
+
+const { t } = useI18n()
 
 const active = ref(0)
 </script>

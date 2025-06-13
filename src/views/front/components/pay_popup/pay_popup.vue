@@ -158,7 +158,7 @@ const props = defineProps({
 const isShow = defineModel({ type: Boolean })
 
 // 响应式状态
-const path = ref("")
+const path = ref(window.location.href.split("#")[0])
 const isDetail = ref(true)
 const elements = ref(null)
 const stripe = ref(null)
@@ -331,7 +331,7 @@ async function handleSubmit(e) {
   const { error } = await stripe.value.confirmPayment({
     elements: elements.value,
     confirmParams: {
-      return_url: `${path.value}#/payment_success?price=${props.order_data.order_price}&orderNo=${props.order_data.order_no}&type=${isManmer.value}`,
+      return_url: `${path.value}payment_success?price=${props.order_data.order_price}&orderNo=${props.order_data.order_no}&type=${isManmer.value}`,
     },
   })
 

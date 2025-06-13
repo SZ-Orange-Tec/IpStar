@@ -84,7 +84,7 @@
           <p class="text-lg">{{ t("Connect_with_us") }}</p>
           <div class="column space-y-2">
             <div class="v_center copy_btn">
-              <div class="px-2">Email: support@ipflare.com</div>
+              <div class="px-2">Email: support@ipstar.io</div>
               <IpButton type="primary" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
             </div>
 
@@ -207,12 +207,12 @@ function toTwitter() {
 
 // 邮箱跳转
 function gotoEmail() {
-  window.open("mailto:support@ipflare.com")
+  window.open("mailto:support@ipstar.io")
 }
 
 // 复制邮箱
 function copyEmail() {
-  navigator.clipboard.writeText("support@ipflare.com")
+  navigator.clipboard.writeText("support@ipstar.io")
   const en = lang.value === "en"
   Message({
     message: en ? "Email copied" : "邮箱已复制",

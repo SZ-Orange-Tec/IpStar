@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="container between w-full h-full">
-      <h1 class="text-2xl">IPSTAR</h1>
+      <div>
+        <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
+      </div>
 
       <div class="v_center h-full space-x-3">
         <ul class="navigator v_center text-base px-3 h-full" @mouseenter="loadFront">

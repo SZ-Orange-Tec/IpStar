@@ -22,7 +22,7 @@
           <template v-if="item.aIdx === idx">
             <a href="javascript:;" v-if="isPurchase">{{ item.a[idx] }}</a>
             <a href="javascript:;" v-if="!isPurchase"> http://***/v1/</a>
-            <span class="upgrade" @click="$router.push('/products')" v-if="!isPurchase">({{ $t("PCHomePage.upgrade.buy") }})</span>
+            <span class="upgrade" @click="$router.push('/products')" v-if="!isPurchase">({{ $t("api_spec.buy") }})</span>
           </template>
         </p>
         <ul v-if="item.type === 'request'" class="proxy_endpoints">
@@ -94,7 +94,7 @@
         </tbody>
       </table>
       <div class="tip" v-if="!isPurchase">
-        {{ $t("PCHomePage.upgrade.see_doc[0]") }} <span @click="$router.push('/products')">{{ $t("PCHomePage.upgrade.see_doc[1]") }}</span>
+        {{ $t("api_spec.upgrade_tip.front") }} <span @click="$router.push('/products')">{{ $t("api_spec.upgrade_tip.btn") }}</span>
       </div>
     </div>
   </div>
