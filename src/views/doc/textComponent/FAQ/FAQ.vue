@@ -1,69 +1,76 @@
 <template>
-  <div class="pc-FAQ">
-    <div class="document_FAQ_text">
-      <h3>{{ $t("PCFaq.h3[0]") }}</h3>
-      <h4>{{ $t("PCFaq.h4[0]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.one[0]") }}</p>
-        <p>{{ $t("PCFaq.pBox.one[1]") }}</p>
+  <div class="FAQ">
+    <div class="container space-y-5">
+      <p class="title1 text-2xl">{{ t("faq_spec._1_1_title") }}</p>
+
+      <div class="space-y-5">
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_1_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_1_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_2_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_2_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_3_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_3_des") }}</div>
+        </div>
       </div>
-      <h4>{{ $t("PCFaq.h4[1]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.two") }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[2]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.three") }}</p>
-      </div>
-      <h3 style="margin-top: 31px">{{ $t("PCFaq.h3[1]") }}</h3>
-      <h4>{{ $t("PCFaq.h4[3]") }}</h4>
-      <div class="p_box">
-        <p>
-          {{ $t("PCFaq.pBox.four[0]") }} <a href="https://www.ipflare.com/#/products">{{ $t("PCFaq.pBox.four[1]") }}</a
-          >,<br />
-          {{ $t("PCFaq.pBox.four[2]") }} <a href="https://www.ipflare.com/#/pricing">{{ $t("PCFaq.pBox.four[3]") }}</a>
-        </p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[4]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.five[0]") }}</p>
-        <p>
-          {{ $t("PCFaq.pBox.five[1]") }} <a href="https://www.ipflare.com/#/doc">{{ $t("PCFaq.pBox.five[2]") }}</a>
-        </p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[5]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.six") }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[6]") }}</h4>
-      <div class="p_box">
-        <p v-for="(item, index) in $t('PCFaq.pBox.seven')" :key="index">{{ item }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[7]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.eight") }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[8]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.nine") }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[9]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.ten") }}</p>
-        <p class="dot">{{ $t("PCFaq.pBox.ten2") }}</p>
-      </div>
-      <h4>{{ $t("PCFaq.h4[10]") }}</h4>
-      <div class="p_box">
-        <p>{{ $t("PCFaq.pBox.eleven") }}</p>
+
+      <p class="title1 text-2xl">{{ t("faq_spec._1_2_title") }}</p>
+
+      <div class="space-y-5">
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_4_title") }}</p>
+          <div class="content" v-html="t('faq_spec._2_4_des')"></div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_5_title") }}</p>
+          <div class="content" v-html="t('faq_spec._2_5_des')"></div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_6_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_6_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_7_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_7_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_8_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_8_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_9_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_9_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_10_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_10_des") }}</div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="title2">{{ t("faq_spec._2_11_title") }}</p>
+          <div class="content">{{ t("faq_spec._2_11_des") }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "PCFAQ",
-}
+<script setup>
+import { useI18n } from "vue-i18n"
+
+const { t } = useI18n()
 </script>
 
 <style lang="less" scoped>
