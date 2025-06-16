@@ -1,63 +1,39 @@
-.pc-help_document_text {
-  width: 100%;
-
-  &>.help_document_text {
+.start{
+  padding: 0 40px;
+  .container{
+    padding: 30px 0;
     width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    padding-left: 23px;
-    padding-top: 10px;
-
-    &>h3 {
-      font-size: 22px;
-      font-family: Roboto;
-      font-weight: 600;
-      // color: #373E52;
-      color: hsl(var(--foreground));
-      line-height: 45px;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-
-    &>div.help_document_text_content {
-      width: 1000px;
-
-      // background-color: pink;
-      &>h3 {
-        font-size: 16px;
-        font-family: Inter;
-        font-weight: 600;
-        // color: #373E52;/
-        color: hsl(var(--foreground) / 80%);
-        line-height: 45px;
-        margin-left: 30px;
-        margin-top: 21px;
-      }
-
-
-      &>h4 {
-        font-size: 14px;
-        font-family: Inter;
-        font-weight: normal;
-        color: #373E52;
-        color: hsl(var(--foreground) / 80%);
-        line-height: 45px;
-        margin-left: 35px;
-        // margin-left: 20px;
-      }
-    }
+    max-width: 1024px;
+    margin: 0 auto;
   }
-
-  & .p_box {
+  .title1{
+    color: hsl(var(--foreground));
+    font-weight: 600;
+  }
+  .title2{
+    color: hsl(var(--foreground) / 80%);
+    font-weight: 600;
+  }
+  .title3{
+    color: hsl(var(--foreground) / 80%);
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .p_box {
     position: relative;
-    width: 1026px;
+    // width: 1026px;
+    width: 100%;
     box-sizing: border-box;
-    padding: 19px;
-    margin-left: 33px;
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    // margin-left: 33px;
     // background-color: #F8F9FA;
     color: hsl(var(--foreground) / 60%);
     background-color: hsl(var(--foreground) / 10%);
-    border-radius: 5px;
+    border-radius: 8px;
+    white-space: pre-wrap;
 
     &::before {
       position: absolute;
@@ -67,17 +43,6 @@
       width: 2px;
       height: 12px;
       background-color: #FC750D;
-    }
-
-    &>p {
-      font-size: 16px;
-      font-family: Roboto;
-      font-weight: 400;
-      line-height: 23px;
-    }
-
-    &>p.note {
-      margin-top: 15px;
     }
   }
 }
