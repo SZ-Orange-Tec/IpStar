@@ -8,9 +8,10 @@ export default {
   ...productList,
   ...paypopup,
   home_spec: {
-    intro_title: 'We Offer Affordable <span class="primary_text">High-Quality</span> <br /> Residential lP Proxy Services.',
+    intro_title: "We Offer Affordable {primary} \n Residential lP Proxy Services.",
+    intro_title_slot: "High-Quality",
     intro_desc:
-      "Our residential-proxy network consists of real user IP addresses <br /> which cannot be detected or blocked. The lP pool is continuously optimized and <br /> updated to ensure high availability of IPs and stable communication speeds.",
+      "Our residential-proxy network consists of real user IP addresses \n which cannot be detected or blocked. The lP pool is continuously optimized and \n updated to ensure high availability of IPs and stable communication speeds.",
 
     try: "Try",
     tutorials: "Tutorials",
@@ -18,12 +19,12 @@ export default {
     online: "Number of online",
     users: "users",
 
-    adv1: "Supports SOCKS5, HTTP/<br />HTTPS & custom protocols.",
-    adv2: "All popular proxy<br />software and APPs.",
-    adv3: "Support fingerprint<br />browsers.",
-    adv4: "Support APl quto<br />extract.",
+    adv1: "Supports SOCKS5, HTTP/\nHTTPS & custom protocols.",
+    adv2: "All popular proxy\nsoftware and APPs.",
+    adv3: "Support fingerprint\nbrowsers.",
+    adv4: "Support APl quto\nextract.",
 
-    why: "Why Choose <span class='primary_text'>IpStar</span>",
+    why: "Why Choose",
     why1_title: "50M+Network lPs",
     why1_desc: "There are more than 20 million high qualityproxy lP in the lP pool , and the pool iscontinuously updating",
     why2_title: "Residential Proxies",
@@ -31,9 +32,9 @@ export default {
     why3_title: "High-Quality Residential IPs",
     why3_desc: "Real residential IPs from around the world, ensuring high quality and stable communication speeds.",
     more: "There are more",
-    automatic: "Automatic And <br /> Instant Delivery",
+    automatic: "Automatic And \n Instant Delivery",
     instant:
-      "Get instant access after payment - no waiting for account activation <br /> or proxies setup.supporting a variety of communication protocols,<br />includingsocks5,http https,and custom protocols",
+      "Get instant access after payment - no waiting for account activation \n or proxies setup.supporting a variety of communication protocols,\nincludingsocks5,http https,and custom protocols",
 
     four1_title: "Reliable Proxy Affordability",
     four1_desc: "With our expertise and intelligent matching system, we will help you find truly reliable and cost-effective residential agents.",
@@ -44,11 +45,12 @@ export default {
     four4_title: "Quick and easyintegration",
     four4_desc: "Sign up with email only. Our zero-code APl auto.builds request URLs-quick start, less hassle.",
 
-    world_title: 'Worldwide <span class="primary_text">Point to Point</span> Proxy',
+    world_title: "Worldwide {primary} Proxy",
+    world_title_slot: "Point to Point",
     world_desc: "Wide range of locations available tailored to your business needs.",
     world_span: "Countries And Districts",
 
-    app_title: "More Powerful Features Of lpflare <br /> Are Waiting For You To Develop",
+    app_title: "More Powerful Features Of lpflare \n Are Waiting For You To Develop",
     e_commerce: "E-commerce",
     any_game: "Any Game",
     file_transfer: "File Transfer",
@@ -56,7 +58,7 @@ export default {
     serp_seo: "SERP & SEO",
     finance: "Finance",
 
-    package_title: "Choose The Package that <br /> fits your needs",
+    package_title: "Choose The Package that \n fits your needs",
     package_desc: "IpStar provides you with various high-quality packages",
   },
 }

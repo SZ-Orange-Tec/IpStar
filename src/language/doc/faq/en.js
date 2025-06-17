@@ -17,10 +17,9 @@ export default {
 
     _2_4_title: "4. How do I purchase proxy services?",
     _2_4_des:
-      'If you have already registered, please log in to our website, go to the console, find the product menu, or click the following link directly: <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>. Or you can click the following link and be redirected to the pricing page to view our products: <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>',
+      "If you have already registered, please log in to our website, go to the console, find the product menu, or click the following link directly: {link1}. Or you can click the following link and be redirected to the pricing page to view our products: {link2}",
     _2_5_title: "5. Do you provide user tutorials?",
-    _2_5_des:
-      'Yes, we provide comprehensive tutorials on all functions. You can access the tutorials from here: <a href="https://www.ipstar.io/doc">https://www.ipstar.io/doc</a>',
+    _2_5_des: "Yes, we provide comprehensive tutorials on all functions. You can access the tutorials from here: {link}",
     _2_6_title: "6. How long can I use the proxy after selecting an IP?",
     _2_6_des:
       "When using a proxy, you can specify the lifespan of the IP or use it throughout the IP's validity period. Since the proxy is a residential proxy, the lifespan of a residential proxy ranges from a few hours to a few days.",

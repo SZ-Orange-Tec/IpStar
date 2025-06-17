@@ -77,24 +77,26 @@
         <!-- 新增按钮 -->
         <el-button @click="addNew">{{ $t("Add") }}</el-button>
         <!-- 白名单表格 -->
-        <el-table :data="tableData" height="378" border style="width: 753px; border-radius: 10px 10px 0px 0px">
-          <el-table-column prop="ip" label="IP"> </el-table-column>
-          <el-table-column prop="note" :label="$t('Notes')"> </el-table-column>
-          <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
-          <el-table-column :label="$t('Manage')">
-            <template #default="scope">
-              <el-popconfirm :title="$t('settings_spec.confirm_delete')" @confirm="deleteItem(scope)">
-                <template #reference>
-                  <el-button>{{ $t("Delete") }}</el-button>
-                </template>
-              </el-popconfirm>
+        <div class="table_box">
+          <el-table :data="tableData" height="378" border style="width: 753px; border-radius: 10px 10px 0px 0px">
+            <el-table-column prop="ip" label="IP"> </el-table-column>
+            <el-table-column prop="note" :label="$t('Notes')"> </el-table-column>
+            <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
+            <el-table-column :label="$t('Manage')">
+              <template #default="scope">
+                <el-popconfirm :title="$t('settings_spec.confirm_delete')" @confirm="deleteItem(scope)">
+                  <template #reference>
+                    <el-button>{{ $t("Delete") }}</el-button>
+                  </template>
+                </el-popconfirm>
+              </template>
+            </el-table-column>
+            <template #append>
+              <div class="message" v-if="bottomLoding">loading&nbsp;<i class="el-icon-loading"></i></div>
+              <div class="message" v-else>{{ $t("At_the_end") }}</div>
             </template>
-          </el-table-column>
-          <template #append>
-            <div class="message" v-if="bottomLoding">loading&nbsp;<i class="el-icon-loading"></i></div>
-            <div class="message" v-else>{{ $t("At_the_end") }}</div>
-          </template>
-        </el-table>
+          </el-table>
+        </div>
         <el-popover placement="bottom" width="400" :offset="50" trigger="hover">
           <div>
             <p>{{ $t("settings_spec.white_tip1") }}</p>

@@ -3,11 +3,15 @@
     <div class="box contact_us">
       <div class="container flex space-x-5" style="justify-content: space-between">
         <div class="email space-y-6 column">
-          <p class="text-3xl title" v-html="t('relation_spec.title')"></p>
+          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="text-3xl title">
+            <template #info>
+              <span class="primary_text">{{ t("relation_spec.title_slot") }}</span>
+            </template>
+          </i18n-t>
 
           <div class="space-y-5 w-full">
             <div class="space-y-1">
-              <p class="label text-xs font-bold">{{ t("PCRelation.emailContact.inputHr.pOne") }}</p>
+              <p class="label text-xs font-bold">{{ t("relation_spec.full_name") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
             <div class="space-y-1">

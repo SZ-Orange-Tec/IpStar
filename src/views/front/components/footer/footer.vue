@@ -121,7 +121,7 @@ const { isProduc } = layoutStore()
 const router = useRouter()
 const { t } = useI18n()
 
-const { lang, documentIdx, isDocument } = settingsStore()
+const { documentIdx, isDocument, en } = settingsStore()
 
 // 去购买
 function goToPay() {
@@ -171,6 +171,10 @@ function toDocument(val) {
   // store.commit("setDocumentIdx", val)
   if (!isLogin.value) {
     router.push("/login")
+    Message({
+      type: "warning",
+      message: en.value ? "Please login first" : "请先登录",
+    })
     return
   }
   const doc = ["Getting", "Help", "FAQ"]
@@ -216,9 +220,8 @@ function gotoEmail() {
 // 复制邮箱
 function copyEmail() {
   navigator.clipboard.writeText("support@ipstar.io")
-  const en = lang.value === "en"
   Message({
-    message: en ? "Email copied" : "邮箱已复制",
+    message: en.value ? "Email copied" : "邮箱已复制",
     type: "success",
   })
 }

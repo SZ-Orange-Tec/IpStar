@@ -15,4 +15,9 @@ export default {
   Payment: "Payment",
   Operation: "Operation",
   Pay: "Pay",
+
+  Paid: "Paid",
+  Unpaid: "Unpaid",
+  Payment_confirmation: "Payment confirmation",
+  Day: "Day",
 }

@@ -6,7 +6,8 @@ export default {
   ...footer,
 
   help_spec: {
-    title: "What can we <spn class='primary_text'>help</spn> you with?",
+    title: "What can we {title} you with?",
+    title_slot: "help",
     more: "View more",
   },
 }

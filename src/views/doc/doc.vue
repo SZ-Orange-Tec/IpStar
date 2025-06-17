@@ -49,7 +49,7 @@
     </div>
 
     <!-- 文本区 -->
-    <div class="text_content">
+    <div class="text_content" v-if="loaded">
       <GettingText v-if="isDocument === 'Getting'" />
       <FAQText v-else-if="isDocument === 'FAQ'" />
       <HelpText v-else-if="isDocument === 'Help'" :name="helpName" :sonName="sonName" />

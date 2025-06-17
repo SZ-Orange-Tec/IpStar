@@ -18,6 +18,11 @@ export default {
   Start_date: "Start_date",
   Expire_date: "Expire_date",
 
+  Available: "Available",
+  Used_up: "Used up",
+  Expired: "Expired",
+  Unlimited: "Unlimited",
+
   product_spec: {
     purchase: "How to use after purchase ?",
     no: "You don't have a traffic balance.",

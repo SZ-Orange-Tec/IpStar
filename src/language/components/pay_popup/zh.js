@@ -1,6 +1,13 @@
 export default {
   Next: "下一步",
 
+  Order_detail: "订单详情",
+  Traffic: "流量",
+  Duration: "有效天数",
+  Discount: "折扣",
+  Total: "合计",
+  Submit: "提交",
+
   payPopup_spec: {
     strip: "Stripe、借记卡、信用卡(Visa、MasterCard、银联、JCB…)",
     usdt: "加密币 USDT-TRC20 支付",
@@ -18,5 +25,7 @@ export default {
     usdt9: "根据当前的网络负载，确认大约需要:",
     usdt10: "1-2分钟额",
     usdt11: "您无需做任何其他事情！您可以关闭此窗口额",
+
+    unit_price: "每GB价格",
   },
 }

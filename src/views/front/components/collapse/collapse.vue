@@ -48,6 +48,7 @@ import { useRouter } from "vue-router"
 import { ChevronRight } from "lucide-vue-next"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
+import Message from "@/components/message/message"
 
 const props = defineProps({
   bol: {
@@ -60,7 +61,7 @@ const props = defineProps({
 
 const { token } = loginStore()
 const router = useRouter()
-const { isDocument, documentIdx } = settingStore()
+const { isDocument, documentIdx, en } = settingStore()
 
 const height = ref(null)
 const titleDom = ref(null)
@@ -69,7 +70,10 @@ const collapseRef = ref(null)
 // 下载之前验证是否登录
 function beforeDownload(e) {
   if (!token.value) {
-    ElMessage.warning(t("PCHomePage.clickPay"))
+    Message({
+      type: "warning",
+      message: en.value ? "Please login first" : "请先登录",
+    })
     e.preventDefault()
   }
 }

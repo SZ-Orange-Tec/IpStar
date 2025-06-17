@@ -22,6 +22,30 @@
     
     &>.tab_content {
       width: 100%;
+      .table_box{
+      :deep(.el-table){
+        max-height: 100%;
+        border-radius: 8px;
+        thead{
+          .el-table__cell{
+            background-color: hsl(var(--primary));
+            .cell{
+              color: hsl(var(--foreground));
+            }
+          }
+
+        }
+        tbody{
+          &>tr:nth-child(even){
+            .el-table__cell{
+              // background-color: hsl(var(--primary) / 10%);
+              // background-color: #f0f9ff;
+              background-color: #eff6ff;
+            }
+          }
+        }
+      }
+    }
     }
   
     &>.tab_content:nth-child(1) {

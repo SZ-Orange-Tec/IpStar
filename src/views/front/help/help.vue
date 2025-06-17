@@ -2,7 +2,11 @@
   <div class="help relative">
     <div class="box">
       <div class="container column_center space-y-10">
-        <p class="text-3xl title" v-html="t('help_spec.title')"></p>
+        <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-3xl title">
+          <template #title>
+            <span class="primary_text">{{ t("help_spec.title_slot") }}</span>
+          </template>
+        </i18n-t>
 
         <!-- 选项块 -->
         <div class="select w-full space-x-10">

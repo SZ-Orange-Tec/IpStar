@@ -4,12 +4,12 @@
     <Tabbar @select="changeActive" v-if="tabbar"></Tabbar>
 
     <!-- introduce 介绍 -->
-    <ul v-if="vantage" class="vantage vh_center">
+    <!-- <ul v-if="vantage" class="vantage vh_center">
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[0]") }}</li>
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[1]") }}</li>
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[2]") }}</li>
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
-    </ul>
+    </ul> -->
     <div class="list" :style="{ 'max-width': maxWidth }">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex space-x-3">
@@ -30,7 +30,7 @@
                 </p>
 
                 <!-- 免费 -->
-                <template v-if="item.trial">
+                <!-- <template v-if="item.trial">
                   <p class="price">
                     {{ item.pack_title.split(" ")[0] }}<em>{{ item.pack_title.split(" ")[1] }}</em>
                   </p>
@@ -39,32 +39,32 @@
                     <em>{{ t("PCProducts.tableHeader.duration") }}: </em>
                     <strong>{{ item.prices[0].days }} {{ t("PCProductList.Day") }}</strong>
                   </p>
-                </template>
+                </template> -->
                 <!-- 不限量 -->
-                <template v-else-if="item.unlimit">
+                <!-- <template v-else-if="item.unlimit">
                   <p class="price" style="margin: 36px 0 10px">
                     ${{ item.prices[item.select].price / 100 }} <span>${{ item.prices[item.select].origin_price / 100 }}</span>
                   </p>
-                </template>
+                </template> -->
                 <!-- 个人 企业 -->
-                <template v-else>
-                  <p class="price text-4xl space-x-1">
-                    <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
-                    <span class="text-sm">/GB</span>
-                  </p>
-                  <p class="total vh_center space-x-1">
-                    <span>{{ t("Total") }}:</span>
-                    <span>${{ item.prices[item.select].price / 100 }}</span>
-                  </p>
-                  <div class="number w-full">
-                    <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
-                  </div>
-                </template>
+                <!-- <template v-else> -->
+                <p class="price text-4xl space-x-1">
+                  <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
+                  <span class="text-sm">/GB</span>
+                </p>
+                <p class="total vh_center space-x-1">
+                  <span>{{ t("Total") }}:</span>
+                  <span>${{ item.prices[item.select].price / 100 }}</span>
+                </p>
+                <div class="number w-full">
+                  <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
+                </div>
+                <!-- </template> -->
               </div>
 
               <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
 
-              <ul class="rights column space-y-5 text-sm font-medium" v-if="item.unlimit">
+              <!-- <ul class="rights column space-y-5 text-sm font-medium" v-if="item.unlimit">
                 <li class="v_center space-x-2">
                   <CircleCheck :size="16" class="flex-shrink-0" />
                   <p>{{ t("PCProductList.unlimited_rights[1]") }}</p>
@@ -85,9 +85,9 @@
                   <CircleCheck :size="16" class="flex-shrink-0" />
                   <p>{{ t("PCProductList.unlimited_rights[5]") }}</p>
                 </li>
-              </ul>
+              </ul> -->
 
-              <ul class="rights column space-y-5 text-sm font-medium" v-else>
+              <ul class="rights column space-y-5 text-sm font-medium">
                 <li class="v_center space-x-1">
                   <CircleCheck :size="20" class="flex-shrink-0" />
                   <p>{{ t("productList_spec.right1") }}</p>
@@ -147,27 +147,27 @@
     <PayPopup ref="payPopupRef" v-model="isPayPopup" v-if="isPayPopup" :order_data="order_data">
       <template #detail>
         <div class="order_detail">
-          <h2>{{ t("PCPayPopup.detail.title") }}</h2>
+          <h2>{{ t("Order_detail") }}</h2>
           <ul class="detail">
             <li class="between">
-              <span>{{ t("PCPayPopup.detail.traffic") }}</span>
+              <span>{{ t("Traffic") }}</span>
               <span>{{ product?.pack_size }}</span>
             </li>
             <li class="between">
-              <span>{{ t("PCPayPopup.detail.unit_price") }}</span>
+              <span>{{ t("payPopup_spec.unit_price") }}</span>
               <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
               <span v-else>--</span>
             </li>
             <li class="between">
-              <span>{{ t("PCPayPopup.detail.discount") }}</span>
+              <span>{{ t("Discount") }}</span>
               <span>{{ product?.discount_rate }}%</span>
             </li>
             <li class="between">
-              <span>{{ t("PCPayPopup.detail.time") }}</span>
-              <span>{{ product?.days }} {{ t("PCProductList.days") }}</span>
+              <span>{{ t("Duration") }}</span>
+              <span>{{ product?.days }} {{ t("Day") }}</span>
             </li>
             <li class="between">
-              <span>{{ t("PCPayPopup.detail.total") }}</span>
+              <span>{{ t("Total") }}</span>
               <span>
                 <i>${{ product?.origin_price / 100 }}</i> ${{ product?.price / 100 }}</span
               >
@@ -177,7 +177,7 @@
             <ip-button type="primary" class="px-3 h-10" @click="FoundOrder">
               <div class="v_center space-x-2">
                 <span class="ip-loading" v-if="loading"></span>
-                <span>{{ t("PCPayPopup.detail.submit") }}</span>
+                <span>{{ t("Submit") }}</span>
               </div>
             </ip-button>
           </div>
@@ -401,8 +401,8 @@ function click_pay(item) {
   if (!token.value) {
     router.push("/login")
     Message({
-      message: t("PCHomePage.clickPay"),
       type: "warning",
+      message: en.value ? "Please login first" : "请先登录",
     })
     return
   }
@@ -412,7 +412,7 @@ function click_pay(item) {
     days: item.prices[item.select].days,
     discount_rate: item.discount_rate,
     unit_price: item.unlimit ? 0 : item.prices[item.select].unit_price,
-    pack_size: item.unlimit ? t("PCProductList.unlimited") : item.pack_title,
+    pack_size: item.unlimit ? t("Unlimited") : item.pack_title,
     price: item.prices[item.select].price,
     origin_price: item.prices[item.select].origin_price,
   }

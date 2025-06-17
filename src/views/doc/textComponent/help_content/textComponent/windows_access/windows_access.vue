@@ -6,7 +6,14 @@
 
     <div class="space-y-2">
       <p class="title2">{{ t("window_spec._2_1_title") }}</p>
-      <div class="content" v-html="t('window_spec._2_1_des')"></div>
+      <i18n-t keypath="window_spec._2_1_des" tag="div" scope="global" class="content">
+        <template #link1>
+          <a href="https://www.proxifier.com/">https://www.proxifier.com/</a>
+        </template>
+        <template #link2>
+          <a href="https://docs.zohopublic.com/file/s3zpwf820118cb4aa437cb0a81ee9b5d39466">{{ t("click_here_to_download") }}</a>
+        </template>
+      </i18n-t>
     </div>
 
     <ul class="space-y-5">

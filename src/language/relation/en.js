@@ -12,7 +12,8 @@ export default {
   Email: "Email",
 
   relation_spec: {
-    title: "Send us <span class='primary_text'>information</span> directly!",
+    title: "Send us {info} directly!",
+    title_slot: "information",
 
     full_name: "Full name",
     help: "What can we help you with?",

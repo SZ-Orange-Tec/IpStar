@@ -22,20 +22,20 @@
 
       <!-- 购买记录表 -->
       <div class="h-full column space-y-5" v-else-if="tabTotal > 0 && !isProduc">
-        <div class="table flex-1 w-full">
-          <el-table :data="tableData" style="width: 100%; height: 100%">
+        <div class="table_box flex-1 w-full">
+          <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>
             <el-table-column prop="price" :label="$t('Price')" min-width="120"></el-table-column>
             <el-table-column :label="$t('Status')" min-width="120">
               <template #default="scope">
-                <span v-if="scope.row.state == 1" style="color: #0dbc79">{{ $t("PCProducts.tableBody.available") }}</span>
-                <span v-else-if="scope.row.state == 2" style="color: #f14c36">{{ $t("PCProducts.tableBody.used_up") }}</span>
-                <span v-else-if="scope.row.state == 3" style="color: #f14c36">{{ $t("PCProducts.tableBody.expired") }}</span>
+                <span v-if="scope.row.state == 1" style="color: #0dbc79">{{ $t("Available") }}</span>
+                <span v-else-if="scope.row.state == 2" style="color: #f14c36">{{ $t("Used_up") }}</span>
+                <span v-else-if="scope.row.state == 3" style="color: #f14c36">{{ $t("Expired") }}</span>
               </template>
             </el-table-column>
             <el-table-column :label="$t('Consume')" min-width="240">
               <template #default="scope">
-                <p v-if="scope.row.unlimited">{{ $t("PCProductList.unlimited") }}</p>
+                <p v-if="scope.row.unlimited">{{ $t("Unlimited") }}</p>
                 <div v-else style="text-align: left">
                   <p style="text-align: center">{{ scope.row.consumeText }}</p>
                   <el-progress :percentage="scope.row.progress" color="#67c23a"></el-progress>

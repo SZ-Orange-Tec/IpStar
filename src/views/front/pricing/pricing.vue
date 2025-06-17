@@ -6,7 +6,11 @@
       <div class="container">
         <div class="column_center space-y-10">
           <div class="text-3xl column_center space-y-5">
-            <p v-html="t('pricing_spec.des')" class="text-center title"></p>
+            <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title">
+              <template #price>
+                <span class="primary_text">{{ t("pricing_spec.des_slot") }}</span>
+              </template>
+            </i18n-t>
 
             <span class="text-3xl description">IPs: 50M+/day</span>
           </div>
@@ -54,7 +58,7 @@
               <div class="text space-y-2 text-2xl font-bold">
                 <p class="v_center space-x-2">
                   <span class="green">{{ countryCount }}</span>
-                  <span>{{ t("home_spec.world_span") }}</span>
+                  <span>{{ t("pricing_spec.world_span") }}</span>
                 </p>
                 <p class="v_center space-x-2">
                   <span class="green">{{ ipsCount }} M+</span>

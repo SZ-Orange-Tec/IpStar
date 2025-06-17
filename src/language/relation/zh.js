@@ -12,7 +12,8 @@ export default {
   Email: "邮箱",
 
   relation_spec: {
-    title: "直接给我们发<span class='primary_text'>信息</span>!",
+    title: "直接给我们发{info}!",
+    title_slot: "信息",
 
     full_name: "名称",
     help: "有什么可以帮你的吗?",

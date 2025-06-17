@@ -4,8 +4,12 @@
     <div class="introduce box relative">
       <div class="container column_center">
         <div class="column_center space-y-5">
-          <p class="text-center title text-3xl font-bold" v-html="t('home_spec.intro_title')"></p>
-          <p class="text-center description" v-html="t('home_spec.intro_desc')"></p>
+          <i18n-t keypath="home_spec.intro_title" tag="p" scope="global" class="text-center title text-3xl font-bold">
+            <template #primary>
+              <span class="primary_text">{{ t("home_spec.intro_title_slot") }}</span>
+            </template>
+          </i18n-t>
+          <p class="text-center description">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
         <div class="my-16 v_center space-x-5">
@@ -70,19 +74,19 @@
           <ul class="v_center space-x-10">
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p v-html="t('home_spec.adv1')"></p>
+              <p>{{ t("home_spec.adv1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p v-html="t('home_spec.adv2')"></p>
+              <p>{{ t("home_spec.adv2") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p v-html="t('home_spec.adv3')"></p>
+              <p>{{ t("home_spec.adv3") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p v-html="t('home_spec.adv4')"></p>
+              <p>{{ t("home_spec.adv4") }}</p>
             </li>
           </ul>
 
@@ -94,7 +98,10 @@
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center">
-        <p class="title text-3xl font-bold" v-html="t('home_spec.why')"></p>
+        <p class="title text-3xl font-bold">
+          {{ t("home_spec.why") }}
+          <span class="primary_txt">IpStar</span>
+        </p>
 
         <ul class="three v_center space-x-8">
           <li class="flex-1">
@@ -112,7 +119,7 @@
             </div>
             <div class="column_center space-y-3 px-3 content">
               <p class="title text-base">{{ t("home_spec.why2_title") }}</p>
-              <p class="description text-sm text-center" v-html="t('home_spec.why2_desc')"></p>
+              <p class="description text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
             </div>
           </li>
           <li class="flex-1">
@@ -121,7 +128,7 @@
             </div>
             <div class="column_center space-y-3 px-3 content">
               <p class="title text-base">{{ t("home_spec.why3_title") }}</p>
-              <p class="description text-sm text-center" v-html="t('home_spec.why3_desc')"></p>
+              <p class="description text-sm text-center">{{ t("home_spec.why3_desc") }}</p>
             </div>
           </li>
         </ul>
@@ -132,10 +139,10 @@
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
               <p class="description text-xs">{{ t("home_spec.more") }}</p>
             </div>
-            <p class="title text-3xl font-bold" v-html="t('home_spec.automatic')"></p>
+            <p class="title text-3xl font-bold">{{ t("home_spec.automatic") }}</p>
           </div>
 
-          <p class="description" v-html="t('home_spec.instant')"></p>
+          <p class="description">{{ t("home_spec.instant") }}</p>
         </div>
 
         <ul class="four v_center space-x-4">
@@ -184,8 +191,12 @@
       <div class="container column_center">
         <div class="h-full relative">
           <div class="column_center space-x-5">
-            <p class="title text-3xl font-bold" v-html="t('home_spec.world_title')"></p>
-            <p class="description text-sm" v-html="t('home_spec.world_desc')"></p>
+            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-3xl font-bold">
+              <template #primary>
+                <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
+              </template>
+            </i18n-t>
+            <p class="description text-sm">{{ t("home_spec.world_desc") }}</p>
           </div>
 
           <div class="trans"></div>
@@ -231,7 +242,7 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <p class="title text-3xl font-bold text-center" v-html="t('home_spec.app_title')"></p>
+        <p class="title text-3xl font-bold text-center">{{ t("home_spec.app_title") }}</p>
 
         <ul class="v_center space-x-5 mt-8" style="flex-wrap: wrap">
           <li class="v_center">
@@ -268,7 +279,7 @@
     <div class="package box">
       <div class="container">
         <div class="column_center space-y-5">
-          <p class="title text-3xl font-bold text-center" v-html="t('home_spec.package_title')"></p>
+          <p class="title text-3xl font-bold text-center">{{ t("home_spec.package_title") }}</p>
           <p class="description text-base green">{{ t("home_spec.package_desc") }}</p>
         </div>
 
@@ -300,7 +311,7 @@ import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const router = useRouter()
 const { t } = useI18n()
-const { gift, lang } = settingStore()
+const { en } = settingStore()
 const { token } = loginStore()
 
 // 转换data为ref
@@ -332,9 +343,6 @@ function bgLoaded() {
 }
 
 // 转换computed
-const ulWidth = computed(() => {
-  return lang === "zh" ? "580px" : lang === "en" ? "800px" : "830px"
-})
 
 // 转换methods
 const getDataConfig = async function () {
@@ -343,19 +351,6 @@ const getDataConfig = async function () {
     isAward.value = data.register_award
   } catch (err) {
     console.log(err)
-  }
-}
-
-function goToPay() {
-  if (token) {
-    store.commit("layout/setIsProduc", true)
-    router.push("/products")
-  } else {
-    Message({
-      message: t("PCHomePage.goToPay"),
-      type: "warning",
-    })
-    router.push("/sign_in")
   }
 }
 
@@ -406,23 +401,23 @@ function merchantScroll() {
 function giftPacks() {
   // 领取礼包
   if (token.value) {
-    ElMessageBox.confirm(t("PCHomePage.giftBag.tip.message"), t("PCHomePage.giftBag.tip.title"), {
-      cancelButtonText: t("PCHomePage.giftBag.tip.cancel"),
-      confirmButtonText: t("PCHomePage.giftBag.tip.confirm"),
-      center: true,
-      callback: (action) => {
-        if (action === "confirm") {
-          window.$crisp.push(["do", "chat:open"])
-        }
-      },
-    })
+    ElMessageBox.confirm(
+      en.value ? "You can contact customer service to apply for a 500M trial traffic pack." : "您可以联系客服申请500M的试用流量包。",
+      en.value ? "Tip" : "温馨提示",
+      {
+        cancelButtonText: en.value ? "I know" : "我知道了",
+        confirmButtonText: en.value ? "Contact No" : "立即联系",
+        center: true,
+        callback: (action) => {
+          if (action === "confirm") {
+            window.$crisp.push(["do", "chat:open"])
+          }
+        },
+      }
+    )
     return
   }
   router.push("/login")
-  // ElNotification({
-  //   title: "Hint",
-  //   message: h("i", { style: "color: green" }, t("PCHomePage.hintTwo")),
-  // })
 }
 
 function scroll() {

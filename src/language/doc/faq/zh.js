@@ -16,9 +16,9 @@ export default {
 
     _2_4_title: "4.如何购买代理服务？",
     _2_4_des:
-      '如果您已经注册，请登录我们的网站，进入控制台，找到产品菜单，或直接单击以下链接：<a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>,或者您可以单击以下链接并重定向到定价页面以查看我们的产品： <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>',
+      "如果您已经注册，请登录我们的网站，进入控制台，找到产品菜单，或直接单击以下链接：{link1},或者您可以单击以下链接并重定向到定价页面以查看我们的产品： {link2}",
     _2_5_title: "5.您是否提供用户教程？",
-    _2_5_des: '是的，我们提供关于所有功能的全面教程。您可以从这里访问教程： <a href="https://www.ipstar.io/doc">https://www.ipstar.io/doc</a>',
+    _2_5_des: "是的，我们提供关于所有功能的全面教程。您可以从这里访问教程： {link}",
     _2_6_title: "6.选择一个IP后，我可以使用代理多久？",
     _2_6_des: "使用代理时，可以指定IP的生存期，也可以在IP的有效期内一直使用它。因为代理是住宅代理，所以住宅代理的生存时间从几小时到几天。",
     _2_7_title: "7.如何切换到另一个IP？",

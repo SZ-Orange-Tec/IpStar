@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <div class="date_flow table">
+          <div class="date_flow table_box flex-1">
             <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
               <el-table-column prop="date" :label="$t('Date')"></el-table-column>
               <el-table-column prop="flow" :label="$t('Traffic')">
@@ -139,7 +139,7 @@
           <Picker class="echart_picker" :defaultDate="ipdefault" :pickerOptions="pickerOptions" @dateChange="ipDateChange" />
         </div>
 
-        <div class="table w-full">
+        <div class="table_box w-full">
           <el-table :data="network" border>
             <el-table-column :label="$t('overview_spec.Country_or_Region')">
               <template #default="scope">
@@ -172,27 +172,29 @@
       </div>
 
       <!-- 余额明细 -->
-      <div class="balance w-full table" v-show="activeIndex === 2">
-        <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
-          <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
-          <el-table-column prop="id" label="ID"></el-table-column>
-          <el-table-column prop="datetime" :label="$t('Date')"></el-table-column>
-          <el-table-column prop="pack_size" :label="$t('Traffic')">
-            <template #default="scope">
-              <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')"></el-table-column>
-          <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')"></el-table-column>
-          <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')"></el-table-column>
-          <el-table-column :label="$t('Type')">
-            <template #default="scope">
-              <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
-              <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
-              <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
+      <div class="balance w-full column" v-show="activeIndex === 2">
+        <div class="table_box w-full flex-1">
+          <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
+            <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
+            <el-table-column prop="id" label="ID"></el-table-column>
+            <el-table-column prop="datetime" :label="$t('Date')"></el-table-column>
+            <el-table-column prop="pack_size" :label="$t('Traffic')">
+              <template #default="scope">
+                <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')"></el-table-column>
+            <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')"></el-table-column>
+            <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')"></el-table-column>
+            <el-table-column :label="$t('Type')">
+              <template #default="scope">
+                <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
+                <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
+                <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
         <!-- 分页 -->
         <div class="pagination vh_center">
           <el-pagination
@@ -447,7 +449,7 @@ export default {
       const myEchart = echart.init(document.querySelector(".myEchart"))
       const option = {
         title: {
-          text: this.$t("overview_spec.EchartTextOne"),
+          text: this.en ? "5-Day Comparison" : "5 天对比",
           textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
           padding: [38, 0, 0, 35],
         },
@@ -1156,9 +1158,10 @@ export default {
     window.removeEventListener("resize", this.lineEchartResize)
   },
   setup() {
-    const { lang } = settingStore()
+    const { lang, en } = settingStore()
     const { unlimited } = userStore()
     return {
+      en,
       lang,
       unlimited,
     }

@@ -16,7 +16,7 @@ export default {
 
   footer_spec: {
     explore: "探索 IpStar 服务",
-    description: "E-commerce,network,bigdata,artifcial intelligence, <br>IpStar helps you develop rapidly",
+    description: "电子商务、网络、大数据、人工智能，\nIpStar助您快速发展",
     get_it_now: "立即获取",
 
     Residential_Proxies: "住宅代理",

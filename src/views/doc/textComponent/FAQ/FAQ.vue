@@ -25,12 +25,23 @@
       <div class="space-y-5">
         <div class="space-y-2">
           <p class="title2">{{ t("faq_spec._2_4_title") }}</p>
-          <div class="content" v-html="t('faq_spec._2_4_des')"></div>
+          <i18n-t keypath="faq_spec._2_4_des" tag="div" scope="global" class="content">
+            <template #link1>
+              <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>
+            </template>
+            <template #link2>
+              <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>
+            </template>
+          </i18n-t>
         </div>
 
         <div class="space-y-2">
           <p class="title2">{{ t("faq_spec._2_5_title") }}</p>
-          <div class="content" v-html="t('faq_spec._2_5_des')"></div>
+          <i18n-t keypath="faq_spec._2_5_des" tag="div" scope="global" class="content">
+            <template #link>
+              <a href="https://www.ipstar.io/doc">https://www.ipstar.io/doc</a>
+            </template>
+          </i18n-t>
         </div>
 
         <div class="space-y-2">

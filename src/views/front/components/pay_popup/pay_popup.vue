@@ -140,8 +140,10 @@ import { X as CloseIcon } from "lucide-vue-next"
 import { ref, computed, watch, onMounted, nextTick } from "vue"
 import { useRouter } from "vue-router"
 import IpButton from "@/components/button/button.vue"
+import settingStore from "@/store/setting.js"
 
 const router = useRouter()
+const { en } = settingStore()
 
 // Props
 const props = defineProps({
@@ -207,7 +209,10 @@ async function stripeCheck() {
     if (data.pay_url) {
       window.location.href = data.pay_url
     } else {
-      ElMessage.error("Connect Scripe Error")
+      Message({
+        type: "warning",
+        message: en.value ? "Connect Scripe Error" : "连接 Scripe 错误",
+      })
     }
   } catch (err) {
     console.log(err)
@@ -331,14 +336,14 @@ async function handleSubmit(e) {
   })
 
   if (error.type === "card_error" || error.type === "validation_error") {
-    ElMessage({
+    Message({
+      type: "warning",
       message: error.message,
-      type: "error",
     })
   } else {
-    ElMessage({
+    Message({
+      type: "warning",
       message: "An unexpected error occurred.",
-      type: "error",
     })
   }
   setLoading(false)
@@ -386,9 +391,9 @@ function onApprove(data, actions) {
       let msg = "Sorry, your transaction could not be processed."
       if (errorDetail.description) msg += "\n\n" + errorDetail.description
       if (orderData.debug_id) msg += " (" + orderData.debug_id + ")"
-      return ElMessage({
+      return Message({
         message: msg,
-        type: "error",
+        type: "warning",
       })
     }
     router.push(`/payment_success?price=${props.order_data.order_price}&orderNo=${props.order_data.order_no}&type=${isManmer.value}`)

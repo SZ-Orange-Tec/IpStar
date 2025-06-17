@@ -7,7 +7,14 @@
 
     <div class="space-y-2">
       <p class="title2">{{ t("android_spec._2_1_title") }}</p>
-      <div class="content" v-html="t('android_spec._2_1_des')"></div>
+      <i18n-t keypath="android_spec._2_1_des" tag="div" scope="global" class="content">
+        <template #link1>
+          <a href="https://docs.zohopublic.com/file/s3zpw4560b795f76a4501b6d49edbd85cf715">{{ t("click_here_to_download") }}</a>
+        </template>
+        <template #link2>
+          <a href="https://github.com/2dust/v2rayNG/releases">https://github.com/2dust/v2rayNG/releases</a>
+        </template>
+      </i18n-t>
     </div>
 
     <ul class="space-y-5">

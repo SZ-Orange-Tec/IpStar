@@ -15,4 +15,9 @@ export default {
   Payment: "付款",
   Operation: "操作",
   Pay: "支付",
+
+  Paid: "已支付",
+  Unpaid: "未支付",
+  Payment_confirmation: "支付确认中",
+  Day: "天",
 }

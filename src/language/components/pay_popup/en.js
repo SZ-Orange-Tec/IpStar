@@ -1,6 +1,13 @@
 export default {
   Next: "Next",
 
+  Order_detail: "Order details",
+  Traffic: "Traffic",
+  Duration: "Duration",
+  Discount: "Discount",
+  Total: "Total",
+  Submit: "Submit",
+
   payPopup_spec: {
     strip: "Stripe, Debit & Credit Card (Visa,MasterCard,UnionPay,JCB...)",
     usdt: "Crypto coins,USDT",
@@ -18,5 +25,7 @@ export default {
     usdt9: "network load, confirmation can take approx imately: ",
     usdt10: "1-2 minutes",
     usdt11: "There is nothing else you need to do! You may close this window.",
+
+    unit_price: "Price per GB",
   },
 }

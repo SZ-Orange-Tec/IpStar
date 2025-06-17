@@ -8,7 +8,7 @@
 
     <div class="w-full main column flex-1">
       <!-- 购买订单 -->
-      <div class="flex-1 w-full table">
+      <div class="flex-1 w-full table_box">
         <el-table :data="tableData">
           <el-table-column prop="order" :label="$t('Order')" width="180"></el-table-column>
           <el-table-column prop="createTime" :label="$t('Place_order_time')"></el-table-column>
@@ -100,16 +100,9 @@ async function getClient() {
       payment: {
         // url: item.is_paid === 1 ? require('@/assets/pc_img/layout_img/payment success.png') : item.is_paid === 0 ? require('@/assets/pc_img/layout_img/abnormal.png') : item.is_paid === 2 ? require('@/assets/pc_img/layout_img/await.png') : '',
         class: item.is_paid === 1 ? "succeed_img" : item.is_paid === 0 ? "error_img" : item.is_paid === 2 ? "warning_img" : "",
-        title:
-          item.is_paid === 1
-            ? t("PCBillings.message[0]")
-            : item.is_paid === 0
-            ? t("PCBillings.message[1]")
-            : item.is_paid === 2
-            ? t("PCBillings.message[2]")
-            : "",
+        title: item.is_paid === 1 ? t("Paid") : item.is_paid === 0 ? t("Unpaid") : item.is_paid === 2 ? t("Payment_confirmation") : "",
       },
-      days: item.days + " " + t("PCProductList.days"),
+      days: item.days + " " + t("Day"),
     }
   })
   tableData.value = newArr
