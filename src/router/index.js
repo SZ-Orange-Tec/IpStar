@@ -94,19 +94,19 @@ const routes = [
   },
   {
     path: "/doc",
-    name: "doc",
+    // name: "doc",
     meta: { index: 5, keepAlive: false },
     component: () => import("@/views/doc/doc.vue"),
   },
   {
     path: "/commitment",
-    // name: 'commitment',
+    name: "commitment",
     meta: { keepAlive: false },
     component: () => import("@/views/front/commitment/commitment.vue"),
   },
   {
     path: "/payment_success",
-    // name: '支付成功',
+    name: "payment_success",
     meta: { keepAlive: false },
     component: () => import("@/views/payment_success/payment_success.vue"),
   },

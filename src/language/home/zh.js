@@ -1,10 +1,13 @@
 import header from "../components/header/zh"
 import footer from "../components/footer/zh"
 import productList from "../components/productList/zh"
+import paypopup from "../components/pay_popup/zh"
 export default {
   ...header,
   ...footer,
   ...productList,
+  ...paypopup,
+
   home_spec: {
     intro_title: "我们提供便宜的 <span class='primary_text'>高质量</span> <br /> 住宅 IP 代理服务",
     intro_desc: "我们的住宅代理网络由真实用户的IP地址构成，不会被检测或封锁。<br />IP池会持续优化更新，确保IP的高可用性与稳定的通信速度",

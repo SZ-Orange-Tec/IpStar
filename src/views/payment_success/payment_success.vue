@@ -2,19 +2,19 @@
   <div class="pc-payment_success">
     <div class="sticky_note">
       <img src="../../assets/img/succeed cancel.png" alt="" />
-      <h1>{{ $t("PCPaymentSuccess.h1") }}</h1>
+      <h1>{{ $t("Payment_successful") }}</h1>
       <div class="line"></div>
       <ul>
         <li>
-          <span>{{ $t("PCPaymentSuccess.span[0]") }}： </span><span>${{ orderPrice / 100 }}</span>
+          <span>{{ $t("Amount_paid") }}： </span><span>${{ orderPrice / 100 }}</span>
         </li>
         <li>
-          <span>{{ $t("PCPaymentSuccess.span[1]") }}： </span><span>{{ patternPayment }}</span>
+          <span>{{ $t("Way") }}： </span><span>{{ patternPayment }}</span>
         </li>
       </ul>
     </div>
     <el-button @click="drop_out">OK</el-button>
-    <p>{{ $t("PCPaymentSuccess.p[0]") }} {{ num }} {{ $t("PCPaymentSuccess.p[1]") }}</p>
+    <p>{{ $t("payment_spec.second1") }} {{ num }} {{ $t("payment_spec.second2") }}</p>
 
     <div class="mask column_center space-y-2" v-if="loading">
       <span class="ip-loading"></span>

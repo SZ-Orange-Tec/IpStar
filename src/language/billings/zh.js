@@ -1,8 +1,10 @@
 import menu from "../components/menu/zh"
 import navbar from "../components/navbar/zh"
+import paypopup from "../components/pay_popup/zh"
 export default {
   ...menu,
   ...navbar,
+  ...paypopup,
   Order: "订单",
   Payment_time: "支付时间",
   Place_order_time: "下单时间",

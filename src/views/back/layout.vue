@@ -17,12 +17,12 @@
     <div class="mask" v-if="isMask !== 'false' && registerAward">
       <div class="mask_content">
         <img src="../../assets/pc_img/layout_img/Gift bag.webp" alt="Gift bag" />
-        <h2>{{ $t("PCLayout.gift[0]") }}</h2>
-        <p :class="lang">{{ $t("PCLayout.gift[1]") }}</p>
+        <h2>{{ t("navbar_spec.gift") }}</h2>
+        <p :class="lang">{{ t("navbar_spec.expire") }}</p>
         <div class="btn_sum">
           <!-- @click="maskFn" -->
-          <!-- <el-button @click="maskFn(1)">{{ $t("PCLayout.gift[2]") }}</el-button> -->
-          <p @click="maskFn(0)">{{ $t("PCLayout.gift[3]") }}</p>
+          <!-- <el-button @click="maskFn(1)">{{ t("PCLayout.gift[2]") }}</el-button> -->
+          <p @click="maskFn(0)">{{ t("navbar_spec.get") }}</p>
         </div>
       </div>
     </div>
@@ -37,11 +37,14 @@ import settingsStore from "@/store/setting"
 import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 import NavMenu from "./components/menu/menu.vue"
+import { useI18n } from "vue-i18n"
 
 const { getUserInfo } = userStore()
 const { isMask, registerAward } = layoutStore()
 const { isDocument, documentIdx } = settingsStore()
 const router = useRouter()
+
+const { t } = useI18n()
 
 function maskFn(bol) {
   detect.gift()

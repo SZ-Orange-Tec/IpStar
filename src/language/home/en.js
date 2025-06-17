@@ -1,10 +1,12 @@
 import header from "../components/header/en"
 import footer from "../components/footer/en"
 import productList from "../components/productList/en"
+import paypopup from "../components/pay_popup/en"
 export default {
   ...header,
   ...footer,
   ...productList,
+  ...paypopup,
   home_spec: {
     intro_title: 'We Offer Affordable <span class="primary_text">High-Quality</span> <br /> Residential lP Proxy Services.',
     intro_desc:

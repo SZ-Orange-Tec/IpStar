@@ -1,7 +1,7 @@
 // 使用插件
 import { createI18n } from "vue-i18n"
-import zh from "./language/local_zh"
-import en from "./language/local_en"
+// import zh from "./language/local_zh"
+// import en from "./language/local_en"
 // import HomeMessage from "./home/index"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
@@ -15,12 +15,13 @@ const langMap = {
 const locale = localStorage.getItem("lang") || langMap[language]
 
 const i18n = createI18n({
+  // legacy: false,
   locale: locale, // 语言标识,第一次登录默认是中文
   messages: {
-    zh: { ...zh },
-    en: { ...en },
+    zh: {},
+    en: {},
   },
-  warnHtmlMessage: false,
+  escapeParameterHtml: true,
 })
 localStorage.setItem("lang", locale)
 

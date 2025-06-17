@@ -23,16 +23,16 @@
                   <img v-if="isManmer === 1" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
                   <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
                   <img src="@/assets/img/stripe.png" alt="" class="img_choice" />
-                  <p>{{ $t("PCPayPopup.choiceArea[0]") }}</p>
+                  <p>{{ $t("payPopup_spec.strip") }}</p>
                 </li>
                 <li @click="selectPay('coingate')">
                   <img v-if="isManmer === 3" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
                   <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
                   <img src="@/assets/img/taida.png" alt="" class="img_coingate_pay" />
-                  <p>{{ $t("PCPayPopup.choiceArea[3]") }}</p>
+                  <p>{{ $t("payPopup_spec.usdt") }}</p>
                 </li>
               </ul>
-              <p>{{ $t("PCPayPopup.p") }}</p>
+              <p>{{ $t("payPopup_spec.tip") }}</p>
             </div>
             <!-- paypal支付 -->
             <div class="pay_result" v-if="processIdx === 2 && isManmer === 2">
@@ -41,29 +41,28 @@
             </div>
             <!-- USDT支付 -->
             <div class="usdt_result" v-if="processIdx === 2 && isManmer === 3">
-              <p class="title">{{ $t("PCPayPopup.usdt[0]") }}</p>
-              <p class="des">{{ $t("PCPayPopup.usdt[1]") }}</p>
-              <div class="wallet">{{ $t("PCPayPopup.usdt[2]") }}</div>
+              <p class="title">{{ $t("payPopup_spec.usdt1") }}</p>
+              <p class="des">{{ $t("payPopup_spec.usdt2") }}</p>
+              <div class="wallet">{{ $t("payPopup_spec.usdt3") }}</div>
               <img :src="usdtInfo?.pay_img_url" alt="" />
               <strong>USDT-TRC20</strong>
-              <span class="tip">*{{ $t("PCPayPopup.usdt[3]") }}</span>
-              <!-- <p class="split">{{$t('PCPayPopup.usdt[4]')}}</p> -->
+              <span class="tip">*{{ $t("payPopup_spec.usdt4") }}</span>
               <p class="split"></p>
               <div class="info">
                 <p>
-                  <strong>{{ $t("PCPayPopup.usdt[5]") }}</strong>
+                  <strong>{{ $t("payPopup_spec.usdt5") }}</strong>
                 </p>
                 <div class="text">{{ order_data.order_usdt_price }} USDT</div>
                 <p>
-                  <strong>{{ $t("PCPayPopup.usdt[6]") }}</strong>
+                  <strong>{{ $t("payPopup_spec.usdt6") }}</strong>
                 </p>
                 <div class="text">{{ usdtInfo?.address }}</div>
               </div>
               <div class="loading" v-if="showProcess">
-                <h1>{{ $t("PCPayPopup.usdt[7]") }}</h1>
+                <h1>{{ $t("payPopup_spec.usdt7") }}</h1>
                 <p>
-                  {{ $t("PCPayPopup.usdt[8]") }}<br />
-                  {{ $t("PCPayPopup.usdt[9]") }} <strong>{{ $t("PCPayPopup.usdt[10]") }}</strong>
+                  {{ $t("payPopup_spec.usdt8") }}<br />
+                  {{ $t("payPopup_spec.usdt9") }} <strong>{{ $t("payPopup_spec.usdt10") }}</strong>
                 </p>
                 <div class="process">
                   <svg viewBox="0 0 100 100">
@@ -79,7 +78,7 @@
                   </svg>
                   <p class="percent">{{ percent }}%</p>
                 </div>
-                <p class="footer">{{ $t("PCPayPopup.usdt[11]") }}</p>
+                <p class="footer">{{ $t("payPopup_spec.usdt11") }}</p>
               </div>
             </div>
             <!-- btn_sum -->
@@ -87,7 +86,7 @@
               <ip-button type="primary" class="px-5 h-10" @click="next" v-if="processIdx === 1">
                 <div class="v_center space-x-2">
                   <span class="ip-loading" v-if="btnLoading"></span>
-                  <span>{{ $t("PCPayPopup.btnTxt") }}</span>
+                  <span>{{ $t("Next") }}</span>
                 </div>
               </ip-button>
               <div id="paypal-button-container" v-if="processIdx === 2 && isManmer === 2">
@@ -111,10 +110,6 @@
           <transition name="fade">
             <div v-show="isLoading" class="loading_pay">loading...</div>
           </transition>
-          <!-- <el-button native-type="submit" id="submit" type="primary" round>
-            <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">{{$t('PCPayPopup.btnTxtTwo')}}</span>
-          </el-button> -->
         </form>
 
         <div class="close vh_center pointer transition-color" @click="close">

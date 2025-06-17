@@ -6,5 +6,8 @@ export default {
     Proxy: "Obtain Proxy",
     API: "API",
     Settings: "Settings",
+
+    help: "If you have any questions, please check the ",
+    manual: "user manual",
   },
 }

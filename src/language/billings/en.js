@@ -1,8 +1,10 @@
 import menu from "../components/menu/en"
 import navbar from "../components/navbar/en"
+import paypopup from "../components/pay_popup/en"
 export default {
   ...menu,
   ...navbar,
+  ...paypopup,
   Order: "Order",
   Payment_time: "Payment Time",
   Place_order_time: "Place Order Time",

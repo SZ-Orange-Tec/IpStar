@@ -1,10 +1,12 @@
 import header from "../components/header/zh"
 import productList from "../components/productList/zh"
+import paypopup from "../components/pay_popup/zh"
 import footer from "../components/footer/zh"
 export default {
   ...header,
   ...productList,
   ...footer,
+  ...paypopup,
 
   pricing_spec: {
     des: "真实住宅IP 覆盖全球 200+ 国家<br>价格最低 <span class='primary_text'>0.25/GB</span>",

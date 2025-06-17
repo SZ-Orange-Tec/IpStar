@@ -17,7 +17,7 @@
       </ul>
     </div>
     <p class="tip text-sm">
-      {{ $t("PCLayout.tip[0]") }}<span @click="$router.push('/doc')">{{ $t("PCLayout.tip[1]") }}</span>
+      {{ $t("menu_spec.help") }}<span @click="$router.push('/doc')">{{ $t("menu_spec.manual") }}</span>
     </p>
   </div>
 </template>

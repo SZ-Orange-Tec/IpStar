@@ -1,10 +1,12 @@
 import menu from "../components/menu/zh"
 import navbar from "../components/navbar/zh"
 import productList from "../components/productList/zh"
+import paypopup from "../components/pay_popup/zh"
 export default {
   ...menu,
   ...navbar,
   ...productList,
+  ...paypopup,
 
   Buy_now: "立即购买",
 
