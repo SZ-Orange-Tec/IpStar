@@ -89,3 +89,58 @@ export const Power = [
     img: new URL("@/assets/pc_img/help_document_img/ADSPower access two.png", import.meta.url).href,
   },
 ]
+
+export const Bitbrowse = [
+  {
+    h4: "STEP 2: SELECT THE PROXY TYPE",
+    p: "Click Modify Proxy under proxy IP address. Select http or socks5 as the proxy type, for example, SOCKS5",
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access one.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 3: FILL IN THE PROXY INFORMATION",
+    p: "Fill in the host port and proxy verification info(account & password)",
+    pTwo: 'Tip: You can obtain the proxy info through the "obtain proxy" menu on your management console of the website .',
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access two.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 4: PROXY DETECTION",
+    p: "Fill in the proxy information and click Proxy Detection. If the displayed destination IP and address are the address you requested, it means that the configuration is successful",
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access three.png", import.meta.url).href,
+  },
+]
+
+export const HubStudio = [
+  {
+    h4: "STEP 2: SELECT THE PROXY TYPE",
+    p: 'Click the "modification proxy" menu of Hubstudio, select Http or Socks5. Here we using Socks5 as an example',
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access one.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 3: FILL IN THE PROXY INFORMATION",
+    p: "Fill in the host port and proxy verification info(account & password)",
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access two.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 4: CHECK THE PROXY",
+    p: "Fill in the proxy information and click Proxy Detection. If the displayed destination IP and address are the address you requested, it means that the configuration is successful",
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access three.png", import.meta.url).href,
+  },
+]
+
+export const VMLogin = [
+  {
+    h4: "STEP 1: SELECT A PROXY TYPE",
+    p: 'Click the "modification proxy" menu of VMLogin, select Http or Socks5. Here we using Socks5 as an example',
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access one.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 2: FILL IN THE PROXY INFORMATION",
+    p: "Fill in the host port and proxy verification info(account & password)",
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access two.png", import.meta.url).href,
+  },
+  {
+    h4: "STEP 3: TEST THE PROXY",
+    p: 'Click the "Proxy Test" button, if the displayed destination IP and address are the address you requested, it means that the configuration is successful',
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access three.png", import.meta.url).href,
+  },
+]

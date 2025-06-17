@@ -2,7 +2,7 @@
   <div class="api_config column space-y-3">
     <div class="card w-full">
       <!-- 计数 -->
-      <h4>{{ $t("Count") }}</h4>
+      <h4>{{ t("Count") }}</h4>
       <div class="countbox">
         <div class="count">
           <div class="process" ref="process" @mousedown="clickCount">
@@ -24,7 +24,7 @@
 
       <!-- 表单 -->
       <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
-        <el-form-item :label="$t('Country')">
+        <el-form-item :label="t('Country')">
           <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
             <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
               <div>
@@ -34,48 +34,48 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('Protocol')">
+        <el-form-item :label="t('Protocol')">
           <el-select v-model="formInline.protocol" placeholder="协议">
             <el-option label="SOCKS5" value="0"></el-option>
             <el-option label="HTTP/HTTPS" value="1"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="'IP ' + $t('Duration')">
+        <el-form-item :label="'IP ' + t('Duration')">
           <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
             <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('Format')">
+        <el-form-item :label="t('Format')">
           <el-select v-model="formInline.format" placeholder="格式">
             <el-option v-for="item in formatList" :key="item.label" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button id="primary-button" type="primary" @click="generateURL">{{ $t("Generate") }} API {{ $t("Link") }}</el-button>
+          <el-button id="primary-button" type="primary" @click="generateURL">{{ t("Generate") }} API {{ t("Link") }}</el-button>
         </el-form-item>
       </el-form>
 
       <!-- 网址 -->
-      <p>{{ $t("api_spec.url") }} {{ $t("api_spec.base") }}</p>
+      <p>{{ t("api_spec.url") }} {{ t("api_spec.base") }}</p>
       <div class="website v_center w-full space-x-5">
         <div class="v_center flex-1">
-          <el-input class="flex-1" v-model="url" :placeholder="$t('api_spec.placeholder')" style="height: 40px"></el-input>
-          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ $t("Copy_link") }}</el-button>
+          <el-input class="flex-1" v-model="url" :placeholder="t('api_spec.placeholder')" style="height: 40px"></el-input>
+          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ t("Copy_link") }}</el-button>
         </div>
-        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ $t("Open_link") }}</el-button>
+        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ t("Open_link") }}</el-button>
       </div>
       <div class="tip">
-        <div class="flex-shrink-0">{{ $t("Note") }}:</div>
+        <div class="flex-shrink-0">{{ t("Note") }}:</div>
         <ol>
-          <li>{{ $t("api_spec.note1") }}</li>
-          <li>{{ $t("api_spec.note2") }}</li>
+          <li>{{ t("api_spec.note1") }}</li>
+          <li>{{ t("api_spec.note2") }}</li>
         </ol>
       </div>
     </div>
 
     <div class="card w-full">
       <!-- 参数声明 -->
-      <h4>{{ $t("Parameter") }} {{ $t("Declaration") }}</h4>
+      <h4>{{ t("Parameter") }} {{ t("Declaration") }}</h4>
       <div class="params w-full">
         <ul>
           <li class="v_center"><span>count</span> COUNT</li>
@@ -85,7 +85,7 @@
         </ul>
       </div>
 
-      <h4>{{ $t("Example") }}</h4>
+      <h4>{{ t("Example") }}</h4>
       <div class="example w-full">
         <template v-if="formInline.format === '0'">
           {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
@@ -97,7 +97,7 @@
         </template>
       </div>
 
-      <h4>{{ $t("Result") }}</h4>
+      <h4>{{ t("Result") }}</h4>
       <div class="params w-full">
         <ul v-if="formInline.format === '2'">
           <li><span>serve</span>SERVE</li>

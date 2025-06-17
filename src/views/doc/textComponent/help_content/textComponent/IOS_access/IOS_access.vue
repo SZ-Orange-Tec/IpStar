@@ -1,55 +1,43 @@
 <template>
-  <div class="pc-IOS_access">
-    <div class="IOS_access_text">
-      <h3>{{ $t("PCIosAccess.h3") }}</h3>
-      <h4>{{ $t("PCIosAccess.h4") }}</h4>
-      <div class="p_box">
-        <p>
-          {{ $t("PCIosAccess.pBox.one[0]") }} <a href="javascript:;" @click="open">{{ $t("PCIosAccess.pBox.one[1]") }}</a
-          >. {{ $t("PCIosAccess.pBox.one[2]") }}
-        </p>
-      </div>
-      <ul class="step_box">
-        <li v-for="(item, index) in list" :key="index">
-          <h4>{{ item.h4 }}</h4>
-          <div class="p_box" style="width: 416px">
-            <p>{{ item.p }}</p>
-          </div>
+  <div class="space-y-5">
+    <div>
+      <p class="title1 text-2xl">{{ t("ios_spec._1_1_title") }}</p>
+    </div>
+
+    <div class="space-y-2">
+      <p class="title2">{{ t("ios_spec._2_1_title") }}</p>
+      <div class="content" v-html="t('ios_spec._2_1_des')"></div>
+    </div>
+
+    <ul class="space-y-5">
+      <li v-for="(item, index) in list" :key="index" class="column space-y-2">
+        <p class="title2">{{ item.h4 }}</p>
+        <div class="content">{{ item.p }}</div>
+        <div class="column_center w-full">
           <img :src="item.img" alt="IOS Access one" />
-        </li>
-      </ul>
-      <div class="p_box">
-        <p class="note">{{ $t("PCIosAccess.pBox.two") }}</p>
-      </div>
+        </div>
+      </li>
+    </ul>
+
+    <div>
+      <div class="content">{{ t("ios_spec._2_2_des") }}</div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "PCIOSAccess",
-  data() {
-    return {
-      list: [],
-    }
-  },
-  methods: {
-    open(url) {
-      window.open(url)
-    },
-    async getInfo() {
-      const en = localStorage.getItem("lang") === "en"
-      const { IOS } = en ? await import("../info.en") : await import("../info.zh")
+<script setup>
+import { ref } from "vue"
+import { useI18n } from "vue-i18n"
 
-      this.list = IOS
-    },
-  },
-  created() {
-    this.getInfo()
-  },
+const { t } = useI18n()
+
+const list = ref([])
+async function getInfo() {
+  const en = localStorage.getItem("lang") === "en"
+  const { IOS } = en ? await import("../info.en") : await import("../info.zh")
+  list.value = IOS
 }
+getInfo()
 </script>
 
-<style lang="less" scoped>
-@import url("./IOS_access.less");
-</style>
+<style lang="less" scoped></style>

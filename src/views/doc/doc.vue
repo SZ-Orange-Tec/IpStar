@@ -18,16 +18,31 @@
             <ChevronRight :size="16" v-if="item.children.length > 0" class="icon" />
           </div>
 
-          <div class="menu_child">
-            <div
-              class="menu_child_item v_center h-8 text-sm pointer transition-color"
-              :class="{ pitch: documentIdx === index + '-' + childIndex }"
-              v-for="(child, childIndex) in item.children"
-              :key="child.id"
-              @click="pitchOnMenu(index + '-' + childIndex)"
-            >
-              <p>{{ child.label }}</p>
+          <div class="menu_child space-y-2">
+            <div v-for="(child, childIndex) in item.children" key="child.id">
+              <div
+                class="v_center pointer transition-color menu_child_item"
+                :class="{ pitch: documentIdx === index + '-' + childIndex, between: child.children?.length }"
+                @click="pitchOnMenu(index + '-' + childIndex)"
+              >
+                <span>{{ child.label }}</span>
+                <ChevronRight :size="16" v-if="child.children?.length > 0" class="icon" />
+              </div>
+              <div class="three_menu text-xs" v-if="child?.children?.length">
+                <div
+                  class="three_menu_item pointer"
+                  :class="{
+                    pitch: documentIdx === index + '-' + childIndex + '-' + threeIndex,
+                  }"
+                  v-for="(three, threeIndex) in child.children"
+                  @click="pitchOnMenu(index + '-' + childIndex + '-' + threeIndex)"
+                >
+                  <span>{{ three.label }}</span>
+                </div>
+              </div>
             </div>
+            <!-- <div class="menu_child_box text-sm space-y-2" v-for="(child, childIndex) in item.children" :key="child.id">
+            </div> -->
           </div>
         </div>
       </div>
@@ -43,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, defineAsyncComponent } from "vue"
+import { ref, nextTick, watch, defineAsyncComponent, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
@@ -51,6 +66,8 @@ import userStore from "@/store/user"
 import { ChevronRight, ChevronLeft } from "lucide-vue-next"
 import anime from "animejs/lib/anime.es"
 import IpButton from "@/components/button/button.vue"
+import { typeOf } from "../../utils/tools"
+import i18n from "../../language"
 
 const { isDocument, documentIdx, en } = settingStore()
 const { is_purchase } = userStore()
@@ -65,8 +82,6 @@ const HelpText = defineAsyncComponent(() => import("./textComponent/help_content
 
 // 响应式数据
 
-const OneGrade = ref(null)
-const defaultActive = ref(null)
 const helpName = ref("Access_Android")
 const sonName = ref(null)
 
@@ -83,105 +98,67 @@ const isCollapse = ref(false) // 菜单栏是否折叠
 
 function toggleMenu(index) {
   // 切换菜单展开
-  const menu = menuRef.value
-  const menuItem = menu.children[index]
-  const menuChild = menuItem.children[1]
-  const expand = menuData.value[index].expand
+  const second = typeOf(index) === "String" // 二级菜单
+  const arr = second ? index.split("-") : [index]
 
-  anime({
-    targets: menuChild,
-    height: expand ? 0 : menuChild.scrollHeight,
-    duration: 300,
-    easing: "easeOutQuad",
-    complete: () => {
-      menuData.value[index].expand = !expand
-    },
-  })
+  const item = arr.reduce((pre, next) => {
+    pre = typeOf(pre) === "Object" ? pre.children : pre
+    return pre[+next]
+  }, menuData.value)
+
+  const menuDom = arr.reduce((dom, index) => {
+    return dom.children[+index].lastChild
+  }, menuRef.value)
+
+  const expand = item.expand
+
+  function animetion(dom, height) {
+    return new Promise((resolve) => {
+      anime({
+        targets: dom,
+        height: height,
+        duration: 300,
+        easing: "easeOutQuad",
+        complete: () => {
+          resolve()
+        },
+      })
+    })
+  }
+
+  if (!second) {
+    const height = expand ? 0 : menuDom.scrollHeight
+    animetion(menuDom, height).then(() => (item.expand = !expand))
+  } else {
+    const dom = menuDom.parentNode.parentNode
+    const childHeight = expand ? 0 : menuDom.scrollHeight
+
+    const parentHeight = expand ? dom.scrollHeight - menuDom.scrollHeight : dom.scrollHeight + menuDom.scrollHeight
+
+    animetion(dom, parentHeight)
+    animetion(menuDom, childHeight).then(() => (item.expand = !expand))
+  }
 }
 function pitchOnMenu(key) {
-  // 选择菜单
-  if (!key) return
-  // isDocument.value = key
-  documentIdx.value = key
   const arr = key.split("-")
-  if (arr.length === 2) {
-    selectDocument(menuData.value[arr[0]].children[arr[1]], key)
-  } else if (arr.length === 3) {
-    selectDocument(menuData.value[arr[0]].children[arr[1]].children[arr[2]], key)
-  }
-}
-function selectDocument(item, index) {
-  // 当前点击的父级菜单 (样式修改)
-  if (index + "" !== "undefined") {
-    if (index.toString().length === 1) {
-      OneGrade.value = index + ""
-    }
-    if (item.children) {
-      defaultActive.value = index + "-" + "0"
-    } else {
-      defaultActive.value = index
-    }
-  }
-  // 一级文档修改
-  if (item.name === "Getting" || item.topName === "Getting") {
-    if (isDocument.value !== "Getting") {
-      isDocument.value = item.topName === "Getting" ? item.topName : item.name
-    }
-  } else if (item.name === "FAQ" || item.topName === "FAQ") {
-    if (isDocument.value !== "FAQ") {
-      isDocument.value = item.topName === "FAQ" ? item.topName : item.name
-    }
-  } else if (item.name === "Help" || item.topName === "Help") {
-    if (isDocument.value === "Help" && item.hierarchy === 3) {
-      if (item.hierarchy === 2) {
-        if (isDocument.value !== item.parentName) {
-          isDocument.value = item.parentName
-        }
-        helpName.value = item.name
-      } else if (item.hierarchy === 3) {
-        if (helpName.value !== item.parentName) {
-          helpName.value = item.parentName
-        }
-        sonName.value = item.name
-      }
-      // 开启子级首个目录
-      if (item.name === "Fingerprint_Browser") {
-        sonName.value = "ADSPower"
-      } else if (item.name === "Code_API_Access") {
-        sonName.value = "Go"
-      }
-      return
-    }
-    helpName.value = "Access_Android"
-    isDocument.value = item.topName === "Help" ? item.topName : item.name
-  }
-  // 二级文档 修改
-  if (item.hierarchy === 2) {
-    // 检查一级文档是否修改
-    if (isDocument.value !== item.parentName) {
-      isDocument.value = item.parentName
-    }
-    helpName.value = item.name
-    // 三级文档修改
-  } else if (item.hierarchy === 3) {
-    // 检查二级文档是否修改
-    if (helpName.value !== item.parentName) {
-      helpName.value = item.parentName
-    }
-    sonName.value = item.name
-  }
-  // 开启子级首个目录
-  if (item.name === "Fingerprint_Browser") {
-    sonName.value = "ADSPower"
-  } else if (item.name === "Code_API_Access") {
-    sonName.value = "Go"
-  }
-  // 首次进入
-  if (first.value) {
-    first.value = false
+  const item = arr.reduce((pre, next) => {
+    pre = typeOf(pre) === "Object" ? pre.children : pre
+    return pre[+next]
+  }, menuData.value)
+
+  const hasChild = item?.children?.length > 1
+  if (hasChild) {
+    toggleMenu(key)
     return
   }
-  // 滚动
+
+  // selectDocument(item, key)
+  isDocument.value = arr.length > 2 ? item.topName : item.parentName
+  documentIdx.value = key
+
+  helpName.value = arr.length > 2 ? item.parentName : item.name
+  sonName.value = item.name
+
   scroll(item.scrollTop)
 }
 
@@ -221,9 +198,19 @@ function assistScroll(dom, scrollTop) {
 }
 
 async function init() {
+  // 初始化菜单
   const { default: data } = en.value ? await import("./menu.en") : await import("./menu.zh")
 
-  data.forEach((item) => (item.expand = false))
+  data.forEach((item) => {
+    if (item.children.length) {
+      item.expand = false
+      item.children.forEach((child) => {
+        if (child.children?.length) {
+          child.expand = false
+        }
+      })
+    }
+  })
 
   if (!is_purchase.value) {
     menuData.value = [data[0], data[2]]
@@ -249,6 +236,31 @@ watch(
   },
   { immediate: false }
 )
+
+// 加载语言
+const loaded = ref(false) // 语言是否加载成功
+async function loadLanguage() {
+  const locale = i18n.global.locale
+  const file = isDocument.value
+  const need = ["Getting", "FAQ", "Help"]
+  const { default: messages } = await import(/* webpackChunkName: "locale-[request]" */ `@/language/doc/${file}/${locale}.js`)
+  i18n.global.mergeLocaleMessage(locale, messages)
+
+  loaded.value = true
+
+  // 异步加载其他需要的语言
+  nextTick(async () => {
+    const load = need.filter((i) => i !== file)
+    load.forEach(async (i) => {
+      const { default: messages } = await import(/* webpackChunkName: "locale-[request]" */ `@/language/doc/${i}/${locale}.js`)
+      i18n.global.mergeLocaleMessage(locale, messages)
+    })
+  })
+}
+
+onMounted(() => {
+  loadLanguage()
+})
 </script>
 
 <style lang="less" scoped>

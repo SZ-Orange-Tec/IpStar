@@ -1,64 +1,42 @@
 <template>
-  <div class="pc-android_access">
-    <div class="android_access_text">
-      <h3>{{ $t("PCAndroidAcess.h3") }}</h3>
-      <div class="p_box">
-        <p>{{ $t("PCAndroidAcess.pBox.one") }}</p>
-      </div>
-      <h4>{{ $t("PCAndroidAcess.h4") }}</h4>
-      <div class="p_box">
-        <p>
-          {{ $t("PCAndroidAcess.pBox.two[0]") }}
-          <a href="javascript:;" @click="open('https://docs.zohopublic.com/file/s3zpw4560b795f76a4501b6d49edbd85cf715')">
-            {{ $t("PCAndroidAcess.pBox.two[1]") }}
-          </a>
-          {{ $t("PCAndroidAcess.pBox.two[2]") }}
-          <a href="javascript:;" @click="open('https://github.com/2dust/v2rayNG/releases')">
-            {{ $t("PCAndroidAcess.pBox.two[3]") }}
-          </a>
-        </p>
-      </div>
-      <ul class="step_box">
-        <li v-for="(item, index) in list" :key="index">
-          <h4>{{ item.h4 }}</h4>
-          <div class="p_box" style="width: 416px">
-            <p>{{ item.p }}</p>
-          </div>
-          <img :src="item.img" alt="Access In Android one" />
-        </li>
-      </ul>
-      <div class="p_box" style="margin-top: 33px">
-        <p class="note">{{ $t("PCAndroidAcess.pBox.three") }}</p>
-      </div>
+  <div class="android space-y-5">
+    <div class="space-y-2">
+      <p class="title1 text-2xl">{{ t("android_spec._1_1_title") }}</p>
+      <div class="content">{{ t("android_spec._1_1_des") }}</div>
     </div>
+
+    <div class="space-y-2">
+      <p class="title2">{{ t("android_spec._2_1_title") }}</p>
+      <div class="content" v-html="t('android_spec._2_1_des')"></div>
+    </div>
+
+    <ul class="space-y-5">
+      <li v-for="(item, index) in list" :key="index" class="column space-y-2">
+        <p class="title2">{{ item.h4 }}</p>
+        <div class="content">{{ item.p }}</div>
+        <div class="column_center w-full">
+          <img :src="item.img" alt="Access In Android one" />
+        </div>
+      </li>
+    </ul>
+
+    <div class="content">{{ t("android_spec._2_2_des") }}</div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "PCAndroidAccess",
-  data() {
-    return {
-      list: [],
-    }
-  },
-  methods: {
-    open(url) {
-      window.open(url)
-    },
-    async getInfo() {
-      const en = localStorage.getItem("lang") === "en"
-      const { Android } = en ? await import("../info.en") : await import("../info.zh")
+<script setup>
+import { ref } from "vue"
+import { useI18n } from "vue-i18n"
 
-      this.list = Android
-    },
-  },
-  created() {
-    this.getInfo()
-  },
+const { t } = useI18n()
+
+const list = ref([])
+async function getInfo() {
+  const en = localStorage.getItem("lang") === "en"
+  const { Android } = en ? await import("../info.en") : await import("../info.zh")
+  list.value = Android
 }
+getInfo()
 </script>
 
-<style lang="less" scoped>
-@import url("./android_access.less");
-</style>
+<style lang="less" scoped></style>

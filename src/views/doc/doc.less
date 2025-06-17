@@ -23,15 +23,32 @@
           // color: hsl(var(--background) / 80%);
           height: 0;
           overflow: hidden;
-          background-color: hsl(var(--page-neutral));
-          padding:  0 12px;
+          // background-color: hsl(var(--page-neutral));
+          
+          padding-left: 12px;
           .menu_child_item{
+            color: hsl(var(--foreground));
             &:hover{
               color: hsl(var(--primary));
             }
           }
+          .three_menu{
+            height: 0;
+            overflow: hidden;
+            
+            // background-color: hsl(var(--page-neutral));
+            
+            padding-left: 12px;
+            .three_menu_item{
+              margin-top: 8px;
+              color: hsl(var(--foreground));
+              &:hover{
+                color: hsl(var(--primary));
+              }
+            }
+          }
           .pitch{
-            color: hsl(var(--primary));
+            color: hsl(var(--primary)) !important;
           }
         }
       }

@@ -89,3 +89,58 @@ export const Power = [
     img: new URL("@/assets/pc_img/help_document_img/ADSPower access two.png", import.meta.url).href,
   },
 ]
+
+export const Bitbrowse = [
+  {
+    h4: "第二步:选择代理类型",
+    p: "单击“代理IP地址”下的“修改代理”。代理类型选择http或socks5，例如socks5",
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access one.png", import.meta.url).href,
+  },
+  {
+    h4: "步骤3:填写代理信息",
+    p: "填写主机端口和代理验证信息(账号和密码)",
+    pTwo: "提示:您可以通过网站管理控制台的“获取代理”菜单获取代理信息。",
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access two.png", import.meta.url).href,
+  },
+  {
+    h4: "第四步:代理检测",
+    p: "填写代理信息后，单击“代理检测”。如果显示的目的IP地址和地址为用户请求的目的IP地址，则说明配置成功",
+    img: new URL("@/assets/pc_img/help_document_img/BitBrowser access three.png", import.meta.url).href,
+  },
+]
+
+export const HubStudio = [
+  {
+    h4: "第二步:选择代理类型",
+    p: "单击Hubstudio的“修改代理”菜单，选择Http或Socks5。这里我们以Socks5为例",
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access one.png", import.meta.url).href,
+  },
+  {
+    h4: "步骤3:填写代理信息",
+    p: "填写主机端口和代理验证信息(账号和密码)",
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access two.png", import.meta.url).href,
+  },
+  {
+    h4: "第四步:检查代理",
+    p: "填写代理信息后，单击“代理检测”。如果显示的目的IP地址和地址为用户请求的目的IP地址，则说明配置成功",
+    img: new URL("@/assets/pc_img/help_document_img/HubStudio access three.png", import.meta.url).href,
+  },
+]
+
+export const VMLogin = [
+  {
+    h4: "步骤1:选择代理类型",
+    p: "单击VMLogin的“修改代理”菜单，选择Http或Socks5。这里我们以Socks5为例",
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access one.png", import.meta.url).href,
+  },
+  {
+    h4: "第二步:填写代理信息",
+    p: "填写主机端口和代理验证信息(账号和密码)",
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access two.png", import.meta.url).href,
+  },
+  {
+    h4: "步骤3:测试代理",
+    p: "单击“代理测试”按钮，如果显示的目的IP和地址为您请求的地址，则表示配置成功",
+    img: new URL("@/assets/pc_img/help_document_img/VMLogin access three.png", import.meta.url).href,
+  },
+]

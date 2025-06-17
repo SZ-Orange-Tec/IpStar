@@ -51,16 +51,16 @@
             <p class="text-lg">{{ t("Help_center") }}</p>
             <ul class="column space-y-2 text-sm">
               <li>
-                <a href="javascript:;" @click="help_document('2-0')">{{ t("FAQ") }}</a>
+                <a href="javascript:;" @click="toDocument('FAQ')">{{ t("FAQ") }}</a>
               </li>
               <li>
-                <a href="javascript:;" @click="help_document('0-0')">{{ t("Getting_Start") }}</a>
+                <a href="javascript:;" @click="toDocument('Getting')">{{ t("Getting_Start") }}</a>
               </li>
               <li>
-                <a href="javascript:;" @click="goToApi">{{ t("API_Reference") }}</a>
+                <a href="javascript:;" @click="jump('/api')">{{ t("API_Reference") }}</a>
               </li>
               <li>
-                <a href="javascript:;" @click="goTologin">{{ t("Examples") }}</a>
+                <a href="javascript:;" @click="jump('/api')">{{ t("Examples") }}</a>
               </li>
             </ul>
           </div>
@@ -121,7 +121,7 @@ const { isProduc } = layoutStore()
 const router = useRouter()
 const { t } = useI18n()
 
-const { lang, documentIdx } = settingsStore()
+const { lang, documentIdx, isDocument } = settingsStore()
 
 // 去购买
 function goToPay() {
@@ -166,23 +166,26 @@ function goTologin(key) {
   }
 }
 
-// 去看API 文档
-function goToApi() {
-  if (isLogin.value) {
-    router.push("/doc")
-  } else {
-    router.push("/login")
-    Message({
-      message: "Please log in your account",
-      type: "warning",
-    })
-  }
-}
-
 // 跳转观看新手文档
-function help_document(val) {
+function toDocument(val) {
   // store.commit("setDocumentIdx", val)
+  if (!isLogin.value) {
+    router.push("/login")
+    return
+  }
+  const doc = ["Getting", "Help", "FAQ"]
+  const index = doc.findIndex((i) => i === val)
+  isDocument.value = val
+  documentIdx.value = `${index}-0`
+
   router.push("/doc")
+}
+function jump(path) {
+  if (!isLogin.value) {
+    router.push("/login")
+    return
+  }
+  router.push(path)
 }
 
 function toTwitter() {

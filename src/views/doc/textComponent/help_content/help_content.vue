@@ -1,31 +1,34 @@
 <template>
-  <div class="pc-help_content">
-    <!-- Android 接入 -->
-    <AndroidAccess v-if="name === 'Access_Android'" />
-    <IOSAccess v-else-if="name === 'Access_IOS'" />
-    <WindowsAccess v-else-if="name === 'Access_Windows'" />
-    <div class="Code_API_Access" v-else-if="name === 'Code_API_Access'">
-      <h3>{{ $t("PCHelpContent.h3") }}</h3>
-      <h4>{{ $t("PCHelpContent.h4") }}</h4>
-      <div class="p_box">
-        <p>
-          <a href="https://ipflare.com/download/example.rar">{{ $t("PCHelpContent.a") }}</a>
-          <a href="https://ipflare.com/download/golang.rar">Go</a>
-          <a href="https://ipflare.com/download/java.rar">JAVA</a>
-          <a href="https://ipflare.com/download/php.rar">PHP</a>
-          <a href="https://ipflare.com/download/python.rar">Python</a>
-        </p>
+  <div class="use">
+    <div class="container">
+      <!-- Android 接入 -->
+      <AndroidAccess v-if="name === 'Access_Android'" />
+      <IOSAccess v-else-if="name === 'Access_IOS'" />
+      <WindowsAccess v-else-if="name === 'Access_Windows'" />
+      <div class="space-y-5" v-else-if="name === 'Code_API_Access'">
+        <p class="title1 text-2xl">{{ $t("code_spec._1_1_title") }}</p>
+
+        <div class="space-y-2">
+          <p class="title2">{{ $t("code_spec._2_1_title") }}</p>
+          <div class="w-full content space-x-10">
+            <a href="https://ipflare.com/download/example.rar">{{ $t("All") }}</a>
+            <a href="https://ipflare.com/download/golang.rar">Go</a>
+            <a href="https://ipflare.com/download/java.rar">JAVA</a>
+            <a href="https://ipflare.com/download/php.rar">PHP</a>
+            <a href="https://ipflare.com/download/python.rar">Python</a>
+          </div>
+        </div>
+        <GOCode v-if="sonName === 'Go'" />
+        <JAVACode v-else-if="sonName === 'Java'" />
+        <PHPCode v-else-if="sonName === 'PHP'" />
+        <Python v-else-if="sonName === 'Python'" />
       </div>
-      <GOCode v-if="sonName === 'Go'" />
-      <JAVACode v-else-if="sonName === 'Java'" />
-      <PHPCode v-else-if="sonName === 'PHP'" />
-      <Python v-else-if="sonName === 'Python'" />
-    </div>
-    <div class="fingerprint_browser" v-else-if="name === 'Fingerprint_Browser'">
-      <ADSPowerAccess v-if="sonName === 'ADSPower'" />
-      <BitbrowseAccess v-else-if="sonName === 'Bitbrowse'" />
-      <HobStudioAccess v-else-if="sonName === 'HubStudio'" />
-      <VMLoginAccess v-else-if="sonName === 'VMLogin'" />
+      <div class="fingerprint_browser" v-else-if="name === 'Fingerprint_Browser'">
+        <ADSPowerAccess v-if="sonName === 'ADSPower'" />
+        <BitbrowseAccess v-else-if="sonName === 'Bitbrowse'" />
+        <HobStudioAccess v-else-if="sonName === 'HubStudio'" />
+        <VMLoginAccess v-else-if="sonName === 'VMLogin'" />
+      </div>
     </div>
   </div>
 </template>

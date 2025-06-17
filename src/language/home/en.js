@@ -55,6 +55,6 @@ export default {
     finance: "Finance",
 
     package_title: "Choose The Package that <br /> fits your needs",
-    package_desc: "Ipflare provides you with various high-quality packages",
+    package_desc: "IpStar provides you with various high-quality packages",
   },
 }
