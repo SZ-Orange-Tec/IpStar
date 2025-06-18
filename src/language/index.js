@@ -1,11 +1,10 @@
 // 使用插件
 import { createI18n } from "vue-i18n"
-// import zh from "./language/local_zh"
-// import en from "./language/local_en"
+import zh from "./home/zh"
+import en from "./home/en"
 // import HomeMessage from "./home/index"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
-import { en } from "element-plus/es/locales.mjs"
 
 const language = navigator.language
 const langMap = {
@@ -14,15 +13,15 @@ const langMap = {
 }
 let locale = localStorage.getItem("lang")
 if (locale !== "en" && locale !== "zh") {
-  locale = langMap[language] ?? en
+  locale = langMap[language] ?? "en"
 }
 
 const i18n = createI18n({
   // legacy: false,
   locale: locale, // 语言标识,第一次登录默认是中文
   messages: {
-    zh: {},
-    en: {},
+    zh: { ...zh },
+    en: { ...en },
   },
   warnHtmlInMessage: false,
   warnHtmlMessage: false,

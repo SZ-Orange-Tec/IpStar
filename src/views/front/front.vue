@@ -16,7 +16,9 @@ import { useRoute, useRouter } from "vue-router"
 
 // 预加载
 function loadLogin() {
-  import(/* webpackChunkName: "login" */ "@/views/login/login.vue")
+  import(/* webpackChunkName: "login" */ "@/views/login/login.vue").then(() => {
+    window.removeEventListener("load", loadLogin)
+  })
 }
 
 // 路由重定向
@@ -27,7 +29,8 @@ if (!route.path || route.path === "/") {
 }
 
 onMounted(() => {
-  loadLogin()
+  // 预加载登录页
+  window.addEventListener("load", loadLogin)
 })
 </script>
 

@@ -38,7 +38,8 @@ function initCrisp() {
 }
 
 onMounted(() => {
-  initCrisp()
+  // 等待所有资源加载完成 初始化Crisp
+  window.addEventListener("load", initCrisp)
 })
 </script>
 
