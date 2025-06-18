@@ -100,13 +100,13 @@
       <div class="container column_center">
         <p class="title text-3xl font-bold">
           {{ t("home_spec.why") }}
-          <span class="primary_txt">IpStar</span>
+          <span class="primary_text">IpStar</span>
         </p>
 
         <ul class="three v_center space-x-8">
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/why1.png" />
+              <img v-lazy="() => import('@/assets/images/home/why1.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
               <p class="title text-base">{{ t("home_spec.why1_title") }}</p>
@@ -115,7 +115,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/why2.png" />
+              <img v-lazy="() => import('@/assets/images/home/why2.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
               <p class="title text-base">{{ t("home_spec.why2_title") }}</p>
@@ -124,7 +124,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/why3.png" />
+              <img v-lazy="() => import('@/assets/images/home/why3.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
               <p class="title text-base">{{ t("home_spec.why3_title") }}</p>
@@ -148,7 +148,7 @@
         <ul class="four v_center space-x-4">
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/four1.png" alt="" />
+              <img v-lazy="() => import('@/assets/images/home/four1.png')" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
@@ -157,7 +157,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/four2.png" alt="" />
+              <img v-lazy="() => import('@/assets/images/home/four2.png')" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
@@ -166,7 +166,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/four3.png" alt="" />
+              <img v-lazy="() => import('@/assets/images/home/four3.png')" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
@@ -175,7 +175,7 @@
           </li>
           <li class="flex-1">
             <div class="img_box">
-              <img src="@/assets/images/home/four4.png" alt="" />
+              <img v-lazy="() => import('@/assets/images/home/four4.png')" alt="" />
             </div>
             <div class="content px-3 space-y-2">
               <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
@@ -205,11 +205,11 @@
     </div>
 
     <!-- world -->
-    <div class="world box">
+    <div class="world box" v-lazy="IpMap">
       <div class="container">
         <div class="w-full relative" style="padding-top: 39.8%">
           <div class="bg">
-            <img src="@/assets/images/home/world.webp" class="bg" alt="" />
+            <img v-lazy="() => import('@/assets/images/home/world.webp')" class="bg" alt="" />
           </div>
 
           <div class="content">
@@ -228,7 +228,7 @@
           </div>
 
           <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-            <img :src="item.icon" width="36" alt="" />
+            <img v-lazy="item.icon" width="36" alt="" />
             <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
               <div class="dot vh_center"></div>
               <span>{{ item.value }} </span>
@@ -271,7 +271,7 @@
           </li>
         </ul>
 
-        <img src="@/assets/images/home/app.png" alt="" />
+        <img v-lazy="() => import('@/assets/images/home/app.png')" alt="" />
       </div>
     </div>
 
@@ -283,10 +283,8 @@
           <p class="description text-base green">{{ t("home_spec.package_desc") }}</p>
         </div>
 
-        <div class="mt-10">
-          <KeepAlive>
-            <ProductList :tabbar="false" :pack="5"></ProductList>
-          </KeepAlive>
+        <div class="mt-10" v-lazy="() => (isProduct = true)">
+          <ProductList :tabbar="false" :pack="5" v-if="isProduct"></ProductList>
         </div>
       </div>
     </div>
@@ -294,12 +292,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, defineAsyncComponent } from "vue"
 import { platDataIndex, platDataConfig } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
-import ProductList from "../components/product_list/product_list.vue"
-import { useRouter, useRoute } from "vue-router"
+import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 // import { ElMessage, ElNotification, ElMessageBox } from "element-plus"
 import Message from "@/components/message/message.js"
@@ -308,11 +305,16 @@ import { MoveRight, Star as StarIcon, ToggleLeft, Dot } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+import vLazy from "@/directive/lazy"
 
 const router = useRouter()
 const { t } = useI18n()
 const { en } = settingStore()
 const { token } = loginStore()
+
+// 异步组件
+const isProduct = ref(false) // 是否加载product
+const ProductList = defineAsyncComponent(() => import("../components/product_list/product_list.vue"))
 
 // 转换data为ref
 const astrict = ref({
@@ -332,17 +334,6 @@ const direction = ref("右")
 const merchantTime = ref(null)
 const isgift = ref(false)
 const isAward = ref(false)
-
-// 视频加载完成
-const startLoadVideo = ref(false)
-function videoLoaded(e) {
-  e.target.style.opacity = 1
-}
-function bgLoaded() {
-  startLoadVideo.value = true
-}
-
-// 转换computed
 
 // 转换methods
 const getDataConfig = async function () {
@@ -455,11 +446,11 @@ function scroll() {
 }
 
 // 转换mounted
-onMounted(() => {
-  // scroll()
-  getDataConfig()
-  IpMap()
-})
+// onMounted(() => {
+// scroll()
+// getDataConfig()
+// IpMap()
+// })
 </script>
 
 <style lang="less" scoped>

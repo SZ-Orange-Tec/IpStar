@@ -39,18 +39,18 @@
     </div>
 
     <div class="column_center pay">
-      <img src="@/assets/images/pricing/pay.png" alt="" />
+      <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" />
       <p class="primary_text">{{ t("pricing_spec.payment") }}</p>
       <div class="column_center scroll w-full">
-        <img src="@/assets/images/pricing/scroll.png" width="28" alt="" />
+        <img v-lazy="() => import('@/assets/images/pricing/scroll.png')" width="28" alt="" />
       </div>
     </div>
 
-    <div class="world box">
+    <div class="world box" v-lazy="IpMap">
       <div class="container">
         <div class="w-full relative" style="padding-top: 39.8%">
           <div class="bg">
-            <img src="@/assets/images/home/world.webp" class="bg" alt="" />
+            <img v-lazy="() => import('@/assets/images/home/world.webp')" class="bg" alt="" />
           </div>
 
           <div class="content">
@@ -69,7 +69,7 @@
           </div>
 
           <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-            <img :src="item.icon" width="36" alt="" />
+            <img v-lazy="item.icon" width="36" alt="" />
             <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
               <div class="dot vh_center"></div>
               <span>{{ item.value }} </span>
@@ -79,41 +79,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="box split payment">
-      <div class="container column_center">
-        <div class="w-full relative column_center space-y-5">
-          <div class="flex space-x-10">
-            <img src="../../../assets/pc_img/pricing_img/Paypal.png" alt="" />
-            <img src="../../../assets/pc_img/pricing_img/Visa.png" alt="" />
-            <img src="../../../assets/pc_img/pricing_img/yinlian.png" alt="" />
-            <img src="../../../assets/pc_img/pricing_img/mastercard.png" alt="" />
-            <img src="../../../assets/pc_img/pricing_img/USDT.png" alt="" />
-          </div>
-          <h1>{{ t("pricing_spec.payment") }}</h1>
-
-          <div class="trans"></div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div class="box country">
-      <div class="container">
-        <div class="column_center">
-          <p class="text-3xl">{{ t("pricing_spec.popular") }}</p>
-          <ul class="gird">
-            <li v-for="(item, index) in areaList" :key="index" class="v_center space-x-3">
-              <img :src="item.imgUrl" alt="" width="47" />
-              <div class="text">
-                <p>{{ item.p }}</p>
-                <span>{{ item.span }}</span>
-              </div>
-            </li>
-          </ul>
-          <p @click="moreCountry" class="pointer" v-html="t('pricing_spec.support')"></p>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -127,6 +92,8 @@ import ProductList from "../components/product_list/product_list.vue"
 import Message from "@/components/message/message"
 import settingStore from "@/store/setting"
 import { roundToDecimal } from "@/utils/tools"
+import vLazy from "@/directive/lazy"
+
 const { t } = useI18n()
 
 const router = useRouter()
@@ -220,7 +187,7 @@ function bgLoaded(e) {
 
 onMounted(() => {
   computeTop()
-  IpMap()
+  // IpMap()
   window.addEventListener("resize", computeTop)
 })
 

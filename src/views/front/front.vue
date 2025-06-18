@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-home">
+  <div>
     <Header />
 
     <router-view />
@@ -35,5 +35,5 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import url("./front.less");
+// @import url("./front.less");
 </style>
