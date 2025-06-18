@@ -7,6 +7,9 @@ export default {
   Reset: "重置",
   Back: "返回",
   Re_send: "重新发送",
+  Forgot_password: "忘记密码",
+  Confirm: "确认",
+  Logging_in: "正在登录",
 
   Home: "首页",
 
@@ -16,6 +19,7 @@ export default {
     label2: "输入以下信息",
     label3: '验证码已发送至"{email}"',
     label4: "设置您的登录密码",
+    label5: "请您的确认邮箱",
 
     your: "登录您的",
   },

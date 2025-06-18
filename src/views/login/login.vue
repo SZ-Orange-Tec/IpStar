@@ -1,20 +1,6 @@
 <template>
   <div class="login vh_center">
     <div class="background">
-      <!-- <img class="bck" src="@/assets/images/login/video_bck.webp" @load="bgLoaded" alt="" />
-      <video
-        v-if="startLoadVideo"
-        type="video/mp4"
-        poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
-        autoplay
-        loop
-        muted
-        playsinline
-        class="bck"
-        src="https://websites.godaddy.com/categories/v4/videos/raw/video/uA41GmyyG8IMaxXdb"
-        style="opacity: 0"
-        @canplaythrough="videoLoaded"
-      ></video> -->
       <StarPlay />
     </div>
 
@@ -31,10 +17,20 @@
           @updateCaptcha="getGraphicCode"
           @next="next"
           @back="back"
+          @forget="status = 'forget_email'"
           v-else-if="status === 'password'"
         />
-        <VerifyCode v-model="code" :account="account" @next="next" @back="back" v-else-if="status === 'code'" />
-        <ResetPassword v-model="password" @next="next" v-else-if="status === 'reset'" />
+        <VerifyCode v-model="code" :account="account" @next="next" @back="back" v-else-if="status === 'code' || status === 'forget_code'" />
+        <ResetPassword v-model="password" @next="next" @back="back" v-else-if="status === 'reset' || status === 'forget_reset'" />
+
+        <ForgetPassword v-model="account" @next="next" @back="back" v-else-if="status === 'forget_email'" />
+      </div>
+
+      <div class="loading vh_center" v-if="loading">
+        <div class="column_center space-y-3">
+          <span class="ip-loading"></span>
+          <p>{{ t("Logging_in") }}</p>
+        </div>
       </div>
     </div>
 
@@ -58,6 +54,7 @@ import Account from "./components/account/index.vue"
 import Password from "./components/password/index.vue"
 import VerifyCode from "./components/code/index.vue"
 import ResetPassword from "./components/reset/index.vue"
+import ForgetPassword from "./components/forget/index.vue"
 import { checkCustomer, platCaptcha, platCustomerLogin, platCustomerRegister, platCustomerVerifycode } from "@/api/login"
 import detect from "@/utils/detect"
 import { platDataConfig } from "@/api/home"
@@ -72,6 +69,7 @@ import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import { ChevronLeft } from "lucide-vue-next"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+import { platCustomerResetpass } from "../../api/login"
 
 const { t } = useI18n()
 
@@ -89,8 +87,8 @@ const captcha = ref({
   image: "",
 })
 const code = ref("")
-const status = ref("account") // account, password, code, reset
-
+const status = ref("password") // account, password, code, reset, forget_email,forget_code,forget_reset
+const loading = ref(false)
 // 预加载后台
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
@@ -100,16 +98,6 @@ async function loadBack() {
   await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
   await import(/*webpackChunkName:'api'*/ "@/views/back/API/api.vue")
   await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
-}
-
-// 视频加载完成
-const startLoadVideo = ref(false)
-function videoLoaded(e) {
-  e.target.style.opacity = 1
-}
-function bgLoaded() {
-  startLoadVideo.value = true
-  loadBack()
 }
 
 async function getGraphicCode() {
@@ -196,6 +184,56 @@ async function next(func) {
           detect.register()
         }
         break
+      case "forget_email":
+        await platCustomerVerifycode({
+          email: account.value,
+          type: 2,
+        })
+        status.value = "forget_code"
+        // Message({
+        //   type:'success',
+        //   message:en.value?''
+        // })
+        break
+      case "forget_code":
+        status.value = "forget_reset"
+        password.value = ""
+        break
+      case "forget_reset":
+        await platCustomerResetpass({
+          email: account.value,
+          code: code.value,
+          password: password.value,
+        })
+        Message({
+          type: "success",
+          message: en.value ? "Successfully reset password" : "成功重置密码",
+        })
+        // 登录
+        loading.value = true
+        await getGraphicCode()
+        const { input, captchaId } = captcha.value
+        const { data } = await platCustomerLogin({
+          email: account.value,
+          password: password.value,
+          captcha_id: captchaId,
+          captcha_value: input,
+        })
+        localStorage.setItem("token", data.token)
+        Login(data.token)
+        getUserInfo()
+        const has = await hasRegisterAward()
+        registerAward.value = has
+        await import("@/views/back/layout.vue")
+        router.push("/overview")
+
+        Message({
+          type: "success",
+          message: en ? "Login successfully" : "登录成功",
+        })
+
+        status.value = "forget_reset"
+        break
       default:
         console.log("Error Status:", status.value)
         break
@@ -203,6 +241,7 @@ async function next(func) {
   } catch (err) {
     console.log(err.message)
   }
+  loading.value = false
   func && func()
 }
 
@@ -216,6 +255,15 @@ function back() {
       break
     case "reset":
       status.value = "code"
+      break
+    case "forget_email":
+      status.value = "password"
+      break
+    case "forget_code":
+      status.value = "forget_email"
+      break
+    case "forget_reset":
+      status.value = "forget_code"
       break
     default:
       console.log(status.value)

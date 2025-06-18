@@ -59,12 +59,13 @@
 
     .loading {
       position: absolute;
+      border-radius: 20px;
       inset: 0;
-      background: rgba(255, 255, 255, 0.8);
-      color: #fdb713;
+      background-color: hsl(var(--page-card) / 80%);
+      color: hsl(var(--foreground));
       z-index: 3;
-      .chat-loading {
-        width: 25px;
+      .ip-loading {
+        width: 20px;
       }
     }
   }

@@ -1,0 +1,67 @@
+.login_account {
+  padding-top: 36px;
+  .form {
+    // &>p{
+    //   white-space: nowrap;
+    // }
+    .input_box {
+      height: 54px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background-color: #2d2d35;
+      position: relative;
+      color:hsl(var(--foreground) / 50%);
+      input{
+        height: 100%;
+        outline: none;
+        border: none;
+        background: transparent;
+        color: hsl(var(--foreground));
+        
+        &:-webkit-autofill {
+          color: hsl(var(--foreground)) !important;
+          box-shadow:0 0 0 1000px transparent inset !important; // 颜色可以随意，这里设置的是透明色
+        }
+        &:-internal-autofill-previewed,
+        &:-internal-autofill-selected {
+          transition: background-color 5000s ease-in-out 0s !important;
+        }
+      }
+      .edit{
+        color: hsl(var(--primary) / 80%);
+        &:hover{
+          color: hsl(var(--primary));
+          text-decoration: underline;
+        }
+      }
+      &:focus-within{
+        border-color: hsl(var(--foreground) / 50%);
+      }
+    }
+  }
+  & > .btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    font-weight: 500;
+    background: linear-gradient(to right,#418bfe,#19ecaa);
+
+  }
+  & > .btn.disabled {
+    background: linear-gradient(to right,#275399,#1ba076);
+  }
+
+  .back{
+    margin-top: 48px;
+    background-color: #2d2d35;
+    height: 40px;
+    border-radius: 8px;
+    color: hsl(var(--foreground) / 80%);
+    line-height: 1;
+    &:hover{
+      background-color: #222227;
+      color: hsl(var(--foreground));
+    }
+  }
+}

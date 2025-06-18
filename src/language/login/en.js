@@ -7,6 +7,9 @@ export default {
   Reset: "Reset",
   Back: "Back",
   Re_send: "Re-send",
+  Forgot_password: "Forgot password",
+  Confirm: "Confirm",
+  Logging_in: "Logging in",
 
   Home: "Home",
 
@@ -16,6 +19,7 @@ export default {
     label2: "Enter the following information.",
     label3: 'A verification code has been sent to "{email}" , please check it.',
     label4: "Set your login password.",
+    label5: "Your confirmation email please.",
 
     your: "SIGN IN TO YOUR",
   },

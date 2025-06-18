@@ -1,6 +1,6 @@
 <template>
-  <div class="pc-login_password space-y-6">
-    <div class="form">
+  <div class="pc-login_password column space-y-6">
+    <div class="form w-full">
       <div class="w-full space-y-2">
         <p class="text-sm">{{ t("login_spec.label4") }}</p>
         <div class="v_center input_box space-x-2 px-3 transition-color">
@@ -11,6 +11,11 @@
     </div>
 
     <div class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading }">{{ t("Next") }}</div>
+
+    <div class="back v_center space-x-2 pointer px-5" @click="emit('back')">
+      <img src="@/assets/images/login/back.png" alt="back" width="18" height="18" />
+      <span>{{ t("Back") }}</span>
+    </div>
   </div>
 </template>
 
@@ -19,6 +24,7 @@ import { ref, computed, onMounted, toRefs } from "vue"
 import Message from "@/components/message/message"
 import settingsStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
+import { Lock } from "lucide-vue-next"
 
 const { t } = useI18n()
 
@@ -29,7 +35,7 @@ const props = defineProps({
 })
 const { modelValue } = toRefs(props)
 
-const emit = defineEmits(["update:modelValue", "next"])
+const emit = defineEmits(["update:modelValue", "next", "back"])
 
 const btnLoading = ref(false)
 const passwordRef = ref(null)

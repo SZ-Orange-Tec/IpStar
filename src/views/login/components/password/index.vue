@@ -9,14 +9,17 @@
         </div>
       </div>
 
-      <div class="w-full flex space-x-3">
-        <div class="flex-1 v_center input_box space-x-2 px-3 transition-color">
-          <ShieldCheck :size="18" class="flex-shrink-0 icon" />
-          <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
+      <div class="w-full space-y-2">
+        <div class="w-full flex space-x-3">
+          <div class="flex-1 v_center input_box space-x-2 px-3 transition-color">
+            <ShieldCheck :size="18" class="flex-shrink-0 icon" />
+            <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
+          </div>
+          <div class="image flex-shink-0" style="height: 52px">
+            <img :src="image" class="image" height="52" alt="graphic code" @click="emit('updateCaptcha')" />
+          </div>
         </div>
-        <div class="image flex-shink-0" style="height: 52px">
-          <img :src="image" class="image" height="52" alt="graphic code" @click="emit('updateCaptcha')" />
-        </div>
+        <IpButton type="link" class="resend text-sm" @click="emit('forget')"> {{ t("Forgot_password") }} ?</IpButton>
       </div>
     </div>
 
@@ -31,6 +34,7 @@
 
 <script setup>
 import IpInput from "@/components/input/input.vue"
+import IpButton from "@/components/button/button.vue"
 import Message from "@/components/message/message"
 import settingsStore from "@/store/setting"
 import { computed, onMounted, ref, toRefs } from "vue"
@@ -48,7 +52,7 @@ const props = defineProps({
   image: String,
 })
 const { password, input, captchaId, image } = toRefs(props)
-const emit = defineEmits(["next", "updateCaptcha", "update:password", "update:input", "back"])
+const emit = defineEmits(["next", "updateCaptcha", "update:password", "update:input", "back", "forget"])
 
 const pwd = computed({
   get() {
