@@ -1,6 +1,8 @@
 export default {
   All: "All",
   click_here_to_download: "click here to download",
+  Back: "Back",
+  Menu: "Menu",
 
   android_spec: {
     _1_1_title: "Integrate IpStar on Android",

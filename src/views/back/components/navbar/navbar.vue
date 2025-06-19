@@ -13,7 +13,10 @@
         </template>
         <template #menu>
           <ul class="menu p-2 text-sm whitespace-nowrap">
-            <li @click="jumpPath('/home')" class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2">{{ t("Home") }}</li>
+            <li @click="jumpPath('/home')" class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2">
+              <House :size="16" />
+              <p>{{ t("Home") }}</p>
+            </li>
             <li class="menu-split"></li>
             <li
               v-for="item in menuData"
@@ -56,7 +59,7 @@
 </template>
 
 <script setup>
-import { ClipboardList, FileQuestion, Menu, Settings, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck } from "lucide-vue-next"
+import { ClipboardList, FileQuestion, House, Menu, Settings, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import { computed } from "vue"
 import { useRoute, useRouter } from "vue-router"

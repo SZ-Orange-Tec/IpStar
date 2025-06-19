@@ -19,38 +19,52 @@
     background-color: hsl(var(--layout-background));
     background-color: hsl(var(--foreground));
     overflow: auto;
+    color: hsl(var(--background));
+
+    .form{
+      width: 100%;
+      .fix{
+        width: 25rem;
+        @media screen and (max-width:680px) {
+          width: 100%;
+        }
+      }
+    }
     
     &>.tab_content {
       width: 100%;
       .table_box{
-      :deep(.el-table){
-        max-height: 100%;
-        border-radius: 8px;
-        thead{
-          .el-table__cell{
-            background-color: hsl(var(--primary));
-            .cell{
-              color: hsl(var(--foreground));
-            }
-          }
-
-        }
-        tbody{
-          &>tr:nth-child(even){
+        :deep(.el-table){
+          max-height: 100%;
+          border-radius: 8px;
+          thead{
             .el-table__cell{
-              // background-color: hsl(var(--primary) / 10%);
-              // background-color: #f0f9ff;
-              background-color: #eff6ff;
+              background-color: hsl(var(--primary));
+              .cell{
+                color: hsl(var(--foreground));
+              }
+            }
+
+          }
+          tbody{
+            &>tr:nth-child(even){
+              .el-table__cell{
+                // background-color: hsl(var(--primary) / 10%);
+                // background-color: #f0f9ff;
+                background-color: #eff6ff;
+              }
             }
           }
         }
       }
     }
-    }
   
     &>.tab_content:nth-child(1) {
       box-sizing: border-box;
       padding: 36px 58px 0px 58px;
+      @media screen and (max-width:768px) {
+        padding: 1rem 0;
+      }
   
       &>.headPortrait {
         width: 100%;
@@ -201,6 +215,9 @@
       position: relative;
       padding: 30px 56px 0px 56px;
       box-sizing: border-box;
+      @media screen and (max-width:768px) {
+        padding: 1rem 0;
+      }
   
       &>.el-button {
         width: 108px;

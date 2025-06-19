@@ -3,9 +3,9 @@
     <div class="card w-full">
       <!-- 计数 -->
       <h4>{{ t("Count") }}</h4>
-      <div class="countbox">
-        <div class="count">
-          <div class="process" ref="process" @mousedown="clickCount">
+      <div class="countbox column gap-3 sm:flex">
+        <div class="count w-full">
+          <div class="process w-full" ref="process" @mousedown="clickCount">
             <div class="percent" :style="{ width: percentWidth + '%' }">
               <!-- <el-tooltip :content="count+''" placement="top" :open-delay="200"> -->
               <div class="bar" @mousedown.stop="moveStart"></div>
@@ -23,7 +23,7 @@
       </div>
 
       <!-- 表单 -->
-      <el-form :inline="true" :model="formInline" label-position="top" class="formInline w-full">
+      <el-form :model="formInline" label-position="top" class="grid grid-cols-2 md:grid-cols-4 w-full form">
         <el-form-item :label="t('Country')">
           <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
             <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
@@ -57,12 +57,12 @@
 
       <!-- 网址 -->
       <p>{{ t("api_spec.url") }} {{ t("api_spec.base") }}</p>
-      <div class="website v_center w-full space-x-5">
-        <div class="v_center flex-1">
-          <el-input class="flex-1" v-model="url" :placeholder="t('api_spec.placeholder')" style="height: 40px"></el-input>
+      <div class="website column md:v_center w-full gap-3">
+        <el-input class="flex-1" v-model="url" :placeholder="t('api_spec.placeholder')" style="height: 40px"></el-input>
+        <div class="space-x-3">
           <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ t("Copy_link") }}</el-button>
+          <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ t("Open_link") }}</el-button>
         </div>
-        <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ t("Open_link") }}</el-button>
       </div>
       <div class="tip">
         <div class="flex-shrink-0">{{ t("Note") }}:</div>

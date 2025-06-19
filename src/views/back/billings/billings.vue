@@ -10,19 +10,19 @@
       <!-- 购买订单 -->
       <div class="flex-1 w-full table_box">
         <el-table :data="tableData">
-          <el-table-column prop="order" :label="$t('Order')" width="180"></el-table-column>
-          <el-table-column prop="createTime" :label="$t('Place_order_time')"></el-table-column>
-          <el-table-column prop="payTime" :label="$t('Payment_time')"></el-table-column>
-          <el-table-column prop="days" :label="$t('Validity_period')"></el-table-column>
-          <el-table-column prop="cost" :label="$t('Cost')"></el-table-column>
-          <el-table-column prop="model" :label="$t('Products')"></el-table-column>
-          <el-table-column prop="contain" :label="$t('Contain')"></el-table-column>
-          <el-table-column prop="payment" :label="$t('Payment')">
+          <el-table-column prop="order" :label="$t('Order')" min-width="200"></el-table-column>
+          <el-table-column prop="createTime" :label="$t('Place_order_time')" min-width="200"></el-table-column>
+          <el-table-column prop="payTime" :label="$t('Payment_time')" min-width="200"></el-table-column>
+          <el-table-column prop="days" :label="$t('Validity_period')" min-width="140"></el-table-column>
+          <el-table-column prop="cost" :label="$t('Cost')" min-width="200"></el-table-column>
+          <el-table-column prop="model" :label="$t('Products')" min-width="100"></el-table-column>
+          <el-table-column prop="contain" :label="$t('Contain')" min-width="100"></el-table-column>
+          <el-table-column prop="payment" :label="$t('Payment')" min-width="100">
             <template #default="scope">
               <p :class="scope.row.payment.class">{{ scope.row.payment.title }}</p>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('Operation')">
+          <el-table-column :label="$t('Operation')" min-width="100">
             <template #default="scope">
               <ip-button :data-index="scope.$index" type="link" class="px-3 h-8" @click="toPay">{{ $t("Pay") }}</ip-button>
             </template>

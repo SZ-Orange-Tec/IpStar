@@ -1,7 +1,7 @@
 <template>
   <div class="pc-docs_help h-full" @click="dom">
     <!-- 索引栏 -->
-    <div v-show="isPurchase" class="docs_help_sidebar">
+    <div v-show="isPurchase" class="docs_help_sidebar hidden md:block">
       <ul class="document_bar">
         <li v-for="(item, index) in column" :key="index" @click="jump(item.id)">
           <p :class="{ h: item.type === 'title', color: activeStep === item.id }">{{ item.text }}</p>
@@ -17,8 +17,14 @@
     <div class="container" ref="container">
       <div class="for" v-for="(item, index) in APIARR" :key="index">
         <h3 v-if="item.titleType === 'h3'" :id="item.id">{{ item.title }}</h3>
-        <p :class="{ color: item.pIdx === idx }" v-show="item.type === 'bigParagraph'" v-for="(i, idx) in item.text" :key="idx">
-          {{ i }}
+        <p
+          :class="{ color: item.pIdx === idx }"
+          class="column md:flex"
+          v-show="item.type === 'bigParagraph'"
+          v-for="(i, idx) in item.text"
+          :key="idx"
+        >
+          <span class="whitespace-nowrap">{{ i }}</span>
           <template v-if="item.aIdx === idx">
             <a href="javascript:;" v-if="isPurchase">{{ item.a[idx] }}</a>
             <a href="javascript:;" v-if="!isPurchase"> http://***/v1/</a>

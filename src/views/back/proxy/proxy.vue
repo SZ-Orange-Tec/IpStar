@@ -6,10 +6,10 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 p-5">
-      <div class="space-y-5 h-full column" v-if="is_purchase">
-        <div class="card column w-full">
-          <div class="filter">
+    <div class="w-full main flex-1">
+      <div class="space-y-5 h-full" v-if="is_purchase">
+        <div class="card column">
+          <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
             <div class="column space-y-2">
               <p class="text-sm font-medium">{{ t("Country") }}</p>
               <el-select
@@ -18,7 +18,7 @@
                 :filter-method="dataFilter"
                 @visible-change="changeCountry"
                 :placeholder="t('Country')"
-                style="width: 232px"
+                style="max-width: 232px"
               >
                 <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
                   <div>
@@ -56,13 +56,13 @@
                 placeholder="The maximum number is 500"
                 v-model.trim="countVal"
                 @input="countChange"
-                style="width: 232px"
+                style="max-width: 232px"
               ></el-input>
             </div>
 
             <div class="column space-y-2">
-              <p class="text-sm font-medium" style="height: 20px"></p>
-              <ip-button @click="generate" :loading="btnLoading" class="px-10 h-10">
+              <p class="text-sm font-medium hidden md:block" style="height: 20px"></p>
+              <ip-button @click="generate" :loading="btnLoading" class="px-5 h-8 text-sm">
                 <div class="v_center space-x-2">
                   <span class="ip-loading" v-if="btnLoading"></span>
                   <p>{{ t("Extract") }}</p>
@@ -74,8 +74,8 @@
 
         <!-- <div class="line w-full"></div> -->
 
-        <div class="card w-full space-y-4 flex-1">
-          <div class="v_center space-x-5 text-sm w-full">
+        <div class="card space-y-4 w-full">
+          <div class="v_center space-x-5 text-sm w-full whitespace-nowrap">
             <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8 font-medium">
               <div class="space-x-2 v_center">
                 <ArrowLeftRight :size="18" />
@@ -85,14 +85,14 @@
             <ip-button type="border" @click="copy" class="px-5 h-8 font-medium">{{ t("Copy_to_clipboard") }}</ip-button>
           </div>
 
-          <p class="text-sm v_center space-x-2 w-full">
+          <p class="text-sm space-x-2 w-full">
             <span>{{ t("proxy_spec.list_tip.front") }}</span>
-            <IpButton type="link" @click="goToDocument">{{ t("proxy_spec.list_tip.btn") }}</IpButton>
+            <span @click="goToDocument" class="primary_text pointer">{{ t("proxy_spec.list_tip.btn") }}</span>
             <span>{{ t("proxy_spec.list_tip.back") }}</span>
           </p>
 
           <!-- 搜索内容显示区 -->
-          <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt">
+          <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt" style="min-height: 455px">
             <p class="tip">{{ t("Server") }} : {{ t("Port") }} : {{ t("User") }} : {{ t("Password") }}</p>
             <div class="space-y-3">
               <p v-for="(item, index) in content" :key="index">{{ item }}</p>
@@ -100,22 +100,22 @@
           </div>
 
           <!-- 表格 -->
-          <div class="table w-full" v-else>
+          <div class="table_box w-full" v-else>
             <el-table class="w-full" :data="tableData" height="455">
-              <el-table-column prop="server" :label="t('Server')"></el-table-column>
-              <el-table-column prop="port" :label="t('Port')"></el-table-column>
-              <el-table-column prop="user" :label="t('User')"></el-table-column>
-              <el-table-column prop="password" :label="t('Password')"></el-table-column>
+              <el-table-column prop="server" :label="t('Server')" min-width="160"></el-table-column>
+              <el-table-column prop="port" :label="t('Port')" min-width="100"></el-table-column>
+              <el-table-column prop="user" :label="t('User')" min-width="300"></el-table-column>
+              <el-table-column prop="password" :label="t('Password')" min-width="140"></el-table-column>
               <template #append>
                 <div class="text-center">{{ t("No_data") }}</div>
               </template>
             </el-table>
           </div>
 
-          <p class="v_center space-x-2 text-sm" v-show="is_purchase">
-            <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" />
+          <p class="space-x-2 text-sm" v-show="is_purchase">
+            <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" style="display: inline-block" />
             <span>{{ t("proxy_spec.api_tip.front") }}</span>
-            <IpButton type="link" @click="goToDocument">{{ t("proxy_spec.api_tip.btn") }}</IpButton>
+            <span class="primary_text pointer" @click="goToDocument">{{ t("proxy_spec.api_tip.btn") }}</span>
           </p>
         </div>
       </div>

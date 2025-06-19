@@ -77,7 +77,7 @@
           <ul class="column_center !items-stretch gap-5 md:v_center">
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p class="whitespace-pre-wrap sm:whitespace-nowrap">{{ t("home_spec.adv1") }}</p>
+              <p class="whitespace-pre-wrap sm:whitespace-normal">{{ t("home_spec.adv1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />

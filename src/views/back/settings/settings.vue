@@ -11,7 +11,7 @@
     </NavBar>
 
     <div class="w-full main flex-1">
-      <div class="tab_content" v-show="!idx">
+      <div class="tab_content space-y-5" v-show="!idx">
         <!-- 头像 -->
         <div class="headPortrait space-x-5">
           <div class="img_head">
@@ -22,52 +22,55 @@
           </ip-button>
         </div>
         <!-- 用户信息 -->
-        <div class="user_info">
-          <div class="name_email">
-            <div class="name">
+        <div class="form space-y-5">
+          <div class="fix flex gap-5">
+            <div class="space-y-2">
               <p>User ID</p>
               <el-input placeholder="Name" readonly v-model="userInfo.cuscode"></el-input>
             </div>
-            <div class="email">
+            <div class="space-y-2">
               <p>Name</p>
               <el-input placeholder="E-mail" readonly v-model="userInfo.username"></el-input>
             </div>
           </div>
-          <div class="api_key">
-            <div class="column">
-              <p>E-mail</p>
-              <div class="input">
-                <el-input readonly v-model="userInfo.email" />
-              </div>
-            </div>
-            <div class="column">
-              <p>API Key</p>
-              <div class="input">
+          <div class="fix space-y-2">
+            <p>E-mail</p>
+            <el-input readonly v-model="userInfo.email" />
+          </div>
+          <div class="space-y-2">
+            <p>API Key</p>
+            <div class="column md:flex gap-2">
+              <div class="fix">
                 <el-input readonly v-model="userInfo.api_key" />
+              </div>
+              <div class="flex space-x-2">
                 <el-button class="color" @click="copyKey">{{ $t("Copy") }}</el-button>
-                <el-button @click="apiKeyUpdate">{{ $t("Regenerate") }}</el-button>
+                <el-button type="primary" @click="apiKeyUpdate">{{ $t("Regenerate") }}</el-button>
                 <el-popover placement="top" width="300" :offset="100" trigger="hover">
                   <div>
                     <p>{{ $t("settings_spec.popover") }}</p>
                   </div>
                   <template #reference>
-                    <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
+                    <img src="../../../assets/pc_img/layout_img/question mark.png" style="height: 20px !important" />
                   </template>
                 </el-popover>
               </div>
             </div>
-            <div class="column">
-              <p>Proxy User</p>
-              <div class="input">
+            <div class="flex w-full space-x-3"></div>
+          </div>
+          <div class="space-y-2">
+            <p>Proxy User</p>
+            <div class="column md:flex gap-2">
+              <div class="fix">
                 <el-input readonly v-model="userInfo.proxy_user" />
-                <el-button class="color" @click="userUpdate">{{ $t("Regenerate") }}</el-button>
               </div>
+              <el-button class="color" @click="userUpdate">{{ $t("Regenerate") }}</el-button>
             </div>
-            <div class="column">
-              <p>Proxy Password</p>
-              <div class="input">
-                <el-input readonly v-model="userInfo.proxy_pass" />
-              </div>
+          </div>
+          <div class="space-y-2">
+            <p>Proxy Password</p>
+            <div class="fix">
+              <el-input readonly v-model="userInfo.proxy_pass" />
             </div>
           </div>
         </div>
@@ -112,7 +115,7 @@
 
     <!-- content -->
     <!-- 弹出层 -->
-    <el-dialog class="min_dialog" v-model="isShow" width="30%" @close="handleClose">
+    <el-dialog class="min_dialog" v-model="isShow" width="350px" @close="handleClose">
       <div class="content_password">
         <!-- 表单验证 -->
         <!-- 修改密码 -->
@@ -146,7 +149,7 @@
       </template>
     </el-dialog>
     <!-- 验证密码弹出层 -->
-    <el-dialog :title="$t('Prompts')" v-model="isDialog" width="22%" :before-close="closeIsDialog" class="passwordDialog">
+    <el-dialog :title="$t('Prompts')" v-model="isDialog" width="350px" :before-close="closeIsDialog" class="passwordDialog">
       <el-form label-position="top" :model="passwordFrom" :rules="passwordRules" ref="passwordForm">
         <el-form-item :label="$t('settings_spec.verify')">
           <el-input show-password v-model="passwordFrom.password" :placeholder="$t('settings_spec.input_password')"></el-input>

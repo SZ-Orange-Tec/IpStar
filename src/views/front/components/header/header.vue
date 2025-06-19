@@ -6,7 +6,7 @@
       </div>
 
       <div class="v_center h-full space-x-3">
-        <ul class="navigator hidden md:v_center text-base px-3 h-full" @mouseenter="loadFront">
+        <ul class="navigator hidden md:v_center text-base px-3 h-full whitespace-nowrap" @mouseenter="loadFront">
           <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
             {{ $t("Home") }}
           </li>

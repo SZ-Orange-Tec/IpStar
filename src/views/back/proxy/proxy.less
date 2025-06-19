@@ -10,17 +10,14 @@
     background-color: hsl(var(--layout-background));
     overflow: auto;
 
+    .primary_text{
+      color: hsl(var(--primary));
+    }
     .card{
       background-color: hsl(var(--foreground));
       color: hsl(var(--background) / 70%);
       border-radius: 8px;
       padding: 16px;
-    }
-    .filter{
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      grid-template-rows: repeat(2 ,1fr);
-      gap: 12px 40px;
     }
 
     .line {
@@ -42,7 +39,7 @@
       }
     }
 
-    .table{
+    .table_box{
       max-width: 100%;
       :deep(.el-table){
         width: 100%;

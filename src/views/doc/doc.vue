@@ -1,14 +1,20 @@
 <template>
   <div class="doc flex">
-    <div class="slide flex-shrink-0 space-y-10">
+    <div class="slide flex-shrink-0 space-y-10" :class="{ expand: !isCollapse }">
       <!-- <img v-if="!isCollapse" :src="logos[0]" alt="logo" @click="$router.push('/home')" />
       <img v-else :src="logos[1]" alt="logo" @click="$router.push('/home')" class="minLogo" /> -->
-      <div class="text-2xl space-x-2 v_center">
+      <div class="text-2xl space-x-2 hidden lg:v_center">
         <ip-button type="border" icon class="h-8 w-8" @click="router.go(-1)">
           <ChevronLeft />
         </ip-button>
         <!-- <span>IPSTAR</span> -->
         <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
+      </div>
+
+      <div class="flex lg:hidden" style="justify-content: flex-end; margin-top: 0">
+        <IpButton type="border" class="w-8 h-8" @click="isCollapse = true">
+          <CloseIcon :size="16" color="hsl(var(--foreground))" />
+        </IpButton>
       </div>
 
       <div class="menu space-y-2" ref="menuRef">
@@ -48,11 +54,28 @@
       </div>
     </div>
 
-    <!-- 文本区 -->
-    <div class="text_content" v-if="loaded">
-      <GettingText v-if="isDocument === 'Getting'" />
-      <FAQText v-else-if="isDocument === 'FAQ'" />
-      <HelpText v-else-if="isDocument === 'Help'" :name="helpName" :sonName="sonName" />
+    <div class="flex-1 h-full column relative" style="overflow: auto">
+      <div class="header w-full v_center h-10 px-3 block lg:hidden space-x-3">
+        <ip-button type="border" class="h-8 px-3" @click="router.go(-1)">
+          <div class="v_center space-x-2 text-sm">
+            <ChevronLeft :size="16" />
+            <span class="whitespace-nowrap">{{ t("Back") }}</span>
+          </div>
+        </ip-button>
+
+        <ip-button type="border" class="px-3 h-8" @click="isCollapse = false">
+          <div class="v_center space-x-2 text-sm">
+            <Menu :size="16" />
+            <span class="whitespace-nowrap">{{ t("Menu") }}</span>
+          </div>
+        </ip-button>
+      </div>
+      <!-- 文本区 -->
+      <div class="text_content flex-1" v-if="loaded">
+        <GettingText v-if="isDocument === 'Getting'" />
+        <FAQText v-else-if="isDocument === 'FAQ'" />
+        <HelpText v-else-if="isDocument === 'Help'" :name="helpName" :sonName="sonName" />
+      </div>
     </div>
   </div>
 </template>
@@ -63,7 +86,7 @@ import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
-import { ChevronRight, ChevronLeft } from "lucide-vue-next"
+import { ChevronRight, ChevronLeft, Menu, X as CloseIcon } from "lucide-vue-next"
 import anime from "animejs/lib/anime.es"
 import IpButton from "@/components/button/button.vue"
 import { typeOf } from "../../utils/tools"
@@ -94,7 +117,7 @@ const first = ref(true)
 // 菜单
 const menuData = ref([])
 const menuRef = ref(null)
-const isCollapse = ref(false) // 菜单栏是否折叠
+const isCollapse = ref(true) // 菜单栏是否折叠
 
 function toggleMenu(index) {
   // 切换菜单展开

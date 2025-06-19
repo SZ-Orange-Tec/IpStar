@@ -2,7 +2,7 @@
   <div class="help relative">
     <div class="box">
       <div class="container column_center space-y-10">
-        <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-3xl title">
+        <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-lg sm:text-3xl title">
           <template #title>
             <span class="primary_text">{{ t("help_spec.title_slot") }}</span>
           </template>

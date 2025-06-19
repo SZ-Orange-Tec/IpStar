@@ -1,6 +1,9 @@
 export default {
   All: "全部",
   click_here_to_download: "请按此处下载",
+  Back: "返回",
+  Menu: "菜单",
+
   android_spec: {
     _1_1_title: "Android集成IpStar",
     _1_1_des: "在您的Android设备上安装并打开IpStar。",

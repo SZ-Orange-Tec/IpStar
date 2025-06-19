@@ -5,14 +5,14 @@
     <div class="box price relative">
       <div class="container">
         <div class="column_center space-y-10">
-          <div class="text-3xl column_center space-y-5">
+          <div class="text-lg sm:text-3xl column_center space-y-5">
             <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title">
               <template #price>
                 <span class="primary_text">{{ t("pricing_spec.des_slot") }}</span>
               </template>
             </i18n-t>
 
-            <span class="text-3xl description">IPs: 50M+/day</span>
+            <span class="text-lg sm:text-3xl description">IPs: 50M+/day</span>
           </div>
 
           <div class="price_main w-full relative" ref="product">
