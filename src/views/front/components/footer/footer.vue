@@ -22,11 +22,11 @@
 
     <!-- serve -->
     <div class="serve box">
-      <div class="container flex">
-        <div class="list flex-1 column_center">
+      <div class="container column md:flex !items-stretch flex-wrap">
+        <div class="list flex-1 column md:column_center whitespace-nowrap">
           <div class="service column space-y-5">
             <p class="text-lg">{{ t("Services") }}</p>
-            <ul class="column space-y-2 text-sm">
+            <ul class="flex md:column gap-2 flex-wrap text-sm">
               <li class="btn">
                 <a href="javascript:;" @click="goTologin">{{ t("footer_spec.Residential_Proxies") }}</a>
               </li>
@@ -46,7 +46,9 @@
           </div>
         </div>
 
-        <div class="list flex-2 between">
+        <div class="line"></div>
+
+        <div class="list flex-1 between !items-stretch space-x-10 whitespace-nowrap">
           <div class="column space-y-5">
             <p class="text-lg">{{ t("Help_center") }}</p>
             <ul class="column space-y-2 text-sm">
@@ -80,17 +82,19 @@
           </div>
         </div>
 
-        <div class="list flex-2 column space-y-5">
+        <div class="line"></div>
+
+        <div class="list flex-1 column space-y-5">
           <p class="text-lg">{{ t("Connect_with_us") }}</p>
           <div class="column space-y-2">
             <div class="v_center copy_btn">
-              <div class="px-2">Email: support@ipstar.io</div>
+              <div class="px-2 whitespace-nowrap">Email: support@ipstar.io</div>
               <IpButton type="primary" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
             </div>
 
-            <IpButton type="ghost" circle class="w-10 h-10" @click="toTwitter">
+            <!-- <IpButton type="ghost" circle class="w-10 h-10" @click="toTwitter">
               <Twitter :size="16" color="hsl(var(--primary))" />
-            </IpButton>
+            </IpButton> -->
           </div>
 
           <p class="text-lg">{{ t("footer_spec.Legal") }}</p>

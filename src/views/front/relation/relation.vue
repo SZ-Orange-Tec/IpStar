@@ -53,9 +53,9 @@
 
             <div class="way flex-1 vh_center space-x-2">
               <span>{{ t("Follow_us_on") }}</span>
-              <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
+              <!-- <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
                 <Twitter :size="20" color="hsl(var(--primary))" :stroke-width="2" />
-              </IpButton>
+              </IpButton> -->
             </div>
           </div>
         </div>

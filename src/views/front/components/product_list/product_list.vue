@@ -125,7 +125,7 @@
       <!-- 骨架屏 -->
       <div v-else class="priceList">
         <ul class="flex space-x-3">
-          <li class="" v-for="item in 6" :key="item">
+          <li class="skeletion_box" v-for="item in 6" :key="item">
             <div class="card skeletion space-y-5">
               <div style="width: 40%"></div>
               <div style="width: 100%" v-for="col in 12" :key="col"></div>

@@ -30,6 +30,6 @@ export default {
     Legal: "法律提示",
     tips: "IpStar 代理服务不支持直接在中国境内请求，用户使用 IpStar 服务必须遵守您所在地的法律，一旦发现风险行为，我们可能会中断服务且不退还任何费用。",
 
-    copyright: "© 版权所有 2022 Sunstack Limited。| 保留一切权利",
+    copyright: "© 版权所有 2025 IpFlare。| 保留一切权利",
   },
 }

@@ -6,7 +6,7 @@
       </div>
 
       <div class="v_center h-full space-x-3">
-        <ul class="navigator v_center text-base px-3 h-full" @mouseenter="loadFront">
+        <ul class="navigator hidden md:v_center text-base px-3 h-full" @mouseenter="loadFront">
           <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
             {{ $t("Home") }}
           </li>
@@ -20,6 +20,45 @@
             {{ $t("Help") }}
           </li>
         </ul>
+        <DropDown placement="bottom" class="block md:hidden" @onChange="loadFront">
+          <template #label="{ open }">
+            <IpButton :class="{ open: open }" type="border" class="w-10 h-10">
+              <Menu :size="16" />
+            </IpButton>
+          </template>
+          <template #menu>
+            <ul class="menu p-2 text-sm">
+              <li
+                @click="navigate('/home')"
+                :class="{ active: activePath === '/home' }"
+                class="menu_item px-2 rounded-md pointer transition-color v_center"
+              >
+                {{ t("Home") }}
+              </li>
+              <li
+                @click="navigate('/pricing')"
+                :class="{ active: activePath === '/pricing' }"
+                class="menu_item px-2 rounded-md pointer transition-color v_center"
+              >
+                {{ t("Pricing") }}
+              </li>
+              <li
+                @click="navigate('/relation')"
+                :class="{ active: activePath === '/relation' }"
+                class="menu_item px-2 rounded-md pointer transition-color v_center"
+              >
+                {{ t("Contact") }}
+              </li>
+              <li
+                @click="navigate('/help')"
+                :class="{ active: activePath === '/help' }"
+                class="menu_item px-2 rounded-md pointer transition-color v_center"
+              >
+                {{ t("Help") }}
+              </li>
+            </ul>
+          </template>
+        </DropDown>
 
         <div class="v_center space-x-5">
           <!-- 语言 -->
@@ -77,7 +116,7 @@
 <script setup>
 import DropDown from "@/components/dropdown/dropdown.vue"
 import IpButton from "@/components/button/button.vue"
-import { CircleUser } from "lucide-vue-next"
+import { CircleUser, Menu } from "lucide-vue-next"
 import loginStore from "@/store/login"
 import settingStore from "@/store/setting"
 import { useRouter, useRoute } from "vue-router"

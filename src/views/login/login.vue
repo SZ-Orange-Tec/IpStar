@@ -87,7 +87,7 @@ const captcha = ref({
   image: "",
 })
 const code = ref("")
-const status = ref("password") // account, password, code, reset, forget_email,forget_code,forget_reset
+const status = ref("account") // account, password, code, reset, forget_email,forget_code,forget_reset
 const loading = ref(false)
 // 预加载后台
 async function loadBack() {

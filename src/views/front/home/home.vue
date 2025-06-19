@@ -3,10 +3,10 @@
     <!-- 介绍 -->
     <div class="introduce box relative">
       <div class="container column_center">
-        <div class="column_center space-y-5">
-          <i18n-t keypath="home_spec.intro_title" tag="p" scope="global" class="text-center title text-3xl font-bold">
+        <div class="column_center space-y-10">
+          <i18n-t keypath="home_spec.intro_title" tag="p" scope="global" class="text-center title text-3xl font-bold" style="line-height: 2">
             <template #primary>
-              <span class="primary_text">{{ t("home_spec.intro_title_slot") }}</span>
+              <span class="primary_text">$0.25/GB</span>
             </template>
           </i18n-t>
           <p class="text-center description">{{ t("home_spec.intro_desc") }}</p>
@@ -37,10 +37,10 @@
           </div>
         </div>
 
-        <div class="intro1 img_box">
+        <div class="intro1 img_box hidden xl:block">
           <img src="@/assets/images/home/intro1.png" />
         </div>
-        <div class="intro2 img_box space-y-4">
+        <div class="intro2 img_box space-y-4 hidden xl:block">
           <div class="v_center space-x-2">
             <img src="@/assets/images/home/intro_avatar.png" width="45" height="45" alt="" />
             <p>Noah Johnoson</p>
@@ -54,10 +54,7 @@
           <p class="text-lg title">IPStar is stable and <br />easy to use</p>
           <p class="text-xs description">"Fast speed and strong anony-<br />mity highly recommended.</p>
         </div>
-        <!-- <div class="intro2 img_box">
-          <img src="@/assets/images/home/intro2.png" />
-        </div> -->
-        <div class="intro3 img_box">
+        <div class="intro3 img_box hidden xl:block">
           <img src="@/assets/images/home/intro3.png" />
         </div>
       </div>
@@ -71,22 +68,22 @@
     <div class="advantage box split">
       <div class="container column_center">
         <div class="h-full relative">
-          <ul class="v_center space-x-10">
+          <ul class="column_center gap-5 md:v_center">
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p>{{ t("home_spec.adv1") }}</p>
+              <p class="whitespace-pre-wrap">{{ t("home_spec.adv1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p>{{ t("home_spec.adv2") }}</p>
+              <p class="whitespace-pre-wrap">{{ t("home_spec.adv2") }}</p>
             </li>
-            <li class="v_center space-x-2">
+            <!-- <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
               <p>{{ t("home_spec.adv3") }}</p>
-            </li>
+            </li> -->
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p>{{ t("home_spec.adv4") }}</p>
+              <p class="whitespace-pre-wrap">{{ t("home_spec.adv4") }}</p>
             </li>
           </ul>
 
@@ -103,7 +100,7 @@
           <span class="primary_text">IpStar</span>
         </p>
 
-        <ul class="three v_center space-x-8">
+        <ul class="three column gap-8 md:v_center">
           <li class="flex-1">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/why1.png')" />
@@ -113,7 +110,7 @@
               <p class="description text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 column_between">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/why2.png')" />
             </div>
@@ -122,7 +119,7 @@
               <p class="description text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 column_between">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/why3.png')" />
             </div>
@@ -133,7 +130,7 @@
           </li>
         </ul>
 
-        <div class="w-full between mt-16">
+        <div class="w-full column md:between mt-16">
           <div class="column">
             <div class="v_center space-x-2">
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
@@ -145,39 +142,39 @@
           <p class="description">{{ t("home_spec.instant") }}</p>
         </div>
 
-        <ul class="four v_center space-x-4">
-          <li class="flex-1">
+        <ul class="four grid grid-cols-2 md:grid-cols-4 gap-5">
+          <li class="flex-1 column">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/four1.png')" alt="" />
             </div>
-            <div class="content px-3 space-y-2">
+            <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
               <p class="title text-base">{{ t("home_spec.four1_title") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 column">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/four2.png')" alt="" />
             </div>
-            <div class="content px-3 space-y-2">
+            <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
               <p class="title text-base">{{ t("home_spec.four2_title") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 column">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/four3.png')" alt="" />
             </div>
-            <div class="content px-3 space-y-2">
+            <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
               <p class="title text-base">{{ t("home_spec.four3_title") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 column">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/four4.png')" alt="" />
             </div>
-            <div class="content px-3 space-y-2">
+            <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
               <p class="title text-base">{{ t("home_spec.four4_title") }}</p>
             </div>
@@ -244,7 +241,7 @@
       <div class="container column_center">
         <p class="title text-3xl font-bold text-center">{{ t("home_spec.app_title") }}</p>
 
-        <ul class="v_center space-x-5 mt-8" style="flex-wrap: wrap">
+        <ul class="grid grid-cols-3 md:grid-cols-6 gap-5 mt-8" style="flex-wrap: wrap">
           <li class="v_center">
             <Dot :size="30" class="green" />
             <p class="description">{{ t("home_spec.e_commerce") }}</p>

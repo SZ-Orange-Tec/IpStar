@@ -50,21 +50,23 @@
     background-color: hsl(var(--page-background));
     .container{
       padding: 64px 0;
+      // width: 100%;
       max-width: 1400px;
-      padding-left: 80px;
+      // padding-left: 80px;
+      gap: 2.5rem;
       
-      .flex-2{
-        flex: 2;
-        // margin-left: 40px;
-        // padding-left: 40px;
-        border-left: 1px solid hsl(var(--foreground) / 10%);
-      }
-      .between{
-        align-items: flex-start;
-      }
 
+      .line{
+        background-color: hsl(var(--foreground) / 10%);
+        @media screen and (max-width:786px) {
+          height: 1px;
+        }
+        @media screen and (min-width:787px) {
+          width: 1px;
+        }
+      }
       .list{
-        padding: 0 60px;
+        // padding: 0 2rem;
         ul{
           &>li{
             height: 32px;

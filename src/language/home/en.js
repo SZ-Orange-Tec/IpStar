@@ -8,10 +8,10 @@ export default {
   ...productList,
   ...paypopup,
   home_spec: {
-    intro_title: "We Offer Affordable {primary} \n Residential lP Proxy Services.",
-    intro_title_slot: "High-Quality",
+    intro_title: "Quality Residential Proxies\n Plans From {primary} & 190+ Countries",
+
     intro_desc:
-      "Our residential-proxy network consists of real user IP addresses \n which cannot be detected or blocked. The lP pool is continuously optimized and \n updated to ensure high availability of IPs and stable communication speeds.",
+      "Get high-guality residential proxies for your business.\n Our lPs are sourced from real homenetworks in over 190 \ncountries, ensuring high stability and anonymity.\n Perfect for marketresearch, ad verification, and brand protection.\n We offer flexible plans to fit your business needs",
 
     try: "Try",
     tutorials: "Tutorials",
@@ -19,31 +19,32 @@ export default {
     online: "Number of online",
     users: "users",
 
-    adv1: "Supports SOCKS5, HTTP/\nHTTPS & custom protocols.",
-    adv2: "All popular proxy\nsoftware and APPs.",
-    adv3: "Support fingerprint\nbrowsers.",
-    adv4: "Support APl quto\nextract.",
+    adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
+    adv2: "All popular proxy software and APPs.",
+    // adv3: "Support fingerprint\nbrowsers.",
+    adv4: "Support APl quto extract.",
 
     why: "Why Choose",
-    why1_title: "50M+Network lPs",
-    why1_desc: "There are more than 20 million high qualityproxy lP in the lP pool , and the pool iscontinuously updating",
+    why1_title: "50M+ Global Residential IPs",
+    why1_desc: "Experience a network of over 50 million real residential IPs from 190+countries worldwide.",
     why2_title: "Residential Proxies",
     why2_desc: "Specializing in residential IP proxies, realresidential lPs from around the world",
-    why3_title: "High-Quality Residential IPs",
-    why3_desc: "Real residential IPs from around the world, ensuring high quality and stable communication speeds.",
+    why3_title: "Premium Residential IPs",
+    why3_desc: "Delivering fast and stable connections",
     more: "There are more",
     automatic: "Automatic And \n Instant Delivery",
     instant:
       "Get instant access after payment - no waiting for account activation \n or proxies setup.supporting a variety of communication protocols,\nincludingsocks5,http https,and custom protocols",
 
-    four1_title: "Reliable Proxy Affordability",
-    four1_desc: "With our expertise and intelligent matching system, we will help you find truly reliable and cost-effective residential agents.",
-    four2_title: "Easy Integration",
-    four2_desc: "Make the connection simpler, no technicalbackground required, and easy to enable.",
-    four3_title: "Unlimited Speed & Access",
-    four3_desc: "Simple, transparent pricing-charged by trafficonly. Unlimited bandwidth, requests, regions, IPsplus a free trial.",
-    four4_title: "Quick and easyintegration",
-    four4_desc: "Sign up with email only. Our zero-code APl auto.builds request URLs-quick start, less hassle.",
+    four1_title: "Pay-As-You-Go Pricing",
+    four1_desc:
+      "Leveraging our expertise and a smart matching system, we connectyou with highly reliable, feature-rich residential proxies tailored to yourneeds and budget.",
+    four2_title: "An Intuitive Dashboard",
+    four2_desc: "Our intuitive dashboard provides simple controls and full accessmaking proxy management effortless.",
+    four3_title: "Flexible Pricing Plans",
+    four3_desc: "Pay only for what you use. A single purchase unlocks our entire global networkof 190+ countries. Start your free trial today!",
+    four4_title: "Easy Integration for Everyone",
+    four4_desc: "Easy email sign-up. Get fast, stable connections inminutes via our user-friendly dashboard or APl.",
 
     world_title: "Worldwide {primary} Proxy",
     world_title_slot: "Point to Point",
