@@ -35,7 +35,7 @@ export default {
     Number_of_country_IPs: "Number of country IPs",
     Network_Status: "Network Status",
 
-    View_More: "View_More",
+    View_More: "View More",
 
     consumption: "consumption",
     recharge: "recharge",

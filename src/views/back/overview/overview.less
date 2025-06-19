@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
+  // overflow-y: auto;
   // display: flex;
   position: relative;
   
@@ -17,13 +17,13 @@
 
     .search {
       :deep(.el-input__wrapper){
+        
         background-color: transparent;
         // border: none;
         box-shadow:none;
         cursor: pointer;
         .el-input__inner{
           color: hsl(var(--foreground) / 80%);
-        
         }
         .el-input__prefix{
           display: none;
@@ -33,13 +33,13 @@
   }
 
   .main{
-    min-height: 0;
-    border-radius: 8px;
+    // border-radius: 8px;
     // background-color: hsl(var(--foreground));
     color: hsl(var(--background));
-    overflow: auto;
+    // overflow: auto;
 
     .table_box{
+      max-height: 100%;
       :deep(.el-table){
         width: 100%;
         height: 100%;
@@ -52,6 +52,8 @@
             background-color: hsl(var(--primary));
             .cell{
               color: hsl(var(--foreground));
+              white-space: nowrap;
+              font-size: 0.75rem;
             }
           }
 
@@ -62,6 +64,7 @@
             font-size: 14px;
             .cell{
               color: hsl(var(--background) / 80%);
+              font-size: 0.75rem;
             }
           }
           &>tr:nth-child(even){
@@ -74,7 +77,6 @@
     }
 
     & > .subscribe {
-      display: flex;
       height: 100%;
       & > .echarts_left {
         flex: 8.5;
@@ -87,13 +89,9 @@
           // justify-content: space-between;
   
           & > .box {
-            flex: 1;
-            // min-width: 265px;
-            padding: 16px;
+            // padding: 16px;
             border-radius: 10px;
             background-color: #fff;
-            // background-color: hsl(var(--foreground));
-            justify-content: space-between;
   
             & > .box_top {
               align-items: flex-start;
@@ -124,21 +122,38 @@
             }
           }
         }
-  
-        & > .outflow_echart {
-          // width: 100%;
-          // height: 380px;
-          position: relative;
-          border-radius: 10px;
-          // background-color: #fff;
-          background-color: hsl(var(--foreground));
-          flex: 1;
-          min-height: 0;
-  
-          & > .myEchart {
-            width: 100%;
+
+        .echart_table{
+          .echart{
+            width: calc(calc(calc(100% - 1.25rem) / 3) * 2);
             height: 100%;
+            @media screen and (max-width:768px) {
+              width: 100%;
+              height: 60rem;
+            }
+            @media screen and (max-width:640px) {
+              width: 100%;
+              height: 40rem;
+            }
           }
+          .table_box{
+            border-radius: 0.5rem;
+            width:calc(calc(100% - 1.25rem) / 3);
+            height: 100%;
+            background-color: hsl(var(--foreground));
+            @media screen and (max-width:768px) {
+              width: 100%;
+              height: auto;
+            }
+          }
+          @media screen and (min-width:768px) {
+            flex: 1;
+            min-height: 0;
+          }
+        }
+  
+        .outflow_echart {
+          background-color: hsl(var(--foreground));
   
           & > .echart_picker {
             position: absolute;
@@ -148,21 +163,8 @@
           }
         }
   
-        & > .day_echart {
-          // width: 100%;
-          // height: 380px;
-          // margin-top: 25px;
-          border-radius: 10px;
-          position: relative;
-          // background-color: #fff;
+        .day_echart {
           background-color: hsl(var(--foreground));
-          flex: 1;
-          min-height: 0;
-  
-          & > .line_echart {
-            width: 100%;
-            height: 100%;
-          }
   
           & > .picker {
             position: absolute;
@@ -195,6 +197,7 @@
   
       & > .right {
         flex: 2.5;
+        
   
         & > .notice {
           width: 100%;
@@ -255,6 +258,7 @@
           }
         }
         & > .date_flow {
+          min-height: 0;
           width: 100%;
           border-radius: 10px;
           background-color: #fff;
@@ -297,11 +301,9 @@
       }
   
       .table_box {
-        padding: 30px;
         // background-color: #fff;
+        padding-bottom: 1.25rem;
         background-color: hsl(var(--foreground));
-        border-radius: 8px;
-        margin-top: 20px;
         .more {
           width: fit-content;
           margin-top: 12px;

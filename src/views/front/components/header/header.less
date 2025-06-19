@@ -1,8 +1,11 @@
 .header {
-  padding: 4px 40px 0;
-  height: 70px;
+  height: 4.25rem;
   background-color: hsl(var(--page-neutral));
   background-color: #1A1B23;
+  padding: 0.25rem 2.5rem 0;
+  @media screen and (max-width:680px) {
+    padding: 0.25rem 1rem 0;
+  }
 
   position: sticky;
   top: 0;
@@ -39,6 +42,11 @@
       }
     }
 
+    .menu_btn{
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  
     .menu{
       // width: 200px;
       min-width: 140px;

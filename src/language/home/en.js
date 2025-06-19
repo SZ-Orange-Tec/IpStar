@@ -19,7 +19,7 @@ export default {
     online: "Number of online",
     users: "users",
 
-    adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
+    adv1: "Supports SOCKS5, HTTP/HTTPS\n& custom protocols.",
     adv2: "All popular proxy software and APPs.",
     // adv3: "Support fingerprint\nbrowsers.",
     adv4: "Support APl quto extract.",

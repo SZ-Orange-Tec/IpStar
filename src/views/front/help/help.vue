@@ -9,7 +9,7 @@
         </i18n-t>
 
         <!-- 选项块 -->
-        <div class="select w-full space-x-10">
+        <div class="select w-full">
           <div
             class="flex-1 select-item pointer transition-color space-y-4"
             :class="{ active: index === idx }"
@@ -17,8 +17,8 @@
             :key="index"
             @click="selectBlock(index)"
           >
-            <h1 class="text-lg title">{{ item.h1 }}</h1>
-            <p class="text-sm description">{{ item.p }}</p>
+            <h1 class="text-sm lg:text-lg title">{{ item.h1 }}</h1>
+            <p class="text-xs lg:text-sm description">{{ item.p }}</p>
           </div>
         </div>
 

@@ -1,12 +1,12 @@
 <template>
   <div class="pc-layout">
     <!-- 侧边栏  -->
-    <div class="sidebar column h-full">
+    <div class="sidebar hidden lg:column h-full">
       <!-- logo -->
       <NavMenu />
     </div>
     <!-- right -->
-    <div class="main px-5">
+    <div class="main px-3 md:px-5">
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive" class="child-view"></router-view>
       </keep-alive>

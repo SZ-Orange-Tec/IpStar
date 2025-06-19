@@ -15,7 +15,7 @@
             <span class="text-3xl description">IPs: 50M+/day</span>
           </div>
 
-          <div class="price_main relative" ref="product">
+          <div class="price_main w-full relative" ref="product">
             <ProductList :tabbar="true" :pack="5"></ProductList>
 
             <img src="@/assets/images/pricing/star.png" class="float_img star" :style="{ opacity: showImg ? 1 : 0 }" width="80" height="80" alt="" />
@@ -70,7 +70,7 @@
 
           <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
             <img v-lazy="item.icon" width="36" alt="" />
-            <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
+            <div class="country-box v_center h-8 space-x-2 px-3 text-xs whitespace-nowrap">
               <div class="dot vh_center"></div>
               <span>{{ item.value }} </span>
               <span class="primary_text">IPS+</span>

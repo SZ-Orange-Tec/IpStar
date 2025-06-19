@@ -1,5 +1,5 @@
 <template>
-  <div class="login vh_center">
+  <div class="login vh_center" :style="{ height: height }">
     <div class="background">
       <StarPlay />
     </div>
@@ -41,7 +41,7 @@
           <span class="text-base">{{ t("Home") }}</span>
         </div>
       </ip-button>
-      <div class="text-3xl">
+      <div class="text-lg sm:text-3xl v_center sm:column gap-2">
         <div>{{ t("login_spec.your") }}</div>
         <div class="liner">IP STAR!</div>
       </div>
@@ -78,6 +78,8 @@ const { registerAward } = layoutStore()
 const { Login } = loginStore()
 const { getUserInfo } = userStore()
 const { en } = settingsStore()
+
+const height = window.innerHeight + "px"
 // 响应式数据
 const account = ref("")
 const password = ref("")

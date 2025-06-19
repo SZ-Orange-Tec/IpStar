@@ -10,6 +10,8 @@ import { onBeforeUnmount, onMounted, ref } from "vue"
 const canvasRef = ref(null)
 
 function play() {
+  const isMobile = window.innerWidth <= 768
+
   const canvas = canvasRef.value
   const ctx = canvas.getContext("2d")
 
@@ -19,8 +21,8 @@ function play() {
   canvas.height = h
 
   // 星空参数
-  let STAR_NUM = 600
-  let STAR_DEPTH = 1500
+  let STAR_NUM = isMobile ? 300 : 600
+  let STAR_DEPTH = isMobile ? 750 : 1500
   let STARS = []
 
   // 星云参数

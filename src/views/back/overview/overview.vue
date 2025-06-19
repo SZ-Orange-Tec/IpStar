@@ -8,7 +8,7 @@
           </ip-button>
           <span>{{ title }}</span>
           <div class="search" v-if="activeIndex === 2">
-            <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="dd.MM.yyyy" />
+            <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="dd.MM.yyyy" style="width: 8rem" />
           </div>
         </div>
       </template>
@@ -16,16 +16,13 @@
 
     <div class="w-full main flex-1">
       <!-- 我的订阅 -->
-      <div class="subscribe w-full space-x-5" v-show="activeIndex === 0">
-        <!-- left_echarts -->
-        <div class="echarts_left column space-y-5">
-          <!-- 已有&&流出 -->
-          <div class="flow space-x-5">
-            <!-- 现有流量 -->
-            <div class="box column space-y-5">
+      <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
+        <div class="echarts_left w-full column gap-5">
+          <div class="flow gap-3 md:gap-5">
+            <div class="box flex-1 column space-y-5 p-2 sm:p-4">
               <div class="box_top w-full between">
-                <h2>{{ $t("overview_spec.Residual_Traffic") }}</h2>
-                <img src="@/assets/images/overview/Gauge.png" width="48" />
+                <p class="">{{ $t("overview_spec.Residual_Traffic") }}</p>
+                <img class="hidden md:block" src="@/assets/images/overview/Gauge.png" width="36" />
                 <!-- <Gauge :size="50" color="#ffcc53" /> -->
               </div>
               <div class="box_bottom v_center">
@@ -37,33 +34,33 @@
                 </div>
               </div>
             </div>
-            <!-- 今日消耗 -->
-            <div class="box column space-y-5">
+
+            <div class="box flex-1 column space-y-5 p-2 sm:p-4">
               <div class="box_top w-full between">
-                <h2>{{ $t("overview_spec.Consumption_Today") }}</h2>
-                <img src="@/assets/images/overview/control.png" width="48" />
+                <p>{{ $t("overview_spec.Consumption_Today") }}</p>
+                <img class="hidden md:block" src="@/assets/images/overview/control.png" width="36" />
                 <!-- <SlidersVertical :size="40" color="hsl(var(--major))" /> -->
               </div>
-              <div class="box_bottom between pointer">
+              <div class="box_bottom column sm:between pointer">
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.consume.num" :unit="quantityOfFlow.consume.unit" />
                 </p>
-                <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(2)">
+                <ip-button type="primary" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(2)">
                   {{ $t("Details") }}
                 </ip-button>
                 <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("overview_spec.detail") }}</div> -->
               </div>
             </div>
-            <!-- 当前在线 IP 总数 -->
-            <div class="box column space-y-5">
+
+            <div class="box flex-1 column md:column_between space-y-5 p-2 sm:p-4">
               <div class="box_top between">
-                <h2>{{ $t("overview_spec.Total_IPs_Available") }}</h2>
+                <p>{{ $t("overview_spec.Total_IPs_Available") }}</p>
               </div>
-              <div class="box_bottom between w-full">
+              <div class="box_bottom column sm:between w-full">
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.remain.count" :unit="quantityOfFlow.consume.count" />
                 </p>
-                <ip-button type="primary" class="px-5 h-8 text-sm" @click="updateActiveIndex(1)">
+                <ip-button type="primary" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(1)">
                   {{ $t("Details") }}
                 </ip-button>
                 <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("overview_spec.detail") }}</div> -->
@@ -71,38 +68,55 @@
             </div>
           </div>
 
-          <!-- 日流出 echarts -->
-          <div class="outflow_echart w-full">
-            <!-- 时间选择 -->
-            <div class="myEchart" v-show="tableData.length > 0"></div>
-            <div class="null_data" v-show="!tableData.length > 0">
-              <el-empty description="No Data"></el-empty>
+          <div class="w-full column md:flex gap-5 items-stretch echart_table">
+            <div class="echart column space-y-5 w-full md:flex-1">
+              <div class="outflow_echart flex-1 w-full rounded-md relative">
+                <!-- 时间选择 -->
+                <div class="w-full h-full" id="echartDay" v-show="tableData.length > 0"></div>
+                <div class="null_data" v-show="!tableData.length > 0">
+                  <el-empty description="No Data"></el-empty>
+                </div>
+                <Picker class="echart_picker" @dateChange="dateChange" />
+              </div>
+
+              <div class="day_echart flex-1 w-full relative rounded-md">
+                <div class="w-full h-full" id="echartTime" v-show="!Nodata"></div>
+                <div class="null_data" v-show="Nodata">
+                  <el-empty description="No Data"></el-empty>
+                </div>
+                <div class="v_center picker">
+                  <Calendar :size="16" />
+                  <el-date-picker
+                    v-model="timeVal"
+                    type="date"
+                    prefix-icon="null"
+                    @change="input"
+                    format="dd.MM.yyyy"
+                    :clearable="false"
+                    placeholder="option date"
+                    style="width: 110px"
+                  />
+                </div>
+              </div>
             </div>
-            <Picker class="echart_picker" @dateChange="dateChange" />
-          </div>
-          <!-- 实时流出 echarts-->
-          <div class="day_echart w-full">
-            <div class="line_echart" v-show="!Nodata"></div>
-            <div class="null_data" v-show="Nodata">
-              <el-empty description="No Data"></el-empty>
-            </div>
-            <div class="v_center picker">
-              <Calendar :size="16" />
-              <el-date-picker
-                v-model="timeVal"
-                type="date"
-                prefix-icon="null"
-                @change="input"
-                format="dd.MM.yyyy"
-                :clearable="false"
-                placeholder="option date"
-                style="width: 110px"
-              />
+
+            <div class="table_box xl:hidden">
+              <el-table :data="tableData" v-if="tableData.length > 0">
+                <el-table-column prop="date" :label="$t('Date')"></el-table-column>
+                <el-table-column prop="flow" :label="$t('Traffic')">
+                  <template #default="scope">
+                    <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <div class="null_data" v-else>
+                <el-empty description="No Data"></el-empty>
+              </div>
             </div>
           </div>
         </div>
         <!-- date flow -->
-        <div class="right column space-y-5">
+        <div class="right h-full hidden xl:column space-y-5">
           <div class="notice" v-if="noticeText">
             <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
             <div class="notice_box">
@@ -113,7 +127,7 @@
             </div>
           </div>
 
-          <div class="date_flow table_box flex-1">
+          <div class="date_flow table_box flex-1 min-h-0">
             <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
               <el-table-column prop="date" :label="$t('Date')"></el-table-column>
               <el-table-column prop="flow" :label="$t('Traffic')">
@@ -130,7 +144,7 @@
       </div>
 
       <!-- 平台在线IP -->
-      <div class="ip w-full" v-show="activeIndex === 1">
+      <div class="ip w-full space-y-5" v-show="activeIndex === 1">
         <div class="ip_echart w-full">
           <div id="ipEchart" v-show="hasIpData"></div>
           <div class="null_data" v-show="!hasIpData">
@@ -139,61 +153,62 @@
           <Picker class="echart_picker" :defaultDate="ipdefault" :pickerOptions="pickerOptions" @dateChange="ipDateChange" />
         </div>
 
-        <div class="table_box w-full">
+        <div class="table_box w-full rounded-md space-y-5">
           <el-table :data="network" border>
-            <el-table-column :label="$t('overview_spec.Country_or_Region')">
+            <el-table-column :label="$t('overview_spec.Country_or_Region')" min-width="200">
               <template #default="scope">
                 <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
                 <span style="margin-left: 10px">{{ lang === "zh" ? scope.row.country_cn : scope.row.country }}</span>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('overview_spec.Country_Code')">
+            <el-table-column :label="$t('overview_spec.Country_Code')" min-width="150">
               <template #default="scope">
                 <p style="text-transform: uppercase">{{ scope.row.code }}</p>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('overview_spec.Number_of_country_IPs')" prop="ips_count"></el-table-column>
-            <el-table-column :label="$t('overview_spec.Network_Status')">
+            <el-table-column :label="$t('overview_spec.Number_of_country_IPs')" prop="ips_count" min-width="200"></el-table-column>
+            <el-table-column :label="$t('overview_spec.Network_Status')" min-width="400">
               <template #default="scope">
                 <tableProgress :percent="scope.row.avaiable" type="network"></tableProgress>
               </template>
             </el-table-column>
-            <el-table-column :label="$t('Load')">
+            <el-table-column :label="$t('Load')" min-width="400">
               <template #default="scope">
                 <tableProgress :percent="scope.row.used" type="load"></tableProgress>
               </template>
             </el-table-column>
           </el-table>
-          <div class="more vh_center pointer" v-if="network.length < page.total" @click="viewMore">
-            <i class="el-icon-loading" v-show="isNetwork"></i>
+          <ip-button type="border" class="h-8 px-3" v-if="network.length < page.total" @click="viewMore">
             {{ $t("overview_spec.View_More") }}
-          </div>
+          </ip-button>
         </div>
       </div>
 
       <!-- 余额明细 -->
       <div class="balance w-full column" v-show="activeIndex === 2">
-        <div class="table_box w-full flex-1">
-          <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
-            <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
-            <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="datetime" :label="$t('Date')"></el-table-column>
-            <el-table-column prop="pack_size" :label="$t('Traffic')">
-              <template #default="scope">
-                <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')"></el-table-column>
-            <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')"></el-table-column>
-            <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')"></el-table-column>
-            <el-table-column :label="$t('Type')">
-              <template #default="scope">
-                <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
-                <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
-                <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
-              </template>
-            </el-table-column>
-          </el-table>
+        <div class="w-full flex-1">
+          <div class="table_box w-full">
+            <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
+              <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
+              <el-table-column prop="id" label="ID"></el-table-column>
+              <el-table-column prop="datetime" :label="$t('Date')" min-width="100"></el-table-column>
+              <el-table-column prop="pack_size" :label="$t('Traffic')" min-width="100">
+                <template #default="scope">
+                  <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')" min-width="200"></el-table-column>
+              <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')" min-width="200"></el-table-column>
+              <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')" min-width="220"></el-table-column>
+              <el-table-column :label="$t('Type')" min-width="140">
+                <template #default="scope">
+                  <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
+                  <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
+                  <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
         </div>
         <!-- 分页 -->
         <div class="pagination vh_center">
@@ -446,7 +461,7 @@ export default {
     async setEchart(xData, serData) {
       const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
 
-      const myEchart = echart.init(document.querySelector(".myEchart"))
+      const myEchart = echart.init(document.getElementById("echartDay"))
       const option = {
         title: {
           text: this.en ? "5-Day Comparison" : "5 天对比",
@@ -618,7 +633,7 @@ export default {
     async setLine(xData, serData) {
       const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
 
-      const myEchart = echart.init(document.querySelector(".line_echart"))
+      const myEchart = echart.init(document.getElementById("echartTime"))
       const option = {
         title: {
           text: this.$t("overview_spec.EchartTextTwo"),

@@ -4,7 +4,7 @@
     <div class="explore box">
       <div class="container">
         <div class="column_center space-y-5 relative">
-          <div class="column_center text-3xl title">
+          <div class="column_center text-lg sm:text-3xl title">
             <p class="v_center space-x-2">
               <span>{{ t("Now") }}</span>
               <Sparkles :size="20" fill="hsl(var(--success))" color="hsl(var(--success))" />
@@ -25,7 +25,7 @@
       <div class="container column md:flex !items-stretch flex-wrap">
         <div class="list flex-1 column md:column_center whitespace-nowrap">
           <div class="service column space-y-5">
-            <p class="text-lg">{{ t("Services") }}</p>
+            <p>{{ t("Services") }}</p>
             <ul class="flex md:column gap-2 flex-wrap text-sm">
               <li class="btn">
                 <a href="javascript:;" @click="goTologin">{{ t("footer_spec.Residential_Proxies") }}</a>
@@ -50,7 +50,7 @@
 
         <div class="list flex-1 between !items-stretch space-x-10 whitespace-nowrap">
           <div class="column space-y-5">
-            <p class="text-lg">{{ t("Help_center") }}</p>
+            <p>{{ t("Help_center") }}</p>
             <ul class="column space-y-2 text-sm">
               <li>
                 <a href="javascript:;" @click="toDocument('FAQ')">{{ t("FAQ") }}</a>
@@ -67,7 +67,7 @@
             </ul>
           </div>
           <div class="column space-y-5">
-            <p class="text-lg">{{ t("Legal") }}</p>
+            <p>{{ t("Legal") }}</p>
             <ul class="column space-y-2 text-sm">
               <li>
                 <a href="/terms.html">{{ t("Terms_Conditions") }}</a>
@@ -85,7 +85,7 @@
         <div class="line"></div>
 
         <div class="list flex-1 column space-y-5">
-          <p class="text-lg">{{ t("Connect_with_us") }}</p>
+          <p>{{ t("Connect_with_us") }}</p>
           <div class="column space-y-2">
             <div class="v_center copy_btn">
               <div class="px-2 whitespace-nowrap">Email: support@ipstar.io</div>
@@ -97,7 +97,7 @@
             </IpButton> -->
           </div>
 
-          <p class="text-lg">{{ t("footer_spec.Legal") }}</p>
+          <p>{{ t("footer_spec.Legal") }}</p>
           <p class="text-sm description">
             {{ t("footer_spec.tips") }}
           </p>

@@ -22,8 +22,8 @@
         </ul>
         <DropDown placement="bottom" class="block md:hidden" @onChange="loadFront">
           <template #label="{ open }">
-            <IpButton :class="{ open: open }" type="border" class="w-10 h-10">
-              <Menu :size="16" />
+            <IpButton :class="{ open: open }" type="border" class="menu_btn">
+              <Menu :size="20" />
             </IpButton>
           </template>
           <template #menu>
@@ -92,8 +92,8 @@
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="px-2 h-10">
                 <div class="v_center shrink-0 space-x-2">
-                  <CircleUser :size="25" :stroke-width="2" />
-                  <p class="username">{{ username }}</p>
+                  <CircleUser :size="25" :stroke-width="1" />
+                  <p class="username hidden sm:block">{{ username }}</p>
                 </div>
               </IpButton>
             </template>

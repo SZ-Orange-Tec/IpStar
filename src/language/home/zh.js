@@ -20,7 +20,7 @@ export default {
     online: "实时在线",
     users: "用户",
 
-    adv1: "支持SOCKS5、HTTP/HTTPS & 自定义协议。",
+    adv1: "支持SOCKS5、HTTP/HTTPS\n& 自定义协议。",
     adv2: "所有流行的代理软件和APP。",
     // adv3: "支持指纹\n浏览器。",
     adv4: "支持API提取。",

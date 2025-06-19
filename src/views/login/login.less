@@ -1,6 +1,6 @@
 .login {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   overflow: hidden;
   // background-image: url("../../assets/images/login/background.webp");
   // background-color: hsl(var(--page-background));
@@ -14,15 +14,20 @@
     // justify-content: flex-end;
     // justify-self: flex-end;
     box-sizing: border-box;
-    width: 500px;
-    height: 520px;
+    width: 100%;
+    max-width: 500px;
+    // height: 520px;
     // height: 450px;
     // height: 580px;
-    padding: 32px 64px 64px;
-    border-radius: 20px;
+    
+    border-radius: 1.25rem;
     position: relative;
     color: hsl(var(--foreground));
     background-color: hsl(var(--page-card) / 80%);
+    padding: 32px 64px 64px;
+    @media screen and (max-width:680px) {
+      padding: 1rem 2rem 2rem;
+    }
 
     .title {
       font-family: "Poppins", sans-serif;
@@ -30,6 +35,9 @@
       font-weight: 800;
       font-size: 56px;
       text-transform: uppercase;
+      @media screen and (max-width:680px) {
+        font-size: 36px;
+      }
     }
 
     .back {
@@ -84,12 +92,16 @@
 
   .welcome{
     position: absolute;
-    left: 40px;
-    bottom: 40px;
+    left: 2.5rem;
+    bottom: 2.5rem;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
-    font-size: 36px;
     line-height: 1.2;
+
+    @media screen and (max-width:680px) {
+      left: 1.5rem;
+      bottom: 1.5rem;
+    }
 
     .back_btn{
       padding: 0 24px 0 8px;

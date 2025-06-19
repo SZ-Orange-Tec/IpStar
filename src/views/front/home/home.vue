@@ -4,7 +4,13 @@
     <div class="introduce box relative">
       <div class="container column_center">
         <div class="column_center space-y-10">
-          <i18n-t keypath="home_spec.intro_title" tag="p" scope="global" class="text-center title text-3xl font-bold" style="line-height: 2">
+          <i18n-t
+            keypath="home_spec.intro_title"
+            tag="p"
+            scope="global"
+            class="text-center title text-lg sm:text-3xl font-bold"
+            style="line-height: 2"
+          >
             <template #primary>
               <span class="primary_text">$0.25/GB</span>
             </template>
@@ -13,8 +19,8 @@
         </div>
 
         <div class="my-16 v_center space-x-5">
-          <IpButton type="primary" class="h-12 w-40 text-base" @click="giftPacks">{{ t("home_spec.try") }}</IpButton>
-          <IpButton type="neutral" class="h-12 w-40 text-base px-3" @click="$router.push('/doc')">
+          <IpButton type="primary" class="h-12 w-40" @click="giftPacks">{{ t("home_spec.try") }}</IpButton>
+          <IpButton type="neutral" class="h-12 w-40 px-3" @click="$router.push('/doc')">
             <div class="between w-full h-full">
               <span>{{ t("home_spec.tutorials") }}</span>
               <button>
@@ -66,12 +72,12 @@
 
     <!-- 优势 split -->
     <div class="advantage box split">
-      <div class="container column_center">
-        <div class="h-full relative">
-          <ul class="column_center gap-5 md:v_center">
+      <div class="container column_center relative">
+        <div class="h-full">
+          <ul class="column_center !items-stretch gap-5 md:v_center">
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
-              <p class="whitespace-pre-wrap">{{ t("home_spec.adv1") }}</p>
+              <p class="whitespace-pre-wrap sm:whitespace-nowrap">{{ t("home_spec.adv1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
@@ -86,16 +92,15 @@
               <p class="whitespace-pre-wrap">{{ t("home_spec.adv4") }}</p>
             </li>
           </ul>
-
-          <div class="trans"></div>
         </div>
+        <div class="trans"></div>
       </div>
     </div>
 
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center">
-        <p class="title text-3xl font-bold">
+        <p class="title text-lg sm:text-3xl font-bold">
           {{ t("home_spec.why") }}
           <span class="primary_text">IpStar</span>
         </p>
@@ -106,7 +111,7 @@
               <img v-lazy="() => import('@/assets/images/home/why1.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <p class="title text-base">{{ t("home_spec.why1_title") }}</p>
+              <p class="title">{{ t("home_spec.why1_title") }}</p>
               <p class="description text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
             </div>
           </li>
@@ -115,7 +120,7 @@
               <img v-lazy="() => import('@/assets/images/home/why2.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <p class="title text-base">{{ t("home_spec.why2_title") }}</p>
+              <p class="title">{{ t("home_spec.why2_title") }}</p>
               <p class="description text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
             </div>
           </li>
@@ -124,7 +129,7 @@
               <img v-lazy="() => import('@/assets/images/home/why3.png')" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <p class="title text-base">{{ t("home_spec.why3_title") }}</p>
+              <p class="title">{{ t("home_spec.why3_title") }}</p>
               <p class="description text-sm text-center">{{ t("home_spec.why3_desc") }}</p>
             </div>
           </li>
@@ -136,20 +141,20 @@
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
               <p class="description text-xs">{{ t("home_spec.more") }}</p>
             </div>
-            <p class="title text-3xl font-bold">{{ t("home_spec.automatic") }}</p>
+            <p class="title text-lg sm:text-3xl font-bold">{{ t("home_spec.automatic") }}</p>
           </div>
 
           <p class="description">{{ t("home_spec.instant") }}</p>
         </div>
 
-        <ul class="four grid grid-cols-2 md:grid-cols-4 gap-5">
+        <ul class="four grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5">
           <li class="flex-1 column">
             <div class="img_box">
               <img v-lazy="() => import('@/assets/images/home/four1.png')" alt="" />
             </div>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
-              <p class="title text-base">{{ t("home_spec.four1_title") }}</p>
+              <p class="title">{{ t("home_spec.four1_title") }}</p>
             </div>
           </li>
           <li class="flex-1 column">
@@ -158,7 +163,7 @@
             </div>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
-              <p class="title text-base">{{ t("home_spec.four2_title") }}</p>
+              <p class="title">{{ t("home_spec.four2_title") }}</p>
             </div>
           </li>
           <li class="flex-1 column">
@@ -167,7 +172,7 @@
             </div>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
-              <p class="title text-base">{{ t("home_spec.four3_title") }}</p>
+              <p class="title">{{ t("home_spec.four3_title") }}</p>
             </div>
           </li>
           <li class="flex-1 column">
@@ -176,7 +181,7 @@
             </div>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
-              <p class="title text-base">{{ t("home_spec.four4_title") }}</p>
+              <p class="title">{{ t("home_spec.four4_title") }}</p>
             </div>
           </li>
         </ul>
@@ -188,7 +193,7 @@
       <div class="container column_center">
         <div class="h-full relative">
           <div class="column_center space-x-5">
-            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-3xl font-bold">
+            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-3xl font-bold">
               <template #primary>
                 <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
               </template>
@@ -239,7 +244,7 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <p class="title text-3xl font-bold text-center">{{ t("home_spec.app_title") }}</p>
+        <p class="title text-lg sm:text-3xl font-bold text-center">{{ t("home_spec.app_title") }}</p>
 
         <ul class="grid grid-cols-3 md:grid-cols-6 gap-5 mt-8" style="flex-wrap: wrap">
           <li class="v_center">
@@ -276,8 +281,8 @@
     <div class="package box">
       <div class="container">
         <div class="column_center space-y-5">
-          <p class="title text-3xl font-bold text-center">{{ t("home_spec.package_title") }}</p>
-          <p class="description text-base green">{{ t("home_spec.package_desc") }}</p>
+          <p class="title text-lg sm:text-3xl font-bold text-center">{{ t("home_spec.package_title") }}</p>
+          <p class="description green">{{ t("home_spec.package_desc") }}</p>
         </div>
 
         <div class="mt-10" v-lazy="() => (isProduct = true)">
