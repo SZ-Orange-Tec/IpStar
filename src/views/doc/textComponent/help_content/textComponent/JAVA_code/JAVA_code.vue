@@ -129,7 +129,7 @@ public static  void testProxy() throws IOException {
   jobject.addProperty("resptype", 0); //0:返回json格式, 1:返回短格式。0: return response as json format, 1: return response as short format
   jobject.addProperty("Sign", ""); //Sign = md5(apikey+protocol+count+region), 暂时不验证, Currently, we don't verify it.
 
-  rst = utils.httpPost("http://service.ipflare.com/v1/obtain_proxy_endpoints", jobject.toString());
+  rst = utils.httpPost("http://service.ipstar.io/v1/obtain_proxy_endpoints", jobject.toString());
   System.out.println(rst);
   JsonParser parse = new JsonParser();
   JsonObject joResult = (JsonObject) parse.parse(rst);

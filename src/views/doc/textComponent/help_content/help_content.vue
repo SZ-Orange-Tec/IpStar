@@ -11,11 +11,11 @@
         <div class="space-y-2">
           <p class="title2">{{ $t("code_spec._2_1_title") }}</p>
           <div class="w-full content space-x-10">
-            <a href="https://ipflare.com/download/example.rar">{{ $t("All") }}</a>
-            <a href="https://ipflare.com/download/golang.rar">Go</a>
-            <a href="https://ipflare.com/download/java.rar">JAVA</a>
-            <a href="https://ipflare.com/download/php.rar">PHP</a>
-            <a href="https://ipflare.com/download/python.rar">Python</a>
+            <a href="https://ipstar.io/download/example.rar">{{ $t("All") }}</a>
+            <a href="https://ipstar.io/download/golang.rar">Go</a>
+            <a href="https://ipstar.io/download/java.rar">JAVA</a>
+            <a href="https://ipstar.io/download/php.rar">PHP</a>
+            <a href="https://ipstar.io/download/python.rar">Python</a>
           </div>
         </div>
         <GOCode v-if="sonName === 'Go'" />

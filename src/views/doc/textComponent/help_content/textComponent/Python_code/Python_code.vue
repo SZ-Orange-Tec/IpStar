@@ -116,7 +116,7 @@ const codeTwo = `
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
         'Content-Type': 'application/json'
      }
-     res = requests.post("http://service.ipflare.com/v1/obtain_proxy_endpoints", data=payload, headers=headers)
+     res = requests.post("http://service.ipstar.io/v1/obtain_proxy_endpoints", data=payload, headers=headers)
      code = json.loads(res.text).get("code")
      if code != 0 :
         print("get proxylist failed")

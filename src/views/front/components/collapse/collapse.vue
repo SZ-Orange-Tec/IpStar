@@ -14,19 +14,19 @@
     <div class="content_download" v-else @click.stop="fn">
       <ul>
         <li>
-          <a href="https://ipflare.com/download/python.rar" @click="beforeDownload">
+          <a href="https://ipstar.io/download/python.rar" @click="beforeDownload">
             Python
             <i class="el-icon-download"></i>
           </a>
         </li>
         <li>
-          <a href="https://ipflare.com/download/php.rar" @click="beforeDownload">
+          <a href="https://ipstar.io/download/php.rar" @click="beforeDownload">
             PHP
             <i class="el-icon-download"></i>
           </a>
         </li>
         <li>
-          <a href="https://ipflare.com/download/java.rar" @click="beforeDownload">
+          <a href="https://ipstar.io/download/java.rar" @click="beforeDownload">
             Java
             <i class="el-icon-download"></i>
           </a>

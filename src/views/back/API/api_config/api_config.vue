@@ -273,7 +273,7 @@ async function generateURL() {
     })
     return
   }
-  const baseUrl = "https://service.ipflare.com/v1/obtain_proxy_endpoints"
+  const baseUrl = "https://service.ipstar.io/v1/obtain_proxy_endpoints"
   const countVal = count.value
   const protocol = formInline.value.protocol
   const region = formInline.value.country === "ALL" ? "" : formInline.value.country

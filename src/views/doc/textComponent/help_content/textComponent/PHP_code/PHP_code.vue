@@ -130,7 +130,7 @@ $req = [
     'sign'      => '',
 ];
 
-$json = curl_post("http://service.ipflare.com/v1/obtain_proxy_endpoints", json_encode($req));
+$json = curl_post("http://service.ipstar.io/v1/obtain_proxy_endpoints", json_encode($req));
 $res = json_decode($json, true);
 $proxylist = $res["data"] ?? [];
 if (empty($proxylist)) {

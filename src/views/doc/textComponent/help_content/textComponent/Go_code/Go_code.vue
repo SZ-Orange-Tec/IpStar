@@ -211,7 +211,7 @@ func testProxy() {
 		Sign: "",
   }
   rstJson := RespClientAPI{}
-  rst := Post("http://service.ipflare.com/v1/obtain_proxy_endpoints", req, "application/json")
+  rst := Post("http://service.ipstar.io/v1/obtain_proxy_endpoints", req, "application/json")
   json.Unmarshal([]byte(rst), &rstJson)
   if rstJson.Code != 0 {
 		fmt.Println("error:", rst)

@@ -43,7 +43,7 @@ export default [
     ],
   },
   {
-    label: "如何使用Ipflare代理",
+    label: "如何使用IpStar代理",
     id: 2,
     scrollTop: 0,
     name: "Help",

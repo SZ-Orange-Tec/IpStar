@@ -117,17 +117,17 @@ export default {
           txt: "如果您已经注册，请登录我们的网站，进入控制台，找到产品菜单，或直接单击以下链接：",
         },
         {
-          txt: "https://www.ipflare.com/#/products",
+          txt: "https://www.ipstar.io/products",
           type: "a",
-          url: "https://www.ipflare.com/#/products",
+          url: "https://www.ipstar.io/products",
         },
         {
           txt: "或者您可以单击以下链接并重定向到定价页面以查看我们的产品：",
         },
         {
-          txt: "https://www.ipflare.com/#/pricing",
+          txt: "https://www.ipstar.io/pricing",
           type: "a",
-          url: "https://www.ipflare.com/#/pricing",
+          url: "https://www.ipstar.io/pricing",
         },
       ],
     },

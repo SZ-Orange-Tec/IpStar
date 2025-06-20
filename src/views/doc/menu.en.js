@@ -43,7 +43,7 @@ export default [
     ],
   },
   {
-    label: "How to use Ipflare proxy",
+    label: "How to use IpStar proxy",
     id: 2,
     scrollTop: 0,
     name: "Help",
