@@ -159,15 +159,12 @@ function handlerGithubLogin() {
         .then(async (res) => {
           // 存储token
           localStorage.setItem("token", res.data.token)
-          store.commit("setToken", res.data.token)
+          token.value = res.data.token
           // 获取用户信息
-          await store.dispatch("getUserInfo")
+          await getUserInfo()
           // 是否有注册奖励
           const has = await hasRegisterAward()
-          store.commit("layout/updateState", {
-            key: "registerAward",
-            value: has,
-          })
+          registerAward.value = has
           router.push("/layout")
         })
         .catch((err) => {

@@ -241,7 +241,7 @@ async function GetProductList() {
       dis = Math.round(dis * 100)
 
       if (item.is_sell === 0) {
-        store.commit("setGift", item.pack_title)
+        // store.commit("setGift", item.pack_title)
       }
 
       const obj = {

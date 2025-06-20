@@ -3,7 +3,7 @@ export default {
   Email: "Email",
   Next: "Next",
   Password: "Password",
-  Verification_code: "Verification code",
+  Verification_code: "Code",
   Reset: "Reset",
   Back: "Back",
   Re_send: "Re-send",

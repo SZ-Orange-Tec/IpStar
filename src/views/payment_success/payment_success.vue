@@ -26,6 +26,8 @@
 <script>
 import { platCustomerOrdersCheckIsPaid } from "@/api/home"
 import detect from "@/utils/detect"
+import userStore from "@/store/user"
+import layoutStore from "../../store/layout"
 export default {
   name: "PaymentSuccess",
   data() {
@@ -81,12 +83,9 @@ export default {
           order: this.orderNo,
         })
         // 更新用户信息
-        if (this.$store.state.user_info && !this.$store.state.user_info.is_purchase) {
+        if (this.username && !this.isPurchase) {
           // 更新本地用户数据
-          const info = await this.$store.dispatch("getUserInfo")
-          // const info = this.$store.state.user_info
-          this.$store.commit("setUserInfo", { ...info, is_purchase: true })
-          localStorage.setItem("user_info", JSON.stringify({ ...info, is_purchase: true }))
+          await this.updateUserInfo()
         }
         this.loading = false
         this.minTime = setInterval(() => {
@@ -101,9 +100,19 @@ export default {
     },
     // 确认退出
     drop_out() {
-      this.$store.commit("layout/setIsProduc", false)
+      this.isProduc = false
       this.$router.push("/products")
     },
+  },
+  setup() {
+    const { username, is_purchase: isPurchase, updateUserInfo } = userStore()
+    const { isProduc } = layoutStore()
+    return {
+      username,
+      isPurchase,
+      updateUserInfo,
+      isProduc,
+    }
   },
   // 销毁
   beforeDestroy() {

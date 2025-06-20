@@ -118,7 +118,6 @@ async function getInfo() {
   GettingList.value = Getting
   IntegrationList.value = Integration
   FAQlist.value = FAQ
-  console.log(Getting)
 }
 
 watch(en, () => {

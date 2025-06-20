@@ -19,7 +19,6 @@ const actions = {
     localStorage.setItem("userInfo", JSON.stringify(data))
   },
   updateUserInfo(info) {
-    debugger
     state.userInfo = info
     localStorage.setItem("userInfo", JSON.stringify(info))
   },

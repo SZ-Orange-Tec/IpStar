@@ -1,5 +1,5 @@
 <template>
-  <div class="number-grow-warp text-lg md:text-2xl">
+  <div class="number-grow-warp text-base sm:text-lg md:text-2xl">
     <span ref="numberGrow" :style="{ visibility: !!unit ? 'visible' : 'hidden' }" :data-time="time" class="number-grow">{{
       Thousands(num) + " " + (unit !== "none" ? unit : "")
     }}</span>

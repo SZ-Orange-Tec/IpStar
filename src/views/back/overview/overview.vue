@@ -19,7 +19,7 @@
       <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
         <div class="echarts_left w-full column gap-5">
           <div class="flow gap-3 md:gap-5">
-            <div class="box flex-1 column space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
               <div class="box_top w-full between">
                 <p class="">{{ $t("overview_spec.Residual_Traffic") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/Gauge.png" width="36" />
@@ -31,11 +31,12 @@
                     <span>{{ $t("Unlimited") }}</span>
                   </div>
                   <NumberCounter v-else :value="quantityOfFlow.remain.num" :unit="quantityOfFlow.remain.unit" />
+                  <div class="h-8"></div>
                 </div>
               </div>
             </div>
 
-            <div class="box flex-1 column space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
               <div class="box_top w-full between">
                 <p>{{ $t("overview_spec.Consumption_Today") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/control.png" width="36" />
@@ -52,7 +53,7 @@
               </div>
             </div>
 
-            <div class="box flex-1 column md:column_between space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
               <div class="box_top between">
                 <p>{{ $t("overview_spec.Total_IPs_Available") }}</p>
               </div>
@@ -338,11 +339,6 @@ export default {
       // 通知滚动
       isNoticeScroll: false,
     }
-  },
-  computed: {
-    unlimited() {
-      return this.$store.state.user_info?.unlimited ?? false
-    },
   },
   created() {
     const DAY = 1000 * 60 * 60 * 24
