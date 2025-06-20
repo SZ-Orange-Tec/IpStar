@@ -8,14 +8,14 @@
             keypath="home_spec.intro_title"
             tag="p"
             scope="global"
-            class="text-center title text-lg sm:text-3xl font-bold"
+            class="text-center title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap"
             style="line-height: 2"
           >
             <template #primary>
               <span class="primary_text">$0.25/GB</span>
             </template>
           </i18n-t>
-          <p class="text-center description">{{ t("home_spec.intro_desc") }}</p>
+          <p class="text-center description md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
         <div class="my-16 v_center space-x-5">
@@ -100,7 +100,7 @@
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center">
-        <p class="title text-lg sm:text-3xl font-bold">
+        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold">
           {{ t("home_spec.why") }}
           <span class="primary_text">IpStar</span>
         </p>
@@ -139,9 +139,9 @@
           <div class="column">
             <div class="v_center space-x-2">
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
-              <p class="description text-xs">{{ t("home_spec.more") }}</p>
+              <p class="description text-xs whitespace-nowrap md:whitespace-pre-wrap">{{ t("home_spec.more") }}</p>
             </div>
-            <p class="title text-lg sm:text-3xl font-bold">{{ t("home_spec.automatic") }}</p>
+            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("home_spec.automatic") }}</p>
           </div>
 
           <p class="description">{{ t("home_spec.instant") }}</p>
@@ -193,7 +193,7 @@
       <div class="container column_center">
         <div class="h-full relative">
           <div class="column_center space-x-5">
-            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-3xl font-bold">
+            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
               <template #primary>
                 <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
               </template>
@@ -215,8 +215,8 @@
           </div>
 
           <div class="content">
-            <div class="container column h-full">
-              <div class="text space-y-2 text-2xl font-bold">
+            <div class="container column">
+              <div class="text space-y-2 text-lg sm:text-2xl font-bold">
                 <p class="v_center space-x-2">
                   <span class="green">{{ countryCount }}</span>
                   <span>{{ t("home_spec.world_span") }}</span>
@@ -227,14 +227,16 @@
                 </p>
               </div>
             </div>
-          </div>
 
-          <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-            <img v-lazy="item.icon" width="36" alt="" />
-            <div class="country-box v_center h-8 space-x-2 px-3 text-xs">
-              <div class="dot vh_center"></div>
-              <span>{{ item.value }} </span>
-              <span class="primary_text">IPS+</span>
+            <div class="country_box">
+              <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
+                <img v-lazy="item.icon" width="36" alt="" />
+                <div class="detail v_center sm:space-x-2 text-xs whitespace-nowrap">
+                  <div class="dot vh_center"></div>
+                  <span>{{ item.value }} </span>
+                  <span class="primary_text">IPS+</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -244,9 +246,9 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <p class="title text-lg sm:text-3xl font-bold text-center">{{ t("home_spec.app_title") }}</p>
+        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.app_title") }}</p>
 
-        <ul class="grid grid-cols-3 md:grid-cols-6 gap-5 mt-8" style="flex-wrap: wrap">
+        <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mt-8 text-xs sm:text-sm" style="flex-wrap: wrap">
           <li class="v_center">
             <Dot :size="30" class="green" />
             <p class="description">{{ t("home_spec.e_commerce") }}</p>
@@ -281,7 +283,7 @@
     <div class="package box">
       <div class="container">
         <div class="column_center space-y-5">
-          <p class="title text-lg sm:text-3xl font-bold text-center">{{ t("home_spec.package_title") }}</p>
+          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
           <p class="description green">{{ t("home_spec.package_desc") }}</p>
         </div>
 

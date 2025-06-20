@@ -12,20 +12,20 @@
     </ul> -->
     <div class="list" :style="{ 'max-width': maxWidth }">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
-        <ul class="flex space-x-3">
+        <ul class="flex gap-3">
           <li v-for="item in product_list" :key="item.id" :class="item.hot ? 'popular' : 'common'" class="transition-color">
-            <div class="card column_center space-y-10">
+            <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
                   <span v-if="item.trial || item.unlimit">{{ item.name }}</span>
                   <div v-else class="column_center">
-                    <strong class="text-xl font-semibold">{{ item.pack_title.split(" ")[0] }}</strong>
+                    <strong class="text-base md:text-xl font-semibold">{{ item.pack_title.split(" ")[0] }}</strong>
                     <span>{{ item.pack_title.split(" ")[1] }}</span>
                   </div>
                 </div>
 
                 <!-- 折扣 -->
-                <p class="font-semibold">
+                <p class="font-medium lg:font-semibold">
                   {{ item.trial ? t("Free") : item.discount_rate + "%" + t("OFF") }}
                 </p>
 
@@ -48,12 +48,12 @@
                 </template> -->
                 <!-- 个人 企业 -->
                 <!-- <template v-else> -->
-                <p class="price text-4xl space-x-1">
+                <p class="price text-2xl lg:text-4xl space-x-1">
                   <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
                   <span class="text-sm">/GB</span>
                 </p>
                 <p class="total vh_center space-x-1">
-                  <span>{{ t("Total") }}:</span>
+                  <span class="lg:text-xl">{{ t("Total") }}:</span>
                   <span>${{ item.prices[item.select].price / 100 }}</span>
                 </p>
                 <div class="number w-full">
@@ -87,30 +87,30 @@
                 </li>
               </ul> -->
 
-              <ul class="rights column space-y-5 text-sm font-medium">
+              <ul class="rights column space-y-5 text-xs lg:text-sm font-medium">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0" />
+                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0" />
+                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right2") }}</p>
                 </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0" />
+                <li class="hidden sm:v_center space-x-1">
+                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right3") }}</p>
                 </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0" />
+                <li class="hidden md:v_center space-x-1">
+                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right4") }}</p>
                 </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0" />
+                <li class="hidden lg:v_center space-x-1">
+                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right5") }}</p>
                 </li>
               </ul>
 
-              <IpButton @click="click_pay(item)" type="link" circle class="border-btn rounded-full px-4 font-medium">
+              <IpButton @click="click_pay(item)" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
                 {{ item.trial ? t("Get") : t("Order") }}
               </IpButton>
             </div>
@@ -123,8 +123,8 @@
         </ul>
       </div>
       <!-- 骨架屏 -->
-      <div v-else class="priceList">
-        <ul class="flex space-x-3">
+      <div v-else class="priceList column">
+        <ul class="flex gap-3">
           <li class="skeletion_box" v-for="item in 6" :key="item">
             <div class="card skeletion space-y-5">
               <div style="width: 40%"></div>

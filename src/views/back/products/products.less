@@ -3,11 +3,12 @@
   .main{
     min-height: 0;
     border-radius: 8px;
+    
     background-color: hsl(var(--layout-background));
-    overflow: auto;
-
-    .product_box{
-      padding: 40px;
+    padding: 40px;
+    @media screen and (max-width:768px) {
+      padding: 2.5rem 0.75rem;
+      overflow: auto;
     }
 
     .table_box{

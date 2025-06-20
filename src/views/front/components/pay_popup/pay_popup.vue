@@ -32,7 +32,7 @@
                   <p>{{ $t("payPopup_spec.usdt") }}</p>
                 </li>
               </ul>
-              <p>{{ $t("payPopup_spec.tip") }}</p>
+              <p class="whitespace-pre-wrap">{{ $t("payPopup_spec.tip") }}</p>
             </div>
             <!-- paypal支付 -->
             <div class="pay_result" v-if="processIdx === 2 && isManmer === 2">

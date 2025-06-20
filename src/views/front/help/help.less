@@ -4,8 +4,8 @@
   min-height: 675px;
   &>.box{
     padding: 0 2.5rem;
-    @media screen and (msx-width:680px) {
-      padding: 0 1.5rem;
+    @media screen and (max-width:640px) {
+      padding: 0 0.75rem;
     }
   }
 
@@ -34,8 +34,9 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      @media screen and (min-width:768px) {
+      @media screen and (max-width:768px) {
         gap: 1.25rem;
+        grid-template-columns: repeat(1, 1fr);
       }
       @media screen and (min-width:1024px) {
         gap: 2.5rem;

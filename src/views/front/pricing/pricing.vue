@@ -5,23 +5,30 @@
     <div class="box price relative">
       <div class="container">
         <div class="column_center space-y-10">
-          <div class="text-lg sm:text-3xl column_center space-y-5">
-            <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title">
+          <div class="text-lg sm:text-2xl lg:text-3xl column_center space-y-5">
+            <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title md:whitespace-pre-wrap">
               <template #price>
                 <span class="primary_text">{{ t("pricing_spec.des_slot") }}</span>
               </template>
             </i18n-t>
 
-            <span class="text-lg sm:text-3xl description">IPs: 50M+/day</span>
+            <span class="text-lg sm:text-2xl lg:text-3xl description">IPs: 50M+/day</span>
           </div>
 
           <div class="price_main w-full relative" ref="product">
             <ProductList :tabbar="true" :pack="5"></ProductList>
 
-            <img src="@/assets/images/pricing/star.png" class="float_img star" :style="{ opacity: showImg ? 1 : 0 }" width="80" height="80" alt="" />
+            <img
+              src="@/assets/images/pricing/star.png"
+              class="float_img star hidden md:block"
+              :style="{ opacity: showImg ? 1 : 0 }"
+              width="80"
+              height="80"
+              alt=""
+            />
             <img
               src="@/assets/images/pricing/star_move.png"
-              class="float_img star_move"
+              class="float_img star_move hidden md:block"
               :style="{ opacity: showImg ? 1 : 0 }"
               width="149"
               height="66"
@@ -54,8 +61,8 @@
           </div>
 
           <div class="content">
-            <div class="container column h-full">
-              <div class="text space-y-2 text-2xl font-bold">
+            <div class="container column">
+              <div class="text space-y-2 text-lg sm:text-2xl font-bold">
                 <p class="v_center space-x-2">
                   <span class="green">{{ countryCount }}</span>
                   <span>{{ t("pricing_spec.world_span") }}</span>
@@ -66,14 +73,16 @@
                 </p>
               </div>
             </div>
-          </div>
 
-          <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-            <img v-lazy="item.icon" width="36" alt="" />
-            <div class="country-box v_center h-8 space-x-2 px-3 text-xs whitespace-nowrap">
-              <div class="dot vh_center"></div>
-              <span>{{ item.value }} </span>
-              <span class="primary_text">IPS+</span>
+            <div class="country_box">
+              <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
+                <img v-lazy="item.icon" width="36" alt="" />
+                <div class="detail v_center h-8 space-x-2 px-3 text-xs whitespace-nowrap">
+                  <div class="dot vh_center"></div>
+                  <span>{{ item.value }} </span>
+                  <span class="primary_text">IPS+</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

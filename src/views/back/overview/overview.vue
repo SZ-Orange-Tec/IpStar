@@ -14,7 +14,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1">
+    <div class="w-full main flex-1 px-3 md:px-5">
       <!-- 我的订阅 -->
       <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
         <div class="echarts_left w-full column gap-5">

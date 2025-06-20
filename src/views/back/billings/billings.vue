@@ -6,7 +6,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full main column flex-1">
+    <div class="w-full main column flex-1 px-3 md:px-5">
       <!-- 购买订单 -->
       <div class="flex-1 w-full table_box">
         <el-table :data="tableData">

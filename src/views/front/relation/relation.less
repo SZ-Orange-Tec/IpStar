@@ -5,7 +5,10 @@
 
   .box{
     // width: 100%;
-    padding: 0 40px;
+    padding: 0 2.5rem;
+    @media screen and (max-width:640px) {
+      padding: 0 0.75rem;
+    }
     .container{
       width: 100%;
       max-width: 1200px;
@@ -47,6 +50,10 @@
         // color: hsl(var(--background));
         // background-color: hsl(var(--foreground));
         // color: hsl(var(--background));
+        @media screen and (max-width:640px) {
+          min-width: 0;
+          width: 100%;
+        }
         &>p{
           white-space: nowrap;
           letter-spacing: 1px;
@@ -103,11 +110,15 @@
       }
 
       .concat{
-        width: 600px;
+        width: 100%;
+        max-width: 600px;
         align-self: flex-end;
         .top{
           padding: 40px 30px;
           border-bottom: 1px solid hsl(var(--foreground) / 20%);
+          @media screen and (max-width:640px) {
+            padding: 1.25rem 0;
+          }
         }
         .bottom{
           .way{

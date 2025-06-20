@@ -1,10 +1,13 @@
 .productTabbar{
 	margin-bottom: 40px;
 	&>.tabbar{
-		height: 54px;
+    height: 3.365rem;
     padding: 4px;
     border-radius: 8px;
     background: rgba(255,255,255,0.1);
+    @media screen and (max-width:640px) {
+      height: 2.75rem;
+    }
     &>div{
       width: 140px;
       border-radius: 8px;

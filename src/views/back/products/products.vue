@@ -8,7 +8,7 @@
 
     <div class="w-full main flex-1">
       <!-- 产品列表 -->
-      <div class="product_box column_center space-y-10" v-if="isProduc">
+      <div class="product_box w-full column_center space-y-5 lg:space-y-10" v-if="isProduc">
         <div class="w-full">
           <productList :tabbar="true" :vantage="false" :pack="5"></productList>
         </div>

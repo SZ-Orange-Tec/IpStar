@@ -6,7 +6,7 @@
       <NavMenu />
     </div>
     <!-- right -->
-    <div class="main px-3 md:px-5">
+    <div class="main">
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive" class="child-view"></router-view>
       </keep-alive>

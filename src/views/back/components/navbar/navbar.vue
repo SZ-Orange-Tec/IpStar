@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar w-full between h-10">
+  <div class="navbar w-full between h-10 px-3 md:px-5">
     <div class="left v_center space-x-2">
       <div class="v_center font-bold">
         <slot :title="name"></slot>

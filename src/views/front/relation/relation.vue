@@ -3,7 +3,7 @@
     <div class="box contact_us">
       <div class="container column_center lg:between gap-5">
         <div class="email space-y-6 column">
-          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="text-lg sm:text-3xl title">
+          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
             <template #info>
               <span class="primary_text">{{ t("relation_spec.title_slot") }}</span>
             </template>
@@ -49,7 +49,7 @@
               </IpButton>
             </div>
 
-            <div class="way flex-1 vh_center pointer" @click="toEmail">support@ipstar.io</div>
+            <div class="way flex-1 vh_center pointer whitespace-nowrap" @click="toEmail">support@ipstar.io</div>
 
             <div class="way flex-1 vh_center space-x-2">
               <span>{{ t("Follow_us_on") }}</span>

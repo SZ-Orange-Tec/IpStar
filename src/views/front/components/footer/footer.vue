@@ -4,7 +4,7 @@
     <div class="explore box">
       <div class="container">
         <div class="column_center space-y-5 relative">
-          <div class="column_center text-lg sm:text-3xl title">
+          <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
             <p class="v_center space-x-2">
               <span>{{ t("Now") }}</span>
               <Sparkles :size="20" fill="hsl(var(--success))" color="hsl(var(--success))" />

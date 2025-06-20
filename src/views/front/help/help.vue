@@ -2,7 +2,7 @@
   <div class="help relative">
     <div class="box">
       <div class="container column_center space-y-10">
-        <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-lg sm:text-3xl title">
+        <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
           <template #title>
             <span class="primary_text">{{ t("help_spec.title_slot") }}</span>
           </template>
@@ -26,31 +26,31 @@
           <p>{{ t("help_spec.more") }}</p>
         </IpButton>
 
-        <!-- 文档块 -->
-        <div class="txt_document w-full space-x-10" v-if="idx === 0">
+        <template v-if="idx === 0">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="box" v-for="(item, index) in GettingList" :key="index" @click="collapseClick(item.id)">
+              <Collapse :bol="collapseIdx === item.id" :info="item" />
+            </div>
+          </div>
+        </template>
+
+        <template v-else-if="idx === 1">
           <!-- left -->
-          <div class="left" v-for="(item, index) in GettingList" :key="index">
-            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="box" v-for="(j, i) in IntegrationList" :key="i" @click="collapseClick(j.id)">
               <Collapse :bol="collapseIdx === j.id" :info="j" />
             </div>
           </div>
-        </div>
-        <div class="txt_document w-full space-x-10" v-if="idx === 1">
+        </template>
+
+        <template v-else-if="idx === 2">
           <!-- left -->
-          <div class="left" v-for="(item, index) in IntegrationList" :key="index">
-            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="box" v-for="(j, i) in FAQlist" :key="i" @click="collapseClick(j.id)">
               <Collapse :bol="collapseIdx === j.id" :info="j" />
             </div>
           </div>
-        </div>
-        <div class="txt_document w-full space-x-10" v-if="idx === 2">
-          <!-- left -->
-          <div class="left" v-for="(item, index) in FAQlist" :key="index">
-            <div class="box" v-for="(j, i) in item" :key="i" @click="collapseClick(j.id)">
-              <Collapse :bol="collapseIdx === j.id" :info="j" />
-            </div>
-          </div>
-        </div>
+        </template>
       </div>
     </div>
     <div class="background">
@@ -118,6 +118,7 @@ async function getInfo() {
   GettingList.value = Getting
   IntegrationList.value = Integration
   FAQlist.value = FAQ
+  console.log(Getting)
 }
 
 watch(en, () => {

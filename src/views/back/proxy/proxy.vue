@@ -6,7 +6,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1">
+    <div class="w-full main flex-1 px-3 md:px-5">
       <div class="space-y-5 h-full" v-if="is_purchase">
         <div class="card column">
           <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">

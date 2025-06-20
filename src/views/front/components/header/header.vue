@@ -6,7 +6,7 @@
       </div>
 
       <div class="v_center h-full space-x-3">
-        <ul class="navigator hidden md:v_center text-base px-3 h-full whitespace-nowrap" @mouseenter="loadFront">
+        <ul class="navigator hidden lg:v_center text-base px-3 h-full whitespace-nowrap" @mouseenter="loadFront">
           <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
             {{ $t("Home") }}
           </li>
@@ -20,7 +20,7 @@
             {{ $t("Help") }}
           </li>
         </ul>
-        <DropDown placement="bottom" class="block md:hidden" @onChange="loadFront">
+        <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
           <template #label="{ open }">
             <IpButton :class="{ open: open }" type="border" class="menu_btn">
               <Menu :size="20" />

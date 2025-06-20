@@ -4,7 +4,7 @@
       <Minus :size="12" :stroke-width="3" />
     </IpButton>
 
-    <strong>{{ days }} {{ $t("Day") }}</strong>
+    <strong class="text-sm">{{ days }} {{ $t("Day") }}</strong>
 
     <IpButton @click="add" type="ghost" circle class="border-btn transition-color" :class="{ opacity50: select >= list.length - 1 }">
       <Plus :size="12" :stroke-width="3" />

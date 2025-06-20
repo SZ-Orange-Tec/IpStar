@@ -8,10 +8,10 @@ export default {
   ...productList,
   ...paypopup,
   home_spec: {
-    intro_title: "Quality Residential Proxies\n Plans From {primary} & 190+ Countries",
+    intro_title: "Quality Residential Proxies\n Plans From {primary} & 200+ Countries",
 
     intro_desc:
-      "Get high-guality residential proxies for your business.\n Our lPs are sourced from real homenetworks in over 190 \ncountries, ensuring high stability and anonymity.\n Perfect for marketresearch, ad verification, and brand protection.\n We offer flexible plans to fit your business needs",
+      "Get high-guality residential proxies for your business.\n Our lPs are sourced from real homenetworks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for marketresearch, ad verification, and brand protection.\n We offer flexible plans to fit your business needs",
 
     try: "Try",
     tutorials: "Tutorials",
@@ -26,7 +26,7 @@ export default {
 
     why: "Why Choose",
     why1_title: "50M+ Global Residential IPs",
-    why1_desc: "Experience a network of over 50 million real residential IPs from 190+countries worldwide.",
+    why1_desc: "Experience a network of over 50 million real residential IPs from 200+countries worldwide.",
     why2_title: "Residential Proxies",
     why2_desc: "Specializing in residential IP proxies, realresidential lPs from around the world",
     why3_title: "Premium Residential IPs",
@@ -42,7 +42,7 @@ export default {
     four2_title: "An Intuitive Dashboard",
     four2_desc: "Our intuitive dashboard provides simple controls and full accessmaking proxy management effortless.",
     four3_title: "Flexible Pricing Plans",
-    four3_desc: "Pay only for what you use. A single purchase unlocks our entire global networkof 190+ countries. Start your free trial today!",
+    four3_desc: "Pay only for what you use. A single purchase unlocks our entire global networkof 200+ countries. Start your free trial today!",
     four4_title: "Easy Integration for Everyone",
     four4_desc: "Easy email sign-up. Get fast, stable connections inminutes via our user-friendly dashboard or APl.",
 
