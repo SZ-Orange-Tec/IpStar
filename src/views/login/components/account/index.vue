@@ -115,11 +115,14 @@ function handlerGoogleLogin() {
           // 是否有注册奖励
           const has = await hasRegisterAward()
           registerAward.value = has
-          router.push("/layout")
+          router.push("/overview")
         })
         .catch((err) => {
           console.log(err)
-          Message.error("Login Failed,Please try again")
+          Message({
+            type: "warning",
+            message: "Login Failed,Please try again",
+          })
         })
         .finally(() => {
           googleLoading.value = false
@@ -135,7 +138,7 @@ function handlerGithubLogin() {
   // 清除上一个
   window.removeEventListener("message", getGithubInfo)
   window.open(
-    "https://github.com/login/oauth/authorize?client_id=5800f6ede67189ccd659&scope=user:email&state=" +
+    "https://github.com/login/oauth/authorize?client_id=Ov23liEEciOEnSYrVVFm&scope=user:email&state=" +
       (/www/.test(window.location.origin) ? "has" : "no") +
       "&redirect_uri=https://www." +
       location.host.replace("www.", "") +
@@ -165,11 +168,14 @@ function handlerGithubLogin() {
           // 是否有注册奖励
           const has = await hasRegisterAward()
           registerAward.value = has
-          router.push("/layout")
+          router.push("/overview")
         })
         .catch((err) => {
           console.log(err)
-          Message.error("Login Failed,Please try again")
+          Message({
+            type: "warning",
+            message: "Login Failed,Please try again",
+          })
         })
         .finally(() => {
           githubLoading.value = false

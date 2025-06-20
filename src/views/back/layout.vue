@@ -14,15 +14,15 @@
     </div>
 
     <!-- 遮罩层 -->
-    <div class="mask" v-if="isMask !== 'false' && registerAward">
+    <div class="mask" v-if="isMask && registerAward">
       <div class="mask_content">
         <img src="../../assets/pc_img/layout_img/Gift bag.webp" alt="Gift bag" />
-        <h2>{{ t("navbar_spec.gift") }}</h2>
-        <p :class="lang">{{ t("navbar_spec.expire") }}</p>
-        <div class="btn_sum">
+        <h2 class="text-lg md:text-2xl">{{ t("navbar_spec.gift") }}</h2>
+        <p :class="lang" class="text-base">{{ t("navbar_spec.expire") }}</p>
+        <div class="btn_sum text-xl">
           <!-- @click="maskFn" -->
           <!-- <el-button @click="maskFn(1)">{{ t("PCLayout.gift[2]") }}</el-button> -->
-          <p @click="maskFn(0)">{{ t("navbar_spec.get") }}</p>
+          <p @click="maskFn(1)">{{ t("navbar_spec.get") }}</p>
         </div>
       </div>
     </div>
@@ -46,9 +46,11 @@ const router = useRouter()
 
 const { t } = useI18n()
 
+console.log(isMask.value)
 function maskFn(bol) {
   detect.gift()
   isMask.value = false
+  localStorage.setItem("mask", JSON.stringify(isMask.value))
   if (!bol) {
     isDocument.value = "Help"
     documentIdx.value = "1-0"

@@ -31,7 +31,7 @@
                     <span>{{ $t("Unlimited") }}</span>
                   </div>
                   <NumberCounter v-else :value="quantityOfFlow.remain.num" :unit="quantityOfFlow.remain.unit" />
-                  <div class="h-8"></div>
+                  <div class="h-8 block sm:hidden"></div>
                 </div>
               </div>
             </div>

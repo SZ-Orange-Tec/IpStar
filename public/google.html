@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Google</title>
-</head>
+  <body></body>
 
-<body>
-
-</body>
-
+  <script>
+    window.onload = function (e) {
+      function getQueryVariable(variable) {
+        const query = window.location.search.substring(1) || window.location.href
+        const vars = query.split("&")
+        for (let i = 0; i < vars.length; i++) {
+          const pair = vars[i].split("=")
+          if (pair[0] === variable) {
+            return pair[1]
+          }
+        }
+        return false
+      }
+      const code = getQueryVariable("access_token")
+      const parent = window.opener || window.parent
+      parent.postMessage({
+        from: "google",
+        code: code || "error",
+      })
+      window.close()
+    }
+  </script>
 </html>
