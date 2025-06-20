@@ -62,7 +62,7 @@ import loginStore from "@/store/login"
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
@@ -280,6 +280,10 @@ function toHome() {
     router.replace("/home")
   }
 }
+
+onMounted(() => {
+  loadBack()
+})
 </script>
 
 <style lang="less" scoped>
