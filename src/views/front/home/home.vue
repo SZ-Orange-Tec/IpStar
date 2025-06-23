@@ -33,13 +33,12 @@
         <div class="v_center">
           <div class="column_center px-5">
             <strong class="title text-2xl">15324</strong>
-            <span class="description text-sm">{{ t("home_spec.Accumulated") }}</span>
-            <span class="description text-sm">{{ t("home_spec.users") }}</span>
+            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.Accumulated") }}</span>
+            <!-- <span class="description text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
           <div class="column_center px-5">
             <strong class="title text-2xl">1220</strong>
-            <span class="description text-sm">{{ t("home_spec.online") }}</span>
-            <span class="description text-sm">IP</span>
+            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
           </div>
         </div>
 

@@ -5,7 +5,17 @@
         <p class="text-sm">{{ t("login_spec.label4") }}</p>
         <div class="v_center input_box space-x-2 px-3 transition-color">
           <Lock :size="18" class="flex-shrink-0 icon" />
-          <input type="text" v-model.trim="password" class="flex-1 text-sm" ref="passwordRef" :placeholder="t('Password')" />
+          <input
+            :type="showPassword ? 'text' : 'password'"
+            v-model.trim="password"
+            class="flex-1 text-sm"
+            ref="passwordRef"
+            :placeholder="t('Password')"
+          />
+          <ip-button type="ghost" class="w-8 h-8 vh_center" @click="showPassword = !showPassword">
+            <Eye v-if="!showPassword" :size="18" />
+            <EyeOff v-else :size="18" />
+          </ip-button>
         </div>
       </div>
     </div>
@@ -24,7 +34,8 @@ import { ref, computed, onMounted, toRefs } from "vue"
 import Message from "@/components/message/message"
 import settingsStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
-import { Lock } from "lucide-vue-next"
+import IpButton from "@/components/button/button.vue"
+import { Lock, Eye, EyeOff } from "lucide-vue-next"
 
 const { t } = useI18n()
 
@@ -39,6 +50,7 @@ const emit = defineEmits(["update:modelValue", "next", "back"])
 
 const btnLoading = ref(false)
 const passwordRef = ref(null)
+const showPassword = ref(false)
 
 const password = computed({
   get: () => modelValue.value,

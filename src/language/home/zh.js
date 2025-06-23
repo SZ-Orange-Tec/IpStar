@@ -16,8 +16,8 @@ export default {
 
     try: "申请试用",
     tutorials: "教程",
-    Accumulated: "累计",
-    online: "实时在线",
+    Accumulated: "累计用户",
+    online: "实时在线 IP",
     users: "用户",
 
     adv1: "支持SOCKS5、HTTP/HTTPS\n& 自定义协议。",
@@ -41,7 +41,7 @@ export default {
     four2_title: "用户友好的仪表板仪表板",
     four2_desc: "设计简洁易用，具有清晰的控制按钮和所有设置的访问权限，使代理管理尽可能简单。",
     four3_title: "体验灵活的定价模式",
-    four3_desc: "采用按流量计费，一次购买，即可访问全球:90+地区的庞大IF网络。立即开始免费试用。",
+    four3_desc: "采用按流量计费，一次购买，即可访问全球:200+地区的庞大IF网络。立即开始免费试用。",
     four4_title: "无需技术背景 易于集成",
     four4_desc: "仅需邮箱即可注册，通过我们简单的仪表盘或API快速启用。为您的业务提供稳定、高速的连接。",
 

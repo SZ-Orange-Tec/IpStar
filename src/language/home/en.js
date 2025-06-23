@@ -15,8 +15,8 @@ export default {
 
     try: "Try",
     tutorials: "Tutorials",
-    Accumulated: "Accumulated",
-    online: "Number of online",
+    Accumulated: "Accumulated \n users",
+    online: "Number of online \n Ip",
     users: "users",
 
     adv1: "Supports SOCKS5, HTTP/HTTPS\n& custom protocols.",

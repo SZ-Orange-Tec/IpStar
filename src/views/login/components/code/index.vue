@@ -113,7 +113,7 @@ function focusInput() {
 
 function inputNumber(e) {
   const { key, keyCode } = e
-  console.log(key, keyCode)
+  // console.log(key, keyCode)
   if (!/^[0-9]$|Backspace/.test(key)) return
   const length = modelValue.value.length
 

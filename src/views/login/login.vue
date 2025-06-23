@@ -5,7 +5,10 @@
     </div>
 
     <div class="container column">
-      <div class="title w-full text-center">{{ t("Sign_in") }}</div>
+      <div class="title w-full text-center">
+        <template v-if="/^forget/.test(status)">{{ t("Forgot_password") }}</template>
+        <template v-else>{{ t("Sign_in") }}</template>
+      </div>
 
       <div class="w-full">
         <Account v-model="account" @next="next" v-if="status === 'account'" />
@@ -166,6 +169,10 @@ async function next(func) {
         }
         break
       case "code":
+        await await platCustomerVerifycode({
+          email: account.value,
+          code: code.value,
+        })
         status.value = "reset"
         break
       case "reset":
@@ -198,6 +205,10 @@ async function next(func) {
         // })
         break
       case "forget_code":
+        await await platCustomerVerifycode({
+          email: account.value,
+          code: code.value,
+        })
         status.value = "forget_reset"
         password.value = ""
         break
