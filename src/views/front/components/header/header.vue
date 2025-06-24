@@ -22,7 +22,7 @@
         </ul>
         <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
           <template #label="{ open }">
-            <IpButton :class="{ open: open }" type="border" class="menu_btn">
+            <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
               <Menu :size="20" />
             </IpButton>
           </template>
@@ -64,9 +64,9 @@
           <!-- 语言 -->
           <DropDown placement="bottom">
             <template #label="{ open }">
-              <IpButton circle :class="{ open: open }" type="ghost">
-                <div class="v_center space-x-2 shrink-0 w-full h-full">
-                  <img src="@/assets/images/home/lang.png" height="32" alt="" />
+              <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
+                <div class="vh_center space-x-2 shrink-0 w-full h-full">
+                  <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" />
                 </div>
               </IpButton>
             </template>
@@ -82,7 +82,7 @@
 
           <!-- 登录 -->
           <div class="btn_sum" v-if="!token">
-            <IpButton type="primary" class="h-10 text-base px-5" @click="$router.push('/login')">{{ t("Sign_in") }}</IpButton>
+            <IpButton type="primary" class="h-8 text-sm px-3" @click="$router.push('/login')">{{ t("Sign_in") }}</IpButton>
             <!-- <el-button @click="$router.push('/sign_in')">{{$t('PCHeader.btnSumOne')}} <i class="el-icon-right"></i> </el-button> -->
             <!-- <el-button type="primary" @click="$router.push('/register')">{{$t('PCHeader.btnSumTwo')}}</el-button> -->
           </div>
@@ -90,7 +90,7 @@
           <!-- 用户 -->
           <DropDown v-else placement="bottom" @onChange="userDropChange">
             <template #label="{ open }">
-              <IpButton :class="{ open: open }" type="ghost" class="px-2 h-10">
+              <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
                 <div class="v_center shrink-0 space-x-2">
                   <CircleUser :size="25" :stroke-width="1" />
                   <p class="username hidden sm:block">{{ username }}</p>

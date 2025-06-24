@@ -32,7 +32,7 @@ export default {
     why3_title: "Premium Residential IPs",
     why3_desc: "Delivering fast and stable connections",
     more: "There are more",
-    automatic: "Automatic And \n Instant Delivery",
+    automatic: "Automatic And \nInstant Delivery",
     instant:
       "Get instant access after payment - no waiting for account activation \n or proxies setup.supporting a variety of communication protocols,\nincludingsocks5,http https,and custom protocols",
 
@@ -51,7 +51,7 @@ export default {
     world_desc: "Wide range of locations available tailored to your business needs.",
     world_span: "Countries And Districts",
 
-    app_title: "More Powerful Features Of lpflare \n Are Waiting For You To Develop",
+    app_title: "More Powerful Features Of IpStar \n Are Waiting For You To Develop",
     e_commerce: "E-commerce",
     any_game: "Any Game",
     file_transfer: "File Transfer",

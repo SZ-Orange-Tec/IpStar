@@ -33,7 +33,7 @@ export default {
     why3_title: "高质量住宅IP",
     why3_desc: "提供高质量且稳定的通信速度。",
     more: "更多",
-    automatic: "自动且\n即时交付",
+    automatic: "自动且 即时交付",
     instant: "付款后立即访问 - 无需等待账户激活或代理设置。\n支持各种通信协议，包括ocks5、http/https 和自定义协议。",
 
     four1_title: "按流量计费，无浪费",

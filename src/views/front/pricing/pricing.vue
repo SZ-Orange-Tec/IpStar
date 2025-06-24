@@ -46,8 +46,9 @@
     </div>
 
     <div class="column_center pay">
-      <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" />
+      <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" style="width: auto" />
       <p class="primary_text">{{ t("pricing_spec.payment") }}</p>
+
       <div class="column_center scroll w-full">
         <img v-lazy="() => import('@/assets/images/pricing/scroll.png')" width="28" alt="" />
       </div>
@@ -55,10 +56,10 @@
 
     <div class="world box" v-lazy="IpMap">
       <div class="container">
-        <div class="w-full relative" style="padding-top: 39.8%">
-          <div class="bg">
+        <div class="w-full relative">
+          <IpImage :width="1271" :height="498">
             <img v-lazy="() => import('@/assets/images/home/world.webp')" class="bg" alt="" />
-          </div>
+          </IpImage>
 
           <div class="content">
             <div class="container column">
@@ -102,6 +103,7 @@ import Message from "@/components/message/message"
 import settingStore from "@/store/setting"
 import { roundToDecimal } from "@/utils/tools"
 import vLazy from "@/directive/lazy"
+import IpImage from "@/components/image/image.vue"
 
 const { t } = useI18n()
 
