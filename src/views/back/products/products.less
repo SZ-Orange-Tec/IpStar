@@ -1,19 +1,13 @@
 .products {
 
   .main{
-    min-height: 0;
-    border-radius: 8px;
-    
-    background-color: hsl(var(--layout-background));
-    padding: 40px;
     @media screen and (max-width:768px) {
-      padding: 2.5rem 0.75rem;
       overflow: auto;
     }
 
     .table_box{
       :deep(.el-table){
-        max-height: 100%;
+        height: 100%;
         border-radius: 8px;
         thead{
           .el-table__cell{
@@ -37,16 +31,29 @@
     }
 
     // .el-table{
-    //   --el-table-header-bg-color:hsl(var(--layout-background));
-    //   --el-table-bg-color: hsl(var(--layout-background));
+    //   --el-table-header-bg-color:hsl(var(--page-background));
+    //   --el-table-bg-color: hsl(var(--page-background));
     //   --el-table-text-color:hsl(var(--foreground));
     //   --el-table-header-text-color:hsl(var(--foreground));
     //   --el-table-border-color:hsl(var(--foreground) / 10%);
       
     // }
-    .el-pagination{
-      --el-pagination-bg-color:transparent;
-      --el-pagination-text-color:hsl(var(--foreground));
+    .pagination{
+      padding-bottom: 12px;
+      :deep(.el-pagination){
+        --el-pagination-button-color:hsl(var(--foreground) / 60%);
+        --el-pagination-bg-color:transparent;
+        --el-pagination-text-color:hsl(var(--foreground));
+        --el-pagination-button-disabled-bg-color:transparent;
+        --el-pagination-button-disabled-color:hsl(var(--foreground) / 30%);
+        --el-input-bg-color:transparent;
+        .el-input{
+          --el-input-bg-color:transparent;
+          --el-input-text-color:hsl(var(--foreground));
+          --el-input-border-color:hsl(var(--border));
+          --el-input-hover-border-color:hsl(var(--input-border-hover));
+        }
+      }
     }
   }
 }

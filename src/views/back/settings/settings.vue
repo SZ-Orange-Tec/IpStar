@@ -11,104 +11,112 @@
     </NavBar>
 
     <div class="w-full main flex-1 px-3 md:px-5">
-      <div class="tab_content space-y-5" v-show="!idx">
-        <!-- 头像 -->
-        <div class="headPortrait space-x-5">
-          <div class="img_head">
-            <img src="../../../assets/pc_img/layout_img/head portrait.png" alt="head portrait" />
+      <div class="main_container">
+        <div class="tab_content space-y-5" v-show="!idx">
+          <!-- 头像 -->
+          <div class="headPortrait space-x-5">
+            <div class="img_head">
+              <img src="../../../assets/pc_img/layout_img/head portrait.png" alt="head portrait" />
+            </div>
+            <ip-button class="px-5 h-8 text-sm" type="neutral" @click="setPassword">
+              {{ $t("Password") }}
+            </ip-button>
           </div>
-          <ip-button class="px-5 h-8 text-sm" type="neutral" @click="setPassword">
-            {{ $t("Password") }}
-          </ip-button>
-        </div>
-        <!-- 用户信息 -->
-        <div class="form space-y-5">
-          <div class="fix flex gap-5">
+          <!-- 用户信息 -->
+          <div class="form space-y-5">
+            <div class="fix flex gap-5">
+              <div class="space-y-2">
+                <p>User ID</p>
+                <el-input placeholder="Name" readonly v-model="userInfo.cuscode"></el-input>
+              </div>
+              <div class="space-y-2">
+                <p>Name</p>
+                <el-input placeholder="E-mail" readonly v-model="userInfo.username"></el-input>
+              </div>
+            </div>
+            <div class="fix space-y-2">
+              <p>E-mail</p>
+              <el-input readonly v-model="userInfo.email" />
+            </div>
             <div class="space-y-2">
-              <p>User ID</p>
-              <el-input placeholder="Name" readonly v-model="userInfo.cuscode"></el-input>
+              <p>API Key</p>
+              <div class="column md:flex gap-2">
+                <div class="fix">
+                  <el-input readonly v-model="userInfo.api_key" />
+                </div>
+                <div class="v_center space-x-2">
+                  <el-button class="color" @click="copyText(userInfo.api_key)">{{ $t("Copy") }}</el-button>
+                  <el-button type="primary" @click="apiKeyUpdate">{{ $t("Regenerate") }}</el-button>
+                  <el-popover placement="top" width="300" trigger="hover">
+                    <div>
+                      <p>{{ $t("settings_spec.popover") }}</p>
+                    </div>
+                    <template #reference>
+                      <HelpCircle :size="16" color="hsl(var(--primary))" class="pointer" />
+                    </template>
+                  </el-popover>
+                </div>
+              </div>
+              <div class="flex w-full space-x-3"></div>
             </div>
             <div class="space-y-2">
-              <p>Name</p>
-              <el-input placeholder="E-mail" readonly v-model="userInfo.username"></el-input>
-            </div>
-          </div>
-          <div class="fix space-y-2">
-            <p>E-mail</p>
-            <el-input readonly v-model="userInfo.email" />
-          </div>
-          <div class="space-y-2">
-            <p>API Key</p>
-            <div class="column md:flex gap-2">
-              <div class="fix">
-                <el-input readonly v-model="userInfo.api_key" />
-              </div>
-              <div class="flex space-x-2">
-                <el-button class="color" @click="copyKey">{{ $t("Copy") }}</el-button>
-                <el-button type="primary" @click="apiKeyUpdate">{{ $t("Regenerate") }}</el-button>
-                <el-popover placement="top" width="300" :offset="100" trigger="hover">
-                  <div>
-                    <p>{{ $t("settings_spec.popover") }}</p>
-                  </div>
-                  <template #reference>
-                    <img src="../../../assets/pc_img/layout_img/question mark.png" style="height: 20px !important" />
-                  </template>
-                </el-popover>
+              <p>Proxy User</p>
+              <div class="column md:flex gap-2">
+                <div class="fix">
+                  <el-input readonly v-model="userInfo.proxy_user" />
+                </div>
+                <div class="flex space-x-2">
+                  <el-button class="color" @click="copyText(userInfo.proxy_user)">{{ $t("Copy") }}</el-button>
+                  <el-button type="primary" class="color" @click="userUpdate">{{ $t("Regenerate") }}</el-button>
+                </div>
               </div>
             </div>
-            <div class="flex w-full space-x-3"></div>
-          </div>
-          <div class="space-y-2">
-            <p>Proxy User</p>
-            <div class="column md:flex gap-2">
-              <div class="fix">
-                <el-input readonly v-model="userInfo.proxy_user" />
+            <div class="space-y-2">
+              <p>Proxy Password</p>
+              <div class="column md:flex gap-2">
+                <div class="fix">
+                  <el-input readonly v-model="userInfo.proxy_pass" />
+                </div>
+                <el-button class="color" @click="copyText(userInfo.proxy_pass)">{{ $t("Copy") }}</el-button>
               </div>
-              <el-button class="color" @click="userUpdate">{{ $t("Regenerate") }}</el-button>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <p>Proxy Password</p>
-            <div class="fix">
-              <el-input readonly v-model="userInfo.proxy_pass" />
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="tab_content" v-show="idx">
-        <!-- 新增按钮 -->
-        <el-button @click="addNew">{{ $t("Add") }}</el-button>
-        <!-- 白名单表格 -->
-        <div class="table_box">
-          <el-table :data="tableData" height="378" border style="width: 753px; border-radius: 10px 10px 0px 0px">
-            <el-table-column prop="ip" label="IP"> </el-table-column>
-            <el-table-column prop="note" :label="$t('Notes')"> </el-table-column>
-            <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
-            <el-table-column :label="$t('Manage')">
-              <template #default="scope">
-                <el-popconfirm :title="$t('settings_spec.confirm_delete')" @confirm="deleteItem(scope)">
-                  <template #reference>
-                    <el-button>{{ $t("Delete") }}</el-button>
-                  </template>
-                </el-popconfirm>
+        <div class="tab_content space-y-5" v-show="idx">
+          <!-- 新增按钮 -->
+          <el-button @click="addNew">{{ $t("Add") }}</el-button>
+          <!-- 白名单表格 -->
+          <div class="table_box">
+            <el-table :data="tableData" height="378" border style="width: 753px; border-radius: 10px 10px 0px 0px">
+              <el-table-column prop="ip" label="IP"> </el-table-column>
+              <el-table-column prop="note" :label="$t('Notes')"> </el-table-column>
+              <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
+              <el-table-column :label="$t('Manage')">
+                <template #default="scope">
+                  <el-popconfirm :title="$t('settings_spec.confirm_delete')" @confirm="deleteItem(scope)">
+                    <template #reference>
+                      <el-button>{{ $t("Delete") }}</el-button>
+                    </template>
+                  </el-popconfirm>
+                </template>
+              </el-table-column>
+              <template #append>
+                <div class="message" v-if="bottomLoding">loading&nbsp;<i class="el-icon-loading"></i></div>
+                <div class="message" v-else>{{ $t("At_the_end") }}</div>
               </template>
-            </el-table-column>
-            <template #append>
-              <div class="message" v-if="bottomLoding">loading&nbsp;<i class="el-icon-loading"></i></div>
-              <div class="message" v-else>{{ $t("At_the_end") }}</div>
-            </template>
-          </el-table>
-        </div>
-        <el-popover placement="bottom" width="400" :offset="50" trigger="hover">
-          <div>
-            <p>{{ $t("settings_spec.white_tip1") }}</p>
-            <p>{{ $t("settings_spec.white_tip2") }}</p>
+            </el-table>
           </div>
-          <template #reference>
-            <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
-          </template>
-        </el-popover>
+          <el-popover placement="top-start" width="400" trigger="hover">
+            <div>
+              <p>{{ $t("settings_spec.white_tip1") }}</p>
+              <p>{{ $t("settings_spec.white_tip2") }}</p>
+            </div>
+            <template #reference>
+              <HelpCircle :size="16" color="hsl(var(--primary))" class="pointer" />
+            </template>
+          </el-popover>
+        </div>
       </div>
     </div>
     <!-- tabs -->
@@ -179,12 +187,14 @@ import loginStore from "@/store/login"
 import NavBar from "../components/navbar/navbar.vue"
 import IpButton from "@/components/button/button.vue"
 import Message from "@/components/message/message"
+import { HelpCircle } from "lucide-vue-next"
 
 export default {
   name: "SettIngs",
   components: {
     NavBar,
     IpButton,
+    HelpCircle,
   },
   data() {
     return {
@@ -305,11 +315,10 @@ export default {
   },
   methods: {
     // 复制key
-    copyKey() {
-      const text = this.userInfo.api_key
+    copyText(str) {
       if (navigator.clipboard) {
         navigator.clipboard
-          .writeText(text)
+          .writeText(str)
           .then((res) => {
             // 成功提示信息
             Message({
@@ -326,7 +335,7 @@ export default {
       } else {
         const input = document.createElement("input")
         document.body.appendChild(input)
-        input.setAttribute("value", text)
+        input.setAttribute("value", str)
         input.select()
         if (document.execCommand("copy")) {
           document.execCommand("copy")

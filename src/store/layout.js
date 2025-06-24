@@ -4,7 +4,7 @@ const state = reactive({
   path: "", // 路由路径
   isProduc: false, // 是否显示产品页
   isMask: JSON.parse(localStorage.getItem("mask") ?? "true"),
-  registerAward: true,
+  registerAward: false, // 是否有注册奖励
 })
 const getters = {}
 const actions = {}

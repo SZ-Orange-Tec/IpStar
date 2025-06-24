@@ -6,9 +6,9 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1">
+    <div class="w-full main flex-1 px-3 md:px-5">
       <!-- 产品列表 -->
-      <div class="product_box w-full column_center space-y-5 lg:space-y-10" v-if="isProduc">
+      <div class="product_box md:px-5 w-full column_center space-y-5 lg:space-y-10" v-if="isProduc">
         <div class="w-full">
           <productList :tabbar="true" :vantage="false" :pack="5"></productList>
         </div>
@@ -48,18 +48,20 @@
           </el-table>
         </div>
         <!-- 分页 -->
-        <div class="w-full between p-3">
-          <el-pagination
-            class="pagination"
-            @current-change="handleCurrentChange"
-            :current-page="tabPage"
-            :page-size="tabSize"
-            layout="total, prev, pager, next, jumper"
-            :total="tabTotal"
-          >
-          </el-pagination>
+        <div class="pagination w-full">
+          <div class="w-full between">
+            <el-pagination
+              class="pagination"
+              @current-change="handleCurrentChange"
+              :current-page="tabPage"
+              :page-size="tabSize"
+              layout="total, prev, pager, next, jumper"
+              :total="tabTotal"
+            >
+            </el-pagination>
 
-          <ip-button type="ghost" class="px-3 h-10 text-sm" @click="toUse">{{ $t("product_spec.purchase") }}</ip-button>
+            <ip-button type="ghost" class="px-3 h-10 text-sm" @click="toUse">{{ $t("product_spec.purchase") }}</ip-button>
+          </div>
         </div>
       </div>
 

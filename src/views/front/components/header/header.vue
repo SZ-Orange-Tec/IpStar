@@ -60,9 +60,9 @@
           </template>
         </DropDown>
 
-        <div class="v_center space-x-5">
+        <div class="v_center space-x-3 shink-0">
           <!-- 语言 -->
-          <DropDown placement="bottom">
+          <DropDown placement="bottom" class="shink-0">
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
                 <div class="vh_center space-x-2 shrink-0 w-full h-full">
@@ -90,10 +90,10 @@
           <!-- 用户 -->
           <DropDown v-else placement="bottom" @onChange="userDropChange">
             <template #label="{ open }">
-              <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
+              <IpButton :class="{ open: open }" type="ghost" class="user_icon">
                 <div class="v_center shrink-0 space-x-2">
-                  <CircleUser :size="25" :stroke-width="1" />
-                  <p class="username hidden sm:block">{{ username }}</p>
+                  <CircleUser :size="24" :stroke-width="1" />
+                  <p class="username hidden md:block">{{ username }}</p>
                 </div>
               </IpButton>
             </template>

@@ -45,6 +45,8 @@
         <div class="intro1 img_box hidden xl:block">
           <img src="@/assets/images/home/intro1.png" />
         </div>
+
+        <!-- 评价 -->
         <div class="intro2 img_box space-y-4 hidden xl:block">
           <div class="v_center space-x-2">
             <img src="@/assets/images/home/intro_avatar.png" width="45" height="45" alt="" />
@@ -59,8 +61,33 @@
           <p class="text-lg title">IPStar is stable and <br />easy to use</p>
           <p class="text-xs description">"Fast speed and strong anony-<br />mity highly recommended.</p>
         </div>
-        <div class="intro3 img_box hidden xl:block">
-          <img src="@/assets/images/home/intro3.png" />
+        <!-- 标签 -->
+        <div class="intro3 img_box hidden xl:column text-sm space-y-5 rounded-lg">
+          <div class="flex space-x-3 tag p-4 rounded-lg">
+            <div class="tag-icon vh_center rounded-full" style="background-color: #fd5b71">
+              <Code :size="20"></Code>
+            </div>
+            <div class="flex-1 space-y-2">
+              <p class="font-semibold whitespace-nowrap">Fresh & High Anonymous</p>
+              <ul class="tag-list text-xs flex space-x-1">
+                <li class="grey v_center rounded">Fast</li>
+                <li class="red v_center rounded">Secure</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex space-x-3 tag p-4 rounded-lg">
+            <div class="tag-icon vh_center rounded-full" style="background-color: #9b51e0">
+              <Laptop :size="20" />
+            </div>
+            <div class="flex-1 space-y-2">
+              <p class="font-semibold">API auto extract</p>
+              <ul class="tag-list text-xs flex space-x-1">
+                <li class="red v_center rounded">Work</li>
+                <li class="purple v_center rounded">Entertainment</li>
+              </ul>
+            </div>
+          </div>
+          <!-- <img src="@/assets/images/home/intro3.png" /> -->
         </div>
       </div>
 
@@ -308,7 +335,7 @@ import { useI18n } from "vue-i18n"
 // import { ElMessage, ElNotification, ElMessageBox } from "element-plus"
 import Message from "@/components/message/message.js"
 import IpButton from "@/components/button/button.vue"
-import { MoveRight, Star as StarIcon, ToggleLeft, Dot } from "lucide-vue-next"
+import { MoveRight, Star as StarIcon, ToggleLeft, Dot, Code, Laptop } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
 import "element-plus/es/components/message-box/style/css"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
@@ -340,18 +367,8 @@ const ipsCountVal = ref(null)
 const countryCount = ref(null)
 const direction = ref("右")
 const merchantTime = ref(null)
-const isgift = ref(false)
-const isAward = ref(false)
 
 // 转换methods
-const getDataConfig = async function () {
-  try {
-    const { data } = await platDataConfig()
-    isAward.value = data.register_award
-  } catch (err) {
-    console.log(err)
-  }
-}
 
 function isInViewPortOfOne(dom) {
   let viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
@@ -401,11 +418,11 @@ function giftPacks() {
   // 领取礼包
   if (token.value) {
     ElMessageBox.confirm(
-      en.value ? "You can contact customer service to apply for a 500M trial traffic pack." : "您可以联系客服申请500M的试用流量包。",
+      en.value ? "You can contact us to apply for a 500M trial traffic pack." : "您可以联系客服申请500M的试用流量包。",
       en.value ? "Tip" : "温馨提示",
       {
         cancelButtonText: en.value ? "I know" : "我知道了",
-        confirmButtonText: en.value ? "Contact No" : "立即联系",
+        confirmButtonText: en.value ? "Contact Now" : "立即联系",
         center: true,
         callback: (action) => {
           if (action === "confirm") {

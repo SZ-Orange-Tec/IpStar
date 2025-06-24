@@ -10,16 +10,16 @@
           </i18n-t>
 
           <div class="space-y-5 w-full">
-            <div class="space-y-1">
-              <p class="label text-xs font-bold">{{ t("relation_spec.full_name") }}</p>
+            <div class="space-y-2">
+              <p class="label text-sm">{{ t("relation_spec.full_name") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
-            <div class="space-y-1">
-              <p class="label text-xs font-bold">{{ t("Email") }}</p>
+            <div class="space-y-2">
+              <p class="label text-sm">{{ t("Email") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="email" :placeholder="t('Email')" />
             </div>
-            <div class="space-y-1">
-              <p class="label text-xs font-bold">{{ t("relation_spec.help") }}</p>
+            <div class="space-y-2">
+              <p class="label text-sm">{{ t("relation_spec.help") }}</p>
               <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help')"></textarea>
             </div>
           </div>
@@ -27,7 +27,8 @@
           <IpButton type="primary" class="px-5 h-10" @click="leave_word">
             <div class="v_center space-x-2">
               <p>{{ t("Send_message") }}</p>
-              <ArrowRight :size="16" />
+              <ArrowRight :size="16" v-if="!loading" />
+              <span class="ip-loading" v-else></span>
             </div>
           </IpButton>
         </div>
@@ -91,30 +92,37 @@ const email = ref("")
 const content = ref("")
 
 // 客户留言
+const loading = ref(false) // loading
 const leave_word = () => {
   if (fullName.value && email.value && content.value) {
+    loading.value = true
+
     platCustomerLeaveMessage({
       fullname: fullName.value,
       email: email.value,
       content: content.value,
-    }).then(() => {
-      const title = en.value ? "warm prompt" : "温馨提示"
-      const message = en.value
-        ? "We have received your messages, and we will contact you as soon as possible."
-        : "我们已经收到您的消息，我们将尽快与您联系。"
-      const confirmText = en.value ? "OK" : "确定"
-
-      ElMessageBox.confirm(message, title, {
-        confirmButtonText: confirmText,
-        callback: (action) => {
-          if (action === "confirm") {
-            fullName.value = ""
-            email.value = ""
-            content.value = ""
-          }
-        },
-      })
     })
+      .then(() => {
+        const title = en.value ? "warm prompt" : "温馨提示"
+        const message = en.value
+          ? "We have received your messages, and we will contact you as soon as possible."
+          : "我们已经收到您的消息，我们将尽快与您联系。"
+        const confirmText = en.value ? "OK" : "确定"
+
+        ElMessageBox.confirm(message, title, {
+          confirmButtonText: confirmText,
+          callback: (action) => {
+            if (action === "confirm") {
+              fullName.value = ""
+              email.value = ""
+              content.value = ""
+            }
+          },
+        })
+      })
+      .finally(() => {
+        loading.value = false
+      })
   } else {
     Message({
       type: "warning",

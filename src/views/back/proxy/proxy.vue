@@ -38,12 +38,12 @@
               <p class="text-sm font-medium">IP {{ t("Duration") }}</p>
               <div class="space-x-3 v_center">
                 <el-cascader v-model="IPtime" :options="IPtimeOption" :append-to-body="false" @change="IPtimeChange"></el-cascader>
-                <el-popover placement="bottom" width="300" :offset="-100" trigger="hover">
+                <el-popover placement="bottom" width="300" trigger="hover">
                   <div>
                     <p>{{ t("proxy_spec.duration_tip") }}</p>
                   </div>
                   <template #reference>
-                    <img src="../../../assets/pc_img/layout_img/question mark.png" alt="question mark" />
+                    <HelpCircle :size="16" color="hsl(var(--primary))" class="pointer" />
                   </template>
                 </el-popover>
               </div>
@@ -148,9 +148,8 @@ import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 import NavBar from "../components/navbar/navbar.vue"
 import IpButton from "@/components/button/button.vue"
-import { ShoppingCart } from "lucide-vue-next"
+import { ShoppingCart, ArrowLeftRight, HelpCircle } from "lucide-vue-next"
 import IpInput from "@/components/input/input.vue"
-import { ArrowLeftRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 
 const { en } = settingStore()

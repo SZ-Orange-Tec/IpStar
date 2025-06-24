@@ -13,7 +13,12 @@
     <div class="list" :style="{ 'max-width': maxWidth }">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex gap-3">
-          <li v-for="item in product_list" :key="item.id" :class="item.hot ? 'popular' : 'common'" class="transition-color">
+          <li
+            v-for="item in product_list"
+            :key="item.id"
+            :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
+            class="transition-color"
+          >
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
@@ -190,7 +195,7 @@
 <script setup>
 import PayPopup from "../pay_popup/pay_popup.vue"
 import setpNumber from "./stepNumber/stepNumber.vue"
-import { platProductsV2, platCustomerOrder } from "@/api/home"
+import { platProductsV2, platCustomerOrder, platDataConfig } from "@/api/home"
 import { debounce, throttle } from "@/utils/tools"
 import loginStore from "@/store/login"
 import { CircleCheck } from "lucide-vue-next"
@@ -201,6 +206,7 @@ import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
+import layoutStore from "@/store/layout"
 
 const props = defineProps({
   tabbar: {
@@ -217,7 +223,11 @@ const props = defineProps({
   },
 })
 
-const { token } = loginStore()
+// 是否显示赠送gift
+const { isLogin } = loginStore()
+const { registerAward } = layoutStore()
+const showGift = computed(() => !isLogin.value && registerAward.value)
+
 const router = useRouter()
 
 const { t } = useI18n()
@@ -273,7 +283,7 @@ async function GetProductList() {
     const index = tempGroup1.findIndex((item) => item.trial)
     if (index > 0) {
       const item = tempGroup1.splice(index, 1)
-      if (!token.value) {
+      if (!isLogin.value) {
         tempGroup1.unshift(item[0])
       }
     }
@@ -287,6 +297,15 @@ async function GetProductList() {
     nextTick(() => {
       initScrollTag()
     })
+  } catch (err) {
+    console.log(err)
+  }
+}
+// 获取全局配置
+async function getDataConfig() {
+  try {
+    const { data } = await platDataConfig()
+    registerAward.value = data.register_award
   } catch (err) {
     console.log(err)
   }
@@ -398,7 +417,7 @@ const order_data = ref(null)
 const payPopupRef = ref(null)
 let product
 function click_pay(item) {
-  if (!token.value) {
+  if (!isLogin.value) {
     router.push("/login")
     Message({
       type: "warning",
@@ -447,6 +466,7 @@ async function FoundOrder() {
 }
 
 onMounted(() => {
+  getDataConfig()
   GetProductList()
   window.addEventListener("resize", initScrollTag)
 })

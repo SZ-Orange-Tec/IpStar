@@ -13,7 +13,7 @@ export default {
 
   relation_spec: {
     title: "Send us {info} directly!",
-    title_slot: "information",
+    title_slot: "advices",
 
     full_name: "Full name",
     help: "What can we help you with?",

@@ -140,7 +140,7 @@ const { t } = useI18n()
 const formInline = ref({
   // form
   country: "",
-  protocol: "1",
+  protocol: "0",
   format: "0",
   IPtime: "0",
 })
