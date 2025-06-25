@@ -9,8 +9,8 @@ export default {
   ...paypopup,
 
   pricing_spec: {
-    des: "Real Residential IPs cover 200+ countries\nLowest price {price}",
-    des_slot: "0.25/GB",
+    des: "Real Residential IPs cover 200+ countries\nPlans From {price}",
+    // des_slot: "0.25/GB",
     payment: "We support multiple payment methods",
     popular: "Most Popular Countries",
 

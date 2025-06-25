@@ -14,7 +14,7 @@
     </div>
 
     <!-- 遮罩层 -->
-    <div class="mask" v-if="isMask && registerAward">
+    <div class="mask" v-if="isMask">
       <div class="mask_content">
         <img src="../../assets/pc_img/layout_img/Gift bag.webp" alt="Gift bag" />
         <h2 class="text-lg md:text-2xl">{{ t("navbar_spec.gift") }}</h2>
@@ -22,7 +22,7 @@
         <div class="btn_sum text-xl">
           <!-- @click="maskFn" -->
           <!-- <el-button @click="maskFn(1)">{{ t("PCLayout.gift[2]") }}</el-button> -->
-          <p @click="maskFn(1)">{{ t("navbar_spec.get") }}</p>
+          <p @click="closeMask">{{ t("navbar_spec.get") }}</p>
         </div>
       </div>
     </div>
@@ -30,36 +30,49 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
-import { useRouter } from "vue-router"
+import { onMounted, ref } from "vue"
 import detect from "@/utils/detect"
-import settingsStore from "@/store/setting"
 import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 import NavMenu from "./components/menu/menu.vue"
 import { useI18n } from "vue-i18n"
+import { differenceInMinutes } from "date-fns"
+import { platDataConfig } from "@/api/home"
 
 const { getUserInfo } = userStore()
-const { isMask, registerAward } = layoutStore()
-const { isDocument, documentIdx } = settingsStore()
-const router = useRouter()
 
 const { t } = useI18n()
 
-function maskFn(bol) {
+// 赠送流量弹窗相关
+const isMask = ref(false)
+async function judgeMask() {
+  try {
+    const { create_time } = await getUserInfo()
+
+    const { data } = await platDataConfig()
+    const hasAward = data.register_award
+
+    if (isNewUser(create_time) && hasAward) {
+      isMask.value = true
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+function isNewUser(create_time) {
+  const date = new Date(create_time)
+  const utc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())
+
+  return differenceInMinutes(new Date(), new Date(utc)) < 3
+}
+function closeMask() {
   detect.gift()
   isMask.value = false
-  localStorage.setItem("mask", JSON.stringify(isMask.value))
-  if (!bol) {
-    isDocument.value = "Help"
-    documentIdx.value = "1-0"
-    router.push("/doc")
-  }
 }
 
 // 生命周期钩子
 onMounted(() => {
-  getUserInfo()
+  judgeMask()
 })
 </script>
 

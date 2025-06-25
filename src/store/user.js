@@ -17,6 +17,8 @@ const actions = {
     const { data } = await platCustomer()
     state.userInfo = data
     localStorage.setItem("userInfo", JSON.stringify(data))
+
+    return data
   },
   updateUserInfo(info) {
     state.userInfo = info

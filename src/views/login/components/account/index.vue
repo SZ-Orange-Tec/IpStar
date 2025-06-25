@@ -36,8 +36,6 @@ import { GithubLogin, GoogleLogin } from "@/api/login"
 import { debounce } from "@/utils/tools"
 import loginStore from "@/store/login"
 import settingStore from "@/store/setting"
-import userStore from "@/store/user"
-import layoutStore from "@/store/layout"
 import Message from "@/components/message/message"
 import { Mail as MailIcon } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
@@ -53,8 +51,6 @@ const emit = defineEmits(["update:modelValue", "next"])
 const router = useRouter()
 const { token } = loginStore()
 const { lang } = settingStore()
-const { getUserInfo } = userStore()
-const { registerAward } = layoutStore()
 
 const btnLoading = ref(false)
 
@@ -110,11 +106,7 @@ function handlerGoogleLogin() {
           // 存储token
           token.value = res.data.token
           localStorage.setItem("token", res.data.token)
-          // 获取用户信息
-          await getUserInfo()
-          // 是否有注册奖励
-          const has = await hasRegisterAward()
-          registerAward.value = has
+
           router.push("/overview")
         })
         .catch((err) => {
@@ -163,11 +155,7 @@ function handlerGithubLogin() {
           // 存储token
           localStorage.setItem("token", res.data.token)
           token.value = res.data.token
-          // 获取用户信息
-          await getUserInfo()
-          // 是否有注册奖励
-          const has = await hasRegisterAward()
-          registerAward.value = has
+
           router.push("/overview")
         })
         .catch((err) => {

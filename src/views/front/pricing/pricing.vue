@@ -8,7 +8,7 @@
           <div class="text-lg sm:text-2xl lg:text-3xl column_center space-y-5">
             <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title md:whitespace-pre-wrap">
               <template #price>
-                <span class="primary_text">{{ t("pricing_spec.des_slot") }}</span>
+                <span class="primary_text">$0.39/GB</span>
               </template>
             </i18n-t>
 

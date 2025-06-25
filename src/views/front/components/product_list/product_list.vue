@@ -232,7 +232,7 @@ const props = defineProps({
 
 // 是否显示赠送gift
 const { isLogin } = loginStore()
-const { registerAward } = layoutStore()
+const { registerAward, gift } = layoutStore()
 const showGift = computed(() => !isLogin.value && registerAward.value)
 
 const router = useRouter()
@@ -264,7 +264,9 @@ async function GetProductList() {
         }, {})
       }
 
-      if (item.is_sell !== 0) {
+      if (item.is_sell === 0) {
+        gift.value = item.pack_size
+      } else {
         item.prices = item.prices.map((i) => {
           const key = String(i.days)
           const origin = prices[key]

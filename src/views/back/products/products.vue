@@ -182,7 +182,7 @@ async function getProductClient() {
 
 // 生命周期钩子
 onMounted(() => {
-  // getProductClient()
+  getProductClient()
 })
 </script>
 

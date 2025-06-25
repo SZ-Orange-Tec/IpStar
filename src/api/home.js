@@ -115,7 +115,7 @@ export function platPaymentStripe(data) {
     data,
   })
 }
-// Stripe checkout 支付
+// 配置信息
 export function platDataConfig(params) {
   return request({
     url: "/plat/data/config",

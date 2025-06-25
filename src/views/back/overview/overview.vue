@@ -629,7 +629,7 @@ export default {
       const myEchart = echart.init(document.getElementById("echartTime"))
       const option = {
         title: {
-          text: this.$t("overview_spec.EchartTextTwo"),
+          text: this.en ? "Real time traffic" : "实时流量",
           textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
           padding: [20, 0, 0, 20],
         },

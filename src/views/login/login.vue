@@ -60,10 +60,7 @@ import ResetPassword from "./components/reset/index.vue"
 import ForgetPassword from "./components/forget/index.vue"
 import { checkCustomer, platCaptcha, platCustomerLogin, platCustomerRegister, platCustomerVerifycode } from "@/api/login"
 import detect from "@/utils/detect"
-import { platDataConfig } from "@/api/home"
 import loginStore from "@/store/login"
-import userStore from "@/store/user"
-import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
@@ -77,9 +74,7 @@ import { platCustomerResetpass } from "../../api/login"
 const { t } = useI18n()
 
 const router = useRouter()
-const { registerAward } = layoutStore()
-const { Login } = loginStore()
-const { getUserInfo } = userStore()
+const { token } = loginStore()
 const { en } = settingsStore()
 
 const height = window.innerHeight + "px"
@@ -116,16 +111,6 @@ async function getGraphicCode() {
   }
 }
 
-async function hasRegisterAward() {
-  try {
-    const { data } = await platDataConfig()
-    return data.register_award
-  } catch (err) {
-    console.log(err)
-    return false
-  }
-}
-
 async function next(func) {
   try {
     switch (status.value) {
@@ -154,12 +139,10 @@ async function next(func) {
             captcha_id: captchaId,
             captcha_value: input,
           })
+          // 保存token
           localStorage.setItem("token", data.token)
-          Login(data.token)
-          getUserInfo()
-          const has = await hasRegisterAward()
-          registerAward.value = has
-          await import("@/views/back/layout.vue")
+          token.value = data.token
+
           router.push("/overview")
 
           Message({
@@ -183,13 +166,12 @@ async function next(func) {
             password: password.value,
             code: code.value,
           })
+          // 保存token
           localStorage.setItem("token", data.token)
-          Login(data.token)
-          getUserInfo()
-          const has = await hasRegisterAward()
-          registerAward.value = has
-          await import("@/views/back/layout.vue")
+          token.value = data.token
+
           router.push("/overview")
+
           detect.register()
         }
         break
@@ -232,12 +214,10 @@ async function next(func) {
           captcha_id: captchaId,
           captcha_value: input,
         })
+        // 保存token
         localStorage.setItem("token", data.token)
-        Login(data.token)
-        getUserInfo()
-        const has = await hasRegisterAward()
-        registerAward.value = has
-        await import("@/views/back/layout.vue")
+        token.value = data.token
+
         router.push("/overview")
 
         Message({

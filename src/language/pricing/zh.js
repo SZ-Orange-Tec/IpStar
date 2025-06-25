@@ -9,8 +9,8 @@ export default {
   ...paypopup,
 
   pricing_spec: {
-    des: "真实住宅IP 覆盖全球 200+ 国家\n价格最低 {price}",
-    des_slot: "0.25/GB",
+    des: "真实住宅IP 覆盖全球 200+ 国家\n套餐 {price} 起",
+    // des_slot: "0.25/GB",
     payment: "我们支持多种支付方式",
     popular: "最受欢迎国家",
 

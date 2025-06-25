@@ -12,7 +12,7 @@
             style="line-height: 2"
           >
             <template #primary>
-              <span class="primary_text">$0.25/GB</span>
+              <span class="primary_text">$0.39/GB</span>
             </template>
           </i18n-t>
           <p class="text-center description md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
