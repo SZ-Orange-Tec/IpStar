@@ -46,7 +46,7 @@
       </ip-button>
       <div class="text-lg sm:text-2xl lg:text-3xl v_center sm:column gap-2">
         <div>{{ t("login_spec.your") }}</div>
-        <div class="liner">IP STAR!</div>
+        <div class="liner">IPSTAR!</div>
       </div>
     </div>
   </div>
@@ -265,11 +265,7 @@ function back() {
 }
 
 function toHome() {
-  try {
-    router.go(-1)
-  } catch (err) {
-    router.replace("/home")
-  }
+  router.push("/home")
 }
 
 onMounted(() => {
