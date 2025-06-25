@@ -30,21 +30,28 @@
                 </div>
 
                 <!-- 折扣 -->
-                <p class="font-medium lg:font-semibold">
-                  {{ item.trial ? t("Free") : item.discount_rate + "%" + t("OFF") }}
+                <p class="font-medium lg:font-semibold" style="height: 1.5rem">
+                  <template v-if="item.trial">{{ t("Free") }}</template>
+                  <template v-else-if="item.prices[item.select]?.discount > 0"
+                    >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
+                  >
+                  <template v-else>{{ item.name }}</template>
                 </p>
 
                 <!-- 免费 -->
-                <!-- <template v-if="item.trial">
-                  <p class="price">
-                    {{ item.pack_title.split(" ")[0] }}<em>{{ item.pack_title.split(" ")[1] }}</em>
+                <template v-if="item.trial">
+                  <p class="price text-2xl lg:text-4xl space-x-1">
+                    <strong>{{ item.pack_title.split(" ")[0] }}</strong>
+                    <span class="text-sm">{{ item.pack_title.split(" ")[1] }}</span>
                   </p>
-                  <p class="delete">{{ t("PCProductList.freeText") }}</p>
-                  <p class="total">
-                    <em>{{ t("PCProducts.tableHeader.duration") }}: </em>
-                    <strong>{{ item.prices[0].days }} {{ t("PCProductList.Day") }}</strong>
+                  <p class="total vh_center space-x-1">
+                    <span>{{ t("Total") }}:</span>
+                    <span>$0</span>
                   </p>
-                </template> -->
+                  <div class="number w-full">
+                    <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
+                  </div>
+                </template>
                 <!-- 不限量 -->
                 <!-- <template v-else-if="item.unlimit">
                   <p class="price" style="margin: 36px 0 10px">
@@ -52,19 +59,19 @@
                   </p>
                 </template> -->
                 <!-- 个人 企业 -->
-                <!-- <template v-else> -->
-                <p class="price text-2xl lg:text-4xl space-x-1">
-                  <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
-                  <span class="text-sm">/GB</span>
-                </p>
-                <p class="total vh_center space-x-1">
-                  <span class="lg:text-xl">{{ t("Total") }}:</span>
-                  <span>${{ item.prices[item.select].price / 100 }}</span>
-                </p>
-                <div class="number w-full">
-                  <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
-                </div>
-                <!-- </template> -->
+                <template v-else>
+                  <p class="price text-2xl lg:text-4xl space-x-1">
+                    <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
+                    <span class="text-sm">/GB</span>
+                  </p>
+                  <p class="total vh_center space-x-1">
+                    <span>{{ t("Total") }}:</span>
+                    <span>${{ item.prices[item.select].price / 100 }}</span>
+                  </p>
+                  <div class="number w-full">
+                    <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
+                  </div>
+                </template>
               </div>
 
               <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
@@ -196,7 +203,7 @@
 import PayPopup from "../pay_popup/pay_popup.vue"
 import setpNumber from "./stepNumber/stepNumber.vue"
 import { platProductsV2, platCustomerOrder, platDataConfig } from "@/api/home"
-import { debounce, throttle } from "@/utils/tools"
+import { debounce, throttle, roundToDecimal } from "@/utils/tools"
 import loginStore from "@/store/login"
 import { CircleCheck } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
@@ -246,12 +253,26 @@ async function GetProductList() {
     const tempGroup2 = []
     const tempGroup3 = []
 
-    data.forEach((item) => {
-      let dis = (item.prices[0].origin_price - item.prices[0].unit_price) / item.prices[0].origin_price
-      dis = Math.round(dis * 100)
+    let prices = null
 
-      if (item.is_sell === 0) {
-        // store.commit("setGift", item.pack_title)
+    data.forEach((item) => {
+      // 第一个套餐作为折扣折算标准
+      if (item.is_sell !== 0 && prices === null) {
+        prices = item.prices.reduce((pre, next) => {
+          pre[next.days] = next.unit_price
+          return pre
+        }, {})
+      }
+
+      if (item.is_sell !== 0) {
+        item.prices = item.prices.map((i) => {
+          const key = String(i.days)
+          const origin = prices[key]
+          const price = i.unit_price
+          i.discount = roundToDecimal(((origin - price) / origin) * 100, 0)
+          i.origin_price = origin
+          return i
+        })
       }
 
       const obj = {
@@ -261,7 +282,7 @@ async function GetProductList() {
         unlimit: item.group === 3,
         hot: item.promo_type === 1,
         discount: item.promo_type === 2,
-        discount_rate: dis,
+        // discount_rate: dis ?? 0,
         name: item.name,
         code: item.code,
         pack_title: item.pack_title,
@@ -280,6 +301,7 @@ async function GetProductList() {
       }
     })
 
+    console.log(prices)
     const index = tempGroup1.findIndex((item) => item.trial)
     if (index > 0) {
       const item = tempGroup1.splice(index, 1)
@@ -298,7 +320,7 @@ async function GetProductList() {
       initScrollTag()
     })
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
   }
 }
 // 获取全局配置
@@ -429,7 +451,7 @@ function click_pay(item) {
   const productData = {
     code: item.code,
     days: item.prices[item.select].days,
-    discount_rate: item.discount_rate,
+    discount_rate: item.prices[item.select].discount,
     unit_price: item.unlimit ? 0 : item.prices[item.select].unit_price,
     pack_size: item.unlimit ? t("Unlimited") : item.pack_title,
     price: item.prices[item.select].price,

@@ -30,14 +30,18 @@
           </IpButton>
         </div>
 
-        <div class="v_center">
+        <div class="v_center" v-lazy="getUserIps">
           <div class="column_center px-5">
-            <strong class="title text-2xl">15324</strong>
+            <strong class="title text-2xl" style="height: 2rem">
+              <template v-if="totalUser !== -1">{{ totalUser }}</template>
+            </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.Accumulated") }}</span>
             <!-- <span class="description text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
           <div class="column_center px-5">
-            <strong class="title text-2xl">1220</strong>
+            <strong class="title text-2xl" style="height: 2rem">
+              <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
+            </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
           </div>
         </div>
@@ -326,7 +330,7 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from "vue"
+import { ref, defineAsyncComponent, nextTick } from "vue"
 import { platDataIndex, platDataConfig } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
@@ -341,6 +345,8 @@ import "element-plus/es/components/message-box/style/css"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
+import anime from "animejs/lib/anime.es.js"
+import { roundToDecimal } from "../../../utils/tools"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -379,10 +385,40 @@ function isInViewPortOfOne(dom) {
   return top <= viewPortHeight
 }
 
+let homeData // 首页数据
 const IpMap = async function () {
-  const { data } = await platDataIndex()
-  ipsCount.value = 50 // data.ips_count
-  countryCount.value = data.country_count
+  const result = homeData ?? (await platDataIndex())
+  const { data } = result
+  homeData = result
+
+  const ip = 50 // data.ips_count
+  const country = data.country_count
+  ipsCount.value = 0
+  countryCount.value = 0
+
+  // 逐渐递增动画
+  nextTick(() => {
+    const ipobj = { charged: 0 }
+    anime({
+      targets: ipobj,
+      charged: ip,
+      round: 1,
+      easing: "linear",
+      update: function () {
+        ipsCount.value = ipobj.charged
+      },
+    })
+    const countryObj = { charged: 0 }
+    anime({
+      targets: countryObj,
+      charged: country,
+      round: 1,
+      easing: "linear",
+      update: function () {
+        countryCount.value = countryObj.charged
+      },
+    })
+  })
 
   const countryImg = await import.meta.glob("@/assets/images/home/country/*", { eager: true })
 
@@ -394,6 +430,49 @@ const IpMap = async function () {
       icon: countryImg[key].default,
     }
   })
+}
+
+// 累计用户
+const totalUser = ref(-1)
+const onlineIps = ref(-1)
+async function getUserIps() {
+  try {
+    const result = homeData ?? (await platDataIndex())
+    const { data } = result
+    homeData = result
+
+    totalUser.value = 0
+    onlineIps.value = 0
+    // 逐渐递增动画
+    nextTick(() => {
+      const ipObj = { charged: 0 }
+      let ip = data?.online_ip_count ?? 3686927
+      if (ip > Math.pow(10, 3)) {
+        ip = roundToDecimal(ip / 1000, 2) + " K"
+      }
+      anime({
+        targets: ipObj,
+        charged: ip,
+        round: 1,
+        easing: "linear",
+        update: function () {
+          onlineIps.value = ipObj.charged
+        },
+      })
+      const userObj = { charged: 0 }
+      anime({
+        targets: userObj,
+        charged: data?.lv_customer_num ?? 15324,
+        round: 1,
+        easing: "linear",
+        update: function () {
+          totalUser.value = userObj.charged
+        },
+      })
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
 }
 
 function merchantScroll() {
@@ -418,10 +497,12 @@ function giftPacks() {
   // 领取礼包
   if (token.value) {
     ElMessageBox.confirm(
-      en.value ? "You can contact us to apply for a 500M trial traffic pack." : "您可以联系客服申请500M的试用流量包。",
+      en.value
+        ? "We have already granted you a default authorization of 5M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
+        : "我们已经默认授权给你5M的测试流量，您可以联系我们申请额外500M的测试流量。",
       en.value ? "Tip" : "温馨提示",
       {
-        cancelButtonText: en.value ? "I know" : "我知道了",
+        cancelButtonText: en.value ? "Later" : "以后再说",
         confirmButtonText: en.value ? "Contact Now" : "立即联系",
         center: true,
         callback: (action) => {

@@ -46,7 +46,6 @@ const router = useRouter()
 
 const { t } = useI18n()
 
-console.log(isMask.value)
 function maskFn(bol) {
   detect.gift()
   isMask.value = false

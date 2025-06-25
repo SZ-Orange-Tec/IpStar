@@ -94,7 +94,7 @@
 
 <script setup>
 import { platDataIndex } from "@/api/home"
-import { onBeforeUnmount, onMounted, ref } from "vue"
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import loginStore from "@/store/login"
@@ -104,6 +104,7 @@ import settingStore from "@/store/setting"
 import { roundToDecimal } from "@/utils/tools"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
+import anime from "animejs/lib/anime.es.js"
 
 const { t } = useI18n()
 
@@ -117,8 +118,33 @@ const ipsCount = ref(null)
 const countryCount = ref(null)
 async function IpMap() {
   const { data } = await platDataIndex()
-  ipsCount.value = 50 // data.ips_count
-  countryCount.value = data.country_count
+
+  ipsCount.value = 0
+  countryCount.value = 0
+
+  // 逐渐递增动画
+  nextTick(() => {
+    const ipobj = { charged: 0 }
+    anime({
+      targets: ipobj,
+      charged: 50, // data.ips_count,
+      round: 1,
+      easing: "linear",
+      update: function () {
+        ipsCount.value = ipobj.charged
+      },
+    })
+    const countryObj = { charged: 0 }
+    anime({
+      targets: countryObj,
+      charged: data.country_count,
+      round: 1,
+      easing: "linear",
+      update: function () {
+        countryCount.value = countryObj.charged
+      },
+    })
+  })
 
   const countryImg = await import.meta.glob("@/assets/images/home/country/*", { eager: true })
 

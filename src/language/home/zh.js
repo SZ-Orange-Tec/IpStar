@@ -38,7 +38,7 @@ export default {
 
     four1_title: "按流量计费，无浪费",
     four1_desc: "凭借专业知识和智能匹配系统，我们将帮助您找到真正可靠且功能丰富，价格灵活的住宅代理。",
-    four2_title: "用户友好的仪表板仪表板",
+    four2_title: "用户友好的仪表板",
     four2_desc: "设计简洁易用，具有清晰的控制按钮和所有设置的访问权限，使代理管理尽可能简单。",
     four3_title: "体验灵活的定价模式",
     four3_desc: "采用按流量计费，一次购买，即可访问全球:200+地区的庞大IF网络。立即开始免费试用。",
@@ -60,6 +60,6 @@ export default {
     finance: "金融",
 
     package_title: "选择适合您需求的套餐",
-    package_desc: "IpStar为您提供各种高质量的套餐",
+    package_desc: "IpStar为您提供多种灵活实用的套餐",
   },
 }

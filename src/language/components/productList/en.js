@@ -6,6 +6,7 @@ export default {
   Get: "Get",
   Order: "Order",
   Most_popular: "Most Popular",
+  Duration: "Duration",
 
   Personal: "Personal",
   Enterprise: "Enterprise",

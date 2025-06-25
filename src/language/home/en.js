@@ -34,21 +34,23 @@ export default {
     more: "There are more",
     automatic: "Automatic And \nInstant Delivery",
     instant:
-      "Get instant access after payment - no waiting for account activation \n or proxies setup.supporting a variety of communication protocols,\nincludingsocks5,http https,and custom protocols",
+      "Access immediately after payment - no waiting for account activation \nor proxy setup. Supports various communication protocols, including \nSOCKS5, HTTP/HTTPS, and custom protocols.",
 
     four1_title: "Pay-As-You-Go Pricing",
-    four1_desc:
-      "Leveraging our expertise and a smart matching system, we connectyou with highly reliable, feature-rich residential proxies tailored to yourneeds and budget.",
+    four1_desc: "With our expertise and smart matching system, we'll help you find reliable, feature-rich, and budget-friendly residential agents.",
     four2_title: "An Intuitive Dashboard",
-    four2_desc: "Our intuitive dashboard provides simple controls and full accessmaking proxy management effortless.",
+    four2_desc:
+      "Simple and user-friendly design with clear control buttons and easy access to all settings, making agent management as straightforward as possible.",
     four3_title: "Flexible Pricing Plans",
-    four3_desc: "Pay only for what you use. A single purchase unlocks our entire global networkof 200+ countries. Start your free trial today!",
+    four3_desc: "Pay as you go, buy once, and access a huge IF network in 200+ regions worldwide. Start your free trial now!",
     four4_title: "Easy Integration for Everyone",
-    four4_desc: "Easy email sign-up. Get fast, stable connections inminutes via our user-friendly dashboard or APl.",
+    four4_desc:
+      "Sign up with just your email and quickly get started with our simple dashboard or API. Enjoy a stable and fast connection for your business.",
 
     world_title: "Worldwide {primary} Proxy",
     world_title_slot: "Point to Point",
-    world_desc: "Wide range of locations available tailored to your business needs.",
+
+    world_desc: "We offer various locations to meet your business needs.",
     world_span: "Countries And Districts",
 
     app_title: "More Powerful Features Of IpStar \n Are Waiting For You To Develop",
@@ -60,6 +62,6 @@ export default {
     finance: "Finance",
 
     package_title: "Choose The Package that \n fits your needs",
-    package_desc: "IpStar provides you with various high-quality packages",
+    package_desc: "IpStar offers you a variety of flexible and practical plans.",
   },
 }

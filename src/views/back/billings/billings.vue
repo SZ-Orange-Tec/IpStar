@@ -22,7 +22,7 @@
               <p :class="scope.row.payment.class">{{ scope.row.payment.title }}</p>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('Operation')" min-width="100">
+          <el-table-column :label="$t('Operation')" min-width="120">
             <template #default="scope">
               <ip-button :data-index="scope.$index" type="link" class="px-3 h-8" @click="toPay">{{ $t("Pay") }}</ip-button>
             </template>

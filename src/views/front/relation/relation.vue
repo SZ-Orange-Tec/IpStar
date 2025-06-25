@@ -20,7 +20,7 @@
             </div>
             <div class="space-y-2">
               <p class="label text-sm">{{ t("relation_spec.help") }}</p>
-              <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help')"></textarea>
+              <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help1')"></textarea>
             </div>
           </div>
 

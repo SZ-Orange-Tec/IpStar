@@ -248,6 +248,7 @@ import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.
 import tableProgress from "../components/progress/progress.vue"
 import { Calendar, ChevronLeft, Gauge, SlidersVertical } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
+import { roundToDecimal } from "../../../utils/tools"
 // import * as echarts from 'echarts'
 let echart = null
 export default {
@@ -462,9 +463,9 @@ export default {
         title: {
           text: this.en ? "5-Day Comparison" : "5 天对比",
           textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
-          padding: [38, 0, 0, 35],
+          padding: [20, 0, 0, 20],
         },
-        grid: { left: 60, top: 100, bottom: 40, right: 60, containLabel: true },
+        grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
 
         dataZoom: [
           {
@@ -477,10 +478,10 @@ export default {
             height: 20,
             borderColor: "transparent",
             showDetail: false,
-            fillerColor: "rgba(244, 177, 34, .3)",
-            backgroundColor: "rgba(244, 177, 34, 0.1)",
+            fillerColor: "rgba(39, 114, 240, .3)",
+            backgroundColor: "rgba(39, 114, 240, 0.1)",
             handleStyle: {
-              color: "rgba(244, 177, 34, 0.57)",
+              color: "rgba(39, 114, 240, 0.57)",
             },
             moveHandleSize: 0,
             moveHandleStyle: {
@@ -488,7 +489,7 @@ export default {
             },
             dataBackground: {
               areaStyle: {
-                color: "rgba(244, 177, 34, 1)",
+                color: "rgba(39, 114, 240, 1)",
               },
             },
           },
@@ -546,7 +547,7 @@ export default {
           className: "tooltip",
           axisPointer: {
             lineStyle: {
-              color: "#FDB713",
+              color: "rgba(39, 114, 240, 1)",
             },
           },
           formatter() {
@@ -560,35 +561,33 @@ export default {
             showSymbol: false, // 开启移入显示 具体数值
             areaStyle: {
               // 覆盖区域的渐变色
-              normal: {
-                color: {
-                  type: "linear",
-                  x: 1,
-                  y: 0,
-                  x2: 0,
-                  y2: 0,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "rgba(244, 177, 34, 0)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(244, 177, 34, 0.5)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "rgba(244, 177, 34, 0)", // 100% 处的颜色
-                    },
-                  ],
-                  global: false, // 缺省为 false
-                },
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "rgba(39, 114, 240,0.7)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
+                  },
+                ],
+                global: false, // 缺省为 false
               },
             },
             showAllSymbol: true,
             // symbol: 'image://路径',
-            symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-            symbolSize: 20,
+            // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
+            symbolSize: 10,
             label: {
               show: true,
               position: "top",
@@ -609,9 +608,7 @@ export default {
             //   show: false
             // },
             lineStyle: {
-              normal: {
-                color: "#FDB713",
-              },
+              color: "rgba(39, 114, 240, 1)",
             },
             data: serData(),
           },
@@ -634,9 +631,9 @@ export default {
         title: {
           text: this.$t("overview_spec.EchartTextTwo"),
           textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
-          padding: [38, 0, 0, 35],
+          padding: [20, 0, 0, 20],
         },
-        grid: { left: 60, top: 100, bottom: 40, right: 60, containLabel: true },
+        grid: { left: 60, top: 60, bottom: 40, right: 60, containLabel: true },
         dataZoom: [
           {
             show: true,
@@ -648,10 +645,10 @@ export default {
             height: 20,
             borderColor: "transparent",
             showDetail: false,
-            fillerColor: "rgba(244, 177, 34, .3)",
-            backgroundColor: "rgba(244, 177, 34, 0.1)",
+            fillerColor: "rgba(39, 114, 240, .3)",
+            backgroundColor: "rgba(39, 114, 240, 0.1)",
             handleStyle: {
-              color: "rgba(244, 177, 34, 0.57)",
+              color: "rgba(39, 114, 240, 0.57)",
             },
             moveHandleSize: 0,
             moveHandleStyle: {
@@ -659,7 +656,7 @@ export default {
             },
             dataBackground: {
               areaStyle: {
-                color: "rgba(244, 177, 34, 1)",
+                color: "rgba(39, 114, 240, 1)",
               },
             },
           },
@@ -719,7 +716,7 @@ export default {
             lineStyle: {
               // type: 'solid',
               // width: 3,
-              color: "#FDB713",
+              color: "rgba(39, 114, 240,1)",
             },
           },
           formatter() {
@@ -733,29 +730,27 @@ export default {
             showSymbol: false, // 开启移入显示 具体数值
             areaStyle: {
               // 覆盖区域的渐变色
-              normal: {
-                color: {
-                  type: "linear",
-                  x: 1,
-                  y: 0,
-                  x2: 0,
-                  y2: 0,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "rgba(244, 177, 34, 0)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(244, 177, 34, 0.5)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 1,
-                      color: "rgba(244, 177, 34, 0)", // 100% 处的颜色
-                    },
-                  ],
-                  global: false, // 缺省为 false
-                },
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "rgba(39, 114, 240, 0)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
+                  },
+                ],
+                global: false, // 缺省为 false
               },
             },
             showAllSymbol: true,
@@ -782,9 +777,7 @@ export default {
             //   show: false
             // },
             lineStyle: {
-              normal: {
-                color: "#FDB713",
-              },
+              color: "rgba(39, 114, 240,1)",
             },
             data: serData(),
           },
@@ -812,17 +805,17 @@ export default {
         echart = _.init(ipdom)
       }
       const lang = this.lang
-      const title = this.$t("overview_spec.onlineIp")
+      const title = this.$t("Online") + " IP"
       // console.log(title)
       const option = {
         title: {
           text: title,
-          textStyle: { color: "#fff", fontSize: 16, fontWeight: "normal" },
-          padding: [30, 0, 0, 30],
+          textStyle: { color: "#999", fontSize: 16, fontWeight: "normal" },
+          padding: [20, 0, 0, 20],
         },
         grid: {
-          top: 80,
-          left: 110,
+          top: 60,
+          left: 80,
           bottom: 80,
           right: 30,
         },
@@ -851,6 +844,15 @@ export default {
             fontSize: 12,
             color: "#B5B5B5",
             margin: 30,
+            formatter(val) {
+              if (val > 1000000) {
+                return `${val / 1000000} M`
+              } else if (val > 1000) {
+                return `${val / 1000} K`
+              } else {
+                return val
+              }
+            },
           },
           axisTick: {
             // y轴刻度线
@@ -874,10 +876,10 @@ export default {
             height: 20,
             borderColor: "transparent",
             showDetail: false,
-            fillerColor: "rgba(244, 177, 34, .3)",
-            backgroundColor: "rgba(244, 177, 34, 0.1)",
+            fillerColor: "rgba(39, 114, 240, .3)",
+            backgroundColor: "rgba(39, 114, 240, 0.1)",
             handleStyle: {
-              color: "rgba(244, 177, 34, 0.57)",
+              color: "rgba(39, 114, 240, 0.57)",
             },
             moveHandleSize: 0,
             moveHandleStyle: {
@@ -885,7 +887,7 @@ export default {
             },
             dataBackground: {
               areaStyle: {
-                color: "rgba(244, 177, 34, 1)",
+                color: "rgba(39, 114, 240, 1)",
               },
             },
           },
@@ -908,14 +910,35 @@ export default {
               color: "#e5e7eb",
               // borderColor: '#fce5c1',
               // borderWidth: 5,
-              shadowColor: "FDB#713",
+              shadowColor: "rgba(39, 114, 240, 0.5)",
               shadowBlur: 6,
               // shadowOffsetX: -3,
               // shadowOffsetY: -3
             },
 
             areaStyle: {
-              color: "#fffaf5",
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(39, 114, 240, 0.2)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
+                  },
+                ],
+                global: false, // 缺省为 false
+              },
             },
             label: {
               show: true,
@@ -925,10 +948,13 @@ export default {
                 fontSize: 14,
               },
               formatter(res) {
-                if (lang === "zh") {
-                  return Math.round((res.value / 10000) * 100) / 100 + "万"
+                const val = res.value
+                if (val > 1000000) {
+                  return `${roundToDecimal(val / 1000000)} M`
+                } else if (val > 1000) {
+                  return `${roundToDecimal(val / 1000)} K`
                 } else {
-                  return Math.round((res.value / 1000) * 100) / 100 + "K"
+                  return val
                 }
               },
             },
@@ -937,9 +963,7 @@ export default {
             //   show: false
             // },
             lineStyle: {
-              normal: {
-                color: "#FDB713",
-              },
+              color: "rgba(39, 114, 240,1)",
             },
             data: ip.count,
           },

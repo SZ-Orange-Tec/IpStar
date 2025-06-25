@@ -21,6 +21,8 @@ export default {
   Medium: "Medium",
   High: "High",
 
+  Online: "Online",
+
   overview_spec: {
     Residual_Traffic: "Residual Traffic",
     Consumption_Today: "Consumption Today",

@@ -16,7 +16,8 @@ export default {
     title_slot: "advices",
 
     full_name: "Full name",
-    help: "What can we help you with?",
+    help: "Please share your suggestions with us",
+    help1: "Tell us your suggestions.",
 
     serve: "How can we serve you better?",
     serve_des:

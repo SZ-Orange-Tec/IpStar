@@ -19,6 +19,8 @@ export default {
   Medium: "中",
   High: "高",
 
+  Online: "在线",
+
   overview_spec: {
     Residual_Traffic: "剩余的流量",
     Consumption_Today: "今天的消耗",

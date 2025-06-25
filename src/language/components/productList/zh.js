@@ -6,6 +6,7 @@ export default {
   Get: "获取",
   Order: "订购",
   Most_popular: "最受欢迎",
+  Duration: "有效期",
 
   Personal: "个人",
   Enterprise: "企业",
