@@ -14,7 +14,7 @@
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex gap-3">
           <li
-            v-for="item in product_list"
+            v-for="(item, index) in product_list"
             :key="item.id"
             :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
             class="transition-color"
@@ -122,7 +122,7 @@
                 </li>
               </ul>
 
-              <IpButton @click="click_pay(item)" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+              <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
                 {{ item.trial ? t("Get") : t("Order") }}
               </IpButton>
             </div>
@@ -167,8 +167,13 @@
             </li>
             <li class="between">
               <span>{{ t("payPopup_spec.unit_price") }}</span>
-              <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
-              <span v-else>--</span>
+              <!-- <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
+              <span v-else>--</span> -->
+              <div class="v_center space-x-1">
+                <span>${{ product?.unit_price / 100 }}</span>
+                <span class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
+                <span> / GB</span>
+              </div>
             </li>
             <li class="between">
               <span>{{ t("Discount") }}</span>
@@ -181,8 +186,9 @@
             <li class="between">
               <span>{{ t("Total") }}</span>
               <span>
-                <i>${{ product?.origin_price / 100 }}</i> ${{ product?.price / 100 }}</span
-              >
+                <!-- <i>${{ product?.origin_price / 100 }}</i>  -->
+                ${{ product?.price / 100 }}
+              </span>
             </li>
           </ul>
           <div class="btn vh_center">
@@ -214,6 +220,7 @@ import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import layoutStore from "@/store/layout"
+import position from "@/components/dialog/position"
 
 const props = defineProps({
   tabbar: {
@@ -303,7 +310,6 @@ async function GetProductList() {
       }
     })
 
-    console.log(prices)
     const index = tempGroup1.findIndex((item) => item.trial)
     if (index > 0) {
       const item = tempGroup1.splice(index, 1)
@@ -440,7 +446,12 @@ const isPayPopup = ref(false)
 const order_data = ref(null)
 const payPopupRef = ref(null)
 let product
-function click_pay(item) {
+function click_pay(e) {
+  position.set({ x: e.clientX, y: e.clientY })
+
+  const index = +e.target.dataset.index
+  const item = product_list.value[index]
+
   if (!isLogin.value) {
     router.push("/login")
     Message({
@@ -460,8 +471,8 @@ function click_pay(item) {
     origin_price: item.prices[item.select].origin_price,
   }
 
-  productData.origin_price = productData.price * (productData.discount_rate / 100) + productData.price
-  productData.origin_price = Math.round(productData.origin_price)
+  // productData.origin_price = productData.price * (productData.discount_rate / 100) + productData.price
+  // productData.origin_price = Math.round(productData.origin_price)
 
   product = productData
 

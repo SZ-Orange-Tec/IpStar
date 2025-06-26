@@ -46,11 +46,19 @@
     </div>
 
     <div class="column_center pay">
-      <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" style="width: auto" />
+      <div class="w-full" style="max-width: 638px">
+        <IpImage :width="638" :height="84">
+          <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" />
+        </IpImage>
+      </div>
       <p class="primary_text">{{ t("pricing_spec.payment") }}</p>
 
       <div class="column_center scroll w-full">
-        <img v-lazy="() => import('@/assets/images/pricing/scroll.png')" width="28" alt="" />
+        <div class="w-full" style="max-width: 28px">
+          <IpImage :width="32" :height="143">
+            <img v-lazy="() => import('@/assets/images/pricing/scroll.png')" width="28" alt="" />
+          </IpImage>
+        </div>
       </div>
     </div>
 
