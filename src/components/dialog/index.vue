@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-dialog column_center">
+  <div class="chat-dialog column_center" v-if="show">
     <div class="dialog_container" ref="container" :style="transformOrigin">
       <slot :close="close"></slot>
     </div>
@@ -10,9 +10,31 @@
 import anime from "animejs/lib/anime.es.js"
 import position from "./position"
 import { roundToDecimal } from "@/utils/tools"
-import { onMounted, ref } from "vue"
+import { nextTick, onMounted, ref, toRefs, watch, watchEffect } from "vue"
 
-const show = defineModel({ type: Boolean })
+const show = ref(false)
+
+const props = defineProps({
+  modelValue: Boolean,
+})
+const { modelValue } = toRefs(props)
+
+watch(
+  modelValue,
+  (val) => {
+    console.log(val)
+    if (val) {
+      show.value = val
+      nextTick(() => {
+        getPosition()
+        open()
+      })
+    } else {
+      close()
+    }
+  }
+  // { immediate: true }
+)
 
 // 开启 关闭动画
 
@@ -67,8 +89,13 @@ function open() {
 }
 
 onMounted(() => {
-  getPosition()
-  open()
+  if (modelValue.value) {
+    show.value = true
+    nextTick(() => {
+      getPosition()
+      open()
+    })
+  }
 })
 </script>
 

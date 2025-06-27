@@ -156,7 +156,7 @@
     </div>
 
     <!-- 支付弹窗 -->
-    <PayPopup ref="payPopupRef" v-model="isPayPopup" v-if="isPayPopup" :order_data="order_data">
+    <PayPopup ref="payPopupRef" v-model="isPayPopup" :order_data="order_data">
       <template #detail>
         <div class="order_detail">
           <h2>{{ t("Order_detail") }}</h2>

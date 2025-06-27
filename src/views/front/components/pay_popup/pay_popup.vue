@@ -112,7 +112,7 @@
           </transition>
         </form>
 
-        <div class="close vh_center pointer transition-color" @click="close">
+        <div class="close vh_center pointer transition-color" @click="isShow = false">
           <CloseIcon :size="16" />
         </div>
       </div>

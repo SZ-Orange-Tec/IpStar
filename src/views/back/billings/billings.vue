@@ -46,7 +46,7 @@
     </div>
 
     <!-- 支付 控件 -->
-    <PayPopup ref="payPopupRef" v-model="isPayPopup" v-if="isPayPopup" :order_data="order_data" />
+    <PayPopup ref="payPopupRef" v-model="isPayPopup" :order_data="order_data" />
   </div>
 </template>
 
