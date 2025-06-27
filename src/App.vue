@@ -8,6 +8,7 @@
 
 <script setup>
 import { onMounted } from "vue"
+import { track_active } from "@/utils/detect"
 
 // function captureError(e){
 //   console.log('enter')
@@ -37,9 +38,40 @@ function initCrisp() {
   window.$crisp.push(["config", "color:theme", ["orange"]])
 }
 
+// google 追踪代码
+function initGoogleTrack(count = 2) {
+  const script = document.createElement("script")
+  script.id = "google"
+  script.src = "https://www.googletagmanager.com/gtag/js?id=AW-17264345186"
+  document.body.append(script)
+
+  script.onload = function () {
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    window.gtag = gtag
+
+    gtag("js", new Date())
+    gtag("config", "AW-17264345186")
+
+    // 网页加载完成 浏览
+    track_active()
+  }
+
+  script.onerror = function () {
+    if (count > 0) {
+      initGoogleTrack(--count)
+    }
+  }
+}
+
 onMounted(() => {
-  // 等待所有资源加载完成 初始化Crisp
-  window.addEventListener("load", initCrisp)
+  // 等待所有资源加载完成
+  window.addEventListener("load", () => {
+    initGoogleTrack()
+    initCrisp()
+  })
 })
 </script>
 

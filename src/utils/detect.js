@@ -1,38 +1,69 @@
 // 第三方监测
-export default {
-  // 用户浏览
-  active() {
-    googleActive()
-  },
-  // 注册
-  register() {
-    googleRegister()
-  },
-  // 领取礼包
-  gift() {
-    googleGift()
-  },
-  // 下单
-  createOrder() {
-    googleOrder()
-  },
-  // 支付
-  payment(params) {
-    googlePayment()
-  },
+
+// 用户浏览
+export function track_active() {
+  googleActive()
+}
+// 注册
+export function track_register() {
+  googleRegister()
+}
+// 领取礼包
+export function track_gift() {
+  googleGift()
+}
+// 下单
+export function track_createOrder() {
+  googleOrder()
+}
+// 支付
+export function track_payment(params) {
+  googlePayment()
 }
 
 // 谷歌
 function googleActive() {
-  // 浏览
+  window.gtag &&
+    gtag("event", "conversion", {
+      send_to: "AW-17264345186/5tTMCNONjuMaEOKApKhA",
+      value: 1.0,
+      currency: "USD",
+    })
 }
-function googleRegister(url) {
-  // 注册
+function googleRegister() {
+  const callback = function () {}
+  window.gtag &&
+    gtag("event", "conversion", {
+      send_to: "AW-17264345186/EdvVCOW5hOQaEOKApKhA",
+      event_callback: callback,
+    })
+  return false
 }
-function googleOrder(url) {
-  // 下单
+function googleOrder() {
+  const callback = function () {}
+  window.gtag &&
+    gtag("event", "conversion", {
+      send_to: "AW-17264345186/hHwUCOu5hOQaEOKApKhA",
+      event_callback: callback,
+    })
+  return false
 }
-function googleGift() {}
-function googlePayment(url) {
-  // 支付完成
+function googleGift() {
+  const callback = function () {}
+  window.gtag &&
+    gtag("event", "conversion", {
+      send_to: "AW-17264345186/vr1jCOi5hOQaEOKApKhA",
+      event_callback: callback,
+    })
+  return false
+}
+function googlePayment() {
+  var callback = function () {}
+  window.gtag &&
+    gtag("event", "conversion", {
+      send_to: "AW-17264345186/d1USCO65hOQaEOKApKhA",
+      transaction_id: "",
+      event_callback: callback,
+    })
+  return false
 }

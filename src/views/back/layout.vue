@@ -31,8 +31,7 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import detect from "@/utils/detect"
-import layoutStore from "@/store/layout"
+// import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 import NavMenu from "./components/menu/menu.vue"
 import { useI18n } from "vue-i18n"
@@ -52,7 +51,9 @@ async function judgeMask() {
     const { data } = await platDataConfig()
     const hasAward = data.register_award
 
-    if (isNewUser(create_time) && hasAward) {
+    const isNew = isNewUser(create_time)
+
+    if (isNew && hasAward) {
       isMask.value = true
     }
   } catch (err) {
@@ -66,7 +67,7 @@ function isNewUser(create_time) {
   return differenceInMinutes(new Date(), new Date(utc)) < 3
 }
 function closeMask() {
-  detect.gift()
+  // detect.gift()
   isMask.value = false
 }
 

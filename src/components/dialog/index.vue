@@ -22,7 +22,6 @@ const { modelValue } = toRefs(props)
 watch(
   modelValue,
   (val) => {
-    console.log(val)
     if (val) {
       show.value = val
       nextTick(() => {

@@ -25,7 +25,7 @@
 
 <script>
 import { platCustomerOrdersCheckIsPaid } from "@/api/home"
-import detect from "@/utils/detect"
+import { track_payment } from "@/utils/detect"
 import userStore from "@/store/user"
 import layoutStore from "../../store/layout"
 export default {
@@ -78,7 +78,7 @@ export default {
       })
       this.is_paid = res.data.is_paid
       if (res.data.is_paid) {
-        detect.payment({
+        track_payment({
           price: this.orderPrice,
           order: this.orderNo,
         })

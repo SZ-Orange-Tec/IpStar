@@ -39,6 +39,7 @@ import settingStore from "@/store/setting"
 import Message from "@/components/message/message"
 import { Mail as MailIcon } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
+import { track_register } from "@/utils/detect"
 
 const { t } = useI18n()
 
@@ -107,6 +108,8 @@ function handlerGoogleLogin() {
           token.value = res.data.token
           localStorage.setItem("token", res.data.token)
 
+          track_register()
+
           router.push("/overview")
         })
         .catch((err) => {
@@ -155,6 +158,8 @@ function handlerGithubLogin() {
           // 存储token
           localStorage.setItem("token", res.data.token)
           token.value = res.data.token
+
+          track_register()
 
           router.push("/overview")
         })

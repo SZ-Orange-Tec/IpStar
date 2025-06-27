@@ -133,7 +133,7 @@ import {
 } from "@/api/home"
 import { loadStripe } from "@stripe/stripe-js"
 import { loadScript } from "@paypal/paypal-js"
-import detect from "@/utils/detect"
+import { track_payment } from "@/utils/detect"
 import { debounce } from "@/utils/tools"
 import IpDialog from "@/components/dialog/index.vue"
 import { X as CloseIcon } from "lucide-vue-next"
@@ -403,7 +403,6 @@ function onApprove(data, actions) {
 
 function next() {
   btnLoading.value = true
-  detect.createOrder()
   if (isManmer.value === 1 && processIdx.value === 1) {
     stripeCheck()
     return
@@ -478,7 +477,7 @@ function stepProcess() {
   }
   if (dashoffset.value === 12) {
     showProcess.value = false
-    detect.payment({
+    track_payment({
       price: props.order_data.order_usdt_price * 100,
       currency: "USD",
       order: props.order_data.order_no,

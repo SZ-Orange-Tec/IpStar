@@ -59,7 +59,7 @@ import VerifyCode from "./components/code/index.vue"
 import ResetPassword from "./components/reset/index.vue"
 import ForgetPassword from "./components/forget/index.vue"
 import { checkCustomer, platCaptcha, platCustomerLogin, platCustomerRegister, platCustomerVerifycode } from "@/api/login"
-import detect from "@/utils/detect"
+import { track_register } from "@/utils/detect"
 import loginStore from "@/store/login"
 import settingsStore from "@/store/setting"
 import { onMounted, ref } from "vue"
@@ -172,7 +172,7 @@ async function next(func) {
 
           router.push("/overview")
 
-          detect.register()
+          track_register()
         }
         break
       case "forget_email":

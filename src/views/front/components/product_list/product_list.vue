@@ -221,6 +221,7 @@ import { ChevronLeft, ChevronRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import layoutStore from "@/store/layout"
 import position from "@/components/dialog/position"
+import { track_createOrder } from "@/utils/detect"
 
 const props = defineProps({
   tabbar: {
@@ -487,6 +488,7 @@ async function FoundOrder() {
       days: item.days,
     })
 
+    track_createOrder()
     order_data.value = {
       order_no: data.order_no,
       order_price: data.order_price,

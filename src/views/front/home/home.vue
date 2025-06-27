@@ -337,7 +337,7 @@ import loginStore from "@/store/login"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 // import { ElMessage, ElNotification, ElMessageBox } from "element-plus"
-import Message from "@/components/message/message.js"
+// import Message from "@/components/message/message.js"
 import IpButton from "@/components/button/button.vue"
 import { MoveRight, Star as StarIcon, ToggleLeft, Dot, Code, Laptop } from "lucide-vue-next"
 import { ElMessageBox } from "element-plus"
@@ -346,7 +346,8 @@ import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
-import { roundToDecimal } from "../../../utils/tools"
+import { roundToDecimal } from "@/utils/tools"
+import { track_gift } from "@/utils/detect"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -495,6 +496,8 @@ function merchantScroll() {
 
 function giftPacks() {
   // 领取礼包
+  track_gift()
+
   if (token.value) {
     ElMessageBox.confirm(
       en.value
@@ -514,6 +517,7 @@ function giftPacks() {
     )
     return
   }
+
   router.push("/login")
 }
 
