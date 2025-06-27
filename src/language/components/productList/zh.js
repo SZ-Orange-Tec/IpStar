@@ -19,5 +19,12 @@ export default {
     right5: "Socks5/Http|Https",
 
     permanent: "不限量套餐",
+
+    Need_more: "需要更多",
+    Extra_discount: "额外折扣",
+    Custom1: "定制套餐",
+    Custom2: "定制地区",
+    Custom3: "定制需求",
+    Service: "联系客服",
   },
 }

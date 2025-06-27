@@ -132,6 +132,36 @@
               <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>
           </li>
+          <li v-if="showContact" class="common">
+            <div class="card column_center space-y-5 lg:space-y-10">
+              <div class="top w-full column_center space-y-4">
+                <div class="package_name vh_center rounded-full">
+                  <div>{{ t("productList_spec.Need_more") }}?</div>
+                </div>
+
+                <!-- 折扣 -->
+                <p class="font-medium lg:font-semibold" style="height: 1.5rem">{{ t("productList_spec.Extra_discount") }}</p>
+
+                <!-- 免费 -->
+                <div
+                  class="whitespace-nowrap font-semibold text-xl w-full space-y-5"
+                  :class="en ? 'lg:text-xl column' : 'lg:text-2xl column_center'"
+                  style="margin-top: 2rem"
+                >
+                  <span>{{ t("productList_spec.Custom1") }}</span>
+                  <span>{{ t("productList_spec.Custom2") }}</span>
+                  <span>{{ t("productList_spec.Custom3") }}</span>
+                </div>
+              </div>
+
+              <IpButton @click="openService" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+                {{ t("productList_spec.Service") }}
+              </IpButton>
+            </div>
+            <div class="bg_img">
+              <img src="@/assets/images/pricing/hover.png" alt="" />
+            </div>
+          </li>
         </ul>
       </div>
       <!-- 骨架屏 -->
@@ -220,8 +250,11 @@ import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import layoutStore from "@/store/layout"
+import settingStore from "@/store/setting"
 import position from "@/components/dialog/position"
 import { track_createOrder } from "@/utils/detect"
+
+const { en } = settingStore()
 
 const props = defineProps({
   tabbar: {
@@ -343,12 +376,18 @@ async function getDataConfig() {
 }
 
 // 切换tab
+const showContact = ref(false)
 function changeActive(index) {
+  showContact.value = index === 1
+
   const group = "group" + (index + 1)
   product_list.value = eval(group)
   nextTick(() => {
     initScrollTag()
   })
+}
+function openService() {
+  window.$crisp.push(["do", "chat:open"])
 }
 
 // 滑动相关

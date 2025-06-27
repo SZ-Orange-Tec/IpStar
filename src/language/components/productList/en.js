@@ -19,5 +19,12 @@ export default {
     right5: "Support Socks5/Http|Https",
 
     permanent: "Unlimited Package",
+
+    Need_more: "Need More",
+    Extra_discount: "Extra Discount",
+    Custom1: "Custom Package",
+    Custom2: "Custom Regions",
+    Custom3: "Custom Demands",
+    Service: "Contact Us",
   },
 }
