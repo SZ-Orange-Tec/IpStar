@@ -132,7 +132,7 @@
               <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>
           </li>
-          <li v-if="showContact" class="common">
+          <li v-if="showContact && isLogin" class="common">
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4">
                 <div class="package_name vh_center rounded-full">
