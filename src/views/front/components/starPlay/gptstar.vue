@@ -21,8 +21,8 @@ function play() {
   canvas.height = h
 
   // 星空参数
-  let STAR_NUM = isMobile ? 300 : 600
-  let STAR_DEPTH = isMobile ? 750 : 1500
+  let STAR_NUM = isMobile ? 200 : 400
+  let STAR_DEPTH = isMobile ? 500 : 1000
   let STARS = []
 
   // 星云参数

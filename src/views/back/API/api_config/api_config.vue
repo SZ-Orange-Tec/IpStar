@@ -123,11 +123,13 @@ import { debounce } from "@/utils/tools"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
-import { ElMessageBox } from "element-plus"
+
 import "element-plus/es/components/message-box/style/css"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
+import Confirm from "@/components/confirm/confirm"
+import position from "../../../../components/dialog/position"
 
 const router = useRouter()
 const { en } = settingStore()
@@ -257,19 +259,18 @@ function clickCount(e) {
   count.value = Math.round((percent / 100) * max_count.value)
 }
 
-async function generateURL() {
+async function generateURL(e) {
   if (!isPurchase.value) {
-    ElMessageBox.confirm(
-      en.value ? "Your balance is low, are you heading to a subscription package?" : "您的余额不足，是否前往购买套餐?",
-      t("Prompt"),
-      {
-        confirmButtonText: t("OK"),
-        cancelButtonText: t("Cancel"),
-        type: "warning",
-      }
-    ).then(() => {
-      isProduc.value = true
-      router.push("/products")
+    position.set({ x: e.clientX, y: e.clientY })
+    Confirm({
+      title: t("Prompt"),
+      message: en.value ? "Your balance is low, are you heading to a subscription package?" : "您的余额不足，是否前往购买套餐?",
+      confirmText: t("OK"),
+      cancelText: t("Cancel"),
+      success: () => {
+        isProduc.value = true
+        router.push("/products")
+      },
     })
     return
   }

@@ -331,23 +331,21 @@
 
 <script setup>
 import { ref, defineAsyncComponent, nextTick } from "vue"
-import { platDataIndex, platDataConfig } from "@/api/home"
+import { platDataIndex } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
-// import { ElMessage, ElNotification, ElMessageBox } from "element-plus"
-// import Message from "@/components/message/message.js"
 import IpButton from "@/components/button/button.vue"
 import { MoveRight, Star as StarIcon, ToggleLeft, Dot, Code, Laptop } from "lucide-vue-next"
-import { ElMessageBox } from "element-plus"
-import "element-plus/es/components/message-box/style/css"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { track_gift } from "@/utils/detect"
+import Confirm from "@/components/confirm/confirm"
+import position from "../../../components/dialog/position"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -494,27 +492,23 @@ function merchantScroll() {
   }, 1000)
 }
 
-function giftPacks() {
+function giftPacks(e) {
   // 领取礼包
   track_gift()
 
   if (token.value) {
-    ElMessageBox.confirm(
-      en.value
+    position.set({ x: e.clientX, y: e.clientY })
+    Confirm({
+      title: en.value ? "Prompt" : "温馨提示",
+      message: en.value
         ? "We have already granted you a default authorization of 5M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
         : "我们已经默认授权给你5M的测试流量，您可以联系我们申请额外500M的测试流量。",
-      en.value ? "Tip" : "温馨提示",
-      {
-        cancelButtonText: en.value ? "Later" : "以后再说",
-        confirmButtonText: en.value ? "Contact Now" : "立即联系",
-        center: true,
-        callback: (action) => {
-          if (action === "confirm") {
-            window.$crisp.push(["do", "chat:open"])
-          }
-        },
-      }
-    )
+      cancelText: en.value ? "Later" : "以后再说",
+      confirmText: en.value ? "Contact Now" : "立即联系",
+      success: () => {
+        window.$crisp.push(["do", "chat:open"])
+      },
+    })
     return
   }
 

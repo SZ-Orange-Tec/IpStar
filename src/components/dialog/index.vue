@@ -51,27 +51,31 @@ function getPosition() {
 function close() {
   const target = container.value
 
-  target.style.backgroundColor = "hsl(var(--dialog-wrap) / 0%)"
-  anime({
-    targets: target,
-    opacity: {
-      value: [1, 0],
-      easing: "easeInQuart",
-    }, // 明确指定起始和结束值
-    scale: {
-      value: [1, 0],
-      easing: "easeInQuart",
-    },
-    duration: 150,
-    complete: () => {
-      show.value = false
-    },
+  target.parentNode.style.backgroundColor = "hsl(var(--dialog-wrap) / 0%)"
+
+  return new Promise((resolve) => {
+    anime({
+      targets: target,
+      opacity: {
+        value: [1, 0],
+        easing: "easeInQuart",
+      }, // 明确指定起始和结束值
+      scale: {
+        value: [1, 0],
+        easing: "easeInQuart",
+      },
+      duration: 150,
+      complete: () => {
+        show.value = false
+        resolve()
+      },
+    })
   })
 }
 function open() {
   const target = container.value
 
-  target.style.backgroundColor = "hsl(var(--dialog-wrap) / 70%)"
+  target.parentNode.style.backgroundColor = "hsl(var(--dialog-wrap) / 90%)"
 
   anime({
     targets: target,

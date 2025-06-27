@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <IpButton type="primary" class="px-5 h-10" @click="leave_word">
+          <IpButton type="primary" class="px-5 h-10" @click="sendInfo">
             <div class="v_center space-x-2">
               <p>{{ t("Send_message") }}</p>
               <ArrowRight :size="16" v-if="!loading" />
@@ -73,15 +73,16 @@
 <script setup>
 import { ref } from "vue"
 import Message from "@/components/message/message"
-import Confirm from "@/components/confirm/confirm"
 import { platCustomerLeaveMessage } from "@/api/home"
 import settingStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import { Twitter, ArrowRight, MessageCircleMore } from "lucide-vue-next"
-import { ElMessageBox } from "element-plus"
+
 import "element-plus/es/components/message-box/style/css"
 import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+import Confirm from "@/components/confirm/confirm"
+import position from "../../../components/dialog/position"
 
 const { t } = useI18n()
 const { en } = settingStore()
@@ -93,7 +94,7 @@ const content = ref("")
 
 // 客户留言
 const loading = ref(false) // loading
-const leave_word = () => {
+function sendInfo(e) {
   if (fullName.value && email.value && content.value) {
     loading.value = true
 
@@ -103,20 +104,22 @@ const leave_word = () => {
       content: content.value,
     })
       .then(() => {
-        const title = en.value ? "warm prompt" : "温馨提示"
+        const title = en.value ? "Prompt" : "温馨提示"
         const message = en.value
           ? "We have received your messages, and we will contact you as soon as possible."
           : "我们已经收到您的消息，我们将尽快与您联系。"
         const confirmText = en.value ? "OK" : "确定"
 
-        ElMessageBox.confirm(message, title, {
-          confirmButtonText: confirmText,
-          callback: (action) => {
-            if (action === "confirm") {
-              fullName.value = ""
-              email.value = ""
-              content.value = ""
-            }
+        position.set({ x: e.clientX, y: e.clientY })
+        Confirm({
+          title,
+          message,
+          showCancel: false,
+          confirmText: confirmText,
+          success: () => {
+            fullName.value = ""
+            email.value = ""
+            content.value = ""
           },
         })
       })
