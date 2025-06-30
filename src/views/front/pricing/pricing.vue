@@ -48,7 +48,7 @@
     <div class="column_center pay">
       <div class="w-full" style="max-width: 638px">
         <IpImage :width="638" :height="84">
-          <img v-lazy="() => import('@/assets/images/pricing/pay.png')" alt="" />
+          <img v-lazy src="@/assets/images/pricing/pay.png" alt="" />
         </IpImage>
       </div>
       <p class="primary_text">{{ t("pricing_spec.payment") }}</p>
@@ -56,7 +56,7 @@
       <div class="column_center scroll w-full">
         <div class="w-full" style="max-width: 28px">
           <IpImage :width="32" :height="143">
-            <img v-lazy="() => import('@/assets/images/pricing/scroll.png')" width="28" alt="" />
+            <img v-lazy src="@/assets/images/pricing/scroll.png" width="28" alt="" />
           </IpImage>
         </div>
       </div>
@@ -66,7 +66,7 @@
       <div class="container">
         <div class="w-full relative">
           <IpImage :width="1271" :height="498">
-            <img v-lazy="() => import('@/assets/images/home/world.webp')" class="bg" alt="" />
+            <img v-lazy src="@/assets/images/home/world.webp" class="bg" alt="" />
           </IpImage>
 
           <div class="content">
@@ -85,7 +85,7 @@
 
             <div class="country_box">
               <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-                <img v-lazy="item.icon" width="36" alt="" />
+                <img v-lazy :src="item.icon" width="36" alt="" />
                 <div class="detail v_center h-8 space-x-2 px-3 text-xs whitespace-nowrap">
                   <div class="dot vh_center"></div>
                   <span>{{ item.value }} </span>

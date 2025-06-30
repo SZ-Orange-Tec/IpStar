@@ -138,7 +138,12 @@
         <ul class="three w-full column gap-8 md:v_center">
           <li class="flex-1">
             <IpImage :width="381" :height="185">
-              <img v-lazy="() => import('@/assets/images/home/why1.png')" />
+              <img
+                v-lazy
+                sizes="(max-width:768px) 764px,382px"
+                src="@/assets/images/home/why1.png"
+                srcset="@/assets/images/home/why1.png 382w, @/assets/images/home/why1@2x.png 764w, @/assets/images/home/why1@3x.png 1128w"
+              />
             </IpImage>
             <div class="column_center space-y-3 px-3 content">
               <p class="title">{{ t("home_spec.why1_title") }}</p>
@@ -147,7 +152,12 @@
           </li>
           <li class="flex-1">
             <IpImage :width="381" :height="185">
-              <img v-lazy="() => import('@/assets/images/home/why2.png')" />
+              <img
+                v-lazy
+                sizes="(max-width:768px) 764px,382px"
+                src="@/assets/images/home/why2.png"
+                srcset="@/assets/images/home/why2.png 382w, @/assets/images/home/why2@2x.png 764w, @/assets/images/home/why2@3x.png 1128w"
+              />
             </IpImage>
             <div class="column_center space-y-3 px-3 content">
               <p class="title">{{ t("home_spec.why2_title") }}</p>
@@ -156,7 +166,12 @@
           </li>
           <li class="flex-1">
             <IpImage :width="381" :height="185">
-              <img v-lazy="() => import('@/assets/images/home/why3.png')" />
+              <img
+                v-lazy
+                sizes="(max-width:768px) 764px,382px"
+                src="@/assets/images/home/why3.png"
+                srcset="@/assets/images/home/why3.png 382w, @/assets/images/home/why3@2x.png 764w, @/assets/images/home/why3@3x.png 1128w"
+              />
             </IpImage>
             <div class="column_center space-y-3 px-3 content">
               <p class="title">{{ t("home_spec.why3_title") }}</p>
@@ -180,7 +195,7 @@
         <ul class="four grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5">
           <li class="flex-1 column">
             <IpImage :width="300" :height="270">
-              <img v-lazy="() => import('@/assets/images/home/four1.png')" alt="" />
+              <img v-lazy src="@/assets/images/home/four1.png" alt="" />
             </IpImage>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
@@ -189,7 +204,7 @@
           </li>
           <li class="flex-1 column">
             <IpImage :width="300" :height="270">
-              <img v-lazy="() => import('@/assets/images/home/four2.png')" alt="" />
+              <img v-lazy src="@/assets/images/home/four2.png" alt="" />
             </IpImage>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
@@ -198,7 +213,7 @@
           </li>
           <li class="flex-1 column">
             <IpImage :width="300" :height="270">
-              <img v-lazy="() => import('@/assets/images/home/four3.png')" alt="" />
+              <img v-lazy src="@/assets/images/home/four3.png" alt="" />
             </IpImage>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
@@ -207,7 +222,7 @@
           </li>
           <li class="flex-1 column">
             <IpImage :width="300" :height="270">
-              <img v-lazy="() => import('@/assets/images/home/four4.png')" alt="" />
+              <img v-lazy src="@/assets/images/home/four4.png" alt="" />
             </IpImage>
             <div class="content flex-1 px-3 space-y-2 column" style="justify-content: space-between">
               <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
@@ -241,7 +256,7 @@
       <div class="container">
         <div class="w-full relative">
           <IpImage :width="1271" :height="498">
-            <img v-lazy="() => import('@/assets/images/home/world.webp')" class="bg" alt="" />
+            <img v-lazy src="@/assets/images/home/world.webp" class="bg" alt="" />
           </IpImage>
           <!-- <div class="bg">
           </div> -->
@@ -262,7 +277,7 @@
 
             <div class="country_box">
               <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-                <img v-lazy="item.icon" width="36" alt="" />
+                <img v-lazy :src="item.icon" width="36" alt="" />
                 <div class="detail v_center sm:space-x-2 text-xs whitespace-nowrap">
                   <div class="dot vh_center"></div>
                   <span>{{ item.value }} </span>
@@ -308,7 +323,7 @@
         </ul>
 
         <IpImage :width="1257" :height="366">
-          <img v-lazy="() => import('@/assets/images/home/app.png')" alt="" />
+          <img v-lazy src="@/assets/images/home/app.png" alt="" />
         </IpImage>
       </div>
     </div>

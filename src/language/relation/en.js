@@ -21,7 +21,7 @@ export default {
 
     serve: "How can we serve you better?",
     serve_des:
-      "If you have any questions or suggestion, please don't hesitate to contactus. You can communicate with us in English, Chinese, Russian or any otherlcnguage.",
+      "If you have any questions or suggestion, please don't hesitate to contact us. You can communicate with us in English, Chinese, Russian or any other language.",
     start_chat: "Start Chat",
   },
 }

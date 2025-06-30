@@ -15,16 +15,19 @@ function lazyEnter(entries) {
   })
 }
 async function execFun(el, fun) {
-  const isImg = el.tagName === "IMG"
+  // const isImg = el.tagName === "IMG"
   const isFun = /Function/.test(typeOf(fun))
 
   try {
-    if (isImg) {
-      el.src = !isFun ? fun : (await fun()).default
-    } else if (isFun) {
-      // 不是图片 直接执行
+    if (isFun) {
       fun()
     }
+    // if (isImg) {
+    //   el.src = !isFun ? fun : (await fun()).default
+    // } else if (isFun) {
+    //   // 不是图片 直接执行
+    //   fun()
+    // }
   } catch (error) {
     console.log(error.message)
   }
@@ -35,7 +38,21 @@ const support = "IntersectionObserver" in window
 const lazy = support ? new IntersectionObserver(lazyEnter) : null
 
 export default {
-  mounted(el, binding) {
+  beforeMount(el, binding, vnode) {
+    if (!binding.value && vnode.type === "img") {
+      const { sizes = "", src = "", srcset = "" } = vnode.props
+      el.removeAttribute("sizes")
+      el.removeAttribute("src")
+      el.removeAttribute("srcset")
+      const fun = () => {
+        sizes && el.setAttribute("sizes", sizes)
+        src && el.setAttribute("src", src)
+        srcset && el.setAttribute("srcset", srcset)
+      }
+      binding.value = fun
+    }
+  },
+  mounted(el, binding, vnode) {
     const fun = binding.value
 
     if (support) {
