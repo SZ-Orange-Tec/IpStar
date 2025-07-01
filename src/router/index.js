@@ -110,6 +110,12 @@ const routes = [
     meta: { keepAlive: false },
     component: () => import("@/views/payment_success/payment_success.vue"),
   },
+  // 404 放最后
+  {
+    path: "/:pathMatch(.*)",
+    name: "404",
+    component: () => import("@/views/404/index.vue"),
+  },
 ]
 
 const router = createRouter({
