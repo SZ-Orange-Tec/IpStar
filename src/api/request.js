@@ -2,8 +2,10 @@ import _axios from "axios"
 import router from "@/router/index"
 import Message from "@/components/message/message"
 import loginStore from "../store/login"
+import settingStore from "../store/setting"
 
 const { OutLogin, token } = loginStore()
+const { en, lang } = settingStore()
 
 // 相同错误码只提示一次
 let prevCode = null
@@ -14,6 +16,24 @@ const _request = _axios.create({
   timeout: 120000,
 })
 
+async function ErrorMsg(code) {
+  try {
+    const url = `/error/${code.toString().charAt(0)}-${lang.value ?? "en"}.json`
+    const result = await fetch(url)
+    const data = await result.json()
+    const msg = data[code]
+
+    Message({
+      type: "warning",
+      message: msg ?? (en.value ? "Unknown error" : "未知错误") + ` [${code}]`,
+    })
+  } catch (err) {
+    Message({
+      type: "warning",
+      message: (en.value ? "Unknown error" : "未知错误") + `[${code}]`,
+    })
+  }
+}
 // 请求拦截
 _request.interceptors.request.use(
   (config) => {
@@ -40,19 +60,18 @@ _request.interceptors.request.use(
 // 响应拦截
 _request.interceptors.response.use(
   (res) => {
+    console.log("res", res)
     if (res.data.msg !== "success") {
       Message({
         message: res.data.msg,
-        type: "success",
+        type: "warning",
       })
     }
     // NProgress.done()
     return res.data
   },
   (error) => {
-    console.log(error, "error")
-    // NProgress.done()
-
+    console.log("error", error)
     if (prevCode === error.response.data.code) {
       return Promise.reject(error)
     } else {
@@ -63,19 +82,20 @@ _request.interceptors.response.use(
     }
 
     // token 失效
-    if (error.response.data.code === 401) {
+    if (error?.response?.data?.code === 401) {
       Message({
         type: "warning",
-        message: "Login expired, please log in again",
+        message: en.value ? "Login expired, please log in again" : "登录过期，请重新登录",
       })
       OutLogin()
       router.push("/login")
       return Promise.reject(error)
-    }
-    if (error.response.data.msg !== 200) {
+    } else if (error?.response?.data?.code) {
+      ErrorMsg(error?.response?.data?.code)
+    } else {
       Message({
         type: "warning",
-        message: error.response.data.msg,
+        message: error.message,
       })
     }
     return Promise.reject(error)
