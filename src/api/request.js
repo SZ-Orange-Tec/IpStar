@@ -60,7 +60,6 @@ _request.interceptors.request.use(
 // 响应拦截
 _request.interceptors.response.use(
   (res) => {
-    console.log("res", res)
     if (res.data.msg !== "success") {
       Message({
         message: res.data.msg,
@@ -71,7 +70,6 @@ _request.interceptors.response.use(
     return res.data
   },
   (error) => {
-    console.log("error", error)
     if (prevCode === error.response.data.code) {
       return Promise.reject(error)
     } else {

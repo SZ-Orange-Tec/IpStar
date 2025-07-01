@@ -110,7 +110,7 @@ function handlerGoogleLogin() {
 
           track_register()
 
-          router.push("/overview")
+          router.replace("/overview")
         })
         .catch((err) => {
           console.log(err)
@@ -161,7 +161,7 @@ function handlerGithubLogin() {
 
           track_register()
 
-          router.push("/overview")
+          router.replace("/overview")
         })
         .catch((err) => {
           console.log(err)

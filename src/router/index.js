@@ -129,6 +129,8 @@ router.beforeEach(async (to, from, next) => {
 
   if (!isLogin.value && loginPath.test(to.path)) {
     next("/login")
+  } else if (isLogin.value && to.path === "/login") {
+    next("/home")
   }
 
   next()

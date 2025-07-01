@@ -143,7 +143,7 @@ async function next(func) {
           localStorage.setItem("token", data.token)
           token.value = data.token
 
-          router.push("/overview")
+          router.replace("/overview")
 
           Message({
             type: "success",
@@ -170,7 +170,7 @@ async function next(func) {
           localStorage.setItem("token", data.token)
           token.value = data.token
 
-          router.push("/overview")
+          router.replace("/overview")
 
           track_register()
         }
@@ -218,7 +218,7 @@ async function next(func) {
         localStorage.setItem("token", data.token)
         token.value = data.token
 
-        router.push("/overview")
+        router.replace("/overview")
 
         Message({
           type: "success",
