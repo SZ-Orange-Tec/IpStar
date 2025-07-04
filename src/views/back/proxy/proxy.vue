@@ -160,7 +160,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 function toBuy() {
-  isProduc.value = false
+  isProduc.value = true
   router.push("/products")
 }
 // 响应式状态

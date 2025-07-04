@@ -15,8 +15,8 @@ export default {
   Status: "Status",
   Consume: "Consume",
   Duration: "Duration",
-  Start_date: "Start_date",
-  Expire_date: "Expire_date",
+  Start_date: "Start date",
+  Expire_date: "Expire date",
 
   Available: "Available",
   Used_up: "Used up",

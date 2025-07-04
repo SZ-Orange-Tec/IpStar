@@ -96,13 +96,11 @@ function focusPath(path) {
 
   idx.value = index
 }
+
 watch(
-  route.path,
+  () => route.path,
   (val) => {
     focusPath(val)
-  },
-  {
-    immediate: true,
   }
 )
 
