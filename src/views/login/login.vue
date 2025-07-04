@@ -6,7 +6,7 @@
 
     <div class="container column">
       <div class="title w-full text-center">
-        <template v-if="/^forget/.test(status)">{{ t("Forgot_password") }}</template>
+        <template v-if="/^forget/.test(status)">{{ t("login_spec.forgot") }}</template>
         <template v-else>{{ t("Sign_in") }}</template>
       </div>
 

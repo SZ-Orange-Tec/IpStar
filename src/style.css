@@ -54,14 +54,14 @@
   }
 }
 
-.flex>.flex-1 {
+.flex>.flex-1,.v_center>.flex-1 {
   flex: 1;
   min-width: 0;
 }
-.flex>.shink-0{
+.flex>.shink-0,.v_center>.shink-0{
   flex-shrink: 0;
 }
-.column>.flex-1 {
+.column>.flex-1,.column_center>.flex-1 {
   flex: 1;
   min-height: 0;
 }

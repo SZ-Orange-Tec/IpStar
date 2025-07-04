@@ -19,7 +19,9 @@ export default {
     label2: "Enter the following information.",
     label3: 'A verification code has been sent to "{email}" , please check it.',
     label4: "Set your login password.",
-    label5: "Your confirmation email please.",
+    label5: "Please confirm your email, a verification code will be sent shortly.",
+
+    forgot: "Reset",
 
     your: "SIGN IN TO YOUR",
   },
