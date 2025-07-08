@@ -15,7 +15,8 @@ export default {
 
     try: "Try",
     tutorials: "Tutorials",
-    Accumulated: "Accumulated \n users",
+    // Accumulated: "Accumulated \n users",
+    partner: "Partner \n Organizations",
     online: "Number of online \n Ip",
     users: "users",
 

@@ -16,7 +16,8 @@ export default {
 
     try: "立即试用",
     tutorials: "教程",
-    Accumulated: "累计用户",
+    // Accumulated: "累计用户",
+    partner: "合作伙伴",
     online: "实时在线 IP",
     users: "用户",
 

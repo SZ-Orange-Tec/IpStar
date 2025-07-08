@@ -22,7 +22,8 @@
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
-                  <span v-if="item.trial || item.unlimit">{{ item.name }}</span>
+                  <span v-if="item.trial">{{ t("Trial") }}</span>
+                  <span v-if="item.unlimit">{{ item.name }}</span>
                   <div v-else class="column_center text-base md:text-xl font-semibold">
                     {{ item.pack_title }}
                     <!-- <strong class="">{{ item.pack_title.split(" ")[0] }}</strong>

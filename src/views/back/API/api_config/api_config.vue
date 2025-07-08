@@ -1,6 +1,6 @@
 <template>
   <div class="api_config column space-y-3">
-    <div class="card w-full">
+    <div class="card w-full board">
       <!-- 计数 -->
       <h4>{{ t("Count") }}</h4>
       <div class="countbox column gap-3 sm:flex">
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="card w-full">
+    <div class="card w-full board">
       <!-- 参数声明 -->
       <h4>{{ t("Parameter") }} {{ t("Declaration") }}</h4>
       <div class="params w-full">

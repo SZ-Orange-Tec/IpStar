@@ -11,6 +11,8 @@ export default {
   Personal: "个人",
   Enterprise: "企业",
 
+  Trial: "试用",
+
   productList_spec: {
     right1: "含美欧和其他地区",
     right2: "国家可以选择",

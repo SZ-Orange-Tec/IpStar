@@ -194,7 +194,7 @@ func main() {
 func testProxy() {
 
   req := EndPointRequestData{
-		//apikey: 你可以在管理控制台用户设置界面找到这个参数。You can find it in the user settings menu of the management console
+		//apikey: 您可以在管理控制台用户设置界面找到这个参数。You can find it in the user settings menu of the management console
 		ApiKey: "70ba35273b46273ffbc42bac73aefd46",
 		//提取的IP个数，Extract IP count
 		Count: 10,
@@ -202,7 +202,7 @@ func testProxy() {
 		Keeptime: 0,
 		//代理协议, proxy protocol, 0: socks5, 1:http
 		Protocol: 0,
-		//region: 地区代码，你可以在后台文档里找到地区参考表。Region code, you can find the region reference in the document on our website.
+		//region: 地区代码，您可以在后台文档里找到地区参考表。Region code, you can find the region reference in the document on our website.
 		Region:  "BR",
 		Session: "",
 		//0:返回json格式, 1:返回短格式。0: return response as json format, 1: return response as short format

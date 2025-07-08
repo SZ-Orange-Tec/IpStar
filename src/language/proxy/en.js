@@ -35,6 +35,6 @@ export default {
       front: "You can also obtain the proxy channels via APIs, please check the ",
       btn: "API reference",
     },
-    no_order: "你没有订单信息",
+    no_order: "您没有订单信息",
   },
 }

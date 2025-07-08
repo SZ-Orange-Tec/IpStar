@@ -19,7 +19,7 @@
       <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
         <div class="echarts_left w-full column gap-5">
           <div class="flow gap-3 md:gap-5">
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top w-full between">
                 <p class="">{{ $t("overview_spec.Residual_Traffic") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/Gauge.png" width="36" />
@@ -36,7 +36,7 @@
               </div>
             </div>
 
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top w-full between">
                 <p>{{ $t("overview_spec.Consumption_Today") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/control.png" width="36" />
@@ -53,7 +53,7 @@
               </div>
             </div>
 
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4">
+            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top between">
                 <p>{{ $t("overview_spec.Total_IPs_Available") }}</p>
               </div>
@@ -71,7 +71,7 @@
 
           <div class="w-full column md:flex gap-5 items-stretch echart_table">
             <div class="echart column space-y-5 w-full md:flex-1">
-              <div class="outflow_echart flex-1 w-full rounded-md relative">
+              <div class="outflow_echart flex-1 w-full rounded-md relative board">
                 <!-- 时间选择 -->
                 <div class="w-full h-full" id="echartDay" v-show="tableData.length > 0"></div>
                 <div class="null_data" v-show="!tableData.length > 0">
@@ -80,7 +80,7 @@
                 <Picker class="echart_picker" @dateChange="dateChange" />
               </div>
 
-              <div class="day_echart flex-1 w-full relative rounded-md">
+              <div class="day_echart flex-1 w-full relative rounded-md board">
                 <div class="w-full h-full" id="echartTime" v-show="!Nodata"></div>
                 <div class="null_data" v-show="Nodata">
                   <el-empty description="No Data"></el-empty>
@@ -101,7 +101,7 @@
               </div>
             </div>
 
-            <div class="table_box xl:hidden">
+            <div class="table_box xl:hidden board">
               <el-table :data="tableData" v-if="tableData.length > 0">
                 <el-table-column prop="date" :label="$t('Date')"></el-table-column>
                 <el-table-column prop="flow" :label="$t('Traffic')">
@@ -118,7 +118,7 @@
         </div>
         <!-- date flow -->
         <div class="right h-full hidden xl:column space-y-5">
-          <div class="notice" v-if="noticeText">
+          <div class="notice board" v-if="noticeText">
             <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
             <div class="notice_box">
               <div ref="noticeText" :class="{ scroll: isNoticeScroll }">
@@ -128,7 +128,7 @@
             </div>
           </div>
 
-          <div class="date_flow table_box flex-1 min-h-0">
+          <div class="date_flow table_box flex-1 min-h-0 board">
             <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
               <el-table-column prop="date" :label="$t('Date')"></el-table-column>
               <el-table-column prop="flow" :label="$t('Traffic')">
@@ -146,7 +146,7 @@
 
       <!-- 平台在线IP -->
       <div class="ip w-full space-y-5" v-show="activeIndex === 1">
-        <div class="ip_echart w-full">
+        <div class="ip_echart w-full board">
           <div id="ipEchart" v-show="hasIpData"></div>
           <div class="null_data" v-show="!hasIpData">
             <el-empty description="No Data"></el-empty>
@@ -154,7 +154,7 @@
           <Picker class="echart_picker" :defaultDate="ipdefault" :pickerOptions="pickerOptions" @dateChange="ipDateChange" />
         </div>
 
-        <div class="table_box w-full rounded-md space-y-5">
+        <div class="table_box w-full rounded-md space-y-5 board">
           <el-table :data="network" border>
             <el-table-column :label="$t('overview_spec.Country_or_Region')" min-width="200">
               <template #default="scope">
@@ -187,7 +187,7 @@
 
       <!-- 余额明细 -->
       <div class="balance w-full column" v-show="activeIndex === 2">
-        <div class="w-full flex-1">
+        <div class="w-full flex-1 board">
           <div class="table_box w-full">
             <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
               <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->

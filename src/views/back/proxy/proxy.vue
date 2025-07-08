@@ -8,7 +8,7 @@
 
     <div class="w-full main flex-1 px-3 md:px-5">
       <div class="space-y-5 h-full" v-if="is_purchase">
-        <div class="card column">
+        <div class="card column board">
           <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
             <div class="column space-y-2">
               <p class="text-sm font-medium">{{ t("Country") }}</p>
@@ -74,7 +74,7 @@
 
         <!-- <div class="line w-full"></div> -->
 
-        <div class="card space-y-4 w-full">
+        <div class="card space-y-4 w-full board">
           <div class="v_center space-x-5 text-sm w-full whitespace-nowrap">
             <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8 font-medium">
               <div class="space-x-2 v_center">

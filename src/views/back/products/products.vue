@@ -13,7 +13,7 @@
           <productList :tabbar="true" :vantage="false" :pack="5"></productList>
         </div>
         <ip-button @click="toUse" type="ghost" class="px-3 h-10" v-if="is_purchase">
-          <div class="v_center">
+          <div class="v_center" style="color: hsl(var(--background))">
             <p>{{ $t("product_spec.purchase") }}</p>
             <CircleChevronRight :size="20" />
           </div>
@@ -21,8 +21,8 @@
       </div>
 
       <!-- 购买记录表 -->
-      <div class="h-full column space-y-5" v-else-if="tabTotal > 0 && !isProduc">
-        <div class="table_box flex-1 w-full">
+      <div class="h-full column space-y-5" v-else-if="tabtotal > 0 && !isProduc">
+        <div class="table_box flex-1 w-full board">
           <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>
             <el-table-column prop="price" :label="$t('Price')" min-width="120"></el-table-column>

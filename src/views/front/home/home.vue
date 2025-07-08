@@ -33,9 +33,9 @@
         <div class="v_center" v-lazy="getUserIps">
           <div class="column_center px-5">
             <strong class="title text-2xl" style="height: 2rem">
-              <template v-if="totalUser !== -1">{{ totalUser }}</template>
+              <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
-            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.Accumulated") }}</span>
+            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
             <!-- <span class="description text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
           <div class="column_center px-5">
@@ -447,7 +447,8 @@ const IpMap = async function () {
 }
 
 // 累计用户
-const totalUser = ref(-1)
+// const totalUser = ref(-1)
+const partner = ref(-1)
 const onlineIps = ref(-1)
 async function getUserIps() {
   try {
@@ -455,7 +456,7 @@ async function getUserIps() {
     const { data } = result
     homeData = result
 
-    totalUser.value = 0
+    partner.value = 0
     onlineIps.value = 0
     // 逐渐递增动画
     nextTick(() => {
@@ -476,11 +477,11 @@ async function getUserIps() {
       const userObj = { charged: 0 }
       anime({
         targets: userObj,
-        charged: data?.lv_customer_num ?? 15324,
+        charged: data?.partners_count ?? 100,
         round: 1,
         easing: "linear",
         update: function () {
-          totalUser.value = userObj.charged
+          partner.value = userObj.charged
         },
       })
     })
@@ -517,7 +518,7 @@ function giftPacks(e) {
       title: en.value ? "Prompt" : "温馨提示",
       message: en.value
         ? "We have already granted you a default authorization of 5M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
-        : "我们已经默认授权给你5M的测试流量，您可以联系我们申请额外500M的测试流量。",
+        : "我们已经默认授权给您5M的测试流量，您可以联系我们申请额外500M的测试流量。",
       cancelText: en.value ? "Later" : "以后再说",
       confirmText: en.value ? "Contact Now" : "立即联系",
       success: () => {

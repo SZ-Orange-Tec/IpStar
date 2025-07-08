@@ -1,5 +1,6 @@
 .navbar{
   height: 50px;
+  color: hsl(var(--background));
   .btn {
     &:hover {
       color: hsl(var(--primary));
@@ -7,9 +8,9 @@
   }
 
   .menu_btn{
-    width: 2.25rem;
-    height: 2.25rem;
-    color: hsl(var(--foreground));
+    width: 2rem;
+    height: 2rem;
+    color: hsl(var(--background));
   }
   .menu{
     // width: 200px;
@@ -29,5 +30,9 @@
       height: 1px;
       background-color: hsl(var(--neutral) / 50%);
     }
+  }
+
+  :deep(button) {
+    --foreground: var(--background);
   }
 }

@@ -11,6 +11,8 @@ export default {
   Personal: "Personal",
   Enterprise: "Enterprise",
 
+  Trial: "Trial",
+
   productList_spec: {
     right1: "200+Regions, Include US",
     right2: "Regions-Select Available",

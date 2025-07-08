@@ -7,7 +7,7 @@
 
       <DropDown placement="bottom" class="block lg:hidden">
         <template #label="{ open }">
-          <IpButton :class="{ open: open }" type="border" class="menu_btn">
+          <IpButton :class="{ open: open }" type="ghost" class="menu_btn">
             <Menu :size="20" />
           </IpButton>
         </template>

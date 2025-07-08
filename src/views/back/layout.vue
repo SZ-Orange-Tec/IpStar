@@ -79,20 +79,11 @@ onMounted(() => {
 
 <style lang="less" scoped>
 @import url("./layout.less");
-// .fade-enter{
-//   opacity: 0;
-//   transform: translateY(-10px);
-// }
-// .fade-enter-to{
-//   opacity: .5;
-//   transition: all .4s linear;
-// }
-// .fade-leave{
-//   opacity: .5;
-// }
-// .fade-leave-to{
-//   opacity: 0;
-//   transition: all .1s linear;
-//   transform: translateY(10px);
-// }
+</style>
+
+<style>
+.board {
+  background-color: hsl(var(--foreground));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 </style>

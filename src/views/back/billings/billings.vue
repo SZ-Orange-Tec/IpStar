@@ -2,13 +2,13 @@
   <div class="billings column h-full">
     <NavBar>
       <template #default="{ title }">
-        <div class="white">{{ title }}</div>
+        <div>{{ title }}</div>
       </template>
     </NavBar>
 
     <div class="w-full main column flex-1 px-3 md:px-5">
       <!-- 购买订单 -->
-      <div class="flex-1 w-full table_box">
+      <div class="flex-1 w-full table_box board">
         <el-table :data="tableData">
           <el-table-column prop="order" :label="$t('Order')" min-width="200"></el-table-column>
           <el-table-column prop="createTime" :label="$t('Place_order_time')" min-width="200"></el-table-column>

@@ -25,6 +25,6 @@ export default {
 
   product_spec: {
     purchase: "购买后如何使用 ?",
-    no: "你没有流量余额",
+    no: "您没有流量余额",
   },
 }
