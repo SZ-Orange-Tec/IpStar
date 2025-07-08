@@ -59,10 +59,10 @@
                 <a href="javascript:;" @click="toDocument('Getting')">{{ t("Getting_Start") }}</a>
               </li>
               <li>
-                <a href="javascript:;" @click="jump('/api')">{{ t("API_Reference") }}</a>
+                <a href="javascript:;" @click="jump('/generate_api')">{{ t("API_Reference") }}</a>
               </li>
               <li>
-                <a href="javascript:;" @click="jump('/api')">{{ t("Examples") }}</a>
+                <a href="javascript:;" @click="jump('/generate_api')">{{ t("Examples") }}</a>
               </li>
             </ul>
           </div>

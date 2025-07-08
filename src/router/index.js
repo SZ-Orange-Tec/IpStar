@@ -72,7 +72,7 @@ const routes = [
         component: () => import("@/views/back/proxy/proxy.vue"),
       },
       {
-        path: "/api",
+        path: "/generate_api",
         name: "api",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/API/api.vue"),

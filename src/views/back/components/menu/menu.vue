@@ -72,7 +72,7 @@ function getSlideList() {
     {
       icon: LaptopMinimalCheck,
       name: t("menu_spec.API"),
-      path: "/api",
+      path: "/generate_api",
       isShow: true,
     },
     {

@@ -78,7 +78,7 @@ const pathMap = {
   "/products": t("menu_spec.Products"),
   "/billings": t("menu_spec.Billings"),
   "/proxy": t("menu_spec.Proxy"),
-  "/api": t("menu_spec.API"),
+  "/generate_api": t("menu_spec.API"),
   "/settings": t("menu_spec.Settings"),
 }
 const name = computed(() => pathMap[route.path] ?? "")
@@ -108,7 +108,7 @@ const menuData = [
   {
     icon: LaptopMinimalCheck,
     name: t("menu_spec.API"),
-    path: "/api",
+    path: "/generate_api",
   },
   {
     icon: Settings,
