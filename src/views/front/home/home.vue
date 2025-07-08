@@ -302,11 +302,11 @@
           </li>
           <li class="v_center">
             <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.any_game") }}</p>
+            <p class="description">{{ t("home_spec.media") }}</p>
           </li>
           <li class="v_center">
             <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.file_transfer") }}</p>
+            <p class="description">{{ t("home_spec.model_training") }}</p>
           </li>
           <li class="v_center">
             <Dot :size="30" class="green" />

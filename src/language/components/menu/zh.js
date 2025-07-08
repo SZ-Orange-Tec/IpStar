@@ -9,5 +9,7 @@ export default {
 
     help: "有任何问题都可以查看",
     manual: "帮助文档",
+
+    back_home: "返回首页",
   },
 }

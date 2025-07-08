@@ -5,6 +5,27 @@
 
   &>.logo {
     align-self: center;
+    .back{
+      opacity: 0;
+      position: absolute;
+      left: -20px;
+      top: 10px;
+      color: hsl(var(--foreground) / 80%);
+    }
+    &:hover{
+      .back{
+        opacity: 1;
+        animation: trans 0.8s infinite;
+      }
+      @keyframes trans {
+        0%{
+          transform: translateX(0);
+        }
+        100%{
+          transform: translateX(-10px);
+        }
+      }
+    }
   }
 
   &>.column {

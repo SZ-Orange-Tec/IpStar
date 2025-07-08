@@ -9,5 +9,7 @@ export default {
 
     help: "If you have any questions, please check the ",
     manual: "user manual",
+
+    back_home: "Back to home page",
   },
 }

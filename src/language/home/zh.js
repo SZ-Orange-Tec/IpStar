@@ -23,7 +23,7 @@ export default {
     adv1: "支持SOCKS5、HTTP/HTTPS\n& 自定义协议。",
     adv2: "所有流行的代理软件和APP。",
     // adv3: "支持指纹\n浏览器。",
-    adv4: "支持API提取。",
+    adv4: "支持API和账密组合提取。",
 
     why: "为什么选择",
     why1_title: "全球5000万+住宅IP池",
@@ -53,8 +53,10 @@ export default {
 
     app_title: "更多强大的lpStar功能\n等待您开发",
     e_commerce: "电子商务",
-    any_game: "任何游戏",
-    file_transfer: "文件传输",
+    // any_game: "任何游戏",
+    // file_transfer: "文件传输",
+    media: "海外自媒体运营",
+    model_training: "AI 大模型训练",
     ad_tech: "广告技术",
     serp_seo: "SERP & SEO",
     finance: "金融",

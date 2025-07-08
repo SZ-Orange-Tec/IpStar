@@ -1,6 +1,9 @@
 <template>
   <div class="menu column h-full space-y-5">
-    <div class="logo text-2xl pointer" @click="$router.push('/home')">
+    <div class="logo text-2xl pointer relative" @click="$router.push('/home')" :title="t('menu_spec.back_home')">
+      <div class="back">
+        <ChevronsLeft :size="20" />
+      </div>
       <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
     </div>
     <div class="column flex-1">
@@ -27,7 +30,7 @@ import { ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import layoutStore from "@/store/layout"
 import { useI18n } from "vue-i18n"
-import { Settings, ClipboardList, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck } from "lucide-vue-next"
+import { Settings, ClipboardList, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck, ChevronsLeft } from "lucide-vue-next"
 
 const { isProduc } = layoutStore()
 const router = useRouter()

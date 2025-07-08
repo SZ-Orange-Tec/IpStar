@@ -22,7 +22,7 @@ export default {
     adv1: "Supports SOCKS5, HTTP/HTTPS\n& custom protocols.",
     adv2: "All popular proxy software and APPs.",
     // adv3: "Support fingerprint\nbrowsers.",
-    adv4: "Support APl quto extract.",
+    adv4: "Supports API and account-password\n combo extraction.",
 
     why: "Why Choose",
     why1_title: "50M+ Global Residential IPs",
@@ -55,8 +55,10 @@ export default {
 
     app_title: "More Powerful Features Of IpStar \n Are Waiting For You To Develop",
     e_commerce: "E-commerce",
-    any_game: "Any Game",
-    file_transfer: "File Transfer",
+    // any_game: "Any Game",
+    // file_transfer: "File Transfer",
+    media: "TikTok",
+    model_training: "AI Model training",
     ad_tech: "Ad Tech",
     serp_seo: "SERP & SEO",
     finance: "Finance",

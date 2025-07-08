@@ -23,9 +23,10 @@
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
                   <span v-if="item.trial || item.unlimit">{{ item.name }}</span>
-                  <div v-else class="column_center">
-                    <strong class="text-base md:text-xl font-semibold">{{ item.pack_title.split(" ")[0] }}</strong>
-                    <span>{{ item.pack_title.split(" ")[1] }}</span>
+                  <div v-else class="column_center text-base md:text-xl font-semibold">
+                    {{ item.pack_title }}
+                    <!-- <strong class="">{{ item.pack_title.split(" ")[0] }}</strong>
+                    <span>{{ item.pack_title.split(" ")[1] }}</span> -->
                   </div>
                 </div>
 

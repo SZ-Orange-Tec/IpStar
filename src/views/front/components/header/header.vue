@@ -102,6 +102,9 @@
                 <li @click="navigate('/overview')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Overview") }}</li>
                 <li @click="navigate('/products')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Products") }}</li>
                 <li @click="navigate('/billings')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Billings") }}</li>
+                <li @click="navigate('/proxy')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Proxy") }}</li>
+                <li @click="navigate('/api')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("API") }}</li>
+                <li @click="navigate('/settings')" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Settings") }}</li>
                 <li class="menu-split my-1"></li>
                 <li @click="signOut" class="menu_item px-2 rounded-md pointer transition-color v_center">{{ t("Sign_out") }}</li>
               </ul>
