@@ -18,6 +18,7 @@ const props = defineProps({
   modelValue: Boolean,
 })
 const { modelValue } = toRefs(props)
+const emit = defineEmits(["update:modelValue"])
 
 watch(
   modelValue,
@@ -67,6 +68,7 @@ function close() {
       duration: 150,
       complete: () => {
         show.value = false
+        emit("update:modelValue", false)
         resolve()
       },
     })

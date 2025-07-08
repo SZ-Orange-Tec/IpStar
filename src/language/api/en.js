@@ -1,8 +1,10 @@
 import menu from "../components/menu/en"
 import navbar from "../components/navbar/en"
+import combo_popup from "../components/combo_popup/en"
 export default {
   ...menu,
   ...navbar,
+  ...combo_popup,
 
   Construction: "Construction",
   Reference: "Reference",
@@ -40,5 +42,7 @@ export default {
       btn: "purchase the product",
     },
     buy: "Membership visibility post-purchase",
+
+    combo: "Account password combination",
   },
 }

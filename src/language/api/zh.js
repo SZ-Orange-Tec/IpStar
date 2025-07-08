@@ -1,8 +1,10 @@
 import menu from "../components/menu/zh"
 import navbar from "../components/navbar/zh"
+import combo_popup from "../components/combo_popup/zh"
 export default {
   ...menu,
   ...navbar,
+  ...combo_popup,
 
   Construction: "构造",
   Reference: "参考",
@@ -40,5 +42,6 @@ export default {
       btn: "购买产品",
     },
     buy: "购买服务会员可见",
+    combo: "账密组合",
   },
 }
