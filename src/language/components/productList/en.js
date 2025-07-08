@@ -22,7 +22,7 @@ export default {
 
     Need_more: "Need More",
     Extra_discount: "Extra Discount",
-    Custom1: "Custom Package",
+    Custom1: "Custom Plans",
     Custom2: "Custom Regions",
     Custom3: "Custom Demands",
     Service: "Contact Us",

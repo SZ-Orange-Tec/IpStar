@@ -11,7 +11,7 @@ export default {
     intro_title: "Quality Residential Proxies\n Plans From {primary} & 200+ Countries",
 
     intro_desc:
-      "Get high-guality residential proxies for your business.\n Our IPs are sourced from real home networks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for market research, ad verification, and brand protection.\n We offer flexible plans to fit your business needs",
+      "Get high-guality residential proxies for your business.\n Our IPs are sourced from real home networks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for market research, ad verification, and Training AI large models.\n We offer flexible plans to fit your business needs",
 
     try: "Try",
     tutorials: "Tutorials",

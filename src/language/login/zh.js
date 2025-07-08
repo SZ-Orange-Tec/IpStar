@@ -7,6 +7,7 @@ export default {
   Reset: "重置",
   Back: "返回",
   Re_send: "重新发送",
+  Forgot_password: "忘记密码",
   Confirm: "确认",
   Logging_in: "正在登录",
 

@@ -95,19 +95,30 @@ import { X as CloseIcon } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
 import { onMounted, ref } from "vue"
+import { platDataNodes } from "../../../../api/home"
 
 const { t } = useI18n()
 
 const show = defineModel()
-const { lang } = settingStore()
+const { en } = settingStore()
 
 // ip池
 const ipPool = ref([])
 async function getIpPool() {
   try {
-    const result = await fetch(`/json/ip_pool_${lang.value}.json`)
-    const data = await result.json()
-    ipPool.value = data
+    const { data } = await platDataNodes()
+    const result = []
+    const suffix = en.value ? "IP Pool Service Address" : "IP池服务地址"
+    data.forEach((item) => {
+      const country = item.group === "OM" ? (en.value ? "US" : "美国") : en.value ? "Comprehensive" : "综合"
+      item.nodes.forEach((node, index) => {
+        result.push({
+          title: `${country} ${suffix} ${index + 1}`,
+          url: node,
+        })
+      })
+    })
+    ipPool.value = result
   } catch (err) {
     console.log(err.message)
   }

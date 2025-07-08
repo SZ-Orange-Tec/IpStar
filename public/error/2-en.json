@@ -3,7 +3,7 @@
   "2002": "Wrong code. Try again.",
   "2003": "Email taken. Use another.",
   "2004": "Username taken. Pick another.",
-  "2005": "Wrong password. Try again.",
+  "2005": "Invalid user or password, please try again!",
   "2006": "Product not found.",
   "2007": "Order creation failed.",
   "2008": "Order not found.",

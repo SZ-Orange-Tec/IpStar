@@ -123,3 +123,11 @@ export function platDataConfig(params) {
     params,
   })
 }
+// 配置信息
+export function platDataNodes(params) {
+  return request({
+    url: "/plat/data/nodes",
+    method: "get",
+    params,
+  })
+}

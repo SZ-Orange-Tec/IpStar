@@ -3,7 +3,7 @@ export default {
   User_password: "",
 
   combo_spec: {
-    title: "Confidential Access Method Documentation",
+    title: "Account and password access method",
 
     title1: "Getting Proxy User Information",
     title2: "Proxy User Format Description",
@@ -17,7 +17,7 @@ export default {
     password: "Proxy user password",
 
     proxy_format: "Proxy user format is usually",
-    ipstr: "IP string, change this part to switch IP address",
+    ipstr: "A random string here can switch the IP address.",
     keeptime: "Input duration (minutes), 0 means no time limit",
     country: "Country code (e.g., US, BR, etc.)",
     suffix: "Fixed suffix",

@@ -42,6 +42,6 @@ export default {
       btn: "购买产品",
     },
     buy: "购买服务会员可见",
-    combo: "账密组合",
+    combo: "帐密组合接入",
   },
 }

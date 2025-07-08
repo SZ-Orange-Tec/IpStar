@@ -43,6 +43,6 @@ export default {
     },
     buy: "Membership visibility post-purchase",
 
-    combo: "Account password combination",
+    combo: "Account and password access",
   },
 }
