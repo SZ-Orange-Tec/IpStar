@@ -1,8 +1,10 @@
 import header from "../components/header/zh"
 import footer from "../components/footer/zh"
+import headerGift from "../components/headerGift/zh"
 export default {
   ...header,
   ...footer,
+  ...headerGift,
 
   Support: "支持",
   Contact_us: "联系我们",

@@ -2,11 +2,13 @@ import header from "../components/header/zh"
 import productList from "../components/productList/zh"
 import paypopup from "../components/pay_popup/zh"
 import footer from "../components/footer/zh"
+import headerGift from "../components/headerGift/zh"
 export default {
   ...header,
   ...productList,
   ...footer,
   ...paypopup,
+  ...headerGift,
 
   pricing_spec: {
     des: "真实住宅IP 覆盖全球 200+ 国家\n套餐 {price} 起",

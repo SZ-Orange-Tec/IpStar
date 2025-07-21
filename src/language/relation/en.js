@@ -1,8 +1,10 @@
 import header from "../components/header/en"
 import footer from "../components/footer/en"
+import headerGift from "../components/headerGift/en"
 export default {
   ...header,
   ...footer,
+  ...headerGift,
 
   Support: "Support",
   Contact_us: "Contact Us",

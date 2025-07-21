@@ -2,17 +2,29 @@ import header from "../components/header/zh"
 import footer from "../components/footer/zh"
 import productList from "../components/productList/zh"
 import paypopup from "../components/pay_popup/zh"
+import headerGift from "../components/headerGift/zh"
 export default {
   ...header,
   ...footer,
   ...productList,
   ...paypopup,
+  ...headerGift,
 
   home_spec: {
     intro_title: "优质住宅IP代理，覆盖全球\n200+国家/地区，套餐{primary}起",
 
     intro_desc:
       "为您的业务提供高品质住宅IP代理。\nIP源自全球200多个国家/地区的真实家庭网络，确保高稳定性和匿名性。\n适用于市场研究、广告验证和AI大模型训练。提供多种灵活套餐以满足您的业务需求。",
+
+    stable: "IPStar 性能稳定，易于使用",
+    note: "速度快、匿名性强，强烈推荐使用。",
+
+    nocode: "零代码集成，快速上手",
+    fast: "更快",
+    secure: "更安全",
+    api: "API 自动提取",
+    work: "工作",
+    entertainment: "娱乐",
 
     try: "立即试用",
     tutorials: "教程",

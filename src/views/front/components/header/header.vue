@@ -94,7 +94,7 @@
                 <div class="v_center shrink-0 space-x-2">
                   <CircleUser :size="24" :stroke-width="1" />
                   <p class="username hidden md:block">{{ username }}</p>
-                  <ChevronDown :size="16" :class="{ 'rotate-180': open }" class="transition-transform" />
+                  <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
                 </div>
               </IpButton>
             </template>

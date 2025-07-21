@@ -62,8 +62,8 @@
             <span class="text-xs description">5.0</span>
           </div>
 
-          <p class="text-lg title">IPStar is stable and <br />easy to use</p>
-          <p class="text-xs description">"Fast speed and strong anony-<br />mity highly recommended.</p>
+          <p class="text-lg title whitespace-pre-wrap">{{ t("home_spec.stable") }}</p>
+          <p class="text-xs description whitespace-pre-wrap">{{ t("home_spec.note") }}</p>
         </div>
         <!-- 标签 -->
         <div class="intro3 img_box hidden xl:column text-sm space-y-5 rounded-lg">
@@ -72,10 +72,10 @@
               <Code :size="20"></Code>
             </div>
             <div class="flex-1 space-y-2">
-              <p class="font-semibold whitespace-nowrap">Fresh & High Anonymous</p>
+              <p class="font-semibold whitespace-nowrap">{{ t("home_spec.nocode") }}</p>
               <ul class="tag-list text-xs flex space-x-1">
-                <li class="grey v_center rounded">Fast</li>
-                <li class="red v_center rounded">Secure</li>
+                <li class="grey v_center rounded">{{ t("home_spec.fast") }}</li>
+                <li class="red v_center rounded">{{ t("home_spec.secure") }}</li>
               </ul>
             </div>
           </div>
@@ -84,10 +84,10 @@
               <Laptop :size="20" />
             </div>
             <div class="flex-1 space-y-2">
-              <p class="font-semibold">API auto extract</p>
+              <p class="font-semibold">{{ t("home_spec.api") }}</p>
               <ul class="tag-list text-xs flex space-x-1">
-                <li class="red v_center rounded">Work</li>
-                <li class="purple v_center rounded">Entertainment</li>
+                <li class="red v_center rounded">{{ t("home_spec.work") }}</li>
+                <li class="purple v_center rounded">{{ t("home_spec.entertainment") }}</li>
               </ul>
             </div>
           </div>

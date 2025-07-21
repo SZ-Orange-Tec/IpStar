@@ -2,16 +2,29 @@ import header from "../components/header/en"
 import footer from "../components/footer/en"
 import productList from "../components/productList/en"
 import paypopup from "../components/pay_popup/en"
+import headerGift from "../components/headerGift/en"
 export default {
   ...header,
   ...footer,
   ...productList,
   ...paypopup,
+  ...headerGift,
   home_spec: {
     intro_title: "Quality Residential Proxies\n Plans From {primary} & 200+ Countries",
 
     intro_desc:
       "Get high-guality residential proxies for your business.\n Our IPs are sourced from real home networks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for market research, ad verification, and Training AI large models.\n We offer flexible plans to fit your business needs",
+
+    stable: "IPStar is stable and \neasy to use",
+    note: "Fast speed and strong anony-\nmity highly recommended.",
+
+    nocode: "No-Code Integration",
+    fast: "Fast",
+    secure: "Secure",
+
+    api: "API auto extract",
+    work: "Work",
+    entertainment: "Entertainment",
 
     try: "Try",
     tutorials: "Tutorials",
