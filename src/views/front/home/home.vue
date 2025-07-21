@@ -12,7 +12,7 @@
             style="line-height: 2"
           >
             <template #primary>
-              <span class="primary_text">$0.39/GB</span>
+              <span class="primary_text">${{ lowestPrice }}/GB</span>
             </template>
           </i18n-t>
           <p class="text-center description md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
@@ -450,6 +450,7 @@ const IpMap = async function () {
 // const totalUser = ref(-1)
 const partner = ref(-1)
 const onlineIps = ref(-1)
+const lowestPrice = ref(0.25)
 async function getUserIps() {
   try {
     const result = homeData ?? (await platDataIndex())
@@ -458,6 +459,7 @@ async function getUserIps() {
 
     partner.value = 0
     onlineIps.value = 0
+    lowestPrice.value = data.lowest_price ? data.lowest_price / 100 : 0.25
     // 逐渐递增动画
     nextTick(() => {
       const ipObj = { charged: 0 }

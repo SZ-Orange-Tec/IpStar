@@ -8,7 +8,7 @@
           <div class="text-lg sm:text-2xl lg:text-3xl column_center space-y-5">
             <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title md:whitespace-pre-wrap">
               <template #price>
-                <span class="primary_text">$0.39/GB</span>
+                <span class="primary_text">${{ lowestPrice }}/GB</span>
               </template>
             </i18n-t>
 
@@ -230,9 +230,20 @@ function bgLoaded(e) {
   showImg.value = true
 }
 
+// 获取最低价格
+const lowestPrice = ref(0.25)
+async function getIndexData() {
+  try {
+    const { data } = await platDataIndex()
+    lowestPrice.value = data.lowest_price ? data.lowest_price / 100 : 0.25
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 onMounted(() => {
   computeTop()
-  // IpMap()
+  getIndexData()
   window.addEventListener("resize", computeTop)
 })
 

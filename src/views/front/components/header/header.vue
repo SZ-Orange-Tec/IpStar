@@ -94,6 +94,7 @@
                 <div class="v_center shrink-0 space-x-2">
                   <CircleUser :size="24" :stroke-width="1" />
                   <p class="username hidden md:block">{{ username }}</p>
+                  <ChevronDown :size="16" :class="{ 'rotate-180': open }" class="transition-transform" />
                 </div>
               </IpButton>
             </template>
@@ -119,7 +120,7 @@
 <script setup>
 import DropDown from "@/components/dropdown/dropdown.vue"
 import IpButton from "@/components/button/button.vue"
-import { CircleUser, Menu } from "lucide-vue-next"
+import { CircleUser, Menu, ChevronDown } from "lucide-vue-next"
 import loginStore from "@/store/login"
 import settingStore from "@/store/setting"
 import { useRouter, useRoute } from "vue-router"
