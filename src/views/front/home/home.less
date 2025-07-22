@@ -207,31 +207,11 @@
       .country_box{
         padding-top: 0.5rem;
         display: grid;
-        grid-template-columns: repeat(6,1fr);
-        grid-template-rows: repeat(2,1fr);
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3,1fr);
         gap: 20px 0;
         // justify-content: center;
         justify-items: center;
-        &>.country:nth-child(1){
-          grid-column-start: 1;
-          grid-column-end: 3;
-        }
-        &>.country:nth-child(2){
-          grid-column-start: 3;
-          grid-column-end: 5;
-        }
-        &>.country:nth-child(3){
-          grid-column-start: 5;
-          grid-column-end: 7;
-        }
-        &>.country:nth-child(4){
-          grid-column-start: 1;
-          grid-column-end: 4;
-        }
-        &>.country:nth-child(5){
-          grid-column-start: 4;
-          grid-column-end: 7;
-        }
       
       }
       .country{
@@ -309,6 +289,14 @@
       .Malaysia{
         left: 76%;
         bottom: 36%;
+      }
+      .USA{
+        left: 22%;
+        top: 30%;
+      }
+      .Japan{
+        right: 3%;
+        top: 31%;
       }
 
       .content{

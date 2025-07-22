@@ -157,9 +157,10 @@ async function IpMap() {
   const countryImg = await import.meta.glob("@/assets/images/home/country/*", { eager: true })
 
   mapData.value = data.countries.map((item) => {
-    const key = `/src/assets/images/home/country/${item.country}.png`
+    const country = item.code === "US" ? "USA" : item.country
+    const key = `/src/assets/images/home/country/${country}.png`
     return {
-      name: item.country,
+      name: country,
       value: (item.ip_count / 10000).toFixed(2),
       icon: countryImg[key].default,
     }
