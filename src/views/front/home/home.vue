@@ -19,8 +19,21 @@
         </div>
 
         <div class="my-16 v_center space-x-5" style="align-items: stretch">
-          <IpButton type="primary" class="h-10 w-40" @click="giftPacks">{{ t("home_spec.start_now") }}</IpButton>
-          <GoogleLoginButton v-if="!isLogin" />
+          <template v-if="!isLogin">
+            <IpButton type="primary" class="h-10 w-40" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
+            <GoogleLoginButton v-if="!isLogin" />
+          </template>
+          <template v-else>
+            <IpButton type="primary" class="h-10 px-5" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="ghost" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/doc')">
+              <div class="between w-full h-full">
+                <span>{{ t("home_spec.tutorials") }}</span>
+                <button>
+                  <MoveRight />
+                </button>
+              </div>
+            </IpButton>
+          </template>
         </div>
 
         <div class="v_center" v-lazy="getUserIps">
@@ -353,6 +366,7 @@ import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { track_gift } from "@/utils/detect"
 import Confirm from "@/components/confirm/confirm"
+import Message from "@/components/message/message"
 import position from "../../../components/dialog/position"
 import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 
@@ -504,6 +518,13 @@ function merchantScroll() {
   }, 1000)
 }
 
+function toLogin() {
+  router.push("/login")
+  Message({
+    type: "info",
+    message: t("gift_spec.sign_up", { gift: "50M" }),
+  })
+}
 function giftPacks(e) {
   // 领取礼包
   track_gift()

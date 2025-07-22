@@ -26,6 +26,8 @@ export default {
     work: "Work",
     entertainment: "Entertainment",
 
+    try: "Try",
+    more_try: "More Trial Traffic",
     start_now: "Start Now",
     tutorials: "Tutorials",
     google_login: "Sign in with Google",

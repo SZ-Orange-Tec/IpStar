@@ -26,6 +26,8 @@ export default {
     work: "工作",
     entertainment: "娱乐",
 
+    try: "试用",
+    more_try: "更多试用流量",
     start_now: "立即试用",
     tutorials: "教程",
     google_login: "使用 Google 登录",

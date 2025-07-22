@@ -104,6 +104,15 @@
 
         
       }
+
+      .tutorial{
+        background-color: transparent;
+        border: 2px solid hsl(var(--foreground) / 10%);
+        &:hover:not(.loading){
+          background-color:  hsl(var(--foreground) / 20%);
+          border-color: hsl(var(--foreground) / 20%);
+        }
+      }
     }
 
     &>.background{
