@@ -13,7 +13,7 @@
 <script setup>
 import Header from "./components/header/header.vue"
 import Footer from "./components/footer/footer.vue"
-import { defineAsyncComponent, nextTick, onMounted, ref } from "vue"
+import { defineAsyncComponent, onMounted, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataConfig } from "@/api/home"
 import layoutStore from "@/store/layout"
@@ -31,15 +31,10 @@ function loadLogin() {
 
 // 获取配置 是否展示礼包
 const HeaderGift = defineAsyncComponent(() => import("./components/headerGift/headerGift.vue"))
-const headerRef = ref(null)
 async function isShowGift() {
   try {
     const { data } = await platDataConfig()
     registerAward.value = data.register_award
-
-    nextTick(() => {
-      headerRef.value.setStickyTop()
-    })
   } catch (err) {
     console.log(err.message)
   }
@@ -51,6 +46,12 @@ function setStickyTop(value) {
   console.log(value)
   stickyTop.value = value
 }
+
+watch(stickyTop, (value, old) => {
+  if (!old && value) {
+    setStickyTop(0)
+  }
+})
 
 // 路由重定向
 const route = useRoute()

@@ -18,27 +18,20 @@
           <p class="text-center description md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
-        <div class="my-16 v_center space-x-5">
-          <IpButton type="primary" class="h-12 w-40" @click="giftPacks">{{ t("home_spec.try") }}</IpButton>
-          <IpButton type="neutral" class="h-12 w-40 px-3" @click="$router.push('/doc')">
-            <div class="between w-full h-full">
-              <span>{{ t("home_spec.tutorials") }}</span>
-              <button>
-                <MoveRight />
-              </button>
-            </div>
-          </IpButton>
+        <div class="my-16 v_center space-x-5" style="align-items: stretch">
+          <IpButton type="primary" class="h-10 w-40" @click="giftPacks">{{ t("home_spec.start_now") }}</IpButton>
+          <GoogleLoginButton v-if="!isLogin" />
         </div>
 
         <div class="v_center" v-lazy="getUserIps">
-          <div class="column_center px-5">
+          <div class="column_center px-10">
             <strong class="title text-2xl" style="height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
             <!-- <span class="description text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
-          <div class="column_center px-5">
+          <div class="column_center px-6">
             <strong class="title text-2xl" style="height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
@@ -361,11 +354,12 @@ import { roundToDecimal } from "@/utils/tools"
 import { track_gift } from "@/utils/detect"
 import Confirm from "@/components/confirm/confirm"
 import position from "../../../components/dialog/position"
+import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 
 const router = useRouter()
 const { t } = useI18n()
 const { en } = settingStore()
-const { token } = loginStore()
+const { isLogin, token } = loginStore()
 
 // 异步组件
 const isProduct = ref(false) // 是否加载product
@@ -519,8 +513,8 @@ function giftPacks(e) {
     Confirm({
       title: en.value ? "Prompt" : "温馨提示",
       message: en.value
-        ? "We have already granted you a default authorization of 5M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
-        : "我们已经默认授权给您5M的测试流量，您可以联系我们申请额外500M的测试流量。",
+        ? "We have already granted you a default authorization of 50M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
+        : "我们已经默认授权给您50M的测试流量，您可以联系我们申请额外500M的测试流量。",
       cancelText: en.value ? "Later" : "以后再说",
       confirmText: en.value ? "Contact Now" : "立即联系",
       success: () => {

@@ -1,0 +1,25 @@
+.googleLoginBtn{
+
+  padding: 0 2rem;
+  background-color: transparent;
+  border: 2px solid hsl(var(--foreground) / 10%);
+  // height: 100%;
+  border-radius: 8px;
+  // color: hsl(var(--foreground) / 80%);
+  position: relative;
+  
+  &:hover:not(.loading){
+    background-color:  hsl(var(--foreground) / 20%);
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--foreground) / 20%);
+  }
+}
+&>googleLoginBtn.loading{
+  &::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 34, 39,.5);
+    border-radius: 8px;
+  }
+}

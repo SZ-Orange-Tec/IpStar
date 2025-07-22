@@ -26,8 +26,9 @@ export default {
     work: "工作",
     entertainment: "娱乐",
 
-    try: "立即试用",
+    start_now: "立即试用",
     tutorials: "教程",
+    google_login: "使用 Google 登录",
     // Accumulated: "累计用户",
     partner: "合作伙伴",
     online: "实时在线 IP",

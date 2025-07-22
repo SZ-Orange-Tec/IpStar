@@ -26,11 +26,12 @@ export default {
     work: "Work",
     entertainment: "Entertainment",
 
-    try: "Try",
+    start_now: "Start Now",
     tutorials: "Tutorials",
+    google_login: "Sign in with Google",
     // Accumulated: "Accumulated \n users",
-    partner: "Partner \n Organizations",
-    online: "Number of online \n Ip",
+    partner: "Partner  Organizations",
+    online: "Number of online Ip",
     users: "users",
 
     adv1: "Supports SOCKS5, HTTP/HTTPS\n& custom protocols.",
