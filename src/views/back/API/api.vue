@@ -7,10 +7,10 @@
             <span class="hidden sm:inline">API</span>
             {{ t("Construction") }}
           </span>
-          <span @click="active = 1" class="pointer" :class="{ active: active === 1 }">
+          <!-- <span @click="active = 1" class="pointer" :class="{ active: active === 1 }">
             <span class="hidden sm:inline">API</span>
             {{ t("Reference") }}
-          </span>
+          </span> -->
         </div>
       </template>
     </NavBar>
@@ -18,14 +18,14 @@
     <div class="flex-1 w-full main column px-3 md:px-5" :class="{ 'flex-1': active === 1 }">
       <ApiConfig v-show="active === 0"></ApiConfig>
 
-      <DocsHelp v-show="active === 1"></DocsHelp>
+      <!-- <DocsHelp v-show="active === 1"></DocsHelp> -->
     </div>
   </div>
 </template>
 
 <script setup>
 import ApiConfig from "./api_config/api_config.vue"
-import DocsHelp from "./docs_help/docs_help.vue"
+// import DocsHelp from "./docs_help/docs_help.vue"
 // import IpButton from "@/components/button/button.vue"
 import NavBar from "../components/navbar/navbar.vue"
 import { ref } from "vue"
