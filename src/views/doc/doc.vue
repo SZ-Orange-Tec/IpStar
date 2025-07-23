@@ -85,7 +85,7 @@ import { ref, nextTick, watch, defineAsyncComponent, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
-import userStore from "@/store/user"
+// import userStore from "@/store/user"
 import { ChevronRight, ChevronLeft, Menu, X as CloseIcon } from "lucide-vue-next"
 import anime from "animejs/lib/anime.es"
 import IpButton from "@/components/button/button.vue"
@@ -93,7 +93,7 @@ import { typeOf } from "../../utils/tools"
 import i18n from "../../language"
 
 const { isDocument, documentIdx, en } = settingStore()
-const { is_purchase } = userStore()
+// const { is_purchase } = userStore()
 const route = useRoute()
 const router = useRouter()
 const { t } = useI18n()
@@ -235,11 +235,11 @@ async function init() {
     }
   })
 
-  if (!is_purchase.value) {
-    menuData.value = [data[0], data[2]]
-  } else {
-    menuData.value = data
-  }
+  // if (!is_purchase.value) {
+  //   menuData.value = [data[0], data[2]]
+  // } else {
+  // }
+  menuData.value = data
 
   nextTick(() => {
     const index = +documentIdx.value.split("-")[0]
