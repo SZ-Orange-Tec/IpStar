@@ -52,9 +52,11 @@ async function judgeMask() {
     const hasAward = data.register_award
 
     const isNew = isNewUser(create_time)
+    const newUserMask = sessionStorage.getItem("newUserMask")
 
-    if (isNew && hasAward) {
+    if (isNew && !newUserMask && hasAward) {
       isMask.value = true
+      sessionStorage.setItem("newUserMask", 1)
     }
   } catch (err) {
     console.log(err.message)
