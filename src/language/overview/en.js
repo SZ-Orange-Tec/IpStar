@@ -42,5 +42,12 @@ export default {
     consumption: "consumption",
     recharge: "recharge",
     rewards: "rewards",
+
+    intro: "Premium Residential IP Proxy",
+    advant1: "From 200+ countries/regions with over 500 million real home IPs",
+    advant2: "Rotation and sticky sessions",
+    advant3: "Success rate up to 99.9%",
+    day_compare: "Daily comparison",
+    hour_compare: "Hourly report",
   },
 }

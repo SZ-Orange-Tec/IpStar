@@ -8,7 +8,8 @@ export default {
   Overview: "Overview",
   Products: "Products",
   Billings: "Billings",
-  Proxy: "Obtain Proxy",
-  API: "API",
+  Proxy: "Manual Obtain",
+  API: "API Obtain",
+
   Settings: "Settings",
 }

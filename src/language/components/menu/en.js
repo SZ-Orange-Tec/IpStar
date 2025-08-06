@@ -3,8 +3,8 @@ export default {
     Overview: "Overview",
     Products: "Products",
     Billings: "Billings",
-    Proxy: "Obtain Proxy",
-    API: "API",
+    Proxy: "Manual Obtain",
+    API: "API Obtain",
     Settings: "Settings",
 
     help: "If you have any questions, please check the ",

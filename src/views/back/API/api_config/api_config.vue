@@ -52,9 +52,9 @@
         </el-form-item>
         <el-form-item class="col-span-2">
           <el-button id="primary-button" type="primary" @click="generateURL">{{ t("Generate") }} API {{ t("Link") }}</el-button>
-          <el-button type="primary" link @click="openCombo">
+          <!-- <el-button type="primary" link @click="openCombo">
             <div class="v_center">{{ t("api_spec.combo") }} <HelpCircle :size="14" /></div>
-          </el-button>
+          </el-button> -->
         </el-form-item>
       </el-form>
 
@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <DialogCombo v-model="dialogCombo" style="margin-top: 0"></DialogCombo>
+    <!-- <DialogCombo v-model="dialogCombo" style="margin-top: 0"></DialogCombo> -->
   </div>
 </template>
 
@@ -135,8 +135,8 @@ import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import Confirm from "@/components/confirm/confirm"
 import position from "@/components/dialog/position"
-import DialogCombo from "./dialogCombo.vue"
-import { HelpCircle } from "lucide-vue-next"
+// import DialogCombo from "./dialogCombo.vue"
+// import { HelpCircle } from "lucide-vue-next"
 
 const router = useRouter()
 const { en } = settingStore()
@@ -334,11 +334,11 @@ function openUrl() {
 }
 
 // 账密组合相关
-const dialogCombo = ref(false)
-function openCombo(e) {
-  position.set({ x: e.clientX, y: e.clientY })
-  dialogCombo.value = true
-}
+// const dialogCombo = ref(false)
+// function openCombo(e) {
+//   position.set({ x: e.clientX, y: e.clientY })
+//   dialogCombo.value = true
+// }
 
 onMounted(() => {
   getData()

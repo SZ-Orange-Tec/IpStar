@@ -66,6 +66,17 @@
   min-height: 0;
 }
 
+/* 颜色 */
+.primary{
+  color: hsl(var(--primary));
+}
+.success{
+  color: hsl(var(--success));
+}
+.warn{
+  color: hsl(var(--warn));
+}
+
 .ip-loading {
   pointer-events: none;
   display: inline-block;

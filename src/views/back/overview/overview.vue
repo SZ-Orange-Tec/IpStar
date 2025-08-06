@@ -17,7 +17,9 @@
     <div class="w-full main flex-1 px-3 md:px-5">
       <!-- 我的订阅 -->
       <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
+        <!-- 左边概览 -->
         <div class="echarts_left w-full column gap-5">
+          <!-- 剩余流量 消耗 IP总数 -->
           <div class="flow gap-3 md:gap-5">
             <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top w-full between">
@@ -69,34 +71,82 @@
             </div>
           </div>
 
+          <!-- 流量消耗趋势 -->
           <div class="w-full column md:flex gap-5 items-stretch echart_table">
             <div class="echart column space-y-5 w-full md:flex-1">
-              <div class="outflow_echart flex-1 w-full rounded-md relative board">
-                <!-- 时间选择 -->
-                <div class="w-full h-full" id="echartDay" v-show="tableData.length > 0"></div>
-                <div class="null_data" v-show="!tableData.length > 0">
-                  <el-empty description="No Data"></el-empty>
+              <div class="card guide rounded-md space-y-5 board">
+                <h3 class="text-base font-semibold">{{ $t("overview_spec.intro") }}</h3>
+
+                <ul class="column space-y-3">
+                  <li class="v_center space-x-2">
+                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
+                    <p style="color: #333">{{ $t("overview_spec.advant1") }}</p>
+                  </li>
+                  <li class="v_center space-x-2">
+                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
+                    <p style="color: #333">{{ $t("overview_spec.advant2") }}</p>
+                  </li>
+                  <li class="v_center space-x-2">
+                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
+                    <p style="color: #333">{{ $t("overview_spec.advant3") }}</p>
+                  </li>
+                </ul>
+                <div class="text-sm v_center space-x-5">
+                  <IpButton type="primary" class="h-10 px-10" @click="$router.push('/proxy')">
+                    {{ $t("Proxy") }}
+                  </IpButton>
+                  <IpButton type="border" class="h-10 px-10 primary-btn" @click="$router.push('/generate_api')">
+                    {{ $t("API") }}
+                  </IpButton>
                 </div>
-                <Picker class="echart_picker" @dateChange="dateChange" />
               </div>
 
-              <div class="day_echart flex-1 w-full relative rounded-md board">
-                <div class="w-full h-full" id="echartTime" v-show="!Nodata"></div>
-                <div class="null_data" v-show="Nodata">
-                  <el-empty description="No Data"></el-empty>
+              <div class="card flex-1 rounded-md board column space-y-2">
+                <div class="label column" style="align-items: stretch">
+                  <!-- 文字 -->
+                  <div class="text v_center space-x-5" ref="textRef">
+                    <div @click="selectEchart(0)" class="pointer transition-colors" :class="{ active: echartIndex === 0 }">
+                      {{ $t("overview_spec.day_compare") }}
+                    </div>
+                    <div @click="selectEchart(1)" class="pointer transition-colors" :class="{ active: echartIndex === 1 }">
+                      {{ $t("overview_spec.hour_compare") }}
+                    </div>
+                  </div>
+                  <!-- 滑块 -->
+                  <div class="slider rounded-full relative">
+                    <div class="bar rounded-full absolute" :style="barStyle"></div>
+                  </div>
                 </div>
-                <div class="v_center picker">
-                  <Calendar :size="16" />
-                  <el-date-picker
-                    v-model="timeVal"
-                    type="date"
-                    prefix-icon="null"
-                    @change="input"
-                    format="dd.MM.yyyy"
-                    :clearable="false"
-                    placeholder="option date"
-                    style="width: 110px"
-                  />
+
+                <div class="w-full flex-1 column relative">
+                  <div v-show="echartIndex === 0" class="outflow_echart flex-1 w-full rounded-md relative">
+                    <!-- 时间选择 -->
+                    <div class="w-full h-full" id="echartDay" v-show="tableData.length > 0"></div>
+                    <div class="null_data" v-show="!tableData.length > 0">
+                      <el-empty description="No Data"></el-empty>
+                    </div>
+                    <Picker class="echart_picker" @dateChange="dateChange" />
+                  </div>
+
+                  <div v-show="echartIndex === 1" class="day_echart flex-1 w-full relative rounded-md">
+                    <div class="w-full h-full" id="echartTime" v-show="!Nodata"></div>
+                    <div class="null_data" v-show="Nodata">
+                      <el-empty description="No Data"></el-empty>
+                    </div>
+                    <div class="v_center picker">
+                      <Calendar :size="16" />
+                      <el-date-picker
+                        v-model="timeVal"
+                        type="date"
+                        prefix-icon="null"
+                        @change="input"
+                        format="dd.MM.yyyy"
+                        :clearable="false"
+                        placeholder="option date"
+                        style="width: 110px"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -116,7 +166,7 @@
             </div>
           </div>
         </div>
-        <!-- date flow -->
+        <!-- 右边通知 -->
         <div class="right h-full hidden xl:column space-y-5">
           <div class="notice board" v-if="noticeText">
             <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
@@ -246,7 +296,7 @@ import NavBar from "../components/navbar/navbar.vue"
 import Picker from "../components/picker/picker.vue"
 import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
 import tableProgress from "../components/progress/progress.vue"
-import { Calendar, ChevronLeft, Gauge, SlidersVertical } from "lucide-vue-next"
+import { Calendar, ChevronLeft, Gauge, SlidersVertical, Check } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import { roundToDecimal } from "../../../utils/tools"
 // import * as echarts from 'echarts'
@@ -254,6 +304,7 @@ let echart = null
 export default {
   name: "OverView",
   components: {
+    Check,
     NavBar,
     Picker,
     NumberCounter,
@@ -296,6 +347,7 @@ export default {
       }),
       // tabbar index
       activeIndex: 0,
+      echartIndex: 0,
       hasIpData: false,
       // ip折线图默认时间
       ipdefault: [],
@@ -339,6 +391,7 @@ export default {
       noticeText: "",
       // 通知滚动
       isNoticeScroll: false,
+      barStyle: { width: 0, left: 0 },
     }
   },
   created() {
@@ -370,10 +423,28 @@ export default {
     this.getCountryList()
     // 通知
     this.getNotice()
+    // 初始化echart滑块
+    this.selectEchart(0)
+
     // 加载国家国旗
     import("flag-icon-css/css/flag-icons.css")
   },
   methods: {
+    selectEchart(index) {
+      this.echartIndex = index
+
+      const parentLeft = this.$refs.textRef.getBoundingClientRect().left
+
+      const sonLeft = this.$refs.textRef.children[index].getBoundingClientRect().left
+      const offsetleft = sonLeft - parentLeft
+
+      const width = this.$refs.textRef.children[index].clientWidth
+
+      this.barStyle = {
+        width: `${width}px`,
+        left: `${offsetleft}px`,
+      }
+    },
     // 获取通知
     async getNotice() {
       try {

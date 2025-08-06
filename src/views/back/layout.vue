@@ -14,18 +14,26 @@
     </div>
 
     <!-- 遮罩层 -->
-    <div class="mask" v-if="isMask">
-      <div class="mask_content">
+    <!-- <div class="mask" v-if="isMask"> -->
+
+    <IpDialog v-model="isMask" class="mask">
+      <div class="mask_content column_center space-y-7">
         <img src="../../assets/pc_img/layout_img/Gift bag.webp" alt="Gift bag" />
-        <h2 class="text-lg md:text-2xl">{{ t("navbar_spec.gift") }}</h2>
-        <p :class="lang" class="text-base">{{ t("navbar_spec.expire") }}</p>
-        <div class="btn_sum text-xl">
-          <!-- @click="maskFn" -->
-          <!-- <el-button @click="maskFn(1)">{{ t("PCLayout.gift[2]") }}</el-button> -->
-          <p @click="closeMask">{{ t("navbar_spec.get") }}</p>
+        <h2 class="text-lg md:text-xl">{{ t("navbar_spec.gift") }}</h2>
+        <div class="w-full">
+          <p :class="lang" class="text-base">{{ t("navbar_spec.expire") }}</p>
+        </div>
+        <div class="w-full space-y-5 text-sm">
+          <IpButton type="primary" class="w-full h-10" @click="isMask = false">
+            {{ t("navbar_spec.start_use") }}
+          </IpButton>
+          <IpButton type="border" class="w-full h-10 primary-btn transition-colors" @click="toTutorial">
+            {{ t("navbar_spec.view_tutorial") }}
+          </IpButton>
+          <!-- <p @click="closeMask">{{ t("navbar_spec.get") }}</p> -->
         </div>
       </div>
-    </div>
+    </IpDialog>
   </div>
 </template>
 
@@ -37,6 +45,8 @@ import NavMenu from "./components/menu/menu.vue"
 import { useI18n } from "vue-i18n"
 import { differenceInMinutes } from "date-fns"
 import { platDataConfig } from "@/api/home"
+import IpDialog from "@/components/dialog/index.vue"
+import IpButton from "@/components/button/button.vue"
 
 const { getUserInfo } = userStore()
 
@@ -68,9 +78,13 @@ function isNewUser(create_time) {
 
   return differenceInMinutes(new Date(), new Date(utc)) < 3
 }
-function closeMask() {
+
+// 跳转教程
+function toTutorial() {
   // detect.gift()
   isMask.value = false
+
+  window.open(location.origin + "/doc")
 }
 
 // 生命周期钩子

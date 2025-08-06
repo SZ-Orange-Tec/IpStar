@@ -2,11 +2,28 @@
 
   .place {
     font-weight: 500;
-    span:hover{
-      color: hsl(var(--primary) / 80%);
+    
+    .text{
+      color: hsl(var(--background) / 40%);
+      &>div:hover:not(.active){
+
+        color: hsl(var(--background) / 60%);
+      }
+      .active{
+        color: hsl(var(--primary));
+      }
     }
-    .active{
-      color: hsl(var(--primary));
+    .slider{
+      transform: translatey(4px);
+      height: 2px;
+      background-color: hsl(var(--background) / 10%);
+      .bar{
+        height: 100%;
+        position: absolute;
+        top: 0;
+        transition:  all .2s;
+        background-color: hsl(var(--primary));
+      }
     }
   }
 

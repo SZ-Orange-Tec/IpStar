@@ -138,6 +138,53 @@
               width: 100%;
               height: 40rem;
             }
+
+            &>.card{
+              box-sizing: border-box;
+              padding: 1.25rem;
+              background-color: hsl(var(--foreground));
+              width: 100%;
+              
+              &>.label {
+                .text{
+                  color: hsl(var(--background) / 40%);
+                  &>div:hover:not(.active){
+            
+                    color: hsl(var(--background) / 60%);
+                  }
+                  .active{
+                    color: hsl(var(--primary));
+                  }
+                }
+                .slider{
+                  transform: translatey(4px);
+                  height: 2px;
+                  background-color: hsl(var(--background) / 10%);
+                  .bar{
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    transition:  all .2s;
+                    background-color: hsl(var(--primary));
+                  }
+                }
+              }
+            }
+            .guide{
+              padding: 2rem 1.25rem;
+              background-image: url('../../../assets/images/overview/home.png');
+              // background-size: 100% 100%;
+              background-position: right bottom;
+              background-repeat: no-repeat;
+
+              .primary-btn{
+                border: 1px solid hsl(var(--primary));
+                color: hsl(var(--primary));
+                &:hover{
+                  background-color: hsl(var(--primary) / 0.1);
+                }
+              }
+            }
           }
           .table_box{
             border-radius: 0.5rem;
@@ -156,7 +203,7 @@
         }
   
         .outflow_echart {
-          background-color: hsl(var(--foreground));
+          // background-color: hsl(var(--foreground));
   
           & > .echart_picker {
             position: absolute;
@@ -167,7 +214,7 @@
         }
   
         .day_echart {
-          background-color: hsl(var(--foreground));
+          // background-color: hsl(var(--foreground));
   
           & > .picker {
             position: absolute;

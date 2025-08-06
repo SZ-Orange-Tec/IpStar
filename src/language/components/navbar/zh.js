@@ -5,7 +5,8 @@ export default {
 
   navbar_spec: {
     gift: "“免费体验礼包”已到账",
-    expire: "三天后到期，请尽快使用它！",
-    get: "好的",
+    expire: "您可以通过手动提取和API提取等方式设置安全可靠的住宅代理服务。",
+    start_use: "开始使用",
+    view_tutorial: "查看教程",
   },
 }

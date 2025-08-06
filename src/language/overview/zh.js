@@ -40,5 +40,12 @@ export default {
     consumption: "消耗",
     recharge: "充值",
     rewards: "奖励",
+
+    intro: "优质住宅IP代理",
+    advant1: "来自200+国家/地区超5000万个真实家庭IP",
+    advant2: "轮换与粘性会话",
+    advant3: "成功率高达99.9%",
+    day_compare: "分天对比",
+    hour_compare: "分小时报表",
   },
 }
