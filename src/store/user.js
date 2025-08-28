@@ -10,6 +10,8 @@ const getters = {
   unlimited: computed(() => state.userInfo?.unlimited ?? false),
   is_purchase: computed(() => state.userInfo?.is_purchase ?? false),
   apiKey: computed(() => state.userInfo?.api_key ?? ""),
+  proxy_user: computed(() => state.userInfo?.proxy_user ?? ""),
+  proxy_pass: computed(() => state.userInfo?.proxy_pass ?? ""),
 }
 
 const actions = {

@@ -13,8 +13,8 @@
         <!-- <p>{{ t("combo_spec.find_your_info") }}：</p> -->
 
         <div class="info-box">
-          <p>{{ t("combo_spec.username") }}：u2340s19</p>
-          <p>{{ t("combo_spec.password") }}：657upp</p>
+          <p>{{ t("combo_spec.username") }}：{{ proxy_user }}</p>
+          <p>{{ t("combo_spec.password") }}：{{ proxy_pass }}</p>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
         </div>
 
         <p>{{ t("combo_spec.combo_example") }}：</p>
-        <div class="info-box">"u2340s19-123RsAYBc-0-US-N"</div>
+        <div class="info-box">"{{ proxy_user }}-123RsAYBc-0-US-N"</div>
 
         <div class="warning">{{ t("combo_spec.warn") }}</div>
       </div>
@@ -67,17 +67,17 @@
       <div class="space-y-3">
         <h2>4. {{ t("combo_spec.title4") }}</h2>
         <div class="info-box">
-          <p>user：u2340s19-12345678-0-BR-N</p>
-          <p>pass: 657upp</p>
+          <p>user：{{ proxy_user }}-12345678-0-BR-N</p>
+          <p>pass: {{ proxy_pass }}</p>
           <p>sock5 {{ t("combo_spec.port") }}：9135</p>
           <p>http {{ t("combo_spec.port") }}：9139</p>
         </div>
 
         <h4>SOCKS5 {{ t("combo_spec.proxy_expample") }}：</h4>
-        <div class="info-box">curl --socks5 u2340s19-12345678-0-BR-N:657upp@pv5.connpnt134.com:9135 https://ipinfo.io</div>
+        <div class="info-box">curl --socks5 {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv5.connpnt134.com:9135 https://ipinfo.io</div>
 
         <h4>HTTP {{ t("combo_spec.proxy_expample") }}：</h4>
-        <div class="info-box">curl -x u2340s19-12345678-0-BR-N:657upp@pv5.connpnt134.com:9139 https://ipinfo.io</div>
+        <div class="info-box">curl -x {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv5.connpnt134.com:9139 https://ipinfo.io</div>
       </div>
     </div>
   </div>
@@ -89,10 +89,13 @@ import { useI18n } from "vue-i18n"
 import settingStore from "@/store/setting"
 import { onMounted, ref } from "vue"
 import { platDataNodes } from "../../../../api/home"
+import userStore from "@/store/user"
 
 const { t } = useI18n()
 
 const { en } = settingStore()
+
+const { proxy_user, proxy_pass } = userStore()
 
 // ip池
 const ipPool = ref([])
