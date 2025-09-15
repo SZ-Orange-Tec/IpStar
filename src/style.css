@@ -70,6 +70,9 @@
 .primary{
   color: hsl(var(--primary));
 }
+.major{
+  color: hsl(var(--major));
+}
 .success{
   color: hsl(var(--success));
 }
@@ -96,6 +99,7 @@
 body{
   font-family:  PingFang SC, Noto Sans SC, sans-serif;
   color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
 
   word-break: break-word;
   overflow-wrap: break-word;

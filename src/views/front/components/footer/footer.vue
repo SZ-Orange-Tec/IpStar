@@ -7,15 +7,13 @@
           <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
             <p class="v_center space-x-2">
               <span>{{ t("Now") }}</span>
-              <Sparkles :size="20" fill="hsl(var(--success))" color="hsl(var(--success))" />
+              <img src="@/assets/images/home/magic.png" alt="" />
             </p>
             <p>{{ t("footer_spec.explore") }}</p>
           </div>
           <p class="text-sm text-center description" v-html="t('footer_spec.description')"></p>
 
-          <IpButton type="primary" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
-
-          <div class="trans"></div>
+          <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
         </div>
       </div>
     </div>
@@ -89,7 +87,7 @@
           <div class="column space-y-2">
             <div class="v_center copy_btn">
               <div class="px-2 whitespace-nowrap">Email: support@ipstar.io</div>
-              <IpButton type="primary" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
+              <IpButton type="major" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
             </div>
 
             <!-- <IpButton type="ghost" circle class="w-10 h-10" @click="toTwitter">
@@ -98,7 +96,7 @@
           </div>
 
           <p>{{ t("footer_spec.Legal") }}</p>
-          <p class="text-sm description">
+          <p class="text-sm opacity-90">
             {{ t("footer_spec.tips") }}
           </p>
         </div>

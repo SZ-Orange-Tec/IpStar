@@ -40,9 +40,9 @@
 					min-width: 210px;
           // height: 100%;
           padding: 2.25rem 1rem;
-          background-color: hsl(var(--foreground));
+          background-color: hsl(var(--background));
 					border-radius: 20px;
-          color: hsl(var(--background));
+          color: hsl(var(--foreground));
           position: relative;
           // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           @media screen and (max-width:1024px) {
@@ -64,13 +64,13 @@
             z-index: 1;
 
 						&>.top{
-
+              color: hsl(var(--primary));
               .package_name{
                 // width: 40px;
                 padding: 15px;
                 height: 40px;
-                background-color: hsl(var(--success));
-                color: hsl(var(--primary-foreground));
+                background-color: hsl(var(--primary));
+                color: hsl(var(--colour-foreground));
                 strong{
                   line-height: 1;
                 }
@@ -83,7 +83,7 @@
 								vertical-align: bottom;
                 line-height: 1;
                 // font-family: Plus Jakarta Sans;
-                font-weight: bolder;
+                // font-weight: bolder;
 							}
 							&>.number{
                 margin-top:1.75rem;
@@ -146,10 +146,10 @@
               height: 50px;
               border: 1px solid #D9D9D9;
               color: hsl(var(--background));
-              background-color: hsl(var(--foreground));
-              &:hover{
-                color: hsl(var(--success));
-              }
+              background-color: hsl(var(--primary));
+              // &:hover{
+              //   color: hsl(var(--success));
+              // }
               @media screen and (max-width:1024px) {
                 height: 2.5rem;
                 padding: 0 1.25rem;
@@ -225,23 +225,24 @@
           }
 
           &:hover:not(.skeletion_box){
-            background-color: #1d1d1d;
-            color: hsl(var(--foreground));
+            // background-color: #1d1d1d;
+            // color: hsl(var(--foreground));
+            // background-color: hsl(var(--neutral));
             // background-image: url("../../../../assets/images/pricing/hover.png");
             // background-repeat: no-repeat;
             // background-size: 100%;
-            .bg_img{
-              z-index: 0;
-              opacity: 1;
-            }
+            // .bg_img{
+            //   z-index: 0;
+            //   opacity: 1;
+            // }
 
-            :deep(.pc-stepNumber){
-              color: hsl(var(--success));
-              background-color: hsl(var(--foreground));
-              .border-btn{
-                color: hsl(var(--success));
-              }
-            }
+            // :deep(.pc-stepNumber){
+            //   color: hsl(var(--success));
+            //   background-color: hsl(var(--foreground));
+            //   .border-btn{
+            //     color: hsl(var(--success));
+            //   }
+            // }
           }
 				}
         &>li.hidden{

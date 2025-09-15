@@ -2,7 +2,12 @@
   <header class="header">
     <div class="container between w-full h-full">
       <div>
-        <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
+        <img
+          sizes="(max-width:112px) 56px,24px"
+          src="@/assets/images/logo.png"
+          srcset="@/assets/images/logo.png 56w, @/assets/images/logo@2x.png 112w"
+          style="height: 36px"
+        />
       </div>
 
       <div class="v_center h-full space-x-3">

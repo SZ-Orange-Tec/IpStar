@@ -1,12 +1,12 @@
 <template>
   <!-- id=HeaderGift  在header组件中用于计算HeaderGift的高度 -->
   <div class="gift" ref="giftRef">
-    <div class="container column sm:vh_center space-x-2">
+    <div class="container column sm:v_center sm:justify-end space-x-2">
       <div class="v_center space-x-2">
         <Tag :size="25" class="icon" />
         <i18n-t keypath="gift_spec.sign_up" tag="p" scope="global">
           <template #gift>
-            <span class="major_text font-bold"> 50 MB </span>
+            <span class="major_text text-lg font-medium"> 50 MB </span>
           </template>
         </i18n-t>
       </div>

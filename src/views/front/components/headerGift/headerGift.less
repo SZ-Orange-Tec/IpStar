@@ -1,6 +1,7 @@
 .gift{
   // background-color: hsl(var(--success) / 20%);
-  background-color: #004047;
+  // background-color: #004047;
+  background-color: #E7F4FF;
   width: 100%;
   padding: 0 2.5rem;
   position: sticky;
@@ -12,33 +13,33 @@
   .container{
     width: 100%;
     padding: 0.75rem 0;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 
     .icon{
       transform: rotate(90deg);
-      fill: hsl(var(--major));
-      color: #004047;;
+      fill: hsl(var(--primary));
+      stroke: hsl(var(--colour-foreground));
     }
 
     .major_text{
-      color: hsl(var(--major));
+      color: #1F6FFF;
     }
 
     .btn{
       height: 2.25rem;
-      background-color: hsl(var(--success) / 18%);
+      background-color: #CEEBFF;
       // background-color: ;
       .text{
         padding: 0 0.25rem 0 1.25rem;
         // color: #1A1B23;
-        color: hsl(var(--foreground) / 80%);
+        color: hsl(var(--primary) / 80%);
       }
       .trial{
-        background-color: hsl(var(--success));
-        color: hsl(var(--foreground));
+        background-color: hsl(var(--primary));
+        color: hsl(var(--colour-foreground));
         &:hover{
-          background-color: hsl(var(--success) / 80%);
+          background-color: hsl(var(--colour-foreground) / 80%);
         }
       }
     }

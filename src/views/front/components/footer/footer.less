@@ -3,6 +3,7 @@
   @color: #FDB713;
   @color-show: #d09712;
   @color-black: #191D26;
+  --primary: 212 77% 53%;
 
   .box{
     // width: 100%;
@@ -30,24 +31,13 @@
   }
 
   .explore{
-    background-color: hsl(var(--page-neutral));
-    padding-bottom: 40px;
-
-    .trans{
-      margin-top: 0;
-      position: absolute;
-      top: 0;
-      left: -20px;
-      width: 100%;
-      transform: translateY(-100%);
-      border-width: 0 60px 40px 60px;
-      border-style: solid;
-      border-color: transparent transparent hsl(var(--page-neutral)) transparent;
-    }
+    // padding-bottom: 4rem;
+    padding: 4rem 0;
   }
 
   .serve{
-    background-color: hsl(var(--page-background));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--colour-foreground));
     .container{
       padding: 64px 0;
       // width: 100%;
@@ -72,19 +62,24 @@
             height: 32px;
             display: flex;
             align-items: center;
-            color: hsl(var(--foreground) / 60%);
+            // color: hsl(var(--foreground) / 60%);
+            // &:hover{
+              // color: hsl(var(--primary));
+            // }
             &:hover{
-              color: hsl(var(--primary));
+              text-decoration: underline;
+              text-underline-offset: 4px;
+              // background-color: hsl(var(--neutral) / 30%);
             }
           }
           &>li.btn{
             border-radius: 6px;
-            color: hsl(var(--foreground) / 80%);
-            background-color: hsl(var(--neutral) / 50%);
+            // background-color: hsl(var(--neutral) / 50%);
             padding: 0 12px;
             &:hover{
-              color: hsl(var(--foreground));
-              background-color: hsl(var(--neutral) / 60%);
+              text-decoration: underline;
+              text-underline-offset: 4px;
+              // background-color: hsl(var(--neutral) / 30%);
             }
           }
         }
@@ -94,8 +89,8 @@
 
         .copy_btn{
           border-radius: 8px;
-          background-color: hsl(var(--foreground));
-          color: hsl(var(--background));
+          background-color: hsl(var(--colour-foreground));
+          color: hsl(var(--foreground));
           button{
             border-radius: 0 8px 8px 0;
           }
@@ -107,8 +102,8 @@
   }
   .copyright{
     height: 40px;
-    background-color: hsl(var(--foreground));
-    color: hsl(var(--background));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
 

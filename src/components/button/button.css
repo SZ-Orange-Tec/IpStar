@@ -12,7 +12,7 @@
 
 .primary {
   background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  color: hsl(var(--colour-foreground));
   cursor: pointer;
   user-select: none;
   border: 1px solid hsl(var(--primary));
@@ -21,14 +21,19 @@
   background-color: hsl(var(--primary) / 80%);
 }
 
+.major{
+  background-color: hsl(var(--major));
+  color: hsl(var(--colour-foreground));
+}
+
 .neutral{
   background-color: hsl(var(--neutral));
-  color: hsl(var(--primary-foreground) / 80%);
+  color: hsl(var(--colour-foreground) / 80%);
   border: 1px solid hsl(var(--foreground) / 60%);
 }
 .neutral:hover{
   background-color: hsl(var(--neutral) / 80%);
-  color: hsl(var(--primary-foreground));
+  color: hsl(var(--colour-foreground));
 }
 
 .ghost{

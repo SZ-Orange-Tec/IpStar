@@ -4,7 +4,7 @@
       <div class="back">
         <ChevronsLeft :size="20" />
       </div>
-      <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
+      <img src="@/assets/images/logo.png" style="height: 36px" alt="" />
     </div>
     <div class="column flex-1">
       <ul class="space-y-1">
