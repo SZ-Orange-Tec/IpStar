@@ -19,6 +19,8 @@
   --shadow: 0 4px 4px 0 rgba(102, 102, 102, 0.25);
   --pop-shadow: 0 0 10px 0 rgba(102, 102, 102, 0.25);
 
+  --border: 240 3% 92%;
+
   --input-border: 240 3% 92%;
   --input-border-focus: 217.612 87.013% 54.706%;
   --input-border-hover: 0 0% 70%;

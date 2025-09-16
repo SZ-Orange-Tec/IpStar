@@ -182,12 +182,14 @@
           </ul>
         </div>
 
-        <div class="world_split column_center space-x-5">
-          <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
-            <template #primary>
-              <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
-            </template>
-          </i18n-t>
+        <div class="w-full world_split column_center space-x-5">
+          <HomeTitle>
+            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
+              <template #primary>
+                <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
+              </template>
+            </i18n-t>
+          </HomeTitle>
           <p class="description text-sm">{{ t("home_spec.world_desc") }}</p>
         </div>
       </div>
@@ -247,7 +249,9 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.app_title") }}</p>
+        <HomeTitle>
+          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.app_title") }}</p>
+        </HomeTitle>
 
         <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mt-8 text-xs sm:text-sm" style="flex-wrap: wrap">
           <li class="v_center">
@@ -278,8 +282,10 @@
 
         <img v-lazy src="@/assets/images/home/app.webp" alt="" />
 
-        <div class="pack_title column_center space-y-5">
-          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
+        <div class="w-full pack_title column_center space-y-5">
+          <HomeTitle>
+            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
+          </HomeTitle>
           <p class="description green">{{ t("home_spec.package_desc") }}</p>
         </div>
       </div>
@@ -315,6 +321,7 @@ import Confirm from "@/components/confirm/confirm"
 import Message from "@/components/message/message"
 import position from "../../../components/dialog/position"
 import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
+import HomeTitle from "../components/homeTitle.vue"
 
 const router = useRouter()
 const { t } = useI18n()

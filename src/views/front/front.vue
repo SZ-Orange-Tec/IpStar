@@ -1,6 +1,6 @@
 <template>
   <div class="front">
-    <HeaderGift v-if="registerAward && !isLogin" @mounted="setStickyTop" />
+    <HeaderGift v-if="registerAward && !isLogin" />
 
     <Header :style="{ top: stickyTop }" />
 
@@ -13,7 +13,7 @@
 <script setup>
 import Header from "./components/header/header.vue"
 import Footer from "./components/footer/footer.vue"
-import { defineAsyncComponent, onMounted, ref, watch } from "vue"
+import { defineAsyncComponent, onMounted, computed } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataConfig } from "@/api/home"
 import layoutStore from "@/store/layout"
@@ -41,16 +41,8 @@ async function isShowGift() {
 }
 
 // 计算粘性定位的top值
-const stickyTop = ref(0)
-function setStickyTop(value) {
-  console.log(value)
-  stickyTop.value = value
-}
-
-watch(stickyTop, (value, old) => {
-  if (!old && value) {
-    setStickyTop(0)
-  }
+const stickyTop = computed(() => {
+  return registerAward.value && !isLogin.value ? "60px" : "0"
 })
 
 // 路由重定向

@@ -4,13 +4,15 @@
     <div class="explore box">
       <div class="container">
         <div class="column_center space-y-5 relative">
-          <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
-            <p class="v_center space-x-2">
-              <span>{{ t("Now") }}</span>
-              <img src="@/assets/images/home/magic.png" alt="" />
-            </p>
-            <p>{{ t("footer_spec.explore") }}</p>
-          </div>
+          <HomeTitle>
+            <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
+              <p class="v_center space-x-2">
+                <span>{{ t("Now") }}</span>
+                <img src="@/assets/images/home/magic.png" alt="" />
+              </p>
+              <p>{{ t("footer_spec.explore") }}</p>
+            </div>
+          </HomeTitle>
           <p class="text-sm text-center description" v-html="t('footer_spec.description')"></p>
 
           <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
@@ -117,6 +119,7 @@ import IpButton from "@/components/button/button.vue"
 import { Copy, Twitter } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
+import HomeTitle from "../homeTitle.vue"
 import { useI18n } from "vue-i18n"
 const { isLogin } = loginStore()
 const { isProduc } = layoutStore()

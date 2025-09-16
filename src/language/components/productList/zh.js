@@ -5,7 +5,7 @@ export default {
   OFF: "折扣",
   Get: "获取",
   Order: "订购",
-  Most_popular: "最受欢迎",
+  Most_popular: "最受\n欢迎",
   Duration: "有效期",
 
   Personal: "个人",

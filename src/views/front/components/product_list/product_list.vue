@@ -129,7 +129,7 @@
               </IpButton>
             </div>
 
-            <div class="hot text-center vh_center text-xs font-medium" v-if="item.hot">{{ t("Most_popular") }}</div>
+            <div class="hot text-center text-xs vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
             <div class="bg_img">
               <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>

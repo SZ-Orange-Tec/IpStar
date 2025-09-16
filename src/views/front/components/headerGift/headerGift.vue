@@ -1,6 +1,6 @@
 <template>
   <!-- id=HeaderGift  在header组件中用于计算HeaderGift的高度 -->
-  <div class="gift" ref="giftRef">
+  <div class="gift">
     <div class="container column sm:v_center sm:justify-end space-x-2">
       <div class="v_center space-x-2">
         <Tag :size="25" class="icon" />
@@ -21,19 +21,12 @@
 
 <script setup>
 import { Tag } from "lucide-vue-next"
-import { onMounted, ref } from "vue"
+// import { onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 
 const { t } = useI18n()
 const router = useRouter()
-
-const emit = defineEmits(["mounted"])
-
-const giftRef = ref(null)
-onMounted(() => {
-  emit("mounted", giftRef.value.clientHeight + "px")
-})
 </script>
 
 <style lang="less" scoped>

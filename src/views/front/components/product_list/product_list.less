@@ -65,12 +65,14 @@
 
 						&>.top{
               color: hsl(var(--primary));
+              transition: color .2s;
               .package_name{
                 // width: 40px;
                 padding: 15px;
                 height: 40px;
                 background-color: hsl(var(--primary));
                 color: hsl(var(--colour-foreground));
+                transition: background-color .2s;
                 strong{
                   line-height: 1;
                 }
@@ -199,12 +201,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 70px;
-            height: 70px;
+            width: 61px;
+            height: 72px;
             background-image: url("../../../../assets/images/pricing/hot.png");
             background-repeat: no-repeat;
             background-size: 100%;
-            color: hsl(var(--foreground));
+            color: hsl(var(--colour-foreground));
             z-index: 1;
           }
           .bg_img{
@@ -225,6 +227,18 @@
           }
 
           &:hover:not(.skeletion_box){
+
+            &>.card{
+              .top{
+                color: hsl(var(--major));
+                .package_name{
+                  background-color: hsl(var(--major));
+                }
+              }
+              .border-btn{
+                background-color: hsl(var(--major));
+              }
+            }
             // background-color: #1d1d1d;
             // color: hsl(var(--foreground));
             // background-color: hsl(var(--neutral));
