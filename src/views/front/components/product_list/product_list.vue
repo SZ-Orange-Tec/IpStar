@@ -552,6 +552,10 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("resize", initScrollTag)
 })
+
+defineExpose({
+  changeActive,
+})
 </script>
 
 <style lang="less" scoped>

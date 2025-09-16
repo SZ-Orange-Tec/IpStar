@@ -1,19 +1,22 @@
 .productTabbar{
 	margin-bottom: 40px;
 	&>.tabbar{
-    height: 3.365rem;
+    height: 3rem;
+    padding: 2px;
     padding: 4px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
+    border-radius: 999px;
+    // background: rgba(255,255,255,0.1);
+    border: 1px solid hsl(var(--background) / 60%);
     @media screen and (max-width:640px) {
       height: 2.75rem;
     }
     &>div{
-      width: 140px;
+      width: 160px;
       border-radius: 8px;
+      border-radius: 999px;
     }
     .active{
-      background-color: hsl(var(--page-background));
+      background-color: hsl(var(--major));
     }
 	}
 	.unlimited{

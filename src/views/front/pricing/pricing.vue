@@ -4,62 +4,45 @@
 
     <div class="box price relative">
       <div class="container">
-        <div class="column_center space-y-10">
-          <div class="text-lg sm:text-2xl lg:text-3xl column_center space-y-5">
+        <div class="column_center">
+          <div class="header text-xl sm:text-2xl lg:text-4xl column_center space-y-5">
             <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title md:whitespace-pre-wrap">
               <template #price>
-                <span class="primary_text">${{ lowestPrice }}/GB</span>
+                <span class="major">${{ lowestPrice }}/GB</span>
               </template>
             </i18n-t>
 
-            <span class="text-lg sm:text-2xl lg:text-3xl description">IPs: 50M+/day</span>
+            <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">50M+</span>/day</span>
+
+            <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>
           </div>
 
-          <div class="price_main w-full relative" ref="product">
-            <ProductList :tabbar="true" :pack="5"></ProductList>
-
-            <img
-              src="@/assets/images/pricing/star.png"
-              class="float_img star hidden md:block"
-              :style="{ opacity: showImg ? 1 : 0 }"
-              width="80"
-              height="80"
-              alt=""
-            />
-            <img
-              src="@/assets/images/pricing/star_move.png"
-              class="float_img star_move hidden md:block"
-              :style="{ opacity: showImg ? 1 : 0 }"
-              width="149"
-              height="66"
-              alt=""
-            />
+          <div class="product w-full relative">
+            <ProductList :tabbar="false" :pack="5" ref="product"></ProductList>
           </div>
         </div>
       </div>
 
-      <div class="background" style="padding-top: 67.9%" :style="{ opacity: showImg ? 1 : 0 }">
-        <div class="img w-full" :style="{ top: top }">
-          <img src="@/assets/images/pricing/background.png" @load="bgLoaded" class="w-full" alt="" />
-        </div>
-      </div>
+      <div class="background"></div>
     </div>
 
-    <div class="column_center pay">
-      <div class="w-full" style="max-width: 638px">
-        <IpImage :width="638" :height="84">
-          <img v-lazy src="@/assets/images/pricing/pay.png" alt="" />
-        </IpImage>
+    <div class="column_center pay space-y-5">
+      <div class="imgs w-full between space-x-5">
+        <img v-lazy src="@/assets/images/pricing/pay1.png" height="48" alt="" />
+        <img v-lazy src="@/assets/images/pricing/pay2.png" height="48" alt="" />
+        <img v-lazy src="@/assets/images/pricing/pay3.png" height="48" alt="" />
+        <img v-lazy src="@/assets/images/pricing/pay4.png" height="48" alt="" />
+        <img v-lazy src="@/assets/images/pricing/pay5.png" height="48" alt="" />
       </div>
-      <p class="primary_text">{{ t("pricing_spec.payment") }}</p>
+      <p class="primary">{{ t("pricing_spec.payment") }}</p>
 
-      <div class="column_center scroll w-full">
+      <!-- <div class="column_center scroll w-full">
         <div class="w-full" style="max-width: 28px">
           <IpImage :width="32" :height="143">
             <img v-lazy src="@/assets/images/pricing/scroll.png" width="28" alt="" />
           </IpImage>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="world box" v-lazy="IpMap">
@@ -102,7 +85,7 @@
 
 <script setup>
 import { platDataIndex } from "@/api/home"
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+import { nextTick, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import loginStore from "@/store/login"
@@ -113,6 +96,7 @@ import { roundToDecimal } from "@/utils/tools"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
+import Tabbar from "../components/product_list/tabbar/tabbar.vue"
 
 const { t } = useI18n()
 
@@ -166,6 +150,12 @@ async function IpMap() {
     }
   })
 }
+
+//
+const product = ref(null)
+function changeActive(index) {
+  product.value.changeActive(index)
+}
 // 更多国家
 // const areaList = ref([
 //   {
@@ -211,21 +201,7 @@ async function IpMap() {
 //   }
 // }
 
-// 背景图片计算top
-const top = ref(0)
-const product = ref(null)
 const showImg = ref(false)
-function computeTop() {
-  const width = window.innerWidth
-  const imgWidth = 1431
-  const imgHeight = 972
-  const percent = 0.49 // 顶部到地球的高度占比
-  const productTop = product.value.getBoundingClientRect().top - 60 //产品列表距离顶部的距离
-
-  const height = (imgHeight / imgWidth) * width
-
-  top.value = roundToDecimal(0 - height * percent + productTop, 0) + "px"
-}
 function bgLoaded(e) {
   console.log("load")
   showImg.value = true
@@ -243,13 +219,7 @@ async function getIndexData() {
 }
 
 onMounted(() => {
-  computeTop()
   getIndexData()
-  window.addEventListener("resize", computeTop)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", computeTop)
 })
 </script>
 

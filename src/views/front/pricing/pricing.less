@@ -1,6 +1,6 @@
 .pricing {
   // padding-top: 80px;
-  background-color: hsl(var(--page-background));
+  background-color: #F2F9FF;
 
   .box{
     // width: 100%;
@@ -13,74 +13,77 @@
       max-width: 1200px;
       margin: 0 auto;
       
-      :deep(.primary_text){
-        color: hsl(var(--primary));
-      }
       .title{
         line-height: 1.5;
-        font-weight: bold;
-        // white-space: pre-wrap;
-        // font-family: Space Grotesk;
+        // font-weight: bold;
       }
       .description{
         line-height: 1.5;
-        font-weight: 500;
-        color: #12F7D6;
-        // color: hsl(var(--major));
-      }
-      .green{
-        color: hsl(var(--success));
+        // font-weight: 500;
       }
     
     }
   }
   .price{
-
+    color: hsl(var(--colour-foreground));
+    --img-height: 450px;
+    
+    @media screen and (max-width:1024px) {
+      --img-height: 380px;
+    }
+    @media screen and (max-width:640px) {
+      --img-height: 300px;
+    }
     .container{
       position: relative;
-      padding: 4rem 0;
       @media screen and (max-width:640px) {
         padding: 2rem 0;
       }
       z-index: 1;
-      .float_img{
-        position: absolute;
-        opacity: 0;
-        transition: opacity .3s;
+
+      .header{
+        height: var(--img-height);
+        justify-content: center;
+        .tabbar{
+          margin-top: 4rem;
+        }
       }
-      .star{
-        right: 150px;
-        top: -10px;
-      }
-      .star_move{
-        left: 150px;
-        top: 20px;
+      .product{
+        padding: 4rem 0;
       }
     }
 
     .background{
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
       z-index: 0;
-      opacity: 0;
-      transition: opacity .3s;
-      .img{
-        left: 0;
-        position: absolute;
-      }
+      // opacity: 0;
+      // transition: opacity .3s;
+      width: 100%;
+      height: var(--img-height);
+      overflow: hidden;
+      background-image: url('@/assets/images/pricing/background@2x.webp');
+      background-size: cover;
+      background-position: center;
+      // .img{
+      //   width: auto;
+      //   height: 100%;
+      // }
     }
 
     
   }
   .pay{
-    background-color: #0E0F14;
-    .primary_text{
-      color: hsl(var(--primary));
-      font-weight: 300;
+    padding-bottom: 4rem;
+    .imgs{
+      width: 100%;
+      max-width: 400px;
     }
+    
     .scroll{
       padding: 40px 0 20px;
-      background:linear-gradient(to bottom,#0E0F14,#09070A);
+      // background:linear-gradient(to bottom,#0E0F14,#09070A);
     }
   }
 
