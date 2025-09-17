@@ -1,6 +1,6 @@
 <template>
   <div class="pc-collapse" ref="collapseRef" :style="`height:${bol ? height : titleDom}px;`">
-    <header class="title dom between text-sm" :class="{ select: bol }">
+    <header class="title dom between text-sm primary" :class="{ select: bol }">
       <p class="title">{{ info?.title }}</p>
       <ChevronRight :size="18" :class="{ down: bol }" style="transition: transform 0.3s" />
     </header>

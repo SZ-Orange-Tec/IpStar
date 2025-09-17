@@ -17,15 +17,18 @@
       input{
         padding-left: 36px;
         padding-right: 12px;
-        height: 54px;
+        height: 44px;
         border-radius: 8px;
-        border: 1px solid transparent;
+        border: 1px solid hsl(var(--input-border));
         outline: none;
-        background-color: #2d2d35;
-        color: hsl(var(--foreground));
+        background-color: hsl(var(--background));
         &:focus{
           outline: none;
-          border-color: hsl(var(--foreground) / 50%);
+          border-color: hsl(var(--input-border-focus) / 50%);
+        }
+        &:hover{
+          outline: none;
+          border-color: hsl(var(--input-border-hover) / 50%);
         }
         &:-webkit-autofill {
           -webkit-text-fill-color:hsl(var(--foreground));
@@ -40,14 +43,15 @@
   }
   & > .btn {
     width: 100%;
-    height: 50px;
+    height: 44px;
     border-radius: 8px;
     font-weight: 500;
-    background: linear-gradient(to right,#418bfe,#19ecaa);
-
+    background-color: hsl(var(--major));
+    color: hsl(var(--colour-foreground));
   }
   & > .btn.disabled {
-    background: linear-gradient(to right,#275399,#1ba076);
+    background-color: hsl(var(--major) / 80%);
+    // background: linear-gradient(to right,#275399,#1ba076);
   }
 
   & > .other_login_title {
@@ -61,14 +65,28 @@
     width: 100%;
     &>div{
       background-color: #2d2d35;
-      height: 50px;
+      background-color: hsl(var(--background));
+      border: 2px solid hsl(var(--primary) / 60%);
+      color: hsl(var(--primary));
+      font-weight: 500;
+      height: 40px;
       border-radius: 8px;
-      color: hsl(var(--foreground) / 80%);
       position: relative;
+
+      
+      .active_icon{
+        display: none;
+      }
       
       &:hover{
-        background-color: #222227;
-        color: hsl(var(--foreground));
+        background-color: hsl(var(--primary));
+        color: hsl(var(--colour-foreground));
+        .icon{
+          display: none;
+        }
+        .active_icon{
+          display: block;
+        }
       }
     }
     &>div.loading{

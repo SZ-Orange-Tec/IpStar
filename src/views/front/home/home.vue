@@ -24,8 +24,8 @@
             <GoogleLoginButton v-if="!isLogin" />
           </template>
           <template v-else>
-            <IpButton type="primary" class="h-10 px-5" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
-            <IpButton type="ghost" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/doc')">
+            <IpButton type="major" class="h-10 px-5" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="major" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/doc')">
               <div class="between w-full h-full">
                 <span>{{ t("home_spec.tutorials") }}</span>
                 <button>
@@ -38,7 +38,7 @@
 
         <div class="v_center data rounded-md !items-stretch" v-lazy="getUserIps">
           <div class="column_center px-3">
-            <strong class="title text-2xl" style="height: 2rem">
+            <strong class="title text-2xl whitespace-nowrap" style="height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
@@ -46,7 +46,7 @@
           </div>
           <div class="bg-current w-[1px] mx-5" style="color: #eef5ff"></div>
           <div class="column_center px-3">
-            <strong class="title text-2xl" style="height: 2rem">
+            <strong class="title text-2xl whitespace-nowrap" style="height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>

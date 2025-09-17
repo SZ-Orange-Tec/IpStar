@@ -1,53 +1,85 @@
 <template>
   <div class="login vh_center" :style="{ height: height }">
-    <div class="background">
-      <StarPlay />
-    </div>
+    <!-- <div class="background"> -->
+    <!-- <StarPlay /> -->
+    <!-- </div> -->
 
-    <div class="container column">
-      <div class="title w-full text-center">
-        <template v-if="/^forget/.test(status)">{{ t("login_spec.forgot") }}</template>
-        <template v-else>{{ t("Sign_in") }}</template>
-      </div>
+    <div class="box w-full">
+      <div class="container between">
+        <div class="form column rounded-lg">
+          <div class="title w-full text-center">
+            <template v-if="/^forget/.test(status)">{{ t("login_spec.forgot") }}</template>
+            <template v-else>{{ t("Sign_in") }}</template>
+          </div>
 
-      <div class="w-full">
-        <Account v-model="account" @next="next" v-if="status === 'account'" />
-        <Password
-          v-model:password="password"
-          v-model:input="captcha.input"
-          :captchaId="captcha.id"
-          :image="captcha.image"
-          @updateCaptcha="getGraphicCode"
-          @next="next"
-          @back="back"
-          @forget="status = 'forget_email'"
-          v-else-if="status === 'password'"
-        />
-        <VerifyCode v-model="code" :account="account" @next="next" @back="back" v-else-if="status === 'code' || status === 'forget_code'" />
-        <ResetPassword v-model="password" @next="next" @back="back" v-else-if="status === 'reset' || status === 'forget_reset'" />
+          <div class="w-full">
+            <Account v-model="account" @next="next" v-if="status === 'account'" />
+            <Password
+              v-model:password="password"
+              v-model:input="captcha.input"
+              :captchaId="captcha.id"
+              :image="captcha.image"
+              @updateCaptcha="getGraphicCode"
+              @next="next"
+              @back="back"
+              @forget="status = 'forget_email'"
+              v-else-if="status === 'password'"
+            />
+            <VerifyCode v-model="code" :account="account" @next="next" @back="back" v-else-if="status === 'code' || status === 'forget_code'" />
+            <ResetPassword v-model="password" @next="next" @back="back" v-else-if="status === 'reset' || status === 'forget_reset'" />
 
-        <ForgetPassword v-model="account" @next="next" @back="back" v-else-if="status === 'forget_email'" />
-      </div>
+            <ForgetPassword v-model="account" @next="next" @back="back" v-else-if="status === 'forget_email'" />
+          </div>
 
-      <div class="loading vh_center" v-if="loading">
-        <div class="column_center space-y-3">
-          <span class="ip-loading"></span>
-          <p>{{ t("Logging_in") }}</p>
+          <div class="loading vh_center" v-if="loading">
+            <div class="column_center space-y-3">
+              <span class="ip-loading"></span>
+              <p>{{ t("Logging_in") }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="right column space-y-10">
+          <div class="img_box flex-1">
+            <img
+              sizes="(max-width: 1024px) 290px, 400px"
+              src="@/assets/images/login/bg-logo.png"
+              srcset="@/assets/images/login/bg-logo.png 290w, @/assets/images/login/bg-logo@2x.png 580w"
+              alt=""
+            />
+          </div>
+
+          <div class="welcome space-y-5 column !items-end">
+            <ip-button type="border" class="back_btn" @click="toHome">
+              <div class="v_center space-x-1">
+                <span class="text-sm">{{ t("Home") }}</span>
+                <ChevronRight :size="18"></ChevronRight>
+              </div>
+            </ip-button>
+            <div class="text-lg sm:text-2xl lg:text-3xl v_center sm:column sm:!items-end gap-2">
+              <div class="primary">{{ t("login_spec.your") }}</div>
+              <div class="text-base major">IPSTAR!</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="welcome space-y-5">
-      <ip-button type="border" class="back_btn" @click="toHome">
-        <div class="v_center space-x-1">
-          <ChevronLeft :size="22"></ChevronLeft>
-          <span class="text-base">{{ t("Home") }}</span>
-        </div>
-      </ip-button>
-      <div class="text-lg sm:text-2xl lg:text-3xl v_center sm:column gap-2">
-        <div>{{ t("login_spec.your") }}</div>
-        <div class="liner">IPSTAR!</div>
-      </div>
+    <div class="bg_left">
+      <img
+        v-lazy
+        sizes="(max-width: 1024px) 600px, 1200"
+        src="@/assets/images/login/bg-left.png"
+        srcset="@/assets/images/login/bg-left.png 773w, @/assets/images/login/bg-left@2x.png 1546w"
+      />
+    </div>
+    <div class="bg_right">
+      <img
+        v-lazy
+        sizes="(max-width: 1024px) 150px, 300px"
+        src="@/assets/images/login/bg-right.png"
+        srcset="@/assets/images/login/bg-right.png 201w, @/assets/images/login/bg-right@2x.png 401w"
+      />
     </div>
   </div>
 </template>
@@ -67,9 +99,10 @@ import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { ChevronLeft } from "lucide-vue-next"
-import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+import { ChevronRight } from "lucide-vue-next"
+// import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import { platCustomerResetpass } from "../../api/login"
+import useWindowHeight from "../../composables/useWindowHeight"
 
 const { t } = useI18n()
 
@@ -77,7 +110,9 @@ const router = useRouter()
 const { token } = loginStore()
 const { en } = settingsStore()
 
-const height = window.innerHeight + "px"
+const { height } = useWindowHeight()
+console.log(height.value)
+
 // 响应式数据
 const account = ref("")
 const password = ref("")

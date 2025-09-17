@@ -4,7 +4,7 @@
       <div class="container column_center space-y-10">
         <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
           <template #title>
-            <span class="primary_text">{{ t("help_spec.title_slot") }}</span>
+            <span class="major">{{ t("help_spec.title_slot") }}</span>
           </template>
         </i18n-t>
 
@@ -17,12 +17,12 @@
             :key="index"
             @click="selectBlock(index)"
           >
-            <h1 class="text-sm lg:text-lg title">{{ item.h1 }}</h1>
+            <h1 class="primary font-medium text-sm lg:text-lg title">{{ item.h1 }}</h1>
             <p class="text-xs lg:text-sm description">{{ item.p }}</p>
           </div>
         </div>
 
-        <IpButton type="primary" class="btn px-10 h-10" @click="gotoDocum">
+        <IpButton type="major" class="btn px-10 h-10" @click="gotoDocum">
           <p>{{ t("help_spec.more") }}</p>
         </IpButton>
 
@@ -54,7 +54,8 @@
       </div>
     </div>
     <div class="background">
-      <StarPlay />
+      <!-- <StarPlay /> -->
+      <img src="@/assets/images/help/bg.webp" alt="" />
     </div>
   </div>
 </template>
@@ -66,7 +67,7 @@ import settingStore from "@/store/setting"
 import IpButton from "@/components/button/button.vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
-import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+// import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 
 const router = useRouter()
 const { t } = useI18n()

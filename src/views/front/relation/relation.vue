@@ -3,23 +3,23 @@
     <div class="box contact_us">
       <div class="container column_center lg:between gap-5">
         <div class="email space-y-6 column">
-          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
+          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="primary text-lg sm:text-2xl lg:text-3xl title">
             <template #info>
-              <span class="primary_text">{{ t("relation_spec.title_slot") }}</span>
+              <span class="primary">{{ t("relation_spec.title_slot") }}</span>
             </template>
           </i18n-t>
 
           <div class="space-y-5 w-full">
             <div class="space-y-2">
-              <p class="label text-sm">{{ t("relation_spec.full_name") }}</p>
+              <p class="label text-sm primary">{{ t("relation_spec.full_name") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
             <div class="space-y-2">
-              <p class="label text-sm">{{ t("Email") }}</p>
+              <p class="label text-sm primary">{{ t("Email") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="email" :placeholder="t('Email')" />
             </div>
             <div class="space-y-2">
-              <p class="label text-sm">{{ t("relation_spec.help") }}</p>
+              <p class="label text-sm primary">{{ t("relation_spec.help") }}</p>
               <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help1')"></textarea>
             </div>
           </div>
@@ -34,38 +34,38 @@
         </div>
 
         <div class="column concat">
-          <div class="top flex space-x-2" style="align-items: flex-start">
-            <img class="flex-shrink-0" src="@/assets/images/relation/icon.png" width="30" height="30" alt="" />
-            <div class="column space-y-2">
-              <p class="title text-base">{{ t("relation_spec.serve") }}</p>
-              <p class="description text-sm">{{ t("relation_spec.serve_des") }}</p>
-            </div>
+          <div class="header w-full flex-1 vh_center">
+            <img src="@/assets/images/relation/background.png" class="h-full" alt="" />
           </div>
-
-          <div class="bottom flex w-full">
-            <div class="way flex-1 vh_center space-x-2">
-              <span>{{ t("relation_spec.start_chat") }}</span>
-              <IpButton @click="toCrisp" type="ghost" circle class="w-8 h-8">
-                <MessageCircleMore :size="20" color="hsl(var(--success))" :stroke-width="2" />
-              </IpButton>
+          <div class="bottom">
+            <div class="top flex space-x-2" style="align-items: flex-start">
+              <img class="flex-shrink-0" src="@/assets/images/relation/icon.png" width="30" height="30" alt="" />
+              <div class="column space-y-2">
+                <p class="title text-base major">{{ t("relation_spec.serve") }}</p>
+                <p class="description text-sm">{{ t("relation_spec.serve_des") }}</p>
+              </div>
             </div>
 
-            <div class="way flex-1 vh_center pointer whitespace-nowrap" @click="toEmail">support@ipstar.io</div>
+            <div class="bottom flex w-full">
+              <div class="way flex-1 vh_center space-x-2">
+                <span>{{ t("relation_spec.start_chat") }}</span>
+                <IpButton @click="toCrisp" type="ghost" circle class="w-8 h-8">
+                  <MessageCircleMore :size="20" color="hsl(var(--success))" :stroke-width="2" />
+                </IpButton>
+              </div>
 
-            <div class="way flex-1 vh_center space-x-2">
-              <span>{{ t("Follow_us_on") }}</span>
-              <!-- <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
-                <Twitter :size="20" color="hsl(var(--primary))" :stroke-width="2" />
-              </IpButton> -->
+              <div class="way flex-1 vh_center pointer whitespace-nowrap" @click="toEmail">support@ipstar.io</div>
+
+              <div class="way flex-1 vh_center space-x-2">
+                <span>{{ t("Follow_us_on") }}</span>
+                <!-- <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
+                  <Twitter :size="20" color="hsl(var(--primary))" :stroke-width="2" />
+                </IpButton> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="background">
-      <StarPlay />
-      <!-- <img src="@/assets/images/relation/background.png" @load="bgLoaded" alt="" class="w-full h-full" style="object-fit: cover" /> -->
     </div>
   </div>
 </template>
@@ -80,7 +80,7 @@ import IpButton from "@/components/button/button.vue"
 import { Twitter, ArrowRight, MessageCircleMore } from "lucide-vue-next"
 
 import "element-plus/es/components/message-box/style/css"
-import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
+// import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import Confirm from "@/components/confirm/confirm"
 import position from "../../../components/dialog/position"
 

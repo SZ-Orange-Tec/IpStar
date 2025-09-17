@@ -13,14 +13,17 @@
     <p class="other_login_title text-sm">{{ t("login_spec.Or") }}</p>
     <div class="other_login between space-x-5">
       <!-- 谷歌登录 -->
-      <div class="vh_center space-x-2 flex-1 transition-color pointer" @click="handlerGoogleLogin" :class="{ loading: googleLoading }">
+      <div class="vh_center text-sm space-x-2 flex-1 transition-color pointer" @click="handlerGoogleLogin" :class="{ loading: googleLoading }">
         <img src="@/assets/images/login/google.png" alt="google" width="22" height="22" />
         <span>Google</span>
         <span class="ip-loading" v-if="googleLoading"></span>
       </div>
       <!-- github登录 -->
-      <div class="vh_center space-x-2 flex-1 transition-color pointer" @click="handlerGithubLogin" :class="{ loading: githubLoading }">
-        <img src="@/assets/images/login/github.png" alt="github" width="28" height="28" />
+      <div class="vh_center text-sm space-x-2 flex-1 transition-color pointer" @click="handlerGithubLogin" :class="{ loading: githubLoading }">
+        <div>
+          <img class="icon" src="@/assets/images/login/github_blue.png" alt="github" width="30" height="30" />
+          <img class="active_icon" src="@/assets/images/login/github_white.png" alt="github" width="30" height="30" />
+        </div>
         <span>Github</span>
         <span class="ip-loading" v-if="githubLoading"></span>
       </div>

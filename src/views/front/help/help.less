@@ -1,7 +1,8 @@
 .help {
 
-  background-color: hsl(var(--page-background));
-  min-height: 675px;
+  // background-color: hsl(var(--page-background));
+  min-height: 760px;
+  background-color: #E7F4FF;
   &>.box{
     padding: 0 2.5rem;
     @media screen and (max-width:640px) {
@@ -11,29 +12,23 @@
 
   .container {
     // padding-bottom: 123px;
-    padding: 64px 0 128px;
+    padding: 64px 0;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
     
-    :deep(.primary_text){
-      color: hsl(var(--primary));
-    }
-    .title{
+    &>.title{
       line-height: 1.5;
       font-weight: 500;
-      // font-family: Space Grotesk;
-    }
-    .green{
-      color: hsl(var(--success));
     }
 
     &>.select {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
+      color: hsl(var(--foreground));
       @media screen and (max-width:768px) {
         gap: 1.25rem;
         grid-template-columns: repeat(1, 1fr);
@@ -45,20 +40,9 @@
       &>.select-item {
         padding: 0.5rem 0.75rem 0.75rem;
         border-radius: 8px;
-        background-color: hsl(var(--foreground) / 10%);
+        background-color: hsl(var(--background));
         border: 1px solid transparent;
-        .title{
-          color: hsl(var(--foreground) / 80%);
-          font-weight: 400;
-        }
-        .description{
-          color: hsl(var(--foreground) / 60%);
-          font-weight: 300;
-          letter-spacing: 0.5px;
-        }
-        &:hover:not(.active){
-          border-color: hsl(var(--foreground) / 10%);
-        }
+      
 
         @media screen and (min-width:768px) {
           padding: 0.75rem 1.25rem 1.25rem;
@@ -66,13 +50,7 @@
       }
 
       &>.active {
-        border-color: hsl(var(--foreground) / 30%);
-        .title{
-          color: hsl(var(--foreground) / 90%);
-        }
-        .description{
-          color: hsl(var(--foreground) / 70%);
-        }
+        box-shadow: 0 5px 16px 0 #BCE0FF;
       }
     }
 
@@ -83,17 +61,18 @@
 
   &>.background{
     position: absolute;
-    width: 100%;
+    width: calc(100% + 100px);
     height: 100%;
-    left: 0;
+    left: -100px;
     top: 0;
     overflow: hidden;
     z-index: 0;
     // inset: 0;
-    .bck{
+    img{
       position: absolute;
       width: 100%;
-      height: 100%;
+      height: auto;
+      bottom: 0;
       object-fit: cover;
       transition: opacity 0.5s;
     }

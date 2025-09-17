@@ -9,15 +9,13 @@
       padding: 0 12px;
       border-radius: 8px;
       border: 1px solid transparent;
-      background-color: #2d2d35;
       position: relative;
-      color:hsl(var(--foreground) / 50%);
+      border: 1px solid hsl(var(--input-border));
+      background-color: hsl(var(--background));
       input{
         height: 100%;
         outline: none;
         border: none;
-        background: transparent;
-        color: hsl(var(--foreground));
         
         &:-webkit-autofill {
           color: hsl(var(--foreground)) !important;
@@ -35,8 +33,11 @@
           text-decoration: underline;
         }
       }
+      &:hover{
+        border-color: hsl(var(--input-border-hover));
+      }
       &:focus-within{
-        border-color: hsl(var(--foreground) / 50%);
+        border-color: hsl(var(--input-border-focus));
       }
     }
   }
