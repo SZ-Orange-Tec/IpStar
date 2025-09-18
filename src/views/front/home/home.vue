@@ -142,41 +142,16 @@
         </div>
 
         <div class="auto_content w-full">
-          <ul class="four grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5">
-            <li class="flex-1 column rounded-lg">
-              <div class="img_box vh_center" :width="300" :height="270">
-                <img v-lazy src="@/assets/images/home/four1.png" alt="" />
-              </div>
-              <div class="content flex-1 px-3 space-y-2 column">
-                <p class="font-bold">{{ t("home_spec.four1_title") }}</p>
-                <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
-              </div>
-            </li>
-            <li class="flex-1 column rounded-lg">
-              <div class="img_box vh_center" :width="300" :height="270">
-                <img v-lazy src="@/assets/images/home/four2.png" alt="" />
-              </div>
-              <div class="content flex-1 px-3 space-y-2 column">
-                <p class="font-bold">{{ t("home_spec.four2_title") }}</p>
-                <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
-              </div>
-            </li>
-            <li class="flex-1 column rounded-lg">
-              <div class="img_box vh_center" :width="300" :height="270">
-                <img v-lazy src="@/assets/images/home/four3.png" alt="" />
-              </div>
-              <div class="content flex-1 px-3 space-y-2 column">
-                <p class="font-bold">{{ t("home_spec.four3_title") }}</p>
-                <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
-              </div>
-            </li>
-            <li class="flex-1 column rounded-lg">
-              <div class="img_box vh_center" :width="300" :height="270">
-                <img v-lazy src="@/assets/images/home/four4.png" alt="" />
-              </div>
-              <div class="content flex-1 px-3 space-y-2 column">
-                <p class="font-bold">{{ t("home_spec.four4_title") }}</p>
-                <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
+          <ul class="four flex">
+            <li v-for="item in scene" :key="item.title">
+              <div class="pointer">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy :src="item.icon" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ item.title }}</p>
+                  <p class="description text-xs">{{ item.des }}</p>
+                </div>
               </div>
             </li>
           </ul>
@@ -453,6 +428,50 @@ async function getUserIps() {
     console.log(error.message)
   }
 }
+
+// 场景
+const scene = [
+  {
+    icon: new URL("@/assets/images/home/four1.png", import.meta.url).href,
+    title: t("home_spec.four1_title"),
+    des: t("home_spec.four1_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four2.png", import.meta.url).href,
+    title: t("home_spec.four2_title"),
+    des: t("home_spec.four2_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four3.png", import.meta.url).href,
+    title: t("home_spec.four3_title"),
+    des: t("home_spec.four3_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four4.png", import.meta.url).href,
+    title: t("home_spec.four4_title"),
+    des: t("home_spec.four4_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four1.png", import.meta.url).href,
+    title: t("home_spec.four5_title"),
+    des: t("home_spec.four5_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four2.png", import.meta.url).href,
+    title: t("home_spec.four6_title"),
+    des: t("home_spec.four6_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four3.png", import.meta.url).href,
+    title: t("home_spec.four7_title"),
+    des: t("home_spec.four7_desc"),
+  },
+  {
+    icon: new URL("@/assets/images/home/four4.png", import.meta.url).href,
+    title: t("home_spec.four8_title"),
+    des: t("home_spec.four8_desc"),
+  },
+]
 
 function merchantScroll() {
   merchantTime.value = setInterval(() => {

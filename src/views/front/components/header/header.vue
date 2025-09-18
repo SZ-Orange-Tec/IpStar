@@ -12,7 +12,7 @@
 
       <div class="v_center h-full space-x-3">
         <ul class="navigator hidden lg:v_center text-base px-3 h-full whitespace-nowrap" @mouseenter="loadFront">
-          <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
+          <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: isHome }">
             {{ $t("Home") }}
           </li>
           <li @click="navigate('/pricing')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/pricing' }">
@@ -143,6 +143,7 @@ const { username } = userStore()
 
 // 路由
 const activePath = computed(() => route.path)
+const isHome = computed(() => /^\/home/.test(activePath.value))
 function navigate(path) {
   // 跳转路由
   if (router.currentRoute.value.path === path) {

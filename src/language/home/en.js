@@ -63,6 +63,14 @@ export default {
     four4_title: "Easy Integration for Everyone",
     four4_desc:
       "Sign up with just your email and quickly get started with our simple dashboard or API. Enjoy a stable and fast connection for your business.",
+    four5_title: "Market Research",
+    four5_desc: "Support cross-regional surveys to get real consumer feedback and help market decisions.",
+    four6_title: "Ad Verification",
+    four6_desc: "Ensure the authenticity and effectiveness of ad presentations to prevent fraudulent click actions.",
+    four7_title: "Brand Protection",
+    four7_desc: "Monitor the global network to identify brand abuse and security threats.",
+    four8_title: "AI Model Training",
+    four8_desc: "Access and integrate global public data to accelerate model training and iteration.",
 
     world_title: "Worldwide {primary} Proxy",
     world_title_slot: "Point to Point",

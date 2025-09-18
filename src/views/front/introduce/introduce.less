@@ -1,0 +1,179 @@
+.home {
+  // padding-top: 80px;
+  @color: #FDB713;
+  @color-show: #d09712;
+  @color-black: #191D26;
+  background-color: hsl(var(--page-background));
+
+  // position: relative;
+
+  .box{
+    // width: 100%;
+    --primary: 212 77% 53%;
+    padding: 0 2.5rem;
+    @media screen and (max-width:640px) {
+      padding: 0 1rem;
+    }
+    .container{
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    
+    }
+  }
+  .introduce{
+  
+    
+    background-color: #061C52;
+    color: hsl(var(--colour-foreground));
+    .container{
+      padding: 64px 0 ;
+      position: relative;
+      z-index: 1;
+      background-image: url('../../../assets/images/home/cover.png');
+      background-repeat: no-repeat;
+      background-position: right 31%;
+      .img_box{
+        position: absolute;
+      }
+
+      .tutorial{
+        background-color: transparent;
+        border: 2px solid hsl(var(--border) / 50%);
+        color: hsl(var(--colour-foreground));
+        &:hover:not(.loading){
+          border-color: hsl(var(--border));
+        }
+      }
+    }
+
+    &>.background{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+      // inset: 0;
+      .bck{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s;
+      }
+    }
+  }
+
+  .country{
+    .container{
+      padding: 64px 0;
+
+      .country_list{
+        margin-top: 4rem;
+        &>ul{
+          margin: 0 -12px;
+          flex-wrap: wrap;
+          &>li{
+            box-sizing: border-box;
+            width: calc(100% / 4);
+            padding: 12px;
+            &>div{
+              justify-content: space-between;
+              height: 180px;
+              padding: 2rem 1.5rem;
+              background-color: #051C4E;
+              box-shadow: 0 0 8px #CCE4FF;
+              color: hsl(var(--colour-foreground));
+              background-image: url('@/assets/images/home/country_bg.png');
+              background-repeat: no-repeat;
+              background-position: right;
+            }
+            
+          }
+        }
+      }
+    }
+  }
+
+  .why_choose{
+    // background-color: hsl(var(--primary));
+    // color: hsl(var(--colour-foreground));
+    .container{
+      padding: 64px 0;
+      position: relative;
+
+      &>ul.three{
+        margin: 64px auto 0;
+        align-items: stretch;
+        li{
+          background: hsl(var(--background));
+          box-shadow: 0 0 8px #CCE4FF;
+          max-width: 350px;
+          border-radius: 20px;
+          padding: 1rem;
+          background-color: hsl(var(--background));
+          .img_box{
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+
+  .auto{
+    .container{
+      padding: 4rem 0;
+      .auto_header{
+        width: 100%;
+        max-width: 1027px;
+        margin: 0 auto;
+      }
+      .auto_content{
+        margin-top: 4rem;
+        // padding: 4rem 0;
+        // background-color: hsl(var(--primary));
+        &>ul.four{
+          width: calc(100% + 32px);
+          flex-wrap: wrap;
+          margin: 0 -16px;
+          li{
+            box-sizing: border-box;
+            width: calc(100% / 4);
+            padding: 16px;
+            &>div{
+              border-radius: 1rem;
+              height: 260px;
+              padding: 1.25rem 1rem 0;
+              box-shadow: 0 0 8px #CCE4FF;
+              .img_box{
+                width: 80px;
+                height: 80px;
+                margin: 0 auto;
+              }
+              &:hover{
+                background-color: hsl(var(--primary));
+                color: hsl(var(--colour-foreground));
+              }
+            }
+          }
+        }
+      }
+
+      .pack_title{
+        margin-top: 4rem;
+      }
+    }
+  }
+
+  .package{
+    background-color: hsl(var(--primary));
+    .container{
+      padding: 4rem 0;
+    }
+  }
+
+  
+}
