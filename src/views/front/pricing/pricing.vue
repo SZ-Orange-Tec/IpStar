@@ -41,26 +41,26 @@
       <div class="container between">
         <div class="text column space-y-10">
           <div class="space-y-5">
-            <h3 class="text-xl font-bold">全方位流量管理解决方案</h3>
-            <p>轻松管理数据使用量，提供全面的流量管理面板，实时统计数据让您精准监控住宅代理的使用情况，从而有效避免超出预算。</p>
+            <h3 class="text-xl font-bold">{{ t("pricing_spec.plan_title") }}</h3>
+            <p>{{ t("pricing_spec.plan_desc") }}</p>
           </div>
 
           <ul class="space-y-3">
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>实时流量监控</p>
+              <p>{{ t("pricing_spec.plan_tag1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>流量消耗明细</p>
+              <p>{{ t("pricing_spec.plan_tag2") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>自定义流量上限</p>
+              <p>{{ t("pricing_spec.plan_tag3") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>子账号权限管理</p>
+              <p>{{ t("pricing_spec.plan_tag4") }}</p>
             </li>
           </ul>
         </div>
@@ -79,45 +79,95 @@
 
         <div class="text column space-y-10">
           <div class="space-y-5">
-            <h3 class="text-xl font-bold">全方位流量管理解决方案</h3>
-            <p>轻松管理数据使用量，提供全面的流量管理面板，实时统计数据让您精准监控住宅代理的使用情况，从而有效避免超出预算。</p>
+            <h3 class="text-xl font-bold">{{ t("pricing_spec.resource_title") }}</h3>
+            <p>{{ t("pricing_spec.resource_desc") }}</p>
           </div>
 
           <ul class="space-y-3">
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>实时流量监控</p>
+              <p>{{ t("pricing_spec.resource_tag1") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>流量消耗明细</p>
+              <p>{{ t("pricing_spec.resource_tag2") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>自定义流量上限</p>
+              <p>{{ t("pricing_spec.resource_tag3") }}</p>
             </li>
             <li class="v_center space-x-2">
               <CircleCheck :size="22" class="icon" />
-              <p>子账号权限管理</p>
+              <p>{{ t("pricing_spec.resource_tag4") }}</p>
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="box">
+    <div class="box code">
       <div class="container space-y-10">
         <div class="space-y-5">
-          <h3 class="text-lg sm:text-2xl lg:text-3xl font-bold text-center">轻松实现多种代码集成</h3>
-          <p class="text-center">提供多种编程语言的爬虫示例及详尽的API参数说明，支持快速集成与应用</p>
+          <h3 class="text-lg sm:text-2xl lg:text-3xl font-bold text-center">{{ t("pricing_spec.code_title") }}</h3>
+          <p class="text-center">{{ t("pricing_spec.code_desc") }}</p>
         </div>
 
         <div class=""></div>
       </div>
     </div>
 
-    <div class="box">
-      <div class="container"></div>
+    <div class="box question">
+      <div class="container space-y-10">
+        <div class="title">
+          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">常见问题</h3>
+        </div>
+
+        <div class="content space-y-5">
+          <Question>
+            <template #header> {{ t("question_spec.title1") }} </template>
+            <template #content>
+              <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
+                <template #product>
+                  <a href="https://www.ipstar.io/product" target="_blank">https://www.ipstar.io/product</a>
+                </template>
+                <template #pricing>
+                  <a href="https://www.ipstar.io/pricing" target="_blank">https://www.ipstar.io/pricing</a>
+                </template>
+              </i18n-t>
+            </template>
+          </Question>
+          <Question>
+            <template #header> {{ t("question_spec.title2") }} </template>
+            <template #content>
+              <p>{{ t("question_spec.desc2") }}</p>
+            </template>
+          </Question>
+          <Question>
+            <template #header> {{ t("question_spec.title3") }} </template>
+            <template #content>
+              <p>{{ t("question_spec.desc3") }}</p>
+            </template>
+          </Question>
+          <Question>
+            <template #header> {{ t("question_spec.title4") }} </template>
+            <template #content>
+              <p>{{ t("question_spec.desc4") }}</p>
+            </template>
+          </Question>
+          <Question>
+            <template #header> {{ t("question_spec.title5") }} </template>
+            <template #content>
+              <p class="whitespace-pre-wrap">{{ t("question_spec.desc5") }}</p>
+            </template>
+          </Question>
+          <Question>
+            <template #header> {{ t("question_spec.title6") }} </template>
+            <template #content>
+              <p>{{ t("question_spec.desc6") }}</p>
+            </template>
+          </Question>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -136,6 +186,7 @@ import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
 import Tabbar from "../components/product_list/tabbar/tabbar.vue"
+import Question from "../components/question/question.vue"
 import { CircleCheck } from "lucide-vue-next"
 
 const { t } = useI18n()

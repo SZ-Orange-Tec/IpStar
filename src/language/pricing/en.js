@@ -3,20 +3,35 @@ import productList from "../components/productList/en"
 import paypopup from "../components/pay_popup/en"
 import footer from "../components/footer/en"
 import headerGift from "../components/headerGift/en"
+import question from "../components/question/en"
 export default {
   ...header,
   ...productList,
   ...footer,
   ...paypopup,
   ...headerGift,
+  ...question,
 
   pricing_spec: {
     des: "Real Residential IPs cover 200+ countries\nPlans From {price}",
-    // des_slot: "0.25/GB",
-    payment: "We support multiple payment methods",
-    popular: "Most Popular Countries",
 
-    world_span: "Countries And Districts",
-    // support: " <span class='primary_text'>200+</span> More Countries",
+    plan_title: "Total Data Control",
+    plan_desc: "Easily track your data usage in real-time. Our dashboard helps you monitor proxy stats and stay on budget.",
+    plan_tag1: "Real-Time Monitoring",
+    plan_tag2: "Usage Statistics",
+    plan_tag3: "Custom Data Caps",
+    plan_tag4: "Sub-user Permissions",
+
+    resource_title: "Premium Global Proxies",
+    resource_desc:
+      "Access tens of millions of premium, continuously updated household IPs from 200+ countries. High speed, low latency, and maximum privacy.",
+    resource_tag1: "Global Coverage",
+    resource_tag2: "Stable & Reliable",
+    resource_tag3: "Fast & Responsive",
+    resource_tag4: "Secure & Private",
+
+    code_title: "Code Integration",
+    code_desc:
+      "Integrate with our API using multiple programming languages. We provide code examples and detailed API parameter descriptions to help you get started quickly.",
   },
 }

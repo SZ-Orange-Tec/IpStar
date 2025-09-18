@@ -33,6 +33,9 @@
       background-image: url('../../../assets/images/home/cover.png');
       background-repeat: no-repeat;
       background-position: right 31%;
+      &>.text{
+        max-width: 550px;
+      }
       .img_box{
         position: absolute;
       }
@@ -118,6 +121,10 @@
             height: 150px;
             margin: 0 auto;
           }
+          &:hover{
+            background-color: hsl(var(--primary));
+            color: hsl(var(--colour-foreground));
+          }
         }
       }
     }
@@ -170,6 +177,12 @@
 
   .package{
     background-color: hsl(var(--primary));
+    .container{
+      padding: 4rem 0;
+    }
+  }
+
+  .question{
     .container{
       padding: 4rem 0;
     }

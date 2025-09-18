@@ -94,7 +94,7 @@
         </p>
 
         <ul class="three column gap-8 md:v_center">
-          <li class="flex-1">
+          <li class="flex-1 pointer transition-colors" @click="toHomeSecond('introduce')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:105px) 105px,89px" src="@/assets/images/home/why1.png" srcset="@/assets/images/home/why1.png 105w" />
             </div>
@@ -104,7 +104,7 @@
               <p class="text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 pointer transition-colors" @click="toHomeSecond('efficient')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:90px) 96px,102px" src="@/assets/images/home/why2.png" srcset="@/assets/images/home/why2.png 96w" />
             </div>
@@ -113,7 +113,7 @@
               <p class="text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1">
+          <li class="flex-1 pointer transition-colors" @click="router.push('/pricing')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:90px) 105px,104px" src="@/assets/images/home/why3.png" srcset="@/assets/images/home/why3.png 105w" />
             </div>
@@ -143,14 +143,91 @@
 
         <div class="auto_content w-full" v-lazy="showSlow">
           <ul class="four flex">
-            <li v-for="item in scene" :key="item.title">
-              <div class="pointer">
+            <li @click="toHomeSecond('data_collection')">
+              <div class="pointer transition-colors">
                 <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy :src="item.icon" alt="" />
+                  <img v-lazy src="@/assets/images/home/four1.png" alt="" />
                 </div>
                 <div class="content flex-1 px-3 space-y-2 column">
-                  <p class="font-bold">{{ item.title }}</p>
-                  <p class="description text-xs">{{ item.des }}</p>
+                  <p class="font-bold">{{ t("home_spec.four1_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four1_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('search_engine')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four2.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four2_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four2_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('social_media')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four3.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four3_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four3_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('e_commerce')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four4.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four4_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four4_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('market')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four1.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four5_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four5_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('bill')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four2.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four6_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four6_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('brand')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four3.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four7_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four7_desc") }}</p>
+                </div>
+              </div>
+            </li>
+            <li @click="toHomeSecond('ai_model')">
+              <div class="pointer transition-colors">
+                <div class="img_box vh_center" :width="300" :height="270">
+                  <img v-lazy src="@/assets/images/home/four4.png" alt="" />
+                </div>
+                <div class="content flex-1 px-3 space-y-2 column">
+                  <p class="font-bold">{{ t("home_spec.four8_title") }}</p>
+                  <p class="description text-xs">{{ t("home_spec.four8_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -450,50 +527,6 @@ async function getUserIps() {
   }
 }
 
-// 场景
-const scene = [
-  {
-    icon: new URL("@/assets/images/home/four1.png", import.meta.url).href,
-    title: t("home_spec.four1_title"),
-    des: t("home_spec.four1_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four2.png", import.meta.url).href,
-    title: t("home_spec.four2_title"),
-    des: t("home_spec.four2_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four3.png", import.meta.url).href,
-    title: t("home_spec.four3_title"),
-    des: t("home_spec.four3_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four4.png", import.meta.url).href,
-    title: t("home_spec.four4_title"),
-    des: t("home_spec.four4_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four1.png", import.meta.url).href,
-    title: t("home_spec.four5_title"),
-    des: t("home_spec.four5_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four2.png", import.meta.url).href,
-    title: t("home_spec.four6_title"),
-    des: t("home_spec.four6_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four3.png", import.meta.url).href,
-    title: t("home_spec.four7_title"),
-    des: t("home_spec.four7_desc"),
-  },
-  {
-    icon: new URL("@/assets/images/home/four4.png", import.meta.url).href,
-    title: t("home_spec.four8_title"),
-    des: t("home_spec.four8_desc"),
-  },
-]
-
 // 动画
 function showSlow(e) {
   anime({
@@ -502,6 +535,16 @@ function showSlow(e) {
     opacity: [0, 1],
     duration: 1000,
     easing: "easeOutQuart",
+  })
+}
+
+// 跳转二级页面
+function toHomeSecond(name) {
+  router.push({
+    name: "introduce",
+    params: {
+      name: name,
+    },
   })
 }
 

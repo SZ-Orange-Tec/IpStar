@@ -15,17 +15,6 @@ export default {
     intro_desc:
       "Get high-guality residential proxies for your business.\n Our IPs are sourced from real home networks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for market research, ad verification, and Training AI large models.\n We offer flexible plans to fit your business needs",
 
-    stable: "IPStar is stable and \neasy to use",
-    note: "Fast speed and strong anony-\nmity highly recommended.",
-
-    nocode: "No-Code Integration",
-    fast: "Fast",
-    secure: "Secure",
-
-    api: "API auto extract",
-    work: "Work",
-    entertainment: "Entertainment",
-
     try: "Try",
     more_try: "More Trial Traffic",
     start_now: "Start Now",
@@ -53,24 +42,22 @@ export default {
     automatic: "Applications",
     instant: "IpStar Residential Proxy offers efficient and secure proxy services,\neasily meeting diverse business needs.",
 
-    four1_title: "Pay-As-You-Go Pricing",
-    four1_desc: "With our expertise and smart matching system, we'll help you find reliable, feature-rich, and budget-friendly residential agents.",
-    four2_title: "An Intuitive Dashboard",
-    four2_desc:
-      "Simple and user-friendly design with clear control buttons and easy access to all settings, making agent management as straightforward as possible.",
-    four3_title: "Flexible Pricing Plans",
-    four3_desc: "Pay as you go, buy once, and access a huge IF network in 200+ regions worldwide. Start your free trial now!",
-    four4_title: "Easy Integration for Everyone",
-    four4_desc:
-      "Sign up with just your email and quickly get started with our simple dashboard or API. Enjoy a stable and fast connection for your business.",
+    four1_title: "Data Collection",
+    four1_desc: "Stable and reliable proxies for your business intelligence projects.",
+    four2_title: "SEO",
+    four2_desc: "Get real search results from any location. Easily verify and optimize your SEO.",
+    four3_title: "Social Media",
+    four3_desc: "Securely manage your social media accounts and boost team efficiency.",
+    four4_title: "E-commerce",
+    four4_desc: "Monitor competitors, optimize pricing, and dominate your market.",
     four5_title: "Market Research",
-    four5_desc: "Support cross-regional surveys to get real consumer feedback and help market decisions.",
+    four5_desc: "Conduct research across regions and get real consumer feedback.",
     four6_title: "Ad Verification",
-    four6_desc: "Ensure the authenticity and effectiveness of ad presentations to prevent fraudulent click actions.",
+    four6_desc: "Verify your ad placements and detect invalid or fraudulent clicks.",
     four7_title: "Brand Protection",
-    four7_desc: "Monitor the global network to identify brand abuse and security threats.",
-    four8_title: "AI Model Training",
-    four8_desc: "Access and integrate global public data to accelerate model training and iteration.",
+    four7_desc: "Monitor the web to find brand abuse and security threats.",
+    four8_title: "AI Training",
+    four8_desc: "Access global public data to accelerate AI model training.",
 
     world_title: "Worldwide {primary} Proxy",
     world_title_slot: "Point to Point",
