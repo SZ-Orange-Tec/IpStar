@@ -26,7 +26,7 @@
       <div class="background"></div>
     </div>
 
-    <div class="column_center pay space-y-5">
+    <!-- <div class="column_center pay space-y-5">
       <div class="imgs w-full between space-x-5">
         <img v-lazy src="@/assets/images/pricing/pay1.png" height="48" alt="" />
         <img v-lazy src="@/assets/images/pricing/pay2.png" height="48" alt="" />
@@ -35,50 +35,89 @@
         <img v-lazy src="@/assets/images/pricing/pay5.png" height="48" alt="" />
       </div>
       <p class="primary">{{ t("pricing_spec.payment") }}</p>
+    </div> -->
 
-      <!-- <div class="column_center scroll w-full">
-        <div class="w-full" style="max-width: 28px">
-          <IpImage :width="32" :height="143">
-            <img v-lazy src="@/assets/images/pricing/scroll.png" width="28" alt="" />
-          </IpImage>
-        </div>
-      </div> -->
-    </div>
-
-    <div class="world box" v-lazy="IpMap">
-      <div class="container">
-        <div class="w-full relative">
-          <IpImage :width="1271" :height="498">
-            <img v-lazy src="@/assets/images/home/world.webp" class="bg" alt="" />
-          </IpImage>
-
-          <div class="content">
-            <div class="container column">
-              <div class="text space-y-2 text-lg sm:text-2xl font-bold">
-                <p class="v_center space-x-2">
-                  <span class="green">{{ countryCount }}</span>
-                  <span>{{ t("pricing_spec.world_span") }}</span>
-                </p>
-                <p class="v_center space-x-2">
-                  <span class="green">{{ ipsCount }} M+</span>
-                  <span>IPS</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="country_box">
-              <div v-for="item in mapData" :key="item.name" class="country v_center space-x-2" :class="item.name">
-                <img v-lazy :src="item.icon" width="36" alt="" />
-                <div class="detail v_center h-8 space-x-2 px-3 text-xs whitespace-nowrap">
-                  <div class="dot vh_center"></div>
-                  <span>{{ item.value }} </span>
-                  <span class="primary_text">IPS+</span>
-                </div>
-              </div>
-            </div>
+    <div class="box plan">
+      <div class="container between">
+        <div class="text column space-y-10">
+          <div class="space-y-5">
+            <h3 class="text-xl font-bold">全方位流量管理解决方案</h3>
+            <p>轻松管理数据使用量，提供全面的流量管理面板，实时统计数据让您精准监控住宅代理的使用情况，从而有效避免超出预算。</p>
           </div>
+
+          <ul class="space-y-3">
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>实时流量监控</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>流量消耗明细</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>自定义流量上限</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>子账号权限管理</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="img_box">
+          <img src="@/assets/images/pricing/product_plan.png" alt="" />
         </div>
       </div>
+    </div>
+
+    <div class="box plan">
+      <div class="container between">
+        <div class="img_box">
+          <img src="@/assets/images/pricing/bighow.png" alt="" />
+        </div>
+
+        <div class="text column space-y-10">
+          <div class="space-y-5">
+            <h3 class="text-xl font-bold">全方位流量管理解决方案</h3>
+            <p>轻松管理数据使用量，提供全面的流量管理面板，实时统计数据让您精准监控住宅代理的使用情况，从而有效避免超出预算。</p>
+          </div>
+
+          <ul class="space-y-3">
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>实时流量监控</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>流量消耗明细</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>自定义流量上限</p>
+            </li>
+            <li class="v_center space-x-2">
+              <CircleCheck :size="22" class="icon" />
+              <p>子账号权限管理</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="container space-y-10">
+        <div class="space-y-5">
+          <h3 class="text-lg sm:text-2xl lg:text-3xl font-bold text-center">轻松实现多种代码集成</h3>
+          <p class="text-center">提供多种编程语言的爬虫示例及详尽的API参数说明，支持快速集成与应用</p>
+        </div>
+
+        <div class=""></div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="container"></div>
     </div>
   </div>
 </template>
@@ -97,6 +136,7 @@ import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
 import Tabbar from "../components/product_list/tabbar/tabbar.vue"
+import { CircleCheck } from "lucide-vue-next"
 
 const { t } = useI18n()
 

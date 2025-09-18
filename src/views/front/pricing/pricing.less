@@ -88,174 +88,28 @@
     }
   }
 
-  .world{
-    // width: 100%;
-    // padding: 0;
-    background-color: #0a070a;
-    // background: linear-gradient(to bottom,#09070a,hsl(var(--page-background)));
-    &>.container{
-      // max-width: 100%;
-      position: relative;
-      padding: 64px 0;
-      .bg{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .country_box{
-        padding-top: 0.5rem;
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        grid-template-rows: repeat(3,1fr);
-        gap: 20px 0;
-    
-      }
-      .country{
-        position: absolute;
-        animation: fade .3s;
-
-        &>.detail{
-          height: 2rem;
-          padding: 0 0.75rem;
-          color: hsl(var(--foreground) / 60%);
-          border-radius: 999px;
-          border: 1px solid hsl(var(--foreground) / 10%);
-          // box-shadow: 0 0 0 1px hsl(var(--foreground) / 10%);
-          cursor: default;
-          background-color: #12141a;
-          .dot{
-            box-sizing: border-box;
-            width: 20px;
-            height: 20px;
-            background-color: hsl(var(--foreground) / 10%);
-            border-radius: 50%;
-            opacity: 0;
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            transition: all .1s;
-            transform-origin: center center;
-            
-            &::before{
-              content: "";
-              display: block;
-              height: 50%;
-              width: 50%;
-              border-radius: 50%;
-              background-color: hsl(var(--success));
-            }
-          }
-          &:hover{
-            box-shadow: 20px 20px 40px #3B82F6;
-            box-shadow: 0 0 0 1px #3B82F6,0 10px 30px -5px  #3B82F6;
-            .dot{
-              width: 20px;
-              height: 20px;
-              opacity: 1;
-            }
-          }
-        }
-        @media screen and (max-width:768px) {
-          position: static;
-          img{
-            width: 18px;
-          }
-          .detail{
-            height: 1.75rem;
-            padding: 0 0.5rem;
-          }
-        }
-      }
-      .Canada{
-        top: 15%;
-        left: 16%;
-      }
-      .France{
-        top: 19%;
-        left: 48%;
-      }
-      .Brazil{
-        left: 34%;
-        bottom: 30%;
-      }
-      .Australia{
-        left: 83%;
-        bottom: 20%;
-      }
-      .Malaysia{
-        left: 76%;
-        bottom: 36%;
-      }
-      .USA{
-        left: 22%;
-        top: 30%;
-      }
-      .Japan{
-        right: 3%;
-        top: 31%;
-      }
-
-      .content{
-        position: absolute;
-        inset: 0;
-        .container{
-          .text{
-            // padding: 20px 0;
-            align-self: flex-end;
-            // transform: translateY(20px);
-            p{
-              justify-content: flex-end;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .country{
+  .plan{
+    margin: 4rem 0;
     .container{
-      padding: 128px 0;
-      .gird{
-        // margin: 96px auto;
-        width: 100%;
-        max-width: 800px;
-        margin: 96px auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        // gap: 40px 100px;
-        gap: 40px;
-        align-items: center;
-        // justify-items: center;
+      border-radius: 12px;
+      padding: 2rem;
+      background-color: hsl(var(--background));
+      box-shadow: 0 0 14px  #D0DCF2;
+      gap: 2rem;
+      
+      &>.text{
+        max-width: 550px;
+        .icon{
+          fill: hsl(var(--primary));
+          stroke: hsl(var(--colour-foreground));
+        }
+      }
+
+      &>.img_box{
+        max-width: 400px;
       }
     }
   }
 
-  .split{
-    background-color: hsl(var(--page-neutral));
-    // height: 80px;
-    padding-top: 40px;
-    .trans{
-      position: absolute;
-      left: -20px;
-      width:100%;
-      border-style: solid;
-      bottom: 0;
-      transform: translateY(100%);
-      border-width: 40px 60px 0 60px;
-      border-color: hsl(var(--page-neutral)) transparent transparent  transparent;
-    }
-  }
-
-  .payment.split{
-    .container{
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
 
 }

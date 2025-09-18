@@ -42,16 +42,16 @@ export default {
     adv4: "Supports API and account-password\n combo extraction.",
 
     why: "Why Choose",
-    why1_title: "50M+ Global Residential IPs",
-    why1_desc: "Experience a network of over 50 million real residential IPs from 200+countries worldwide.",
-    why2_title: "Residential Proxies",
-    why2_desc: "Specializing in residential IP proxies, realresidential lPs from around the world",
-    why3_title: "Premium Residential IPs",
-    why3_desc: "Delivering fast and stable connections",
-    more: "There are more",
-    automatic: "Automatic And \nInstant Delivery",
-    instant:
-      "Access immediately after payment - no waiting for account activation \nor proxy setup. Supports various communication protocols, including \nSOCKS5, HTTP/HTTPS, and custom protocols.",
+    why1_title: "Massive Resource",
+    why1_desc: "Cover 200+ countries, provide 5000+ real residential proxy IPs, help enterprises easily expand global business.",
+    why2_title: "High Anonymity & Efficiency",
+    why2_desc:
+      "Genuine residential IPs effectively prevent detection and tracking, strongly protecting data privacy. High-speed, stable network for a smooth experience.",
+    why3_title: "Great Value",
+    why3_desc: "Competitive pricing with exceptional quality and reliable residential proxy services.",
+    more: "Versatile Use Cases",
+    automatic: "Applications",
+    instant: "IpStar Residential Proxy offers efficient and secure proxy services,\neasily meeting diverse business needs.",
 
     four1_title: "Pay-As-You-Go Pricing",
     four1_desc: "With our expertise and smart matching system, we'll help you find reliable, feature-rich, and budget-friendly residential agents.",

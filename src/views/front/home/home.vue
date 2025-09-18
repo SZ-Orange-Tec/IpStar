@@ -9,7 +9,7 @@
             tag="p"
             scope="global"
             class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap"
-            style="line-height: 2"
+            style="line-height: 1.5"
           >
             <template #primary>
               <span class="major">${{ lowestPrice }}/GB</span>
@@ -87,7 +87,7 @@
 
     <!-- 为什么选择 -->
     <div class="box why_choose">
-      <div class="container column_center">
+      <div class="container column_center" v-lazy="showSlow">
         <p class="title text-lg sm:text-2xl lg:text-3xl font-bold">
           {{ t("home_spec.why") }}
           <span class="primary_text">IpStar</span>
@@ -129,7 +129,7 @@
     <!-- 自动且即时交付 -->
     <div class="box auto">
       <div class="container column_center">
-        <div class="auto_header column md:between mt-16 gap-2">
+        <div class="auto_header column md:between mt-16 gap-2" v-lazy="showSlow">
           <div class="column">
             <div class="v_center space-x-2">
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
@@ -141,7 +141,7 @@
           <p class="description whitespace-normal md:whitespace-pre-wrap">{{ t("home_spec.instant") }}</p>
         </div>
 
-        <div class="auto_content w-full">
+        <div class="auto_content w-full" v-lazy="showSlow">
           <ul class="four flex">
             <li v-for="item in scene" :key="item.title">
               <div class="pointer">
@@ -157,7 +157,7 @@
           </ul>
         </div>
 
-        <div class="w-full world_split column_center space-x-5">
+        <div class="w-full world_split column_center space-x-5" v-lazy="showSlow">
           <HomeTitle>
             <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
               <template #primary>
@@ -170,13 +170,13 @@
       </div>
     </div>
 
-    <div class="world box" v-lazy="IpMap">
+    <div class="world box" v-lazy="showSlow">
       <div class="container between">
-        <div class="img_box flex-1">
+        <div class="img_box flex-1" v-lazy="showSlow">
           <img src="@/assets/images/home/world.png" height="400" alt="" />
         </div>
 
-        <div class="content h-full py-3 box-border">
+        <div class="content h-full py-3 box-border" v-lazy="showSlow">
           <div class="space-y-5">
             <h3 class="primary text-lg font-bold">Accurate coverage</h3>
             <p class="text-sm">
@@ -185,7 +185,7 @@
             </p>
           </div>
 
-          <div class="space-y-5">
+          <div class="space-y-5" v-lazy="showSlow">
             <p class="font-medium">premiumresources</p>
 
             <ul class="column space-y-3">
@@ -224,40 +224,41 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <HomeTitle>
+        <HomeTitle v-lazy="showSlow">
           <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.app_title") }}</p>
         </HomeTitle>
 
-        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mt-8 text-xs sm:text-sm" style="flex-wrap: wrap">
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.e_commerce") }}</p>
-          </li>
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.media") }}</p>
-          </li>
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.model_training") }}</p>
-          </li>
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.ad_tech") }}</p>
-          </li>
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.serp_seo") }}</p>
-          </li>
-          <li class="v_center">
-            <Dot :size="30" class="green" />
-            <p class="description">{{ t("home_spec.finance") }}</p>
-          </li>
-        </ul>
+        <div class="w-full" v-lazy="showSlow">
+          <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mt-8 text-xs sm:text-sm" style="flex-wrap: wrap">
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.e_commerce") }}</p>
+            </li>
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.media") }}</p>
+            </li>
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.model_training") }}</p>
+            </li>
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.ad_tech") }}</p>
+            </li>
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.serp_seo") }}</p>
+            </li>
+            <li class="v_center">
+              <Dot :size="30" class="green" />
+              <p class="description">{{ t("home_spec.finance") }}</p>
+            </li>
+          </ul>
+          <img v-lazy src="@/assets/images/home/app.webp" alt="" />
+        </div>
 
-        <img v-lazy src="@/assets/images/home/app.webp" alt="" />
-
-        <div class="w-full pack_title column_center space-y-5">
+        <div class="w-full pack_title column_center space-y-5" v-lazy="showSlow">
           <HomeTitle>
             <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
           </HomeTitle>
@@ -268,9 +269,29 @@
 
     <!-- package -->
     <div class="package box">
-      <div class="container">
+      <div class="container" v-lazy="showSlow">
         <div v-lazy="() => (isProduct = true)">
           <ProductList :tabbar="false" :pack="5" v-if="isProduct"></ProductList>
+        </div>
+      </div>
+    </div>
+
+    <!-- explore -->
+    <div class="explore box">
+      <div class="container" v-lazy="showSlow">
+        <div class="column_center space-y-5 relative">
+          <HomeTitle>
+            <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
+              <p class="v_center space-x-2">
+                <span>{{ t("Now") }}</span>
+                <img src="@/assets/images/home/magic.png" alt="" />
+              </p>
+              <p>{{ t("footer_spec.explore") }}</p>
+            </div>
+          </HomeTitle>
+          <p class="text-sm text-center description" v-html="t('footer_spec.description')"></p>
+
+          <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
         </div>
       </div>
     </div>
@@ -473,6 +494,17 @@ const scene = [
   },
 ]
 
+// 动画
+function showSlow(e) {
+  anime({
+    targets: e,
+    translateY: [200, 0],
+    opacity: [0, 1],
+    duration: 1000,
+    easing: "easeOutQuart",
+  })
+}
+
 function merchantScroll() {
   merchantTime.value = setInterval(() => {
     if (direction.value === "右") {
@@ -519,40 +551,6 @@ function giftPacks(e) {
   }
 
   router.push("/login")
-}
-
-function scroll() {
-  const $el = document.querySelector(".pc-home_page").children[0].children[1].children
-  function fn() {
-    if (isInViewPortOfOne($el[0]) && !astrict.value.num1) {
-      astrict.value.num1 = true
-    }
-    if (isInViewPortOfOne($el[1]) && !astrict.value.num2) {
-      astrict.value.num2 = true
-    }
-    if (isInViewPortOfOne($el[2]) && !astrict.value.num3) {
-      astrict.value.num3 = true
-    }
-    if (isInViewPortOfOne($el[3]) && !astrict.value.num5) {
-      astrict.value.num5 = true
-      if (!ipsCount.value) {
-        IpMap().then(() => {
-          ipsCountVal.value = ipsCount.value
-        })
-      } else {
-        ipsCountVal.value = ipsCount.value
-      }
-    }
-    if (isInViewPortOfOne($el[4]) && !astrict.value.num6) {
-      astrict.value.num6 = true
-      merchantScroll()
-    }
-    if (isInViewPortOfOne($el[5]) && !astrict.value.num4) {
-      astrict.value.num4 = true
-    }
-  }
-  window.addEventListener("scroll", fn)
-  fn()
 }
 
 // 转换mounted

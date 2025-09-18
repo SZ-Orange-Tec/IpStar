@@ -10,7 +10,7 @@ function lazyEnter(entries) {
       const fun = weakMap.get(el)
 
       const isFun = /Function/.test(typeOf(fun))
-      isFun && (await fun())
+      isFun && (await fun(el))
 
       lazy.unobserve(el)
     }
