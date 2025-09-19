@@ -33,6 +33,12 @@
       background-image: url('../../../assets/images/home/cover.png');
       background-repeat: no-repeat;
       background-position: right 31%;
+      @media screen and (max-width:1024px) {
+        background-size: 40% auto;
+      }
+      @media screen and (max-width:800px) {
+        background-img: none;
+      }
       &>.text{
         max-width: 550px;
       }
@@ -74,12 +80,14 @@
 
       .country_list{
         margin-top: 4rem;
+        min-height: 424px;
         &>ul{
           margin: 0 -12px;
           flex-wrap: wrap;
+          animation: fade .3s;
           &>li{
             box-sizing: border-box;
-            width: calc(100% / 4);
+            // width: calc(100% / 4);
             padding: 12px;
             &>div{
               justify-content: space-between;
@@ -143,26 +151,54 @@
         // padding: 4rem 0;
         // background-color: hsl(var(--primary));
         &>ul.four{
-          width: calc(100% + 32px);
+          --padding: 16px;
+          width: calc(100% + calc(var(--padding) * 2));
           flex-wrap: wrap;
-          margin: 0 -16px;
+          margin: 0 calc(var(--padding) * -1);
+          @media screen and (max-width:1024px) {
+            --padding: 14px;
+          }
+          @media screen and (max-width:768px) {
+            --padding: 10px;
+          }
+          @media screen and (max-width:648px) {
+            --padding: 8px;
+          }
+          
           li{
             box-sizing: border-box;
-            width: calc(100% / 4);
-            padding: 16px;
+            // width: calc(100% / 4);
+            padding: var(--padding);
+            
             &>div{
               border-radius: 1rem;
               height: 260px;
-              padding: 1.25rem 1rem 0;
+              padding: 1.25rem 1.25rem 0;
               box-shadow: 0 0 8px #CCE4FF;
               .img_box{
                 width: 80px;
                 height: 80px;
                 margin: 0 auto;
+                img{
+                  max-width: 100%;
+                  max-height: 100%;
+                }
+                &>img:last-child{
+                  display: none;
+                }
               }
+              
               &:hover{
                 background-color: hsl(var(--primary));
                 color: hsl(var(--colour-foreground));
+                .img_box{
+                  &>img:first-child{
+                    display: none;
+                  }
+                  &>img:last-child{
+                    display: block;
+                  }
+                }
               }
             }
           }
@@ -170,7 +206,7 @@
       }
 
       .pack_title{
-        margin-top: 4rem;
+        margin-top: 8rem;
       }
     }
   }
@@ -179,6 +215,7 @@
     background-color: hsl(var(--primary));
     .container{
       padding: 4rem 0;
+      min-height: 400px;
     }
   }
 

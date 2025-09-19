@@ -1,122 +1,120 @@
 <template>
   <ip-dialog v-model="isShow" class="pay_popup">
-    <template #default="{ close }">
-      <div class="container">
-        <div class="pc-popup_content" v-if="!isFrom">
-          <!-- 订单详情 -->
-          <div v-if="isDetail">
-            <slot name="detail"></slot>
-          </div>
+    <div class="container">
+      <div class="pc-popup_content" v-if="!isFrom">
+        <!-- 订单详情 -->
+        <div v-if="isDetail">
+          <slot name="detail"></slot>
+        </div>
 
-          <!-- 下单支付 -->
-          <div class="order_buy" v-else>
-            <!-- 产品信息 -->
-            <div class="product_message" v-if="processIdx === 1">
-              <h1>$ {{ order_data.order_price / 100 }}</h1>
-              <p>{{ order_data.desc_3 }}</p>
-              <p>{{ order_data.desc_4 }}</p>
+        <!-- 下单支付 -->
+        <div class="order_buy" v-else>
+          <!-- 产品信息 -->
+          <div class="product_message" v-if="processIdx === 1">
+            <h1>$ {{ order_data.order_price / 100 }}</h1>
+            <p>{{ order_data.desc_3 }}</p>
+            <p>{{ order_data.desc_4 }}</p>
+          </div>
+          <!-- 支付方式 -->
+          <div class="pay_manner" v-if="processIdx === 1">
+            <ul class="choice_area">
+              <li @click="selectPay('stripe')">
+                <img v-if="isManmer === 1" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
+                <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
+                <img src="@/assets/img/stripe.png" alt="" class="img_choice" />
+                <p>{{ $t("payPopup_spec.strip") }}</p>
+              </li>
+              <li @click="selectPay('coingate')">
+                <img v-if="isManmer === 3" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
+                <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
+                <img src="@/assets/img/taida.png" alt="" class="img_coingate_pay" />
+                <p>{{ $t("payPopup_spec.usdt") }}</p>
+              </li>
+            </ul>
+            <p class="whitespace-pre-wrap">{{ $t("payPopup_spec.tip") }}</p>
+          </div>
+          <!-- paypal支付 -->
+          <div class="pay_result" v-if="processIdx === 2 && isManmer === 2">
+            <img src="@/assets/img/paypal.png" alt="" />
+            <img src="@/assets/img/succeed cancel.png" alt="succeed cancel" />
+          </div>
+          <!-- USDT支付 -->
+          <div class="usdt_result" v-if="processIdx === 2 && isManmer === 3">
+            <p class="title">{{ $t("payPopup_spec.usdt1") }}</p>
+            <p class="des">{{ $t("payPopup_spec.usdt2") }}</p>
+            <div class="wallet">{{ $t("payPopup_spec.usdt3") }}</div>
+            <img :src="usdtInfo?.pay_img_url" alt="" />
+            <strong>USDT-TRC20</strong>
+            <span class="tip">*{{ $t("payPopup_spec.usdt4") }}</span>
+            <p class="split"></p>
+            <div class="info">
+              <p>
+                <strong>{{ $t("payPopup_spec.usdt5") }}</strong>
+              </p>
+              <div class="text">{{ order_data.order_usdt_price }} USDT</div>
+              <p>
+                <strong>{{ $t("payPopup_spec.usdt6") }}</strong>
+              </p>
+              <div class="text">{{ usdtInfo?.address }}</div>
             </div>
-            <!-- 支付方式 -->
-            <div class="pay_manner" v-if="processIdx === 1">
-              <ul class="choice_area">
-                <li @click="selectPay('stripe')">
-                  <img v-if="isManmer === 1" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
-                  <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
-                  <img src="@/assets/img/stripe.png" alt="" class="img_choice" />
-                  <p>{{ $t("payPopup_spec.strip") }}</p>
-                </li>
-                <li @click="selectPay('coingate')">
-                  <img v-if="isManmer === 3" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
-                  <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
-                  <img src="@/assets/img/taida.png" alt="" class="img_coingate_pay" />
-                  <p>{{ $t("payPopup_spec.usdt") }}</p>
-                </li>
-              </ul>
-              <p class="whitespace-pre-wrap">{{ $t("payPopup_spec.tip") }}</p>
-            </div>
-            <!-- paypal支付 -->
-            <div class="pay_result" v-if="processIdx === 2 && isManmer === 2">
-              <img src="@/assets/img/paypal.png" alt="" />
-              <img src="@/assets/img/succeed cancel.png" alt="succeed cancel" />
-            </div>
-            <!-- USDT支付 -->
-            <div class="usdt_result" v-if="processIdx === 2 && isManmer === 3">
-              <p class="title">{{ $t("payPopup_spec.usdt1") }}</p>
-              <p class="des">{{ $t("payPopup_spec.usdt2") }}</p>
-              <div class="wallet">{{ $t("payPopup_spec.usdt3") }}</div>
-              <img :src="usdtInfo?.pay_img_url" alt="" />
-              <strong>USDT-TRC20</strong>
-              <span class="tip">*{{ $t("payPopup_spec.usdt4") }}</span>
-              <p class="split"></p>
-              <div class="info">
-                <p>
-                  <strong>{{ $t("payPopup_spec.usdt5") }}</strong>
-                </p>
-                <div class="text">{{ order_data.order_usdt_price }} USDT</div>
-                <p>
-                  <strong>{{ $t("payPopup_spec.usdt6") }}</strong>
-                </p>
-                <div class="text">{{ usdtInfo?.address }}</div>
+            <div class="loading" v-if="showProcess">
+              <h1>{{ $t("payPopup_spec.usdt7") }}</h1>
+              <p>
+                {{ $t("payPopup_spec.usdt8") }}<br />
+                {{ $t("payPopup_spec.usdt9") }} <strong>{{ $t("payPopup_spec.usdt10") }}</strong>
+              </p>
+              <div class="process">
+                <svg viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="myGradient">
+                      <stop offset="50%" stop-color="#dbe3fe" />
+                      <stop offset="100%" stop-color="#fff" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="bck_circle" cx="50" cy="50" r="38"></circle>
+                  <circle class="pro_circle" cx="50" cy="50" r="38" :stroke-dashoffset="strokeOffset"></circle>
+                  <circle class="bor_circle" cx="50" cy="50" r="30" stroke="url(#myGradient)"></circle>
+                </svg>
+                <p class="percent">{{ percent }}%</p>
               </div>
-              <div class="loading" v-if="showProcess">
-                <h1>{{ $t("payPopup_spec.usdt7") }}</h1>
-                <p>
-                  {{ $t("payPopup_spec.usdt8") }}<br />
-                  {{ $t("payPopup_spec.usdt9") }} <strong>{{ $t("payPopup_spec.usdt10") }}</strong>
-                </p>
-                <div class="process">
-                  <svg viewBox="0 0 100 100">
-                    <defs>
-                      <linearGradient id="myGradient">
-                        <stop offset="50%" stop-color="#dbe3fe" />
-                        <stop offset="100%" stop-color="#fff" />
-                      </linearGradient>
-                    </defs>
-                    <circle class="bck_circle" cx="50" cy="50" r="38"></circle>
-                    <circle class="pro_circle" cx="50" cy="50" r="38" :stroke-dashoffset="strokeOffset"></circle>
-                    <circle class="bor_circle" cx="50" cy="50" r="30" stroke="url(#myGradient)"></circle>
-                  </svg>
-                  <p class="percent">{{ percent }}%</p>
-                </div>
-                <p class="footer">{{ $t("payPopup_spec.usdt11") }}</p>
-              </div>
-            </div>
-            <!-- btn_sum -->
-            <div class="btn_sum">
-              <ip-button type="primary" class="px-5 h-10" @click="next" v-if="processIdx === 1">
-                <div class="v_center space-x-2">
-                  <span class="ip-loading" v-if="btnLoading"></span>
-                  <span>{{ $t("Next") }}</span>
-                </div>
-              </ip-button>
-              <div id="paypal-button-container" v-if="processIdx === 2 && isManmer === 2">
-                <!-- <p>loading....</p> -->
-              </div>
+              <p class="footer">{{ $t("payPopup_spec.usdt11") }}</p>
             </div>
           </div>
-
-          <!-- close -->
-          <div class="close vh_center pointer" @click="handleClose">
-            <i class="el-icon-close"></i>
+          <!-- btn_sum -->
+          <div class="btn_sum">
+            <ip-button type="primary" class="px-5 h-10" @click="next" v-if="processIdx === 1">
+              <div class="v_center space-x-2">
+                <span class="ip-loading" v-if="btnLoading"></span>
+                <span>{{ $t("Next") }}</span>
+              </div>
+            </ip-button>
+            <div id="paypal-button-container" v-if="processIdx === 2 && isManmer === 2">
+              <!-- <p>loading....</p> -->
+            </div>
           </div>
         </div>
-        <!-- stripe支付 -->
-        <form @submit.prevent="handleSubmit" v-else>
-          <div class="stripe_logo">
-            <img src="@/assets/img/stripe.png" alt="" />
-            <p>stripe</p>
-          </div>
-          <div id="pay" />
-          <transition name="fade">
-            <div v-show="isLoading" class="loading_pay">loading...</div>
-          </transition>
-        </form>
 
-        <div class="close vh_center pointer transition-color" @click="isShow = false">
-          <CloseIcon :size="16" />
+        <!-- close -->
+        <div class="close vh_center pointer" @click="handleClose">
+          <i class="el-icon-close"></i>
         </div>
       </div>
-    </template>
+      <!-- stripe支付 -->
+      <form @submit.prevent="handleSubmit" v-else>
+        <div class="stripe_logo">
+          <img src="@/assets/img/stripe.png" alt="" />
+          <p>stripe</p>
+        </div>
+        <div id="pay" />
+        <transition name="fade">
+          <div v-show="isLoading" class="loading_pay">loading...</div>
+        </transition>
+      </form>
+
+      <div class="close vh_center pointer transition-color" @click="closePay">
+        <CloseIcon :size="16" />
+      </div>
+    </div>
   </ip-dialog>
 </template>
 
@@ -187,7 +185,10 @@ function handleClose() {
   isManmer.value = 1
   processIdx.value = 1
 }
-
+function closePay() {
+  isDetail.value = true
+  isShow.value = false
+}
 async function stripeCheck() {
   try {
     const pre = /www/.test(location.href) ? "has" : "no"

@@ -102,25 +102,11 @@ import settingsStore from "@/store/setting"
 import HomeTitle from "../homeTitle.vue"
 import { useI18n } from "vue-i18n"
 const { isLogin } = loginStore()
-const { isProduc } = layoutStore()
+
 const router = useRouter()
 const { t } = useI18n()
 
 const { documentIdx, isDocument, en } = settingsStore()
-
-// 去购买
-function goToPay() {
-  if (isLogin.value) {
-    isProduc.value = true
-    router.push("/products")
-  } else {
-    Message({
-      message: "Please login first",
-      type: "warning",
-    })
-    router.push("/login")
-  }
-}
 
 // 未登录去登录
 function goTologin(key) {

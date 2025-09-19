@@ -99,7 +99,7 @@ onMounted(() => {
 
 <style>
 .board {
-  background-color: hsl(var(--foreground));
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: hsl(var(--background));
+  box-shadow: 0px 5px 16px 0px rgba(187, 187, 187, 0.57), 0px 0px 16px 0px #ffffff, 4px 4px 5px 0px rgba(255, 255, 255, 0.42);
 }
 </style>

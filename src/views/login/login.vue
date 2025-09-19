@@ -103,6 +103,7 @@ import { ChevronRight } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import { platCustomerResetpass } from "../../api/login"
 import useWindowHeight from "../../composables/useWindowHeight"
+import vLazy from "@/directive/lazy"
 
 const { t } = useI18n()
 
@@ -111,7 +112,6 @@ const { token } = loginStore()
 const { en } = settingsStore()
 
 const { height } = useWindowHeight()
-console.log(height.value)
 
 // 响应式数据
 const account = ref("")

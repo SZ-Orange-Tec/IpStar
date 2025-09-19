@@ -12,7 +12,7 @@
 
       <div class="v_center h-full space-x-3">
         <ul class="navigator hidden lg:v_center text-base px-3 h-full whitespace-nowrap" @mouseenter="loadFront">
-          <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: isHome }">
+          <li @click="navigate('/home')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/home' }">
             {{ $t("Home") }}
           </li>
           <li @click="navigate('/pricing')" class="px-8 h-full v_center pointer transition-color" :class="{ active: activePath === '/pricing' }">
@@ -69,9 +69,13 @@
           <!-- 语言 -->
           <DropDown placement="bottom" class="shink-0">
             <template #label="{ open }">
-              <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
+              <IpButton :class="{ open: open }" type="ghost" class="user_icon">
                 <div class="vh_center space-x-2 shrink-0 w-full h-full">
-                  <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" />
+                  <!-- <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" /> -->
+                  <LangIcon :size="22" />
+                  <span class="hidden md:block" v-if="lang === 'zh'">简体中文</span>
+                  <span class="hidden md:block" v-if="lang === 'en'">English</span>
+                  <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
                 </div>
               </IpButton>
             </template>
@@ -97,7 +101,7 @@
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="user_icon">
                 <div class="v_center shrink-0 space-x-2">
-                  <CircleUser :size="24" :stroke-width="1" />
+                  <CircleUser :size="24" :stroke-width="2" />
                   <p class="username hidden md:block">{{ username }}</p>
                   <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
                 </div>
@@ -125,7 +129,7 @@
 <script setup>
 import DropDown from "@/components/dropdown/dropdown.vue"
 import IpButton from "@/components/button/button.vue"
-import { CircleUser, Menu, ChevronDown } from "lucide-vue-next"
+import { CircleUser, Menu, ChevronDown, Globe as LangIcon } from "lucide-vue-next"
 import loginStore from "@/store/login"
 import settingStore from "@/store/setting"
 import { useRouter, useRoute } from "vue-router"
@@ -143,7 +147,7 @@ const { username } = userStore()
 
 // 路由
 const activePath = computed(() => route.path)
-const isHome = computed(() => /^\/home/.test(activePath.value))
+// const isHome = computed(() => /^\/home/.test(activePath.value))
 function navigate(path) {
   // 跳转路由
   if (router.currentRoute.value.path === path) {

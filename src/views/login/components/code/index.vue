@@ -24,8 +24,9 @@
       <span class="pointer"></span>
     </div> -->
 
-    <div class="btn pointer vh_center space-x-6" @click="submit" :class="{ disabled: btnLoading }">
-      <p>{{ t("Next") }}</p>
+    <div class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading }">
+      <span class="ip-loading" v-if="btnLoading"></span>
+      <span>{{ t("Next") }}</span>
     </div>
 
     <div class="back v_center space-x-2 pointer px-5" @click="emit('back')">

@@ -9,6 +9,9 @@ export default {
   ...productList,
   ...paypopup,
   ...headerGift,
+
+  Learn_More: "Learn More",
+
   home_spec: {
     intro_title: "Quality Residential Proxies\n Plans From {primary} & 200+ Countries",
 
@@ -25,10 +28,10 @@ export default {
     online: "Number of online Ip",
     users: "users",
 
-    adv1: "Supports SOCKS5, HTTP/HTTPS\n& custom protocols.",
+    adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
     adv2: "All popular proxy software and APPs.",
     // adv3: "Support fingerprint\nbrowsers.",
-    adv4: "Supports API and account-password\n combo extraction.",
+    adv4: "Supports API and account-password combo extraction.",
 
     why: "Why Choose",
     why1_title: "Massive Resource",
@@ -61,9 +64,15 @@ export default {
 
     world_title: "Worldwide {primary} Proxy",
     world_title_slot: "Point to Point",
-
     world_desc: "We offer various locations to meet your business needs.",
-    world_span: "Countries And Districts",
+    coverage: "Accurate coverage",
+    coverage_desc:
+      "90 million real residential agency IPs,helping covering over 200 countries and providing over enterprise easily expand their global business.",
+    resources: "Premium resources",
+    word_adv1: "lected high-quality IP resources",
+    word_adv2: "And continuously optimize the IP pool",
+    word_adv3: "Ensure a smooth and stable online experience",
+    word_adv4: "Enhance user experience",
 
     app_title: "More Powerful Features Of IpStar \n Are Waiting For You To Develop",
     e_commerce: "E-commerce",

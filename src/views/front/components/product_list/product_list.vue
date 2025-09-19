@@ -179,61 +179,63 @@
         </ul>
       </div>
       <IpButton v-show="isLeft" type="ghost" circle class="arrow-btn rounded-full font-medium left" @click="scrollPluginValue('left')">
-        <ChevronLeft :size="30" :stroke-width="2" />
+        <ChevronLeft :size="20" :stroke-width="2" />
       </IpButton>
       <IpButton v-show="isRight" type="ghost" circle class="arrow-btn rounded-full font-medium right" @click="scrollPluginValue('right')">
-        <ChevronRight :size="30" :stroke-width="2" />
+        <ChevronRight :size="20" :stroke-width="2" />
       </IpButton>
       <!-- div -->
     </div>
 
     <!-- 支付弹窗 -->
-    <PayPopup ref="payPopupRef" v-model="isPayPopup" :order_data="order_data">
-      <template #detail>
-        <div class="order_detail">
-          <h2>{{ t("Order_detail") }}</h2>
-          <ul class="detail">
-            <li class="between">
-              <span>{{ t("Traffic") }}</span>
-              <span>{{ product?.pack_size }}</span>
-            </li>
-            <li class="between">
-              <span>{{ t("payPopup_spec.unit_price") }}</span>
-              <!-- <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
-              <span v-else>--</span> -->
-              <div class="v_center space-x-1">
-                <span>${{ product?.unit_price / 100 }}</span>
-                <span class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
-                <span> / GB</span>
-              </div>
-            </li>
-            <li class="between">
-              <span>{{ t("Discount") }}</span>
-              <span>{{ product?.discount_rate }}%</span>
-            </li>
-            <li class="between">
-              <span>{{ t("Duration") }}</span>
-              <span>{{ product?.days }} {{ t("Day") }}</span>
-            </li>
-            <li class="between">
-              <span>{{ t("Total") }}</span>
-              <span>
-                <!-- <i>${{ product?.origin_price / 100 }}</i>  -->
-                ${{ product?.price / 100 }}
-              </span>
-            </li>
-          </ul>
-          <div class="btn vh_center">
-            <ip-button type="primary" class="px-3 h-10" @click="FoundOrder">
-              <div class="v_center space-x-2">
-                <span class="ip-loading" v-if="loading"></span>
-                <span>{{ t("Submit") }}</span>
-              </div>
-            </ip-button>
+    <teleport to="body">
+      <PayPopup ref="payPopupRef" v-model="isPayPopup" :order_data="order_data">
+        <template #detail>
+          <div class="order_detail">
+            <h2>{{ t("Order_detail") }}</h2>
+            <ul class="detail">
+              <li class="between">
+                <span>{{ t("Traffic") }}</span>
+                <span>{{ product?.pack_size }}</span>
+              </li>
+              <li class="between">
+                <span>{{ t("payPopup_spec.unit_price") }}</span>
+                <!-- <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
+                <span v-else>--</span> -->
+                <div class="v_center space-x-1">
+                  <span>${{ product?.unit_price / 100 }}</span>
+                  <span class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
+                  <span> / GB</span>
+                </div>
+              </li>
+              <li class="between">
+                <span>{{ t("Discount") }}</span>
+                <span>{{ product?.discount_rate }}%</span>
+              </li>
+              <li class="between">
+                <span>{{ t("Duration") }}</span>
+                <span>{{ product?.days }} {{ t("Day") }}</span>
+              </li>
+              <li class="between">
+                <span>{{ t("Total") }}</span>
+                <span>
+                  <!-- <i>${{ product?.origin_price / 100 }}</i>  -->
+                  ${{ product?.price / 100 }}
+                </span>
+              </li>
+            </ul>
+            <div class="btn vh_center">
+              <ip-button type="primary" class="px-3 h-10" @click="FoundOrder">
+                <div class="v_center space-x-2">
+                  <span class="ip-loading" v-if="loading"></span>
+                  <span>{{ t("Submit") }}</span>
+                </div>
+              </ip-button>
+            </div>
           </div>
-        </div>
-      </template>
-    </PayPopup>
+        </template>
+      </PayPopup>
+    </teleport>
   </div>
 </template>
 
@@ -560,4 +562,63 @@ defineExpose({
 
 <style lang="less" scoped>
 @import "./product_list.less";
+</style>
+
+<style lang="less">
+.order_detail {
+  // padding: 0 80px;
+  & > h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  & > .detail {
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+
+    & > li {
+      width: 100%;
+      font-size: 15px;
+      span.orange {
+        color: #fc7f46;
+      }
+      span.grey {
+        color: hsl(var(--foreground) / 30%);
+      }
+    }
+    & > li + li {
+      margin-top: 20px;
+    }
+    & > li:last-child {
+      margin-top: 30px;
+      padding: 30px 0 10px;
+      border-top: 1px solid #eee;
+      & > span:last-child {
+        color: #fd550a;
+        font-size: 17px;
+        i {
+          font-size: 15px;
+          font-weight: 400;
+          text-decoration: line-through;
+          color: #666;
+        }
+      }
+    }
+  }
+  & > .btn {
+    padding-top: 20px;
+    .el-button {
+      height: 40px;
+      padding: 0 40px;
+      background-color: #f4b121;
+      color: #fff;
+      border: none;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
 </style>

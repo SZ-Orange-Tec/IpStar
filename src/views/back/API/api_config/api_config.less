@@ -13,8 +13,8 @@
   
 
   .card{
-    background-color: hsl(var(--foreground));
-    color: hsl(var(--background) / 70%);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground) / 70%);
     border-radius: 8px;
     padding: 20px;
     & > h4 {
@@ -174,8 +174,8 @@
     border-radius: 8px;
     padding: 20px;
     font-size: 14px;
-    background-color: hsl(var(--background) / 10%);
-    color: hsl(var(--background) / 70%);
+    background-color: hsl(var(--foreground) / 5%);
+    color: hsl(var(--foreground) / 70%);
     margin-bottom: 30px;
     white-space: pre-wrap;
   }
@@ -185,13 +185,12 @@
     // min-width: 150px;
     padding: 12px 30px;
     height: 40px;
-    color: hsl(var(--foreground) / 80%);
+    color: hsl(var(--colour-foreground));
     font-size: 14px;
     transition: background-color 0.2s;
     border: none;
     &:hover {
       background-color: hsl(var(--primary) / 80%);
-      color: hsl(var(--foreground));
     }
   }
   #primary-border {

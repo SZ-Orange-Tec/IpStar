@@ -2,36 +2,31 @@
   position: relative;
   color: hsl(var(--foreground) / 80%);
   
+  &>.code_block{
+    height: 100%;
+    max-height: 500px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 8px;
+    }
+  }
 
   &>.copy_btn {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #9999aa;
-    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    color: hsl(var(--colour-foreground));
+    opacity: 0;
 
-    &>p {
-      text-align: center;
-      line-height: 35px;
-      font-size: 18px;
-      
-      color: #fff;
+  }
 
-      &>span {
-        position: absolute;
-        top: 5px;
-        left: 0px;
-        width: 60px;
-        height: 30px;
-        line-height: 28px;
-        font-size: 14px;
-        border-radius: 5px;
-        animation: slide-in-right 1.5s ease-in-out 0s 1 normal none;
-        background-color: #9999aa;
-      }
+  &:hover{
+    &>.copy_btn{
+      opacity: 1;
     }
   }
 
@@ -40,7 +35,8 @@
     width: 100%;
     /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
     // background-color: #F8F9FA;
-    background-color: hsl(var(--foreground) / 10%);
+    // background-color: hsl(var(--foreground) / 10%);
+    background-color: #042040;
     color: #879CEB;
 
     /* you must provide font-family font-size line-height. Example: */
@@ -56,10 +52,6 @@
     outline: none;
   }
 
-  /* not required: */
-  .height-300 {
-    height: 100%;
-  }
 
   @keyframes slide-in-right {
 

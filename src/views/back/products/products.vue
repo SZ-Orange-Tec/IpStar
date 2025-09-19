@@ -13,7 +13,7 @@
           <productList :tabbar="true" :vantage="false" :pack="5"></productList>
         </div>
         <ip-button @click="toUse" type="ghost" class="px-3 h-10" v-if="is_purchase">
-          <div class="v_center" style="color: hsl(var(--background))">
+          <div class="v_center">
             <p>{{ $t("product_spec.purchase") }}</p>
             <CircleChevronRight :size="20" />
           </div>

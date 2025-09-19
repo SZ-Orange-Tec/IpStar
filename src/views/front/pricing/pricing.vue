@@ -18,7 +18,7 @@
           </div>
 
           <div class="product w-full relative">
-            <ProductList :tabbar="false" :pack="5" ref="product"></ProductList>
+            <ProductList :tabbar="false" :pack="6" ref="product"></ProductList>
           </div>
         </div>
       </div>
@@ -112,7 +112,20 @@
           <p class="text-center">{{ t("pricing_spec.code_desc") }}</p>
         </div>
 
-        <div class=""></div>
+        <div class="code_content flex">
+          <div class="left">
+            <div class="pointer vh_center" :class="{ active: active === 'go' }" @click="active = 'go'">Go</div>
+            <div class="pointer vh_center" :class="{ active: active === 'java' }" @click="active = 'java'">Java</div>
+            <div class="pointer vh_center" :class="{ active: active === 'php' }" @click="active = 'php'">PHP</div>
+            <div class="pointer vh_center" :class="{ active: active === 'python' }" @click="active = 'python'">Python</div>
+          </div>
+          <div class="right flex-1">
+            <CodeText v-if="active == 'go'" :code="GolangCode" />
+            <CodeText v-if="active == 'java'" :code="JavaCode" />
+            <CodeText v-if="active == 'php'" :code="PHPCode" />
+            <CodeText v-if="active == 'python'" :code="PythonCode" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -174,7 +187,7 @@
 
 <script setup>
 import { platDataIndex } from "@/api/home"
-import { nextTick, onMounted, ref } from "vue"
+import { defineAsyncComponent, nextTick, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import loginStore from "@/store/login"
@@ -188,6 +201,22 @@ import anime from "animejs/lib/anime.es.js"
 import Tabbar from "../components/product_list/tabbar/tabbar.vue"
 import Question from "../components/question/question.vue"
 import { CircleCheck } from "lucide-vue-next"
+
+// 代码
+const active = ref("go")
+const CodeText = defineAsyncComponent(() => import("@/views/doc/components/code_block/code_block.vue"))
+const GolangCode = ref()
+const JavaCode = ref()
+const PHPCode = ref()
+const PythonCode = ref()
+async function getCode() {
+  const { go, java, php, python } = await import("@/views/doc/code.js")
+  GolangCode.value = go
+  JavaCode.value = java
+  PHPCode.value = php
+  PythonCode.value = python
+}
+getCode()
 
 const { t } = useI18n()
 

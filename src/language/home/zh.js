@@ -10,6 +10,8 @@ export default {
   ...paypopup,
   ...headerGift,
 
+  Learn_More: "了解更多",
+
   home_spec: {
     intro_title: "优质住宅IP代理，覆盖全球\n200+国家/地区，套餐{primary}起",
 
@@ -61,9 +63,14 @@ export default {
 
     world_title: "全球{primary}代理",
     world_title_slot: "点对点",
-
     world_desc: "提供各种位置，满足您的业务需求。",
-    world_span: "国家和地区",
+    coverage: "精准覆盖",
+    coverage_desc: "9000万真实住宅IP地址，覆盖200余个国家，助力企业轻松拓展全球业务",
+    resources: "优质资源",
+    word_adv1: "精选高品质IP资源",
+    word_adv2: "持续优化IP池",
+    word_adv3: "保障流畅稳定的在线体验",
+    word_adv4: "提升用户体验",
 
     app_title: "更多强大的lpStar功能\n等待您开发",
     e_commerce: "电子商务",

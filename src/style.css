@@ -110,7 +110,7 @@ body{
   word-spacing: 0.1em;     /* 单词间距 */
 
   font-size: 16px;
-  @media screen and (max-width:768px) {
+  @media screen and (max-width:1024px) {
     font-size: 14px;
   }
   
