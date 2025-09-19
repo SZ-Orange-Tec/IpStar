@@ -1,7 +1,7 @@
 <template>
   <div class="login_password column space-y-6">
     <div class="w-full form space-y-6">
-      <div class="w-full space-y-2">
+      <div class="w-full space-y-5">
         <p class="text-sm">{{ t("login_spec.label2") }}</p>
         <div class="v_center input_box space-x-2 px-3 transition-color">
           <Lock :size="18" class="flex-shrink-0 icon" />
@@ -25,8 +25,8 @@
             <ShieldCheck :size="18" class="flex-shrink-0 icon" />
             <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
           </div>
-          <div class="image flex-shink-0" style="height: 52px">
-            <img :src="image" class="image" height="52" alt="graphic code" @click="emit('updateCaptcha')" />
+          <div class="image flex-shink-0" style="height: 44px">
+            <img :src="image" class="image" height="44" alt="graphic code" @click="emit('updateCaptcha')" />
           </div>
         </div>
         <IpButton type="link" class="resend text-sm" @click="emit('forget')"> {{ t("Forgot_password") }} ?</IpButton>
@@ -35,7 +35,7 @@
 
     <div class="btn pointer vh_center space-x-6" @click="submit" :class="{ disabled: btnLoading }">{{ t("Next") }}</div>
 
-    <div class="back v_center space-x-2 pointer px-5" @click="emit('back')">
+    <div class="back v_center space-x-2 pointer transition-colors px-5" @click="emit('back')">
       <img src="@/assets/images/login/back.png" alt="back" width="18" height="18" />
       <span>{{ t("Back") }}</span>
     </div>

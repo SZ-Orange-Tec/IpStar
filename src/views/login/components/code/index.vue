@@ -1,6 +1,6 @@
 <template>
   <div class="pc-login_code column space-y-5">
-    <div class="form space-y-2 w-full column">
+    <div class="form space-y-5 w-full column">
       <p class="text-sm">{{ t("login_spec.label3", { email: account }) }}</p>
 
       <div class="input_group w-full">

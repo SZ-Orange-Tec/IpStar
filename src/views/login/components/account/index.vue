@@ -1,6 +1,6 @@
 <template>
   <div class="login_account space-y-5">
-    <div class="form space-y-2">
+    <div class="form space-y-5">
       <p class="text-sm">{{ t("login_spec.label1") }}</p>
       <div class="v_center input_box transition-color">
         <MailIcon :size="18" class="flex-shrink-0 icon" />
