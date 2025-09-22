@@ -22,6 +22,7 @@ export default {
     more_try: "More Trial Traffic",
     start_now: "Start Now",
     tutorials: "Tutorials",
+    dashboard: "Dashboard",
     google_login: "Sign in with Google",
     // Accumulated: "Accumulated \n users",
     partner: "Partner  Organizations",

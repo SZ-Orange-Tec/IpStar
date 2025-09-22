@@ -25,9 +25,9 @@
           </template>
           <template v-else>
             <IpButton type="major" class="h-10 px-5" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
-            <IpButton type="major" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/doc')">
+            <IpButton type="major" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/overview')">
               <div class="between w-full h-full">
-                <span>{{ t("home_spec.tutorials") }}</span>
+                <span>{{ t("home_spec.dashboard") }}</span>
                 <button>
                   <MoveRight />
                 </button>

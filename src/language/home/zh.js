@@ -22,6 +22,7 @@ export default {
     more_try: "更多试用流量",
     start_now: "立即试用",
     tutorials: "教程",
+    dashboard: "控制台",
     google_login: "使用 Google 登录",
     // Accumulated: "累计用户",
     partner: "合作伙伴",
