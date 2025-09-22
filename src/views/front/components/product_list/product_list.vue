@@ -10,7 +10,7 @@
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[2]") }}</li>
       <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
     </ul> -->
-    <div class="list" :style="{ 'max-width': maxWidth }">
+    <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex gap-3">
           <li
@@ -169,7 +169,7 @@
       <!-- 骨架屏 -->
       <div v-else class="priceList column">
         <ul class="flex gap-3">
-          <li class="skeletion_box" v-for="item in 6" :key="item">
+          <li class="skeletion_box" v-for="item in 5" :key="item">
             <div class="card skeletion space-y-5">
               <div style="width: 40%"></div>
               <div style="width: 100%" v-for="col in 12" :key="col"></div>
@@ -268,10 +268,6 @@ const props = defineProps({
   vantage: {
     type: Boolean,
     default: false,
-  },
-  pack: {
-    type: Number,
-    default: 5,
   },
 })
 
@@ -398,10 +394,7 @@ function openService() {
 const productRef = ref(null)
 const isLeft = ref(false)
 const isRight = ref(false)
-const packWidth = 210 + 14
-const maxWidth = computed(() => {
-  return props.pack * packWidth - 14 + "px"
-})
+const packWidth = 210
 const scrollPlugin = throttle(
   function (e) {
     if (/macintosh|mac os x/i.test(navigator.userAgent)) return

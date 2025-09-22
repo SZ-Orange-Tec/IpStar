@@ -356,7 +356,7 @@
     <div class="package box" id="home_package">
       <div class="container" v-lazy="showSlow">
         <div v-lazy="() => (isProduct = true)">
-          <ProductList :tabbar="false" :pack="5" v-if="isProduct"></ProductList>
+          <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
         </div>
       </div>
     </div>
@@ -384,7 +384,7 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent, nextTick } from "vue"
+import { ref, defineAsyncComponent, nextTick, computed } from "vue"
 import { platDataIndex } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
@@ -586,7 +586,7 @@ function merchantScroll() {
 }
 
 // 去购买
-const { isProduc } = layoutStore()
+const { isProduc, registerAward } = layoutStore()
 function goToPay() {
   if (isLogin.value) {
     isProduc.value = true
@@ -599,6 +599,11 @@ function goToPay() {
     router.push("/login")
   }
 }
+
+// 展示套餐数量
+const pack = computed(() => {
+  return !isLogin.value && registerAward.value ? 5 : 4
+})
 
 function toLogin() {
   router.push("/login")

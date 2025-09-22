@@ -64,7 +64,8 @@
         :deep(.pc-product_list){
 		      .priceList{
             padding: 1rem;
-            &::after,&::before{
+          }
+          &::after,&::before{
               content: '';
               position: absolute;
               top: 0;
@@ -80,7 +81,6 @@
               right: 0;
               background: linear-gradient(to right, transparent, hsl(var(--background)));
             }
-          }
         }
       }
     }

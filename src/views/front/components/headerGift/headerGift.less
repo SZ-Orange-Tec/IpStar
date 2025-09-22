@@ -2,12 +2,14 @@
   // background-color: hsl(var(--success) / 20%);
   // background-color: #004047;
   height: 60px;
-  background-color: #E7F4FF;
+  // background-color: #E7F4FF;
   width: 100%;
   padding: 0 2.5rem;
   position: sticky;
   top: 0;
   z-index: 10;
+  background: radial-gradient(0 76% at 52% 50%,#131832 0,#190f35 100%);
+  color: hsl(var(--colour-foreground));
   @media screen and (max-width:640px) {
     padding: 0 1rem;
   }
@@ -20,7 +22,8 @@
     .icon{
       transform: rotate(90deg);
       fill: hsl(var(--primary));
-      stroke: hsl(var(--colour-foreground));
+      // stroke: hsl(var(--colour-foreground));
+      stroke: #190F35;
     }
 
     .major_text{

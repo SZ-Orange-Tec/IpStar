@@ -9,16 +9,20 @@
 		// max-width: 1570px;
 		margin: auto;
 		display: flex;
-		align-items: flex-end;
+    flex-direction: column;
+		align-items: flex-start;
 		position: relative;
     z-index: 3;
+    box-sizing: content-box;
 		&::-webkit-scrollbar{
 			height: 0 !important;
 		}
 
 		&>.priceList{
-			flex: 1;
-			min-width: 0;
+      max-width: 100%;
+      margin: 0 auto;
+			// flex: 1;
+			// min-width: 0;
 			// width: calc(100% - 215px);
 			overflow-x: auto;
 			scroll-behavior: smooth;
@@ -29,6 +33,7 @@
 			}
 
 			&>ul{
+        
         display: inline-flex;
 				// height: 683px;
 				// width: 100%;
@@ -177,7 +182,7 @@
               border-radius: 6px;
               position: relative;
               overflow: hidden;
-              background-color: hsl(var(--background) / 10%);
+              background-color: hsl(var(--foreground) / 5%);
               &::before {
                 content: "";
                 display: block;
@@ -190,7 +195,7 @@
                 background: linear-gradient(
                   to right,
                   transparent,
-                  hsl(var(--background) / 5%),
+                  hsl(var(--foreground) / 5%),
                   transparent
                 );
                 animation: skeleton 1.5s linear infinite;

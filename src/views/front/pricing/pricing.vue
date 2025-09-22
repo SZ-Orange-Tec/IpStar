@@ -18,7 +18,7 @@
           </div>
 
           <div class="product w-full relative">
-            <ProductList :tabbar="false" :pack="6" ref="product"></ProductList>
+            <ProductList :tabbar="false" :pack="pack" ref="product"></ProductList>
           </div>
         </div>
       </div>
@@ -187,7 +187,7 @@
 
 <script setup>
 import { platDataIndex } from "@/api/home"
-import { defineAsyncComponent, nextTick, onMounted, ref } from "vue"
+import { computed, defineAsyncComponent, nextTick, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import loginStore from "@/store/login"
@@ -201,6 +201,7 @@ import anime from "animejs/lib/anime.es.js"
 import Tabbar from "../components/product_list/tabbar/tabbar.vue"
 import Question from "../components/question/question.vue"
 import { CircleCheck } from "lucide-vue-next"
+import layoutStore from "../../../store/layout"
 
 // 代码
 const active = ref("go")
@@ -221,8 +222,9 @@ getCode()
 const { t } = useI18n()
 
 const router = useRouter()
-const { token } = loginStore()
+const { token, isLogin } = loginStore()
 const { en } = settingStore()
+const { registerAward } = layoutStore()
 
 // 地图数据
 const mapData = ref([])
@@ -276,50 +278,11 @@ const product = ref(null)
 function changeActive(index) {
   product.value.changeActive(index)
 }
-// 更多国家
-// const areaList = ref([
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/united states.png", import.meta.url).href,
-//     p: "United States",
-//     span: "894,243 IPs",
-//   },
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/brazil.png", import.meta.url).href,
-//     p: "Brazil",
-//     span: "5,054,208 IPs",
-//   },
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/australia.png", import.meta.url).href,
-//     p: "Australia",
-//     span: "379,344 IPs",
-//   },
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/france.png", import.meta.url).href,
-//     p: "France",
-//     span: "1,592,304 IPs",
-//   },
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/canada.png", import.meta.url).href,
-//     p: "Canada",
-//     span: "586,688 IPs",
-//   },
-//   {
-//     imgUrl: new URL("../../../assets/pc_img/pricing_img/malaysia.png", import.meta.url).href,
-//     p: "Malaysia",
-//     span: "868,208 IPs",
-//   },
-// ])
-// const moreCountry = () => {
-//   if (!token) {
-//     Message({
-//       type: "warning",
-//       message: en ? "Please login to view more countries" : "请登录查看更多国家",
-//     })
-//     router.push("/login")
-//   } else {
-//     router.push("/overview")
-//   }
-// }
+
+// 展示套餐数量
+const pack = computed(() => {
+  return !isLogin.value && registerAward.value ? 5 : 4
+})
 
 const showImg = ref(false)
 function bgLoaded(e) {

@@ -229,7 +229,7 @@
     <div class="package box">
       <div class="container" v-lazy="showSlow">
         <div class="packlist" v-lazy="() => (isProduct = true)">
-          <ProductList :tabbar="false" :pack="5" v-if="isProduct"></ProductList>
+          <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
         </div>
       </div>
     </div>
@@ -311,12 +311,14 @@ import position from "../../../components/dialog/position"
 // import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 // import HomeTitle from "../components/homeTitle.vue"
 import Question from "../components/question/question.vue"
+import layoutStore from "../../../store/layout"
 
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
 const { en } = settingStore()
 const { isLogin, token } = loginStore()
+const { registerAward } = layoutStore()
 
 // 路由参数
 const nameReg = /general|efficient|data_collection|search_engine|social_media|ecommerce|market|bill|brand|ai_model/
@@ -508,6 +510,11 @@ async function getUserIps() {
     console.log(error.message)
   }
 }
+
+// 展示套餐数量
+const pack = computed(() => {
+  return !isLogin.value && registerAward.value ? 5 : 4
+})
 
 function merchantScroll() {
   merchantTime.value = setInterval(() => {
