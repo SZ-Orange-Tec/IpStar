@@ -2,7 +2,7 @@
   <div class="home w-full">
     <!-- 介绍 -->
     <div class="introduce box relative">
-      <div class="container">
+      <div class="container column space-y-10">
         <div class="space-y-10">
           <i18n-t
             keypath="home_spec.intro_title"
@@ -36,33 +36,24 @@
           </template>
         </div>
 
-        <div class="v_center data rounded-md !items-stretch" v-lazy="getUserIps">
-          <div class="column_center px-3">
-            <strong class="title text-2xl whitespace-nowrap" style="height: 2rem">
+        <div class="v_center data md:self-center rounded-md !items-stretch" v-lazy="getUserIps">
+          <div class="column_center">
+            <strong class="title text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
             <!-- <span class="description  text-xs md:text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
           <div class="bg-current w-[1px] mx-5" style="color: #eef5ff"></div>
-          <div class="column_center px-3">
-            <strong class="title text-2xl whitespace-nowrap" style="height: 2rem">
+          <div class="column_center">
+            <strong class="title text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
             <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
           </div>
         </div>
-      </div>
 
-      <div class="background">
-        <!-- <StarPlay /> -->
-      </div>
-    </div>
-
-    <!-- 优势 split -->
-    <div class="advantage box">
-      <div class="container column_center relative">
-        <div class="h-full">
+        <div class="w-full md:column_center">
           <ul class="column_center !items-stretch gap-5 md:v_center">
             <li class="v_center space-x-2">
               <StarIcon :size="16" fill="currentColor" class="major" />
@@ -82,6 +73,10 @@
             </li>
           </ul>
         </div>
+      </div>
+
+      <div class="background">
+        <!-- <StarPlay /> -->
       </div>
     </div>
 
@@ -242,14 +237,12 @@
           </ul>
         </div>
 
-        <div class="w-full world_split column_center space-x-5" v-lazy="showSlow">
-          <HomeTitle>
-            <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
-              <template #primary>
-                <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
-              </template>
-            </i18n-t>
-          </HomeTitle>
+        <div class="w-full world_split column_center space-y-5" v-lazy="showSlow">
+          <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
+            <template #primary>
+              <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
+            </template>
+          </i18n-t>
           <p class="description text-sm">{{ t("home_spec.world_desc") }}</p>
         </div>
       </div>
@@ -306,11 +299,17 @@
     <!-- app -->
     <div class="app box">
       <div class="container column_center">
-        <HomeTitle v-lazy="showSlow">
-          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.app_title") }}</p>
-        </HomeTitle>
+        <div class="space-y-5">
+          <p v-lazy="showSlow" class="text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">
+            {{ t("home_spec.app_title") }}
+          </p>
+          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.app_desc") }}</p>
+        </div>
 
-        <div class="content w-full" v-lazy="showSlow">
+        <IpImage :width="2376" :height="320" style="margin-top: 3rem" v-lazy="showSlow">
+          <img v-lazy src="@/assets/images/home/app1.webp" alt="" />
+        </IpImage>
+        <!-- <div class="content w-full" v-lazy="showSlow">
           <IpImage :width="1409" :height="406">
             <img v-lazy src="@/assets/images/home/app.webp" alt="" />
           </IpImage>
@@ -341,12 +340,11 @@
               <p class="description">{{ t("home_spec.finance") }}</p>
             </li>
           </ul>
-        </div>
+        </div> -->
 
         <div class="w-full pack_title column_center space-y-5" v-lazy="showSlow">
-          <HomeTitle>
-            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
-          </HomeTitle>
+          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
+
           <p class="description green">{{ t("home_spec.package_desc") }}</p>
         </div>
       </div>
@@ -365,15 +363,13 @@
     <div class="explore box">
       <div class="container" v-lazy="showSlow">
         <div class="column_center space-y-5 relative">
-          <HomeTitle>
-            <div class="column_center text-lg sm:text-2xl lg:text-3xl title">
-              <p class="v_center space-x-2">
-                <span>{{ t("Now") }}</span>
-                <img v-lazy src="@/assets/images/home/magic.png" alt="" />
-              </p>
-              <p>{{ t("footer_spec.explore") }}</p>
-            </div>
-          </HomeTitle>
+          <div class="column_center text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">
+            <p class="v_center space-x-2">
+              <span>{{ t("Now") }}</span>
+              <img v-lazy src="@/assets/images/home/magic.png" alt="" />
+            </p>
+            <p>{{ t("footer_spec.explore") }}</p>
+          </div>
           <p class="text-sm text-center description" v-html="t('footer_spec.description')"></p>
 
           <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
@@ -402,7 +398,7 @@ import Confirm from "@/components/confirm/confirm"
 import Message from "@/components/message/message"
 import position from "../../../components/dialog/position"
 import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
-import HomeTitle from "../components/homeTitle.vue"
+// import HomeTitle from "../components/homeTitle.vue"
 import layoutStore from "@/store/layout"
 
 const router = useRouter()

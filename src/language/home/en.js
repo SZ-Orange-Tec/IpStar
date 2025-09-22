@@ -26,7 +26,7 @@ export default {
     google_login: "Sign in with Google",
     // Accumulated: "Accumulated \n users",
     partner: "Partner  Organizations",
-    online: "Number of online Ip",
+    online: "Number \nof online Ip",
     users: "users",
 
     adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
@@ -75,7 +75,9 @@ export default {
     word_adv3: "Ensure a smooth and stable online experience",
     word_adv4: "Enhance user experience",
 
-    app_title: "More Powerful Features Of IpStar \n Are Waiting For You To Develop",
+    app_title: "Easily integrate our solutions to your \nprojects your use case",
+    app_desc:
+      "Integrating our products into your web scraping framework is effortless. With support for port extraction, proxy \nprocesses, API and account/password authentication, plus multi-language code samples, we ensure a fast, \nhassle-free start to your data acquisition projects.",
     e_commerce: "E-commerce",
     // any_game: "Any Game",
     // file_transfer: "File Transfer",

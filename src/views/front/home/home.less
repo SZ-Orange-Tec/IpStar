@@ -32,7 +32,8 @@
       z-index: 1;
       background-image: url('../../../assets/images/home/cover.png');
       background-repeat: no-repeat;
-      background-position: right 31%;
+      background-position: right 10%;
+      background-size: 500px auto;
       @media screen and (max-width:1024px) {
         background-image: none;
       }
@@ -50,14 +51,18 @@
       }
 
       .data{
-        position: absolute;
-        left: 50%;
-        bottom: 0;
+        // position: absolute;
+        // left: 50%;
+        // bottom: 0;
+        margin-top: 4rem;
         background-color: hsl(var(--background));
-        transform: translate(-50%, 50%);
-        padding: 1.5rem;
+        // transform: translate(-50%, 50%);
         color: hsl(var(--foreground));
         border: 1px solid #E7EFFD;
+        padding: 1rem 1.5rem;
+        &>div:first-child,&>div:last-child{
+          width: 150px;
+        }
       }
     }
 
@@ -79,25 +84,19 @@
     }
   }
 
-  .advantage{
-    .container{
-      padding: 84px 0 48px;
-    }
-  }
-
   .why_choose{
     // background-color: hsl(var(--primary));
     // color: hsl(var(--colour-foreground));
     .container{
-      padding: 64px 0;
+      padding: 6rem 0 3rem;
       position: relative;
 
       &>ul.three{
-        margin: 64px auto 0;
+        margin: 3rem 0;
         align-items: stretch;
         color: hsl(var(--foreground));
         li{
-          max-width: 350px;
+          // max-width: 350px;
           border-radius: 20px;
           padding: 1rem;
           background-color: hsl(var(--background));
@@ -119,14 +118,14 @@
 
   .auto{
     .container{
-      padding: 4rem 0;
+      padding: 3rem 0;
       .auto_header{
         width: 100%;
-        max-width: 1027px;
+        // max-width: 1027px;
         margin: 0 auto;
       }
       .auto_content{
-        margin-top: 4rem;
+        margin-top: 3rem;
         // padding: 4rem 0;
         // background-color: hsl(var(--primary));
         &>ul.four{
@@ -185,7 +184,7 @@
       }
 
       .world_split{
-        margin-top: 4rem;
+        margin-top: 6rem;
       }
     }
   }
@@ -196,7 +195,7 @@
     &>.container{
       // max-width: 100%;
       position: relative;
-      padding: 64px 0;
+      padding: 3rem 0;
 
       .img_box{
         width: 100%;
@@ -222,11 +221,11 @@
       // background-position: 50% 70%;
       // background-repeat: no-repeat;d
 
-      padding-top: 40px;
+      padding-top: 6rem;
       position: relative;
 
       .pack_title{
-        margin: 4rem 0;
+        margin: 6rem 0 3rem;
       }
 
       &>.content{
@@ -255,7 +254,7 @@
   .explore{
     // padding-bottom: 4rem;
     .container{
-      padding: 4rem 0;
+      padding: 6rem 0;
     }
   }
 

@@ -73,7 +73,9 @@ export default {
     word_adv3: "保障流畅稳定的在线体验",
     word_adv4: "提升用户体验",
 
-    app_title: "更多强大的lpStar功能\n等待您开发",
+    app_title: "轻松将我们的解决方案集成到您的\n使用场景中",
+    app_desc:
+      "将我们的产品集成到您的 Web 抓取框架中毫不费力 。通过对端口提取 、 代理进程、API 和帐户/密码身份验证以及\n多语言代码示例的支持，我们确保快速、轻松地启动您的数据采集项目。",
     e_commerce: "电子商务",
     // any_game: "任何游戏",
     // file_transfer: "文件传输",

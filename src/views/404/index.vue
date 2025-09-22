@@ -29,7 +29,7 @@ function toHome() {
 
 <style lang="less" scoped>
 .not_found {
-  background-color: hsl(var(--page-background));
+  background-color: hsl(var(--background));
   .container {
     width: 100;
     max-width: 1200px;
