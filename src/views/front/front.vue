@@ -2,7 +2,7 @@
   <div class="front">
     <HeaderGift v-if="registerAward && !isLogin" @load="setStickyTop" />
 
-    <Header :style="{ top: stickyTop }" />
+    <Header :stickyTop="stickyTop" />
 
     <router-view />
 

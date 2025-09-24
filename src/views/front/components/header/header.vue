@@ -1,5 +1,6 @@
 <template>
-  <header class="header">
+  <div ref="triggerRef" class="h-[1px]" style="background: transparent;"></div>
+  <header class="header" :class="{'home_header':isHome,shadow:shadow}" :style="{top:stickyTop}">
     <div class="container between w-full h-full">
       <div>
         <img
@@ -137,6 +138,9 @@ import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import userStore from "@/store/user"
 import { useI18n } from "vue-i18n"
 import { computed } from "vue"
+import { ref } from "vue"
+import { onMounted } from "vue"
+import { toRefs } from "vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -145,15 +149,39 @@ const { token, OutLogin } = loginStore()
 const { lang } = settingStore()
 const { username } = userStore()
 
+const props=defineProps({
+  stickyTop: {
+    type: String,
+    default: '0px'
+  }
+})
+const {stickyTop}=toRefs(props)
+
 // 路由
 const activePath = computed(() => route.path)
-// const isHome = computed(() => /^\/home/.test(activePath.value))
+const isHome = computed(() => '/home' === activePath.value )
 function navigate(path) {
   // 跳转路由
   if (router.currentRoute.value.path === path) {
     return
   }
   router.push(path)
+}
+
+// 阴影
+const shadow=ref(false) //阴影
+const triggerRef=ref(null)
+// 滚动是节流的,有时候监听不到所以用IntersectionObserver
+function initShadowObserve(){ 
+  function callback(entries){
+    entries.forEach(entrie=>{
+      shadow.value = !entrie.isIntersecting
+    })
+  }
+  const shadowObserver= new IntersectionObserver(callback)
+
+  shadowObserver.observe(triggerRef.value)
+
 }
 
 // 切换语言
@@ -193,6 +221,10 @@ async function loadFront() {
 function signOut() {
   OutLogin()
 }
+
+onMounted(()=>{
+  initShadowObserve()
+})
 </script>
 
 <style lang="less" scoped>

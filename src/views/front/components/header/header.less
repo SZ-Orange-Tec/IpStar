@@ -2,7 +2,8 @@
   height: 4.25rem;
   padding: 0.25rem 2.5rem 0;
   background-color: hsl(var(--background));
-  border-bottom: 1px solid hsl(var(--border));
+  transition: background-color .3s,color .2s;
+  // border-bottom: 1px solid hsl(var(--border));
   @media screen and (max-width:640px) {
     padding: 0.25rem 1rem 0;
   }
@@ -84,5 +85,23 @@
     .rotate180{
       transform: rotate(-180deg);
     }
+  }
+}
+.home_header{
+  background-color: transparent;
+  color: hsl(var(--colour-foreground));
+  .icon_btn,.user_icon{
+    color: hsl(var(--colour-foreground));
+  }
+  .menu_item{
+    color: hsl(var(--foreground));
+  }
+}
+.shadow{
+  box-shadow: var(--pop-shadow);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  .icon_btn,.user_icon{
+    color: hsl(var(--foreground));
   }
 }
