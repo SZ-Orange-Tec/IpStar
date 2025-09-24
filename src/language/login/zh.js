@@ -21,6 +21,7 @@ export default {
     label4: "设置您的登录密码",
     label5: "请您确认邮箱，稍后会发送验证码到您的邮箱",
 
+    email_tip: '请注意检查"垃圾邮件"',
     forgot: "忘记密码",
 
     your: "登录您的",

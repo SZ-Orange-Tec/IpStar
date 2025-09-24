@@ -5,7 +5,7 @@
     <!-- </div> -->
 
     <div class="box w-full">
-      <div class="container between">
+      <div class="container column_center md:between gap-5">
         <div class="form column rounded-lg">
           <div class="title w-full text-center">
             <template v-if="/^forget/.test(status)">{{ t("login_spec.forgot") }}</template>
@@ -39,8 +39,8 @@
           </div>
         </div>
 
-        <div class="right column space-y-10">
-          <div class="img_box flex-1">
+        <div class="right column w-full">
+          <div class="img_box flex-1 hidden md:block">
             <img
               sizes="(max-width: 1024px) 290px, 400px"
               src="@/assets/images/login/bg-logo.png"
@@ -49,7 +49,7 @@
             />
           </div>
 
-          <div class="welcome space-y-5 column !items-end">
+          <div class="welcome space-y-5 column !items-end py-10">
             <ip-button type="border" class="back_btn" @click="toHome">
               <div class="v_center space-x-1">
                 <span class="text-sm">{{ t("Home") }}</span>

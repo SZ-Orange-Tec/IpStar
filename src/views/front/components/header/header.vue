@@ -1,5 +1,6 @@
 <template>
-  <div ref="triggerRef" class="h-[1px]" style="background: transparent;"></div>
+  <div ref="triggerRef" class="h-0" style="background: transparent;"></div>
+  <HeaderGift v-if="registerAward && !isLogin" @load="setStickyTop" />
   <header class="header" :class="{'home_header':isHome,shadow:shadow}" :style="{top:stickyTop}">
     <div class="container between w-full h-full">
       <div>
@@ -137,25 +138,18 @@ import { useRouter, useRoute } from "vue-router"
 import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import userStore from "@/store/user"
 import { useI18n } from "vue-i18n"
-import { computed } from "vue"
-import { ref } from "vue"
-import { onMounted } from "vue"
-import { toRefs } from "vue"
+import { computed,onMounted,ref } from "vue"
+import layoutStore from "@/store/layout"
+import { platDataConfig } from "@/api/home"
+import { defineAsyncComponent } from "vue"
 
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
-const { token, OutLogin } = loginStore()
+const { token, OutLogin,isLogin } = loginStore()
 const { lang } = settingStore()
 const { username } = userStore()
-
-const props=defineProps({
-  stickyTop: {
-    type: String,
-    default: '0px'
-  }
-})
-const {stickyTop}=toRefs(props)
+const { registerAward } = layoutStore()
 
 // 路由
 const activePath = computed(() => route.path)
@@ -182,6 +176,21 @@ function initShadowObserve(){
 
   shadowObserver.observe(triggerRef.value)
 
+}
+
+// 赠送流量
+const HeaderGift = defineAsyncComponent(() => import("../headerGift/headerGift.vue"))
+async function isShowGift() {
+  try {
+    const { data } = await platDataConfig()
+    registerAward.value = data.register_award
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+const stickyTop = ref('px')
+function setStickyTop(value) {
+  stickyTop.value = value
 }
 
 // 切换语言
@@ -224,6 +233,7 @@ function signOut() {
 
 onMounted(()=>{
   initShadowObserve()
+  isShowGift()
 })
 </script>
 

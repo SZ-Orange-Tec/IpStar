@@ -1,8 +1,10 @@
 <template>
   <div class="pc-login_code column space-y-5">
     <div class="form space-y-5 w-full column">
-      <p class="text-sm">{{ t("login_spec.label3", { email: account }) }}</p>
-
+      <div>
+        <p class="text-sm">{{ t("login_spec.label3", { email: account }) }}</p>
+        <p class="text-xs" style="color: hsl(var(--foreground) / 70%);">{{ t("login_spec.email_tip") }}</p>
+      </div>
       <div class="input_group w-full">
         <label for="code">
           <ul class="flex space-x-3" ref="inputGroup">

@@ -3,7 +3,7 @@
     <!-- 介绍 -->
     <div class="introduce box relative">
       <div class="container column space-y-10">
-        <div class="space-y-10">
+        <div class="space-y-2 md:space-y-5">
           <i18n-t
             keypath="home_spec.intro_title"
             tag="p"
@@ -20,12 +20,12 @@
 
         <div class="my-16 v_center space-x-5" style="align-items: stretch">
           <template v-if="!isLogin">
-            <IpButton type="major" class="h-10 w-40" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
+            <IpButton type="major" class="h-10 px-4 md:px-8" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
             <GoogleLoginButton v-if="!isLogin" />
           </template>
           <template v-else>
-            <IpButton type="major" class="h-10 px-5" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
-            <IpButton type="major" class="h-10 w-40 px-5 tutorial transition-color" @click="$router.push('/overview')">
+            <IpButton type="major" class="h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="major" class="h-10 px-4 md:px-8 tutorial transition-color" @click="$router.push('/overview')">
               <div class="between w-full h-full">
                 <span>{{ t("home_spec.dashboard") }}</span>
                 <button>
@@ -38,23 +38,23 @@
 
         <div class="v_center data md:self-center rounded-md !items-stretch" v-lazy="getUserIps">
           <div class="column_center">
-            <strong class="title text-xl whitespace-nowrap" style="height: 2rem">
+            <strong class="title text-base md:text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
-            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
+            <span class="description text-xs md:text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
             <!-- <span class="description  text-xs md:text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
           <div class="bg-current w-[1px] mx-5" style="color: #eef5ff"></div>
           <div class="column_center">
-            <strong class="title text-xl whitespace-nowrap" style="height: 2rem">
+            <strong class="title text-base md:text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
-            <span class="description text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
+            <span class="description text-xs md:text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
           </div>
         </div>
 
         <div class="w-full md:column_center">
-          <ul class="column_center !items-stretch gap-5 md:v_center">
+          <ul class="column_center !items-stretch gap-2 md:gap-5 md:v_center">
             <li class="v_center space-x-2">
               <StarIcon :size="16" fill="currentColor" class="major" />
               <p class="whitespace-pre-wrap sm:whitespace-normal">{{ t("home_spec.adv1") }}</p>
@@ -88,7 +88,7 @@
           <span class="primary_text">IpStar</span>
         </p>
 
-        <ul class="three column gap-8 md:v_center" v-lazy="showSlow">
+        <ul class="three mt-4 md:mt-6 column gap-8 md:v_center" v-lazy="showSlow">
           <li class="flex-1 pointer transition-colors" @click="toHomeSecond('introduce')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:105px) 105px,89px" src="@/assets/images/home/why1.png" srcset="@/assets/images/home/why1.png 105w" />
@@ -136,7 +136,7 @@
           <p class="description whitespace-normal md:whitespace-pre-wrap">{{ t("home_spec.instant") }}</p>
         </div>
 
-        <div class="auto_content w-full" v-lazy="showSlow">
+        <div class="auto_content mt-4 md:mt-6 w-full" v-lazy="showSlow">
           <ul class="four flex" v-lazy="loadHoverImg">
             <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('data_collection')">
               <div class="pointer transition-colors space-y-5">
@@ -237,7 +237,7 @@
           </ul>
         </div>
 
-        <div class="w-full world_split column_center space-y-5" v-lazy="showSlow">
+        <div class="w-full mt-8 md:mt-16 world_split column_center space-y-2 md:space-y-5" v-lazy="showSlow">
           <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
             <template #primary>
               <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
@@ -309,40 +309,8 @@
         <IpImage :width="2376" :height="320" style="margin-top: 3rem" v-lazy="showSlow">
           <img v-lazy src="@/assets/images/home/app1.webp" alt="" />
         </IpImage>
-        <!-- <div class="content w-full" v-lazy="showSlow">
-          <IpImage :width="1409" :height="406">
-            <img v-lazy src="@/assets/images/home/app.webp" alt="" />
-          </IpImage>
 
-          <ul class="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mt-8 text-xs sm:text-sm" style="flex-wrap: wrap">
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.e_commerce") }}</p>
-            </li>
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.media") }}</p>
-            </li>
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.model_training") }}</p>
-            </li>
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.ad_tech") }}</p>
-            </li>
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.serp_seo") }}</p>
-            </li>
-            <li class="v_center">
-              <Dot :size="30" class="green" />
-              <p class="description">{{ t("home_spec.finance") }}</p>
-            </li>
-          </ul>
-        </div> -->
-
-        <div class="w-full pack_title column_center space-y-5" v-lazy="showSlow">
+        <div class="w-full pack_title mt-8 md:mt-16 column_center space-y-2 md:space-y-5" v-lazy="showSlow">
           <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
 
           <p class="description green">{{ t("home_spec.package_desc") }}</p>

@@ -1,5 +1,5 @@
 <template>
-  <div class="googleLoginBtn v_center space-x-2 transition-color pointer" @click="handlerGoogleLogin" :class="{ loading: googleLoading }">
+  <div class="googleLoginBtn px-4 md:px-8 v_center space-x-2 transition-color pointer" @click="handlerGoogleLogin" :class="{ loading: googleLoading }">
     <img src="@/assets/images/login/google.png" alt="google" width="22" height="22" />
     <span>{{ t("home_spec.google_login") }}</span>
     <span class="ip-loading" v-if="googleLoading"></span>

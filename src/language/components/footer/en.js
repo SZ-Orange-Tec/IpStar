@@ -28,7 +28,7 @@ export default {
     privicy: "Don't Sell My Personal info",
 
     Legal: "Legal Tips",
-    tips: "IpStar proxy services do not support direct requests within China, users must comply with the laws of your location to use IpStar services, and we may discontinue the service without refund once risky behaviour is detected.",
+    tips: "IpStar proxy services do not support direct requests within China, users must comply with the laws of your location to use IpStar services, and we may discontinue the service once risky behaviour is detected.",
 
     copyright: "Copyright © 2025 IpStar. All rights reserved.",
   },
