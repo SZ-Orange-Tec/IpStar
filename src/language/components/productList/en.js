@@ -7,7 +7,6 @@ export default {
   Order: "Order",
   Most_popular: "Most Popular",
   Duration: "Duration",
-  Forever: "Forever",
 
   Personal: "Personal",
   Enterprise: "Enterprise",
@@ -20,6 +19,8 @@ export default {
     right3: "Unlimited Bandwidth",
     right4: "Concurrency 500+",
     right5: "Support Socks5/Http|Https",
+
+    Never_Expires: "Never Expires",
 
     permanent: "Unlimited Package",
 

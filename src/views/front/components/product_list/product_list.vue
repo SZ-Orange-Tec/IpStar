@@ -75,8 +75,7 @@
                   </p>
                   <div class="number w-full">
                     <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
-                      <span>{{ t("Duration") }}:</span>
-                      <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("Forever") }}</span>
+                      <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("productList_spec.Never_Expires") }}</span>
                       <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
                     </div>
                     <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>

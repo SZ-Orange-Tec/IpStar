@@ -21,7 +21,7 @@
       </div>
 
       <!-- 购买记录表 -->
-      <div class="h-full column space-y-5" v-else-if="tabtotal > 0 && !isProduc">
+      <div class="h-full column space-y-5" v-else-if="tabTotal > 0 && !isProduc">
         <div class="table_box flex-1 w-full board">
           <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>

@@ -7,7 +7,6 @@ export default {
   Order: "订购",
   Most_popular: "最受\n欢迎",
   Duration: "有效期",
-  Forever: "永久",
 
   Personal: "个人",
   Enterprise: "企业",
@@ -20,6 +19,8 @@ export default {
     right3: "带宽不限制",
     right4: "并发数500+",
     right5: "Socks5/Http|Https",
+
+    Never_Expires: "永久有效",
 
     permanent: "不限量套餐",
 

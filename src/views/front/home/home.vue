@@ -3,18 +3,12 @@
     <!-- 介绍 -->
     <div class="introduce box relative">
       <div class="container column space-y-10">
-        <div class="space-y-2 md:space-y-5">
-          <i18n-t
-            keypath="home_spec.intro_title"
-            tag="p"
-            scope="global"
-            class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap"
-            style="line-height: 1.5"
-          >
-            <template #primary>
-              <span class="major">${{ lowestPrice }}/GB</span>
-            </template>
-          </i18n-t>
+        <div class="space-y-2 md:space-y-7" style="max-width: 750px">
+          <div class="space-y-2">
+            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap">{{ t("home_spec.intro_title1") }}</p>
+            <p class="title text-base lg:text-xl md:whitespace-pre-wrap">{{ t("home_spec.intro_title2") }}</p>
+          </div>
+
           <p class="opacity-90 md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
         </div>
 

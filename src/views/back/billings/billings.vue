@@ -24,7 +24,9 @@
           </el-table-column>
           <el-table-column :label="$t('Operation')" min-width="120">
             <template #default="scope">
-              <ip-button :data-index="scope.$index" type="link" class="px-3 h-8" @click="toPay">{{ $t("Pay") }}</ip-button>
+              <ip-button v-if="scope.row.isPaid !== 1" :data-index="scope.$index" type="link" class="px-3 h-8" @click="toPay">{{
+                $t("Pay")
+              }}</ip-button>
             </template>
           </el-table-column>
         </el-table>
@@ -103,6 +105,7 @@ async function getClient() {
         title: item.is_paid === 1 ? t("Paid") : item.is_paid === 0 ? t("Unpaid") : item.is_paid === 2 ? t("Payment_confirmation") : "",
       },
       days: item.days > 3650 ? t("Forever") : item.days + " " + t("Day"),
+      isPaid: item.is_paid,
     }
   })
   tableData.value = newArr

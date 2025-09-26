@@ -13,10 +13,11 @@ export default {
   Learn_More: "Learn More",
 
   home_spec: {
-    intro_title: "Quality Residential Proxies\n Plans From {primary} & 200+ Countries",
+    intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
+    intro_title2: "",
 
     intro_desc:
-      "Get high-guality residential proxies for your business.\n Our IPs are sourced from real home networks in over 200+ \ncountries, ensuring high stability and anonymity.\n Perfect for market research, ad verification, and Training AI large models.\n We offer flexible plans to fit your business needs",
+      "With IPStar, explore, connect to, retrieve from, and interact with any public website. Acquire structured, reliable data—whether real-time or historical. Effortlessly integrate with any model, pipeline, or workflow.",
 
     try: "Try",
     more_try: "More Trial Traffic",
