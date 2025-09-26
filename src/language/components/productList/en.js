@@ -7,6 +7,7 @@ export default {
   Order: "Order",
   Most_popular: "Most Popular",
   Duration: "Duration",
+  Forever: "Forever",
 
   Personal: "Personal",
   Enterprise: "Enterprise",

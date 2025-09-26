@@ -51,7 +51,10 @@
                     <span>$0</span>
                   </p>
                   <div class="number w-full">
-                    <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
+                    <div class="duration text-center space-x-1 text-sm">
+                      <span>{{ t("Duration") }}:</span>
+                      <span class="font-bold text-base">30 {{ t("Day") }}</span>
+                    </div>
                   </div>
                 </template>
                 <!-- 不限量 -->
@@ -71,7 +74,12 @@
                     <span>${{ item.prices[item.select].price / 100 }}</span>
                   </p>
                   <div class="number w-full">
-                    <setpNumber :list="item.prices" v-model:select="item.select"></setpNumber>
+                    <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
+                      <span>{{ t("Duration") }}:</span>
+                      <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("Forever") }}</span>
+                      <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
+                    </div>
+                    <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>
                   </div>
                 </template>
               </div>

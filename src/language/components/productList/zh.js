@@ -7,6 +7,7 @@ export default {
   Order: "订购",
   Most_popular: "最受\n欢迎",
   Duration: "有效期",
+  Forever: "永久",
 
   Personal: "个人",
   Enterprise: "企业",

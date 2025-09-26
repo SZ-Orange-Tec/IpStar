@@ -3,7 +3,7 @@ export default {
 
   Order_detail: "订单详情",
   Traffic: "流量",
-  Duration: "有效天数",
+  Duration: "有效期",
   Discount: "折扣",
   Total: "合计",
   Submit: "提交",

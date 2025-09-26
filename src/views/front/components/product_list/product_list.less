@@ -101,9 +101,17 @@
                 // font-weight: bolder;
 							}
 							&>.number{
+                height: 2.5rem;
                 margin-top:1.75rem;
                 max-width: 9rem;
                 width: 100%;
+                .duration{
+                  vertical-align: baseline;
+                  &>span:first-child{
+                    color: hsl(var(--foreground) / 90%);
+                    
+                  }
+                }
                 @media screen and (max-width:1024px) {
                   margin-top: 1.25rem;
                 }

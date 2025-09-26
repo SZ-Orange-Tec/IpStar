@@ -11,7 +11,7 @@ export default {
   Count: "数量",
   Country: "国家",
   Protocol: "协议",
-  Duration: "时长",
+  Duration: "有效期",
   Format: "格式",
   Generate: "生成",
   Link: "链接",

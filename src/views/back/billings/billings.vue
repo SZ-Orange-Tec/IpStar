@@ -102,7 +102,7 @@ async function getClient() {
         class: item.is_paid === 1 ? "succeed_img" : item.is_paid === 0 ? "error_img" : item.is_paid === 2 ? "warning_img" : "",
         title: item.is_paid === 1 ? t("Paid") : item.is_paid === 0 ? t("Unpaid") : item.is_paid === 2 ? t("Payment_confirmation") : "",
       },
-      days: item.days + " " + t("Day"),
+      days: item.days > 3650 ? t("Forever") : item.days + " " + t("Day"),
     }
   })
   tableData.value = newArr
