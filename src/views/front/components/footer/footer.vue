@@ -2,11 +2,11 @@
   <footer class="footer">
     <!-- serve -->
     <div class="serve box">
-      <div class="container column md:flex !items-stretch flex-wrap">
+      <div class="container gap-4 md:gap-10 column md:flex !items-stretch flex-wrap">
         <div class="list flex-1 column md:column_center whitespace-nowrap">
-          <div class="service column space-y-5">
-            <p>{{ t("Services") }}</p>
-            <ul class="flex md:column gap-2 flex-wrap text-sm">
+          <div class="service column space-y-3 md:space-y-5">
+            <p class="font-semibold">{{ t("Services") }}</p>
+            <ul class="flex md:column md:space-y-2 flex-wrap text-sm font-light">
               <li class="btn">
                 <a href="javascript:;" @click="goTologin">{{ t("footer_spec.Residential_Proxies") }}</a>
               </li>
@@ -29,9 +29,9 @@
         <div class="line"></div>
 
         <div class="list flex-1 between !items-stretch space-x-10 whitespace-nowrap">
-          <div class="column space-y-5">
-            <p>{{ t("Help_center") }}</p>
-            <ul class="column space-y-2 text-sm">
+          <div class="column space-y-3 md:space-y-5">
+            <p class="font-semibold">{{ t("Help_center") }}</p>
+            <ul class="column space-y-2 text-sm font-light">
               <li>
                 <a href="javascript:;" @click="toDocument('FAQ')">{{ t("FAQ") }}</a>
               </li>
@@ -46,9 +46,9 @@
               </li>
             </ul>
           </div>
-          <div class="column space-y-5">
-            <p>{{ t("Legal") }}</p>
-            <ul class="column space-y-2 text-sm">
+          <div class="column space-y-3 md:space-y-5">
+            <p class="font-semibold">{{ t("Legal") }}</p>
+            <ul class="column space-y-2 text-sm font-light">
               <li>
                 <a href="/terms.html">{{ t("Terms_Conditions") }}</a>
               </li>
@@ -65,22 +65,22 @@
         <div class="line"></div>
 
         <div class="list flex-1 column space-y-5">
-          <p>{{ t("Connect_with_us") }}</p>
-          <div class="column space-y-2">
-            <div class="v_center copy_btn">
-              <div class="px-2 whitespace-nowrap">Email: support@ipstar.io</div>
-              <IpButton type="major" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
+          <div class="space-y-3">
+            <p class="font-semibold">{{ t("Connect_with_us") }}</p>
+            <div class="column space-y-2">
+              <div class="v_center copy_btn">
+                <div class="px-2 whitespace-nowrap">Email: support@ipstar.io</div>
+                <IpButton type="major" icon class="px-2 h-8 text-sm" @click="copyEmail"> <Copy :size="16" /> </IpButton>
+              </div>
             </div>
-
-            <!-- <IpButton type="ghost" circle class="w-10 h-10" @click="toTwitter">
-              <Twitter :size="16" color="hsl(var(--primary))" />
-            </IpButton> -->
           </div>
 
-          <p>{{ t("footer_spec.Legal") }}</p>
-          <p class="text-sm opacity-90">
-            {{ t("footer_spec.tips") }}
-          </p>
+          <div class="space-y-3">
+            <p class="font-semibold">{{ t("footer_spec.Legal") }}</p>
+            <p class="text-sm opacity-90 font-light">
+              {{ t("footer_spec.tips") }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

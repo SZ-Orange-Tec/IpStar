@@ -6,13 +6,10 @@
       <div class="container">
         <div class="column_center">
           <div class="header text-xl sm:text-2xl lg:text-4xl column_center space-y-5">
-            <i18n-t keypath="pricing_spec.des" tag="p" scope="global" class="text-center title md:whitespace-pre-wrap">
-              <template #price>
-                <span class="major">${{ lowestPrice }}/GB</span>
-              </template>
-            </i18n-t>
-
-            <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">50M+</span>/day</span>
+            <div class="space-y-10 column_center">
+              <p class="text-center title md:whitespace-pre-wrap">{{ t("pricing_spec.des") }}</p>
+              <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">50M+</span>/day</span>
+            </div>
 
             <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>
           </div>
@@ -65,7 +62,7 @@
           </ul>
         </div>
 
-        <div class="img_box">
+        <div class="img_box hidden sm:block">
           <img src="@/assets/images/pricing/product_plan.png" alt="" />
         </div>
       </div>
@@ -73,7 +70,7 @@
 
     <div class="box plan">
       <div class="container between">
-        <div class="img_box">
+        <div class="img_box hidden sm:block">
           <img src="@/assets/images/pricing/bighow.png" alt="" />
         </div>
 
@@ -112,8 +109,8 @@
           <p class="text-center">{{ t("pricing_spec.code_desc") }}</p>
         </div>
 
-        <div class="code_content flex">
-          <div class="left">
+        <div class="code_content column md:flex !items-stretch">
+          <div class="left flex md:column">
             <div class="pointer vh_center" :class="{ active: active === 'go' }" @click="active = 'go'">Go</div>
             <div class="pointer vh_center" :class="{ active: active === 'java' }" @click="active = 'java'">Java</div>
             <div class="pointer vh_center" :class="{ active: active === 'php' }" @click="active = 'php'">PHP</div>
@@ -132,7 +129,7 @@
     <div class="box question">
       <div class="container space-y-10">
         <div class="title">
-          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">常见问题</h3>
+          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("FAQ") }}</h3>
         </div>
 
         <div class="content space-y-5">

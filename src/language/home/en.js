@@ -16,8 +16,10 @@ export default {
     intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
     intro_title2: "",
 
+    // intro_desc:
+    //   "With IPStar, explore, connect to, retrieve from, and interact with any public website. Acquire structured, reliable data—whether real-time or historical. Effortlessly integrate with any model, pipeline, or workflow.",
     intro_desc:
-      "With IPStar, explore, connect to, retrieve from, and interact with any public website. Acquire structured, reliable data—whether real-time or historical. Effortlessly integrate with any model, pipeline, or workflow.",
+      "IPStar connects you to any public website, delivering structured real-time or historical data for seamless integration with any model, pipeline, or workflow.",
 
     try: "Try",
     more_try: "More Trial Traffic",
@@ -26,14 +28,17 @@ export default {
     dashboard: "Dashboard",
     google_login: "Sign in with Google",
     // Accumulated: "Accumulated \n users",
-    partner: "Partner  Organizations",
-    online: "Number \nof online Ip",
+    partner: "Partner Organizations",
+    online: "Number of online Ip",
     users: "users",
 
-    adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
-    adv2: "All popular proxy software and APPs.",
-    // adv3: "Support fingerprint\nbrowsers.",
-    adv4: "Supports API and account-password combo extraction.",
+    // adv1: "Supports SOCKS5, HTTP/HTTPS & custom protocols.",
+    // adv2: "All popular proxy software and APPs.",
+    // adv4: "Supports API and account-password combo extraction.",
+    adv1: "Support Http/Socks5",
+    adv2: "195+Countries Locations",
+    adv3: "All major proxy software.",
+    adv4: "For API and credential retrieval.",
 
     why: "Why Choose",
     why1_title: "Massive Resource",

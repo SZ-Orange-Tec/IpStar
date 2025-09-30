@@ -14,7 +14,7 @@ export default {
   ...question,
 
   pricing_spec: {
-    des: "真实住宅IP 覆盖全球 200+ 国家\n套餐 {price} 起",
+    des: "真实住宅IP 覆盖全球 200+ 国家",
 
     plan_title: "全方位流量管理解决方案",
     plan_desc: "轻松管理数据使用量，提供全面的流量管理面板，实时统计数据让您精准监控住宅代理的使用情况，从而有效避免超出预算。",

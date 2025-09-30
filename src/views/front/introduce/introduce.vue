@@ -237,7 +237,7 @@
     <div class="box question">
       <div class="container space-y-10">
         <div class="title" v-lazy="showSlow">
-          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">常见问题</h3>
+          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("FAQ") }}</h3>
         </div>
 
         <div class="content space-y-5">

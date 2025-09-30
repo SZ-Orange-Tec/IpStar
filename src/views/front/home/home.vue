@@ -3,66 +3,77 @@
     <!-- 介绍 -->
     <div class="introduce box relative">
       <div class="container column space-y-10">
-        <div class="space-y-2 md:space-y-7" style="max-width: 750px">
-          <div class="space-y-2">
-            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap">{{ t("home_spec.intro_title1") }}</p>
-            <p class="title text-base lg:text-xl md:whitespace-pre-wrap">{{ t("home_spec.intro_title2") }}</p>
+        <div class="space-y-4 md:space-y-7" style="max-width: 700px">
+          <div class="space-y-1 md:space-y-4">
+            <p class="title text-lg lg:text-3xl whitespace-pre-wrap font-semibold">{{ t("home_spec.intro_title1") }}</p>
+            <p class="title text-lg lg:text-xl md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_title2") }}</p>
           </div>
 
-          <p class="opacity-90 md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
+          <p class="opacity-90 md:whitespace-pre-wrap font-light">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
-        <div class="my-16 v_center space-x-5" style="align-items: stretch">
-          <template v-if="!isLogin">
-            <IpButton type="major" class="h-10 px-4 md:px-8" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
-            <GoogleLoginButton v-if="!isLogin" />
-          </template>
-          <template v-else>
-            <IpButton type="major" class="h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
-            <IpButton type="major" class="h-10 px-4 md:px-8 tutorial transition-color" @click="$router.push('/overview')">
-              <div class="between w-full h-full">
-                <span>{{ t("home_spec.dashboard") }}</span>
-                <button>
-                  <MoveRight />
-                </button>
+        <div class="my-16 btn_box">
+          <div class="w-full column sm:v_center gap-4" v-if="!isLogin" style="align-items: stretch">
+            <IpButton type="major" class="flex-1" @click="toLogin">
+              <div class="vh_center space-x-2 h-10">
+                <span>{{ t("home_spec.start_now") }}</span>
+                <MoveUpRight :size="14" />
               </div>
             </IpButton>
-          </template>
+            <GoogleLoginButton v-if="!isLogin" class="flex-1 h-10 md:h-auto" />
+          </div>
+          <div class="w-full column md:v_center gap-4" v-else style="align-items: stretch">
+            <IpButton type="major" class="h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="major" class="h-10 px-4 md:px-8 tutorial transition-color" @click="$router.push('/overview')">
+              <div class="vh_center space-x-2 w-full h-full">
+                <span>{{ t("home_spec.dashboard") }}</span>
+                <MoveRight :size="14" />
+              </div>
+            </IpButton>
+          </div>
         </div>
 
-        <div class="v_center data md:self-center rounded-md !items-stretch" v-lazy="getUserIps">
+        <div class="v_center data self-center rounded-md" v-lazy="getUserIps">
           <div class="column_center">
             <strong class="title text-base md:text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
-            <span class="description text-xs md:text-sm whitespace-pre-wrap text-center">{{ t("home_spec.partner") }}</span>
+            <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.partner") }}</span>
             <!-- <span class="description  text-xs md:text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
           </div>
-          <div class="bg-current w-[1px] mx-5" style="color: #eef5ff"></div>
+          <div class="line" style="color: #eef5ff"></div>
           <div class="column_center">
-            <strong class="title text-base md:text-xl whitespace-nowrap" style="height: 2rem">
+            <strong class="title text-base font-semibold md:text-xl whitespace-nowrap" style="height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
-            <span class="description text-xs md:text-sm whitespace-pre-wrap text-center">{{ t("home_spec.online") }}</span>
+            <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.online") }}</span>
           </div>
         </div>
 
-        <div class="w-full md:column_center">
-          <ul class="column_center !items-stretch gap-2 md:gap-5 md:v_center">
-            <li class="v_center space-x-2">
-              <StarIcon :size="16" fill="currentColor" class="major" />
-              <p class="whitespace-pre-wrap sm:whitespace-normal">{{ t("home_spec.adv1") }}</p>
+        <div class="advant w-full md:column_center overflow-hidden">
+          <ul class="flex !items-stretch font-normal">
+            <li class="v_center space-x-1 rounded-full">
+              <div class="icon shrink-0 vh_center rounded-full">
+                <StarIcon :size="16" fill="currentColor" class="major" />
+              </div>
+              <p class="whitespace-nowrap sm:whitespace-normal">{{ t("home_spec.adv1") }}</p>
             </li>
-            <li class="v_center space-x-2">
-              <StarIcon :size="16" fill="currentColor" class="major" />
+            <li class="v_center space-x-1 rounded-full">
+              <div class="icon shrink-0 vh_center rounded-full">
+                <StarIcon :size="16" fill="currentColor" class="major" />
+              </div>
               <p class="whitespace-pre-wrap">{{ t("home_spec.adv2") }}</p>
             </li>
-            <!-- <li class="v_center space-x-2">
-              <StarIcon :size="16" :strokeWidth="0" fill="#10b981" />
+            <li class="v_center space-x-1 rounded-full">
+              <div class="icon shrink-0 vh_center rounded-full">
+                <StarIcon :size="16" fill="currentColor" class="major" />
+              </div>
               <p>{{ t("home_spec.adv3") }}</p>
-            </li> -->
-            <li class="v_center space-x-2">
-              <StarIcon :size="16" fill="currentColor" class="major" />
+            </li>
+            <li class="v_center space-x-1 rounded-full">
+              <div class="icon shrink-0 vh_center rounded-full">
+                <StarIcon :size="16" fill="currentColor" class="major" />
+              </div>
               <p class="whitespace-pre-wrap">{{ t("home_spec.adv4") }}</p>
             </li>
           </ul>
@@ -77,37 +88,37 @@
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center" v-lazy="showSlow">
-        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold">
+        <p class="title text-xl lg:text-3xl font-semibold">
           {{ t("home_spec.why") }}
           <span class="primary_text">IpStar</span>
         </p>
 
         <ul class="three mt-4 md:mt-6 column gap-8 md:v_center" v-lazy="showSlow">
-          <li class="flex-1 pointer transition-colors" @click="toHomeSecond('introduce')">
+          <li class="flex-1 space-y-3 pointer transition-colors" @click="toHomeSecond('introduce')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:105px) 105px,89px" src="@/assets/images/home/why1.png" srcset="@/assets/images/home/why1.png 105w" />
             </div>
 
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why1_title") }}</h3>
+              <h3 class="font-semibold text-center">{{ t("home_spec.why1_title") }}</h3>
               <p class="text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1 pointer transition-colors" @click="toHomeSecond('efficient')">
+          <li class="flex-1 space-y-3 pointer transition-colors" @click="toHomeSecond('efficient')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:90px) 96px,102px" src="@/assets/images/home/why2.png" srcset="@/assets/images/home/why2.png 96w" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why2_title") }}</h3>
+              <h3 class="font-semibold text-center">{{ t("home_spec.why2_title") }}</h3>
               <p class="text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
             </div>
           </li>
-          <li class="flex-1 pointer transition-colors" @click="router.push('/pricing')">
+          <li class="flex-1 space-y-3 pointer transition-colors" @click="router.push('/pricing')">
             <div class="img_box vh_center">
               <img v-lazy sizes="(max-width:90px) 105px,104px" src="@/assets/images/home/why3.png" srcset="@/assets/images/home/why3.png 105w" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why3_title") }}</h3>
+              <h3 class="font-semibold text-center">{{ t("home_spec.why3_title") }}</h3>
               <p class="text-sm text-center">{{ t("home_spec.why3_desc") }}</p>
             </div>
           </li>
@@ -124,7 +135,7 @@
               <ToggleLeft :size="16" fill="#10b981" color="#10b981" />
               <p class="description text-sm whitespace-nowrap md:whitespace-pre-wrap">{{ t("home_spec.more") }}</p>
             </div>
-            <p class="title text-lg sm:text-2xl lg:text-3xl font-bold whitespace-normal md:whitespace-pre-wrap">{{ t("home_spec.automatic") }}</p>
+            <p class="title text-xl lg:text-3xl font-semibold whitespace-normal md:whitespace-pre-wrap">{{ t("home_spec.automatic") }}</p>
           </div>
 
           <p class="description whitespace-normal md:whitespace-pre-wrap">{{ t("home_spec.instant") }}</p>
@@ -139,7 +150,7 @@
                   <img v-lazy src="@/assets/images/home/four_active1.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four1_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four1_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four1_desc") }}</p>
                 </div>
               </div>
@@ -151,7 +162,7 @@
                   <img v-lazy src="@/assets/images/home/four_active2.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four2_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four2_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four2_desc") }}</p>
                 </div>
               </div>
@@ -163,7 +174,7 @@
                   <img v-lazy src="@/assets/images/home/four_active3.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four3_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four3_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four3_desc") }}</p>
                 </div>
               </div>
@@ -175,7 +186,7 @@
                   <img v-lazy src="@/assets/images/home/four_active4.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four4_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four4_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four4_desc") }}</p>
                 </div>
               </div>
@@ -187,7 +198,7 @@
                   <img v-lazy src="@/assets/images/home/four_active5.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four5_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four5_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four5_desc") }}</p>
                 </div>
               </div>
@@ -199,7 +210,7 @@
                   <img v-lazy src="@/assets/images/home/four_active6.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four6_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four6_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four6_desc") }}</p>
                 </div>
               </div>
@@ -211,7 +222,7 @@
                   <img v-lazy src="@/assets/images/home/four_active7.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four7_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four7_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four7_desc") }}</p>
                 </div>
               </div>
@@ -223,7 +234,7 @@
                   <img v-lazy src="@/assets/images/home/four_active8.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four8_title") }}</p>
+                  <p class="text-center font-semibold">{{ t("home_spec.four8_title") }}</p>
                   <p class="description text-sm">{{ t("home_spec.four8_desc") }}</p>
                 </div>
               </div>
@@ -232,52 +243,52 @@
         </div>
 
         <div class="w-full mt-8 md:mt-16 world_split column_center space-y-2 md:space-y-5" v-lazy="showSlow">
-          <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-lg sm:text-2xl lg:text-3xl font-bold">
+          <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-xl lg:text-3xl font-semibold">
             <template #primary>
               <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
             </template>
           </i18n-t>
-          <p class="description text-sm">{{ t("home_spec.world_desc") }}</p>
+          <p class="description text-sm text-center">{{ t("home_spec.world_desc") }}</p>
         </div>
       </div>
     </div>
 
     <div class="world box" v-lazy="showSlow">
       <div class="container between">
-        <div class="img_box flex-1" v-lazy="showSlow">
+        <div class="img_box flex-1 hidden md:block" v-lazy="showSlow">
           <img v-lazy src="@/assets/images/home/world.png" height="400" alt="" />
         </div>
 
         <div class="content h-full py-3 box-border" v-lazy="showSlow">
           <div class="space-y-5">
-            <h3 class="primary text-lg font-bold">{{ t("home_spec.coverage") }}</h3>
+            <h3 class="primary text-lg font-semibold">{{ t("home_spec.coverage") }}</h3>
             <p class="text-sm">{{ t("home_spec.coverage_desc") }}</p>
           </div>
 
           <div class="space-y-5" v-lazy="showSlow">
-            <p class="font-medium">{{ t("home_spec.resources") }}</p>
+            <p class="primary text-lg font-semibold">{{ t("home_spec.resources") }}</p>
 
             <ul class="column space-y-3">
-              <li class="v_center space-x-1">
-                <div class="w-4 h-4 primary bg-current rounded-full vh_center">
+              <li class="flex space-x-2">
+                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
                   <Check :size="12" color="white" />
                 </div>
                 <p>{{ t("home_spec.word_adv1") }}</p>
               </li>
-              <li class="v_center space-x-1">
-                <div class="w-4 h-4 primary bg-current rounded-full vh_center">
+              <li class="flex space-x-2">
+                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
                   <Check :size="12" color="white" />
                 </div>
                 <p>{{ t("home_spec.word_adv2") }}</p>
               </li>
-              <li class="v_center space-x-1">
-                <div class="w-4 h-4 primary bg-current rounded-full vh_center">
+              <li class="flex space-x-2">
+                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
                   <Check :size="12" color="white" />
                 </div>
                 <p>{{ t("home_spec.word_adv3") }}</p>
               </li>
-              <li class="v_center space-x-1">
-                <div class="w-4 h-4 primary bg-current rounded-full vh_center">
+              <li class="flex space-x-2">
+                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
                   <Check :size="12" color="white" />
                 </div>
                 <p>{{ t("home_spec.word_adv4") }}</p>
@@ -294,7 +305,7 @@
     <div class="app box">
       <div class="container column_center">
         <div class="space-y-5">
-          <p v-lazy="showSlow" class="text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">
+          <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
             {{ t("home_spec.app_title") }}
           </p>
           <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.app_desc") }}</p>
@@ -305,9 +316,9 @@
         </IpImage>
 
         <div class="w-full pack_title mt-8 md:mt-16 column_center space-y-2 md:space-y-5" v-lazy="showSlow">
-          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
+          <p class="title text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
 
-          <p class="description green">{{ t("home_spec.package_desc") }}</p>
+          <p class="description green text-center">{{ t("home_spec.package_desc") }}</p>
         </div>
       </div>
     </div>
@@ -325,7 +336,7 @@
     <div class="explore box">
       <div class="container" v-lazy="showSlow">
         <div class="column_center space-y-5 relative">
-          <div class="column_center text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">
+          <div class="column_center text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
             <p class="v_center space-x-2">
               <span>{{ t("Now") }}</span>
               <img v-lazy src="@/assets/images/home/magic.png" alt="" />
@@ -349,7 +360,7 @@ import loginStore from "@/store/login"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { MoveRight, Star as StarIcon, ToggleLeft, Dot, Code, Laptop, Check } from "lucide-vue-next"
+import { MoveRight, WandSparkles as StarIcon, ToggleLeft, Dot, Code, Laptop, Check, MoveUpRight } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"

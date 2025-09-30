@@ -11,6 +11,7 @@
     // width: 100%;
     --primary: 212 77% 53%;
     padding: 0 2.5rem;
+    // overflow-x: hidden;
     
     &>.container{
       width: 100%;
@@ -20,7 +21,7 @@
       // opacity: 0;
     }
     @media screen and (max-width:768px) {
-      padding: 0 0.5rem;
+      padding: 0 1rem;
       &>.container{
         padding: 2rem 0;
       }
@@ -36,12 +37,70 @@
       background-image: url('../../../assets/images/home/cover.png');
       background-repeat: no-repeat;
       background-position: right 10%;
-      background-size: 500px auto;
+      background-size: 450px auto;
       @media screen and (max-width:1024px) {
         background-image: none;
       }
       .img_box{
         position: absolute;
+      }
+
+      .btn_box{
+        width: 100%;
+        max-width: 640px;
+      }
+
+      .advant{
+        &>ul{
+          flex-wrap: wrap;
+          --gap:1.25rem;
+          gap: var(--gap);
+          &>li{
+            height: 2.5rem;
+            border-radius: 999px;
+            border: 1px solid hsl(var(--primary) / 30%);
+            padding: 0 0.75rem 0 0.25rem;
+            position: relative;
+            // box-shadow: 0 0 0 1px ;
+            &::before{
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              border-radius: inherit;
+              padding: 1px 2px; /* 边框宽度 */
+              box-sizing: border-box;
+              background: linear-gradient(20deg, hsl(var(--major) / 50%), hsl(var(--primary) / 50%));
+              -webkit-mask: 
+                  linear-gradient(#fff 0 0) content-box, 
+                  linear-gradient(#fff 0 0);
+              -webkit-mask-composite: destination-out;
+              mask-composite: exclude;
+            }
+            &>.icon{
+              width: 2rem;
+              height: 2rem;
+              background-color: hsl(var(--major) / 20%);
+            }
+            &>div{
+              position: relative;
+              z-index: 1;
+            }
+          }
+          @media screen and (max-width:1024px) {
+            &>li{
+              width: calc(calc(100% - var(--gap)) / 2);
+            }
+          }
+          @media screen and (max-width:640px) {
+            --gap:0.5rem;
+            &>li{
+              width: 100%;
+            }
+          }
+        }
       }
 
       .tutorial{
@@ -54,22 +113,26 @@
       }
 
       .data{
+        margin-top: 4rem;
         // position: absolute;
         // left: 50%;
         // bottom: 0;
-        background-color: hsl(var(--background));
         // transform: translate(-50%, 50%);
-        color: hsl(var(--foreground));
-        border: 1px solid #E7EFFD;
+        color: hsl(var(--colour-foreground));
+        // background-color: hsl(var(--background));
+        // border: 1px solid #E7EFFD;
         padding: 1rem 1.5rem;
-        &>div:first-child,&>div:last-child{
-          width: 150px;
+        // &>div:first-child,&>div:last-child{
+        //   width: 150px;
+        // }
+        &>.line{
+          width: 2px;
+          height: 32px;
+          margin: 0 2rem;
+          background-color: hsl(var(--colour-foreground) / 20%);
         }
-        @media screen and (max-width:768px) {
-          padding: 0.5rem 1rem;
-          &>div:first-child,&>div:last-child{
-            width: 100px;
-          }
+        @media screen and (max-width:640px) {
+          margin-top: 1rem;
         }
       }
     }
@@ -109,9 +172,17 @@
           background-color: hsl(var(--background));
           box-shadow: 0 0 8px #CCE4FF;
           .img_box{
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
+            &>img{
+              max-width: 100%;
+              max-height: 100%;
+            }
+            @media screen and (max-width:640px) {
+              width: 80px;
+              height: 80px;
+            }
           }
           &:hover{
             box-shadow: 0 0 8px #CCE4FF;
