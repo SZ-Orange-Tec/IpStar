@@ -106,6 +106,11 @@
               <el-table-column prop="port" :label="t('Port')" min-width="100"></el-table-column>
               <el-table-column prop="user" :label="t('User')" min-width="300"></el-table-column>
               <el-table-column prop="password" :label="t('Password')" min-width="140"></el-table-column>
+              <el-table-column :label="t('Curl_Command')" min-width="140">
+                <template #default="scope">
+                  <ip-button type="border" @click="copyUrl(scope.row)" class="px-3 h-8 font-medium">{{ t("Copy") }}</ip-button>
+                </template>
+              </el-table-column>
               <template #append>
                 <div class="text-center">{{ t("No_data") }}</div>
               </template>
@@ -151,6 +156,7 @@ import IpButton from "@/components/button/button.vue"
 import { ShoppingCart, ArrowLeftRight, HelpCircle } from "lucide-vue-next"
 import IpInput from "@/components/input/input.vue"
 import { useI18n } from "vue-i18n"
+import copyText from "../../../utils/copyText"
 
 const { en } = settingStore()
 const { isProduc } = layoutStore()
@@ -238,6 +244,16 @@ async function generate() {
   } catch {
     btnLoading.value = false
   }
+}
+
+async function copyUrl(item) {
+  const { password, port, server, user } = item
+  const url = `curl -${protocolVal.value === "0" ? "socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
+  await copyText(url)
+  Message({
+    message: en.value ? "Copy success" : "复制成功",
+    type: "success",
+  })
 }
 
 let allCountry = []

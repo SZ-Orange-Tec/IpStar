@@ -5,7 +5,7 @@
       <div class="container column space-y-10">
         <div class="space-y-4 md:space-y-7" style="max-width: 700px">
           <div class="space-y-1 md:space-y-4">
-            <p class="title text-lg lg:text-3xl whitespace-pre-wrap font-semibold">{{ t("home_spec.intro_title1") }}</p>
+            <p class="title text-lg lg:text-4xl whitespace-pre-wrap font-semibold">{{ t("home_spec.intro_title1") }}</p>
             <p class="title text-lg lg:text-xl md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_title2") }}</p>
           </div>
 
@@ -35,7 +35,7 @@
 
         <div class="v_center data self-center rounded-md" v-lazy="getUserIps">
           <div class="column_center">
-            <strong class="title text-base md:text-xl whitespace-nowrap" style="height: 2rem">
+            <strong class="title text-center text-base md:text-xl whitespace-nowrap" style="width: 10rem; height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
             <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.partner") }}</span>
@@ -43,7 +43,7 @@
           </div>
           <div class="line" style="color: #eef5ff"></div>
           <div class="column_center">
-            <strong class="title text-base font-semibold md:text-xl whitespace-nowrap" style="height: 2rem">
+            <strong class="title text-center text-base font-semibold md:text-xl whitespace-nowrap" style="width: 10rem; height: 2rem">
               <template v-if="onlineIps !== -1">{{ onlineIps }}</template>
             </strong>
             <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.online") }}</span>

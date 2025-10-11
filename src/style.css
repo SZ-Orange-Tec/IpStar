@@ -79,6 +79,23 @@
 .warn{
   color: hsl(var(--warn));
 }
+.black{
+  color: hsl(var(--foreground));
+}
+.grey-80{
+  color: hsl(var(--foreground) / 80%);
+}
+.grey-60{
+  color: hsl(var(--foreground) / 60%);
+}
+.grey-40{
+  color: hsl(var(--foreground) / 40%);
+}
+.grey-20{
+  color: hsl(var(--foreground) / 20%);
+}
+
+
 
 .ip-loading {
   pointer-events: none;

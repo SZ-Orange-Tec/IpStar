@@ -7,8 +7,8 @@
         <div class="column_center">
           <div class="header text-xl sm:text-2xl lg:text-4xl column_center space-y-5">
             <div class="space-y-10 column_center">
-              <p class="text-center title md:whitespace-pre-wrap">{{ t("pricing_spec.des") }}</p>
-              <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">50M+</span>/day</span>
+              <p class="text-center title md:whitespace-pre-wrap font-semibold">{{ t("pricing_spec.des") }}</p>
+              <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">90M+</span></span>
             </div>
 
             <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>

@@ -30,7 +30,7 @@ export default {
     _2_8_des:
       "We guarantee that most IPs are available. If this happens, please switch to another IP channel. IpStar only charges for valid IPs, which means that invalid IPs will not incur any fees.",
     _2_9_title: "9. How large is IpStar's IP pool?",
-    _2_9_des: "IpStar has more than 50 million residential IP addresses and updates them regularly to provide the cleanest IP pool.",
+    _2_9_des: "IpStar has more than 90 million residential IP addresses and updates them regularly to provide the cleanest IP pool.",
     _2_10_title: "10. What are residential proxies used for?",
     _2_10_des:
       "Theoretically, you can use residential proxies for any operation that a regular proxy can perform. The undetectability of residential proxies makes them ideal for media streaming, online shopping, and data scraping on websites that block regular proxies.\nConsidering potential risks, IpStar prohibits accessing sensitive websites through proxy IP addresses. These websites include websites in high - risk areas, government websites, certain specific websites, etc. When you access these websites through the IpStar proxy, you will receive an error message indicating that the target website is blocked. If you have any questions, please consult our online customer service.",

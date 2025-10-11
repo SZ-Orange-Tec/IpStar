@@ -23,6 +23,9 @@ export default {
 
   Buy_now: "Buy now",
 
+  Copy: "Copy",
+  Curl_Command: "Curl命令",
+
   proxy_spec: {
     duration_tip:
       "When using a proxy, you can set the IP's lifespan and use the proxy throughout that time. Since it's a resident proxy, its lifespan can range from a few hours to several days.",

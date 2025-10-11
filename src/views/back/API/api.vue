@@ -42,10 +42,14 @@ import UserPwd from "./user_pwd/user_pwd.vue"
 import NavBar from "../components/navbar/navbar.vue"
 import { onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
+import { useRoute } from "vue-router"
 
 const { t } = useI18n()
+const route = useRoute()
 
-const active = ref(0) // 0: 构造文档 2:账密组合
+const initActive = route?.query?.active ? Number(route?.query?.active) : 0
+
+const active = ref(initActive) // 0: 构造文档 1:账密组合
 
 const barStyle = ref({ width: 0, left: 0 })
 const textRef = ref(null)
@@ -66,7 +70,7 @@ function select(index) {
 }
 
 onMounted(() => {
-  select(0)
+  select(initActive)
 })
 </script>
 

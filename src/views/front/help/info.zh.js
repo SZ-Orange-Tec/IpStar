@@ -184,7 +184,7 @@ export default {
       id: 6,
       p: [
         {
-          txt: "IpStar 拥有5000多万个住宅 IP 地址，并定期更新以提供最干净的 IP 池。",
+          txt: "IpStar 拥有9000多万个住宅 IP 地址，并定期更新以提供最干净的 IP 池。",
         },
       ],
     },

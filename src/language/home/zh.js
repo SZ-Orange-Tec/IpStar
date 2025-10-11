@@ -26,7 +26,7 @@ export default {
     dashboard: "控制台",
     google_login: "使用 Google 登录",
     // Accumulated: "累计用户",
-    partner: "合作伙伴",
+    partner: "合作组织",
     online: "实时在线 IP",
     users: "用户",
 
@@ -40,7 +40,7 @@ export default {
 
     why: "为什么选择",
     why1_title: "海量资源",
-    why1_desc: "覆盖200+国家，提供5000万+真实住宅代理IP，助力企业轻松实现全球业务拓展。",
+    why1_desc: "覆盖200+国家，提供9000万+真实住宅代理IP，助力企业轻松实现全球业务拓展。",
     why2_title: "高匿高效",
     why2_desc: "提供真实住宅IP，有效防检测、防追踪，强力保护数据隐私。网络高速稳定，体验流畅无忧。",
     why3_title: "超高性价比",

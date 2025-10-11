@@ -73,34 +73,51 @@
 
           <!-- 流量消耗趋势 -->
           <div class="w-full column md:flex gap-5 items-stretch echart_table">
-            <div class="echart column space-y-5 w-full md:flex-1">
-              <div class="card guide rounded-md space-y-5 board">
-                <h3 class="text-base font-semibold">{{ $t("overview_spec.intro") }}</h3>
+            <!-- 新手引导 -->
+            <div v-if="!isUsed" class="new_guide w-full md:flex-1 column !items-stretch space-y-4">
+              <div class="text-lg md:text-2xl font-semibold">
+                <span class="primary">{{ $t("overview_spec.welcome1") }}</span>
+                {{ $t("overview_spec.welcome2") }}
+              </div>
+              <div class="split"></div>
 
-                <ul class="column space-y-3">
-                  <li class="v_center space-x-2">
-                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
-                    <p style="color: #333">{{ $t("overview_spec.advant1") }}</p>
-                  </li>
-                  <li class="v_center space-x-2">
-                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
-                    <p style="color: #333">{{ $t("overview_spec.advant2") }}</p>
-                  </li>
-                  <li class="v_center space-x-2">
-                    <Check :size="16" color="hsl(var(--success))" :strokeWidth="3" />
-                    <p style="color: #333">{{ $t("overview_spec.advant3") }}</p>
-                  </li>
-                </ul>
-                <div class="text-sm v_center space-x-5">
-                  <IpButton type="primary" class="h-10 px-10" @click="$router.push('/proxy')">
-                    {{ $t("Proxy") }}
-                  </IpButton>
-                  <IpButton type="border" class="h-10 px-10 primary-btn" @click="$router.push('/generate_api')">
-                    {{ $t("API") }}
-                  </IpButton>
+              <div>
+                <div class="w-full column !items-stretch space-y-2" style="max-width: 30rem">
+                  <CopyItem :label="$t('overview_spec.port')" text="9135" />
+                  <CopyItem :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
+                  <CopyItem :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
                 </div>
               </div>
 
+              <div class="">
+                <span class="black font-medium">{{ $t("overview_spec.test1") }}</span>
+                &nbsp;
+                <span class="grey-60">{{ $t("overview_spec.test2") }}</span>
+              </div>
+
+              <div>
+                <div class="w-full column !items-stretch space-y-2" style="max-width: 70rem">
+                  <CopyItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
+                </div>
+              </div>
+
+              <div class="btn_list space-y-5">
+                <p>{{ $t("overview_spec.way") }}</p>
+                <div class="v_center space-x-5">
+                  <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
+                    {{ $t("menu_spec.Proxy") }}
+                  </div>
+                  <div @click="$router.push('/generate_api')" class="font-semibold pointer yellow_btn btn vh_center rounded flex-1">
+                    {{ $t("menu_spec.API") }}
+                  </div>
+                  <div @click="$router.push('/generate_api?active=1')" class="font-semibold pointer blue_btn btn vh_center rounded flex-1">
+                    {{ $t("menu_spec.Account_and_password") }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div v-else class="echart column space-y-5 w-full md:flex-1">
               <div class="card flex-1 rounded-md board column space-y-2">
                 <div class="label column" style="align-items: stretch">
                   <!-- 文字 -->
@@ -151,7 +168,7 @@
               </div>
             </div>
 
-            <div class="table_box xl:hidden board">
+            <div v-if="isUsed" class="table_box xl:hidden board">
               <el-table :data="tableData" v-if="tableData.length > 0">
                 <el-table-column prop="date" :label="$t('Date')"></el-table-column>
                 <el-table-column prop="flow" :label="$t('Traffic')">
@@ -167,7 +184,7 @@
           </div>
         </div>
         <!-- 右边通知 -->
-        <div class="right h-full hidden xl:column space-y-5">
+        <div v-if="isUsed" class="right h-full hidden xl:column space-y-5">
           <div class="notice board" v-if="noticeText">
             <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
             <div class="notice_box">
@@ -299,6 +316,8 @@ import tableProgress from "../components/progress/progress.vue"
 import { Calendar, ChevronLeft, Gauge, SlidersVertical, Check } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import { roundToDecimal } from "../../../utils/tools"
+import CopyItem from "./copyItem.vue"
+import { platDataNodes } from "../../../api/home"
 // import * as echarts from 'echarts'
 let echart = null
 export default {
@@ -314,6 +333,7 @@ export default {
     IpButton,
     Gauge,
     SlidersVertical,
+    CopyItem,
   },
   data() {
     this.page = {
@@ -327,6 +347,13 @@ export default {
       "font-size": "14px",
     }
     return {
+      // ip池
+      ipPools: [
+        "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv3.connpnt134.com:9135 https://ipinfo.io",
+        "curl -socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv2.connpnt134.com:9135 https://ipinfo.io",
+        "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
+        "curl -socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv5.connpnt134.com:9135 https://ipinfo.io",
+      ],
       // ip直线图选择的开始日期
       ipStartDate: "",
       pickerOptions: Object.freeze({
@@ -418,18 +445,41 @@ export default {
       this.quantityOfFlow = obj
     })
     // 实时统计
-    this.getRealTime(new Date())
+    if (this.isUsed) {
+      this.getRealTime(new Date())
+      // 通知
+      this.getNotice()
+      // 初始化echart滑块
+      this.selectEchart(0)
+    } else {
+      this.getIpPool()
+    }
     // // 国家列表
     this.getCountryList()
-    // 通知
-    this.getNotice()
-    // 初始化echart滑块
-    this.selectEchart(0)
 
     // 加载国家国旗
     import("flag-icon-css/css/flag-icons.css")
   },
   methods: {
+    async getIpPool() {
+      try {
+        const { data } = await platDataNodes()
+        const result = []
+        const proto = ["HTTP(s)", "SOCKS5"]
+        data.forEach((item) => {
+          const country = item.group === "OM" ? (this.en ? "US" : "美国") : this.en ? "Comprehensive" : "综合"
+          item.nodes.forEach((node, index) => {
+            result.push({
+              label: `${country} ${proto[index]}：`,
+              text: `curl -${index % 2 === 0 ? "x" : "socks5"} ${this.proxy_user}-123RsAYBc-0-US-N:${this.proxy_pass}@${node}:9135 https://ipinfo.io`,
+            })
+          })
+        })
+        this.ipPools = result
+      } catch (err) {
+        console.log(err.message)
+      }
+    },
     selectEchart(index) {
       this.echartIndex = index
 
@@ -1265,11 +1315,14 @@ export default {
   },
   setup() {
     const { lang, en } = settingStore()
-    const { unlimited } = userStore()
+    const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()
     return {
       en,
       lang,
       unlimited,
+      isUsed,
+      proxy_user,
+      proxy_pass,
     }
   },
 }

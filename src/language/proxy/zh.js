@@ -23,6 +23,9 @@ export default {
 
   Buy_now: "立即购买",
 
+  Copy: "复制",
+  Curl_Command: "Curl 命令",
+
   proxy_spec: {
     duration_tip: "当您使用代理时，您可以设置IP的有效期，并在有效期内使用该代理。由于它是常驻代理，因此有效期的范围可以从几个小时到几天不等。",
     list_tip: {

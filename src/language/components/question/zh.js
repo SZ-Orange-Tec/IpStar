@@ -14,6 +14,6 @@ export default {
     desc5:
       "您可以通过三种方式切换 IP 地址：\n(1) 在获得的代理列表中重新选择 IP 地址通道。\n(2) 调用用于切换 IP 的特殊 API。有关详细信息，请参阅 API 文档。\n(3) 自定义代理用户名。\nIpStar 的代理用户格式通常为“user-ipstr-0-county-N”，这是一个实际示例：“u20247cwjfp-6Kv3RsAYBc-0-BR-N”，您可以将“ipstr”的第二段更改为另一个随机字符串以更改 IP 地址。同时，您可以将“country”的第四段更改为另一个国家代码来切换国家，并且在切换国家时，必须同时修改“ipstr”，否则修改将无效。",
     title6: "IpStar 的 IP 池有多大？",
-    desc6: "IpStar 拥有5000多万个住宅 IP 地址，并定期更新以提供最干净的 IP 池。",
+    desc6: "IpStar 拥有9000多万个住宅 IP 地址，并定期更新以提供最干净的 IP 池。",
   },
 }

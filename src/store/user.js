@@ -12,6 +12,7 @@ const getters = {
   apiKey: computed(() => state.userInfo?.api_key ?? ""),
   proxy_user: computed(() => state.userInfo?.proxy_user ?? ""),
   proxy_pass: computed(() => state.userInfo?.proxy_pass ?? ""),
+  isUsed: computed(() => state.userInfo?.consume > 0),
 }
 
 const actions = {
