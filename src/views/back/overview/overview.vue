@@ -72,7 +72,7 @@
           </div>
 
           <!-- 流量消耗趋势 -->
-          <div class="w-full column md:flex gap-5 items-stretch echart_table">
+          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{'echart_table_layout':isUsed}">
             <!-- 新手引导 -->
             <div v-if="!isUsed" class="new_guide w-full md:flex-1 column !items-stretch space-y-4">
               <div class="text-lg md:text-2xl font-semibold">
@@ -470,7 +470,7 @@ export default {
           const country = item.group === "OM" ? (this.en ? "US" : "美国") : this.en ? "Comprehensive" : "综合"
           item.nodes.forEach((node, index) => {
             result.push({
-              label: `${country} ${proto[index]}：`,
+              label: `${country} ${proto[index%2]}：`,
               text: `curl -${index % 2 === 0 ? "x" : "socks5"} ${this.proxy_user}-123RsAYBc-0-US-N:${this.proxy_pass}@${node}:9135 https://ipinfo.io`,
             })
           })
