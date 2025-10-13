@@ -45,11 +45,13 @@ export default {
 
     welcome1: "Welcome!",
     welcome2: "Let's quickly verify your proxy server configuration, connection, and speed.",
+    proxy_title: "Proxy Information",
     port: "Host Port：",
     proxy_user: "Proxy Username：",
     proxy_pass: "Proxy Password：",
     test1: "Test Example",
     test2: "Test Command is CURL Example, You Can Paste It into the Command Line to Quickly Test Your Proxy Settings.",
+    obtxy_title: "IP Extraction Method",
     way: "Detailed IP Extraction Method, You Can Try",
 
     day_compare: "Daily comparison",

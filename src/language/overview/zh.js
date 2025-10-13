@@ -43,11 +43,13 @@ export default {
 
     welcome1: "欢迎！",
     welcome2: "让我们快速验证您的代理服务器配置、连接和速度。",
+    proxy_title: "代理信息",
     port: "主机端口：",
     proxy_user: "代理用户名：",
     proxy_pass: "代理密码：",
     test1: "测试示例",
     test2: "测试命令为CURL示例，您可以将其粘贴到命令行中以快速测试您的代理设置。",
+    obtxy_title: "获取IP方式",
     way: "详细的IP提取方式，您可以试试",
 
     day_compare: "分天对比",

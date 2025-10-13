@@ -46,6 +46,8 @@ async function copy() {
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-family: mononoki, Consolas, Liberation Mono, Menlo, Courier, monospace, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, Segoe UI Symbol,
+      Android Emoji, EmojiSymbols;
   }
 }
 </style>

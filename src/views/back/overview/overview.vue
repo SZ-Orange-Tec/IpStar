@@ -72,46 +72,59 @@
           </div>
 
           <!-- 流量消耗趋势 -->
-          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{'echart_table_layout':isUsed}">
+          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{ echart_table_layout: isUsed }">
             <!-- 新手引导 -->
-            <div v-if="!isUsed" class="new_guide w-full md:flex-1 column !items-stretch space-y-4">
+            <div v-if="!isUsed" class="new_guide w-full md:flex-1 column !items-stretch space-y-7">
               <div class="text-lg md:text-2xl font-semibold">
                 <span class="primary">{{ $t("overview_spec.welcome1") }}</span>
                 {{ $t("overview_spec.welcome2") }}
               </div>
               <div class="split"></div>
 
-              <div>
-                <div class="w-full column !items-stretch space-y-2" style="max-width: 30rem">
-                  <CopyItem :label="$t('overview_spec.port')" text="9135" />
-                  <CopyItem :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
-                  <CopyItem :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
+              <div class="space-y-2" style="margin-top: 0">
+                <div class="space-y-2">
+                  <p class="black font-medium text-xl">1. {{ $t("overview_spec.proxy_title") }}</p>
+                </div>
+
+                <div>
+                  <div class="w-full column !items-stretch space-y-2" style="max-width: 30rem">
+                    <CopyItem :label="$t('overview_spec.port')" text="9135(http) 9139(socks5)" />
+                    <CopyItem :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
+                    <CopyItem :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
+                  </div>
                 </div>
               </div>
 
-              <div class="">
-                <span class="black font-medium">{{ $t("overview_spec.test1") }}</span>
-                &nbsp;
-                <span class="grey-60">{{ $t("overview_spec.test2") }}</span>
-              </div>
+              <div class="space-y-3">
+                <div class="space-y-2">
+                  <p class="black font-medium text-xl">2. {{ $t("overview_spec.test1") }}</p>
+                  <p>{{ $t("overview_spec.test2") }}</p>
+                </div>
 
-              <div>
-                <div class="w-full column !items-stretch space-y-2" style="max-width: 70rem">
-                  <CopyItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
+                <div>
+                  <div class="w-full column !items-stretch space-y-4" style="max-width: 70rem">
+                    <CodeItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
+                  </div>
                 </div>
               </div>
 
-              <div class="btn_list space-y-5">
-                <p>{{ $t("overview_spec.way") }}</p>
-                <div class="v_center space-x-5">
-                  <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
-                    {{ $t("menu_spec.Proxy") }}
-                  </div>
-                  <div @click="$router.push('/generate_api')" class="font-semibold pointer yellow_btn btn vh_center rounded flex-1">
-                    {{ $t("menu_spec.API") }}
-                  </div>
-                  <div @click="$router.push('/generate_api?active=1')" class="font-semibold pointer blue_btn btn vh_center rounded flex-1">
-                    {{ $t("menu_spec.Account_and_password") }}
+              <div class="space-y-2">
+                <div class="space-y-2">
+                  <p class="black font-medium text-xl">3. {{ $t("overview_spec.obtxy_title") }}</p>
+                </div>
+
+                <div class="btn_list space-y-5">
+                  <p>{{ $t("overview_spec.way") }}</p>
+                  <div class="v_center space-x-5">
+                    <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
+                      {{ $t("menu_spec.Proxy") }}
+                    </div>
+                    <div @click="$router.push('/generate_api')" class="font-semibold pointer yellow_btn btn vh_center rounded flex-1">
+                      {{ $t("menu_spec.API") }}
+                    </div>
+                    <div @click="$router.push('/generate_api?active=1')" class="font-semibold pointer blue_btn btn vh_center rounded flex-1">
+                      {{ $t("menu_spec.Account_and_password") }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -317,6 +330,7 @@ import { Calendar, ChevronLeft, Gauge, SlidersVertical, Check } from "lucide-vue
 import IpButton from "@/components/button/button.vue"
 import { roundToDecimal } from "../../../utils/tools"
 import CopyItem from "./copyItem.vue"
+import CodeItem from "./codeItem.vue"
 import { platDataNodes } from "../../../api/home"
 // import * as echarts from 'echarts'
 let echart = null
@@ -334,6 +348,7 @@ export default {
     Gauge,
     SlidersVertical,
     CopyItem,
+    CodeItem,
   },
   data() {
     this.page = {
@@ -466,15 +481,33 @@ export default {
         const { data } = await platDataNodes()
         const result = []
         const proto = ["HTTP(s)", "SOCKS5"]
+        const host = []
+        const countrys = [
+          { en: "US", zh: "美国", code: "US" },
+          { en: "Germany", zh: "德国", code: "DE" },
+          { en: "Russia", zh: "俄罗斯", code: "RU" },
+          { en: "Random", zh: "随机", code: "N" },
+        ]
         data.forEach((item) => {
-          const country = item.group === "OM" ? (this.en ? "US" : "美国") : this.en ? "Comprehensive" : "综合"
           item.nodes.forEach((node, index) => {
-            result.push({
-              label: `${country} ${proto[index%2]}：`,
-              text: `curl -${index % 2 === 0 ? "x" : "socks5"} ${this.proxy_user}-123RsAYBc-0-US-N:${this.proxy_pass}@${node}:9135 https://ipinfo.io`,
-            })
+            host.push(node)
           })
         })
+        host.forEach((serve, index) => {
+          const country = countrys[index]
+          const name = country[this.lang] ?? country.en
+          const code = country.code
+
+          const idx = index % 2
+          const port = idx === 0 ? 9139 : 9135
+          result.push({
+            label: `${name} ${proto[index % 2]}：`,
+            text: `curl -${index % 2 === 0 ? "x" : "socks5"} ${this.proxy_user}-123RsAYBc-0-${code}-N:${
+              this.proxy_pass
+            }@${serve}:${port} https://ipinfo.io`,
+          })
+        })
+        console.log(result)
         this.ipPools = result
       } catch (err) {
         console.log(err.message)
