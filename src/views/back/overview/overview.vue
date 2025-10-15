@@ -7,9 +7,6 @@
             <ChevronLeft />
           </ip-button>
           <span>{{ title }}</span>
-          <div class="search" v-if="activeIndex === 2">
-            <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="dd.MM.yyyy" style="width: 8rem" />
-          </div>
         </div>
       </template>
     </NavBar>
@@ -170,7 +167,7 @@
                         type="date"
                         prefix-icon="null"
                         @change="input"
-                        format="dd.MM.yyyy"
+                        format="YYYY-MM-DD"
                         :clearable="false"
                         placeholder="option date"
                         style="width: 110px"
@@ -209,7 +206,7 @@
           </div>
 
           <div class="date_flow table_box flex-1 min-h-0 board">
-            <el-table :data="tableData" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
+            <el-table :data="tableData" height="100%" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
               <el-table-column prop="date" :label="$t('Date')"></el-table-column>
               <el-table-column prop="flow" :label="$t('Traffic')">
                 <template #default="scope">
@@ -267,6 +264,9 @@
 
       <!-- 余额明细 -->
       <div class="balance w-full column board p-5 rounded-md space-y-3" v-show="activeIndex === 2">
+        <div class="search" v-if="activeIndex === 2">
+          <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="YYYY-MM-DD" style="width: 8rem" />
+        </div>
         <div class="table_box w-full">
           <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
             <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->

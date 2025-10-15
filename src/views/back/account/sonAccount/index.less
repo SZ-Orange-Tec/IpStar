@@ -1,0 +1,72 @@
+.pc-son-account {
+  .icon {
+    color: #409eff;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .red {
+    color: #ff4949;
+    &:hover {
+      color: #ff7875;
+    }
+  }
+  .tablebox {
+    :deep(.el-table){
+      border: 1px solid #EBEEF5;
+      // border-bottom: none;
+      // max-height: 100%;
+      // border-radius: 8px;
+      thead{
+        .el-table__cell{
+          background-color: #F2F3F5;
+          .cell{
+            color: hsl(var(--foreground));
+          }
+        }
+
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  ::v-deep .el-dialog {
+    border-radius: 8px;
+    // padding: 20px 30px;
+    .el-dialog__body {
+      padding-right: 80px;
+    }
+
+    .prepend-btn {
+      margin: -10px -20px;
+      // width: 100%;
+      padding: 0 20px;
+      height: 38px;
+      border-radius: 0 6px 6px 0;
+      background-color: #ebeef5;
+    }
+    .append-btn {
+      margin: -10px -20px;
+      // width: 100%;
+      padding: 0 20px;
+      height: 38px;
+      border-radius: 0 6px 6px 0;
+      background-color: #fff;
+      &:hover {
+        background-color: #f5f7fa;
+      }
+    }
+  }
+
+  .hastraffic {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 6px;
+    border-radius: 1px solid #b3d8ff;
+    color: #409eff;
+    background-color: #ecf5ff;
+  }
+}

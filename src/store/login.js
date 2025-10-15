@@ -1,7 +1,5 @@
 import { computed, reactive, toRefs } from "vue"
-
-// import userStore from "./user"
-// const { clearUserInfo } = userStore()
+import userStore from "./user"
 
 const state = reactive({
   token: localStorage.getItem("token") || "",
@@ -14,7 +12,8 @@ const getters = {
 function OutLogin() {
   state.token = ""
   localStorage.removeItem("token")
-  // clearUserInfo()
+  const { clearUserInfo } = userStore()
+  clearUserInfo()
 }
 function Login(token) {
   state.token = token

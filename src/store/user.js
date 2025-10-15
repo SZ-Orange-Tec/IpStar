@@ -13,9 +13,13 @@ const getters = {
   proxy_user: computed(() => state.userInfo?.proxy_user ?? ""),
   proxy_pass: computed(() => state.userInfo?.proxy_pass ?? ""),
   isUsed: computed(() => state.userInfo?.consume > 0),
+  isAdmin: computed(() => state.userInfo?.admin === 2),
+  subPrefix: computed(() => state.userInfo?.sub_prefix ?? ""),
 
   username_simple: computed(() =>
-    state.userInfo.username.length > 15 ? state.userInfo.username.slice(0, 4) + "****" + state.userInfo.username.slice(-4) : state.userInfo.username
+    (state.userInfo?.username?.length ?? 0) > 15
+      ? state.userInfo.username.slice(0, 4) + "****" + state.userInfo.username.slice(-4)
+      : state.userInfo?.username
   ),
 }
 

@@ -1,0 +1,63 @@
+.pc-account-detail {
+  h5 {
+    font-size: 15px;
+  }
+  .tablebox {
+    ::v-deep .el-table {
+      // height: 100%;
+      .el-table__body-wrapper::-webkit-scrollbar {
+        width: 7px;
+      }
+    }
+  }
+  .search {
+    ::v-deep .el-range-editor {
+      width: 260px;
+      .el-range-separator {
+        width: 30px;
+        color: #ccc;
+      }
+    }
+  }
+
+  .day_echart {
+    height: 100%;
+    & > .line_echart {
+      width: 100%;
+      height: 100%;
+    }
+    .null_data {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // font-family: Microsoft YaHei;
+      ::v-deep .el-empty {
+        .el-empty__image {
+          width: 80px;
+        }
+        .el-empty__description p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  // #primary-button {
+  //   background-color: @color;
+  //   // min-width: 150px;
+  //   padding: 12px 30px;
+  //   height: 40px;
+  //   color: #2c3038;
+  //   font-size: 14px;
+  //   transition: background-color 0.2s;
+  //   border: none;
+  //   &:hover {
+  //     background-color: #ebaa10;
+  //   }
+  // }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

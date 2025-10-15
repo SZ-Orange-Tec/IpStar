@@ -19,7 +19,7 @@
             v-show="item.isShow"
             @click="jumpPath(index, item)"
           >
-            <component :is="item.icon" :size="18"></component>
+            <component :is="item.icon" :size="16" :stroke-width="1.5"></component>
             <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
           </li>
         </template>
@@ -45,14 +45,17 @@ import {
   LaptopMinimalCheck,
   ChevronsLeft,
   NotepadText as WhiteListIcon,
+  Contact as AccountIcon,
 } from "lucide-vue-next"
-import settingStore from "../../../../store/setting"
+import settingStore from "@/store/setting"
+import userStore from "@/store/user"
 
 const { isProduc } = layoutStore()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
 const { lang } = settingStore()
+const { isAdmin } = userStore()
 
 // 响应式状态
 const idx = ref(0)
@@ -98,6 +101,12 @@ function getSlideList() {
       path: "/whitelist",
       isShow: true,
     },
+    // {
+    //   icon: AccountIcon,
+    //   name: t("Account"),
+    //   path: "/account",
+    //   isShow: isAdmin.value,
+    // },
     {
       icon: Settings,
       name: t("menu_spec.Settings"),

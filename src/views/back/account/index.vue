@@ -1,0 +1,24 @@
+<template>
+  <div class="account column h-full">
+    <NavBar>
+      <template #default="{ title }">
+        <div>{{ title }}</div>
+      </template>
+    </NavBar>
+
+    <div class="flex-1 w-full px-5">
+      <SonAccount class="board p-5 mt-5 rounded-md" />
+      <!-- <AccountDetail class="card" /> -->
+    </div>
+  </div>
+</template>
+
+<script setup>
+import NavBar from "../components/navbar/navbar.vue"
+import SonAccount from "./sonAccount/index.vue"
+// import AccountDetail from "./detail/index.vue"
+</script>
+
+<style lang="less" scoped>
+// @import url("./index.less");
+</style>

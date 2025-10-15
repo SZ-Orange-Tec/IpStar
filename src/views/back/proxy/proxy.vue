@@ -75,32 +75,17 @@
         <!-- <div class="line w-full"></div> -->
 
         <div class="card space-y-4 w-full board">
-          <div class="v_center space-x-5 text-sm w-full whitespace-nowrap">
-            <ip-button type="border" @click="isTxt = !isTxt" class="px-5 h-8 font-medium">
-              <div class="space-x-2 v_center">
-                <ArrowLeftRight :size="18" />
-                <p>{{ !isTxt ? t("Show_as_text") : t("Show_as_table") }}</p>
-              </div>
-            </ip-button>
-            <ip-button type="border" @click="copy" class="px-5 h-8 font-medium">{{ t("Copy_to_clipboard") }}</ip-button>
-          </div>
+          <div class="between space-x-5 w-full">
+            <p class="font-medium text-lg">{{ t("Link_Information") }}</p>
 
-          <p class="text-sm space-x-2 w-full">
-            <span>{{ t("proxy_spec.list_tip.front") }}</span>
-            <span @click="goToDocument" class="primary_text pointer">{{ t("proxy_spec.list_tip.btn") }}</span>
-            <span>{{ t("proxy_spec.list_tip.back") }}</span>
-          </p>
-
-          <!-- 搜索内容显示区 -->
-          <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt" style="min-height: 455px">
-            <p class="grey-60">{{ t("Server") }} : {{ t("Port") }} : {{ t("User") }} : {{ t("Password") }}</p>
-            <div class="space-y-3">
-              <p v-for="(item, index) in content" :key="index">{{ item }}</p>
+            <div class="v_center space-x-2">
+              <ip-button type="border" @click="copy" class="btn px-5 h-8 text-sm font-medium">{{ t("Copy_Information") }}</ip-button>
+              <ip-button type="border" @click="copyUrlAll" class="btn px-5 h-8 text-sm font-medium">{{ t("Copy_Curl") }}</ip-button>
             </div>
           </div>
 
           <!-- 表格 -->
-          <div class="table_box w-full" v-else>
+          <div class="table_box w-full">
             <el-table class="w-full" :data="tableData" height="455">
               <el-table-column prop="server" :label="t('Server')" min-width="160"></el-table-column>
               <el-table-column prop="port" :label="t('Port')" min-width="100"></el-table-column>
@@ -108,7 +93,7 @@
               <el-table-column prop="password" :label="t('Password')" min-width="140"></el-table-column>
               <el-table-column :label="t('Curl_Command')" min-width="140">
                 <template #default="scope">
-                  <ip-button type="border" @click="copyUrl(scope.row)" class="px-3 h-8 font-medium">{{ t("Copy") }}</ip-button>
+                  <span @click="copyUrl(scope.row)" class="primary pointer font-medium">{{ t("Copy") }}</span>
                 </template>
               </el-table-column>
               <!-- <template #append>
@@ -116,7 +101,6 @@
               </template> -->
             </el-table>
           </div>
-
           <p class="space-x-2 text-sm" v-show="is_purchase">
             <img src="../../../assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" style="display: inline-block" />
             <span>{{ t("proxy_spec.api_tip.front") }}</span>
@@ -250,6 +234,19 @@ async function copyUrl(item) {
   const { password, port, server, user } = item
   const url = `curl -${protocolVal.value === "0" ? "socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
   await copyText(url)
+  Message({
+    message: en.value ? "Copy success" : "复制成功",
+    type: "success",
+  })
+}
+async function copyUrlAll() {
+  let result = ""
+  tableData.value.forEach((item) => {
+    const { password, port, server, user } = item
+    const url = `curl -${protocolVal.value === "0" ? "socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
+    result += result.length > 0 ? "\n" + url : url
+  })
+  await copyText(result)
   Message({
     message: en.value ? "Copy success" : "复制成功",
     type: "success",

@@ -127,9 +127,10 @@ import {
   Globe as LangIcon,
   ChevronDown,
   LogOut as SignOutIcon,
+  Contact as AccountIcon,
 } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
@@ -138,26 +139,34 @@ import settingStore from "@/store/setting"
 import userStore from "@/store/user"
 import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import loginStore from "@/store/login"
+import { watch } from "vue"
 
 const router = useRouter()
 const route = useRoute()
 const { isProduc } = layoutStore()
-const { username_simple } = userStore()
+const { username_simple, isAdmin } = userStore()
 const { lang } = settingStore()
 const { OutLogin } = loginStore()
 
 const { t } = useI18n()
 
-const pathMap = {
-  "/overview": t("menu_spec.Overview"),
-  "/products": t("menu_spec.Products"),
-  "/billings": t("menu_spec.Billings"),
-  "/proxy": t("menu_spec.Proxy"),
-  "/generate_api": t("menu_spec.API"),
-  "/settings": t("menu_spec.Settings"),
-  "/whitelist": t("Whitelist"),
+const name = ref("")
+function getName() {
+  const pathMap = {
+    "/overview": t("menu_spec.Overview"),
+    "/products": t("menu_spec.Products"),
+    "/billings": t("menu_spec.Billings"),
+    "/proxy": t("menu_spec.Proxy"),
+    "/generate_api": t("menu_spec.API"),
+    "/settings": t("menu_spec.Settings"),
+    "/whitelist": t("Whitelist"),
+    "/account": t("Account"),
+  }
+  name.value = pathMap[route.path] ?? ""
 }
-const name = computed(() => pathMap[route.path] ?? "")
+watch(lang, () => getName(), {
+  immediate: true,
+})
 
 const path = computed(() => route.path)
 const menuData = [
@@ -187,14 +196,20 @@ const menuData = [
     path: "/generate_api",
   },
   {
-    icon: Settings,
-    name: t("menu_spec.Settings"),
-    path: "/settings",
-  },
-  {
     icon: WhiteListIcon,
     name: t("Whitelist"),
     path: "/whitelist",
+  },
+  // {
+  //   icon: AccountIcon,
+  //   name: t("Account"),
+  //   path: "/account",
+  //   isShow: isAdmin.value,
+  // },
+  {
+    icon: Settings,
+    name: t("menu_spec.Settings"),
+    path: "/settings",
   },
 ]
 function jumpPath(path) {

@@ -72,7 +72,7 @@
             prefix-icon="null"
             class="picker"
             @change="input"
-            format="DD.MM.YYYY"
+            format="YYYY-MM-DD"
             :clearable="false"
             placeholder="option date"
           >
@@ -196,7 +196,7 @@
       <i @click="updateActiveIndex(0)" v-if="activeIndex !== 0" class="el-icon-arrow-left pointer"></i>
       <span>{{ $t("PCHeader.userDropdown.dropdownOne") }}</span>
       <div class="search" v-if="activeIndex === 2">
-        <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="DD.MM.YYYY" />
+        <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="YYYY-MM-DD" />
       </div>
     </div>
   </div>

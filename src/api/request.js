@@ -4,9 +4,6 @@ import Message from "@/components/message/message"
 import loginStore from "../store/login"
 import settingStore from "../store/setting"
 
-const { OutLogin, token } = loginStore()
-const { en, lang } = settingStore()
-
 // 相同错误码只提示一次
 let prevCode = null
 const _request = _axios.create({
@@ -17,6 +14,7 @@ const _request = _axios.create({
 })
 
 async function ErrorMsg(code) {
+  const { en, lang } = settingStore()
   try {
     const url = `/error/${code.toString().charAt(0)}-${lang.value ?? "en"}.json`
     const result = await fetch(url)
@@ -37,6 +35,7 @@ async function ErrorMsg(code) {
 // 请求拦截
 _request.interceptors.request.use(
   (config) => {
+    const { token } = loginStore()
     if (token.value) {
       config.headers.Authorization = `Bearer ${token.value}`
     }
@@ -70,6 +69,8 @@ _request.interceptors.response.use(
     return res.data
   },
   (error) => {
+    const { OutLogin } = loginStore()
+    const { en } = settingStore()
     if (prevCode === error.response.data.code) {
       return Promise.reject(error)
     } else {

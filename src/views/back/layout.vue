@@ -90,6 +90,7 @@ function toTutorial() {
 // 生命周期钩子
 onMounted(() => {
   // judgeMask()
+  getUserInfo()
 })
 </script>
 

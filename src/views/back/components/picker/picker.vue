@@ -7,7 +7,7 @@
       :default-value="new Date()"
       :picker-options="pickerOptions"
       range-separator="to"
-      format="dd.MM.YYYY"
+      format="YYYY-MM-DD"
       prefix-icon="null"
       start-placeholder="start time"
       end-placeholder="end time"

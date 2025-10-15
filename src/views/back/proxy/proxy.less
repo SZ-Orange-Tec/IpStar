@@ -51,15 +51,15 @@
           }
 
         }
-        tbody{
-          &>tr:nth-child(even){
-            .el-table__cell{
-              // background-color: hsl(var(--primary) / 10%);
-              // background-color: #f0f9ff;
-              background-color: #eff6ff;
-            }
-          }
-        }
+      }
+    }
+
+    .btn{
+      box-shadow: 0 0 0 1px hsl(var(--primary));
+      color: hsl(var(--primary));
+      &:hover{
+        background-color: hsl(var(--primary));
+        color: hsl(var(--colour-foreground));
       }
     }
   }

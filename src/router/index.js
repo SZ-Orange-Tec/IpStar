@@ -3,7 +3,6 @@ import { loadLocaleMessages } from "../language"
 import Front from "@/views/front/front.vue"
 import Home from "@/views/front/home/home.vue"
 import loginStore from "../store/login"
-const { isLogin } = loginStore()
 
 const routes = [
   { path: "/", redirect: "/home" },
@@ -94,6 +93,12 @@ const routes = [
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/whitelist/whitelist.vue"),
       },
+      {
+        path: "/account",
+        name: "account",
+        meta: { index: 14, keepAlive: false },
+        component: () => import("@/views/back/account/index.vue"),
+      },
 
       // {
       //   path: '/configure',
@@ -140,6 +145,8 @@ const router = createRouter({
 const loginPath = /\/overview|\/products|\/billings|\/proxy|\/api|\/settings/
 
 router.beforeEach(async (to, from, next) => {
+  const { isLogin } = loginStore()
+
   if (to.name) {
     await loadLocaleMessages(to.name)
   }

@@ -104,12 +104,14 @@ import { ChevronRight } from "lucide-vue-next"
 import { platCustomerResetpass } from "../../api/login"
 import useWindowHeight from "../../composables/useWindowHeight"
 import vLazy from "@/directive/lazy"
+import userStore from "../../store/user"
 
 const { t } = useI18n()
 
 const router = useRouter()
 const { token } = loginStore()
 const { en } = settingsStore()
+const { getUserInfo } = userStore()
 
 const { height } = useWindowHeight()
 
@@ -178,7 +180,8 @@ async function next(func) {
           localStorage.setItem("token", data.token)
           token.value = data.token
 
-          router.replace("/overview")
+          await getUserInfo()
+          router.push("/overview")
 
           Message({
             type: "success",
@@ -205,7 +208,8 @@ async function next(func) {
           localStorage.setItem("token", data.token)
           token.value = data.token
 
-          router.replace("/overview")
+          await getUserInfo()
+          router.push("/overview")
 
           track_register()
         }
@@ -253,14 +257,13 @@ async function next(func) {
         localStorage.setItem("token", data.token)
         token.value = data.token
 
-        router.replace("/overview")
+        await getUserInfo()
+        router.push("/overview")
 
         Message({
           type: "success",
           message: en ? "Login successfully" : "登录成功",
         })
-
-        status.value = "forget_reset"
         break
       default:
         console.log("Error Status:", status.value)
