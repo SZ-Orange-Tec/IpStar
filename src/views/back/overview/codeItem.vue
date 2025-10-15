@@ -4,11 +4,11 @@
       <div>{{ label }}</div>
     </div>
 
-    <div class="code px-3 py-2 rounded-md">
+    <div class="code px-3 py-2 rounded-md text-sm">
       <prism-editor class="my-editor" aria-disabled v-model="text" :highlight="highlighter" :tabSize="4" readonly></prism-editor>
       <ip-button type="ghost" class="copy_btn transition-opacity" @click="Copy" :class="{ show: bol }">
-        <Clipboard v-if="!bol" :size="16" />
-        <ClipboardCheck v-else :size="16" class="primary" />
+        <CopyIcon v-if="!bol" :size="14" />
+        <CopySuccessIcon v-else :size="14" class="primary" />
       </ip-button>
     </div>
   </div>
@@ -25,7 +25,7 @@ import "prismjs/components/prism-javascript"
 import "prismjs/themes/prism-tomorrow.css"
 
 import IpButton from "@/components/button/button.vue"
-import { Clipboard, ClipboardCheck } from "lucide-vue-next"
+import { Copy as CopyIcon, CopyCheck as CopySuccessIcon } from "lucide-vue-next"
 import { ref } from "vue"
 import copyText from "../../../utils/copyText"
 
@@ -61,7 +61,7 @@ async function Copy() {
 .codeItem {
   .header {
     // border-bottom: 1px solid #e2e8f0;
-    font-weight: 500;
+    font-weight: 400;
     color: #314158;
   }
   .code {
@@ -71,6 +71,8 @@ async function Copy() {
     ::v-deep .my-editor {
       font-family: mononoki, Consolas, Liberation Mono, Menlo, Courier, monospace, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji,
         Segoe UI Symbol, Android Emoji, EmojiSymbols;
+      // color: ;
+      color: #adafb4;
       textarea {
         display: none;
       }

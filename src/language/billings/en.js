@@ -20,4 +20,6 @@ export default {
   Unpaid: "Unpaid",
   Payment_confirmation: "Payment confirmation",
   Day: "Day",
+
+  Forever: "Forever",
 }

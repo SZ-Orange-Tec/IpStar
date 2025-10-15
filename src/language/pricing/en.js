@@ -13,7 +13,8 @@ export default {
   ...question,
 
   pricing_spec: {
-    des: "Real Residential IPs cover 200+ countries",
+    title: "Residential Proxies Pricing",
+    des: "Access the Global Web: The Power of 200+ Countries of Residential IPs.",
 
     plan_title: "Total Data Control",
     plan_desc: "Easily track your data usage in real-time. Our dashboard helps you monitor proxy stats and stay on budget.",

@@ -1,18 +1,14 @@
 <template>
   <div class="pc-settings column h-full">
     <NavBar>
-      <template #default>
-        <div class="my_tabs v_center space-x-5">
-          <span class="pointer" :class="{ active: index === idx }" v-for="(item, index) in tabs" :key="index" @click="cikTabs(index)">
-            {{ item }}
-          </span>
-        </div>
+      <template #default="{ title }">
+        <div>{{ title }}</div>
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 px-3 md:px-5">
+    <div class="w-full main flex-1 px-3 md:px-5 my-5">
       <div class="main_container board">
-        <div class="tab_content space-y-5" v-show="!idx">
+        <div class="tab_content space-y-5">
           <!-- 头像 -->
           <div class="headPortrait space-x-5">
             <div class="img_head">
@@ -82,41 +78,6 @@
             </div>
           </div>
         </div>
-
-        <div class="tab_content space-y-5" v-show="idx">
-          <!-- 新增按钮 -->
-          <el-button @click="addNew">{{ $t("Add") }}</el-button>
-          <!-- 白名单表格 -->
-          <div class="table_box">
-            <el-table :data="tableData" height="378" border style="width: 753px; border-radius: 10px 10px 0px 0px">
-              <el-table-column prop="ip" label="IP"> </el-table-column>
-              <el-table-column prop="note" :label="$t('Notes')"> </el-table-column>
-              <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
-              <el-table-column :label="$t('Manage')">
-                <template #default="scope">
-                  <el-popconfirm :title="$t('settings_spec.confirm_delete')" @confirm="deleteItem(scope)">
-                    <template #reference>
-                      <el-button>{{ $t("Delete") }}</el-button>
-                    </template>
-                  </el-popconfirm>
-                </template>
-              </el-table-column>
-              <template #append>
-                <div class="message" v-if="bottomLoding">loading&nbsp;<i class="el-icon-loading"></i></div>
-                <div class="message" v-else>{{ $t("At_the_end") }}</div>
-              </template>
-            </el-table>
-          </div>
-          <el-popover placement="top-start" width="400" trigger="hover">
-            <div>
-              <p>{{ $t("settings_spec.white_tip1") }}</p>
-              <p>{{ $t("settings_spec.white_tip2") }}</p>
-            </div>
-            <template #reference>
-              <HelpCircle :size="16" color="hsl(var(--primary))" class="pointer" />
-            </template>
-          </el-popover>
-        </div>
       </div>
     </div>
     <!-- tabs -->
@@ -127,7 +88,7 @@
       <div class="content_password">
         <!-- 表单验证 -->
         <!-- 修改密码 -->
-        <el-form :model="formData" :rules="rules" ref="Elform" v-show="isForm">
+        <el-form :model="formData" :rules="rules" ref="Elform">
           <el-form-item prop="oldPassword" :label="$t('Old_password')">
             <el-input type="number" v-model="formData.oldPassword" show-password autofocus></el-input>
           </el-form-item>
@@ -138,21 +99,12 @@
             <el-input type="number" v-model="formData.repeatNewPassword" show-password></el-input>
           </el-form-item>
         </el-form>
-        <!-- 新增白名单 -->
-        <el-form :model="AddFormData" :rules="AddRules" ref="AddElform" v-show="!isForm">
-          <el-form-item prop="IP" :label="$t('Add_to')">
-            <el-input v-model="AddFormData.IP" placeholder="IP" autofocus></el-input>
-          </el-form-item>
-          <el-form-item prop="notes">
-            <el-input v-model="AddFormData.notes" :placeholder="$t('Notes')"></el-input>
-          </el-form-item>
-        </el-form>
       </div>
       <!-- 按钮 -->
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="confirm" :loading="btnloading">{{ $t("OK") }}</el-button>
-          <el-button type="primary" @click="isShow = false">{{ $t("Cancel") }}</el-button>
+          <el-button @click="isShow = false">{{ $t("Cancel") }}</el-button>
+          <el-button type="primary" @click="confirm" :loading="btnloading">{{ $t("OK") }}</el-button>
         </span>
       </template>
     </el-dialog>
@@ -198,20 +150,12 @@ export default {
   },
   data() {
     return {
-      tabs: [this.$t("Settings"), this.$t("whitelist")],
-      idx: 0,
-      tableData: [],
       isShow: false,
       // 修改密码
       formData: {
         oldPassword: null,
         newPassword: null,
         repeatNewPassword: null,
-      },
-      // 新增白名单
-      AddFormData: {
-        IP: null,
-        notes: null,
       },
       // 修改密码
       rules: {
@@ -254,29 +198,6 @@ export default {
           },
         ],
       },
-      // 新增白名单
-      AddRules: {
-        IP: [
-          { required: true, message: this.en ? "Please enter an IP." : "请填写IP", trigger: "change" },
-          {
-            required: true,
-            validator: (rule, val, callback) => {
-              const reg = /^(([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])$/
-              if (reg.test(val)) {
-                callback()
-              } else {
-                callback(new Error(this.en ? "IP format is incorrect." : "IP格式错误。"))
-              }
-            },
-            trigger: "change",
-          },
-        ],
-        notes: [{ required: true, message: this.en ? "Please fill in these notes." : "请填写这些备注", trigger: "change" }],
-      },
-      // 修改密码form&&新增白名单form
-      isForm: true,
-      // 白名单数量
-      count: 0,
       // 加载状态
       bottomLoding: false,
       btnloading: false,
@@ -304,14 +225,6 @@ export default {
       },
       passwordType: null,
     }
-  },
-  created() {
-    // 获取ip白名单列表
-    this.getWhiteList()
-  },
-  mounted() {
-    // 下拉加载更多ip白名单
-    this.load()
   },
   methods: {
     // 复制key
@@ -344,26 +257,6 @@ export default {
         document.body.removeChild(input)
       }
     },
-    // tabs 切换
-    cikTabs(val) {
-      if (val) {
-        this.isForm = false
-      } else {
-        this.isForm = true
-      }
-      this.idx = val
-    },
-    // 点击删除白名单
-    async deleteItem({ row }) {
-      // console.log(row)
-      await delPlatCustomerWhitelist(row.id)
-      const idx = this.tableData.findIndex((item) => item.id === row.id)
-      this.tableData.splice(idx, 1)
-      Message({
-        type: "success",
-        message: this.en ? "successfully delete" : "删除成功",
-      })
-    },
     // 关闭弹层触发
     handleClose() {
       this.formData = {
@@ -376,73 +269,39 @@ export default {
         notes: null,
       }
       // 重置表单验证
-      if (this.isForm) {
-        this.$refs.Elform.resetFields()
-      } else {
-        this.$refs.AddElform.resetFields()
-      }
+      this.$refs.Elform.resetFields()
     },
     // 确认 提交
     confirm() {
       this.btnloading = true
-      if (this.isForm) {
-        this.$refs.Elform.validate(async (valid) => {
-          if (!valid) {
-            this.btnloading = false
-            return
-          }
-          try {
-            // 修改用户密码
-            await platCustomerUpdatePass({
-              password: this.formData.oldPassword,
-              new_password: this.formData.newPassword,
-            })
-            this.btnloading = false
-            this.isShow = false
-            this.handleClose()
-            this.OutLogin()
-            Message({
-              type: "success",
-              message: this.en ? "Password change successful, you need to log in again" : "密码更改成功，您需要重新登录",
-            })
-            this.$router.push("/login")
-          } catch (err) {
-            console.log(err)
-            this.btnloading = false
-          }
-        })
-      } else {
-        this.$refs.AddElform.validate(async (valid) => {
-          if (!valid) {
-            this.btnloading = false
-            return
-          }
-          try {
-            await AddplatCustomerWhitelist({
-              ip: this.AddFormData.IP,
-              remark: this.AddFormData.notes,
-            })
-            this.btnloading = false
-            Message({
-              type: "success",
-              message: this.en ? "successfully added" : "添加成功",
-            })
-            this.isShow = false
-            this.handleClose()
-            this.getWhiteList()
-          } catch (err) {
-            console.log(err)
-            this.btnloading = false
-          }
-        })
-      }
+      this.$refs.Elform.validate(async (valid) => {
+        if (!valid) {
+          this.btnloading = false
+          return
+        }
+        try {
+          // 修改用户密码
+          await platCustomerUpdatePass({
+            password: this.formData.oldPassword,
+            new_password: this.formData.newPassword,
+          })
+          this.btnloading = false
+          this.isShow = false
+          this.handleClose()
+          this.OutLogin()
+          Message({
+            type: "success",
+            message: this.en ? "Password change successful, you need to log in again" : "密码更改成功，您需要重新登录",
+          })
+          this.$router.push("/login")
+        } catch (err) {
+          console.log(err)
+          this.btnloading = false
+        }
+      })
     },
     // 打开修改密码弹窗
     setPassword() {
-      this.isShow = true
-    },
-    // 打开新增白名单弹窗
-    addNew() {
       this.isShow = true
     },
     // 更新api_key
@@ -454,43 +313,6 @@ export default {
     userUpdate() {
       this.isDialog = true
       this.passwordType = "user"
-    },
-    // 获取IP白名单列表
-    async getWhiteList(page = 1, size = 10) {
-      const {
-        data: { count, list },
-      } = await platCustomerWhitelist({
-        page_index: page,
-        page_size: size,
-      })
-      this.count = count
-      this.tableData = list.map((item) => {
-        return {
-          ip: item.ip,
-          note: item.remark,
-          date: item.create_time,
-          id: item.id,
-        }
-      })
-    },
-    // 触底加载更多
-    load() {
-      const dom = document.querySelector(".el-table__body-wrapper")
-      if (!dom) return
-      dom.onscroll = (val) => {
-        const clientHeight = val.target.clientHeight
-        const scrollTop = val.target.scrollTop
-        const scrollHeight = val.target.scrollHeight
-        let size = 10
-        if (clientHeight + scrollTop === scrollHeight) {
-          this.bottomLoding = true
-          if (this.tableData.length === this.count) {
-            this.bottomLoding = false
-          } else {
-            this.getWhiteList(1, (size += 10))
-          }
-        }
-      }
     },
     // 验证密码提示框关闭
     closeIsDialog() {

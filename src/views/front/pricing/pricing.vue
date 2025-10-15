@@ -5,10 +5,12 @@
     <div class="box price relative">
       <div class="container">
         <div class="column_center">
-          <div class="header text-xl sm:text-2xl lg:text-4xl column_center space-y-5">
-            <div class="space-y-10 column_center">
-              <p class="text-center title md:whitespace-pre-wrap font-semibold">{{ t("pricing_spec.des") }}</p>
-              <span class="text-base sm:text-xl lg:text-2xl description">IPs: <span class="major">90M+</span></span>
+          <div class="header column_center">
+            <div class="column_center space-y-3">
+              <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">
+                {{ t("pricing_spec.title") }}
+              </p>
+              <p class="text-lg">{{ t("pricing_spec.des") }}</p>
             </div>
 
             <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>
@@ -20,7 +22,7 @@
         </div>
       </div>
 
-      <div class="background"></div>
+      <!-- <div class="background"></div> -->
     </div>
 
     <!-- <div class="column_center pay space-y-5">

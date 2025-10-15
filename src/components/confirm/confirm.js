@@ -36,8 +36,8 @@ export default function Confirm(options) {
     app.unmount()
     div.remove()
   }
-  options.success = async ({ close, input }) => {
-    success && (await success(input))
+  options.success = async ({ close, input, loading }) => {
+    success && (await success({ input, loading }))
     await close()
 
     app.unmount()

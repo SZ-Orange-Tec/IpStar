@@ -24,6 +24,9 @@ export default {
   Unlimited: "Unlimited",
 
   product_spec: {
+    title: "Residential Proxies Pricing",
+    des: "Access the Global Web: The Power of 200+ Countries of Residential IPs.",
+
     purchase: "How to use after purchase ?",
     no: "You don't have a traffic balance.",
   },

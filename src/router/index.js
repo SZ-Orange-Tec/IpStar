@@ -88,6 +88,12 @@ const routes = [
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/settings/settings.vue"),
       },
+      {
+        path: "/whitelist",
+        name: "whitelist",
+        meta: { index: 14, keepAlive: false },
+        component: () => import("@/views/back/whitelist/whitelist.vue"),
+      },
 
       // {
       //   path: '/configure',

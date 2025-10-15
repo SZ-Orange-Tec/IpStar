@@ -6,10 +6,16 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 px-3 md:px-5">
+    <div class="w-full main flex-1 px-3 md:px-5 my-5">
       <!-- 产品列表 -->
-      <div class="product_box md:px-5 w-full column_center space-y-5 lg:space-y-10" v-if="isProduc">
-        <div class="w-full">
+      <div class="product_box box-border column_center column space-y-3 board rounded-md" v-if="isProduc">
+        <div class="column_center space-y-3">
+          <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">
+            {{ t("product_spec.title") }}
+          </p>
+          <p class="text-lg">{{ t("product_spec.des") }}</p>
+        </div>
+        <div class="w-full product">
           <productList :tabbar="true" :vantage="false" :pack="5"></productList>
         </div>
         <ip-button @click="toUse" type="ghost" class="px-3 h-10" v-if="is_purchase">
@@ -21,9 +27,9 @@
       </div>
 
       <!-- 购买记录表 -->
-      <div class="h-full column space-y-5" v-else-if="tabTotal > 0 && !isProduc">
-        <div class="table_box flex-1 w-full board">
-          <el-table :data="tableData" style="width: 100%">
+      <div class="box-border h-full column space-y-3 board p-5 rounded-md" v-else-if="tabTotal > 0 && !isProduc">
+        <div class="table_box w-full">
+          <el-table :data="tableData" style="width: 100%" v-loading="loading">
             <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>
             <el-table-column prop="price" :label="$t('Price')" min-width="120"></el-table-column>
             <el-table-column :label="$t('Status')" min-width="120">
@@ -48,19 +54,19 @@
           </el-table>
         </div>
         <!-- 分页 -->
-        <div class="pagination w-full">
-          <div class="w-full between">
+        <div class="pagination h-8 w-full">
+          <div class="w-full flex justify-end">
             <el-pagination
               class="pagination"
               @current-change="handleCurrentChange"
-              :current-page="tabPage"
+              @size-change="handleSizeChange"
               :page-size="tabSize"
-              layout="total, prev, pager, next, jumper"
+              :current-page="tabPage"
+              :page-sizes="[10, 25, 50]"
+              layout="total, prev, pager, next, sizes, jumper"
               :total="tabTotal"
             >
             </el-pagination>
-
-            <ip-button type="ghost" class="px-3 h-10 text-sm" @click="toUse">{{ $t("product_spec.purchase") }}</ip-button>
           </div>
         </div>
       </div>
@@ -81,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue"
+import { ref, onMounted, watch, provide, reactive } from "vue"
 import { platCustomerProductsV2 } from "@/api/layout"
 import settingStore from "@/store/setting"
 import layoutStore from "@/store/layout"
@@ -96,6 +102,7 @@ import { useRouter } from "vue-router"
 import NavBar from "../components/navbar/navbar.vue"
 import { useI18n } from "vue-i18n"
 import { CircleChevronRight } from "lucide-vue-next"
+import { platDataIndex } from "../../../api/home"
 
 const { lang, documentIdx } = settingStore()
 const { isProduc } = layoutStore()
@@ -132,6 +139,10 @@ function handleCurrentChange(val) {
   tabPage.value = val
   getProductClient()
 }
+function handleSizeChange(val) {
+  tabSize.value = val
+  getProductClient()
+}
 
 // ip-table 样式渲染
 function tableRowClassName({ row, rowIndex }) {
@@ -142,43 +153,67 @@ function tableRowClassName({ row, rowIndex }) {
 
 // 获取客户购买产品列表
 async function getProductClient() {
-  const {
-    data: { count, list },
-  } = await platCustomerProductsV2({
-    page_index: tabPage.value,
-    page_size: tabSize.value,
-  })
+  loading.value = true
+  try {
+    const {
+      data: { count, list },
+    } = await platCustomerProductsV2({
+      page_index: tabPage.value,
+      page_size: tabSize.value,
+    })
 
-  tabTotal.value = count
+    tabTotal.value = count
 
-  const MB = 1024
-  const GB = MB * 1024
-  const TB = GB * 1024
-  tableData.value = list.map((item) => {
-    let consumeText = ""
-    if (item.fconsume >= TB) {
-      consumeText = Math.round((item.fconsume / TB) * 10) / 10 + "TB"
-    } else if (item.fconsume >= GB) {
-      consumeText = Math.round((item.fconsume / GB) * 10) / 10 + "GB"
-    } else if (item.fconsume >= MB) {
-      consumeText = Math.round((item.fconsume / MB) * 10) / 10 + "MB"
-    }
-    return {
-      id: item.fid,
-      name: item.fpname,
-      size: item.fpacktitle,
-      price: item.fprice / 100,
-      state: item.fstatus,
-      start_time: item.fstarttime,
-      expire_time: item.fexpiretime,
-      days: item.fexpiredays + " " + t("Day"),
-      consume: item.fconsume,
-      progress: Math.round((item.fconsume / item.fpacksize) * 100),
-      consumeText,
-      unlimited: item.fprdgroup === 3,
-    }
-  })
+    const MB = 1024
+    const GB = MB * 1024
+    const TB = GB * 1024
+    tableData.value = list.map((item) => {
+      let consumeText = ""
+      if (item.fconsume >= TB) {
+        consumeText = Math.round((item.fconsume / TB) * 10) / 10 + "TB"
+      } else if (item.fconsume >= GB) {
+        consumeText = Math.round((item.fconsume / GB) * 10) / 10 + "GB"
+      } else if (item.fconsume >= MB) {
+        consumeText = Math.round((item.fconsume / MB) * 10) / 10 + "MB"
+      }
+      return {
+        id: item.fid,
+        name: item.fpname,
+        size: item.fpacktitle,
+        price: item.fprice / 100,
+        state: item.fstatus,
+        start_time: item.fstarttime,
+        expire_time: item.fexpiretime,
+        days: item.fexpiredays + " " + t("Day"),
+        consume: item.fconsume,
+        progress: Math.round((item.fconsume / item.fpacksize) * 100),
+        consumeText,
+        unlimited: item.fprdgroup === 3,
+      }
+    })
+  } catch (error) {
+    console.log(error.message)
+  } finally {
+    loading.value = false
+  }
 }
+
+// 首页数据
+const homeData = reactive({
+  lowestPrice: 0,
+})
+async function getHomeData() {
+  try {
+    const { data } = await platDataIndex()
+    const { lowest_price: lowestPrice } = data
+
+    homeData.lowestPrice = lowestPrice
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+provide("homeData", homeData)
+getHomeData()
 
 // 生命周期钩子
 onMounted(() => {

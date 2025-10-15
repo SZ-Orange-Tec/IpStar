@@ -1,5 +1,6 @@
 export default {
   Test: "Test",
+  Whitelist: "Whitelist",
   menu_spec: {
     Overview: "Overview",
     Products: "Products",

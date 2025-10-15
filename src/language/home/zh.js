@@ -11,6 +11,7 @@ export default {
   ...headerGift,
 
   Learn_More: "了解更多",
+  Free_Trial: "开始免费试用",
 
   home_spec: {
     intro_title1: "高质量IP代理，大数据业务引擎",
@@ -21,7 +22,7 @@ export default {
 
     try: "试用",
     more_try: "更多试用流量",
-    start_now: "立即试用",
+    // start_now: "立即试用",
     tutorials: "教程",
     dashboard: "控制台",
     google_login: "使用 Google 登录",

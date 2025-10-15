@@ -10,6 +10,6 @@ export default {
   Billings: "Billings",
   Proxy: "Manual Obtain",
   API: "API Obtain",
-
   Settings: "Settings",
+  Dashboard: "Dashboard",
 }

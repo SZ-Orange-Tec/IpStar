@@ -1,7 +1,7 @@
 <template>
   <div class="navbar w-full between h-10 px-3 md:px-5">
     <div class="left v_center space-x-2">
-      <div class="v_center font-bold">
+      <div class="v_center font-medium text-lg">
         <slot :title="name"></slot>
       </div>
 
@@ -33,43 +33,118 @@
       </DropDown>
     </div>
 
-    <div class="v_center space-x-3">
-      <IpButton type="ghost" class="btn px-2 h-8 text-sm" v-if="isProduc">
+    <div class="v_center space-x-3 h-full">
+      <IpButton type="normal" class="user_icon" v-if="isProduc">
         <div class="v_center space-x-2 pointer" @click="toPay('list')">
           <ClipboardList :size="16" />
-          <p class="hidden sm:block">{{ t("My_product_list") }}</p>
+          <div class="slider_bck slider_bck_left">
+            <p class="hidden sm:block">{{ t("My_product_list") }}</p>
+          </div>
         </div>
       </IpButton>
 
-      <IpButton type="ghost" class="btn px-2 h-8 text-sm" v-else>
+      <IpButton type="normal" class="user_icon" v-else>
         <div class="v_center space-x-2 pointer" @click="toPay('buy')">
-          <ShoppingCart :size="18" />
-          <p class="hidden sm:block">{{ t("Order_new") }}</p>
+          <ShoppingCart :size="16" />
+          <div class="slider_bck slider_bck_left">
+            <p class="hidden sm:block">{{ t("Order_new") }}</p>
+          </div>
         </div>
       </IpButton>
 
-      <IpButton type="ghost" class="btn px-2 h-8 text-sm" @click="toDocument">
-        <div class="v_center space-x-1 pointer">
-          <FileQuestion :size="18" />
-          <p class="hidden sm:block">{{ t("User_manual") }}</p>
-        </div>
-      </IpButton>
+      <div class="split"></div>
+
+      <!-- 语言 -->
+      <DropDown placement="bottom" class="shink-0">
+        <template #label="{ open }">
+          <IpButton :class="{ open: open }" type="normal" class="user_icon">
+            <div class="vh_center space-x-1 shrink-0 w-full h-full">
+              <!-- <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" /> -->
+              <LangIcon :size="16" />
+              <div class="slider_bck slider_bck_left">
+                <span class="hidden md:block" v-if="lang === 'zh'">简体中文</span>
+                <span class="hidden md:block" v-if="lang === 'en'">English</span>
+              </div>
+              <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+            </div>
+          </IpButton>
+        </template>
+        <template #menu>
+          <div class="menu column text-sm">
+            <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('zh')">中文</div>
+            <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('en')">English</div>
+          </div>
+        </template>
+      </DropDown>
+
+      <div class="split"></div>
+
+      <!-- 用户 -->
+      <DropDown placement="bottom">
+        <template #label="{ open }">
+          <IpButton :class="{ open: open }" type="normal" class="user_icon">
+            <div class="v_center shrink-0 space-x-2 h-full">
+              <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+              <div class="slider_bck slider_bck_left">
+                <p class="username hidden md:block">{{ username_simple }}</p>
+              </div>
+              <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+            </div>
+          </IpButton>
+        </template>
+        <template #menu>
+          <ul class="menu text-sm">
+            <li @click="jumpPath('/Settings')" class="menu_item px-2 rounded pointer transition-color v_center">
+              <div class="v_center space-x-2">
+                <Settings :size="16" />
+                <span>{{ t("Settings") }}</span>
+              </div>
+            </li>
+            <li @click="signOut" class="menu_item px-2 rounded pointer transition-color v_center">
+              <div class="v_center space-x-2">
+                <SignOutIcon :size="16" />
+                <span>{{ t("Sign_out") }}</span>
+              </div>
+            </li>
+          </ul>
+        </template>
+      </DropDown>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ClipboardList, FileQuestion, House, Menu, Settings, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck } from "lucide-vue-next"
+import {
+  ClipboardList,
+  House,
+  Menu,
+  Settings,
+  ShoppingCart,
+  ChartLine,
+  PrinterCheck,
+  LaptopMinimalCheck,
+  NotepadText as WhiteListIcon,
+  Globe as LangIcon,
+  ChevronDown,
+  LogOut as SignOutIcon,
+} from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import { computed } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
+import settingStore from "@/store/setting"
+import userStore from "@/store/user"
+import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
+import loginStore from "@/store/login"
 
 const router = useRouter()
 const route = useRoute()
 const { isProduc } = layoutStore()
+const { username_simple } = userStore()
+const { lang } = settingStore()
+const { OutLogin } = loginStore()
 
 const { t } = useI18n()
 
@@ -80,6 +155,7 @@ const pathMap = {
   "/proxy": t("menu_spec.Proxy"),
   "/generate_api": t("menu_spec.API"),
   "/settings": t("menu_spec.Settings"),
+  "/whitelist": t("Whitelist"),
 }
 const name = computed(() => pathMap[route.path] ?? "")
 
@@ -115,6 +191,11 @@ const menuData = [
     name: t("menu_spec.Settings"),
     path: "/settings",
   },
+  {
+    icon: WhiteListIcon,
+    name: t("Whitelist"),
+    path: "/whitelist",
+  },
 ]
 function jumpPath(path) {
   if (path === "/products") {
@@ -129,8 +210,24 @@ function toPay(key) {
     router.push("/products")
   }
 }
-function toDocument() {
-  router.push("/doc")
+
+// 切换语言
+async function toggleLang(locale) {
+  const path = route.name
+  if (path) {
+    await loadLocaleMessages(path, locale)
+  }
+
+  lang.value = locale
+  localStorage.setItem("lang", locale)
+
+  setI18nLanguage(locale)
+}
+
+// 退出
+function signOut() {
+  OutLogin()
+  router.replace("/home")
 }
 </script>
 

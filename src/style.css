@@ -117,16 +117,22 @@ html{
   font-family: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
   font-feature-settings: normal;
   font-variation-settings: normal;
+  font-optical-sizing: auto;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
+  font-size: 16px;
+  @media screen and (max-width:768px) {
+    font-size: 14px;
+  }
 }
 
 body{
   /* font-family:  PingFang SC, Noto Sans SC, sans-serif; */
-  font-family: Be Vietnam Pro,Verdana,sans-serif;
+  /* font-family: Be Vietnam Pro,Verdana,sans-serif; */
+  font-family: Outfit, Noto Sans SC, sans-serif, serif;
   color: hsl(var(--foreground));
   background-color: hsl(var(--background));
 
@@ -135,16 +141,12 @@ body{
   hyphens: auto;
 
   /* 间距和行高 */
-  letter-spacing: 0.05em;  /* 字母间距 */
-  word-spacing: 0.1em;     /* 单词间距 */
-
-  font-size: 16px;
+  /* letter-spacing: 0.05em;  字母间距 */
+  /* word-spacing: 0.1em;     单词间距 */
   /* @media screen and (max-width:1024px) {
     font-size: 14px;
   } */
-  @media screen and (max-width:768px) {
-    font-size: 14px;
-  }
+   font-size: 1rem;
   
 
   /* 段落样式 */

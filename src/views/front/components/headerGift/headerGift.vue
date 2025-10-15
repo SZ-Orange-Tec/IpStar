@@ -5,16 +5,16 @@
       <div class="v_center gap-2">
         <Tag class="hidden md:block icon" :size="20" />
         <i18n-t keypath="gift_spec.sign_up" tag="p" scope="global" class="text-xs sm:text-base">
-          <template #gift>
+          <!-- <template #gift>
             <span class="major_text font-medium"> 50 MB </span>
-          </template>
+          </template> -->
         </i18n-t>
       </div>
 
       <div class="btn v_center rounded-full text-xs md:text-sm whitespace-nowrap">
         <div class="text h-full rounded-full hidden lg:v_center">{{ t("Limited_Time_Only") }}</div>
         <div @click="router.push('/login')" class="trial font-medium px-5 h-full v_center rounded-full pointer transition-color">
-          {{ t("Start_Trial") }}
+          {{ t("Free_Trial") }}
         </div>
       </div>
     </div>

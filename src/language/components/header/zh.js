@@ -11,4 +11,5 @@ export default {
   Proxy: "手动提取",
   API: "API 提取",
   Settings: "设置",
+  Dashboard: "个人中心",
 }

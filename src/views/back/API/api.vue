@@ -1,5 +1,5 @@
 <template>
-  <div class="api h-full column">
+  <div class="api column">
     <NavBar>
       <template #default>
         <div class="place column" style="align-items: stretch">
@@ -25,7 +25,7 @@
       </template>
     </NavBar>
 
-    <div class="flex-1 w-full main column px-3 md:px-5" :class="{ 'flex-1': active === 1 }">
+    <div class="flex-1 w-full main column px-3 md:px-5 my-5" :class="{ 'flex-1': active === 1 }">
       <ApiConfig v-show="active === 0"></ApiConfig>
 
       <!-- <DocsHelp v-show="active === 1"></DocsHelp> -->

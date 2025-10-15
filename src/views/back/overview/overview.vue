@@ -14,14 +14,14 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 px-3 md:px-5">
+    <div class="w-full main flex-1 px-3 md:px-5 mt-5">
       <!-- 我的订阅 -->
       <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
         <!-- 左边概览 -->
         <div class="echarts_left w-full column gap-5">
           <!-- 剩余流量 消耗 IP总数 -->
           <div class="flow gap-3 md:gap-5">
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
+            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top w-full between">
                 <p class="">{{ $t("overview_spec.Residual_Traffic") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/Gauge.png" width="36" />
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
+            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top w-full between">
                 <p>{{ $t("overview_spec.Consumption_Today") }}</p>
                 <img class="hidden md:block" src="@/assets/images/overview/control.png" width="36" />
@@ -55,7 +55,7 @@
               </div>
             </div>
 
-            <div class="box flex-1 column_between space-y-5 p-2 sm:p-4 board">
+            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
               <div class="box_top between">
                 <p>{{ $t("overview_spec.Total_IPs_Available") }}</p>
               </div>
@@ -74,8 +74,8 @@
           <!-- 流量消耗趋势 -->
           <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{ echart_table_layout: isUsed }">
             <!-- 新手引导 -->
-            <div v-if="!isUsed" class="new_guide w-full md:flex-1 column !items-stretch space-y-7">
-              <div class="text-lg md:text-2xl font-semibold">
+            <div v-if="!isUsed" class="new_guide rounded-md w-full md:flex-1 column !items-stretch space-y-7">
+              <div class="text-lg md:text-xl font-semibold">
                 <span class="primary">{{ $t("overview_spec.welcome1") }}</span>
                 {{ $t("overview_spec.welcome2") }}
               </div>
@@ -83,11 +83,11 @@
 
               <div class="space-y-2" style="margin-top: 0">
                 <div class="space-y-2">
-                  <p class="black font-medium text-xl">1. {{ $t("overview_spec.proxy_title") }}</p>
+                  <p class="black font-semibold text-lg">1. {{ $t("overview_spec.proxy_title") }}</p>
                 </div>
 
                 <div>
-                  <div class="w-full column !items-stretch space-y-2" style="max-width: 30rem">
+                  <div class="w-full column md:v_center !items-stretch gap-2">
                     <CopyItem :label="$t('overview_spec.port')" text="9135(http) 9139(socks5)" />
                     <CopyItem :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
                     <CopyItem :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
@@ -97,12 +97,12 @@
 
               <div class="space-y-3">
                 <div class="space-y-2">
-                  <p class="black font-medium text-xl">2. {{ $t("overview_spec.test1") }}</p>
-                  <p>{{ $t("overview_spec.test2") }}</p>
+                  <p class="black font-semibold text-lg">2. {{ $t("overview_spec.test1") }}</p>
+                  <p class="text-sm">{{ $t("overview_spec.test2") }}</p>
                 </div>
 
                 <div>
-                  <div class="w-full column !items-stretch space-y-4" style="max-width: 70rem">
+                  <div class="w-full column !items-stretch space-y-4" style="max-width: 60rem">
                     <CodeItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
                   </div>
                 </div>
@@ -110,11 +110,11 @@
 
               <div class="space-y-2">
                 <div class="space-y-2">
-                  <p class="black font-medium text-xl">3. {{ $t("overview_spec.obtxy_title") }}</p>
+                  <p class="black font-semibold text-lg">3. {{ $t("overview_spec.obtxy_title") }}</p>
                 </div>
 
                 <div class="btn_list space-y-5">
-                  <p>{{ $t("overview_spec.way") }}</p>
+                  <p class="text-sm">{{ $t("overview_spec.way") }}</p>
                   <div class="v_center space-x-5">
                     <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
                       {{ $t("menu_spec.Proxy") }}
@@ -266,33 +266,31 @@
       </div>
 
       <!-- 余额明细 -->
-      <div class="balance w-full column" v-show="activeIndex === 2">
-        <div class="w-full flex-1 board">
-          <div class="table_box w-full">
-            <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
-              <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
-              <el-table-column prop="id" label="ID"></el-table-column>
-              <el-table-column prop="datetime" :label="$t('Date')" min-width="100"></el-table-column>
-              <el-table-column prop="pack_size" :label="$t('Traffic')" min-width="100">
-                <template #default="scope">
-                  <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
-                </template>
-              </el-table-column>
-              <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')" min-width="200"></el-table-column>
-              <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')" min-width="200"></el-table-column>
-              <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')" min-width="220"></el-table-column>
-              <el-table-column :label="$t('Type')" min-width="140">
-                <template #default="scope">
-                  <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
-                  <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
-                  <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
+      <div class="balance w-full column board p-5 rounded-md space-y-3" v-show="activeIndex === 2">
+        <div class="table_box w-full">
+          <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
+            <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
+            <el-table-column prop="id" label="ID"></el-table-column>
+            <el-table-column prop="datetime" :label="$t('Date')" min-width="100"></el-table-column>
+            <el-table-column prop="pack_size" :label="$t('Traffic')" min-width="100">
+              <template #default="scope">
+                <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')" min-width="200"></el-table-column>
+            <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')" min-width="200"></el-table-column>
+            <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')" min-width="220"></el-table-column>
+            <el-table-column :label="$t('Type')" min-width="140">
+              <template #default="scope">
+                <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
+                <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
+                <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
         <!-- 分页 -->
-        <div class="pagination vh_center">
+        <div class="w-full pagination flex justify-end h-8">
           <el-pagination
             @current-change="handleCurrentChange"
             :current-page="tabPage"
@@ -507,7 +505,6 @@ export default {
             }@${serve}:${port} https://ipinfo.io`,
           })
         })
-        console.log(result)
         this.ipPools = result
       } catch (err) {
         console.log(err.message)

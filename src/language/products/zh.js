@@ -24,6 +24,9 @@ export default {
   Unlimited: "不限量",
 
   product_spec: {
+    title: "住宅代理 定价",
+    des: "拥抱全球网络：拥有200+国家真实住宅IP的强大优势",
+
     purchase: "购买后如何使用 ?",
     no: "您没有流量余额",
   },

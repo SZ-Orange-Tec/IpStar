@@ -6,44 +6,50 @@
       </template>
     </NavBar>
 
-    <div class="w-full main column flex-1 px-3 md:px-5">
+    <div class="w-full box-border main flex-1 min-h-0 px-5 my-5">
       <!-- 购买订单 -->
-      <div class="flex-1 w-full table_box board">
-        <el-table :data="tableData">
-          <el-table-column prop="order" :label="$t('Order')" min-width="200"></el-table-column>
-          <el-table-column prop="createTime" :label="$t('Place_order_time')" min-width="200"></el-table-column>
-          <el-table-column prop="payTime" :label="$t('Payment_time')" min-width="200"></el-table-column>
-          <el-table-column prop="days" :label="$t('Validity_period')" min-width="140"></el-table-column>
-          <el-table-column prop="cost" :label="$t('Cost')" min-width="200"></el-table-column>
-          <el-table-column prop="model" :label="$t('Products')" min-width="100"></el-table-column>
-          <el-table-column prop="contain" :label="$t('Contain')" min-width="100"></el-table-column>
-          <el-table-column prop="payment" :label="$t('Payment')" min-width="100">
-            <template #default="scope">
-              <p :class="scope.row.payment.class">{{ scope.row.payment.title }}</p>
-            </template>
-          </el-table-column>
-          <el-table-column :label="$t('Operation')" min-width="120">
-            <template #default="scope">
-              <ip-button v-if="scope.row.isPaid !== 1" :data-index="scope.$index" type="link" class="px-3 h-8" @click="toPay">{{
-                $t("Pay")
-              }}</ip-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
 
-      <!-- <el-empty style="height: 100%" description="No Data" v-else></el-empty> -->
+      <div class="h-full board p-5 rounded-md space-y-5">
+        <div class="h-full column space-y-5">
+          <div class="w-full table_box">
+            <el-table :data="tableData" style="width: 100%" v-loading="loading">
+              <el-table-column prop="order" :label="$t('Order')" min-width="200"></el-table-column>
+              <el-table-column prop="createTime" :label="$t('Place_order_time')" min-width="200"></el-table-column>
+              <el-table-column prop="payTime" :label="$t('Payment_time')" min-width="200"></el-table-column>
+              <el-table-column prop="days" :label="$t('Validity_period')" min-width="140"></el-table-column>
+              <el-table-column prop="cost" :label="$t('Cost')" min-width="200"></el-table-column>
+              <el-table-column prop="model" :label="$t('Products')" min-width="100"></el-table-column>
+              <el-table-column prop="contain" :label="$t('Contain')" min-width="100"></el-table-column>
+              <el-table-column prop="payment" :label="$t('Payment')" min-width="100">
+                <template #default="scope">
+                  <p :class="scope.row?.payment?.class" class="text-sm">{{ scope.row?.payment?.title || "-" }}</p>
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('Operation')" min-width="120">
+                <template #default="scope">
+                  <ip-button v-if="scope.row.isPaid !== 1" :data-index="scope.$index" type="link" @click="toPay">{{ $t("Pay") }}</ip-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
 
-      <div class="pagination">
-        <el-pagination
-          class="pagination"
-          @current-change="handleCurrentChange"
-          :current-page="page"
-          :page-size="size"
-          layout="total, prev, pager, next, jumper"
-          :total="total"
-        >
-        </el-pagination>
+          <!-- <el-empty style="height: 100%" description="No Data" v-else></el-empty> -->
+
+          <div class="w-full pagination flex justify-end">
+            <el-pagination
+              class="pagination"
+              @current-change="handleCurrentChange"
+              @size-change="handleSizeChange"
+              :current-page="page"
+              size="default"
+              :page-size="size"
+              :page-sizes="[10, 25, 50]"
+              layout="total, prev, pager, next,sizes, jumper"
+              :total="total"
+            >
+            </el-pagination>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -53,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue"
+import { ref, onMounted, nextTick, onBeforeUnmount } from "vue"
 import { platCustomerOrders } from "@/api/layout"
 import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
 import { useI18n } from "vue-i18n"
@@ -68,7 +74,7 @@ const { t } = useI18n()
 
 // 响应式数据
 const tableData = ref([])
-const total = ref(40)
+const total = ref(0)
 const page = ref(1)
 const size = ref(10)
 const loading = ref(false)
@@ -83,38 +89,47 @@ function tableRowClassName({ row, rowIndex }) {
 // 获取客户订单
 async function getClient() {
   loading.value = true
-  const {
-    data: { count, list },
-  } = await platCustomerOrders({
-    page_index: page.value,
-    page_size: size.value,
-  })
-  total.value = count
-  let newArr = list.map((item) => {
-    return {
-      order: item.order_no,
-      createTime: item.create_time,
-      payTime: item.pay_time,
-      cost: `$ ${item.amount / 100}`,
-      model: item.product_name,
-      contain: item.package_title,
-      textlist: [`Price:${item.amount / 100}/GB`, `${item.package_title} included`, item.amount],
-      payment: {
-        // url: item.is_paid === 1 ? require('@/assets/pc_img/layout_img/payment success.png') : item.is_paid === 0 ? require('@/assets/pc_img/layout_img/abnormal.png') : item.is_paid === 2 ? require('@/assets/pc_img/layout_img/await.png') : '',
-        class: item.is_paid === 1 ? "succeed_img" : item.is_paid === 0 ? "error_img" : item.is_paid === 2 ? "warning_img" : "",
-        title: item.is_paid === 1 ? t("Paid") : item.is_paid === 0 ? t("Unpaid") : item.is_paid === 2 ? t("Payment_confirmation") : "",
-      },
-      days: item.days > 3650 ? t("Forever") : item.days + " " + t("Day"),
-      isPaid: item.is_paid,
-    }
-  })
-  tableData.value = newArr
-  loading.value = false
+  try {
+    const {
+      data: { count, list },
+    } = await platCustomerOrders({
+      page_index: page.value,
+      page_size: size.value,
+    })
+    total.value = count
+    let newArr = list.map((item) => {
+      return {
+        order: item.order_no,
+        createTime: item.create_time,
+        payTime: item.pay_time,
+        cost: `$ ${item.amount / 100}`,
+        model: item.product_name,
+        contain: item.package_title,
+        textlist: [`Price:${item.amount / 100}/GB`, `${item.package_title} included`, item.amount],
+        payment: {
+          // url: item.is_paid === 1 ? require('@/assets/pc_img/layout_img/payment success.png') : item.is_paid === 0 ? require('@/assets/pc_img/layout_img/abnormal.png') : item.is_paid === 2 ? require('@/assets/pc_img/layout_img/await.png') : '',
+          class: item.is_paid === 1 ? "succeed_img" : item.is_paid === 0 ? "error_img" : item.is_paid === 2 ? "warning_img" : "",
+          title: item.is_paid === 1 ? t("Paid") : item.is_paid === 0 ? t("Unpaid") : item.is_paid === 2 ? t("Payment_confirmation") : "",
+        },
+        days: item.days > 3650 ? t("Forever") : item.days + " " + t("Day"),
+        isPaid: item.is_paid,
+      }
+    })
+    tableData.value = newArr
+  } catch (error) {
+    console.log(error.message)
+  } finally {
+    loading.value = false
+  }
 }
 
 // 当前处于第?页
 function handleCurrentChange(val) {
   page.value = val
+  getClient()
+}
+function handleSizeChange(val) {
+  size.value = val
   getClient()
 }
 
@@ -143,6 +158,7 @@ function toPay(e) {
 
 // 生命周期钩子
 onMounted(() => {
+  // tableData.value = new Array(30).fill(0)
   getClient()
 })
 </script>

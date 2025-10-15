@@ -89,7 +89,7 @@ function toTutorial() {
 
 // 生命周期钩子
 onMounted(() => {
-  judgeMask()
+  // judgeMask()
 })
 </script>
 
@@ -100,6 +100,7 @@ onMounted(() => {
 <style>
 .board {
   background: hsl(var(--background));
-  box-shadow: 0px 5px 16px 0px rgba(187, 187, 187, 0.57), 0px 0px 16px 0px #ffffff, 4px 4px 5px 0px rgba(255, 255, 255, 0.42);
+  /* border: 1px solid ; */
+  /* box-shadow: 0px 5px 16px 0px rgba(187, 187, 187, 0.57), 0px 0px 16px 0px #ffffff, 4px 4px 5px 0px rgba(255, 255, 255, 0.42); */
 }
 </style>

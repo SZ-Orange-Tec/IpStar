@@ -7,20 +7,23 @@
             <template v-if="type === 'warn'">
               <TriangleAlert class="warn-icon" :size="18" />
             </template>
-            <p class="font-semibold">{{ title }}</p>
+            <p class="font-medium">{{ title }}</p>
           </div>
 
-          <div class="space-y-2">
+          <div class="space-y-2 text-sm">
             <p class="font-normal">{{ message }}</p>
             <IpInput class="w-full" v-if="showInput" v-model="input" :placeholder="placeholder"></IpInput>
           </div>
 
           <div class="space-x-3 v_center" style="justify-content: flex-end; margin-top: 1.25rem">
-            <IpButton v-if="showCancel" type="border" class="px-3 h-8 text-xs md:text-sm grey" @click="cancel({ close })">
+            <IpButton v-if="showCancel" type="border" class="px-5 h-8 text-sm" @click="cancel({ close })">
               {{ cancelText }}
             </IpButton>
-            <IpButton type="primary" class="px-3 h-8 text-xs md:text-sm" @click="() => success({ close, input })">
-              {{ confirmText }}
+            <IpButton type="primary" :disabled="loading" class="px-5 h-8 text-xs md:text-sm" @click="toSuccess(close)">
+              <div class="vh_center space-x-2">
+                <span class="ip-loading" v-if="loading"></span>
+                <span>{{ confirmText }}</span>
+              </div>
             </IpButton>
           </div>
         </div>
@@ -40,7 +43,7 @@ import IpInput from "@/components/Input/Input.vue"
 import { TriangleAlert, X as CloseIcon } from "lucide-vue-next"
 import { ref, defineModel } from "vue"
 
-const show = defineModel({ type: String })
+const show = defineModel({ type: Boolean })
 
 const props = defineProps({
   title: String,
@@ -55,9 +58,13 @@ const props = defineProps({
   success: Function,
   width: String,
 })
-// const { title, icon, message, showInput, placeholder, showCancel, confirmText, cancelText } = props
+const { title, type, message, showInput, placeholder, showCancel, confirmText, cancelText, cancel, success, width } = props
 
 const input = ref("")
+const loading = ref(false)
+function toSuccess(close) {
+  success({ close, input, loading })
+}
 </script>
 
 <style lang="less" scoped>

@@ -6,7 +6,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 px-3 md:px-5">
+    <div class="w-full main flex-1 px-3 md:px-5 mt-5">
       <div class="space-y-5 h-full" v-if="is_purchase">
         <div class="card column board">
           <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -93,7 +93,7 @@
 
           <!-- 搜索内容显示区 -->
           <div class="grey text-sm flex-1 w-full space-y-3" v-if="isTxt" style="min-height: 455px">
-            <p class="tip">{{ t("Server") }} : {{ t("Port") }} : {{ t("User") }} : {{ t("Password") }}</p>
+            <p class="grey-60">{{ t("Server") }} : {{ t("Port") }} : {{ t("User") }} : {{ t("Password") }}</p>
             <div class="space-y-3">
               <p v-for="(item, index) in content" :key="index">{{ item }}</p>
             </div>
@@ -111,9 +111,9 @@
                   <ip-button type="border" @click="copyUrl(scope.row)" class="px-3 h-8 font-medium">{{ t("Copy") }}</ip-button>
                 </template>
               </el-table-column>
-              <template #append>
+              <!-- <template #append>
                 <div class="text-center">{{ t("No_data") }}</div>
-              </template>
+              </template> -->
             </el-table>
           </div>
 

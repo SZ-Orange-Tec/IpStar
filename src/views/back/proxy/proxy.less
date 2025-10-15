@@ -32,25 +32,21 @@
     .grey{
       border-radius: 8px;
       padding: 20px;
-      background-color: hsl(var(--neutral) / 10%);
-      color:hsl(var(--background) / 80%);
+      border: 1px solid hsl(var(--border));
       letter-spacing: 1px;
-      .tip{
-        color:hsl(var(--background) / 50%)
-      }
     }
 
     .table_box{
       max-width: 100%;
       :deep(.el-table){
+        border: 1px solid #EBEEF5;
         width: 100%;
         max-height: 100%;
-        border-radius: 8px;
         thead{
           .el-table__cell{
-            background-color: hsl(var(--primary));
+            background-color: #F2F3F5;
             .cell{
-              color: hsl(var(--colour-foreground));
+              color: hsl(var(--foreground));
             }
           }
 

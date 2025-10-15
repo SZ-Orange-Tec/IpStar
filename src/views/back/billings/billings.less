@@ -11,16 +11,19 @@
     }
 
     .table_box{
-      max-width: 100%;
+      // max-height: calc(100vh - 32px);
+      max-height: calc(100% - 44px);
       :deep(.el-table){
-        width: 100%;
         height: 100%;
-        border-radius: 8px;
+        border: 1px solid #EBEEF5;
+        // border-bottom: none;
+        // max-height: 100%;
+        // border-radius: 8px;
         thead{
           .el-table__cell{
-            background-color: hsl(var(--primary));
+            background-color: #F2F3F5;
             .cell{
-              color: hsl(var(--colour-foreground));
+              color: hsl(var(--foreground));
             }
           }
 
@@ -35,34 +38,6 @@
           }
         }
       }
-    }
-    // .el-table{
-      // --el-table-header-bg-color:hsl(var(--page-background));
-      // --el-table-bg-color: hsl(var(--page-background));
-      // --el-table-text-color:hsl(var(--foreground) / 80%);
-      // --el-table-header-text-color:hsl(var(--foreground));
-      // --el-table-border-color:hsl(var(--foreground) / 10%);
-      // --el-table-current-row-bg-color:transparent;
-      // --el-table-tr-bg-color:transparent;
-      // --el-table-row-hover-bg-color:hsl(var(--page-neutral) / 10%);
-    // }
-
-    .pagination{
-      padding: 12px 0;
-      // :deep(.el-pagination){
-      //   --el-pagination-button-color:hsl(var(--foreground) / 60%);
-      //   --el-pagination-bg-color:transparent;
-      //   --el-pagination-text-color:hsl(var(--foreground));
-      //   --el-pagination-button-disabled-bg-color:transparent;
-      //   --el-pagination-button-disabled-color:hsl(var(--foreground) / 30%);
-      //   --el-input-bg-color:transparent;
-      //   .el-input{
-      //     --el-input-bg-color:transparent;
-      //     --el-input-text-color:hsl(var(--foreground));
-      //     --el-input-border-color:hsl(var(--border));
-      //     --el-input-hover-border-color:hsl(var(--input-border-hover));
-      //   }
-      // }
     }
   }
 }

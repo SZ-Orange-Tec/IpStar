@@ -5,7 +5,8 @@
 }
 :root[data-theme="light"] {
   --background: 0 0% 100%;
-  --foreground: 0 0% 16%;
+  /* --foreground: 240, 6.67%, 11.76%; */
+  --foreground: 240 6.67% 11.76%;
 
   --neutral: 0 0% 45.1%;
   

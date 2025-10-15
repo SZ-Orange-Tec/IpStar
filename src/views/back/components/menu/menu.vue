@@ -1,6 +1,6 @@
 <template>
   <div class="menu column h-full space-y-5">
-    <div class="logo text-2xl pointer relative" @click="$router.push('/home')" :title="t('menu_spec.back_home')">
+    <div class="w-full logo v_center text-2xl pointer relative" @click="$router.push('/home')" :title="t('menu_spec.back_home')">
       <div class="back">
         <ChevronsLeft :size="20" />
       </div>
@@ -12,7 +12,13 @@
           <li class="v_center pointer grey text-xs" v-if="index === 1 || index === 4">
             <em>{{ index === 1 ? "PLANS" : "PROXIES" }}</em>
           </li>
-          <li class="v_center pointer space-x-2" v-else :class="{ pitch_on: idx === index }" v-show="item.isShow" @click="jumpPath(index, item)">
+          <li
+            class="v_center pointer space-x-2 text-[15px] font-medium"
+            v-else
+            :class="{ pitch_on: idx === index }"
+            v-show="item.isShow"
+            @click="jumpPath(index, item)"
+          >
             <component :is="item.icon" :size="18"></component>
             <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
           </li>
@@ -26,16 +32,27 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
+import { nextTick, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import layoutStore from "@/store/layout"
 import { useI18n } from "vue-i18n"
-import { Settings, ClipboardList, ShoppingCart, ChartLine, PrinterCheck, LaptopMinimalCheck, ChevronsLeft } from "lucide-vue-next"
+import {
+  Settings,
+  ClipboardList,
+  ShoppingCart,
+  ChartLine,
+  PrinterCheck,
+  LaptopMinimalCheck,
+  ChevronsLeft,
+  NotepadText as WhiteListIcon,
+} from "lucide-vue-next"
+import settingStore from "../../../../store/setting"
 
 const { isProduc } = layoutStore()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
+const { lang } = settingStore()
 
 // 响应式状态
 const idx = ref(0)
@@ -76,6 +93,12 @@ function getSlideList() {
       isShow: true,
     },
     {
+      icon: WhiteListIcon,
+      name: t("Whitelist"),
+      path: "/whitelist",
+      isShow: true,
+    },
+    {
       icon: Settings,
       name: t("menu_spec.Settings"),
       path: "/settings",
@@ -103,9 +126,13 @@ function focusPath(path) {
 watch(
   () => route.path,
   (val) => {
+    console.log(val)
     focusPath(val)
   }
 )
+watch(lang, (val) => {
+  getSlideList()
+})
 
 getSlideList()
 </script>

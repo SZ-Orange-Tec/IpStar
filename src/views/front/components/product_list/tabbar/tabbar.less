@@ -6,17 +6,25 @@
     padding: 4px;
     border-radius: 999px;
     // background: rgba(255,255,255,0.1);
-    border: 1px solid hsl(var(--background) / 60%);
+    background-color: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
     @media screen and (max-width:640px) {
       height: 2.75rem;
     }
     &>div{
-      width: 160px;
-      border-radius: 8px;
+      min-width: 160px;
+      // border-radius: 8px;
       border-radius: 999px;
+      white-space: nowrap;
+      .tag{
+        color: #20937E;
+        background-color: #CBF5E7;
+        padding: 2px 4px;
+        font-size: 12px;
+      }
     }
     .active{
-      background-color: hsl(var(--major));
+      background-color: hsl(var(--foreground));
       color: hsl(var(--colour-foreground));
     }
 	}

@@ -13,6 +13,10 @@ const getters = {
   proxy_user: computed(() => state.userInfo?.proxy_user ?? ""),
   proxy_pass: computed(() => state.userInfo?.proxy_pass ?? ""),
   isUsed: computed(() => state.userInfo?.consume > 0),
+
+  username_simple: computed(() =>
+    state.userInfo.username.length > 15 ? state.userInfo.username.slice(0, 4) + "****" + state.userInfo.username.slice(-4) : state.userInfo.username
+  ),
 }
 
 const actions = {
@@ -26,6 +30,10 @@ const actions = {
   updateUserInfo(info) {
     state.userInfo = info
     localStorage.setItem("userInfo", JSON.stringify(info))
+  },
+  clearUserInfo() {
+    state.userInfo = ""
+    localStorage.removeItem("userInfo")
   },
 }
 

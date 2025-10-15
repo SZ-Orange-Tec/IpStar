@@ -1,10 +1,15 @@
 <template>
   <div class="productTabbar vh_center">
     <!-- 个人 企业 -->
-    <div class="tabbar v_center space-x-1">
-      <div class="h-full flex-1 vh_center pointer" :class="{ active: active === 0 }" @click="select(0)">{{ $t("Personal") }}</div>
+    <div class="tabbar v_center space-x-1 font-medium">
+      <div class="h-full px-5 vh_center pointer" :class="{ active: active === 0 }" @click="select(0)">{{ $t("Personal") }}</div>
 
-      <div class="h-full flex-1 vh_center pointer" :class="{ active: active === 1 }" @click="select(1)">{{ $t("Enterprise") }}</div>
+      <div class="h-full px-5 vh_center pointer" :class="{ active: active === 1 }" @click="select(1)">
+        <div class="v_center space-x-1">
+          <span class="white-nowrap">{{ $t("Enterprise") }}</span>
+          <div v-if="lowestPrice" class="tag text-xs rounded-full font-semibold">${{ lowestPrice }}/GB</div>
+        </div>
+      </div>
     </div>
 
     <!-- 无限 -->
@@ -16,20 +21,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "PCProductTabbar",
-  data() {
-    return {
-      active: 0,
-    }
-  },
-  methods: {
-    select(index) {
-      this.active = index
-      this.$emit("select", index)
-    },
-  },
+<script setup>
+import { computed, inject, ref } from "vue"
+
+const homeData = inject("homeData")
+const lowestPrice = computed(() => (homeData?.lowestPrice ?? 0) / 100)
+
+const emit = defineEmits(["select"])
+const active = ref(0)
+function select(index) {
+  active.value = index
+  emit("select", index)
 }
 </script>
 

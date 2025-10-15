@@ -1,0 +1,196 @@
+.pc-settings {
+
+  @color:hsl(var(--primary));
+
+  .my_tabs {
+    font-weight: 500;
+    span:hover{
+      color: hsl(var(--primary) / 80%);
+    }
+    .active{
+      color: hsl(var(--primary));
+    }
+  }
+
+  .main{
+    .main_container{
+      border-radius: 8px;
+      min-height: 100%;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      
+      &>.tab_content {
+        width: 100%;
+        .table_box{
+          width: 100%;
+          :deep(.el-table){
+            border: 1px solid #EBEEF5;
+            thead{
+              .el-table__cell{
+                background-color: #F2F3F5;
+                .cell{
+                  color: hsl(var(--foreground));
+                }
+              }
+
+            }
+            tbody{
+              &>tr:nth-child(even){
+                .el-table__cell{
+                  // background-color: hsl(var(--primary) / 10%);
+                  // background-color: #f0f9ff;
+                  background-color: #eff6ff;
+                }
+              }
+            }
+          }
+        }
+      }
+    
+      // &>.tab_content:nth-child(1) {
+      //   position: relative;
+      //   padding: 30px 56px 0px 56px;
+      //   box-sizing: border-box;
+      //   @media screen and (max-width:768px) {
+      //     padding: 1rem 0;
+      //   }
+    
+    
+      //   ::v-deep .el-table tr {
+      //     display: inline-block;
+      //     width: 753px;
+      //     height: 42px;
+      //     display: flex;
+    
+      //     &>th {
+      //       flex: 1;
+      //       font-size: 14px;
+      //       text-align: center;
+      //       padding-top: 8px;
+            
+      //       font-weight: 400;
+      //       color: #FFFFFF;
+      //       border: none;
+      //       background-color: #5c5c5c;
+      //     }
+    
+      //     &>th.gutter {
+      //       display: none;
+      //     }
+    
+      //     &>td {
+      //       flex: 1;
+      //       font-size: 14px;
+      //       text-align: center;
+            
+      //       font-weight: 400;
+      //       color: #333333;
+      //       // border: none;
+    
+      //       & .el-button {
+      //         width: 78px;
+      //         height: 26px;
+      //         font-size: 14px;
+              
+      //         font-weight: 400;
+      //         line-height: 0;
+      //         color: #666;
+      //         border-radius: 10px;
+      //         padding: 0px;
+      //         background-color: #E7E7E7;
+      //       }
+      //     }
+      //   }
+    
+      //   .message {
+      //     width: 100%;
+      //     height: 40px;
+      //     display: flex;
+      //     justify-content: center;
+      //     align-items: center;
+      //   }
+    
+      //   &>span {
+      //     position: absolute;
+      //     left: 817px;
+      //     top: 88px;
+    
+      //     & .el-popover__reference-wrapper {
+      //       img {
+      //         width: 20px;
+      //         height: 20px;
+      //         cursor: pointer;
+      //       }
+      //     }
+      //   }
+      // }
+    }
+    @media screen and (max-width:768px) {
+      overflow: auto;
+    }
+    
+
+  }
+
+
+
+
+  ::v-deep .my_dialog.el-dialog {
+    padding: 0;
+
+    .el-dialog__header {
+      padding: 0;
+      height: 3.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid hsl(var(--border));
+    }
+
+    .el-dialog__body {
+      padding: 1.5rem 1.75rem 0;
+      .el-form-item__label{
+        color: hsl(var(--foreground));
+      }
+      .el-input__wrapper,.el-textarea__inner{
+        background-color: #F4F4F7;
+      }
+    }
+
+
+    .el-dialog__footer {
+      padding-top: 12px;
+      padding-bottom: 1.75rem;
+
+    }
+  }
+
+  .passwordDialog {
+    &>::v-deep .el-dialog {
+      margin-top: 30vh !important;
+
+      &>.el-dialog__header {
+        padding: 15px;
+      }
+
+      &>.el-dialog__body {
+        padding: 0px 15px;
+      }
+
+      &>.el-dialog__footer {
+        padding-bottom: 10px;
+        padding-right: 15px;
+
+      }
+    }
+  }
+
+  ::v-deep input::-webkit-outer-spin-button,
+  ::v-deep input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+  }
+
+  ::v-deep input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}

@@ -1,6 +1,6 @@
 
 .button{
-  @apply border-none outline-none focus:outline-none bg-transparent rounded-md
+  @apply border-none outline-none focus:outline-none bg-transparent rounded transition-all duration-200
 }
 
 .circle{
@@ -52,10 +52,10 @@
 
 .border{
   border-radius: 6px;
-  border: 1px solid hsl(var(--border));
+  box-shadow: 0 0 0 1px hsl(var(--border));
 }
 .border:hover,.border:focus{
-  border-color: hsl(var(--primary) / 60%);
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 60%);
   color: hsl(var(--primary));
 }
 

@@ -11,6 +11,7 @@ export default {
   ...headerGift,
 
   Learn_More: "Learn More",
+  Free_Trial: "Free Trial",
 
   home_spec: {
     intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
@@ -23,7 +24,7 @@ export default {
 
     try: "Try",
     more_try: "More Trial Traffic",
-    start_now: "Start Now",
+    // start_now: "Start Now",
     tutorials: "Tutorials",
     dashboard: "Dashboard",
     google_login: "Sign in with Google",

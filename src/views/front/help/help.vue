@@ -17,7 +17,7 @@
             :key="index"
             @click="selectBlock(index)"
           >
-            <h1 class="primary font-medium text-sm lg:text-lg title">{{ item.h1 }}</h1>
+            <h1 class="font-medium text-sm lg:text-lg title">{{ item.h1 }}</h1>
             <p class="text-xs lg:text-sm description">{{ item.p }}</p>
           </div>
         </div>

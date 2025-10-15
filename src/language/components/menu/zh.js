@@ -1,5 +1,6 @@
 export default {
   Test: "测试",
+  Whitelist: "白名单",
   menu_spec: {
     Overview: "概览",
     Products: "产品",

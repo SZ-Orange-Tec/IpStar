@@ -20,4 +20,6 @@ export default {
   Unpaid: "未支付",
   Payment_confirmation: "支付确认中",
   Day: "天",
+
+  Forever: "永久",
 }

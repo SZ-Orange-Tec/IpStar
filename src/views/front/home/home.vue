@@ -16,7 +16,7 @@
           <div class="w-full column sm:v_center gap-4" v-if="!isLogin" style="align-items: stretch">
             <IpButton type="major" class="flex-1" @click="toLogin">
               <div class="vh_center space-x-2 h-10">
-                <span>{{ t("home_spec.start_now") }}</span>
+                <span>{{ t("Free_Trial") }}</span>
                 <MoveUpRight :size="14" />
               </div>
             </IpButton>
@@ -519,8 +519,8 @@ async function getUserIps() {
 function showSlow(e) {
   anime({
     targets: e,
-    translateY: [200, 0],
-    opacity: [0, 1],
+    translateY: [100, 0],
+    opacity: [0.3, 1],
     duration: 1000,
     easing: "easeOutQuart",
   })
@@ -576,10 +576,10 @@ const pack = computed(() => {
 
 function toLogin() {
   router.push("/login")
-  Message({
-    type: "info",
-    message: t("gift_spec.sign_up", { gift: "50M" }),
-  })
+  // Message({
+  //   type: "info",
+  //   message: t("gift_spec.sign_up", { gift: "50M" }),
+  // })
 }
 function giftPacks(e) {
   // 领取礼包

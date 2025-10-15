@@ -304,6 +304,9 @@ async function GetProductList() {
     let prices = null
 
     data.forEach((item) => {
+      // 注册奖励不显示
+      if (item.is_sell === 0) return
+
       // 第一个套餐作为折扣折算标准
       if (item.is_sell !== 0 && prices === null) {
         prices = item.prices.reduce((pre, next) => {

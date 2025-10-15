@@ -3,23 +3,23 @@
     <div class="box contact_us">
       <div class="container column_center lg:between gap-5">
         <div class="email space-y-6 column">
-          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="primary text-lg sm:text-2xl lg:text-3xl title">
+          <i18n-t keypath="relation_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
             <template #info>
-              <span class="primary">{{ t("relation_spec.title_slot") }}</span>
+              <span>{{ t("relation_spec.title_slot") }}</span>
             </template>
           </i18n-t>
 
           <div class="space-y-5 w-full">
             <div class="space-y-2">
-              <p class="label text-sm primary">{{ t("relation_spec.full_name") }}</p>
+              <p class="label text-sm">{{ t("relation_spec.full_name") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="fullName" :placeholder="t('relation_spec.full_name')" />
             </div>
             <div class="space-y-2">
-              <p class="label text-sm primary">{{ t("Email") }}</p>
+              <p class="label text-sm">{{ t("Email") }}</p>
               <input class="w-full transition-color text-sm" v-model.trim="email" :placeholder="t('Email')" />
             </div>
             <div class="space-y-2">
-              <p class="label text-sm primary">{{ t("relation_spec.help") }}</p>
+              <p class="label text-sm">{{ t("relation_spec.help") }}</p>
               <textarea class="w-full transition-color text-sm" v-model.trim="content" :placeholder="t('relation_spec.help1')"></textarea>
             </div>
           </div>
