@@ -93,7 +93,10 @@
               <el-table-column prop="password" :label="t('Password')" min-width="140"></el-table-column>
               <el-table-column :label="t('Curl_Command')" min-width="140">
                 <template #default="scope">
-                  <span @click="copyUrl(scope.row)" class="primary pointer font-medium">{{ t("Copy") }}</span>
+                  <div class="w-full v_center">
+                    <p class="flex-1 min-w-0 ellipsis">{{ scope.row.curl }}</p>
+                    <span @click="copyUrl(scope.row.curl)" class="primary pointer font-medium">{{ t("Copy") }}</span>
+                  </div>
                 </template>
               </el-table-column>
               <!-- <template #append>
@@ -210,11 +213,15 @@ async function generate() {
       content.value = data
       tableData.value = data.map((item) => {
         const arr = item.split(":")
-        return {
+        const obj = {
           server: arr[0],
           port: arr[1],
           user: arr[2],
           password: arr[3],
+        }
+        return {
+          ...obj,
+          curl: generateCurl(obj),
         }
       })
       mes = data.toString()
@@ -229,10 +236,13 @@ async function generate() {
     btnLoading.value = false
   }
 }
-
-async function copyUrl(item) {
+function generateCurl(item) {
   const { password, port, server, user } = item
-  const url = `curl -${protocolVal.value === "0" ? "socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
+  const url = `curl -${protocolVal.value === "0" ? "-socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
+  return url
+}
+
+async function copyUrl(url) {
   await copyText(url)
   Message({
     message: en.value ? "Copy success" : "复制成功",
@@ -242,9 +252,8 @@ async function copyUrl(item) {
 async function copyUrlAll() {
   let result = ""
   tableData.value.forEach((item) => {
-    const { password, port, server, user } = item
-    const url = `curl -${protocolVal.value === "0" ? "socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
-    result += result.length > 0 ? "\n" + url : url
+    const { curl } = item
+    result += result.length > 0 ? "\n" + curl : curl
   })
   await copyText(result)
   Message({

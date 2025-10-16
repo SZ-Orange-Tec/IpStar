@@ -363,9 +363,9 @@ export default {
       // ip池
       ipPools: [
         "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv3.connpnt134.com:9135 https://ipinfo.io",
-        "curl -socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv2.connpnt134.com:9135 https://ipinfo.io",
+        "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv2.connpnt134.com:9135 https://ipinfo.io",
         "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
-        "curl -socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv5.connpnt134.com:9135 https://ipinfo.io",
+        "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv5.connpnt134.com:9135 https://ipinfo.io",
       ],
       // ip直线图选择的开始日期
       ipStartDate: "",
@@ -476,21 +476,15 @@ export default {
   methods: {
     async getIpPool() {
       try {
-        const { data } = await platDataNodes()
         const result = []
         const proto = ["HTTP(s)", "SOCKS5"]
-        const host = []
+        const host = ["pv3.connpnt134.com", "pv5.connpnt134.com", "pv2.connpnt134.com", "pv4.connpnt134.com"]
         const countrys = [
           { en: "US", zh: "美国", code: "US" },
           { en: "Germany", zh: "德国", code: "DE" },
           { en: "Russia", zh: "俄罗斯", code: "RU" },
           { en: "Random", zh: "随机", code: "N" },
         ]
-        data.forEach((item) => {
-          item.nodes.forEach((node, index) => {
-            host.push(node)
-          })
-        })
         host.forEach((serve, index) => {
           const country = countrys[index]
           const name = country[this.lang] ?? country.en
@@ -500,7 +494,7 @@ export default {
           const port = idx === 0 ? 9139 : 9135
           result.push({
             label: `${name} ${proto[index % 2]}：`,
-            text: `curl -${index % 2 === 0 ? "x" : "socks5"} ${this.proxy_user}-123RsAYBc-0-${code}-N:${
+            text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${this.proxy_user}-123RsAYBc-0-${code}-N:${
               this.proxy_pass
             }@${serve}:${port} https://ipinfo.io`,
           })
