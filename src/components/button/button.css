@@ -59,6 +59,11 @@
   color: hsl(var(--primary));
 }
 
+.black{
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--colour-foreground));
+}
+
 .disabled{
   opacity: 0.5;
   cursor: not-allowed;

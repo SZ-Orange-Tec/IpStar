@@ -4,6 +4,10 @@ export default {
   ...menu,
   ...navbar,
 
+  Start_date: "开始日期",
+  To: "至",
+  End_date: "结束日期",
+
   account_spec: {
     account_manage: "账号管理",
     sub_account: "子账号",

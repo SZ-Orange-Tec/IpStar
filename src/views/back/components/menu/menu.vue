@@ -55,7 +55,6 @@ const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
 const { lang } = settingStore()
-const { isAdmin } = userStore()
 
 // 响应式状态
 const idx = ref(0)
@@ -101,12 +100,12 @@ function getSlideList() {
       path: "/whitelist",
       isShow: true,
     },
-    // {
-    //   icon: AccountIcon,
-    //   name: t("Account"),
-    //   path: "/account",
-    //   isShow: isAdmin.value,
-    // },
+    {
+      icon: AccountIcon,
+      name: t("Account"),
+      path: "/account",
+      isShow: true,
+    },
     {
       icon: Settings,
       name: t("menu_spec.Settings"),

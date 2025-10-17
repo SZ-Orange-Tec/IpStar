@@ -36,5 +36,9 @@ export default {
       btn: "API reference",
     },
     no_order: "您没有订单信息",
+
+    subscript: "Subscription required",
+    unlock_title: "Unlock Manual Obtain",
+    unlock_desc: "After unlocking, you can extract proxy channels via APIs.",
   },
 }

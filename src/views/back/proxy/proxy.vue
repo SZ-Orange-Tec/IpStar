@@ -112,12 +112,17 @@
         </div>
       </div>
 
-      <div class="h-full column_center space-y-4" v-else style="justify-content: center">
-        <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
-        <p>{{ t("proxy_spec.no_order") }}</p>
-        <ip-button type="primary" @click="toBuy" class="px-3 h-10">
-          <div class="v_center space-x-2">
-            <ShoppingCart :size="20" />
+      <div class="h-full column_center space-y-4 board rounded-md lock" v-else style="justify-content: center">
+        <img src="@/assets/images/products/lock.png" width="60" alt="" />
+        <span class="text-sm primary">{{ t("proxy_spec.subscript") }}</span>
+
+        <div class="column_center space-y-2">
+          <strong class="text-2xl">{{ t("proxy_spec.unlock_title") }}</strong>
+          <p>{{ t("proxy_spec.unlock_desc") }}</p>
+        </div>
+        <ip-button type="black" @click="toBuy" class="px-5 h-9 text-sm" style="margin-top: 1.5rem">
+          <div class="vh_center space-x-2">
+            <ShoppingCart :size="14" />
             <span>{{ t("Buy_now") }}</span>
           </div>
         </ip-button>

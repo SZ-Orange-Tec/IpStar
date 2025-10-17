@@ -6,9 +6,9 @@
       </template>
     </NavBar>
 
-    <div class="flex-1 w-full px-5">
+    <div class="w-full px-5">
       <SonAccount class="board p-5 mt-5 rounded-md" />
-      <!-- <AccountDetail class="card" /> -->
+      <AccountDetail class="board p-5 my-5 rounded-md" />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
 <script setup>
 import NavBar from "../components/navbar/navbar.vue"
 import SonAccount from "./sonAccount/index.vue"
-// import AccountDetail from "./detail/index.vue"
+import AccountDetail from "./detail/index.vue"
 </script>
 
 <style lang="less" scoped>

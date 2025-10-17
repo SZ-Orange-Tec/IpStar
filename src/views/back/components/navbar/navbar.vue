@@ -144,7 +144,7 @@ import { watch } from "vue"
 const router = useRouter()
 const route = useRoute()
 const { isProduc } = layoutStore()
-const { username_simple, isAdmin } = userStore()
+const { username_simple } = userStore()
 const { lang } = settingStore()
 const { OutLogin } = loginStore()
 
@@ -200,12 +200,12 @@ const menuData = [
     name: t("Whitelist"),
     path: "/whitelist",
   },
-  // {
-  //   icon: AccountIcon,
-  //   name: t("Account"),
-  //   path: "/account",
-  //   isShow: isAdmin.value,
-  // },
+  {
+    icon: AccountIcon,
+    name: t("Account"),
+    path: "/account",
+    isShow: true,
+  },
   {
     icon: Settings,
     name: t("menu_spec.Settings"),

@@ -72,15 +72,74 @@
       </div>
 
       <!-- 无购买记录 状态 -->
-      <div class="h-full column_center space-y-4" v-else-if="!isProduc" style="justify-content: center">
-        <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
+      <div class="w-full h-full column_center space-y-4 board rounded-md" v-else-if="!isProduc" style="justify-content: center">
+        <!-- <img src="@/assets/images/products/empty.png" width="256" alt="null commodity" />
         <p>{{ $t("product_spec.no") }}</p>
         <ip-button type="primary" @click="toBuy" class="px-3 h-10">
           <div class="v_center space-x-2">
             <ShoppingCart :size="20" />
             <span>{{ $t("Buy_now") }}</span>
           </div>
+        </ip-button> -->
+        <div class="icon vh_center rounded-md">
+          <img src="@/assets/images/products/house.webp" width="80" height="80" alt="" />
+        </div>
+        <h5 class="text-2xl font-bold">{{ t("product_spec.guide_title") }}</h5>
+        <p>{{ t("product_spec.guide_des") }}</p>
+        <div class="price text-sm v_center space-x-2">
+          <div class="v_center space-x-1">
+            <span>{{ t("product_spec.lowest") }}</span>
+            <strong>${{ homeData.lowestPrice / 100 }}/GB</strong>
+          </div>
+          <span class="tag text-xs font-bold px-2 rounded-full v_center">{{ t("Never_Expires") }}</span>
+        </div>
+        <ip-button type="primary" @click="toBuy" class="h-9 w-full text-sm" style="max-width: 400px">
+          <div class="vh_center space-x-2">
+            <ShoppingCart :size="14" />
+            <span>{{ $t("Buy_now") }}</span>
+          </div>
         </ip-button>
+        <div class="w-full column_center feature">
+          <strong class="text-base font-medium">{{ t("Feature_List") }}</strong>
+          <ul class="flex w-full">
+            <li class="">
+              <div class="v_center space-x-4 rounded-md">
+                <img src="@/assets/images/products/earth.png" width="36" height="36" alt="" />
+                <div class="space-y-2">
+                  <strong class="font-medium">{{ t("product_spec.feature_title1") }}</strong>
+                  <p class="text-sm">{{ t("product_spec.feature_desc1") }}</p>
+                </div>
+              </div>
+            </li>
+            <li class="">
+              <div class="v_center space-x-4 rounded-md">
+                <img src="@/assets/images/products/time.png" width="36" height="36" alt="" />
+                <div class="space-y-2">
+                  <strong class="font-medium">{{ t("product_spec.feature_title2") }}</strong>
+                  <p class="text-sm">{{ t("product_spec.feature_desc2") }}</p>
+                </div>
+              </div>
+            </li>
+            <li class="">
+              <div class="v_center space-x-4 rounded-md">
+                <img src="@/assets/images/products/book.png" width="36" height="36" alt="" />
+                <div class="space-y-2">
+                  <strong class="font-medium">{{ t("product_spec.feature_title3") }}</strong>
+                  <p class="text-sm">{{ t("product_spec.feature_desc3") }}</p>
+                </div>
+              </div>
+            </li>
+            <li class="">
+              <div class="v_center space-x-4 rounded-md">
+                <img src="@/assets/images/products/check.png" width="36" height="36" alt="" />
+                <div class="space-y-2">
+                  <strong class="font-medium">{{ t("product_spec.feature_title4") }}</strong>
+                  <p class="text-sm">{{ t("product_spec.feature_desc4") }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -101,7 +160,7 @@ import { ShoppingCart } from "lucide-vue-next"
 import { useRouter } from "vue-router"
 import NavBar from "../components/navbar/navbar.vue"
 import { useI18n } from "vue-i18n"
-import { CircleChevronRight } from "lucide-vue-next"
+import { CircleChevronRight, House } from "lucide-vue-next"
 import { platDataIndex } from "../../../api/home"
 
 const { lang, documentIdx } = settingStore()

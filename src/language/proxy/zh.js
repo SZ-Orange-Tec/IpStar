@@ -36,5 +36,9 @@ export default {
       btn: "API参考",
     },
     no_order: "You have no order information",
+
+    subscript: "需要订阅",
+    unlock_title: "解锁API提取",
+    unlock_desc: "解锁后，您可以通过手动提取代理通道。",
   },
 }

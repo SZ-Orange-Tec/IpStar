@@ -4,6 +4,10 @@ export default {
   ...menu,
   ...navbar,
 
+  Start_date: "Start Date",
+  To: "To",
+  End_date: "End Date",
+
   account_spec: {
     account_manage: "Account Management",
     sub_account: "Sub Account",
