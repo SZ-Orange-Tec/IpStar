@@ -345,6 +345,46 @@
           background-color: #fff;
           // background-color: hsl(var(--foreground));
         }
+
+        .how_use{
+          height: 50px;
+          &:hover{
+            color: hsl(var(--primary));
+          }
+        }
+
+        .price{
+          .tag{
+            height: 24px;
+            background-color: #ffec9f;
+            color: #7a4b03;
+          }
+        }
+        .resource{
+          &>.header{
+            height: 50px;
+            border-bottom: 1px solid #F3F4F9;
+          }
+          ul{
+            li{
+              &:hover{
+                background-color: hsl(var(--primary) / 5%);
+              }
+            }
+          }
+        }
+
+        .service{
+          .or{
+            &::before,&::after{
+              content: "";
+              display: block;
+              flex: 1;
+              height: 1px;
+              background-color: #F3F4F9;
+            }
+          }
+        }
       }
     }
   

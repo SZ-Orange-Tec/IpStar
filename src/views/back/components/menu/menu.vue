@@ -17,7 +17,7 @@
             v-else
             :class="{ pitch_on: idx === index }"
             v-show="item.isShow"
-            @click="jumpPath(index, item)"
+            @click="jumpPath(index)"
           >
             <component :is="item.icon" :size="16" :stroke-width="1.5"></component>
             <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
@@ -102,7 +102,7 @@ function getSlideList() {
     },
     {
       icon: AccountIcon,
-      name: t("Account"),
+      name: t("Sub_Account"),
       path: "/account",
       isShow: true,
     },
@@ -115,7 +115,8 @@ function getSlideList() {
   ]
   focusPath(route.path)
 }
-function jumpPath(index, item) {
+function jumpPath(index) {
+  const item = menuData.value[index]
   if (item.path === "/products") {
     isProduc.value = false
   }

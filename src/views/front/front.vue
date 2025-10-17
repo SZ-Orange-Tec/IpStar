@@ -14,6 +14,9 @@ import Footer from "./components/footer/footer.vue"
 import { onMounted, provide, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
+import layoutStore from "../../store/layout"
+
+const { setLowestPrice } = layoutStore()
 
 // 预加载
 function loadLogin() {
@@ -47,6 +50,8 @@ async function getHomeData() {
     homeData.onlineIp = onlineIp
     homeData.ipsCount = ipsCount
     homeData.countrys = countrys
+
+    setLowestPrice(lowestPrice)
   } catch (error) {
     console.log(error.message)
   }

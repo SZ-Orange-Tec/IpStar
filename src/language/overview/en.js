@@ -23,6 +23,15 @@ export default {
 
   Online: "Online",
 
+  Never_Expires: "Never Expires",
+  Buy_now: "Buy Now",
+  Resources: "Resources",
+  Statistics: "Statistics",
+  User_Guide: "User Guide",
+  FAQ: "FAQ",
+  Or: " Or ",
+  Email: "Email",
+
   overview_spec: {
     Residual_Traffic: "Residual Traffic",
     Consumption_Today: "Consumption Today",
@@ -56,5 +65,13 @@ export default {
 
     day_compare: "Daily comparison",
     hour_compare: "Hourly report",
+
+    guide_title: "Residential Proxies",
+    guide_des: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+    lowest: "Lowest price:",
+    guide_learn: "Learn how to use your Residential Proxy",
+    service_des: "If you have any questions or suggestions, please feel free to contact us.",
+    contact: "Contact Us",
+    how_use: "Learn how to get started quickly",
   },
 }

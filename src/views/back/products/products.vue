@@ -88,7 +88,7 @@
         <p>{{ t("product_spec.guide_des") }}</p>
         <div class="price text-sm v_center space-x-2">
           <div class="v_center space-x-1">
-            <span>{{ t("product_spec.lowest") }}</span>
+            <span class="grey-60">{{ t("product_spec.lowest") }}</span>
             <strong>${{ homeData.lowestPrice / 100 }}/GB</strong>
           </div>
           <span class="tag text-xs font-bold px-2 rounded-full v_center">{{ t("Never_Expires") }}</span>
@@ -157,29 +157,31 @@ import { ShoppingCart } from "lucide-vue-next"
 // import IpTable from "@/components/table/table.vue"
 // import IpTableColumn from "@/components/table/table-column.vue"
 // import IpPagination from "@/components/pagination/pagination.vue"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import NavBar from "../components/navbar/navbar.vue"
 import { useI18n } from "vue-i18n"
 import { CircleChevronRight, House } from "lucide-vue-next"
 import { platDataIndex } from "../../../api/home"
 
 const { lang, documentIdx } = settingStore()
-const { isProduc } = layoutStore()
+const { isProduc, setLowestPrice } = layoutStore()
 const { is_purchase } = userStore()
 const { t } = useI18n()
 
 const router = useRouter()
+const route = useRoute()
 
-watch(isProduc, (newVal) => {
-  console.log("update,", newVal)
-})
+if (route.query.buy) {
+  isProduc.value = true
+}
+isProduc.value = false
 
 // 响应式数据
 const total = ref(10)
 const page = ref(1)
 const size = ref(10)
 const tableData = ref([])
-const tabTotal = ref(10)
+const tabTotal = ref(0)
 const tabPage = ref(1)
 const tabSize = ref(10)
 const loading = ref(false)
@@ -267,6 +269,8 @@ async function getHomeData() {
     const { lowest_price: lowestPrice } = data
 
     homeData.lowestPrice = lowestPrice
+
+    setLowestPrice(lowestPrice)
   } catch (error) {
     console.log(error.message)
   }
@@ -276,7 +280,7 @@ getHomeData()
 
 // 生命周期钩子
 onMounted(() => {
-  getProductClient()
+  // getProductClient()
 })
 </script>
 

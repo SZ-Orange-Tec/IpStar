@@ -45,7 +45,7 @@
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.consume.num" :unit="quantityOfFlow.consume.unit" />
                 </p>
-                <ip-button type="primary" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(2)">
+                <ip-button type="primary_border" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(2)">
                   {{ $t("Details") }}
                 </ip-button>
                 <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("overview_spec.detail") }}</div> -->
@@ -60,7 +60,7 @@
                 <p class="number">
                   <NumberCounter :value="quantityOfFlow.remain.count" :unit="quantityOfFlow.consume.count" />
                 </p>
-                <ip-button type="primary" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(1)">
+                <ip-button type="primary_border" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(1)">
                   {{ $t("Details") }}
                 </ip-button>
                 <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("overview_spec.detail") }}</div> -->
@@ -69,9 +69,9 @@
           </div>
 
           <!-- 流量消耗趋势 -->
-          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{ echart_table_layout: isUsed }">
+          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{ echart_table_layout: isDashboard }">
             <!-- 新手引导 -->
-            <div v-if="!isUsed" class="new_guide rounded-md w-full md:flex-1 column !items-stretch space-y-7">
+            <div v-if="!isDashboard" class="new_guide rounded-md w-full md:flex-1 column !items-stretch space-y-7">
               <div class="text-lg md:text-xl font-semibold">
                 <span class="primary">{{ $t("overview_spec.welcome1") }}</span>
                 {{ $t("overview_spec.welcome2") }}
@@ -83,11 +83,11 @@
                   <p class="black font-semibold text-lg">1. {{ $t("overview_spec.proxy_title") }}</p>
                 </div>
 
-                <div>
+                <div class="w-full" style="max-width: 55rem">
                   <div class="w-full column md:v_center !items-stretch gap-2">
-                    <CopyItem :label="$t('overview_spec.port')" text="9135(http) 9139(socks5)" />
-                    <CopyItem :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
-                    <CopyItem :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
+                    <CopyItem class="flex-1" :label="$t('overview_spec.port')" text="9135(http) 9139(socks5)" />
+                    <CopyItem class="flex-1" :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
+                    <CopyItem class="flex-1" :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div>
-                  <div class="w-full column !items-stretch space-y-4" style="max-width: 60rem">
+                  <div class="w-full column !items-stretch space-y-4" style="max-width: 55rem">
                     <CodeItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
                   </div>
                 </div>
@@ -178,7 +178,7 @@
               </div>
             </div>
 
-            <div v-if="isUsed" class="table_box xl:hidden board">
+            <div v-if="isDashboard" class="table_box xl:hidden board">
               <el-table :data="tableData" v-if="tableData.length > 0">
                 <el-table-column prop="date" :label="$t('Date')"></el-table-column>
                 <el-table-column prop="flow" :label="$t('Traffic')">
@@ -194,7 +194,7 @@
           </div>
         </div>
         <!-- 右边通知 -->
-        <div v-if="isUsed" class="right h-full hidden xl:column space-y-5">
+        <div v-if="isDashboard" class="right h-full hidden xl:column space-y-5">
           <div class="notice board" v-if="noticeText">
             <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
             <div class="notice_box">
@@ -203,6 +203,11 @@
               </div>
               <div class="mark"></div>
             </div>
+          </div>
+
+          <div class="board how_use between px-4 w-full rounded-md pointer" @click="isDashboard = false">
+            <strong class="font-medium">{{ $t("overview_spec.how_use") }}</strong>
+            <ChevronRight :size="14" />
           </div>
 
           <div class="date_flow table_box flex-1 min-h-0 board">
@@ -217,6 +222,73 @@
             <div class="null_data" v-else>
               <el-empty description="No Data"></el-empty>
             </div>
+          </div>
+        </div>
+        <div v-else class="right h-full hidden xl:column space-y-5">
+          <div class="w-full price board column_center px-4 py-5 rounded-md space-y-3">
+            <div class="v_center space-x-2">
+              <img src="@/assets/images/products/house.webp" width="30" height="30" alt="" />
+              <strong>{{ $t("overview_spec.guide_title") }}</strong>
+            </div>
+            <p class="text-sm text-center">{{ $t("overview_spec.guide_des") }}</p>
+
+            <div class="text-sm v_center space-x-2">
+              <div class="v_center space-x-1">
+                <span class="grey-60">{{ $t("overview_spec.lowest") }}</span>
+                <strong>${{ lowestPrice / 100 }}/GB</strong>
+              </div>
+              <span class="tag text-xs font-medium px-2 rounded-full v_center">{{ $t("Never_Expires") }}</span>
+            </div>
+
+            <ip-button type="primary" @click="$router.push('/products?buy=1')" class="h-9 w-full text-sm" style="max-width: 400px">
+              <div class="vh_center space-x-2">
+                <ShoppingCart :size="14" />
+                <span>{{ $t("Buy_now") }}</span>
+              </div>
+            </ip-button>
+          </div>
+
+          <div class="resource board ounded-md w-full">
+            <div class="header v_center space-x-2 px-5">
+              <Book :size="14" class="primary" />
+              <strong class="font-semibold">{{ $t("Resources") }}</strong>
+            </div>
+            <div class="px-3 pb-5">
+              <p class="text-sm h-10 v_center px-2">{{ $t("overview_spec.guide_learn") }}</p>
+              <ul class="text-[15px]">
+                <li class="between h-10 px-2 rounded-md pointer" @click="isDashboard = true">
+                  <div class="v_center space-x-2">
+                    <FileText :size="18" />
+                    <span>{{ $t("Statistics") }}</span>
+                  </div>
+                  <ChevronRight :size="14" />
+                </li>
+                <li class="between h-10 px-2 rounded-md pointer" @click="$router.push('/doc')">
+                  <div class="v_center space-x-2">
+                    <ShieldUser :size="18" />
+                    <span>{{ $t("User_Guide") }}</span>
+                  </div>
+                  <ChevronRight :size="14" />
+                </li>
+                <li class="between h-10 px-2 rounded-md pointer" @click="$router.push('/help')">
+                  <div class="v_center space-x-2">
+                    <MessageCircleQuestion :size="18" />
+                    <span>{{ $t("FAQ") }}</span>
+                  </div>
+                  <ChevronRight :size="14" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="w-full service column_center board rounded-md py-5 px-5 space-y-4 text-sm">
+            <img src="@/assets/images/overview/chatPop.svg" width="30" alt="" />
+            <p class="text-center font-medium">{{ $t("overview_spec.service_des") }}</p>
+            <p class="font-normal">{{ $t("Email") }}：support@ipstar.io</p>
+
+            <div class="v_center w-full or space-x-3 grey-40">{{ $t("Or") }}</div>
+
+            <ip-button @click="openService" type="border" class="h-9 w-full text-sm">{{ $t("overview_spec.contact") }}</ip-button>
           </div>
         </div>
       </div>
@@ -324,12 +396,25 @@ import NavBar from "../components/navbar/navbar.vue"
 import Picker from "../components/picker/picker.vue"
 import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
 import tableProgress from "../components/progress/progress.vue"
-import { Calendar, ChevronLeft, Gauge, SlidersVertical, Check } from "lucide-vue-next"
+import {
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Gauge,
+  SlidersVertical,
+  Check,
+  Book,
+  FileText,
+  ShieldUser,
+  MessageCircleQuestion,
+  ShoppingCart,
+} from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import { roundToDecimal } from "../../../utils/tools"
 import CopyItem from "./copyItem.vue"
 import CodeItem from "./codeItem.vue"
 import { platDataNodes } from "../../../api/home"
+import layoutStore from "../../../store/layout"
 // import * as echarts from 'echarts'
 let echart = null
 export default {
@@ -342,11 +427,17 @@ export default {
     tableProgress,
     Calendar,
     ChevronLeft,
+    ChevronRight,
     IpButton,
     Gauge,
     SlidersVertical,
     CopyItem,
     CodeItem,
+    Book,
+    FileText,
+    ShoppingCart,
+    ShieldUser,
+    MessageCircleQuestion,
   },
   data() {
     this.page = {
@@ -360,6 +451,7 @@ export default {
       "font-size": "14px",
     }
     return {
+      isDashboard: this.isUsed,
       // ip池
       ipPools: [
         "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv3.connpnt134.com:9135 https://ipinfo.io",
@@ -458,7 +550,7 @@ export default {
       this.quantityOfFlow = obj
     })
     // 实时统计
-    if (this.isUsed) {
+    if (this.isDashboard) {
       this.getRealTime(new Date())
       // 通知
       this.getNotice()
@@ -474,6 +566,10 @@ export default {
     import("flag-icon-css/css/flag-icons.css")
   },
   methods: {
+    openService() {
+      // window.$crisp.push(["do", "chat:show"])
+      window.$crisp.push(["do", "chat:open"])
+    },
     async getIpPool() {
       try {
         const result = []
@@ -1330,6 +1426,19 @@ export default {
     balanceDate(val) {
       this.getBalanceData()
     },
+    isDashboard(val) {
+      this.$nextTick(() => {
+        if (val) {
+          this.getRealTime(new Date())
+          // 通知
+          this.getNotice()
+          // 初始化echart滑块
+          this.selectEchart(0)
+        } else {
+          this.getIpPool()
+        }
+      })
+    },
   },
   beforeDestroy() {
     echart = null
@@ -1339,6 +1448,10 @@ export default {
   },
   setup() {
     const { lang, en } = settingStore()
+    const { lowestPrice, getLowestPrice } = layoutStore()
+    if (!lowestPrice.value) {
+      getLowestPrice()
+    }
     const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()
     return {
       en,
@@ -1347,6 +1460,7 @@ export default {
       isUsed,
       proxy_user,
       proxy_pass,
+      lowestPrice,
     }
   },
 }

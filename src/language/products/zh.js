@@ -34,10 +34,10 @@ export default {
     no: "您没有流量余额",
 
     guide_title: "住宅代理",
-    guide_des: "9000万+安全住宅代理，高置名性和低检测率。适用于各种便用场景。",
+    guide_des: "9000万+安全住宅代理，高匿名性和低检测率。适用于各种使用场景。",
     lowest: "低至：",
     feature_title1: "全球覆盖",
-    feature_desc1: "访问要盖全球所有国家的分布式代理网路。",
+    feature_desc1: "访问覆盖全球所有国家的分布式代理网络。",
     feature_title2: "99.99%在线率",
     feature_desc2: "IPStar拥有全球最高的连接成功率。",
     feature_title3: "多种协议支持",

@@ -22,6 +22,7 @@ import "vue-prism-editor/dist/prismeditor.min.css"
 import { highlight, languages } from "prismjs/components/prism-core"
 import "prismjs/components/prism-clike"
 import "prismjs/components/prism-javascript"
+import "prismjs/components/prism-bash" // 引入 bash 语言支持
 import "prismjs/themes/prism-tomorrow.css"
 
 import IpButton from "@/components/button/button.vue"
@@ -43,7 +44,8 @@ const props = defineProps({
 const { text, label } = props
 // 代码块高亮
 function highlighter(code) {
-  return highlight(code, languages.text, "bash")
+  // return highlight(code, languages.text, "bash")
+  return highlight(code, languages.bash, "bash")
 }
 
 // 复制
@@ -66,13 +68,13 @@ async function Copy() {
   }
   .code {
     border: 1px solid #e2e8f0;
-    background-color: #f8fafc;
+    background-color: #282c34;
     position: relative;
     ::v-deep .my-editor {
       font-family: mononoki, Consolas, Liberation Mono, Menlo, Courier, monospace, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji,
         Segoe UI Symbol, Android Emoji, EmojiSymbols;
       // color: ;
-      color: #adafb4;
+      color: #abb2bf;
       textarea {
         display: none;
       }
@@ -82,6 +84,7 @@ async function Copy() {
       top: 8px;
       right: 12px;
       opacity: 0;
+      color: #fff;
     }
     .show {
       opacity: 1;

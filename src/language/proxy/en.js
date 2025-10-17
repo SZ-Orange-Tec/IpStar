@@ -27,6 +27,9 @@ export default {
   Copy: "Copy",
   Curl_Command: "Curl",
 
+  Account: "Account",
+  Sub_Account: "Sub-account",
+
   proxy_spec: {
     duration_tip:
       "When using a proxy, you can set the IP's lifespan and use the proxy throughout that time. Since it's a resident proxy, its lifespan can range from a few hours to several days.",
@@ -37,8 +40,9 @@ export default {
     },
     no_order: "您没有订单信息",
 
-    subscript: "Subscription required",
-    unlock_title: "Unlock Manual Obtain",
-    unlock_desc: "After unlocking, you can extract proxy channels via APIs.",
+    // subscript: "Subscription required",
+    // unlock_title: "Unlock Manual Obtain",
+    // unlock_desc: "After unlocking, you can extract proxy channels via APIs.",
+    no_buy: "Insufficient balance",
   },
 }

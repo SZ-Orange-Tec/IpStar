@@ -63,7 +63,13 @@
         <el-table-column prop="remark" :label="t('account_spec.remark')" min-width="100px"></el-table-column>
         <el-table-column :label="t('account_spec.status')" min-width="100px">
           <template #default="scope">
-            <el-switch @click="updateStatus(scope.$index)" :value="scope.row.status" active-color="#13CE66" inactive-color="#788B9D"></el-switch>
+            <el-switch
+              @change="updateStatus(scope.$index)"
+              :model-value="scope.row.status"
+              :loading="scope.row.loading"
+              active-color="#13CE66"
+              inactive-color="#788B9D"
+            ></el-switch>
             <!-- <el-tag :type="scope.row.status === 1 ? 'success' : 'danger'">{{ scope.row.status === 1 ? '正常' : '禁用' }}</el-tag> -->
           </template>
         </el-table-column>
@@ -363,8 +369,7 @@ let searchDebounce
 
 // 方法定义
 function openAddDialog() {
-  const isPurchase = is_purchase.value ?? false
-  if (!isPurchase) {
+  if (!isAdmin.value) {
     Confirm({
       title: en.value ? "Prompt" : "温馨提示",
       message: en.value
@@ -681,6 +686,7 @@ function starPasswordEdit(e) {
 async function updateStatus(index) {
   try {
     const { id, status } = accountList.value[index]
+    accountList.value[index].loading = true
     await platAccountUpdateStatus({
       id,
       status: Number(!status),
@@ -688,6 +694,8 @@ async function updateStatus(index) {
     accountList.value[index].status = !status
   } catch (error) {
     console.log(error.message)
+  } finally {
+    accountList.value[index].loading = false
   }
 }
 
@@ -708,6 +716,7 @@ async function getList() {
     })
     accountList.value = data.list.map((item) => {
       item.status = Boolean(item.status)
+      item.loading = false
       return item
     })
     page.total = data.count

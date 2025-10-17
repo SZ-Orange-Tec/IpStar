@@ -28,6 +28,9 @@ export default {
   Copy: "复制",
   Curl_Command: "Curl 命令",
 
+  Account: "账号",
+  Sub_Account: "子账号",
+
   proxy_spec: {
     duration_tip: "当您使用代理时，您可以设置IP的有效期，并在有效期内使用该代理。由于它是常驻代理，因此有效期的范围可以从几个小时到几天不等。",
 
@@ -37,8 +40,9 @@ export default {
     },
     no_order: "You have no order information",
 
-    subscript: "需要订阅",
-    unlock_title: "解锁API提取",
-    unlock_desc: "解锁后，您可以通过手动提取代理通道。",
+    // subscript: "需要订阅",
+    // unlock_title: "解锁API提取",
+    // unlock_desc: "解锁后，您可以通过手动提取代理通道。",
+    no_buy: "流量不足",
   },
 }

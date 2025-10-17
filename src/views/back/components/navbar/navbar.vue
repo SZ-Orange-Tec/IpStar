@@ -160,7 +160,7 @@ function getName() {
     "/generate_api": t("menu_spec.API"),
     "/settings": t("menu_spec.Settings"),
     "/whitelist": t("Whitelist"),
-    "/account": t("Account"),
+    "/account": t("Sub_Account"),
   }
   name.value = pathMap[route.path] ?? ""
 }
@@ -202,7 +202,7 @@ const menuData = [
   },
   {
     icon: AccountIcon,
-    name: t("Account"),
+    name: t("Sub_Account"),
     path: "/account",
     isShow: true,
   },

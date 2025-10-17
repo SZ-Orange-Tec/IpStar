@@ -1,7 +1,7 @@
 export default {
   Test: "测试",
   Whitelist: "白名单",
-  Account: "账号管理",
+  Sub_Account: "子账号",
   menu_spec: {
     Overview: "概览",
     Products: "产品",

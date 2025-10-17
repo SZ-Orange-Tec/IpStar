@@ -20,6 +20,17 @@
 .primary:hover {
   background-color: hsl(var(--primary) / 80%);
 }
+.primary_border{
+  background-color: hsl(var(--background));
+  color: hsl(var(--primary));
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+}
+.primary_border:hover {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--colour-foreground));
+}
 
 .major{
   background-color: hsl(var(--major));

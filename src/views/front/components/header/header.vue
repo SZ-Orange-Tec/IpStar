@@ -195,7 +195,7 @@ const activePath = computed(() => route.path)
 const isHome = computed(() => "/home" === activePath.value)
 function navigate(path) {
   // 跳转路由
-  if (router.currentRoute.value.path === path) {
+  if (route.path === path) {
     return
   }
   router.push(path)

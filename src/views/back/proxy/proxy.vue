@@ -61,6 +61,13 @@
             </div>
 
             <div class="column space-y-2">
+              <p class="text-sm font-medium">{{ t("Account") }}</p>
+              <el-select v-model="account" clearable :placeholder="$t('Sub_Account')" style="max-width: 232px">
+                <el-option v-for="item in accountList" :key="item" :value="item" :label="item"></el-option>
+              </el-select>
+            </div>
+
+            <div class="column space-y-2">
               <p class="text-sm font-medium hidden md:block" style="height: 20px"></p>
               <ip-button @click="generate" :loading="btnLoading" class="px-5 h-8 text-sm">
                 <div class="v_center space-x-2">
@@ -114,12 +121,12 @@
 
       <div class="h-full column_center space-y-4 board rounded-md lock" v-else style="justify-content: center">
         <img src="@/assets/images/products/lock.png" width="60" alt="" />
-        <span class="text-sm primary">{{ t("proxy_spec.subscript") }}</span>
+        <span class="text-lg primary">{{ t("proxy_spec.no_buy") }}</span>
 
-        <div class="column_center space-y-2">
+        <!-- <div class="column_center space-y-2">
           <strong class="text-2xl">{{ t("proxy_spec.unlock_title") }}</strong>
           <p>{{ t("proxy_spec.unlock_desc") }}</p>
-        </div>
+        </div> -->
         <ip-button type="black" @click="toBuy" class="px-5 h-9 text-sm" style="margin-top: 1.5rem">
           <div class="vh_center space-x-2">
             <ShoppingCart :size="14" />
@@ -139,7 +146,7 @@ import { debounce } from "@/utils/tools"
 // import cnOptions from "./json/cncascader.json"
 import { PlatCustomerEndPoints } from "@/api/layout"
 import Message from "@/components/message/message.js"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import settingStore from "@/store/setting"
 import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
@@ -149,12 +156,14 @@ import { ShoppingCart, ArrowLeftRight, HelpCircle } from "lucide-vue-next"
 import IpInput from "@/components/input/input.vue"
 import { useI18n } from "vue-i18n"
 import copyText from "../../../utils/copyText"
+import { platAccountSelect } from "@/api/account"
 
 const { en } = settingStore()
 const { isProduc } = layoutStore()
-const { is_purchase } = userStore()
+const { is_purchase, isAdmin } = userStore()
 
 const router = useRouter()
+const route = useRoute()
 const { t } = useI18n()
 
 function toBuy() {
@@ -212,6 +221,7 @@ async function generate() {
         keeptime: currentIPtime,
         count: countVal.value,
         persistconn: 1,
+        account: account.value !== accountList.value[0] ? account.value : "",
       }
       const { data } = await PlatCustomerEndPoints(params)
       btnLoading.value = false
@@ -338,6 +348,19 @@ function goToDocument() {
   router.push("/doc")
 }
 
+// 子账号
+const accountList = ref([])
+const account = ref(route.query.account)
+async function getAccountList() {
+  try {
+    const { data } = await platAccountSelect()
+    data[0] = data[0] + ` (${en.value ? "Primary account" : "主账号"})`
+    accountList.value = data
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 // watch
 // watch(
 //   () => lang.value,
@@ -361,6 +384,7 @@ function goToDocument() {
 
 onMounted(() => {
   getData()
+  getAccountList()
 })
 </script>
 

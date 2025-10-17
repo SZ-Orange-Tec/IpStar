@@ -1,7 +1,7 @@
 export default {
   Test: "Test",
   Whitelist: "Whitelist",
-  Account: "Account",
+  Sub_Account: "Sub-account",
   menu_spec: {
     Overview: "Overview",
     Products: "Products",
