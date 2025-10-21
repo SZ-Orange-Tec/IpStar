@@ -1,8 +1,8 @@
 <template>
-  <div class="v_center h-10 rounded-md px-3 copyItem text-sm">
-    <span class="grey-40">{{ label }}</span>
-    <span class="primary text flex-1 pointer" @click="copy(text1)">{{ text1 }}</span>
-    <span class="primary text flex-1 pointer" v-if="text2" @click="copy(text2)">{{ text2 }}</span>
+  <div class="v_center py-3 rounded-md px-3 copyItem text-sm space-x-2">
+    <span class="whitespace-nowrap grey-40">{{ label }}</span>
+    <span class="whitespace-nowrap primary text pointer" @click="copy(text1)">{{ text1 }}</span>
+    <span class="whitespace-nowrap primary text pointer" v-if="text2" @click="copy(text2)">{{ text2 }}</span>
     <!-- <CopyIcon v-if="!iscopy" :size="14" class="grey-40 pointer" @click="copy" />
     <CopySuccessIcon v-else :size="14" class="primary" /> -->
   </div>

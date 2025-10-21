@@ -6,12 +6,14 @@
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
           <div>
-            <img
+            <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
+            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" />
+            <!-- <img
               sizes="(max-width:112px) 56px,24px"
-              src="@/assets/images/logo.png"
-              srcset="@/assets/images/logo.png 56w, @/assets/images/logo@2x.png 112w"
+              src="@/assets/images/logo_white.png"
+              srcset="@/assets/images/logo_white.png 56w, @/assets/images/logo_white@2x.png 112w"
               style="height: 36px"
-            />
+            /> -->
           </div>
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li

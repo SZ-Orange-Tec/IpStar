@@ -84,8 +84,8 @@
                 </div>
 
                 <div class="w-full" style="max-width: 55rem">
-                  <div class="w-full column md:v_center !items-stretch gap-2">
-                    <CopyItem class="flex-1" :label="$t('overview_spec.port')" text="9135(http) 9139(socks5)" />
+                  <div class="column md:v_center !items-stretch gap-2">
+                    <CopyItem class="flex-1" :label="$t('overview_spec.port')" text="9139(http) 9135(socks5)" />
                     <CopyItem class="flex-1" :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
                     <CopyItem class="flex-1" :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
                   </div>
