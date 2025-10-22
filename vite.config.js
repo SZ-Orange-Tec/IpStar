@@ -10,6 +10,8 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
 import tailwindcss from "tailwindcss"
 import path from "path"
 const __dirname = path.resolve()
+// 自动添加css前缀
+import autoprefixer from "autoprefixer"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -47,7 +49,13 @@ export default defineConfig({
   // 新增 css 配置
   css: {
     postcss: {
-      plugins: [tailwindcss()],
+      plugins: [
+        tailwindcss(),
+        autoprefixer({
+          overrideBrowserslist: ["Android 4.1", "iOS 7.1", "Chrome > 31", "ff > 31", "ie >= 8", "> 1%"],
+          grid: true,
+        }),
+      ],
     },
   },
 })
