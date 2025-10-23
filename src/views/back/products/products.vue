@@ -181,7 +181,7 @@ const total = ref(10)
 const page = ref(1)
 const size = ref(10)
 const tableData = ref([])
-const tabTotal = ref(0)
+const tabTotal = ref(10)
 const tabPage = ref(1)
 const tabSize = ref(10)
 const loading = ref(false)
@@ -280,7 +280,7 @@ getHomeData()
 
 // 生命周期钩子
 onMounted(() => {
-  // getProductClient()
+  getProductClient()
 })
 </script>
 
