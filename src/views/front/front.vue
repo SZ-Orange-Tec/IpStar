@@ -1,5 +1,9 @@
 <template>
   <div class="front">
+    <div class="home_bg w-full" :style="{ height: height }">
+      <HomeBg class="w-full h-full" />
+    </div>
+
     <Header />
 
     <router-view />
@@ -15,8 +19,12 @@ import { onMounted, provide, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
 import layoutStore from "../../store/layout"
+import HomeBg from "./components/homeBg.vue"
+import useWindowHeight from "@/composables/useWindowHeight"
 
 const { setLowestPrice } = layoutStore()
+
+const { height } = useWindowHeight()
 
 // 预加载
 function loadLogin() {
