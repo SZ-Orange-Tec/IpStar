@@ -1,12 +1,13 @@
 .menu {
-  width: 240px;
+  width: 260px;
+  overflow-y: auto;
   padding: 0 0 20px;
   background-color: hsl(var(--page-background));
   border-right: 1px solid hsl(var(--border));
 
   &>.logo {
     height: 50px;
-    padding-left: 32px;
+    padding-left: 28px;
     .back{
       opacity: 0;
       position: absolute;
@@ -36,7 +37,7 @@
 
     &>ul {
       width: 100%;
-      padding: 0 16px;
+      padding: 0 14px;
       box-sizing: border-box;
 
       &>li {
@@ -44,21 +45,19 @@
         width: 100%;
         height: 36px;
         box-sizing: border-box;
-        padding: 0 16px;
+        padding: 0 0 0 14px;
         // padding-left: 51px;
-
-        &:not(.pitch_on):hover {
+      }
+      &>li.menu-item{
+        &:hover{
           background-color: hsl(var(--primary) / 5%);
-          // p{
-          //   color: #E8710980;
-          // }
         }
       }
       .grey{
         color: hsl(var(--foreground) / 50%);
       }
       &>.pitch_on {
-        color: hsl(var(--primary));
+        // color: hsl(var(--primary));
         background-color: hsl(var(--primary) / 5%);
         // position: relative;
         // &::before{

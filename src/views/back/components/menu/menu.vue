@@ -9,25 +9,25 @@
     <div class="column flex-1">
       <ul class="space-y-1">
         <template v-for="(item, index) in menuData" :key="index">
-          <li class="v_center pointer grey text-xs" v-if="index === 1 || index === 4">
-            <em>{{ index === 1 ? "PLANS" : "PROXIES" }}</em>
-          </li>
           <li
-            class="v_center pointer space-x-2 text-[15px] font-medium"
-            v-else
+            class="v_center pointer space-x-2 text-[15px] font-medium menu-item"
+            v-if="item.path"
             :class="{ pitch_on: idx === index }"
             v-show="item.isShow"
             @click="jumpPath(index)"
           >
-            <component :is="item.icon" :size="16" :stroke-width="1.5"></component>
+            <component :is="item.icon" :size="16" :stroke-width="2" class="grey-80"></component>
             <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
+          </li>
+          <li class="v_center pointer grey text-xs" v-else>
+            <em>{{ item.name }}</em>
           </li>
         </template>
       </ul>
     </div>
-    <p class="tip text-sm">
+    <!-- <p class="tip text-sm">
       {{ $t("menu_spec.help") }}<span @click="$router.push('/doc')">{{ $t("menu_spec.manual") }}</span>
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -37,15 +37,19 @@ import { useRoute, useRouter } from "vue-router"
 import layoutStore from "@/store/layout"
 import { useI18n } from "vue-i18n"
 import {
-  Settings,
-  ClipboardList,
-  ShoppingCart,
-  ChartLine,
-  PrinterCheck,
-  LaptopMinimalCheck,
-  ChevronsLeft,
+  ChartLine as OverviewIcon,
+  FileCode as GetProxyIcon,
+  ShoppingCart as ComboIcon,
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
   NotepadText as WhiteListIcon,
   Contact as AccountIcon,
+  Settings as SettingsIcon,
+  BookMarked as HelpIcon,
+  MessageCircleQuestion as QuestionIcon,
+  ChevronsLeft,
 } from "lucide-vue-next"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
@@ -63,53 +67,79 @@ const menuData = ref([])
 function getSlideList() {
   menuData.value = [
     {
-      icon: ChartLine,
-      name: t("menu_spec.Overview"),
+      icon: OverviewIcon,
+      name: t("menu_spec.overview"),
       path: "/overview",
       isShow: true,
     },
-    {},
+    { name: t("menu_spec.how_to_use") },
     {
-      icon: ShoppingCart,
-      name: t("menu_spec.Products"),
-      path: "/products",
+      icon: GetProxyIcon,
+      name: t("menu_spec.get_proxy"),
+      path: "/get_proxy",
       isShow: true,
     },
     {
-      icon: ClipboardList,
-      name: t("menu_spec.Billings"),
-      path: "/billings",
+      icon: ComboIcon,
+      name: t("menu_spec.combo"),
+      path: "/combo",
       isShow: true,
     },
-    {},
+    { name: t("menu_spec.products") },
     {
-      icon: PrinterCheck,
-      name: t("menu_spec.Proxy"),
-      path: "/proxy",
+      icon: ResidentialProxyIcon,
+      name: t("menu_spec.residential_proxy"),
+      path: "/residential_proxy",
       isShow: true,
     },
     {
-      icon: LaptopMinimalCheck,
-      name: t("menu_spec.API"),
-      path: "/generate_api",
+      icon: UnlimitedProxyIcon,
+      name: t("menu_spec.unlimited_proxy"),
+      path: "/unlimited_proxy",
       isShow: true,
     },
+    {
+      icon: PhoneProxyIcon,
+      name: t("menu_spec.phone_proxy"),
+      path: "/phone_proxy",
+      isShow: true,
+    },
+    {
+      icon: DataProxyIcon,
+      name: t("menu_spec.data_proxy"),
+      path: "/data_proxy",
+      isShow: true,
+    },
+    { name: t("menu_spec.menu") },
     {
       icon: WhiteListIcon,
-      name: t("Whitelist"),
+      name: t("menu_spec.white_list"),
       path: "/whitelist",
       isShow: true,
     },
     {
       icon: AccountIcon,
-      name: t("Sub_Account"),
-      path: "/account",
+      name: t("menu_spec.sub_account"),
+      path: "/sub_account",
       isShow: true,
     },
     {
-      icon: Settings,
-      name: t("menu_spec.Settings"),
+      icon: SettingsIcon,
+      name: t("menu_spec.setting"),
       path: "/settings",
+      isShow: true,
+    },
+    { name: t("menu_spec.support") },
+    {
+      icon: HelpIcon,
+      name: t("menu_spec.help"),
+      path: "/help",
+      isShow: true,
+    },
+    {
+      icon: QuestionIcon,
+      name: t("menu_spec.question"),
+      path: "/question",
       isShow: true,
     },
   ]

@@ -115,19 +115,19 @@
 
 <script setup>
 import {
-  ClipboardList,
-  House,
-  Menu,
-  Settings,
-  ShoppingCart,
-  ChartLine,
-  PrinterCheck,
-  LaptopMinimalCheck,
+  ChartLine as OverviewIcon,
+  FileCode as GetProxyIcon,
+  ShoppingCart as ComboIcon,
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
   NotepadText as WhiteListIcon,
-  Globe as LangIcon,
-  ChevronDown,
-  LogOut as SignOutIcon,
   Contact as AccountIcon,
+  Settings as SettingsIcon,
+  BookMarked as HelpIcon,
+  MessageCircleQuestion as QuestionIcon,
+  ChevronsLeft,
 } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import { computed, ref } from "vue"
@@ -153,14 +153,18 @@ const { t } = useI18n()
 const name = ref("")
 function getName() {
   const pathMap = {
-    "/overview": t("menu_spec.Overview"),
-    "/products": t("menu_spec.Products"),
-    "/billings": t("menu_spec.Billings"),
-    "/proxy": t("menu_spec.Proxy"),
-    "/generate_api": t("menu_spec.API"),
-    "/settings": t("menu_spec.Settings"),
-    "/whitelist": t("Whitelist"),
-    "/account": t("Sub_Account"),
+    "/overview": t("menu_spec.overview"),
+    "/get_proxy": t("menu_spec.get_proxy"),
+    "/combo": t("menu_spec.combo"),
+    "/residential_proxy": t("menu_spec.residential_proxy"),
+    "/unlimited_proxy": t("menu_spec.unlimited_proxy"),
+    "/phone_proxy": t("menu_spec.phone_proxy"),
+    "/data_proxy": t("menu_spec.data_proxy"),
+    "/whitelist": t("menu_spec.white_list"),
+    "/sub_account": t("menu_spec.sub_account"),
+    "/settings": t("menu_spec.setting"),
+    "/help": t("menu_spec.help"),
+    "/question": t("menu_spec.question"),
   }
   name.value = pathMap[route.path] ?? ""
 }
@@ -171,45 +175,64 @@ watch(lang, () => getName(), {
 const path = computed(() => route.path)
 const menuData = [
   {
-    icon: ChartLine,
-    name: t("menu_spec.Overview"),
+    icon: OverviewIcon,
+    name: t("menu_spec.overview"),
     path: "/overview",
   },
   {
-    icon: ShoppingCart,
-    name: t("menu_spec.Products"),
-    path: "/products",
+    icon: GetProxyIcon,
+    name: t("menu_spec.get_proxy"),
+    path: "/get_proxy",
   },
   {
-    icon: ClipboardList,
-    name: t("menu_spec.Billings"),
-    path: "/billings",
+    icon: ComboIcon,
+    name: t("menu_spec.combo"),
+    path: "/combo",
   },
   {
-    icon: PrinterCheck,
-    name: t("menu_spec.Proxy"),
-    path: "/proxy",
+    icon: ResidentialProxyIcon,
+    name: t("menu_spec.residential_proxy"),
+    path: "/residential_proxy",
   },
   {
-    icon: LaptopMinimalCheck,
-    name: t("menu_spec.API"),
-    path: "/generate_api",
+    icon: UnlimitedProxyIcon,
+    name: t("menu_spec.unlimited_proxy"),
+    path: "/unlimited_proxy",
+  },
+  {
+    icon: PhoneProxyIcon,
+    name: t("menu_spec.phone_proxy"),
+    path: "/phone_proxy",
+  },
+  {
+    icon: DataProxyIcon,
+    name: t("menu_spec.data_proxy"),
+    path: "/data_proxy",
   },
   {
     icon: WhiteListIcon,
-    name: t("Whitelist"),
+    name: t("menu_spec.white_list"),
     path: "/whitelist",
   },
   {
     icon: AccountIcon,
-    name: t("Sub_Account"),
-    path: "/account",
-    isShow: true,
+    name: t("menu_spec.sub_account"),
+    path: "/sub_account",
   },
   {
-    icon: Settings,
-    name: t("menu_spec.Settings"),
+    icon: SettingsIcon,
+    name: t("menu_spec.setting"),
     path: "/settings",
+  },
+  {
+    icon: HelpIcon,
+    name: t("menu_spec.help"),
+    path: "/help",
+  },
+  {
+    icon: QuestionIcon,
+    name: t("menu_spec.question"),
+    path: "/question",
   },
 ]
 function jumpPath(path) {
