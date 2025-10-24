@@ -33,6 +33,8 @@ export default {
   Email: "Email",
 
   overview_spec: {
+    starting_from: "Starting from:",
+
     Residual_Traffic: "Residual Traffic",
     Consumption_Today: "Consumption Today",
     Total_IPs_Available: "Total IPs Available",

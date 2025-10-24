@@ -31,6 +31,7 @@ export default {
   Email: "邮箱",
 
   overview_spec: {
+    starting_from: "低至：",
     Residual_Traffic: "剩余的流量",
     Consumption_Today: "今天的消耗",
     Total_IPs_Available: "当前在线 IP 总数",
