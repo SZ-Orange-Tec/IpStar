@@ -64,6 +64,7 @@ export default {
     test2: "Test Command is CURL Example, You Can Paste It into the Command Line to Quickly Test Your Proxy Settings.",
     obtxy_title: "IP Extraction Method",
     way: "Detailed IP Extraction Method, You Can Try",
+    account_password: "Account and Password",
 
     day_compare: "Daily comparison",
     hour_compare: "Hourly report",

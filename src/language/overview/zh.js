@@ -61,6 +61,7 @@ export default {
     test2: "测试命令为CURL示例，您可以将其粘贴到命令行中以快速测试您的代理设置。",
     obtxy_title: "获取IP方式",
     way: "详细的IP提取方式，您可以试试",
+    account_password: "账密组合",
 
     day_compare: "分天对比",
     hour_compare: "分小时报表",

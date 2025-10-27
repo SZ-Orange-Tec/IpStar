@@ -7,7 +7,7 @@
     </NavBar>
 
     <div class="main w-full flex flex-1 p-5 gap-5">
-      <div class="flex-1">
+      <div class="flex-1 space-y-5">
         <ul class="tab board px-2 py-5 rounded flex" @click="selectActive">
           <li :class="{ focus: active === 0 }" class="pointer flex-1 column p-5 rounded-md" data-active="0">
             <strong class="font-medium text-sm">{{ t("menu_spec.residential_proxy") }}</strong>
@@ -27,6 +27,10 @@
           </li>
           <li class="focus" :style="focusStyle"></li>
         </ul>
+
+        <div>
+          <ResidentialProxy v-if="active === 0" />
+        </div>
       </div>
 
       <div class="" style="width: 320px"></div>
@@ -38,6 +42,7 @@
 import { useI18n } from "vue-i18n"
 import NavBar from "../components/navbar/navbar.vue"
 import { ref } from "vue"
+import ResidentialProxy from "./residential_proxy/index.vue"
 
 const { t } = useI18n()
 
