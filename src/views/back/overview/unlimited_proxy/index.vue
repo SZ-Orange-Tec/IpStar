@@ -1,14 +1,14 @@
 <template>
-  <div class="residential-proxy space-y-6 column">
+  <div class="space-y-6 column">
     <div class="w-full p-5 board rounded">
       <!-- 头部区域 -->
       <div class="w-full between mb-8">
         <div class="v_center space-x-3">
           <div class="iconbox rounded-lg vh_center">
-            <ResidentialProxyIcon :size="28" :stroke-width="1.5" />
+            <UnlimitedProxyIcon :size="28" :stroke-width="1.5" />
           </div>
           <div>
-            <h1 class="font-medium">住宅代理</h1>
+            <h1 class="font-medium">{{ t("menu_spec.unlimited_proxy") }}</h1>
             <p class="grey-80 text-sm">9000万+安全性住宅代理，高匿名性和低检测率。</p>
           </div>
         </div>
@@ -58,27 +58,30 @@
     </div>
 
     <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
-      <TabItem :value="0" label="使用指南" class="h-9 px-5 min-w-[140px]" />
-      <TabItem :value="1" label="数据图表" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="0" label="带宽使用情况" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="1" label="并发使用情况" class="h-9 px-5 min-w-[140px]" />
     </Tab>
 
     <div class="w-full p-5 board rounded">
-      <Guide v-show="active === 0" />
-      <Echarts v-show="active === 1" />
+      <Bandwidth v-show="active === 0" />
+      <Concurrent v-show="active === 1" />
     </div>
   </div>
 </template>
 
 <script setup>
 import ipButton from "@/components/button/button.vue"
-import Guide from "./guide.vue"
-import Echarts from "./echarts.vue"
+import Bandwidth from "./bandwidth.vue"
+import Concurrent from "./concurrent .vue"
 import { ref } from "vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
-import { House as ResidentialProxyIcon } from "lucide-vue-next"
+import { useI18n } from "vue-i18n"
+import { Infinity as UnlimitedProxyIcon } from "lucide-vue-next"
 
-const active = ref(1) // 0:guide 1:echart
+const { t } = useI18n()
+
+const active = ref(0) // 0:bandwidth 1:concurrent
 const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",
   borderRadius: "4px",

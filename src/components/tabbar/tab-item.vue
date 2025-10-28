@@ -56,12 +56,12 @@ onMounted(() => {
   }
 })
 
-// 组件卸载时从父组件注销
-onUnmounted(() => {
-  if (tabbarContext?.unregisterTab) {
-    tabbarContext.unregisterTab(props.value)
-  }
-})
+// // 组件卸载时从父组件注销
+// onUnmounted(() => {
+//   if (tabbarContext?.unregisterTab) {
+//     tabbarContext.unregisterTab("unmounted")
+//   }
+// })
 </script>
 
 <style scoped>

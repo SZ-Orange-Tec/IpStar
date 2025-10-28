@@ -1,6 +1,6 @@
 <template>
   <div class="tabbar-container">
-    <div class="tabbar-wrapper">
+    <div class="tabbar-wrapper relative flex w-full">
       <!-- 活动背景指示器 -->
       <div class="active-bg" :style="activeBgStyle"></div>
 
@@ -20,27 +20,22 @@ const props = defineProps({
     type: [String, Number],
     default: undefined,
   },
-  // 背景颜色
-  activeBgColor: {
-    type: String,
-    default: "#e6f7ff",
-  },
-  // 选中文字颜色（优先级高于父组件）
   activeTextColor: {
     type: String,
-    default: "#ffffff",
+    default: "hsl(var(--foreground))",
   },
-  // 动画持续时间（毫秒）
-  animationDuration: {
-    type: Number,
-    default: 300,
-  },
-  // 背景圆角
-  borderRadius: {
-    type: Number,
-    default: 4,
+  activeStyle: {
+    type: Object,
+    default: () => ({}),
   },
 })
+
+const defaultActiveStyle = {
+  borderRadius: "4px",
+  backgroundColor: "#ffffff",
+  transition: `all 500ms cubic-bezier(.29,1.42,.79,1)`,
+  ...props.activeStyle,
+}
 
 // Emits定义
 const emit = defineEmits(["update:modelValue", "change"])
@@ -80,11 +75,6 @@ function registerTab(key, element) {
   } else {
     tabItems.value[existingIndex].element = element
   }
-
-  // 更新活动背景
-  nextTick(() => {
-    updateActiveBgStyle()
-  })
 }
 
 // 注销tab项
@@ -120,6 +110,10 @@ function handleTabClick(key, tabData = {}) {
     if (activeTab) {
       activeTabElement.value = activeTab.element
     }
+
+    nextTick(() => {
+      updateActiveBgStyle()
+    })
   }
 }
 
@@ -131,42 +125,16 @@ function updateActiveBgStyle() {
       const wrapper = activeTabElement.value.parentElement
       const wrapperLeft = wrapper.getBoundingClientRect().left
 
+      console.log(left, width, wrapperLeft)
+
       activeBgStyle.value = {
+        ...defaultActiveStyle,
         left: `${left - wrapperLeft}px`,
         width: `${width}px`,
-        backgroundColor: props.activeBgColor,
-        borderRadius: `${props.borderRadius}px`,
-        transition: `left ${props.animationDuration}ms ease, width ${props.animationDuration}ms ease`,
       }
     }
   })
 }
-
-// 监听modelValue变化
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    if (newVal !== activeKey.value) {
-      activeKey.value = newVal
-
-      // 更新活动tab元素引用
-      const activeTab = tabItems.value.find((item) => item.key === newVal)
-      if (activeTab) {
-        activeTabElement.value = activeTab.element
-      }
-
-      nextTick(() => {
-        updateActiveBgStyle()
-      })
-    }
-  },
-  { immediate: true }
-)
-
-// 监听activeKey变化，更新背景位置
-watch(activeKey, () => {
-  updateActiveBgStyle()
-})
 
 // 组件挂载后初始化背景位置
 onMounted(() => {
@@ -188,14 +156,7 @@ defineExpose({
 })
 </script>
 
-<style scoped>
-.tabbar-wrapper {
-  position: relative;
-  display: inline-flex;
-  border-radius: 8px;
-  /* background-color: #f5f5f5; */
-}
-
+<style>
 .active-bg {
   position: absolute;
   top: 0;
