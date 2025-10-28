@@ -76,6 +76,12 @@ const routes = [
         component: () => import("@/views/back/unlimited/unlimited.vue"),
       },
       {
+        path: "/mobile",
+        name: "mobile",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/mobile/mobile.vue"),
+      },
+      {
         path: "/products",
         name: "products",
         meta: { index: 12, keepAlive: false },

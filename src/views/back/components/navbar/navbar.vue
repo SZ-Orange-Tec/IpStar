@@ -168,7 +168,7 @@ function getName() {
     "/purchase": t("menu_spec.combo"),
     "/residential": t("menu_spec.residential_proxy"),
     "/unlimited": t("menu_spec.unlimited_proxy"),
-    "/phone_proxy": t("menu_spec.phone_proxy"),
+    "/mobile": t("menu_spec.phone_proxy"),
     "/data_proxy": t("menu_spec.data_proxy"),
     "/whitelist": t("menu_spec.white_list"),
     "/sub_account": t("menu_spec.sub_account"),
@@ -212,7 +212,7 @@ const menuData = [
   {
     icon: PhoneProxyIcon,
     name: t("menu_spec.phone_proxy"),
-    path: "/phone_proxy",
+    path: "/mobile",
   },
   {
     icon: DataProxyIcon,

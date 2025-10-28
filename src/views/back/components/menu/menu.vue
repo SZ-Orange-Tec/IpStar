@@ -101,7 +101,7 @@ function getSlideList() {
     {
       icon: PhoneProxyIcon,
       name: t("menu_spec.phone_proxy"),
-      path: "/phone_proxy",
+      path: "/mobile",
       isShow: true,
     },
     {

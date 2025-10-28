@@ -12,7 +12,7 @@ export default {
   Get_Proxy: "获取代理",
   Billing: "订单",
 
-  residential_spec: {
-    des: "无限IP提取，高带宽不限流量——为大规模数据采集量身打造。",
+  mobile_spec: {
+    des: "200万+高质量移动IP，全球覆盖。提供高成功率的网络访问，轻松应对复杂网络环境。",
   },
 }
