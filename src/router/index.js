@@ -64,6 +64,12 @@ const routes = [
         component: () => import("@/views/back/purchase/purchase.vue"),
       },
       {
+        path: "/residential",
+        name: "residential",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/residential/residential.vue"),
+      },
+      {
         path: "/products",
         name: "products",
         meta: { index: 12, keepAlive: false },

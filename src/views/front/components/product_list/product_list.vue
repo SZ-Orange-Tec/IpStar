@@ -3,13 +3,6 @@
     <!-- tabbar 个人 企业 -->
     <Tabbar @select="changeActive" v-if="tabbar"></Tabbar>
 
-    <!-- introduce 介绍 -->
-    <!-- <ul v-if="vantage" class="vantage vh_center">
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[0]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[1]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[2]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
-    </ul> -->
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex gap-3">
@@ -268,13 +261,14 @@ import { track_createOrder } from "@/utils/detect"
 const { en } = settingStore()
 
 const props = defineProps({
+  type: {
+    type: Number,
+    default: 1,
+    // 1=住宅代理 2=不限量住宅 3=移动手机 4=数据中心
+  },
   tabbar: {
     type: Boolean,
     default: true,
-  },
-  vantage: {
-    type: Boolean,
-    default: false,
   },
 })
 
@@ -296,10 +290,12 @@ let group2 = []
 let group3 = []
 async function GetProductList() {
   try {
-    const { data } = await platProductsV2()
-    const tempGroup1 = []
-    const tempGroup2 = []
-    const tempGroup3 = []
+    const { data } = await platProductsV2({
+      prd_type: props.type,
+    })
+    const tempGroup1 = [] // 个人
+    const tempGroup2 = [] // 企业
+    const tempGroup3 = [] // 不限量
 
     let prices = null
 
@@ -375,6 +371,7 @@ async function GetProductList() {
     console.log(err.message)
   }
 }
+
 // 获取全局配置
 async function getDataConfig() {
   try {

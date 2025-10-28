@@ -89,7 +89,7 @@ function getSlideList() {
     {
       icon: ResidentialProxyIcon,
       name: t("menu_spec.residential_proxy"),
-      path: "/residential_proxy",
+      path: "/residential",
       isShow: true,
     },
     {
