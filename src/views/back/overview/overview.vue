@@ -91,6 +91,8 @@ const activeStyle = {
   border: "1px solid hsl(var(--primary) / 90%)",
   borderRadius: "8px",
   transition: `all 500ms cubic-bezier(.29,1.42,.79,1)`,
+  top: 0,
+  bottom: 0,
 }
 function selectActive(e) {
   if (e.target.tagName === "UL") return

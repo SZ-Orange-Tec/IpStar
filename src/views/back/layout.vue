@@ -98,7 +98,7 @@ onMounted(() => {
 @import url("./layout.less");
 </style>
 
-<style>
+<style lang="less">
 .board {
   background: hsl(var(--background));
   /* border: 1px solid ; */

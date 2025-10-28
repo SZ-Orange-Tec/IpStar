@@ -159,8 +159,6 @@ defineExpose({
 <style>
 .active-bg {
   position: absolute;
-  top: 0;
-  bottom: 0;
   z-index: 0;
 }
 </style>

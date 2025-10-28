@@ -16,5 +16,7 @@ export default {
     support: "Support",
     help: "Help",
     question: "Questions",
+
+    back_home: "Back to Home",
   },
 }

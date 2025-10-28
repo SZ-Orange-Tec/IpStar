@@ -83,6 +83,8 @@ const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",
   borderRadius: "4px",
   "--activeTextColor": "#ffffff",
+  top: 0,
+  bottom: 0,
 }
 </script>
 

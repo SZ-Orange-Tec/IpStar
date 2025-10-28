@@ -1,6 +1,6 @@
 import menu from "../components/menu/zh"
 import navbar from "../components/navbar/zh"
-import combo_popup from "../components/combo_popup/zh"
+import combo_popup from "../components/purchase_popup/zh"
 export default {
   ...menu,
   ...navbar,

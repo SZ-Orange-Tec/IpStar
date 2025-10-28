@@ -58,6 +58,12 @@ const routes = [
         component: () => import("@/views/back/overview/overview.vue"),
       },
       {
+        path: "/purchase",
+        name: "purchase",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/purchase/purchase.vue"),
+      },
+      {
         path: "/products",
         name: "products",
         meta: { index: 12, keepAlive: false },

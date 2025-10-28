@@ -16,5 +16,7 @@ export default {
     support: "支持",
     help: "帮助文档",
     question: "常见问题",
+
+    back_home: "返回首页",
   },
 }

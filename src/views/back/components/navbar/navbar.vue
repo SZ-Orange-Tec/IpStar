@@ -1,114 +1,119 @@
 <template>
-  <div class="navbar w-full between h-10 px-3 md:px-5">
-    <div class="left v_center space-x-2">
-      <div class="v_center font-medium text-lg">
-        <slot :title="name"></slot>
+  <div class="navbar w-full">
+    <div class="nav_header box-border w-full between h-10 px-3 md:px-5">
+      <div class="left v_center space-x-2">
+        <div class="v_center font-medium text-lg">
+          <slot :title="name"></slot>
+        </div>
+
+        <DropDown placement="bottom" class="block lg:hidden">
+          <template #label="{ open }">
+            <IpButton :class="{ open: open }" type="ghost" class="menu_btn">
+              <Menu :size="20" />
+            </IpButton>
+          </template>
+          <template #menu>
+            <ul class="menu p-2 text-sm whitespace-nowrap">
+              <li @click="jumpPath('/home')" class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2">
+                <ResidentialProxyIcon :size="16" />
+                <p>{{ t("Home") }}</p>
+              </li>
+              <li class="menu-split"></li>
+              <li
+                v-for="item in menuData"
+                :key="item.name"
+                @click="jumpPath(item.path)"
+                :class="{ active: path === item.path }"
+                class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2"
+              >
+                <component :is="item.icon" :size="16"></component>
+                <p>{{ item.name }}</p>
+              </li>
+            </ul>
+          </template>
+        </DropDown>
       </div>
 
-      <DropDown placement="bottom" class="block lg:hidden">
-        <template #label="{ open }">
-          <IpButton :class="{ open: open }" type="ghost" class="menu_btn">
-            <Menu :size="20" />
-          </IpButton>
-        </template>
-        <template #menu>
-          <ul class="menu p-2 text-sm whitespace-nowrap">
-            <li @click="jumpPath('/home')" class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2">
-              <House :size="16" />
-              <p>{{ t("Home") }}</p>
-            </li>
-            <li class="menu-split"></li>
-            <li
-              v-for="item in menuData"
-              :key="item.name"
-              @click="jumpPath(item.path)"
-              :class="{ active: path === item.path }"
-              class="menu_item px-2 rounded-md pointer transition-color v_center space-x-2"
-            >
-              <component :is="item.icon" :size="16"></component>
-              <p>{{ item.name }}</p>
-            </li>
-          </ul>
-        </template>
-      </DropDown>
+      <div class="v_center space-x-3 h-full">
+        <IpButton type="normal" class="user_icon" v-if="isProduc">
+          <div class="v_center space-x-2 pointer" @click="toPay('list')">
+            <ClipboardList :size="16" />
+            <div class="slider_bck slider_bck_left">
+              <p class="hidden sm:block">{{ t("My_product_list") }}</p>
+            </div>
+          </div>
+        </IpButton>
+
+        <IpButton type="normal" class="user_icon" v-else>
+          <div class="v_center space-x-2 pointer" @click="toPay('buy')">
+            <ComboIcon :size="16" />
+            <div class="slider_bck slider_bck_left">
+              <p class="hidden sm:block">{{ t("Order_new") }}</p>
+            </div>
+          </div>
+        </IpButton>
+
+        <div class="split"></div>
+
+        <!-- 语言 -->
+        <DropDown placement="bottom" class="shink-0">
+          <template #label="{ open }">
+            <IpButton :class="{ open: open }" type="normal" class="user_icon">
+              <div class="vh_center space-x-1 shrink-0 w-full h-full">
+                <!-- <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" /> -->
+                <LangIcon :size="16" />
+                <div class="slider_bck slider_bck_left">
+                  <span class="hidden md:block" v-if="lang === 'zh'">简体中文</span>
+                  <span class="hidden md:block" v-if="lang === 'en'">English</span>
+                </div>
+                <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+              </div>
+            </IpButton>
+          </template>
+          <template #menu>
+            <div class="menu column text-sm">
+              <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('zh')">中文</div>
+              <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('en')">English</div>
+            </div>
+          </template>
+        </DropDown>
+
+        <div class="split"></div>
+
+        <!-- 用户 -->
+        <DropDown placement="bottom">
+          <template #label="{ open }">
+            <IpButton :class="{ open: open }" type="normal" class="user_icon">
+              <div class="v_center shrink-0 space-x-2 h-full">
+                <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+                <div class="slider_bck slider_bck_left">
+                  <p class="username hidden md:block">{{ username_simple }}</p>
+                </div>
+                <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+              </div>
+            </IpButton>
+          </template>
+          <template #menu>
+            <ul class="menu text-sm">
+              <li @click="jumpPath('/Settings')" class="menu_item px-2 rounded pointer transition-color v_center">
+                <div class="v_center space-x-2">
+                  <SettingsIcon :size="16" />
+                  <span>{{ t("Settings") }}</span>
+                </div>
+              </li>
+              <li @click="signOut" class="menu_item px-2 rounded pointer transition-color v_center">
+                <div class="v_center space-x-2">
+                  <SignOutIcon :size="16" />
+                  <span>{{ t("Sign_out") }}</span>
+                </div>
+              </li>
+            </ul>
+          </template>
+        </DropDown>
+      </div>
     </div>
-
-    <div class="v_center space-x-3 h-full">
-      <IpButton type="normal" class="user_icon" v-if="isProduc">
-        <div class="v_center space-x-2 pointer" @click="toPay('list')">
-          <ClipboardList :size="16" />
-          <div class="slider_bck slider_bck_left">
-            <p class="hidden sm:block">{{ t("My_product_list") }}</p>
-          </div>
-        </div>
-      </IpButton>
-
-      <IpButton type="normal" class="user_icon" v-else>
-        <div class="v_center space-x-2 pointer" @click="toPay('buy')">
-          <ShoppingCart :size="16" />
-          <div class="slider_bck slider_bck_left">
-            <p class="hidden sm:block">{{ t("Order_new") }}</p>
-          </div>
-        </div>
-      </IpButton>
-
-      <div class="split"></div>
-
-      <!-- 语言 -->
-      <DropDown placement="bottom" class="shink-0">
-        <template #label="{ open }">
-          <IpButton :class="{ open: open }" type="normal" class="user_icon">
-            <div class="vh_center space-x-1 shrink-0 w-full h-full">
-              <!-- <img src="@/assets/images/home/lang.svg" width="22" height="22" alt="" /> -->
-              <LangIcon :size="16" />
-              <div class="slider_bck slider_bck_left">
-                <span class="hidden md:block" v-if="lang === 'zh'">简体中文</span>
-                <span class="hidden md:block" v-if="lang === 'en'">English</span>
-              </div>
-              <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
-            </div>
-          </IpButton>
-        </template>
-        <template #menu>
-          <div class="menu column text-sm">
-            <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('zh')">中文</div>
-            <div class="menu_item px-2 rounded-md pointer transition-color v_center" @click="toggleLang('en')">English</div>
-          </div>
-        </template>
-      </DropDown>
-
-      <div class="split"></div>
-
-      <!-- 用户 -->
-      <DropDown placement="bottom">
-        <template #label="{ open }">
-          <IpButton :class="{ open: open }" type="normal" class="user_icon">
-            <div class="v_center shrink-0 space-x-2 h-full">
-              <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
-              <div class="slider_bck slider_bck_left">
-                <p class="username hidden md:block">{{ username_simple }}</p>
-              </div>
-              <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
-            </div>
-          </IpButton>
-        </template>
-        <template #menu>
-          <ul class="menu text-sm">
-            <li @click="jumpPath('/Settings')" class="menu_item px-2 rounded pointer transition-color v_center">
-              <div class="v_center space-x-2">
-                <Settings :size="16" />
-                <span>{{ t("Settings") }}</span>
-              </div>
-            </li>
-            <li @click="signOut" class="menu_item px-2 rounded pointer transition-color v_center">
-              <div class="v_center space-x-2">
-                <SignOutIcon :size="16" />
-                <span>{{ t("Sign_out") }}</span>
-              </div>
-            </li>
-          </ul>
-        </template>
-      </DropDown>
+    <div class="nav_bottom px-3 md:px-5">
+      <slot name="nav"></slot>
     </div>
   </div>
 </template>
@@ -128,6 +133,11 @@ import {
   BookMarked as HelpIcon,
   MessageCircleQuestion as QuestionIcon,
   ChevronsLeft,
+  ChevronDown,
+  Menu,
+  ClipboardList,
+  Globe as LangIcon,
+  LogOut as SignOutIcon,
 } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import { computed, ref } from "vue"
@@ -155,7 +165,7 @@ function getName() {
   const pathMap = {
     "/overview": t("menu_spec.overview"),
     "/get_proxy": t("menu_spec.get_proxy"),
-    "/combo": t("menu_spec.combo"),
+    "/purchase": t("menu_spec.combo"),
     "/residential_proxy": t("menu_spec.residential_proxy"),
     "/unlimited_proxy": t("menu_spec.unlimited_proxy"),
     "/phone_proxy": t("menu_spec.phone_proxy"),
@@ -187,7 +197,7 @@ const menuData = [
   {
     icon: ComboIcon,
     name: t("menu_spec.combo"),
-    path: "/combo",
+    path: "/purchase",
   },
   {
     icon: ResidentialProxyIcon,

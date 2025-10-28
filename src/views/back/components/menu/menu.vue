@@ -82,7 +82,7 @@ function getSlideList() {
     {
       icon: ComboIcon,
       name: t("menu_spec.combo"),
-      path: "/combo",
+      path: "/purchase",
       isShow: true,
     },
     { name: t("menu_spec.products") },
