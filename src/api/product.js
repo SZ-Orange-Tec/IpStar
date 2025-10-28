@@ -28,3 +28,32 @@ export function platCustomerDataProxy(params) {
     params,
   })
 }
+
+export function platBillingResidentialProxy(params) {
+  return request({
+    url: "",
+    method: "get",
+    params,
+  })
+}
+export function platBillingUnlimitedProxy(params) {
+  return request({
+    url: "",
+    method: "get",
+    params,
+  })
+}
+export function platBillingPhoneProxy(params) {
+  return request({
+    url: "",
+    method: "get",
+    params,
+  })
+}
+export function platBillingDataProxy(params) {
+  return request({
+    url: "",
+    method: "get",
+    params,
+  })
+}

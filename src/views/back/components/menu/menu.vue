@@ -95,7 +95,7 @@ function getSlideList() {
     {
       icon: UnlimitedProxyIcon,
       name: t("menu_spec.unlimited_proxy"),
-      path: "/unlimited_proxy",
+      path: "/unlimited",
       isShow: true,
     },
     {

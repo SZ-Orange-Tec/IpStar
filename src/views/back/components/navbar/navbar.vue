@@ -167,7 +167,7 @@ function getName() {
     "/get_proxy": t("menu_spec.get_proxy"),
     "/purchase": t("menu_spec.combo"),
     "/residential": t("menu_spec.residential_proxy"),
-    "/unlimited_proxy": t("menu_spec.unlimited_proxy"),
+    "/unlimited": t("menu_spec.unlimited_proxy"),
     "/phone_proxy": t("menu_spec.phone_proxy"),
     "/data_proxy": t("menu_spec.data_proxy"),
     "/whitelist": t("menu_spec.white_list"),
@@ -207,7 +207,7 @@ const menuData = [
   {
     icon: UnlimitedProxyIcon,
     name: t("menu_spec.unlimited_proxy"),
-    path: "/unlimited_proxy",
+    path: "/unlimited",
   },
   {
     icon: PhoneProxyIcon,
