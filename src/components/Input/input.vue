@@ -10,6 +10,7 @@
     @focus="focus"
     @blur="blur"
     @input="change"
+    :style="{ 'border-width': border ? '1px' : '0px' }"
   />
 </template>
 
@@ -34,6 +35,10 @@ const props = defineProps({
   password: {
     type: Boolean,
     default: false,
+  },
+  border: {
+    type: Boolean,
+    default: true,
   },
 })
 

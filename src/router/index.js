@@ -82,6 +82,12 @@ const routes = [
         component: () => import("@/views/back/mobile/mobile.vue"),
       },
       {
+        path: "/data_center",
+        name: "data_center",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/data_center/data_center.vue"),
+      },
+      {
         path: "/products",
         name: "products",
         meta: { index: 12, keepAlive: false },

@@ -107,7 +107,7 @@ function getSlideList() {
     {
       icon: DataProxyIcon,
       name: t("menu_spec.data_proxy"),
-      path: "/data_proxy",
+      path: "/data_center",
       isShow: true,
     },
     { name: t("menu_spec.menu") },
