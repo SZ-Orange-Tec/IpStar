@@ -592,7 +592,7 @@ export default {
             label: `${name} ${proto[index % 2]}：`,
             text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${this.proxy_user}-123RsAYBc-0-${code}-N:${
               this.proxy_pass
-            }@${serve}:${port} https://ipinfo.io`,
+            }@${serve}:${port} https://ipinfo.io -vv`,
           })
         })
         this.ipPools = result
