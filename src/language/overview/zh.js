@@ -23,6 +23,11 @@ export default {
   Concurrency: "并发量",
   Bandwidth: "带宽",
   Expiration_time: "过期时间",
+  Remaining: "剩余",
+  Used: "已使用",
+  Port: "端口",
+  Locations: "位置",
+  Status: "状态",
 
   Search: "搜索",
   Date: "日期",
@@ -50,6 +55,8 @@ export default {
   overview_spec: {
     residential_adv: "9000万+安全性住宅代理，高匿名性和低检测率。",
     unlimited_adv: "灵活的IP轮换和会话控制，享受无限住宅代理流量。",
+    mobile_adv: "基于运营商4G/5G网络出口，真实模拟移动端流量场景，助力广告验证、市场分析与应用测试",
+    data_center_adv: "使用我们的数据中心代理，享受无限带宽，仅按IP付费。",
     day_compare: "分天对比",
     hour_compare: "分小时报表",
 

@@ -23,6 +23,11 @@ export default {
   Concurrency: "Concurrency",
   Bandwidth: "Bandwidth",
   Expiration_time: "Expiration Time",
+  Remaining: "Remaining",
+  Used: "Used",
+  Port: "Port",
+  Locations: "Locations",
+  Status: "Status",
 
   Search: "Search",
   Date: "Date",
@@ -50,6 +55,9 @@ export default {
   overview_spec: {
     residential_adv: "9000+ secure residential proxies, high anonymity, and low detection rate.",
     unlimited_adv: "Flexible IP rotation and session control, enjoy unlimited residential proxy traffic.",
+    mobile_adv:
+      "Using real carrier 4G/5G network egress, it provides true-to-life simulation of mobile traffic environments, empowering ad validation, market analytics, and app testing.",
+    data_center_adv: "Using our data center proxy, enjoy unlimited bandwidth at a fixed price per IP.",
     day_compare: "Daily comparison",
     hour_compare: "Hourly report",
 

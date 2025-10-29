@@ -4,7 +4,7 @@
       <!-- 头部区域 -->
       <div class="w-full between mb-8">
         <div class="v_center space-x-3">
-          <div class="iconbox rounded-lg vh_center">
+          <div class="iconbox rounded-lg vh_center shrink-0">
             <UnlimitedProxyIcon :size="28" :stroke-width="1.5" />
           </div>
           <div>
@@ -24,7 +24,7 @@
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <strong class="text-lg font-semibold">0.00 MB</strong>
+            <strong class="text-lg font-semibold">{{ concurrent }}</strong>
           </div>
           <div class="text-sm">
             <p class="grey-60">{{ t("Concurrency") }}</p>
@@ -35,7 +35,7 @@
         <div class="bg-yellow-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <strong class="text-lg font-semibold">0.00 MB</strong>
+            <strong class="text-lg font-semibold">{{ bandwidth }}</strong>
           </div>
           <div class="between text-sm">
             <p class="grey-60">{{ t("Bandwidth") }}</p>
@@ -47,7 +47,7 @@
         <div class="bg-blue-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-            <strong class="text-lg font-semibold">2041.87 万</strong>
+            <strong class="text-lg font-semibold">{{ expireTime }}</strong>
           </div>
           <div class="between text-sm">
             <p class="grey-60">{{ t("Expiration_time") }}</p>

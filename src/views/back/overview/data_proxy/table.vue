@@ -8,8 +8,8 @@
       <el-table :data="tableData" :height="500">
         <el-table-column prop="ip" label="IP"> </el-table-column>
         <el-table-column prop="note" :label="$t('Port')"> </el-table-column>
-        <el-table-column prop="date" :label="$t('Date')"> </el-table-column>
-        <el-table-column prop="date" :label="$t('Expire_Time')"> </el-table-column>
+        <el-table-column prop="date" :label="$t('Locations')"> </el-table-column>
+        <el-table-column prop="date" :label="$t('Expiration_time')"> </el-table-column>
         <el-table-column prop="date" :label="$t('Status')"> </el-table-column>
       </el-table>
     </div>
