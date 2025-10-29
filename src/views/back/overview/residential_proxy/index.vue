@@ -8,13 +8,13 @@
             <ResidentialProxyIcon :size="28" :stroke-width="1.5" />
           </div>
           <div>
-            <h1 class="font-medium">住宅代理</h1>
-            <p class="grey-80 text-sm">9000万+安全性住宅代理，高匿名性和低检测率。</p>
+            <h1 class="font-medium">{{ t("menu_spec.residential_proxy") }}</h1>
+            <p class="grey-80 text-sm">{{ t("overview_spec.residential_adv") }}</p>
           </div>
         </div>
         <div class="flex space-x-4">
-          <ip-button class="h-9 text-sm min-w-[120px] px-5" type="primary_border">充值</ip-button>
-          <ip-button class="h-9 text-sm min-w-[120px] px-5" type="primary">开始使用</ip-button>
+          <ip-button @click="router.push('/residential')" class="h-9 text-sm min-w-[120px] px-5" type="black">{{ t("Add_funds") }}</ip-button>
+          <ip-button @click="router.push('/proxy')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button>
         </div>
       </div>
 
@@ -24,10 +24,10 @@
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <strong class="text-lg font-semibold">0.00 MB</strong>
+            <strong class="text-lg font-semibold">{{ remain_num }} {{ remain_unit }}</strong>
           </div>
           <div class="text-sm">
-            <p class="grey-60">剩余流量</p>
+            <p class="grey-60">{{ t("Residual_Traffic") }}</p>
           </div>
         </div>
 
@@ -35,11 +35,13 @@
         <div class="bg-yellow-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <strong class="text-lg font-semibold">0.00 MB</strong>
+            <strong class="text-lg font-semibold">{{ consume_num }} {{ consume_unit }}</strong>
           </div>
-          <div class="between text-sm">
-            <p class="grey-60">今天消耗</p>
-            <button class="px-4 py-1 rounded-full text-yellow-600 bg-white border border-yellow-200 text-sm">详情</button>
+          <div class="between flex-wrap gap-2 text-sm">
+            <p class="grey-60">{{ t("Consumption_Today") }}</p>
+            <button @click="isBalance = true" class="px-4 text-xs h-8 rounded-full text-yellow-600 bg-white border border-yellow-200">
+              {{ t("Details") }}
+            </button>
           </div>
         </div>
 
@@ -49,17 +51,19 @@
             <div class="w-3 h-3 rounded-full bg-blue-500"></div>
             <strong class="text-lg font-semibold">2041.87 万</strong>
           </div>
-          <div class="between text-sm">
-            <p class="grey-80">当前在线 IP 总数</p>
-            <button class="px-4 py-1 rounded-full text-blue-600 bg-white border border-blue-200 text-sm">详情</button>
+          <div class="between flex-wrap gap-2 text-sm">
+            <p class="grey-60">{{ t("Total_IPs_Available") }}</p>
+            <button @click="isOnlineIp = true" class="px-4 text-xs h-8 rounded-full text-blue-600 bg-white border border-blue-200">
+              {{ t("Details") }}
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
-      <TabItem :value="0" label="使用指南" class="h-9 px-5 min-w-[140px]" />
-      <TabItem :value="1" label="数据图表" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="0" :label="t('User_Guide')" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="1" :label="t('Traffic_Usage')" class="h-9 px-5 min-w-[140px]" />
     </Tab>
 
     <div class="w-full p-5 board rounded">
@@ -73,12 +77,26 @@
 import ipButton from "@/components/button/button.vue"
 import Guide from "./guide.vue"
 import Echarts from "./echarts.vue"
-import { ref } from "vue"
+import { inject, nextTick, onMounted, provide, reactive, ref } from "vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import { House as ResidentialProxyIcon } from "lucide-vue-next"
+import { useI18n } from "vue-i18n"
+import anime from "animejs/lib/anime.es.js"
+import { platCustomerReportOverview } from "@/api/layout"
+import Message from "@/components/message/message"
+import { roundToDecimal } from "../../../../utils/tools"
+import { useRouter } from "vue-router"
 
-const active = ref(1) // 0:guide 1:echart
+const { t } = useI18n()
+const router = useRouter()
+
+// 切换余额详情
+const isBalance = inject("isBalance")
+const isOnlineIp = inject("isOnlineIp")
+
+// 切换tab
+const active = ref(0) // 0:guide 1:echart
 const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",
   borderRadius: "4px",
@@ -86,6 +104,49 @@ const activeStyle = {
   top: 0,
   bottom: 0,
 }
+provide("active", active)
+
+// 获取流量数据
+const remain_num = ref(0)
+const remain_unit = ref("")
+const consume_num = ref(0)
+const consume_unit = ref("")
+async function getTrafficData() {
+  try {
+    const { data } = await platCustomerReportOverview()
+    const remain = +data.remain.split(" ")[0]
+    remain_unit.value = data.remain.split(" ")[1]
+    const consume = +data.consume.split(" ")[0]
+    consume_unit.value = data.consume.split(" ")[1]
+
+    nextTick(() => {
+      numberAnimation(remain_num, remain * 100)
+      numberAnimation(consume_num, consume * 100)
+    })
+  } catch (error) {
+    console.log(error.message)
+    Message({
+      type: "warning",
+      message: "platCustomerReportOverview failed",
+    })
+  }
+}
+function numberAnimation(data, target) {
+  const ipObj = { charged: 0 }
+  anime({
+    targets: ipObj,
+    charged: target,
+    round: Math.floor(target / 10),
+    easing: "linear",
+    update: function () {
+      data.value = roundToDecimal(ipObj.charged / 100)
+    },
+  })
+}
+
+onMounted(() => {
+  getTrafficData()
+})
 </script>
 
 <style lang="less" scoped>

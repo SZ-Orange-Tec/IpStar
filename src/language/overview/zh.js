@@ -3,22 +3,39 @@ import navbar from "../components/navbar/zh"
 export default {
   ...menu,
   ...navbar,
-  Notifications: "通知",
-  Details: "详情",
 
+  Starting_from: "低至：",
+  Add_funds: "充值",
+  Start_now: "开始使用",
+  Residual_Traffic: "剩余流量",
+  Consumption_Today: "今日消耗",
+  Total_IPs_Available: "在线 IP 总数",
+  Details: "详情",
+  Consumption_Details: "消耗详情",
+  Online_IP: "在线 IP",
+  Unlimited: "无限制",
+  User_Guide: "用户指南",
+  Traffic_Usage: "流量使用",
+  User_Pass_Auth: "账密提取",
+  API_Auth: "API提取",
+  Bandwidth_Usage: "带宽使用",
+  Concurrent_Usage: "并发使用",
+  Concurrency: "并发量",
+  Bandwidth: "带宽",
+  Expiration_time: "过期时间",
+
+  Search: "搜索",
   Date: "日期",
   Traffic: "流量",
   Type: "类型",
 
   Load: "负载",
-
   Excellent: "优",
   Good: "良好",
   Average: "一般",
   Low: "低",
   Medium: "中",
   High: "高",
-
   Online: "在线",
 
   Never_Expires: "永不过期",
@@ -31,25 +48,23 @@ export default {
   Email: "邮箱",
 
   overview_spec: {
-    starting_from: "低至：",
-    Residual_Traffic: "剩余的流量",
-    Consumption_Today: "今天的消耗",
-    Total_IPs_Available: "当前在线 IP 总数",
+    residential_adv: "9000万+安全性住宅代理，高匿名性和低检测率。",
+    unlimited_adv: "灵活的IP轮换和会话控制，享受无限住宅代理流量。",
+    day_compare: "分天对比",
+    hour_compare: "分小时报表",
 
     Number_of_new_Ips: "新增 IP 数",
     Number_Of_IPs: "IP 总数",
     Number_Of_Requests: "请求总数",
+    consumption: "消耗",
+    recharge: "充值",
+    rewards: "奖励",
 
     Country_or_Region: "国家或地区",
     Country_Code: "国家代码",
     Number_of_country_IPs: "国家 IP 数量",
     Network_Status: "网络状况",
-
     View_More: "查看更多",
-
-    consumption: "消耗",
-    recharge: "充值",
-    rewards: "奖励",
 
     welcome1: "欢迎！",
     welcome2: "让我们快速验证您的代理服务器配置、连接和速度。",
@@ -62,9 +77,6 @@ export default {
     obtxy_title: "获取IP方式",
     way: "详细的IP提取方式，您可以试试",
     account_password: "账密组合",
-
-    day_compare: "分天对比",
-    hour_compare: "分小时报表",
 
     guide_title: "住宅代理",
     guide_des: "9000万+安全住宅代理，高匿名性和低检测率。",

@@ -9,12 +9,12 @@
           </div>
           <div>
             <h1 class="font-medium">{{ t("menu_spec.unlimited_proxy") }}</h1>
-            <p class="grey-80 text-sm">9000万+安全性住宅代理，高匿名性和低检测率。</p>
+            <p class="grey-80 text-sm">{{ t("overview_spec.unlimited_adv") }}</p>
           </div>
         </div>
         <div class="flex space-x-4">
-          <ip-button class="h-9 text-sm min-w-[120px] px-5" type="primary_border">充值</ip-button>
-          <ip-button class="h-9 text-sm min-w-[120px] px-5" type="primary">开始使用</ip-button>
+          <ip-button @click="router.push('/unlimited')" class="h-9 text-sm min-w-[120px] px-5" type="black">{{ t("Add_funds") }}</ip-button>
+          <ip-button @click="router.push('/proxy')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
             <strong class="text-lg font-semibold">0.00 MB</strong>
           </div>
           <div class="text-sm">
-            <p class="grey-60">剩余流量</p>
+            <p class="grey-60">{{ t("Concurrency") }}</p>
           </div>
         </div>
 
@@ -38,8 +38,8 @@
             <strong class="text-lg font-semibold">0.00 MB</strong>
           </div>
           <div class="between text-sm">
-            <p class="grey-60">今天消耗</p>
-            <button class="px-4 py-1 rounded-full text-yellow-600 bg-white border border-yellow-200 text-sm">详情</button>
+            <p class="grey-60">{{ t("Bandwidth") }}</p>
+            <!-- <button class="px-4 py-1 rounded-full text-yellow-600 bg-white border border-yellow-200 text-sm">详情</button> -->
           </div>
         </div>
 
@@ -50,16 +50,16 @@
             <strong class="text-lg font-semibold">2041.87 万</strong>
           </div>
           <div class="between text-sm">
-            <p class="grey-80">当前在线 IP 总数</p>
-            <button class="px-4 py-1 rounded-full text-blue-600 bg-white border border-blue-200 text-sm">详情</button>
+            <p class="grey-60">{{ t("Expiration_time") }}</p>
+            <!-- <button class="px-4 py-1 rounded-full text-blue-600 bg-white border border-blue-200 text-sm">详情</button> -->
           </div>
         </div>
       </div>
     </div>
 
     <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
-      <TabItem :value="0" label="带宽使用情况" class="h-9 px-5 min-w-[140px]" />
-      <TabItem :value="1" label="并发使用情况" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="0" :label="t('Bandwidth_Usage')" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="1" :label="t('Concurrent_Usage')" class="h-9 px-5 min-w-[140px]" />
     </Tab>
 
     <div class="w-full p-5 board rounded">
@@ -73,20 +73,66 @@
 import ipButton from "@/components/button/button.vue"
 import Bandwidth from "./bandwidth.vue"
 import Concurrent from "./concurrent .vue"
-import { ref } from "vue"
+import { onMounted, provide, ref } from "vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import { useI18n } from "vue-i18n"
 import { Infinity as UnlimitedProxyIcon } from "lucide-vue-next"
+import { useRouter } from "vue-router"
 
 const { t } = useI18n()
+const router = useRouter()
 
+// tab
 const active = ref(0) // 0:bandwidth 1:concurrent
 const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",
   borderRadius: "4px",
   "--activeTextColor": "#ffffff",
+  top: 0,
+  bottom: 0,
 }
+provide("active", active)
+
+// 获取并发量数据
+const concurrent = ref(0)
+const bandwidth = ref(0)
+const expireTime = ref("")
+async function getData() {
+  try {
+    const { data } = await platCustomerReportOverview()
+
+    const concurrent_num = data.concurrent
+    const bandwidth_num = data.bandwidth
+
+    nextTick(() => {
+      numberAnimation(concurrent, concurrent_num)
+      numberAnimation(bandwidth, bandwidth_num)
+    })
+  } catch (error) {
+    console.log(error.message)
+    Message({
+      type: "warning",
+      message: "platCustomerReportOverview failed",
+    })
+  }
+}
+function numberAnimation(data, target) {
+  const ipObj = { charged: 0 }
+  anime({
+    targets: ipObj,
+    charged: target,
+    round: Math.floor(target / 10),
+    easing: "linear",
+    update: function () {
+      data.value = roundToDecimal(ipObj.charged / 100)
+    },
+  })
+}
+
+onMounted(() => {
+  getData()
+})
 </script>
 
 <style lang="less" scoped>

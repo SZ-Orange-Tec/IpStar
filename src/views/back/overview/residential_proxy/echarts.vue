@@ -1,31 +1,39 @@
 <template>
-  <div class="w-full column" :class="{ echart_table_layout: isDashboard }">
+  <div class="w-full column">
     <!-- search -->
     <div class="v_center space-x-3">
       <div class="tab v_center text-sm rounded">
         <div class="pointer h-9 px-3 v_center transition-colors duration-300" @click="updateActive(0)" :class="{ active: active === 0 }">
-          {{ $t("overview_spec.day_compare") }}
+          {{ t("overview_spec.day_compare") }}
         </div>
         <div class="pointer h-9 px-3 v_center transition-colors duration-300" @click="updateActive(1)" :class="{ active: active === 1 }">
-          {{ $t("overview_spec.hour_compare") }}
+          {{ t("overview_spec.hour_compare") }}
         </div>
       </div>
-      <el-date-picker v-model="day" type="date" format="YYYY-MM-DD" :clearable="false" class="transition-all duration-300" style="height: 36px" />
-      <ip-button type="primary" class="h-9 px-5" @click="search">{{ $t("Search") }}</ip-button>
+      <el-date-picker
+        v-model="dayRange"
+        :type="active === 0 ? 'daterange' : 'date'"
+        format="YYYY-MM-DD"
+        :clearable="false"
+        class="transition-all duration-300"
+        style="height: 36px"
+        @change="search"
+      />
+      <!-- <ip-button type="primary" class="h-9 px-5" @click="search">{{ t("Search") }}</ip-button> -->
     </div>
 
     <!-- echart -->
-    <div class="w-full column relative echart">
+    <div class="w-full column relative echart" v-loading="loading">
       <div v-show="active === 0" class="w-full h-full rounded-md relative">
         <div class="w-full h-full" id="echartDay" v-show="showDay"></div>
-        <div class="null_data" v-show="!showDay">
+        <div class="null_data w-full h-full" v-show="!showDay">
           <el-empty description="No Data"></el-empty>
         </div>
       </div>
 
       <div v-show="active === 1" class="w-full h-full relative rounded-md">
         <div class="w-full h-full" id="echartTime" v-show="showTime"></div>
-        <div class="null_data" v-show="!showTime">
+        <div class="null_data w-full h-full" v-show="!showTime">
           <el-empty description="No Data"></el-empty>
         </div>
       </div>
@@ -35,39 +43,58 @@
 
 <script setup>
 import { platCustomerReport, platCustomerReportRealTime } from "@/api/layout"
-import { computed, nextTick, onMounted, ref } from "vue"
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 import IpButton from "@/components/button/button.vue"
-import { addDays } from "date-fns"
+import { addDays, format } from "date-fns"
+import { useI18n } from "vue-i18n"
+import settingStore from "../../../../store/setting"
+import { watch } from "vue"
+
+const { en } = settingStore()
+const { t } = useI18n()
 
 // tab
 const active = ref(0) // 0:按天 1：按时
 function updateActive(index) {
   active.value = index
+  let temp = dayRange.value
   if (index === 0) {
     dayRange.value = oldDay ?? [addDays(new Date(), -7), addDays(new Date(), -1)]
-    !showDay && getDayLineData()
+    oldDay = temp
+    !showDay.value && getDayLineData()
   } else {
     dayRange.value = oldDay ?? new Date()
-    !showTime && getRealTime()
+    oldDay = temp
+    !showTime.value && getRealTime()
   }
 }
 
 // 搜索
-const day = ref(new Date())
 let oldDay
-const dayRange = ref([addDays(new Date(), -7), addDays(new Date(), -1)])
-function search() {}
+const dayRange = ref()
+const loading = ref(false)
+function search() {
+  // oldDay = dayRange.value
+  if (active.value === 0) {
+    getDayLineData()
+  } else {
+    getRealTime()
+  }
+}
 
 // 分时统计
 const timeLineData = ref([])
 const showTime = computed(() => {
   return timeLineData.value.length > 0
 })
+let timeEchart, timeResize
 async function getRealTime(date = new Date()) {
   try {
+    loading.value = true
+    const day = format(dayRange.value, "yyyy-MM-dd")
     let { data } = await platCustomerReportRealTime({
-      start_time: `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} 00:00:00`,
-      end_time: `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} 23:59:59`,
+      start_time: `${day} 00:00:00`,
+      end_time: `${day} 23:59:59`,
     })
     timeLineData.value = data
     if (!timeLineData.value.length) return
@@ -85,15 +112,24 @@ async function getRealTime(date = new Date()) {
     )
   } catch (error) {
     console.log(error.message)
+  } finally {
+    loading.value = false
   }
 }
 async function setLine(xData, serData) {
-  const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
-
-  const myEchart = echart.init(document.getElementById("echartTime"))
+  if (!timeEchart) {
+    const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+    timeEchart = echart.init(document.getElementById("echartTime"))
+    timeResize = () => {
+      timeEchart && timeEchart.resize()
+    }
+    window.addEventListener("resize", timeResize)
+  } else {
+    timeEchart.clear()
+  }
   const option = {
     title: {
-      text: this.en ? "Real time traffic" : "实时流量",
+      text: en.value ? "Real time traffic" : "实时流量",
       textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
       padding: [20, 0, 0, 20],
     },
@@ -247,12 +283,7 @@ async function setLine(xData, serData) {
       },
     ],
   }
-  myEchart.setOption(option)
-  // this.loadingLine.close()
-  this.lineEchartResize = () => {
-    myEchart.resize()
-  }
-  window.addEventListener("resize", this.lineEchartResize)
+  timeEchart.setOption(option)
 }
 
 // 分天 数据图
@@ -260,11 +291,13 @@ const dayLine = ref([])
 const showDay = computed(() => {
   return dayLine.value.length > 0
 })
+let dayEchart, dayResize
 async function getDayLineData() {
   try {
+    loading.value = true
     let { data } = await platCustomerReport({
-      start_time: `${starDate.year}-${addZero(starDate.month)}-${addZero(starDate.day)}`,
-      end_time: `${endDate.year}-${addZero(endDate.month)}-${addZero(endDate.day)}`,
+      start_time: format(dayRange.value[0], "yyyy-MM-dd"),
+      end_time: format(dayRange.value[1], "yyyy-MM-dd"),
     })
     data = data.sort((a, b) => {
       return b.date_short < a.date_short ? -1 : 1
@@ -287,15 +320,25 @@ async function getDayLineData() {
     })
   } catch (error) {
     console.log(error.message)
+  } finally {
+    loading.value = false
   }
 }
 async function setEchart(xData, serData) {
-  const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+  if (!dayEchart) {
+    const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+    dayEchart = echart.init(document.getElementById("echartDay"))
+    dayResize = () => {
+      dayEchart && dayEchart.resize()
+    }
+    window.addEventListener("resize", dayResize)
+  } else {
+    dayEchart.clear()
+  }
 
-  const myEchart = echart.init(document.getElementById("echartDay"))
   const option = {
     title: {
-      text: this.en ? "5-Day Comparison" : "5 天对比",
+      text: en.value ? "5-Day Comparison" : "5 天对比",
       textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
       padding: [20, 0, 0, 20],
     },
@@ -448,17 +491,28 @@ async function setEchart(xData, serData) {
       },
     ],
   }
-  myEchart.setOption(option)
+  dayEchart.setOption(option)
   // console.log(option, 'option')
   // this.loadingEchart.close()
-  this.dateEchartResize = () => {
-    myEchart.resize()
-  }
-  window.addEventListener("resize", this.dateEchartResize)
 }
 
-onMounted(() => {
-  updateActive(0)
+// onMounted(() => {
+//   updateActive(0)
+// })
+
+// v-show 不能使用mounted
+const activeTab = inject("active")
+watch(activeTab, (newVal) => {
+  if (newVal === 1 && !dayEchart && !timeEchart) {
+    updateActive(0)
+  }
+})
+
+onBeforeUnmount(() => {
+  timeEchart = null
+  timeResize = null
+  dayEchart = null
+  dayResize = null
 })
 </script>
 

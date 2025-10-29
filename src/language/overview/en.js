@@ -4,23 +4,38 @@ export default {
   ...menu,
   ...navbar,
 
-  Unlimited: "Unlimited",
-  Notifications: "Notifications",
+  Starting_from: "Starting from:",
+  Add_funds: "Add Funds",
+  Start_now: "Start Now",
+  Residual_Traffic: "Residual Traffic",
+  Consumption_Today: "Consumption Today",
+  Total_IPs_Available: "Total IPs Available",
   Details: "Details",
+  Consumption_Details: "Consumption Details",
+  Online_IP: "Online IP",
+  Unlimited: "Unlimited",
+  User_Guide: "User Guide",
+  Traffic_Usage: "Traffic Usage",
+  User_Pass_Auth: "User & Pass Auth",
+  API_Auth: "API",
+  Bandwidth_Usage: "Bandwidth Usage",
+  Concurrent_Usage: "Concurrent Usage",
+  Concurrency: "Concurrency",
+  Bandwidth: "Bandwidth",
+  Expiration_time: "Expiration Time",
 
+  Search: "Search",
   Date: "Date",
   Traffic: "Traffic",
   Type: "Type",
 
   Load: "Load",
-
   Excellent: "Excellent",
   Good: "Good",
   Average: "Average",
   Low: "Low",
   Medium: "Medium",
   High: "High",
-
   Online: "Online",
 
   Never_Expires: "Never Expires",
@@ -33,26 +48,23 @@ export default {
   Email: "Email",
 
   overview_spec: {
-    starting_from: "Starting from:",
-
-    Residual_Traffic: "Residual Traffic",
-    Consumption_Today: "Consumption Today",
-    Total_IPs_Available: "Total IPs Available",
+    residential_adv: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+    unlimited_adv: "Flexible IP rotation and session control, enjoy unlimited residential proxy traffic.",
+    day_compare: "Daily comparison",
+    hour_compare: "Hourly report",
 
     Number_of_new_Ips: "Number of new Ips",
     Number_Of_IPs: "Number Of IPs",
     Number_Of_Requests: "Number Of Requests",
+    consumption: "consumption",
+    recharge: "recharge",
+    rewards: "rewards",
 
     Country_or_Region: "Country or Region",
     Country_Code: "Country Code",
     Number_of_country_IPs: "Number of country IPs",
     Network_Status: "Network Status",
-
     View_More: "View More",
-
-    consumption: "consumption",
-    recharge: "recharge",
-    rewards: "rewards",
 
     welcome1: "Welcome!",
     welcome2: "Let's quickly verify your proxy server configuration, connection, and speed.",
@@ -65,9 +77,6 @@ export default {
     obtxy_title: "IP Extraction Method",
     way: "Detailed IP Extraction Method, You Can Try",
     account_password: "Account and Password",
-
-    day_compare: "Daily comparison",
-    hour_compare: "Hourly report",
 
     guide_title: "Residential Proxies",
     guide_des: "9000+ secure residential proxies, high anonymity, and low detection rate.",

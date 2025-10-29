@@ -125,8 +125,6 @@ function updateActiveBgStyle() {
       const wrapper = activeTabElement.value.parentElement
       const wrapperLeft = wrapper.getBoundingClientRect().left
 
-      console.log(left, width, wrapperLeft)
-
       activeBgStyle.value = {
         ...defaultActiveStyle,
         left: `${left - wrapperLeft}px`,

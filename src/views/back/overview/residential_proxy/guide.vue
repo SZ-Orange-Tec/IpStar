@@ -39,18 +39,19 @@
           <p class="black font-semibold text-lg">3. {{ $t("overview_spec.obtxy_title") }}</p>
         </div>
 
-        <div class="btn_list space-y-5">
+        <div class="btn_list space-y-5 pb-5">
           <p class="text-sm">{{ $t("overview_spec.way") }}</p>
-          <div class="v_center space-x-5">
-            <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
-              {{ $t("menu_spec.Proxy") }}
-            </div>
-            <div @click="$router.push('/generate_api')" class="font-semibold pointer yellow_btn btn vh_center rounded flex-1">
-              {{ $t("menu_spec.API") }}
-            </div>
-            <div @click="$router.push('/generate_api?active=1')" class="font-semibold pointer blue_btn btn vh_center rounded flex-1">
-              {{ $t("menu_spec.Account_and_password") }}
-            </div>
+          <div class="w-full v_center space-x-5">
+            <ipButton type="border" class="flex-1" @click="router.push('/proxy?active=0')">
+              <div class="vh_center space-x-2 py-3 w-full">
+                <span>{{ $t("User_Pass_Auth") }}</span>
+              </div>
+            </ipButton>
+            <ipButton type="border" class="flex-1">
+              <div class="vh_center space-x-2 py-3 w-full" @click="router.push('/proxy?active=1')">
+                <span>{{ $t("API_Auth") }}</span>
+              </div>
+            </ipButton>
           </div>
         </div>
       </div>
@@ -64,8 +65,11 @@ import CodeItem from "./codeItem.vue"
 import { onMounted, ref } from "vue"
 import userStore from "@/store/user"
 import settingStore from "@/store/setting"
+import IpButton from "@/components/button/button.vue"
+import { useRouter } from "vue-router"
 
 const { lang } = settingStore()
+const router = useRouter()
 
 // 用户代理信息
 const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()

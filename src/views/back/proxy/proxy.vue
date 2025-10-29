@@ -32,11 +32,13 @@ import Lock from "./lock.vue"
 import { ref } from "vue"
 import userStore from "../../../store/user"
 import { useI18n } from "vue-i18n"
+import { useRoute } from "vue-router"
 
 const { t } = useI18n()
+const route = useRoute()
 const { is_purchase } = userStore()
 
-const active = ref(1) // 0:user_pass 1:api
+const active = ref(Number(route.query?.active ?? 0)) // 0:user_pass 1:api
 const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",
   borderRadius: "4px",

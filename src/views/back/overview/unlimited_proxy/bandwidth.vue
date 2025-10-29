@@ -31,9 +31,9 @@
     </div>
 
     <div class="w-full column relative echart">
-      <div class="w-full h-full relative">
+      <div class="w-full h-full relative" v-loading="loading">
         <div class="w-full h-full" id="echartTime" v-show="show"></div>
-        <div class="null_data" v-show="!show">
+        <div class="w-full h-full vh_center" v-show="!show">
           <el-empty description="No Data"></el-empty>
         </div>
       </div>
@@ -42,9 +42,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
+import { onMounted, ref, onBeforeUnmount } from "vue"
 import IpButton from "@/components/button/button.vue"
-import { addDays } from "date-fns"
+import { addDays, format } from "date-fns"
+import { platUnlimitedBandWidthUsage } from "@/api/product"
 
 // tab
 const active = ref(0) // 0:按天 1：按时
@@ -55,30 +56,26 @@ function updateActive(index) {
   } else {
     dayRange.value = [addDays(new Date(), -29), new Date()]
   }
-  getDayLineData()
 }
 
 // 折线图
-const dayRange = ref(["2023-01-01", "2023-01-31"])
-const dayLine = ref([])
-const show = computed(() => {
-  return dayLine.value.length > 0
-})
+const dayRange = ref()
+const loading = ref(false)
+const show = ref(false)
+let dayEchart, dayResize
 async function getDayLineData() {
   try {
-    let { data } = await platCustomerReport({
-      start_time: `${starDate.year}-${addZero(starDate.month)}-${addZero(starDate.day)}`,
-      end_time: `${endDate.year}-${addZero(endDate.month)}-${addZero(endDate.day)}`,
+    loading.value = true
+    let { data } = await platUnlimitedBandWidthUsage({
+      start_time: format(dayRange.value[0], "yyyy-MM-dd"),
+      end_time: format(dayRange.value[1], "yyyy-MM-dd"),
     })
     data = data.sort((a, b) => {
       return b.date_short < a.date_short ? -1 : 1
     })
-    dayLine.value = data.map((item) => {
-      return {
-        date: item.date_short,
-        flow: item.pack_size,
-      }
-    })
+    show.value = data.length > 0
+    if (!show.value) return
+
     nextTick(() => {
       setEchart(
         () => {
@@ -91,15 +88,25 @@ async function getDayLineData() {
     })
   } catch (error) {
     console.log(error.message)
+  } finally {
+    loading.value = false
   }
 }
 async function setEchart(xData, serData) {
-  const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+  if (!dayEchart) {
+    const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
+    dayEchart = echart.init(document.getElementById("echartDay"))
+    dayResize = () => {
+      dayEchart && dayEchart.resize()
+    }
+    window.addEventListener("resize", dayResize)
+  } else {
+    dayEchart.clear()
+  }
 
-  const myEchart = echart.init(document.getElementById("echartDay"))
   const option = {
     title: {
-      text: this.en ? "5-Day Comparison" : "5 天对比",
+      text: en.value ? "5-Day Comparison" : "5 天对比",
       textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
       padding: [20, 0, 0, 20],
     },
@@ -252,17 +259,16 @@ async function setEchart(xData, serData) {
       },
     ],
   }
-  myEchart.setOption(option)
-  // console.log(option, 'option')
-  // this.loadingEchart.close()
-  this.dateEchartResize = () => {
-    myEchart.resize()
-  }
-  window.addEventListener("resize", this.dateEchartResize)
+  dayEchart.setOption(option)
 }
 
 onMounted(() => {
   updateActive(0)
+})
+
+onBeforeUnmount(() => {
+  dayEchart = null
+  dayResize = null
 })
 </script>
 
