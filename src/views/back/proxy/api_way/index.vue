@@ -1,30 +1,22 @@
 <template>
-  <div class="api_config column space-y-3">
-    <div class="card w-full board">
+  <div class="w-full column space-y-6">
+    <div class="w-full box-border board rounded p-5 text-sm space-y-5">
+      <strong class="font-medium text-lg">{{ t("Options") }}</strong>
       <!-- 计数 -->
-      <h4>{{ t("Count") }}</h4>
-      <div class="countbox column gap-3 sm:flex">
-        <div class="count w-full">
-          <div class="process w-full" ref="process" @mousedown="clickCount">
-            <div class="percent" :style="{ width: percentWidth + '%' }">
-              <!-- <el-tooltip :content="count+''" placement="top" :open-delay="200"> -->
-              <div class="bar" @mousedown.stop="moveStart"></div>
-              <div class="tip">{{ count }}</div>
-              <!-- </el-tooltip> -->
-            </div>
-          </div>
-          <p class="between">
-            <span>{{ min_count }}</span>
-            <span>{{ mid_count }}</span>
-            <span>{{ max_count }}</span>
-          </p>
+      <div class="space-y-1">
+        <span>{{ t("Count") }}</span>
+        <div class="countbox column gap-3 sm:flex">
+          <el-slider v-model="count" show-input :min="min_count" :max="max_count" />
+          <!-- <div class="slider-demo-block">
+           </div>
+           <SliderCount v-model="count" :min="min_count" :max="max_count" />
+           <el-input-number class="number h-10" v-model="count" :min="min_count" :max="max_count"></el-input-number> -->
         </div>
-        <el-input-number class="number h-10" v-model="count" :min="min_count" :max="max_count"></el-input-number>
       </div>
 
-      <!-- 表单 -->
-      <el-form :model="formInline" label-position="top" class="grid grid-cols-2 md:grid-cols-4 w-full form">
-        <el-form-item :label="t('Country')">
+      <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div class="space-y-1">
+          <span>{{ t("Country") }}</span>
           <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
             <el-option v-for="item in countryData" :key="item.value" :value="item.value" :label="item.label">
               <div>
@@ -33,86 +25,128 @@
               </div>
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item :label="t('Protocol')">
+        </div>
+        <div class="space-y-1">
+          <span>{{ t("Protocol") }}</span>
           <el-select v-model="formInline.protocol" placeholder="协议">
             <el-option label="SOCKS5" value="0"></el-option>
             <el-option label="HTTP/HTTPS" value="1"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item :label="'IP ' + t('Duration')">
+        </div>
+        <div class="space-y-1">
+          <span>IP {{ t("Duration") }}</span>
           <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
             <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item :label="t('Format')">
+        </div>
+        <div class="space-y-1">
+          <span>{{ t("Format") }}</span>
           <el-select v-model="formInline.format" placeholder="格式">
             <el-option v-for="item in formatList" :key="item.label" :value="item.value" :label="item.label"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item class="col-span-2">
-          <el-button id="primary-button" type="primary" @click="generateURL">{{ t("Generate") }} API {{ t("Link") }}</el-button>
-          <!-- <el-button type="primary" link @click="openCombo">
-            <div class="v_center">{{ t("api_spec.combo") }} <HelpCircle :size="14" /></div>
-          </el-button> -->
-        </el-form-item>
-      </el-form>
-
-      <!-- 网址 -->
-      <p>{{ t("api_spec.url") }} {{ t("api_spec.base") }}</p>
-      <div class="website column md:v_center w-full gap-3">
-        <el-input class="flex-1" v-model="url" :placeholder="t('api_spec.placeholder')" style="height: 40px"></el-input>
-        <div class="space-x-3">
-          <el-button id="primary-button" class="copy" type="primary" @click="copyUrl">{{ t("Copy_link") }}</el-button>
-          <el-button id="primary-border" @click="openUrl" style="height: 40px">{{ t("Open_link") }}</el-button>
+        </div>
+        <div class="" style="align-self: end">
+          <ip-button type="primary" class="px-5 h-9" @click="generateURL">{{ t("Generate") }} API {{ t("Link") }}</ip-button>
         </div>
       </div>
-      <div class="tip">
-        <div class="flex-shrink-0">{{ t("Note") }}:</div>
-        <ol>
-          <li>{{ t("api_spec.note1") }}</li>
-          <li>{{ t("api_spec.note2") }}</li>
-        </ol>
+
+      <!-- 网址 -->
+      <div class="">
+        <p class="text-base">{{ t("proxy_spec.url") }} {{ t("proxy_spec.base") }}</p>
+        <div class="column md:v_center w-full gap-3 mt-2">
+          <IpInput class="flex-1 h-10 rounded" v-model="url" :placeholder="t('proxy_spec.placeholder')"></IpInput>
+          <div class="space-x-3 v_center text-sm">
+            <ip-button type="primary" class="h-10 px-5" @click="copyUrl">{{ t("Copy_link") }}</ip-button>
+            <ip-button type="primary_border" class="h-10 px-5" @click="openUrl">{{ t("Open_link") }}</ip-button>
+          </div>
+        </div>
+        <div class="note px-3 py-2 rounded flex space-x-2 mt-5">
+          <div class="flex-shrink-0 major font-medium">{{ t("Note") }}:</div>
+          <ol class="flex-1">
+            <li>1. {{ t("proxy_spec.note1") }}</li>
+            <li>2. {{ t("proxy_spec.note2") }}</li>
+          </ol>
+        </div>
       </div>
     </div>
 
-    <div class="card w-full board">
+    <div class="w-full box-border board rounded p-5 text-sm space-y-5">
+      <strong class="font-medium text-lg">{{ t("Link_Information") }}</strong>
       <!-- 参数声明 -->
-      <h4>{{ t("Parameter") }} {{ t("Declaration") }}</h4>
-      <div class="params w-full">
-        <ul>
-          <li class="v_center"><span>count</span> COUNT</li>
-          <li class="v_center"><span>resptype</span> FORMAT:TXT JSON</li>
-          <li class="v_center"><span>regions</span> COUNTRY</li>
-          <li class="v_center"><span>protocol</span> PROTOCOL</li>
-        </ul>
+      <div class="space-y-1">
+        <span>{{ t("Parameter") }}</span>
+        <div class="params rounded px-3 py-3 w-full">
+          <ul class="flex flex-wrap justify-between">
+            <li class="v_center">
+              <div class="px-2 rounded">count</div>
+              <span class="ml-3">COUNT</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">resptype</div>
+              <span class="ml-3">FORMAT:TXT JSON</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">regions</div>
+              <span class="ml-3">COUNTRY</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">protocol</div>
+              <span class="ml-3">PROTOCOL</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <h4>{{ t("Example") }}</h4>
-      <div class="example w-full">
-        <template v-if="formInline.format === '0'">
-          {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
-        </template>
-        <template v-else-if="formInline.format === '1'"> {"code":0,"msg":"","data":["serve : port : username : password"]} </template>
-        <template v-else-if="formInline.format === '2'">
-          serve : port : username : password <br />
-          ***.com : 8080 : u2084sjtsait-V4PKcdfWCe-0-AG-N : n856naue
-        </template>
+      <div class="space-y-1">
+        <span>{{ t("Example") }}</span>
+        <div class="example w-full">
+          <template v-if="formInline.format === '0'">
+            {"code":0,"msg":"","data":[{"server":"***.com","port":9000,"user":"username","pass":"password","ptype":"http"}]}
+          </template>
+          <template v-else-if="formInline.format === '1'"> {"code":0,"msg":"","data":["serve : port : username : password"]} </template>
+          <template v-else-if="formInline.format === '2'">
+            serve : port : username : password <br />
+            ***.com : 8080 : u2084sjtsait-V4PKcdfWCe-0-AG-N : n856naue
+          </template>
+        </div>
       </div>
 
-      <h4>{{ t("Result") }}</h4>
-      <div class="params w-full">
-        <ul v-if="formInline.format === '2'">
-          <li><span>serve</span>SERVE</li>
-          <li><span>port</span>PORT</li>
-          <li><span>username</span>USERNAME</li>
-          <li><span>password</span>PASSWORD</li>
-        </ul>
-        <ul v-else>
-          <li><span>code</span> Status Code</li>
-          <li><span>Msg</span> Messages</li>
-          <li><span>data</span> IP-list</li>
-        </ul>
+      <div class="space-y-1">
+        <h4>{{ t("Result") }}</h4>
+        <div class="params rounded px-3 py-3 w-full">
+          <ul class="flex flex-wrap justify-between" v-if="formInline.format === '2'">
+            <li class="v_center">
+              <div class="px-2 rounded">serve</div>
+              <span class="ml-3">SERVE</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">port</div>
+              <span class="ml-3">PORT</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">username</div>
+              <span class="ml-3">USERNAME</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">code</div>
+              <span class="ml-3">PASSWORD</span>
+            </li>
+          </ul>
+          <ul class="flex flex-wrap justify-between" v-else>
+            <li class="v_center">
+              <div class="px-2 rounded">Msg</div>
+              <span class="ml-3">Status Code</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">data</div>
+              <span class="ml-3">Messages</span>
+            </li>
+            <li class="v_center">
+              <div class="px-2 rounded">password</div>
+              <span class="ml-3">IP-list</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -123,8 +157,6 @@
 <script setup>
 import { ref, computed, watch, onMounted } from "vue"
 import { debounce } from "@/utils/tools"
-// import enOptions from "../../proxy/json/cascader.json"
-// import cnOptions from "../../proxy/json/cncascader.json"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
 import layoutStore from "@/store/layout"
@@ -135,8 +167,8 @@ import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import Confirm from "@/components/confirm/confirm"
 import position from "@/components/dialog/position"
-// import DialogCombo from "./dialogCombo.vue"
-// import { HelpCircle } from "lucide-vue-next"
+import IpButton from "@/components/button/button.vue"
+import IpInput from "@/components/input/input.vue"
 
 const router = useRouter()
 const { en } = settingStore()
@@ -169,7 +201,7 @@ let allCountry = [] // 国家
 const countryData = ref(null)
 // 获取国家/时长数据
 async function getData() {
-  let { country, duration } = en.value ? await import("../../proxy/info/en") : await import("../../proxy/info/zh")
+  let { country, duration } = en.value ? await import("../account_way/info/en") : await import("../account_way/info/zh")
   allCountry = country
   countryData.value = sortCountry(country)
   formInline.value = {
@@ -346,5 +378,42 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import "./api_config.less";
+.countbox {
+  :deep(.el-slider) {
+    .el-slider__bar {
+      background-color: hsl(var(--primary) / 80%);
+    }
+    .el-slider__button {
+      border-color: hsl(var(--primary) / 80%);
+    }
+  }
+}
+.note {
+  border: 1px solid hsl(var(--major) / 20%);
+  background-color: hsl(var(--major) / 4%);
+}
+.params {
+  border: 1px dashed #dddfe6;
+  & > ul {
+    li {
+      &::before {
+        content: "\2022";
+        color: hsl(var(--primary) / 80%);
+        font-size: 20px;
+      }
+      & > div {
+        background-color: hsl(var(--primary) / 30%);
+      }
+    }
+  }
+}
+.example {
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 14px;
+  background-color: hsl(var(--foreground) / 3%);
+  color: hsl(var(--foreground) / 80%);
+  margin-bottom: 30px;
+  white-space: pre-wrap;
+}
 </style>

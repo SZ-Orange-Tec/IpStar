@@ -58,6 +58,12 @@ const routes = [
         component: () => import("@/views/back/overview/overview.vue"),
       },
       {
+        path: "/proxy",
+        name: "proxy",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/proxy/proxy.vue"),
+      },
+      {
         path: "/purchase",
         name: "purchase",
         meta: { index: 11, keepAlive: false },
@@ -86,30 +92,6 @@ const routes = [
         name: "data_center",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/data_center/data_center.vue"),
-      },
-      {
-        path: "/products",
-        name: "products",
-        meta: { index: 12, keepAlive: false },
-        component: () => import("@/views/back/products/products.vue"),
-      },
-      {
-        path: "/billings",
-        name: "billings",
-        meta: { index: 13, keepAlive: false },
-        component: () => import("@/views/back/billings/billings.vue"),
-      },
-      {
-        path: "/proxy",
-        name: "proxy",
-        meta: { index: 15, keepAlive: false },
-        component: () => import("@/views/back/proxy/proxy.vue"),
-      },
-      {
-        path: "/generate_api",
-        name: "api",
-        meta: { index: 14, keepAlive: false },
-        component: () => import("@/views/back/API/api.vue"),
       },
       {
         path: "/settings",

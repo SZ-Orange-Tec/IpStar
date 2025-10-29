@@ -3,7 +3,7 @@ export default {
     overview: "概览",
     how_to_use: "如何使用",
     get_proxy: "获取代理",
-    combo: "套餐",
+    purchases: "套餐",
     products: "产品",
     residential_proxy: "住宅代理",
     unlimited_proxy: "不限量住宅代理",

@@ -76,12 +76,12 @@ function getSlideList() {
     {
       icon: GetProxyIcon,
       name: t("menu_spec.get_proxy"),
-      path: "/get_proxy",
+      path: "/proxy",
       isShow: true,
     },
     {
       icon: ComboIcon,
-      name: t("menu_spec.combo"),
+      name: t("menu_spec.purchases"),
       path: "/purchase",
       isShow: true,
     },

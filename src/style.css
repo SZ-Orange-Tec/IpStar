@@ -52,6 +52,12 @@
   .transition-color {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   }
+
+  .ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .flex>.flex-1,.v_center>.flex-1 {

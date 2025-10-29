@@ -53,7 +53,7 @@ const activeStyle = {
 function activeChange() {
   if (active.value === 1) {
     // 切换到账密提取页时，默认选中账密提取
-    router.push("/get_proxy")
+    router.push("/proxy")
   }
 }
 </script>

@@ -77,11 +77,15 @@ function handlerGoogleLogin() {
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
-  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
-  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
   await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
-  await import(/*webpackChunkName:'api'*/ "@/views/back/API/api.vue")
+  await import(/*webpackChunkName:'products'*/ "@/views/back/purchase/purchase.vue")
+  await import(/*webpackChunkName:'api'*/ "@/views/back/residential/residential.vue")
+  await import(/*webpackChunkName:'api'*/ "@/views/back/unlimited/unlimited.vue")
+  await import(/*webpackChunkName:'api'*/ "@/views/back/mobile/mobile.vue")
+  await import(/*webpackChunkName:'api'*/ "@/views/back/data_center/data_center.vue")
   await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
+  await import(/*webpackChunkName:'settings'*/ "@/views/back/whitelist/whitelist.vue")
+  await import(/*webpackChunkName:'settings'*/ "@/views/back/account/index.vue")
 }
 // async function handlerGoogleLogin(access_token) {
 //   try {

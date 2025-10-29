@@ -3,7 +3,7 @@ export default {
     overview: "Overview",
     how_to_use: "How to Use",
     get_proxy: "Get Proxy",
-    combo: "Combo",
+    purchases: "Purchases",
     products: "Products",
     residential_proxy: "Residential Proxy",
     unlimited_proxy: "Unlimited Residential Proxy",

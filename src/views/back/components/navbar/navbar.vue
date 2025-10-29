@@ -164,8 +164,8 @@ const name = ref("")
 function getName() {
   const pathMap = {
     "/overview": t("menu_spec.overview"),
-    "/get_proxy": t("menu_spec.get_proxy"),
-    "/purchase": t("menu_spec.combo"),
+    "/proxy": t("menu_spec.get_proxy"),
+    "/purchase": t("menu_spec.purchases"),
     "/residential": t("menu_spec.residential_proxy"),
     "/unlimited": t("menu_spec.unlimited_proxy"),
     "/mobile": t("menu_spec.phone_proxy"),
@@ -192,11 +192,11 @@ const menuData = [
   {
     icon: GetProxyIcon,
     name: t("menu_spec.get_proxy"),
-    path: "/get_proxy",
+    path: "/proxy",
   },
   {
     icon: ComboIcon,
-    name: t("menu_spec.combo"),
+    name: t("menu_spec.purchases"),
     path: "/purchase",
   },
   {

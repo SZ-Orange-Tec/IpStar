@@ -100,15 +100,21 @@ import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
 import { ChevronDown } from "lucide-vue-next"
+import { debounce } from "../../../../utils/tools"
 
 const { t } = useI18n()
 
-// 筛选
+// 表单
 const form = reactive({
   ip: "",
   area: "",
   status: "",
 })
+function Search() {
+  getTableData()
+}
+
+// 状态筛选
 const statusList = ref([
   { label: t("Normal"), value: 0 },
   { label: t("Abnormal"), value: 1 },
@@ -131,10 +137,18 @@ function statusChange(e) {
   form.status = +value
   console.log(form.status)
 }
-const areaList = ref([
+
+// 区域筛选
+const areaList = [
   { label: t("Normal"), value: 0 },
   { label: t("Abnormal"), value: 1 },
-])
+]
+const filterAreaList = ref(areaList)
+function filterArea() {
+  const area = area_text.value
+  filterAreaList.value = areaList.filter((item) => item.label.includes(area))
+}
+const debounceFilterArea = debounce(filterArea, 300)
 const area_text = ref("")
 function areaChange(e) {
   function findDom(dom) {
@@ -149,9 +163,6 @@ function areaChange(e) {
 
   const value = dom.dataset.value
   form.area = value
-}
-function Search() {
-  getTableData()
 }
 
 // 表格数据

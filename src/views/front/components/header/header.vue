@@ -256,8 +256,6 @@ function userDropChange(status) {
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
-  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
-  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
 }
 // 预加载前台
 async function loadFront() {
