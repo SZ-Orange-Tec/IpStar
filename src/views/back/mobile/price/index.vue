@@ -6,7 +6,7 @@
         <p class="text-lg">{{ t("mobile_spec.des") }}</p>
       </div>
       <div class="w-full mt-5">
-        <ProductList :type="3" :tabbar="false" :pack="5" />
+        <ProductList :type="2" :tabbar="false" :pack="5" />
       </div>
     </div>
   </div>

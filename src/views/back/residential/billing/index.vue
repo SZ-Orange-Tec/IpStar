@@ -3,20 +3,20 @@
     <div class="w-full box-border p-5 board rounded table_box space-y-3">
       <div class="table_box">
         <el-table :data="tableData" style="width: 100%" v-loading="loading">
-          <el-table-column prop="size" :label="$t('Size')" min-width="120"></el-table-column>
-          <el-table-column prop="price" :label="$t('Price')" min-width="120"></el-table-column>
-          <el-table-column :label="$t('Status')" min-width="120">
+          <el-table-column prop="size" :label="t('Size')" min-width="120"></el-table-column>
+          <el-table-column prop="price" :label="t('Price')" min-width="120"></el-table-column>
+          <el-table-column :label="t('Status')" min-width="120">
             <template #default="scope">
-              <span v-if="scope.row.state == 1" style="color: #0dbc79">{{ $t("Available") }}</span>
-              <span v-else-if="scope.row.state == 2" style="color: #f14c36">{{ $t("Used_up") }}</span>
-              <span v-else-if="scope.row.state == 3" style="color: #f14c36">{{ $t("Expired") }}</span>
+              <span v-if="scope.row.state == 1" style="color: #0dbc79">{{ t("Available") }}</span>
+              <span v-else-if="scope.row.state == 2" style="color: #f14c36">{{ t("Used_up") }}</span>
+              <span v-else-if="scope.row.state == 3" style="color: #f14c36">{{ t("Expired") }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="concurrency" :label="$t('Concurrency')" min-width="240"></el-table-column>
-          <el-table-column prop="bandwidth" :label="$t('Bandwidth')" min-width="240"></el-table-column>
-          <el-table-column prop="days" :label="$t('Duration')" min-width="120"></el-table-column>
-          <el-table-column prop="start_time" :label="$t('Start_date')" min-width="180"></el-table-column>
-          <el-table-column prop="expire_time" :label="$t('Expire_date')" min-width="180"></el-table-column>
+          <el-table-column prop="concurrency" :label="t('Concurrency')" min-width="240"></el-table-column>
+          <el-table-column prop="bandwidth" :label="t('Bandwidth')" min-width="240"></el-table-column>
+          <el-table-column prop="days" :label="t('Duration')" min-width="120"></el-table-column>
+          <el-table-column prop="start_time" :label="t('Start_date')" min-width="180"></el-table-column>
+          <el-table-column prop="expire_time" :label="t('Expiration_time')" min-width="180"></el-table-column>
         </el-table>
       </div>
 
@@ -41,8 +41,10 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import { platCustomerUnlimitedProxy } from "@/api/product"
+import { platBillingResidentialProxy } from "@/api/product"
+import { useI18n } from "vue-i18n"
 
+const { t } = useI18n()
 // 表格数据
 const loading = ref(false)
 const tableData = ref([])
@@ -51,7 +53,7 @@ async function getTableData() {
   try {
     const {
       data: { count, list },
-    } = await platCustomerUnlimitedProxy({
+    } = await platBillingResidentialProxy({
       page_index: page.value,
       page_size: size.value,
     })

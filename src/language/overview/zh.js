@@ -46,7 +46,6 @@ export default {
   Never_Expires: "永不过期",
   Buy_now: "立即购买",
   Resources: "资源",
-  Statistics: "数据统计",
   User_Guide: "帮助文档",
   FAQ: "常见问题解答",
   Or: "或",

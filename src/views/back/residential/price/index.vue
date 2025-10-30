@@ -8,7 +8,7 @@
         <p class="text-lg">{{ t("residential_spec.des") }}</p>
       </div>
       <div class="w-full">
-        <ProductList :pack="5" />
+        <ProductList :type="0" :pack="5" />
       </div>
     </div>
   </div>

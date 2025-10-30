@@ -24,7 +24,7 @@
 <script setup>
 import { computed, inject, ref } from "vue"
 
-const homeData = inject("homeData")
+const homeData = inject("homeData", {})
 const lowestPrice = computed(() => (homeData?.lowestPrice ?? 0) / 100)
 
 const emit = defineEmits(["select"])

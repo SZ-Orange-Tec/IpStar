@@ -46,7 +46,6 @@ export default {
   Never_Expires: "Never Expires",
   Buy_now: "Buy Now",
   Resources: "Resources",
-  Statistics: "Statistics",
   User_Guide: "User Guide",
   FAQ: "FAQ",
   Or: " Or ",

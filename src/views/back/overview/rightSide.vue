@@ -1,6 +1,6 @@
 <template>
   <div class="right_side h-full column space-y-5">
-    <div class="w-full price board column_center px-4 py-5 rounded-md space-y-3">
+    <!-- <div class="w-full price board column_center px-4 py-5 rounded-md space-y-3">
       <div class="v_center space-x-2">
         <img src="@/assets/images/products/house.webp" width="30" height="30" alt="" />
         <strong>{{ $t("overview_spec.guide_title") }}</strong>
@@ -21,7 +21,7 @@
           <span>{{ $t("Buy_now") }}</span>
         </div>
       </ip-button>
-    </div>
+    </div> -->
 
     <div class="resource board ounded-md w-full">
       <div class="header v_center space-x-2 px-5">
@@ -31,13 +31,13 @@
       <div class="px-3 pb-5">
         <p class="text-sm h-10 v_center px-2">{{ $t("overview_spec.guide_learn") }}</p>
         <ul class="text-[15px]">
-          <li class="between h-10 px-2 rounded-md pointer" @click="isDashboard = true">
+          <!-- <li class="between h-10 px-2 rounded-md pointer" @click="isDashboard = true">
             <div class="v_center space-x-2">
               <FileText :size="18" />
               <span>{{ $t("Statistics") }}</span>
             </div>
             <ChevronRight :size="14" />
-          </li>
+          </li> -->
           <li class="between h-10 px-2 rounded-md pointer" @click="router.push('/doc')">
             <div class="v_center space-x-2">
               <ShieldUser :size="18" />
@@ -81,6 +81,11 @@ const router = useRouter()
 const { lowestPrice, getLowestPrice } = layoutStore()
 if (!lowestPrice.value) {
   getLowestPrice()
+}
+
+function openService() {
+  // window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:open"])
 }
 </script>
 

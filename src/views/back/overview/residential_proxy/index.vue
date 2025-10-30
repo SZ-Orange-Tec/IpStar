@@ -49,7 +49,7 @@
         <div class="bg-blue-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-            <strong class="text-lg font-semibold">2041.87 万</strong>
+            <strong class="text-lg font-semibold">{{ online_ip }} {{ online_ip_unit }}</strong>
           </div>
           <div class="between flex-wrap gap-2 text-sm">
             <p class="grey-60">{{ t("Total_IPs_Available") }}</p>
@@ -77,7 +77,7 @@
 import ipButton from "@/components/button/button.vue"
 import Guide from "./guide.vue"
 import Echarts from "./echarts.vue"
-import { inject, nextTick, onMounted, provide, reactive, ref } from "vue"
+import { computed, inject, nextTick, onMounted, provide, reactive, ref, watch } from "vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import { House as ResidentialProxyIcon } from "lucide-vue-next"
@@ -87,9 +87,11 @@ import { platCustomerReportOverview } from "@/api/layout"
 import Message from "@/components/message/message"
 import { roundToDecimal } from "../../../../utils/tools"
 import { useRouter } from "vue-router"
+import settingStore from "../../../../store/setting"
 
 const { t } = useI18n()
 const router = useRouter()
+const { en } = settingStore()
 
 // 切换余额详情
 const isBalance = inject("isBalance")
@@ -111,6 +113,17 @@ const remain_num = ref(0)
 const remain_unit = ref("")
 const consume_num = ref(0)
 const consume_unit = ref("")
+const online_ip = ref(0)
+const online_ip_unit = computed(() => {
+  return !en.value ? "万" : " K"
+})
+watch(en, () => {
+  nextTick(() => {
+    numberAnimation(online, (charged) => {
+      online_ip.value = Math.floor(charged)
+    })
+  })
+})
 async function getTrafficData() {
   try {
     const { data } = await platCustomerReportOverview()
@@ -118,10 +131,18 @@ async function getTrafficData() {
     remain_unit.value = data.remain.split(" ")[1]
     const consume = +data.consume.split(" ")[0]
     consume_unit.value = data.consume.split(" ")[1]
+    const online = !en.value ? Math.floor(data.online_ip ?? 15308000 / 10000) : Math.floor(data.online_ip ?? 15308000 / 1000)
 
     nextTick(() => {
-      numberAnimation(remain_num, remain * 100)
-      numberAnimation(consume_num, consume * 100)
+      numberAnimation(remain * 100, (charged) => {
+        remain_num.value = roundToDecimal(charged / 100)
+      })
+      numberAnimation(consume * 100, (charged) => {
+        consume_num.value = roundToDecimal(charged / 100)
+      })
+      numberAnimation(online, (charged) => {
+        online_ip.value = Math.floor(charged)
+      })
     })
   } catch (error) {
     console.log(error.message)
@@ -131,16 +152,14 @@ async function getTrafficData() {
     })
   }
 }
-function numberAnimation(data, target) {
+function numberAnimation(target, callback) {
   const ipObj = { charged: 0 }
   anime({
     targets: ipObj,
     charged: target,
     round: Math.floor(target / 10),
     easing: "linear",
-    update: function () {
-      data.value = roundToDecimal(ipObj.charged / 100)
-    },
+    update: () => callback(ipObj.charged),
   })
 }
 

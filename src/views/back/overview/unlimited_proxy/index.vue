@@ -79,6 +79,7 @@ import TabItem from "@/components/tabbar/tab-item.vue"
 import { useI18n } from "vue-i18n"
 import { Infinity as UnlimitedProxyIcon } from "lucide-vue-next"
 import { useRouter } from "vue-router"
+import Message from "@/components/message/message"
 
 const { t } = useI18n()
 const router = useRouter()

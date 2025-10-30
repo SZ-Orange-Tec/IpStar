@@ -1,26 +1,26 @@
 <template>
-  <div class="menu column h-full space-y-5">
+  <div class="menu group column w-full h-full space-y-5 overflow-y-auto">
     <div class="w-full logo v_center text-2xl pointer relative" @click="$router.push('/home')" :title="t('menu_spec.back_home')">
-      <div class="back">
+      <div class="back hidden 2xl:block group-hover:block">
         <ChevronsLeft :size="20" />
       </div>
-      <img src="@/assets/images/logo.png" style="height: 36px" alt="" />
+      <img class="hidden 2xl:block group-hover:block" src="@/assets/images/logo.png" style="height: 36px" alt="" />
     </div>
-    <div class="column flex-1">
-      <ul class="space-y-1">
+    <div class="column flex-1 w-full">
+      <ul class="space-y-1 column px-3">
         <template v-for="(item, index) in menuData" :key="index">
           <li
-            class="v_center pointer space-x-2 text-[15px] font-medium menu-item"
+            class="box-border w-full v_center h-9 pointer space-x-2 text-[15px] font-medium menu-item"
             v-if="item.path"
             :class="{ pitch_on: idx === index }"
             v-show="item.isShow"
             @click="jumpPath(index)"
           >
-            <component :is="item.icon" :size="16" :stroke-width="2" class="grey-80"></component>
-            <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
+            <component :is="item.icon" :size="17" :stroke-width="2" class="icon shrink-0"></component>
+            <p class="hidden 2xl:block group-hover:block ellipsis" :class="idx === index ? 'color' : ''">{{ item.name }}</p>
           </li>
-          <li class="v_center pointer grey text-xs" v-else>
-            <em>{{ item.name }}</em>
+          <li class="h-9 v_center pointer grey-40 text-xs" v-else>
+            <em class="hidden 2xl:block group-hover:block">{{ item.name }}</em>
           </li>
         </template>
       </ul>

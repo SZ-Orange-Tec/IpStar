@@ -1,7 +1,7 @@
 <template>
   <div class="pc-layout">
     <!-- 侧边栏  -->
-    <div class="sidebar hidden lg:column h-full">
+    <div class="sidebar relative column h-full shrink-0">
       <!-- logo -->
       <NavMenu />
     </div>
@@ -99,6 +99,12 @@ onMounted(() => {
 </style>
 
 <style lang="less">
+.sidebar {
+  width: 260px;
+  @media screen and (max-width: 1536px) {
+    width: 66px;
+  }
+}
 .board {
   background: hsl(var(--background));
   /* border: 1px solid ; */

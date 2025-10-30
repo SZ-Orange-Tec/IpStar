@@ -28,56 +28,57 @@
 
     <div v-else class="main flex-1 min-h-0 overflow-y-auto w-full flex p-6 gap-5">
       <div class="flex-1 min-w-0 space-y-5">
-        <div class="board tab px-2 py-5 rounded">
-          <Tab v-model="active" :active-style="activeStyle">
-            <TabItem :value="0" class="flex-1">
-              <div :class="{ focus: active === 0 }" class="pointer flex-1 column p-5 rounded-md" data-active="0">
-                <div class="iconbox rounded-lg vh_center mb-2">
-                  <ResidentialProxyIcon :size="24" />
+        <div class="board px-2 py-5 rounded">
+          <keep-alive>
+            <Tab class="tab" v-model="active" :active-style="activeStyle">
+              <TabItem :value="0" class="flex-1 tab-item">
+                <div :class="{ focus: active === 0 }" class="pointer flex-1 column p-5 rounded-md" data-active="0">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <ResidentialProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.residential_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
                 </div>
-                <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.residential_proxy") }}</strong>
-                <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
-              </div>
-            </TabItem>
-            <TabItem :value="1" class="flex-1">
-              <div :class="{ focus: active === 1 }" class="pointer flex-1 column p-5 rounded-md" data-active="1">
-                <div class="iconbox rounded-lg vh_center mb-2">
-                  <UnlimitedProxyIcon :size="24" />
+              </TabItem>
+              <TabItem :value="1" class="flex-1 tab-item">
+                <div :class="{ focus: active === 1 }" class="pointer flex-1 column p-5 rounded-md" data-active="1">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <UnlimitedProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
                 </div>
-                <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
-                <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
-              </div>
-            </TabItem>
-            <TabItem :value="2" class="flex-1">
-              <div :class="{ focus: active === 2 }" class="pointer flex-1 column p-5 rounded-md" data-active="2">
-                <div class="iconbox rounded-lg vh_center mb-2">
-                  <PhoneProxyIcon :size="24" />
+              </TabItem>
+              <TabItem :value="2" class="flex-1 tab-item">
+                <div :class="{ focus: active === 2 }" class="pointer flex-1 column p-5 rounded-md" data-active="2">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <PhoneProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.phone_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
                 </div>
-                <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.phone_proxy") }}</strong>
-                <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
-              </div>
-            </TabItem>
-            <TabItem :value="3" class="flex-1">
-              <div :class="{ focus: active === 3 }" class="pointer flex-1 column p-5 rounded-md" data-active="3">
-                <div class="iconbox rounded-lg vh_center mb-2">
-                  <DataProxyIcon :size="24" />
+              </TabItem>
+              <TabItem :value="3" class="flex-1 tab-item">
+                <div :class="{ focus: active === 3 }" class="pointer flex-1 column p-5 rounded-md" data-active="3">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <DataProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
                 </div>
-                <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
-                <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
-              </div>
-            </TabItem>
-          </Tab>
+              </TabItem>
+            </Tab>
+          </keep-alive>
         </div>
 
         <div>
-          <ResidentialProxy v-if="active === 0" />
-          <UnlimitedProxy v-if="active === 1" />
-          <PhoneProxy v-if="active === 2" />
-          <DataProxy v-if="active === 3" />
+          <keep-alive>
+            <component :is="activeComponent" />
+          </keep-alive>
         </div>
       </div>
 
-      <div class="" style="width: 380px">
+      <div class="rightSide">
         <RightSide />
       </div>
     </div>
@@ -87,7 +88,7 @@
 <script setup>
 import { useI18n } from "vue-i18n"
 import NavBar from "../components/navbar/navbar.vue"
-import { provide, ref } from "vue"
+import { computed, provide, ref } from "vue"
 import ResidentialProxy from "./residential_proxy/index.vue"
 import UnlimitedProxy from "./unlimited_proxy/index.vue"
 import PhoneProxy from "./phone_proxy/index.vue"
@@ -109,7 +110,7 @@ import {
 const { t } = useI18n()
 
 // tabbar
-const active = ref(3) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
+const active = ref(0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",
@@ -132,6 +133,20 @@ function selectActive(e) {
 
   active.value = value
 }
+const activeComponent = computed(() => {
+  switch (active.value) {
+    case 0:
+      return ResidentialProxy
+    case 1:
+      return UnlimitedProxy
+    case 2:
+      return PhoneProxy
+    case 3:
+      return DataProxy
+    default:
+      return ResidentialProxy
+  }
+})
 
 // 切换余额详情
 const isBalance = ref(false)
@@ -143,6 +158,10 @@ provide("isOnlineIp", isOnlineIp)
 
 <style lang="less" scoped>
 .tab {
+  overflow: auto;
+  .tab-item {
+    min-width: 220px;
+  }
   .focus {
     .iconbox {
       background-color: #ffffff;
@@ -168,6 +187,15 @@ provide("isOnlineIp", isOnlineIp)
     height: 12px;
     background-color: hsl(var(--primary) / 20%);
     border-radius: 50%;
+  }
+}
+.rightSide {
+  width: 380px;
+  @media screen and (max-width: 1536px) {
+    width: 320px;
+  }
+  @media screen and (max-width: 1280px) {
+    width: 280px;
   }
 }
 </style>
