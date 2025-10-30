@@ -61,3 +61,12 @@ export function platUnlimitedConcurrentUsage(params) {
     params,
   })
 }
+
+// 产品区域
+export function platProductRegions(params) {
+  return request({
+    url: "/plat/products/regions",
+    method: "get",
+    params,
+  })
+}

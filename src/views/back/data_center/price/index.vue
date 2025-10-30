@@ -3,7 +3,7 @@
     <div class="product board p-5 rounded">
       <div class="column_center space-y-3">
         <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">{{ t("menu_spec.data_proxy") }} {{ t("Price") }}</p>
-        <p class="text-lg">{{ t("data_center_spec.des") }}</p>
+        <p class="text-lg desc text-center">{{ t("data_center_spec.des") }}</p>
       </div>
       <div class="w-full mt-5">
         <ProductList :type="3" :tabbar="false" :pack="5" />
@@ -23,5 +23,9 @@ const { t } = useI18n()
 <style lang="less" scoped>
 .product {
   padding-top: 50px;
+}
+.desc {
+  width: 100%;
+  max-width: 800px;
 }
 </style>

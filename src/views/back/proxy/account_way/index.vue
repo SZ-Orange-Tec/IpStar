@@ -55,7 +55,7 @@
 
         <div class="column space-y-1">
           <p class="text-sm">{{ t("Account") }}</p>
-          <el-select v-model="account" clearable :placeholder="$t('Sub_Account')" style="max-width: 232px">
+          <el-select v-model="account" clearable :placeholder="$t('Account')" style="max-width: 232px">
             <el-option v-for="item in accountList" :key="item" :value="item" :label="item"></el-option>
           </el-select>
         </div>
@@ -104,11 +104,11 @@
             </template> -->
         </el-table>
       </div>
-      <p class="space-x-2 text-sm" v-show="is_purchase">
-        <!-- <img src="@/assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" /> -->
+      <!-- <p class="space-x-2 text-sm" v-show="is_purchase">
+        <img src="@/assets/pc_img/products_img/left arrows.png" width="20" alt="left arrows" />
         <span>{{ t("proxy_spec.api_tip.front") }}</span>
         <span class="primary pointer" @click="goToDocument">{{ t("proxy_spec.api_tip.btn") }}</span>
-      </p>
+      </p> -->
     </div>
   </div>
 </template>
@@ -172,7 +172,6 @@ function protocolChange(val) {
   protocolVal.value = val[0]
 }
 function IPtimeChange(val) {
-  console.log(val)
   IPtime.value = val[0]
 }
 function countChange(val) {

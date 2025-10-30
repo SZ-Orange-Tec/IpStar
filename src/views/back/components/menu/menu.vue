@@ -165,7 +165,6 @@ function focusPath(path) {
 watch(
   () => route.path,
   (val) => {
-    console.log(val)
     focusPath(val)
   }
 )

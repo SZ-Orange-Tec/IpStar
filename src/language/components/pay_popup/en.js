@@ -26,6 +26,6 @@ export default {
     usdt10: "1-2 minutes",
     usdt11: "There is nothing else you need to do! You may close this window.",
 
-    unit_price: "Price per GB",
+    unit_price: "Unit Price",
   },
 }

@@ -17,7 +17,7 @@
 <script setup>
 import { ref, toRefs, defineModel } from "vue"
 
-const input = defineModel({ type: String })
+const input = defineModel()
 
 const props = defineProps({
   type: {

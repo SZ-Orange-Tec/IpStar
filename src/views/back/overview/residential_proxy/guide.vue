@@ -106,7 +106,6 @@ async function getIpPool() {
       })
     })
     ipPools.value = result
-    console.log(ipPools.value)
   } catch (err) {
     console.log(err.message)
   }

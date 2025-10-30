@@ -1,12 +1,16 @@
 <template>
-  <div class="column">
+  <div class="column h-full">
     <NavBar>
       <template #default="{ title }">
         <div>{{ title }}</div>
       </template>
     </NavBar>
 
-    <div class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6 space-y-6 column">
+    <div class="flex-1 min-h-0 overflow-y-auto w-full column p-6 gap-6">
+      <div class="w-full box-border board rounded px-2 py-5">
+        <Tabs v-model="active_tab" @change="handleTabChange" />
+      </div>
+
       <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="rounded tab">
         <TabItem :value="0" :label="t('User_Pass_Auth')" class="h-9 px-5 min-w-[140px]" />
         <TabItem :value="1" :label="t('API_Auth')" class="h-9 px-5 min-w-[140px]" />
@@ -29,6 +33,7 @@ import TabItem from "@/components/tabbar/tab-item.vue"
 import AccountWay from "./account_way/index.vue"
 import ApiWay from "./api_way/index.vue"
 import Lock from "./lock.vue"
+import Tabs from "./tabs.vue"
 import { ref } from "vue"
 import userStore from "../../../store/user"
 import { useI18n } from "vue-i18n"
@@ -38,6 +43,13 @@ const { t } = useI18n()
 const route = useRoute()
 const { is_purchase } = userStore()
 
+// tabs
+const active_tab = ref(Number(route.query?.tab ?? 0))
+function handleTabChange(tab) {
+  console.log("tab change")
+}
+
+// 选项卡
 const active = ref(Number(route.query?.active ?? 0)) // 0:user_pass 1:api
 const activeStyle = {
   backgroundColor: "hsl(var(--foreground))",

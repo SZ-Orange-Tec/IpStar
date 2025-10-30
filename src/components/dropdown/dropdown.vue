@@ -3,7 +3,15 @@
     <div class="label" @click="toggleMenu" ref="label">
       <slot name="label" :open="open"></slot>
     </div>
-    <div class="dropMenu" ref="menu" @click="closeMenu" :placement="direction" :style="position">
+    <div
+      class="dropMenu"
+      :class="maxHeight ? 'overflow-y-auto' : 'overflow-hidden'"
+      ref="menu"
+      @click="closeMenu"
+      :placement="direction"
+      :style="position"
+      @wheel.stop
+    >
       <slot name="menu"></slot>
     </div>
   </div>
@@ -19,6 +27,9 @@ export default {
   },
   props: {
     trigger: String,
+    maxHeight: {
+      type: Number,
+    },
     placement: {
       type: String,
       default: "bottom",
@@ -51,6 +62,8 @@ export default {
 
       this.computePosition()
 
+      const height = this.maxHeight ? Math.min(target.scrollHeight, this.maxHeight) : target.scrollHeight
+
       anime({
         targets: target,
         opacity: {
@@ -59,7 +72,7 @@ export default {
           easing: "easeOutQuad",
         },
         height: {
-          value: target.scrollHeight,
+          value: height,
           duration: 200,
           easing: "easeOutExpo",
         },

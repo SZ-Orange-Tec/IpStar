@@ -41,7 +41,7 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import { platCustomerPhoneProxy } from "@/api/product"
+import { platBillingPhoneProxy } from "@/api/product"
 
 // 表格数据
 const loading = ref(false)
@@ -51,7 +51,7 @@ async function getTableData() {
   try {
     const {
       data: { count, list },
-    } = await platCustomerPhoneProxy({
+    } = await platBillingPhoneProxy({
       page_index: page.value,
       page_size: size.value,
     })

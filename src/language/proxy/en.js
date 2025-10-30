@@ -7,6 +7,7 @@ export default {
   User_Pass_Auth: "User & Pass Auth",
   API_Auth: "API",
   Options: "Options",
+  Starting_from: "Starting from ",
 
   Country: "Country",
   Protocol: "Protocol",
@@ -28,6 +29,7 @@ export default {
   Buy_now: "Buy now",
 
   Format: "Format",
+  Simplified: "Simplified",
   Generate: "Generate",
   Link: "Link",
   Copy_link: "Copy link",

@@ -78,7 +78,7 @@
         </div>
       </div>
 
-      <div class="rightSide">
+      <div class="rightSide hidden xl:block">
         <RightSide />
       </div>
     </div>
@@ -160,7 +160,7 @@ provide("isOnlineIp", isOnlineIp)
 .tab {
   overflow: auto;
   .tab-item {
-    min-width: 220px;
+    min-width: 200px;
   }
   .focus {
     .iconbox {
@@ -191,6 +191,9 @@ provide("isOnlineIp", isOnlineIp)
 }
 .rightSide {
   width: 380px;
+  @media screen and (max-width: 1620px) {
+    width: 340px;
+  }
   @media screen and (max-width: 1536px) {
     width: 320px;
   }

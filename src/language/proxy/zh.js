@@ -7,6 +7,7 @@ export default {
   User_Pass_Auth: "账密提取",
   API_Auth: "API提取",
   Options: "筛选项",
+  Starting_from: "低至：",
 
   Country: "国家",
   Protocol: "协议",
@@ -28,6 +29,7 @@ export default {
   Buy_now: "立即购买",
 
   Format: "格式",
+  Simplified: "精简",
   Generate: "生成",
   Link: "链接",
   Copy_link: "复制链接",

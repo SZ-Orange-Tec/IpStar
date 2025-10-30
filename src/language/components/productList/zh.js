@@ -7,6 +7,10 @@ export default {
   Order: "订购",
   Most_popular: "最受\n欢迎",
   Duration: "有效期",
+  Locations: "地区",
+  Number: "数量",
+  Name: "名称",
+  Never_Expires: "永久有效",
 
   Personal: "个人",
   Enterprise: "企业",
@@ -20,6 +24,22 @@ export default {
     right4: "并发数500+",
     right5: "Socks5/Http|Https",
 
+    unlimited_right1: "不限流量",
+    unlimited_right2: "广泛的IP池",
+    unlimited_right3: "全球200+个地区随机定位",
+    unlimited_right4: "不限制并发",
+    unlimited_right5: "真实动态住字代理",
+
+    phone_right1: "支持5G/4G/3G/LTE",
+    phone_right2: "自由国家定位",
+    phone_right3: "按流量付费，无到期日",
+    phone_right4: "24/7支持",
+
+    data_right1: "平均成功率99.5%",
+    data_right2: "HTTP/SOCKS5",
+    data_right3: "IP可续",
+    data_right4: "可靠的网络供应商",
+
     Never_Expires: "永久有效",
 
     permanent: "不限量套餐",
@@ -29,6 +49,13 @@ export default {
     Custom1: "定制套餐",
     Custom2: "定制地区",
     Custom3: "定制需求",
+
+    Custom4: "定制并发",
+    Custom5: "定制带宽",
+
+    Custom6: "定制位量",
+    Custom7: "定制数量",
+
     Service: "联系客服",
   },
 }
