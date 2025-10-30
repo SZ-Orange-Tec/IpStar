@@ -34,7 +34,7 @@ import AccountWay from "./account_way/index.vue"
 import ApiWay from "./api_way/index.vue"
 import Lock from "./lock.vue"
 import Tabs from "./tabs.vue"
-import { ref } from "vue"
+import { provide, ref } from "vue"
 import userStore from "../../../store/user"
 import { useI18n } from "vue-i18n"
 import { useRoute } from "vue-router"
@@ -48,6 +48,7 @@ const active_tab = ref(Number(route.query?.tab ?? 0))
 function handleTabChange(tab) {
   console.log("tab change")
 }
+provide("active_tab", active_tab)
 
 // 选项卡
 const active = ref(Number(route.query?.active ?? 0)) // 0:user_pass 1:api

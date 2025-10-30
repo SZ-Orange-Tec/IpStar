@@ -7,7 +7,7 @@
       <img class="hidden 2xl:block group-hover:block" src="@/assets/images/logo.png" style="height: 36px" alt="" />
     </div>
     <div class="column flex-1 w-full">
-      <ul class="space-y-1 column px-3">
+      <ul class="space-y-1 column px-3 w-full">
         <template v-for="(item, index) in menuData" :key="index">
           <li
             class="box-border w-full v_center h-9 pointer space-x-2 text-[15px] font-medium menu-item"

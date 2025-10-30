@@ -86,7 +86,7 @@
 
       <!-- 表格 -->
       <div class="table_box w-full">
-        <el-table class="w-full" :data="tableData" height="440">
+        <el-table class="w-full" :data="tableData" height="440" v-loading="btnLoading">
           <el-table-column prop="server" :label="t('Server')" min-width="160"></el-table-column>
           <el-table-column prop="port" :label="t('Port')" min-width="100"></el-table-column>
           <el-table-column prop="user" :label="t('User')" min-width="300"></el-table-column>
@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from "vue"
+import { ref, computed, watch, onMounted, inject } from "vue"
 
 import { debounce } from "@/utils/tools"
 // import enOptions from "./json/cascader.json"
@@ -134,6 +134,7 @@ import { platAccountSelect } from "@/api/account"
 const { en } = settingStore()
 const { isProduc } = layoutStore()
 const { is_purchase } = userStore()
+const active_tab = inject("active_tab")
 
 const router = useRouter()
 const route = useRoute()
@@ -194,6 +195,7 @@ async function generate() {
         count: countVal.value,
         persistconn: 1,
         account: account.value !== accountList.value[0] ? account.value : "",
+        stype: active_tab.value,
       }
       const { data } = await PlatCustomerEndPoints(params)
       btnLoading.value = false
@@ -225,7 +227,7 @@ async function generate() {
 }
 function generateCurl(item) {
   const { password, port, server, user } = item
-  const url = `curl -${protocolVal.value === "0" ? "-socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
+  const url = `curl -${protocolVal.value === "0" ? "-socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io --vv`
   return url
 }
 
@@ -322,7 +324,7 @@ function goToDocument() {
 
 // 子账号
 const accountList = ref([])
-const account = ref(route.query.account)
+const account = ref(route.query.account ?? "")
 async function getAccountList() {
   try {
     const { data } = await platAccountSelect()
