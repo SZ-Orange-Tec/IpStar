@@ -40,8 +40,10 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import { platCustomerDataProxy } from "@/api/product"
+import { platCustomerProductsV2 } from "@/api/product"
+import { useI18n } from "vue-i18n"
 
+const { t } = useI18n()
 // 表格数据
 const loading = ref(false)
 const tableData = ref([])
@@ -50,9 +52,10 @@ async function getTableData() {
   try {
     const {
       data: { count, list },
-    } = await platCustomerDataProxy({
+    } = await platCustomerProductsV2({
       page_index: page.value,
       page_size: size.value,
+      prd_type: 3,
     })
 
     total.value = count

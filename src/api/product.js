@@ -1,30 +1,9 @@
 import request from "./request"
 
 // 购买产品记录
-export function platCustomerResidentialProxy(params) {
+export function platCustomerProductsV2(params) {
   return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
-export function platCustomerUnlimitedProxy(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
-export function platCustomerPhoneProxy(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
-export function platCustomerDataProxy(params) {
-  return request({
-    url: "",
+    url: "/plat/v2/customer/products",
     method: "get",
     params,
   })

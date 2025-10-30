@@ -17,10 +17,9 @@
     </NavBar>
 
     <div class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6">
-      <ResidentialProxy v-if="active === 0" />
-      <UnlimitedProxy v-if="active === 1" />
-      <PhoneProxy v-if="active === 2" />
-      <DataCenterProxy v-if="active === 3" />
+      <keep-alive>
+        <component :is="activeComponent" />
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -35,6 +34,7 @@ import PhoneProxy from "./phone_proxy/index.vue"
 import DataCenterProxy from "./data_proxy/index.vue"
 import { useI18n } from "vue-i18n"
 import { ref } from "vue"
+import { computed } from "vue"
 
 const { t } = useI18n()
 
@@ -61,6 +61,22 @@ function selectActive(e) {
 
   active.value = value
 }
+
+// 活跃组件
+const activeComponent = computed(() => {
+  switch (active.value) {
+    case 0:
+      return ResidentialProxy
+    case 1:
+      return UnlimitedProxy
+    case 2:
+      return PhoneProxy
+    case 3:
+      return DataCenterProxy
+    default:
+      return ResidentialProxy
+  }
+})
 </script>
 
 <style lang="less" scoped>
