@@ -106,7 +106,7 @@ const routes = [
         component: () => import("@/views/back/whitelist/whitelist.vue"),
       },
       {
-        path: "/account",
+        path: "/sub_account",
         name: "account",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/account/index.vue"),

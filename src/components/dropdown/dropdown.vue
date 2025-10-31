@@ -1,6 +1,6 @@
 <template>
   <div class="pc-dropDown" v-clickoutside="closeMenu">
-    <div class="label" @click="toggleMenu" ref="label">
+    <div class="label h-full" @click="toggleMenu" ref="label">
       <slot name="label" :open="open"></slot>
     </div>
     <div

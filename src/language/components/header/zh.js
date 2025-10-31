@@ -12,4 +12,15 @@ export default {
   API: "API 提取",
   Settings: "设置",
   Dashboard: "个人中心",
+
+  Proxy_Solutions: "代理解决方案",
+  Residential_Proxies: "住宅代理",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
+  Phone_Proxies: "移动手机代理",
+  Data_Center_Proxies: "静态数据中心代理",
+  Residential_Proxies_Adv: "9000万+安全性住宅代理，高匿名性和低检测率。",
+  Unlimited_Residential_Proxies_Adv: "灵活的IP轮换和会话控制，享受无限住宅代理流量。",
+  Phone_Proxies_Adv: "全球真实移动设备IP池。",
+  Data_Center_Proxies_Adv: "安全的数据中心代理提供专用IP，连接稳定快速。",
+  perfect_for_All: "完美适用于AI",
 }

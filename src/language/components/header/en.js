@@ -12,4 +12,15 @@ export default {
   API: "API Obtain",
   Settings: "Settings",
   Dashboard: "Dashboard",
+
+  Proxy_Solutions: "Proxy Solutions",
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Static Data Center Proxies",
+  Residential_Proxies_Adv: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+  Unlimited_Residential_Proxies_Adv: "Flexible IP rotation and session control, enjoy unlimited residential proxy traffic.",
+  Phone_Proxies_Adv: "Global pool of authentic mobile device IP addresses.",
+  Data_Center_Proxies_Adv: "Secure data centre proxies provide dedicated IPs for stable and rapid connectivity.",
+  perfect_for_All: "Perfect for AI",
 }

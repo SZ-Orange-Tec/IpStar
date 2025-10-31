@@ -1,6 +1,6 @@
 <template>
   <div ref="triggerRef" class="h-0" style="background: transparent"></div>
-  <div class="header_box" :class="{ shadow: shadow }">
+  <div class="header_box relative" :class="{ shadow: shadow }">
     <HeaderGift v-if="registerAward && !isLogin" @load="setStickyTop" />
     <header class="header" :class="{ home_header: isHome }">
       <div class="container flex w-full h-full">
@@ -18,10 +18,16 @@
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li
               @click="navigate('/home')"
-              class="slider_bck slider_bck_center h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color"
               :class="{ active: activePath === '/home' }"
+              @mouseenter="toggleProductPop"
+              @mouseleave="toggleProductPop"
             >
-              {{ $t("Home") }}
+              <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
+                <div>{{ $t("Home") }}</div>
+                <ChevronDown :class="{ rotate180: open }" :size="18" />
+              </div>
+              <ProductPop v-model="productPopShow" />
             </li>
             <li
               @click="navigate('/pricing')"
@@ -180,6 +186,7 @@ import { computed, inject, onMounted, ref } from "vue"
 import layoutStore from "@/store/layout"
 import { platDataConfig } from "@/api/home"
 import { defineAsyncComponent } from "vue"
+import ProductPop from "..//product_pop/product_pop.vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -267,6 +274,12 @@ async function loadFront() {
 // 退出
 function signOut() {
   OutLogin()
+}
+
+// 气泡
+const productPopShow = ref(false)
+function toggleProductPop() {
+  productPopShow.value = !productPopShow.value
 }
 
 onMounted(() => {
