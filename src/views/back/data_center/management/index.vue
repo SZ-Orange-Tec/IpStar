@@ -94,7 +94,7 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from "vue"
-import { platBillingDataProxy } from "@/api/product"
+import { platCustomerOrders } from "@/api/layout"
 import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
@@ -173,7 +173,7 @@ async function getTableData() {
   try {
     const {
       data: { count, list },
-    } = await platBillingDataProxy({
+    } = await platCustomerOrders({
       page_index: page.value,
       page_size: size.value,
     })
