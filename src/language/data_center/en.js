@@ -26,6 +26,10 @@ export default {
   API_link: "API Link",
   Purchase_time: "Purchase Time",
   Remark: "Remark",
+  Expiration_time: "Expiration Time",
+  Normal: "Normal",
+  Expired: "Expired",
+  No_Data: "No Data",
 
   Order_Number: "Order Number",
   Product_Name: "Product Name",

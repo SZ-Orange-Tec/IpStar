@@ -45,7 +45,7 @@ const { t } = useI18n()
 const router = useRouter()
 
 // 头部nav tab
-const active = ref(0) // 0:Price 1:Get_Proxy 2:IP Management 3:Billing
+const active = ref(2) // 0:Price 1:Get_Proxy 2:IP Management 3:Billing
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

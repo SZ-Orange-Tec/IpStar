@@ -20,6 +20,7 @@ export default {
   Concurrency: "Concurrency",
   Bandwidth: "Bandwidth",
   Price: "Price",
+  Never_Expire: "Never Expire",
 
   product_spec: {},
 }

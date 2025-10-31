@@ -42,18 +42,6 @@
             <!-- <button class="px-4 py-1 rounded-full text-yellow-600 bg-white border border-yellow-200 text-sm">详情</button> -->
           </div>
         </div>
-
-        <!-- 当前在线IP总数卡片 -->
-        <div class="bg-blue-50 rounded-lg p-5 space-y-2">
-          <div class="v_center space-x-2">
-            <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-            <strong class="text-lg font-semibold">2041.87 万</strong>
-          </div>
-          <div class="between text-sm">
-            <p class="grey-80">当前在线 IP 总数</p>
-            <button class="px-4 py-1 rounded-full text-blue-600 bg-white border border-blue-200 text-sm">详情</button>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -81,8 +69,8 @@ const router = useRouter()
 // 获取流量数据
 const remain_num = ref(0)
 const remain_unit = ref("")
-const used_num = ref(0)
-const used_unit = ref("")
+const consume_num = ref(0)
+const consume_unit = ref("")
 async function getTrafficData() {
   try {
     const { data } = await platCustomerReportOverviewDataCenter()
@@ -93,7 +81,7 @@ async function getTrafficData() {
 
     nextTick(() => {
       numberAnimation(remain_num, remain * 100)
-      numberAnimation(used_num, consume * 100)
+      numberAnimation(consume_num, consume * 100)
     })
   } catch (error) {
     console.log(error.message)

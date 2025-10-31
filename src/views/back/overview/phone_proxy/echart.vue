@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <div class="w-full space-y-5 column">
-      <strong class="text-lg font-medium">流量使用情况</strong>
+      <strong class="text-lg font-medium">{{ $t("Traffic_Usage") }}</strong>
       <div class="v_center space-x-3">
         <div class="tab v_center text-sm rounded">
           <div
@@ -43,10 +43,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref, onBeforeUnmount } from "vue"
+import { onMounted, ref, onBeforeUnmount, nextTick } from "vue"
 import IpButton from "@/components/button/button.vue"
 import { addDays, format } from "date-fns"
-import { platUnlimitedBandWidthUsage } from "@/api/product"
+import { platCustomerReport } from "@/api/layout"
+import { useI18n } from "vue-i18n"
+import settingStore from "../../../../store/setting"
+
+const { t } = useI18n()
+const { en } = settingStore()
 
 // tab
 const active = ref(0) // 0:按天 1：按时
@@ -63,19 +68,27 @@ function updateActive(index) {
 const dayRange = ref()
 const loading = ref(false)
 const show = ref(false)
+const dayLine = ref([])
 let dayEchart, dayResize
 async function getDayLineData() {
   try {
     loading.value = true
-    let { data } = await platUnlimitedBandWidthUsage({
+    let { data } = await platCustomerReport({
       start_time: format(dayRange.value[0], "yyyy-MM-dd"),
       end_time: format(dayRange.value[1], "yyyy-MM-dd"),
+      prd_type: 2,
     })
     data = data.sort((a, b) => {
       return b.date_short < a.date_short ? -1 : 1
     })
     show.value = data.length > 0
     if (!show.value) return
+    dayLine.value = data.map((item) => {
+      return {
+        date: item.date_short,
+        flow: item.pack_size,
+      }
+    })
 
     nextTick(() => {
       setEchart(
@@ -106,11 +119,11 @@ async function setEchart(xData, serData) {
   }
 
   const option = {
-    title: {
-      text: en.value ? "5-Day Comparison" : "5 天对比",
-      textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
-      padding: [20, 0, 0, 20],
-    },
+    // title: {
+    //   text: en.value ? "5-Day Comparison" : "5 天对比",
+    //   textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
+    //   padding: [20, 0, 0, 20],
+    // },
     grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
 
     dataZoom: [

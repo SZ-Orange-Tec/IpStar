@@ -89,7 +89,7 @@ async function getTableData() {
         state: item.fstatus,
         start_time: item.fstarttime,
         expire_time: item.fexpiretime,
-        days: item.fexpiredays + " " + t("Day"),
+        days: item.fexpiredays > 3650 || item.fexpiredays < 0 ? t("Never_Expire") : item.fexpiredays + " " + t("Day"),
         consume: item.fconsume,
         progress: Math.round((item.fconsume / item.fpacksize) * 100),
         consumeText,

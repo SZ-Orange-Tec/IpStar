@@ -58,14 +58,14 @@
 <script setup>
 import ipButton from "@/components/button/button.vue"
 import Echart from "./echart.vue"
-import { nextTick, onMounted, ref } from "vue"
+import { nextTick, onActivated, onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { Smartphone as PhoneProxyIcon } from "lucide-vue-next"
 import { useRouter } from "vue-router"
 import anime from "animejs/lib/anime.es.js"
 import Message from "@/components/message/message"
-import { roundToDecimal } from "../../../../utils/tools"
-import { platCustomerReportOverviewMobile } from "../../../../api/layout"
+import { roundToDecimal } from "@/utils/tools"
+import { platCustomerReportOverview } from "@/api/layout"
 
 const { t } = useI18n()
 const router = useRouter()
@@ -77,34 +77,36 @@ const consume_num = ref(0)
 const consume_unit = ref("")
 async function getTrafficData() {
   try {
-    const { data } = await platCustomerReportOverviewMobile()
-    const remain = +data.remain.split(" ")[0]
-    remain_unit.value = data.remain.split(" ")[1]
-    const consume = +data.consume.split(" ")[0]
-    consume_unit.value = data.consume.split(" ")[1]
+    const { data } = await platCustomerReportOverview()
+    const remain = +data.mobi_remain.split(" ")[0]
+    remain_unit.value = data.mobi_remain.split(" ")[1]
+    const consume = +data.mobi_consume.split(" ")[0]
+    consume_unit.value = data.mobi_consume.split(" ")[1]
 
     nextTick(() => {
-      numberAnimation(remain_num, remain * 100)
-      numberAnimation(consume_num, consume * 100)
+      numberAnimation(remain * 100, (charged) => {
+        remain_num.value = roundToDecimal(charged / 100)
+      })
+      numberAnimation(consume * 100, (charged) => {
+        consume_num.value = roundToDecimal(charged / 100)
+      })
     })
   } catch (error) {
     console.log(error.message)
     Message({
       type: "warning",
-      message: "platCustomerReportOverviewMobile failed",
+      message: "platCustomerReportOverview failed",
     })
   }
 }
-function numberAnimation(data, target) {
+function numberAnimation(target, callback) {
   const ipObj = { charged: 0 }
   anime({
     targets: ipObj,
     charged: target,
     round: Math.floor(target / 10),
     easing: "linear",
-    update: function () {
-      data.value = roundToDecimal(ipObj.charged / 100)
-    },
+    update: () => callback(ipObj.charged),
   })
 }
 

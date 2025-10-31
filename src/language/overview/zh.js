@@ -28,6 +28,8 @@ export default {
   Port: "端口",
   Locations: "位置",
   Status: "状态",
+  Normal: "正常",
+  Expired: "已过期",
 
   Search: "搜索",
   Date: "日期",

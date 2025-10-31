@@ -40,3 +40,21 @@ export function platProductRegions(params) {
     params,
   })
 }
+
+// 产品最低价格列表
+export function platProductLowestPrices(params) {
+  return request({
+    url: "/plat/products/unit-prices",
+    method: "get",
+    params,
+  })
+}
+
+// 客户IP列表
+export function platCustomerStaticIps(params) {
+  return request({
+    url: "/plat/customer/staticips",
+    method: "get",
+    params,
+  })
+}

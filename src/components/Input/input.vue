@@ -44,7 +44,7 @@ const props = defineProps({
 
 const { maxlength, placeholder, type } = toRefs(props)
 
-const emit = defineEmits(["input"])
+const emit = defineEmits(["input", "change"])
 // 只读
 const readonly = ref(true)
 function focus() {
@@ -55,6 +55,7 @@ function blur() {
 }
 function change(e) {
   emit("input", e.target.value)
+  emit("change", e.target.value)
 }
 
 defineExpose({

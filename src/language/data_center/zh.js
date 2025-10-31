@@ -15,8 +15,6 @@ export default {
 
   // ip 管理
   Please_Enter: "请输入",
-  Normal: "正常",
-  Abnormal: "异常",
   All_Locations: "所有位置",
   Search: "搜索",
   Ip_Address: "IP 地址",
@@ -27,6 +25,10 @@ export default {
   API_link: "API 链接",
   Purchase_time: "购买时间",
   Remark: "备注",
+  Expiration_time: "过期时间",
+  Normal: "正常",
+  Expired: "已过期",
+  No_Data: "暂无数据",
 
   // billing 表格
   Order_Number: "订单号",

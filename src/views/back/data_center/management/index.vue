@@ -6,27 +6,40 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
       </el-select> -->
 
-      <DropDown placement="bottom" class="shink-0 dropdown">
+      <!-- 地区 -->
+      <DropDown placement="bottom" class="shink-0 dropdown" :max-height="300">
         <template #label="{ open }">
           <IpButton :class="{ open: open }" type="border" class="label">
-            <div class="black v_center text-sm space-x-3 shrink-0 w-full h-9 pr-3">
-              <IpInput :border="false" v-model="area_text" :placeholder="t('Area')" class="h-full flex-1 rounded-md" />
+            <div class="black between text-sm space-x-3 shrink-0 w-full h-9 px-3">
+              <!-- <IpInput
+                :border="false"
+                v-model="area_text"
+                @change="debounceFilterRegion"
+                :placeholder="t('Locations')"
+                class="h-full flex-1 rounded-md"
+              /> -->
+              <div :class="{ 'grey-60': !area_text }">{{ area_text || t("Locations") }}</div>
               <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
             </div>
           </IpButton>
         </template>
         <template #menu>
-          <ul class="menu box-border p-1 column text-sm" @click="statusChange">
-            <li
-              v-for="item in areaList"
-              :key="item.value"
-              :class="{ active: form.status === item.value }"
-              class="menu_item px-2 rounded-md pointer transition-color v_center"
-              :data-value="item.value"
-            >
-              {{ item.label }}
-            </li>
-          </ul>
+          <div class="menu">
+            <ul v-if="filterRegionsList.length" class="grey-60 box-border p-1 column text-sm" @click="regionChange">
+              <li
+                v-for="item in filterRegionsList"
+                :key="item.value"
+                :class="{ active: item.value === form.region }"
+                class="menu_item w-full box-border px-2 h-8 rounded-md pointer transition-color v_center pointer"
+                :data-value="item.value"
+              >
+                {{ item[lang] }}
+              </li>
+            </ul>
+            <div class="w-full vh_center" v-else>
+              <div class="grey-60 text-sm">{{ t("No_Data") }}</div>
+            </div>
+          </div>
         </template>
       </DropDown>
 
@@ -54,22 +67,27 @@
         </template>
       </DropDown>
 
-      <IpButton class="text-sm px-5 h-9 rounded-md">{{ $t("Search") }}</IpButton>
+      <IpButton class="text-sm px-5 h-9 rounded-md" @click="Search">{{ $t("Search") }}</IpButton>
     </div>
     <div class="w-full flex-1 min-h-0 box-border board rounded space-y-3">
       <div class="table_box">
         <el-table :data="tableData" style="width: 100%" v-loading="loading">
-          <el-table-column prop="size" :label="$t('Ip_Address')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Port')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Locations')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Username')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Password')" min-width="120"></el-table-column>
+          <el-table-column prop="ip" :label="$t('Ip_Address')" min-width="120"></el-table-column>
+          <el-table-column prop="port" :label="$t('Port')" min-width="120"></el-table-column>
+          <el-table-column prop="region_code" :label="$t('Locations')" min-width="120"></el-table-column>
+          <el-table-column prop="username" :label="$t('Username')" min-width="120"></el-table-column>
+          <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
           <el-table-column prop="size" :label="$t('API_link')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Purchase_time')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Expiration_time')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Remark')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Status')" min-width="120"></el-table-column>
-          <el-table-column prop="size" :label="$t('Action')" min-width="120"></el-table-column>
+          <el-table-column prop="create_time" :label="$t('Purchase_time')" min-width="120"></el-table-column>
+          <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="120"></el-table-column>
+          <el-table-column :label="$t('Status')">
+            <template #default="scope">
+              <el-tag v-if="scope.row.status === 1" type="success">{{ $t("Normal") }}</el-tag>
+              <el-tag v-if="scope.row.status === 2" type="danger">{{ $t("Expired") }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="remark" :label="$t('Remark')" min-width="120"></el-table-column>
+          <el-table-column :label="$t('Action')" min-width="120"></el-table-column>
         </el-table>
       </div>
 
@@ -94,33 +112,39 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from "vue"
-import { platCustomerOrders } from "@/api/layout"
 import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
 import { ChevronDown } from "lucide-vue-next"
 import { debounce } from "../../../../utils/tools"
+import { platCustomerStaticIps } from "@/api/product"
+import IpTag from "@/components/tag/tag.vue"
+import Message from "@/components/message/message"
+import { platProductRegions } from "@/api/product"
+import settingStore from "../../../../store/setting"
 
 const { t } = useI18n()
+const { lang } = settingStore()
 
 // 表单
 const form = reactive({
   ip: "",
-  area: "",
+  region: "",
   status: "",
 })
 function Search() {
+  page.value = 1
   getTableData()
 }
 
 // 状态筛选
 const statusList = ref([
-  { label: t("Normal"), value: 0 },
-  { label: t("Abnormal"), value: 1 },
+  { label: t("Normal"), value: 1 },
+  { label: t("Expired"), value: 2 },
 ])
 const status_text = computed(() => {
-  return statusList.value[form.status]?.label ?? ""
+  return statusList.value.find((i) => i.value === form.status)?.label ?? ""
 })
 function statusChange(e) {
   function findDom(dom) {
@@ -135,22 +159,29 @@ function statusChange(e) {
 
   const value = dom.dataset.value
   form.status = +value
-  console.log(form.status)
+}
+
+// 获取区域
+const regionsList = ref([])
+async function getRegions() {
+  const { data } = await platProductRegions()
+  regionsList.value = data.map((item) => ({
+    value: item.code,
+    country: item.country,
+    zh: item.city_cn,
+    en: item.city,
+  }))
 }
 
 // 区域筛选
-const areaList = [
-  { label: t("Normal"), value: 0 },
-  { label: t("Abnormal"), value: 1 },
-]
-const filterAreaList = ref(areaList)
-function filterArea() {
-  const area = area_text.value
-  filterAreaList.value = areaList.filter((item) => item.label.includes(area))
+const filterRegionsList = ref(regionsList)
+function filterRegion(area) {
+  const reg = new RegExp(area, "g")
+  filterRegionsList.value = regionsList.value.filter((item) => reg.test(item[lang.value]))
 }
-const debounceFilterArea = debounce(filterArea, 300)
+const debounceFilterRegion = debounce(filterRegion, 300)
 const area_text = ref("")
-function areaChange(e) {
+function regionChange(e) {
   function findDom(dom) {
     if (!dom || dom.tagName === "UL") return
     if (dom.tagName === "LI") {
@@ -162,55 +193,34 @@ function areaChange(e) {
   if (!dom) return
 
   const value = dom.dataset.value
-  form.area = value
+  form.region = value
+
+  area_text.value = regionsList.value.find((item) => item.value === value)?.[lang.value] ?? ""
 }
 
 // 表格数据
-const loading = ref(false)
 const tableData = ref([])
+const loading = ref(false)
 async function getTableData() {
-  loading.value = true
   try {
-    const {
-      data: { count, list },
-    } = await platCustomerOrders({
+    loading.value = true
+    const { data } = await platCustomerStaticIps({
       page_index: page.value,
       page_size: size.value,
+      ip: form.ip,
+      region_code: form.region,
+      status: form.status,
     })
-
-    total.value = count
-
-    const MB = 1024
-    const GB = MB * 1024
-    const TB = GB * 1024
-    tableData.value = list.map((item) => {
-      let consumeText = ""
-      if (item.fconsume >= TB) {
-        consumeText = Math.round((item.fconsume / TB) * 10) / 10 + "TB"
-      } else if (item.fconsume >= GB) {
-        consumeText = Math.round((item.fconsume / GB) * 10) / 10 + "GB"
-      } else if (item.fconsume >= MB) {
-        consumeText = Math.round((item.fconsume / MB) * 10) / 10 + "MB"
-      }
-      return {
-        id: item.fid,
-        name: item.fpname,
-        size: item.fpacktitle,
-        price: item.fprice / 100,
-        state: item.fstatus,
-        start_time: item.fstarttime,
-        expire_time: item.fexpiretime,
-        days: item.fexpiredays + " " + t("Day"),
-        consume: item.fconsume,
-        progress: Math.round((item.fconsume / item.fpacksize) * 100),
-        consumeText,
-        unlimited: item.fprdgroup === 3,
-      }
-    })
-  } catch (error) {
-    console.log(error.message)
-  } finally {
+    total.value = data.count
+    tableData.value = data.list
     loading.value = false
+  } catch (error) {
+    loading.value = false
+    console.log(error.message)
+    Message({
+      type: "warning",
+      message: "platCustomerStaticIps failed",
+    })
   }
 }
 
@@ -229,6 +239,7 @@ function handleSizeChange(val) {
 
 onMounted(() => {
   getTableData()
+  getRegions()
 })
 </script>
 

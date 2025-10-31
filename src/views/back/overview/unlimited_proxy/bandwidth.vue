@@ -1,5 +1,6 @@
 <template>
   <div class="column">
+    <div class="text-lg font-semibold mb-5">{{ $t("Bandwidth_Usage") }}</div>
     <div class="">
       <div class="v_center space-x-3">
         <div class="tab v_center text-sm rounded">
@@ -42,10 +43,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref, onBeforeUnmount } from "vue"
+import { onMounted, ref, onBeforeUnmount, nextTick } from "vue"
 import IpButton from "@/components/button/button.vue"
 import { addDays, format } from "date-fns"
-import { platUnlimitedBandWidthUsage } from "@/api/product"
+import { platCustomerReport } from "@/api/layout"
+import { roundToDecimal } from "../../../../utils/tools"
 
 // tab
 const active = ref(0) // 0:按天 1：按时
@@ -66,12 +68,21 @@ let dayEchart, dayResize
 async function getDayLineData() {
   try {
     loading.value = true
-    let { data } = await platUnlimitedBandWidthUsage({
+    let { data } = await platCustomerReport({
       start_time: format(dayRange.value[0], "yyyy-MM-dd"),
       end_time: format(dayRange.value[1], "yyyy-MM-dd"),
+      prd_type: 1,
     })
     data = data.sort((a, b) => {
       return b.date_short < a.date_short ? -1 : 1
+    })
+    data = data.map((item) => {
+      const flow = item.pack_size * 1024 // mb
+      const Day = 86400000
+      return {
+        date: item.date_short,
+        flow: roundToDecimal(flow / Day, 2),
+      }
     })
     show.value = data.length > 0
     if (!show.value) return
@@ -79,10 +90,10 @@ async function getDayLineData() {
     nextTick(() => {
       setEchart(
         () => {
-          return dayLine.value.map((item) => item.date)
+          return data.map((item) => item.date)
         },
         () => {
-          return dayLine.value.map((item) => item.flow)
+          return data.map((item) => item.flow)
         }
       )
     })
@@ -95,7 +106,7 @@ async function getDayLineData() {
 async function setEchart(xData, serData) {
   if (!dayEchart) {
     const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
-    dayEchart = echart.init(document.getElementById("echartDay"))
+    dayEchart = echart.init(document.getElementById("echartTime"))
     dayResize = () => {
       dayEchart && dayEchart.resize()
     }
@@ -105,11 +116,11 @@ async function setEchart(xData, serData) {
   }
 
   const option = {
-    title: {
-      text: en.value ? "5-Day Comparison" : "5 天对比",
-      textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
-      padding: [20, 0, 0, 20],
-    },
+    // title: {
+    //   text: en.value ? "5-Day Comparison" : "5 天对比",
+    //   textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
+    //   padding: [20, 0, 0, 20],
+    // },
     grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
 
     dataZoom: [
@@ -170,7 +181,7 @@ async function setEchart(xData, serData) {
         color: "#666",
         margin: 30,
         formatter(val) {
-          return `${val}GB`
+          return `${val} Mbps`
         },
       },
       axisTick: {

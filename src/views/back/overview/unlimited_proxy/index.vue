@@ -47,7 +47,7 @@
         <div class="bg-blue-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-            <strong class="text-lg font-semibold">{{ expireTime }}</strong>
+            <strong class="text-lg font-semibold">{{ unlimited_time || "--" }}</strong>
           </div>
           <div class="between text-sm">
             <p class="grey-60">{{ t("Expiration_time") }}</p>
@@ -57,14 +57,15 @@
       </div>
     </div>
 
-    <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
+    <!-- <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
       <TabItem :value="0" :label="t('Bandwidth_Usage')" class="h-9 px-5 min-w-[140px]" />
       <TabItem :value="1" :label="t('Concurrent_Usage')" class="h-9 px-5 min-w-[140px]" />
-    </Tab>
+    </Tab> -->
 
     <div class="w-full p-5 board rounded">
-      <Bandwidth v-show="active === 0" />
-      <Concurrent v-show="active === 1" />
+      <Bandwidth />
+      <!-- <Bandwidth v-show="active === 0" />
+      <Concurrent v-show="active === 1" /> -->
     </div>
   </div>
 </template>
@@ -73,16 +74,18 @@
 import ipButton from "@/components/button/button.vue"
 import Bandwidth from "./bandwidth.vue"
 import Concurrent from "./concurrent .vue"
-import { onMounted, provide, ref } from "vue"
+import { onActivated, onMounted, provide, ref } from "vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import { useI18n } from "vue-i18n"
 import { Infinity as UnlimitedProxyIcon } from "lucide-vue-next"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
+import userStore from "../../../../store/user"
 
 const { t } = useI18n()
 const router = useRouter()
+const { unlimited_time, getUserInfo } = userStore()
 
 // tab
 const active = ref(0) // 0:bandwidth 1:concurrent
@@ -98,7 +101,6 @@ provide("active", active)
 // 获取并发量数据
 const concurrent = ref(0)
 const bandwidth = ref(0)
-const expireTime = ref("")
 async function getData() {
   try {
     const { data } = await platCustomerReportOverview()
@@ -130,6 +132,12 @@ function numberAnimation(data, target) {
     },
   })
 }
+
+onActivated(() => {
+  if (!unlimited_time.value) {
+    getUserInfo()
+  }
+})
 
 onMounted(() => {
   getData()

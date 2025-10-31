@@ -20,6 +20,7 @@ export default {
   Concurrency: "并发量",
   Bandwidth: "带宽",
   Price: "价格",
+  Never_Expire: "永久有效",
 
   purchase_spec: {},
 }

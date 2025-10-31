@@ -37,7 +37,7 @@
                     <ResidentialProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.residential_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.residential }}/GB </span>
                 </div>
               </TabItem>
               <TabItem :value="1" class="flex-1 tab-item">
@@ -46,7 +46,7 @@
                     <UnlimitedProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/GB </span>
                 </div>
               </TabItem>
               <TabItem :value="2" class="flex-1 tab-item">
@@ -55,7 +55,7 @@
                     <PhoneProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.phone_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.phone }}/GB </span>
                 </div>
               </TabItem>
               <TabItem :value="3" class="flex-1 tab-item">
@@ -64,7 +64,7 @@
                     <DataProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} $0.35/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/GB </span>
                 </div>
               </TabItem>
             </Tab>
@@ -88,7 +88,7 @@
 <script setup>
 import { useI18n } from "vue-i18n"
 import NavBar from "../components/navbar/navbar.vue"
-import { computed, provide, ref } from "vue"
+import { computed, onMounted, provide, reactive, ref } from "vue"
 import ResidentialProxy from "./residential_proxy/index.vue"
 import UnlimitedProxy from "./unlimited_proxy/index.vue"
 import PhoneProxy from "./phone_proxy/index.vue"
@@ -106,6 +106,7 @@ import {
   Database as DataProxyIcon,
   ChevronLeft,
 } from "lucide-vue-next"
+import { platProductLowestPrices } from "@/api/product"
 
 const { t } = useI18n()
 
@@ -154,6 +155,32 @@ provide("isBalance", isBalance)
 
 const isOnlineIp = ref(false)
 provide("isOnlineIp", isOnlineIp)
+
+// 最低价格
+const lowestPrice = ref({
+  residential: "0.00",
+  unlimited: "0.00",
+  phone: "0.00",
+  data_center: "0.00",
+})
+async function getLowestPrice() {
+  try {
+    const { data } = await platProductLowestPrices()
+    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const target = {}
+    data.forEach(({ prd_type, unit_price }) => {
+      const key = keys[prd_type]
+      target[key] = unit_price / 100
+    })
+    lowestPrice.value = target
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+onMounted(() => {
+  getLowestPrice()
+})
 </script>
 
 <style lang="less" scoped>

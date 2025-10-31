@@ -28,6 +28,8 @@ export default {
   Port: "Port",
   Locations: "Locations",
   Status: "Status",
+  Normal: "Normal",
+  Expired: "Expired",
 
   Search: "Search",
   Date: "Date",
