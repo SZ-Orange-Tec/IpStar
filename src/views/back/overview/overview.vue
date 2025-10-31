@@ -185,7 +185,9 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .tab {
-  overflow: auto;
+  @media screen and (max-width: 1024px) {
+    overflow-x: auto;
+  }
   .tab-item {
     min-width: 200px;
   }

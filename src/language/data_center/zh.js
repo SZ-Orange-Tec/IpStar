@@ -29,6 +29,7 @@ export default {
   Normal: "正常",
   Expired: "已过期",
   No_Data: "暂无数据",
+  Renewal: "续费",
 
   // billing 表格
   Order_Number: "订单号",

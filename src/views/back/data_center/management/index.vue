@@ -87,7 +87,11 @@
             </template>
           </el-table-column>
           <el-table-column prop="remark" :label="$t('Remark')" min-width="120"></el-table-column>
-          <el-table-column :label="$t('Action')" min-width="120"></el-table-column>
+          <el-table-column :label="$t('Action')" min-width="120">
+            <template #default="scope">
+              <ip-button v-if="scope.row.status === 1" :data-index="scope.$index" type="link" @click="renewal">{{ $t("Renewal") }}</ip-button>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
 
@@ -107,22 +111,27 @@
         </div>
       </div>
     </div>
+
+    <!-- 支付 控件 -->
+    <PayPopup ref="payPopupRef" v-model="isPayPopup" :order_data="order_data" />
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from "vue"
+import { computed, nextTick, onMounted, reactive, ref } from "vue"
 import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
 import { ChevronDown } from "lucide-vue-next"
 import { debounce } from "../../../../utils/tools"
-import { platCustomerStaticIps } from "@/api/product"
+import { platCustomerStaticIps, platCustomerOrdersRenewal } from "@/api/product"
 import IpTag from "@/components/tag/tag.vue"
 import Message from "@/components/message/message"
 import { platProductRegions } from "@/api/product"
 import settingStore from "../../../../store/setting"
+import position from "@/components/dialog/position"
+import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
 
 const { t } = useI18n()
 const { lang } = settingStore()
@@ -235,6 +244,46 @@ function handleCurrentChange(val) {
 function handleSizeChange(val) {
   size.value = val
   getTableData()
+}
+
+// 续费
+async function renewal(e) {
+  try {
+    const { index } = e.target.dataset
+    if (!index) return
+    position.set({ x: e.clientX, y: e.clientY })
+
+    const { id } = tableData.value[+index]
+    const { data } = await platCustomerOrdersRenewal({
+      id,
+    })
+
+    toPay(data)
+  } catch (error) {
+    console.log(error.message)
+    Message({
+      type: "warning",
+      message: "platCustomerStaticIps failed",
+    })
+  }
+}
+
+// 支付订单
+const isPayPopup = ref(false)
+const order_data = ref(null)
+const payPopupRef = ref(null)
+function toPay(data) {
+  order_data.value = {
+    order_usdt_price: data.order_usdt_price,
+    desc_3: "",
+    desc_4: data.product_name,
+    order_price: data.order_price,
+    order_no: data.order_no,
+  }
+  isPayPopup.value = true
+  nextTick(() => {
+    payPopupRef.value.toggleDetail(false)
+  })
 }
 
 onMounted(() => {

@@ -17,13 +17,6 @@ export function platResidentialUsage(params) {
     params,
   })
 }
-export function platUnlimitedBandWidthUsage(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
 export function platUnlimitedConcurrentUsage(params) {
   return request({
     url: "",
@@ -56,5 +49,14 @@ export function platCustomerStaticIps(params) {
     url: "/plat/customer/staticips",
     method: "get",
     params,
+  })
+}
+
+// IP续费
+export function platCustomerOrdersRenewal(data) {
+  return request({
+    url: "/plat/customer/orders/ip-renewal",
+    method: "post",
+    data,
   })
 }

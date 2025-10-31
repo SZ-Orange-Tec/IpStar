@@ -17,27 +17,28 @@
           </div>
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li
-              @click="navigate('/home')"
               class="h-full v_center pointer transition-color"
               :class="{ active: activePath === '/home' }"
               @mouseenter="toggleProductPop"
               @mouseleave="toggleProductPop"
             >
               <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
-                <div>{{ $t("Home") }}</div>
+                <div>{{ $t("Products") }}</div>
                 <ChevronDown :class="{ rotate180: open }" :size="18" />
               </div>
               <ProductPop v-model="productPopShow" />
             </li>
             <li
-              @click="navigate('/pricing')"
-              class="slider_bck slider_bck_center h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color"
               :class="{ active: activePath === '/pricing' }"
+              @mouseenter="togglePricePop"
+              @mouseleave="togglePricePop"
             >
-              <div class="v_center space-x-1">
+              <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Pricing") }}</div>
-                <div v-if="lowestPrice" class="tag text-xs rounded-full font-semibold">${{ lowestPrice }}/GB</div>
+                <ChevronDown :class="{ rotate180: open }" :size="18" />
               </div>
+              <PricePop v-model="pricePopShow" />
             </li>
             <li
               @click="navigate('/relation')"
@@ -187,6 +188,7 @@ import layoutStore from "@/store/layout"
 import { platDataConfig } from "@/api/home"
 import { defineAsyncComponent } from "vue"
 import ProductPop from "..//product_pop/product_pop.vue"
+import PricePop from "..//price_pop/price_pop.vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -280,6 +282,11 @@ function signOut() {
 const productPopShow = ref(false)
 function toggleProductPop() {
   productPopShow.value = !productPopShow.value
+}
+
+const pricePopShow = ref(false)
+function togglePricePop() {
+  pricePopShow.value = !pricePopShow.value
 }
 
 onMounted(() => {

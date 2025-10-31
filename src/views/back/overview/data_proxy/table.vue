@@ -59,7 +59,7 @@ async function getTableData() {
       page_index: page.value,
       page_size: size.value,
     })
-    count.value = count
+    total.value = count
     tableData.value = list
     loading.value = false
   } catch (error) {

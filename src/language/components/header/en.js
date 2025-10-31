@@ -1,5 +1,6 @@
 export default {
   Home: "Home",
+  Products: "Products",
   Pricing: "Pricing",
   Contact: "Contact",
   Help: "Help",
@@ -14,6 +15,7 @@ export default {
   Dashboard: "Dashboard",
 
   Proxy_Solutions: "Proxy Solutions",
+  Agent_Price: "Agent Price",
   Residential_Proxies: "Residential Proxies",
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
   Phone_Proxies: "Phone Proxies",
@@ -23,4 +25,12 @@ export default {
   Phone_Proxies_Adv: "Global pool of authentic mobile device IP addresses.",
   Data_Center_Proxies_Adv: "Secure data centre proxies provide dedicated IPs for stable and rapid connectivity.",
   perfect_for_All: "Perfect for AI",
+  Starting_from: "Starting from",
+  Popular: "Popular",
+
+  header_spac: {
+    unlimited: "Unlimited Data Transfer",
+    performance: "Dedicated High-Performance Data Centers",
+    native: "Native",
+  },
 }

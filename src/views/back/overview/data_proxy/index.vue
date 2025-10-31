@@ -24,7 +24,7 @@
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <strong class="text-lg font-semibold">{{ remain_num }} {{ remain_unit }}</strong>
+            <strong class="text-lg font-semibold">{{ ip_num }}</strong>
           </div>
           <div class="text-sm">
             <p class="grey-60">{{ t("Remaining") }} IPs</p>
@@ -35,7 +35,7 @@
         <div class="bg-yellow-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <strong class="text-lg font-semibold">{{ consume_num }} {{ consume_unit }}</strong>
+            <strong class="text-lg font-semibold">{{ expire_ip_num }}</strong>
           </div>
           <div class="between text-sm">
             <p class="grey-60">{{ t("Used") }} IPs</p>
@@ -67,40 +67,48 @@ const { t } = useI18n()
 const router = useRouter()
 
 // 获取流量数据
-const remain_num = ref(0)
-const remain_unit = ref("")
-const consume_num = ref(0)
-const consume_unit = ref("")
+const ip_num = ref(0)
+const expire_ip_num = ref(0)
+// const online_ip_unit = computed(() => {
+//   return !en.value ? "万" : " K"
+// })
+// watch(en, () => {
+//   nextTick(() => {
+//     numberAnimation(online, (charged) => {
+//       online_ip.value = Math.floor(charged)
+//     })
+//   })
+// })
 async function getTrafficData() {
   try {
-    const { data } = await platCustomerReportOverviewDataCenter()
-    const remain = +data.remain.split(" ")[0]
-    remain_unit.value = data.remain.split(" ")[1]
-    const consume = +data.consume.split(" ")[0]
-    used_unit.value = data.consume.split(" ")[1]
+    const { data } = await platCustomerReportOverview()
+    const ip = data.ip_num
+    const expire_ip = data.expire_ip_num
 
     nextTick(() => {
-      numberAnimation(remain_num, remain * 100)
-      numberAnimation(consume_num, consume * 100)
+      numberAnimation(ip, (charged) => {
+        ip_num.value = Math.floor(charged)
+      })
+      numberAnimation(expire_ip, (charged) => {
+        expire_ip_num.value = Math.floor(charged)
+      })
     })
   } catch (error) {
     console.log(error.message)
     Message({
       type: "warning",
-      message: "platCustomerReportOverviewDataCenter failed",
+      message: "platCustomerReportOverview failed",
     })
   }
 }
-function numberAnimation(data, target) {
+function numberAnimation(target, callback) {
   const ipObj = { charged: 0 }
   anime({
     targets: ipObj,
     charged: target,
     round: Math.floor(target / 10),
     easing: "linear",
-    update: function () {
-      data.value = roundToDecimal(ipObj.charged / 100)
-    },
+    update: () => callback(ipObj.charged),
   })
 }
 

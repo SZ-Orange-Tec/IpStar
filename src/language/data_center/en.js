@@ -30,6 +30,7 @@ export default {
   Normal: "Normal",
   Expired: "Expired",
   No_Data: "No Data",
+  Renewal: "Renewal",
 
   Order_Number: "Order Number",
   Product_Name: "Product Name",

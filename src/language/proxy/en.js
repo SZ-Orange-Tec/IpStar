@@ -8,6 +8,9 @@ export default {
   API_Auth: "API",
   Options: "Options",
   Starting_from: "Starting from ",
+  Residual_Traffic: "Residual Traffic",
+  Expiration_time: "Expiration Time",
+  Remaining: "Remaining",
 
   Country: "Country",
   Protocol: "Protocol",

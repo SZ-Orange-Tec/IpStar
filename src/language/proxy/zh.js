@@ -8,6 +8,9 @@ export default {
   API_Auth: "API提取",
   Options: "筛选项",
   Starting_from: "低至：",
+  Residual_Traffic: "剩余流量",
+  Expiration_time: "过期时间",
+  Remaining: "剩余",
 
   Country: "国家",
   Protocol: "协议",

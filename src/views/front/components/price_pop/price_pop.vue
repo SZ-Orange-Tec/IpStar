@@ -2,7 +2,7 @@
   <div v-if="show">
     <div class="product_pop" ref="container" :style="{ width: width }">
       <div class="main black">
-        <div class="grey-40 font-medium">{{ t("Proxy_Solutions") }}</div>
+        <div class="grey-40 font-medium">{{ t("Agent_Price") }}</div>
         <div class="split w-full"></div>
         <div class="w-full">
           <ul class="grid grid-cols-2 gap-5">
@@ -10,46 +10,68 @@
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <ResidentialProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
-                <div class="v_center space-x-2">
+              <div class="flex-1 min-w-0">
+                <div class="column space-y-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Residential_Proxies") }}</strong>
-                  <ip-tag type="success rounded-full font-medium">90M+Ips</ip-tag>
+                  <ip-tag type="major" class="rounded-full font-normal">{{ t("Popular") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Residential_Proxies_Adv") }}</p>
+              </div>
+              <div class="right column_center">
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
               </div>
             </li>
             <li class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <PhoneProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
-                <div class="">
+              <div class="flex-1 min-w-0">
+                <div class="column space-y-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Phone_Proxies") }}</strong>
+                  <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.native") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Phone_Proxies_Adv") }}</p>
+              </div>
+              <div class="right column_center">
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                </div>
               </div>
             </li>
             <li class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
-                <div class="v_center space-x-2">
+              <div class="flex-1 min-w-0">
+                <div class="column space-y-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Unlimited_Residential_Proxies") }}</strong>
-                  <ip-tag type="success rounded-full font-medium">{{ t("perfect_for_All") }}</ip-tag>
+                  <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.unlimited") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Unlimited_Residential_Proxies_Adv") }}</p>
+              </div>
+              <div class="right column_center">
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /GB
+                </div>
               </div>
             </li>
             <li class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <DataProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
-                <div class="">
+              <div class="flex-1 min-w-0">
+                <div class="column space-y-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Data_Center_Proxies") }}</strong>
+                  <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.performance") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Data_Center_Proxies_Adv") }}</p>
+              </div>
+              <div class="right column_center">
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /GB
+                </div>
               </div>
             </li>
           </ul>
@@ -72,6 +94,7 @@ import IpTag from "@/components/tag/tag.vue"
 import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { nextTick, onMounted, ref, toRefs, watch } from "vue"
+import { platProductLowestPrices } from "@/api/product"
 
 const { t } = useI18n()
 
@@ -151,7 +174,30 @@ function open() {
   })
 }
 
+// 最低价格
+const lowestPrice = ref({
+  residential: "0.00",
+  unlimited: "0.00",
+  phone: "0.00",
+  data_center: "0.00",
+})
+async function getLowestPrice() {
+  try {
+    const { data } = await platProductLowestPrices()
+    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const target = {}
+    data.forEach(({ prd_type, unit_price }) => {
+      const key = keys[prd_type]
+      target[key] = unit_price / 100
+    })
+    lowestPrice.value = target
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
 onMounted(() => {
+  getLowestPrice()
   if (modelValue.value) {
     show.value = true
     computeWidth()
@@ -205,6 +251,8 @@ onMounted(() => {
     }
     .grid {
       margin: 0 -12px;
+      row-gap: 24px;
+      column-gap: 36px;
       & > li {
         width: 100%;
         height: 100%;
@@ -218,6 +266,10 @@ onMounted(() => {
         //   overflow: hidden;
         //   text-overflow: ellipsis;
         // }
+        .right {
+          padding-left: 20px;
+          border-left: 1px solid hsl(var(--border));
+        }
         &:hover {
           background-color: hsl(var(--primary) / 8%);
           .iconbox {

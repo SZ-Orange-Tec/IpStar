@@ -39,6 +39,10 @@ const { type, size } = toRefs(props)
   background-color: hsl(var(--success) / 10%);
   color: hsl(var(--success));
 }
+.major {
+  background-color: hsl(var(--major) / 10%);
+  color: hsl(var(--major));
+}
 .warn {
   background-color: hsl(var(--warn) / 10%);
   color: hsl(var(--warn));

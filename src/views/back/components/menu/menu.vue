@@ -133,13 +133,13 @@ function getSlideList() {
     {
       icon: HelpIcon,
       name: t("menu_spec.help"),
-      path: "/help",
+      path: "/doc",
       isShow: true,
     },
     {
       icon: QuestionIcon,
       name: t("menu_spec.question"),
-      path: "/question",
+      path: "/help",
       isShow: true,
     },
   ]
