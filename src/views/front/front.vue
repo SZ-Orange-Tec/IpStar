@@ -1,8 +1,6 @@
 <template>
   <div class="front">
-    <div class="home_bg w-full" :style="{ height: height }">
-      <HomeBg class="w-full h-full" />
-    </div>
+    <HomeBg class="home_bg w-full" v-if="homeHeight" :height="homeHeight" />
 
     <Header />
 
@@ -15,16 +13,16 @@
 <script setup>
 import Header from "./components/header/header.vue"
 import Footer from "./components/footer/footer.vue"
-import { onMounted, provide, reactive } from "vue"
+import { onMounted, provide, reactive, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
 import layoutStore from "../../store/layout"
 import HomeBg from "./components/homeBg.vue"
-import useWindowHeight from "@/composables/useWindowHeight"
 
 const { setLowestPrice } = layoutStore()
 
-const { height } = useWindowHeight()
+const homeHeight = ref(0)
+provide("homeHeight", homeHeight)
 
 // 预加载
 function loadLogin() {

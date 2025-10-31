@@ -1,11 +1,25 @@
 <template>
-  <div class="home_bg relative">
-    <canvas class="w-full h-full" ref="canvasRef"></canvas>
+  <div class="home_bg relative" :style="{ height: height + 'px' }">
+    <div class="bg1 w-full h-full relative">
+      <div class="bg1-child bg1-child1"></div>
+      <div class="bg1-child bg1-child2"></div>
+      <div class="bg1-child bg1-child3"></div>
+    </div>
+    <div class="bg2 w-full h-full">
+      <canvas class="w-full h-full" ref="canvasRef"></canvas>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue"
+
+const props = defineProps({
+  height: {
+    type: Number,
+    default: 0,
+  },
+})
 
 // 网格参数
 const gridSize = 60 // 网格大小
@@ -22,7 +36,7 @@ function initCanvas() {
   canvas = canvasRef.value
   ctx = canvas.getContext("2d")
   canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+  canvas.height = props.height
 }
 
 // 初始化穿梭线
@@ -197,11 +211,31 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .home_bg {
-  .grid,
-  .line {
+  mask-image: radial-gradient(circle at center, #fff 0%, #fff 45%, transparent 90%);
+  mask-size: cover;
+  .bg1,
+  .bg2 {
     position: absolute;
     top: 0;
     left: 0;
+  }
+  .bg1-child {
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    top: 150px;
+    // background-color: rgb(211 251 231 /1);
+    // background-color: hsl(var(--primary) / 0.1);
+    filter: blur(150px);
+  }
+  .bg1-child1 {
+    left: 0;
+  }
+  .bg1-child2 {
+    left: 50%;
+  }
+  .bg1-child3 {
+    right: 0;
   }
 }
 </style>

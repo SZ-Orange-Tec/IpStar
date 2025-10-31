@@ -1,7 +1,7 @@
 <template>
   <div class="home w-full">
     <!-- 介绍 -->
-    <div class="introduce box relative">
+    <div class="introduce box relative" ref="introRef">
       <div class="container column space-y-10">
         <div class="space-y-4 md:space-y-7" style="max-width: 700px">
           <div class="space-y-1 md:space-y-4">
@@ -353,7 +353,7 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent, nextTick, computed } from "vue"
+import { ref, defineAsyncComponent, nextTick, computed, inject, onMounted } from "vue"
 import { platDataIndex } from "@/api/home"
 import settingStore from "@/store/setting"
 import loginStore from "@/store/login"
@@ -373,6 +373,16 @@ import position from "../../../components/dialog/position"
 import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 // import HomeTitle from "../components/homeTitle.vue"
 import layoutStore from "@/store/layout"
+
+// 首页canvas高度
+const homeHeight = inject("homeHeight")
+const introRef = ref()
+function setHomeHeight() {
+  if (!introRef.value) return
+  const bottom = introRef.value.getBoundingClientRect().bottom
+  const top = document.body.getBoundingClientRect().top
+  homeHeight.value = bottom - top + 60
+}
 
 const router = useRouter()
 const { t } = useI18n()
@@ -605,11 +615,9 @@ function giftPacks(e) {
 }
 
 // 转换mounted
-// onMounted(() => {
-// scroll()
-// getDataConfig()
-// IpMap()
-// })
+onMounted(() => {
+  setHomeHeight()
+})
 </script>
 
 <style lang="less" scoped>
