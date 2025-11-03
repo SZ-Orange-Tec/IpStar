@@ -108,7 +108,7 @@
     </div>
 
     <!-- 覆盖多种应用场景 -->
-    <div class="box auto">
+    <div class="box auto" ref="scenceRef">
       <div class="container">
         <div class="space-y-5 w-full" v-lazy="showSlow">
           <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("home_spec.cases_title") }}</h3>
@@ -216,20 +216,103 @@
             </li>
           </ul>
         </div>
-
-        <div class="w-full pack_title column_center space-y-5" v-lazy="showSlow">
-          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
-
-          <p class="description green">{{ t("home_spec.package_desc") }}</p>
-        </div>
       </div>
     </div>
 
-    <!-- package -->
-    <div class="package box">
-      <div class="container" v-lazy="showSlow">
-        <div class="packlist" v-lazy="() => (isProduct = true)">
-          <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
+    <!-- 代理 -->
+    <div class="box proxy" v-lazy="getLowestPrice">
+      <div class="container">
+        <div class="space-y-5">
+          <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
+            {{ t("home_spec.proxy_title") }}
+          </p>
+          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.proxy_desc") }}</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.residential_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('residential')" type="primary_border" class="h-9 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('unlimited')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <PhoneProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('mobile')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <DataProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('data_center')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3 column" style="grid-column-start: 2; grid-column-end: 4">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Customised_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.customer_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm"><span class="text-xl font-medium">$ ?</span> /GB</div>
+              </div>
+              <IpButton @click="openService" type="primary_border" class="h-8 px-4 text-sm">{{ t("Contact_Us") }}</IpButton>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -312,6 +395,14 @@ import position from "../../../components/dialog/position"
 // import HomeTitle from "../components/homeTitle.vue"
 import Question from "../components/question/question.vue"
 import layoutStore from "../../../store/layout"
+import { platProductLowestPrices } from "@/api/product"
+import {
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
+  ChevronLeft,
+} from "lucide-vue-next"
 
 const router = useRouter()
 const route = useRoute()
@@ -321,15 +412,16 @@ const { isLogin, token } = loginStore()
 const { registerAward } = layoutStore()
 
 // 路由参数
-const nameReg = /general|efficient|data_collection|search_engine|social_media|ecommerce|market|bill|brand|ai_model/
+const nameReg =
+  /general|efficient|data_collection|search_engine|social_media|ecommerce|market|bill|brand|ai_model|residential|unlimited|mobile|data_center/
 const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "general"))
 
 const tag = computed(() => {
-  return secondName.value === "efficient"
+  return /efficient|mobile|data_center/.test(secondName.value)
     ? [[1, 2, 3]]
     : secondName.value === "data_collection"
     ? [[1, 2]]
-    : secondName.value === "general"
+    : /general|residential/.test(secondName.value)
     ? [
         [1, 2, 3],
         [4, 5, 6],
@@ -339,10 +431,6 @@ const tag = computed(() => {
         [3, 4],
       ]
 })
-
-// 异步组件
-const isProduct = ref(false) // 是否加载product
-const ProductList = defineAsyncComponent(() => import("../components/product_list/product_list.vue"))
 
 // 转换data为ref
 const astrict = ref({
@@ -464,12 +552,24 @@ function toHomeSecond(name) {
     },
   })
 }
+function toPriceSecond(name) {
+  router.push({
+    name: "pricing",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+function openService() {
+  // window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:open"])
+}
 
 // 累计用户
 // const totalUser = ref(-1)
 const partner = ref(-1)
 const onlineIps = ref(-1)
-const lowestPrice = ref(0.25)
 async function getUserIps() {
   try {
     const result = homeData ?? (await platDataIndex())
@@ -478,7 +578,6 @@ async function getUserIps() {
 
     partner.value = 0
     onlineIps.value = 0
-    lowestPrice.value = data.lowest_price ? data.lowest_price / 100 : 0.25
     // 逐渐递增动画
     nextTick(() => {
       const ipObj = { charged: 0 }
@@ -602,8 +701,46 @@ function scroll() {
   fn()
 }
 
+// 最低价格
+const lowestPrice = ref({
+  residential: "0.00",
+  unlimited: "0.00",
+  phone: "0.00",
+  data_center: "0.00",
+})
+async function getLowestPrice() {
+  try {
+    const { data } = await platProductLowestPrices()
+    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const target = {}
+    data.forEach(({ prd_type, unit_price }) => {
+      const key = keys[prd_type]
+      target[key] = unit_price / 100
+    })
+    lowestPrice.value = target
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+// 滚动
+const scenceRef = ref()
+function scrollToScence() {
+  const top = scenceRef.value.getBoundingClientRect().top
+  console.log(top)
+  window.scrollBy({
+    top: top,
+    behavior: "smooth",
+  })
+}
+
 onMounted(() => {
   IpMap()
+  if (/#scence/.test(window.location.href)) {
+    setTimeout(() => {
+      scrollToScence()
+    }, 300)
+  }
 })
 // 转换mounted
 // onMounted(() => {

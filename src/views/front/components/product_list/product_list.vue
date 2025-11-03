@@ -1,7 +1,7 @@
 <template>
   <div class="pc-product_list">
     <!-- tabbar 个人 企业 -->
-    <Tabbar @select="changeActive" v-if="tabbar"></Tabbar>
+    <Tabbar @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
 
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
@@ -307,7 +307,7 @@ import loginStore from "@/store/login"
 import { CircleCheck } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import Tabbar from "./tabbar/tabbar.vue"
-import { ref, computed, onMounted, onBeforeUnmount, nextTick, defineAsyncComponent, provide, toRef, toRefs } from "vue"
+import { ref, computed, onMounted, onBeforeUnmount, nextTick, defineAsyncComponent, provide, toRef, toRefs, watch } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
@@ -334,6 +334,7 @@ const props = defineProps({
     default: true,
   },
 })
+const { type } = toRefs(props)
 
 // 是否显示赠送gift
 const { isLogin } = loginStore()
@@ -343,6 +344,13 @@ const showGift = computed(() => !isLogin.value && registerAward.value)
 const router = useRouter()
 
 const { t } = useI18n()
+
+// 最低价格
+const { lowestPrice, getLowestPrice } = layoutStore()
+const keys = ["residential", "unlimited", "phone", "data_center"]
+const lowest = computed(() => {
+  return lowestPrice.value[keys[type.value]]
+})
 
 // 产品相关
 const loading = ref(false)
@@ -558,6 +566,7 @@ function scrollPluginValue(op) {
 
 const initScrollTag = debounce(function () {
   const dom = productRef.value
+  if (!dom) return
   const width = dom.clientWidth
   const scrollWidth = dom.scrollWidth
   const scrollLeft = dom.scrollLeft
@@ -669,10 +678,24 @@ function getTitleDesc(type) {
   return desc
 }
 
+watch(
+  type,
+  (newVal, oldVal) => {
+    if (typeof oldVal === "number") {
+      product_list.value = []
+    }
+    nextTick(() => {
+      GetProductList()
+    })
+  },
+  {
+    immediate: true,
+  }
+)
 onMounted(() => {
   getRegions()
   getDataConfig()
-  GetProductList()
+  // GetProductList()
   window.addEventListener("resize", initScrollTag)
 })
 

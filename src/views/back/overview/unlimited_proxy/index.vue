@@ -140,7 +140,7 @@ onActivated(() => {
 })
 
 onMounted(() => {
-  getData()
+  // getData()
 })
 </script>
 

@@ -85,6 +85,103 @@
       </div>
     </div>
 
+    <div class="box proxy overflow-hidden" v-lazy="getLowestPrice">
+      <div class="container">
+        <div class="space-y-5">
+          <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
+            {{ t("home_spec.proxy_title") }}
+          </p>
+          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.proxy_desc") }}</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.residential_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('residential')" type="primary_border" class="h-9 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('unlimited')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <PhoneProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('mobile')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <DataProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                </div>
+              </div>
+              <IpButton @click="toPriceSecond('data_center')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
+            </div>
+          </div>
+          <div class="grid-item p-5 rounded-md column space-y-3 column" style="grid-column-start: 2; grid-column-end: 4">
+            <div class="iconbox rounded-lg vh_center shrink-0">
+              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
+            </div>
+            <strong class="font-medium">{{ t("Customised_Proxies") }}</strong>
+            <p class="text-sm grey-60">{{ t("home_spec.customer_des") }}</p>
+
+            <div class="between w-full" style="margin-top: auto">
+              <div>
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm"><span class="text-xl font-medium">$ ?</span> /GB</div>
+              </div>
+              <IpButton @click="openService" type="primary_border" class="h-8 px-4 text-sm">{{ t("Contact_Us") }}</IpButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 为什么选择 -->
     <div class="box why_choose">
       <div class="container column_center" v-lazy="showSlow">
@@ -302,7 +399,7 @@
     </div>
 
     <!-- app -->
-    <div class="app box">
+    <div class="app box" v-lazy="() => (isProduct = true)">
       <div class="container column_center">
         <div class="space-y-5">
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
@@ -326,7 +423,7 @@
     <!-- package -->
     <div class="package box" id="home_package">
       <div class="container" v-lazy="showSlow">
-        <div v-lazy="() => (isProduct = true)">
+        <div>
           <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
         </div>
       </div>
@@ -341,11 +438,11 @@
               <span>{{ t("Now") }}</span>
               <img v-lazy src="@/assets/images/home/magic.png" alt="" />
             </p>
-            <p>{{ t("footer_spec.explore") }}</p>
+            <p>{{ t("home_spec.explore") }}</p>
           </div>
-          <p class="text-sm text-center description" v-html="t('footer_spec.description')"></p>
+          <p class="text-sm text-center description" v-html="t('home_spec.explore_desc')"></p>
 
-          <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("footer_spec.get_it_now") }}</IpButton>
+          <IpButton type="major" circle class="px-10 h-10 text-sm" @click="goToPay">{{ t("Get_Now") }}</IpButton>
         </div>
       </div>
     </div>
@@ -373,6 +470,14 @@ import position from "../../../components/dialog/position"
 import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 // import HomeTitle from "../components/homeTitle.vue"
 import layoutStore from "@/store/layout"
+import { platProductLowestPrices } from "@/api/product"
+import {
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
+  ChevronLeft,
+} from "lucide-vue-next"
 
 // 首页canvas高度
 const homeHeight = inject("homeHeight")
@@ -409,6 +514,9 @@ const ipsCountVal = ref(null)
 const countryCount = ref(null)
 const direction = ref("右")
 const merchantTime = ref(null)
+
+// 最低价格
+const { lowestPrice, getLowestPrice } = layoutStore()
 
 // 转换methods
 
@@ -483,7 +591,6 @@ function loadHoverImg() {
 // const totalUser = ref(-1)
 const partner = ref(-1)
 const onlineIps = ref(-1)
-const lowestPrice = ref(0.25)
 async function getUserIps() {
   try {
     const result = homeData ?? (await platDataIndex())
@@ -492,7 +599,6 @@ async function getUserIps() {
 
     partner.value = 0
     onlineIps.value = 0
-    lowestPrice.value = data.lowest_price ? data.lowest_price / 100 : 0.25
     // 逐渐递增动画
     nextTick(() => {
       const ipObj = { charged: 0 }
@@ -544,6 +650,19 @@ function toHomeSecond(name) {
       name: name,
     },
   })
+}
+function toPriceSecond(name) {
+  router.push({
+    name: "pricing",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+function openService() {
+  // window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:open"])
 }
 
 function merchantScroll() {

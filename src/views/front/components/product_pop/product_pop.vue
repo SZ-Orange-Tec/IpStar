@@ -1,55 +1,55 @@
 <template>
   <div v-if="show">
-    <div class="product_pop" ref="container" :style="{ width: width }">
-      <div class="main black">
+    <div class="product_pop" ref="container">
+      <div class="main black rounded-lg">
         <div class="grey-40 font-medium">{{ t("Proxy_Solutions") }}</div>
         <div class="split w-full"></div>
         <div class="w-full">
-          <ul class="grid grid-cols-2 gap-5">
-            <li class="v_center space-x-3 pointer rounded">
+          <ul class="grid grid-cols-2 gap-4">
+            <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('residential')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <ResidentialProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
+              <div class="space-y-1 flex-1 min-w-0">
                 <div class="v_center space-x-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Residential_Proxies") }}</strong>
                   <ip-tag type="success rounded-full font-medium">90M+Ips</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Residential_Proxies_Adv") }}</p>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Residential_Proxies_Adv") }}</p>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('mobile')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <PhoneProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
+              <div class="space-y-1 flex-1 min-w-0">
                 <div class="">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Phone_Proxies") }}</strong>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Phone_Proxies_Adv") }}</p>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Phone_Proxies_Adv") }}</p>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('unlimited')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
+              <div class="space-y-1 flex-1 min-w-0">
                 <div class="v_center space-x-2">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Unlimited_Residential_Proxies") }}</strong>
                   <ip-tag type="success rounded-full font-medium">{{ t("perfect_for_All") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Unlimited_Residential_Proxies_Adv") }}</p>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Unlimited_Residential_Proxies_Adv") }}</p>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('data_center')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <DataProxyIcon class="w-6 h-6 text-primary" />
               </div>
-              <div class="space-y-1">
+              <div class="space-y-1 flex-1 min-w-0">
                 <div class="">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Data_Center_Proxies") }}</strong>
                 </div>
-                <p class="grey-80 text-sm">{{ t("Data_Center_Proxies_Adv") }}</p>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Data_Center_Proxies_Adv") }}</p>
               </div>
             </li>
           </ul>
@@ -72,8 +72,10 @@ import IpTag from "@/components/tag/tag.vue"
 import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { nextTick, onMounted, ref, toRefs, watch } from "vue"
+import { useRouter } from "vue-router"
 
 const { t } = useI18n()
+const router = useRouter()
 
 const show = ref(false)
 
@@ -106,7 +108,6 @@ function computeWidth() {
   const app = document.getElementById("app")
   width.value = app.clientWidth + "px"
 }
-
 function close() {
   const target = container.value
 
@@ -151,6 +152,17 @@ function open() {
   })
 }
 
+// 跳转二级页面
+function toHomeSecond(name) {
+  router.push({
+    name: "introduce",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+
 onMounted(() => {
   if (modelValue.value) {
     show.value = true
@@ -185,21 +197,23 @@ onMounted(() => {
 }
 .product_pop {
   box-sizing: border-box;
-  padding: 20px 40px 60px;
+  padding-top: 10px;
   // width: 100vw;
   position: absolute;
   // top: 100%;
-  left: 0;
+  left: -40px;
   top: 100%;
-  box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
-  transform-origin: center center;
-  background-color: hsl(var(--background));
-  border-bottom: 1px solid hsl(var(--border));
   .main {
-    max-width: 1200px;
+    padding: 20px 40px 40px;
+    box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
+    transform-origin: center center;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+    // max-width: 1200px;
+    width: 820px;
     margin: 0 auto;
     .split {
-      margin: 10px 0 30px;
+      margin: 10px 0 20px;
       height: 1px;
       background-color: hsl(var(--border));
     }

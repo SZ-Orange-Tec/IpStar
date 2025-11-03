@@ -1,17 +1,17 @@
 <template>
   <div v-if="show">
-    <div class="product_pop" ref="container" :style="{ width: width }">
-      <div class="main black">
+    <div class="product_pop" ref="container">
+      <div class="main black rounded-lg">
         <div class="grey-40 font-medium">{{ t("Agent_Price") }}</div>
         <div class="split w-full"></div>
         <div class="w-full">
           <ul class="grid grid-cols-2 gap-5">
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('residential')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <ResidentialProxyIcon class="w-6 h-6 text-primary" />
               </div>
               <div class="flex-1 min-w-0">
-                <div class="column space-y-2">
+                <div class="column space-y-1">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Residential_Proxies") }}</strong>
                   <ip-tag type="major" class="rounded-full font-normal">{{ t("Popular") }}</ip-tag>
                 </div>
@@ -23,12 +23,12 @@
                 </div>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('mobile')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <PhoneProxyIcon class="w-6 h-6 text-primary" />
               </div>
               <div class="flex-1 min-w-0">
-                <div class="column space-y-2">
+                <div class="column space-y-1">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Phone_Proxies") }}</strong>
                   <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.native") }}</ip-tag>
                 </div>
@@ -40,12 +40,12 @@
                 </div>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('unlimited')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
               </div>
               <div class="flex-1 min-w-0">
-                <div class="column space-y-2">
+                <div class="column space-y-1">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Unlimited_Residential_Proxies") }}</strong>
                   <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.unlimited") }}</ip-tag>
                 </div>
@@ -57,12 +57,12 @@
                 </div>
               </div>
             </li>
-            <li class="v_center space-x-3 pointer rounded">
+            <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('data_center')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <DataProxyIcon class="w-6 h-6 text-primary" />
               </div>
               <div class="flex-1 min-w-0">
-                <div class="column space-y-2">
+                <div class="column space-y-1">
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Data_Center_Proxies") }}</strong>
                   <ip-tag type="success" class="rounded-full font-normal">{{ t("header_spac.performance") }}</ip-tag>
                 </div>
@@ -95,6 +95,7 @@ import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { nextTick, onMounted, ref, toRefs, watch } from "vue"
 import { platProductLowestPrices } from "@/api/product"
+import { useRouter } from "vue-router"
 
 const { t } = useI18n()
 
@@ -196,6 +197,18 @@ async function getLowestPrice() {
   }
 }
 
+// 跳转
+const router = useRouter()
+function toPriceSecond(name) {
+  router.push({
+    name: "pricing",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+
 onMounted(() => {
   getLowestPrice()
   if (modelValue.value) {
@@ -231,28 +244,27 @@ onMounted(() => {
 }
 .product_pop {
   box-sizing: border-box;
-  padding: 20px 40px 60px;
   // width: 100vw;
   position: absolute;
   // top: 100%;
-  left: 0;
+  padding-top: 10px;
+  left: -40px;
   top: 100%;
-  box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
-  transform-origin: center center;
-  background-color: hsl(var(--background));
-  border-bottom: 1px solid hsl(var(--border));
   .main {
-    max-width: 1200px;
+    padding: 20px 40px 40px;
+    width: 820px;
     margin: 0 auto;
+    box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
+    transform-origin: center center;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
     .split {
-      margin: 10px 0 30px;
+      margin: 10px 0 20px;
       height: 1px;
       background-color: hsl(var(--border));
     }
     .grid {
-      margin: 0 -12px;
-      row-gap: 24px;
-      column-gap: 36px;
+      // column-gap: 25px;
       & > li {
         width: 100%;
         height: 100%;

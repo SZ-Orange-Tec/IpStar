@@ -7,7 +7,7 @@
       <div class="h-full px-5 vh_center pointer" :class="{ active: active === 1 }" @click="select(1)">
         <div class="v_center space-x-1">
           <span class="white-nowrap">{{ $t("Enterprise") }}</span>
-          <div v-if="lowestPrice" class="tag text-xs rounded-full font-semibold">${{ lowestPrice }}/GB</div>
+          <div v-if="lowest" class="tag text-xs rounded-full font-semibold">${{ lowest }}/GB</div>
         </div>
       </div>
     </div>
@@ -22,10 +22,16 @@
 </template>
 
 <script setup>
-import { computed, inject, ref } from "vue"
+import { computed, inject, ref, toRefs } from "vue"
 
-const homeData = inject("homeData", {})
-const lowestPrice = computed(() => (homeData?.lowestPrice ?? 0) / 100)
+const props = defineProps({
+  lowest: {
+    type: Number || String,
+    default: 0,
+  },
+})
+
+const { lowest } = toRefs(props)
 
 const emit = defineEmits(["select"])
 const active = ref(0)

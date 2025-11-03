@@ -16,10 +16,7 @@ import Footer from "./components/footer/footer.vue"
 import { onMounted, provide, reactive, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
-import layoutStore from "../../store/layout"
 import HomeBg from "./components/homeBg.vue"
-
-const { setLowestPrice } = layoutStore()
 
 const homeHeight = ref(0)
 provide("homeHeight", homeHeight)
@@ -56,13 +53,10 @@ async function getHomeData() {
     homeData.onlineIp = onlineIp
     homeData.ipsCount = ipsCount
     homeData.countrys = countrys
-
-    setLowestPrice(lowestPrice)
   } catch (error) {
     console.log(error.message)
   }
 }
-provide("homeData", homeData)
 getHomeData()
 
 onMounted(() => {

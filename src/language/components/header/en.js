@@ -30,7 +30,7 @@ export default {
 
   header_spac: {
     unlimited: "Unlimited Data Transfer",
-    performance: "Dedicated High-Performance Data Centers",
+    performance: "High-Performance",
     native: "Native",
   },
 }

@@ -8,16 +8,16 @@
           <div class="header column_center">
             <div class="column_center space-y-3">
               <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">
-                {{ t("pricing_spec.title") }}
+                {{ t(`pricing_spec.${secondName}.title`) }}
               </p>
-              <p class="text-lg">{{ t("pricing_spec.des") }}</p>
+              <p class="text-lg">{{ t(`pricing_spec.${secondName}.des`) }}</p>
             </div>
 
             <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>
           </div>
 
           <div class="product w-full relative">
-            <ProductList :tabbar="false" :pack="pack" ref="product"></ProductList>
+            <ProductList :type="type" :tabbar="false" :pack="pack" ref="product"></ProductList>
           </div>
         </div>
       </div>
@@ -187,7 +187,7 @@
 <script setup>
 import { platDataIndex } from "@/api/home"
 import { computed, defineAsyncComponent, nextTick, onMounted, ref } from "vue"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import loginStore from "@/store/login"
 import ProductList from "../components/product_list/product_list.vue"
@@ -201,6 +201,25 @@ import Tabbar from "../components/product_list/tabbar/tabbar.vue"
 import Question from "../components/question/question.vue"
 import { CircleCheck } from "lucide-vue-next"
 import layoutStore from "../../../store/layout"
+
+// 路由参数
+const route = useRoute()
+const nameReg = /residential|unlimited|mobile|data_center/
+const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "residential"))
+const type = computed(() => {
+  switch (secondName.value) {
+    case "residential":
+      return 0
+    case "unlimited":
+      return 1
+    case "mobile":
+      return 2
+    case "data_center":
+      return 3
+    default:
+      return 0
+  }
+})
 
 // 代码
 const active = ref("go")

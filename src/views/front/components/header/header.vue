@@ -5,7 +5,7 @@
     <header class="header" :class="{ home_header: isHome }">
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
-          <div>
+          <div class="pointer" @click="navigate('/home')">
             <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
             <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" />
             <!-- <img
@@ -17,26 +17,26 @@
           </div>
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li
-              class="h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/home' }"
               @mouseenter="toggleProductPop"
               @mouseleave="toggleProductPop"
             >
               <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Products") }}</div>
-                <ChevronDown :class="{ rotate180: open }" :size="18" />
+                <ChevronDown :class="{ rotate180: productPopShow }" :size="18" />
               </div>
               <ProductPop v-model="productPopShow" />
             </li>
             <li
-              class="h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/pricing' }"
               @mouseenter="togglePricePop"
               @mouseleave="togglePricePop"
             >
               <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Pricing") }}</div>
-                <ChevronDown :class="{ rotate180: open }" :size="18" />
+                <ChevronDown :class="{ rotate180: pricePopShow }" :size="18" />
               </div>
               <PricePop v-model="pricePopShow" />
             </li>

@@ -85,7 +85,7 @@ const activeComponent = computed(() => {
     height: 44px;
   }
   .tab-item + .tab-item {
-    margin-left: 24px;
+    margin-left: 36px;
   }
 }
 </style>

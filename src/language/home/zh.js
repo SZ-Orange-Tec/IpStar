@@ -13,6 +13,17 @@ export default {
   Learn_More: "了解更多",
   Free_Trial: "开始免费试用",
 
+  Residential_Proxies: "住宅代理",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
+  Phone_Proxies: "移动手机代理",
+  Data_Center_Proxies: "静态数据中心代理",
+  Customised_Proxies: "定制代理",
+  Starting_from: "低至：",
+  Get_Now: "立即获取",
+  Contact_Us: "联系我们",
+  Now: "现在",
+  Get_Now: "立即获取",
+
   home_spec: {
     intro_title1: "高质量IP代理，大数据业务引擎",
     intro_title2: "纯净、安全、稳定，您的首选全球数据业务伙伴",
@@ -38,6 +49,14 @@ export default {
     adv2: "所有流行的代理软件。",
     adv3: "支持指纹浏览器。",
     adv4: "支持API和账密提取。",
+
+    proxy_title: "满足各类需求的代理服务",
+    proxy_desc: "使用易于操作、高质量且经济实惠的代理IP基础设施开启您的旅程。",
+    residential_des: "高稳定性的全球网络，可用率达99.7%。流量不过期，按需付费，为您的跨区域业务提供可靠连接。",
+    unlimited_des: "200+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
+    phone_des: "全球真实移动设备IP资源池，4G/5G网络原生出口，保障业务高稳定性与高可用性，支持公开数据分析与多元化业务需求。",
+    data_center_des: "高性价比的数据中心IP网络。提供充足带宽与稳定低延退连接，助力企业实现商业洞察、应用测试与性能监控。",
+    customer_des: "我们提供精准匹配多样化需求的IP解决方案，并配备强大的技术支持团队，7x24小时响应，保障业务稳定运行。",
 
     why: "为什么选择",
     why1_title: "海量资源",
@@ -89,6 +108,9 @@ export default {
     ad_tech: "广告技术",
     serp_seo: "SERP & SEO",
     finance: "金融",
+
+    explore: "探索 IpStar 服务",
+    explore_desc: "电子商务、网络、大数据、人工智能， IpStar助您快速发展",
 
     package_title: "选择适合您需求的套餐",
     package_desc: "IpStar为您提供多种灵活实用的套餐",

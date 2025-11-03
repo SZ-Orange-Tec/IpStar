@@ -212,11 +212,40 @@
     }
   }
 
-  .package{
-    background-color: hsl(var(--primary));
+  .proxy{
+    background-color: hsl(var(--background));
+    
+    // background: linear-gradient(to bottom, transparent, #fff);
     .container{
-      padding: 4rem 0;
-      min-height: 400px;
+      position: relative;
+
+      
+
+      .grid{
+        margin-top: 64px;
+        .grid-item{
+          background-color: hsl(var(--primary) / 5%);
+          &>.iconbox {
+            width: 40px;
+            height: 40px;
+            background-color: hsl(var(--primary) / 10%);
+            position: relative;
+            transition: background-color 0.3s ease-in-out;
+            &::after {
+              content: "";
+              display: block;
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              transform: translate(-50%, -50%);
+              width: 12px;
+              height: 12px;
+              background-color: hsl(var(--primary) / 20%);
+              border-radius: 50%;
+            }
+          }
+        }
+      }
     }
   }
 

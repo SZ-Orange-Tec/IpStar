@@ -13,6 +13,17 @@ export default {
   Learn_More: "Learn More",
   Free_Trial: "Free Trial",
 
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Customised_Proxies: "Customised Proxies",
+  Starting_from: "Starting_from ",
+  Get_Now: "Get Now",
+  Contact_Us: "Contact Us",
+  Now: "Now",
+  Get_Now: "Get Now",
+
   home_spec: {
     intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
     intro_title2: "",
@@ -40,6 +51,14 @@ export default {
     adv2: "195+Countries Locations",
     adv3: "All major proxy software.",
     adv4: "For API and credential retrieval.",
+
+    proxy_title: "Proxy Types",
+    proxy_desc: "We offer a variety of proxy types to meet your specific needs.",
+    residential_des: "Residential proxies provide real IP addresses from residential locations, ensuring anonymity and privacy.",
+    unlimited_des: "Unlimited residential proxies offer a vast pool of IP addresses, allowing for unlimited access to the internet.",
+    phone_des: "Phone proxies enable you to access the internet using mobile phone numbers, perfect for bypassing geo-restrictions.",
+    data_center_des: "Data center proxies offer stable and high-speed connections, ideal for businesses that require consistent performance.",
+    customer_des: "With our customer support team, you can rely on us to provide prompt and helpful assistance whenever you need it.",
 
     why: "Why Choose",
     why1_title: "Massive Resource",
@@ -93,6 +112,9 @@ export default {
     ad_tech: "Ad Tech",
     serp_seo: "SERP & SEO",
     finance: "Finance",
+
+    explore: "explore IpStar services",
+    explore_desc: "E-commerce,network,bigdata,artifcial intelligence, IpStar helps you develop rapidly",
 
     package_title: "Choose The Package that \n fits your needs",
     package_desc: "IpStar offers you a variety of flexible and practical plans.",

@@ -23,7 +23,7 @@ const routes = [
         component: () => import("@/views/front/introduce/introduce.vue"),
       },
       {
-        path: "/pricing",
+        path: "/pricing/:name",
         name: "pricing",
         component: () => import("@/views/front/pricing/pricing.vue"),
       },

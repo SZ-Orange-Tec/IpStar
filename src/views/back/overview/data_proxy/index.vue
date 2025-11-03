@@ -24,10 +24,10 @@
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <strong class="text-lg font-semibold">{{ ip_num }}</strong>
+            <strong class="text-lg font-semibold">{{ ip_num }} IPs</strong>
           </div>
           <div class="text-sm">
-            <p class="grey-60">{{ t("Remaining") }} IPs</p>
+            <p class="grey-60">{{ t("Remaining") }} IP</p>
           </div>
         </div>
 
@@ -35,10 +35,10 @@
         <div class="bg-yellow-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <strong class="text-lg font-semibold">{{ expire_ip_num }}</strong>
+            <strong class="text-lg font-semibold">{{ expire_ip_num }} IPs</strong>
           </div>
           <div class="between text-sm">
-            <p class="grey-60">{{ t("Used") }} IPs</p>
+            <p class="grey-60">{{ t("Used") }} IP</p>
             <!-- <button class="px-4 py-1 rounded-full text-yellow-600 bg-white border border-yellow-200 text-sm">详情</button> -->
           </div>
         </div>
