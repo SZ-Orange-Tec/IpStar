@@ -26,10 +26,10 @@ function initCrisp() {
     locale: localStorage.getItem("lang"),
   }
   window.$crisp = []
-  // 测试
-  window.CRISP_WEBSITE_ID = "16e899c6-af05-4ef0-96ec-55f69cee3d9f"
-  // // 线上
-  // window.CRISP_WEBSITE_ID = "5f7424dc-8221-4aaa-841e-0f255962b76e"
+  // // 测试
+  // window.CRISP_WEBSITE_ID = "16e899c6-af05-4ef0-96ec-55f69cee3d9f"
+  // 线上
+  window.CRISP_WEBSITE_ID = "5f7424dc-8221-4aaa-841e-0f255962b76e"
   ;(function () {
     const d = document
     const s = d.createElement("script")
