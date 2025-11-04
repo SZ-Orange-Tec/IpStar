@@ -22,5 +22,5 @@ export default {
   Price: "Price",
   Never_Expire: "Never Expire",
 
-  product_spec: {},
+  purchase_spec: {},
 }

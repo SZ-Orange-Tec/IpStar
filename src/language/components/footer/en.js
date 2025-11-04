@@ -23,6 +23,6 @@ export default {
     document: "Help Documents",
     question: "Common Questions",
 
-    rights: "@ Copyright 2025 IPstar. All rights reserved.",
+    rights: "@Copyright 2025 IPstar. All rights reserved.",
   },
 }

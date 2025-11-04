@@ -68,3 +68,24 @@ onMounted(() => {
 <style lang="less" scoped>
 @import url("./front.less");
 </style>
+
+<style lang="less">
+.box_wrap {
+  padding: 0 2.5rem;
+  & > .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 0;
+    .content {
+      margin-top: 60px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+    & > .container {
+      padding: 2rem 0;
+    }
+  }
+}
+</style>
