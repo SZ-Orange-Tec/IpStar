@@ -6,7 +6,7 @@
       </template>
     </NavBar>
 
-    <div class="flex-1 min-h-0 overflow-y-auto w-full column p-6 gap-6">
+    <div class="flex-1 min-h-0 overflow-y-auto w-full box-border column p-6 gap-6">
       <div class="w-full box-border board rounded px-2 py-5">
         <Tabs v-model="active_tab" @change="handleTabChange" />
       </div>

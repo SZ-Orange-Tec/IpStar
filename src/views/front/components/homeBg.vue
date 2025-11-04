@@ -213,6 +213,7 @@ onMounted(() => {
 .home_bg {
   mask-image: radial-gradient(circle at center, #fff 0%, #fff 45%, transparent 90%);
   mask-size: cover;
+  overflow: hidden;
   .bg1,
   .bg2 {
     position: absolute;

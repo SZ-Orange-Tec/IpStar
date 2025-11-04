@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="box proxy overflow-hidden" v-lazy="getLowestPrice">
+    <div class="box proxy" v-lazy="getLowestPrice">
       <div class="container">
         <div class="space-y-5">
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
@@ -116,7 +116,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Unlimited_Residential_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
@@ -133,7 +133,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <PhoneProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Phone_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
@@ -150,7 +150,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <DataProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Data_Center_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
@@ -399,7 +399,7 @@
     </div>
 
     <!-- app -->
-    <div class="app box" v-lazy="() => (isProduct = true)">
+    <div class="app box">
       <div class="container column_center">
         <div class="space-y-5">
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
@@ -412,22 +412,22 @@
           <img v-lazy src="@/assets/images/home/app1.webp" alt="" />
         </IpImage>
 
-        <div class="w-full pack_title mt-8 md:mt-16 column_center space-y-2 md:space-y-5" v-lazy="showSlow">
+        <!-- <div class="w-full pack_title mt-8 md:mt-16 column_center space-y-2 md:space-y-5" v-lazy="showSlow">
           <p class="title text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
 
           <p class="description green text-center">{{ t("home_spec.package_desc") }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <!-- package -->
-    <div class="package box" id="home_package">
+    <!-- <div class="package box" id="home_package">
       <div class="container" v-lazy="showSlow">
         <div>
           <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- explore -->
     <div class="explore box">
@@ -495,8 +495,8 @@ const { en } = settingStore()
 const { isLogin, token } = loginStore()
 
 // 异步组件
-const isProduct = ref(false) // 是否加载product
-const ProductList = defineAsyncComponent(() => import("../components/product_list/product_list.vue"))
+// const isProduct = ref(false) // 是否加载product
+// const ProductList = defineAsyncComponent(() => import("../components/product_list/product_list.vue"))
 
 // 转换data为ref
 const astrict = ref({

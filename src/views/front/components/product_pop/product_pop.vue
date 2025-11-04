@@ -18,6 +18,18 @@
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Residential_Proxies_Adv") }}</p>
               </div>
             </li>
+            <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('residential')">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <RotatingProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="v_center space-x-2">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Rotating_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">{{ t("Hot") }}</ip-tag>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Rotating_Proxies_Adv") }}</p>
+              </div>
+            </li>
             <li class="v_center space-x-3 pointer rounded" @click="toHomeSecond('mobile')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <PhoneProxyIcon class="w-6 h-6 text-primary" />
@@ -63,6 +75,7 @@
 import { useI18n } from "vue-i18n"
 import {
   House as ResidentialProxyIcon,
+  Rotate3D as RotatingProxyIcon,
   Infinity as UnlimitedProxyIcon,
   Smartphone as PhoneProxyIcon,
   Database as DataProxyIcon,

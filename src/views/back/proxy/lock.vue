@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full column_center space-y-4 board rounded-md lock" style="justify-content: center">
+  <div class="w-full h-full column_center space-y-4 board rounded-md lock" style="justify-content: center">
     <img src="@/assets/images/products/lock.png" width="60" alt="" />
     <span class="text-lg primary">{{ t("proxy_spec.no_buy") }}</span>
 
@@ -15,3 +15,35 @@
     </ip-button>
   </div>
 </template>
+
+<script setup>
+import IpButton from "@/components/button/button.vue"
+import { ShoppingCart } from "lucide-vue-next"
+import { inject } from "vue"
+import { useI18n } from "vue-i18n"
+import { useRouter } from "vue-router"
+
+const { t } = useI18n()
+
+const router = useRouter()
+const active = inject("active_tab")
+function toBuy() {
+  switch (active.value) {
+    case 0:
+      router.push("/residential")
+      break
+    case 1:
+      router.push("/unlimited")
+      break
+    case 2:
+      router.push("/mobile")
+      break
+    case 3:
+      router.push("/data_center")
+      break
+    default:
+      router.push("/residential")
+      break
+  }
+}
+</script>

@@ -13,7 +13,7 @@
               <p class="text-lg">{{ t(`pricing_spec.${secondName}.des`) }}</p>
             </div>
 
-            <Tabbar @select="changeActive" class="tabbar text-base"></Tabbar>
+            <Tabbar v-if="secondName === 'residential'" @select="changeActive" class="tabbar text-base"></Tabbar>
           </div>
 
           <div class="product w-full relative">

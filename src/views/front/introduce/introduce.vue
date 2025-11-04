@@ -251,7 +251,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Unlimited_Residential_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
@@ -268,7 +268,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <PhoneProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Phone_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
@@ -285,7 +285,7 @@
             <div class="iconbox rounded-lg vh_center shrink-0">
               <DataProxyIcon class="w-6 h-6 text-primary" />
             </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
+            <strong class="font-medium">{{ t("Data_Center_Proxies") }}</strong>
             <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
 
             <div class="between w-full" style="margin-top: auto">
