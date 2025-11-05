@@ -28,6 +28,11 @@ const routes = [
         component: () => import("@/views/front/product/residential/index.vue"),
       },
       {
+        path: "/unlimited-residential-proxy",
+        name: "unlimited-proxy",
+        component: () => import("@/views/front/product/unlimited/index.vue"),
+      },
+      {
         path: "/pricing/:name",
         name: "pricing",
         component: () => import("@/views/front/pricing/pricing.vue"),
