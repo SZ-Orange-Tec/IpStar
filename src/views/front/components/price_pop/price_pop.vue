@@ -53,7 +53,7 @@
               <div class="right column_center">
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /GB
+                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /{{ t("Day") }}
                 </div>
               </div>
             </li>
@@ -70,7 +70,7 @@
               <div class="right column_center">
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /GB
+                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /IP
                 </div>
               </div>
             </li>

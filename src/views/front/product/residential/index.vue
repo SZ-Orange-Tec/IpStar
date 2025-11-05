@@ -236,7 +236,12 @@
 
     <div class="box_wrap price">
       <div class="container space-y-6">
-        <h1 class="text-4xl font-medium text-center">{{ t(`product_spec.${secondName}.title`) }} {{ t("Price") }}</h1>
+        <h1 class="text-4xl font-medium text-center">
+          <template v-if="type === 0">{{ t("Residential_Proxies") }}</template>
+          <template v-else-if="type === 3">{{ t("Data_Center_Proxies") }}</template>
+          <template v-else-if="type === 4">{{ t("Rotating_Proxies") }}</template>
+          {{ t("Price") }}
+        </h1>
         <p class="text-lg grey-80 text-center">
           {{ t("product_spec.price_desc") }}
         </p>
@@ -376,46 +381,43 @@
 
         <div class="content space-y-5">
           <Question>
-            <template #header> {{ t("question_spec.title1") }} </template>
+            <template #header>{{ t(`product_spec.${secondName}.ques1`) }}</template>
             <template #content>
-              <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
-                <template #product>
-                  <a href="https://www.ipstar.io/product" target="_blank">https://www.ipstar.io/product</a>
-                </template>
-                <template #pricing>
-                  <a href="https://www.ipstar.io/pricing" target="_blank">https://www.ipstar.io/pricing</a>
-                </template>
-              </i18n-t>
+              <p class="text-base grey-80">
+                {{ t(`product_spec.${secondName}.ans1`) }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title2") }} </template>
+            <template #header>{{ t(`product_spec.${secondName}.ques2`) }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc2") }}</p>
+              <p class="text-base grey-80">
+                {{ t(`product_spec.${secondName}.ans2`) }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title3") }} </template>
+            <template #header>{{ t(`product_spec.${secondName}.ques3`) }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc3") }}</p>
+              <p class="text-base grey-80">
+                {{ t(`product_spec.${secondName}.ans3`) }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title4") }} </template>
+            <template #header>{{ t(`product_spec.${secondName}.ques4`) }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc4") }}</p>
+              <p class="text-base grey-80 whitespace-pre-wrap">
+                {{ t(`product_spec.${secondName}.ans4`) }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title5") }} </template>
+            <template #header>{{ t(`product_spec.${secondName}.ques5`) }}</template>
             <template #content>
-              <p class="whitespace-pre-wrap">{{ t("question_spec.desc5") }}</p>
-            </template>
-          </Question>
-          <Question>
-            <template #header> {{ t("question_spec.title6") }} </template>
-            <template #content>
-              <p>{{ t("question_spec.desc6") }}</p>
+              <p class="text-base grey-80 whitespace-pre-wrap">
+                {{ t(`product_spec.${secondName}.ans5`) }}
+              </p>
             </template>
           </Question>
         </div>
@@ -467,6 +469,8 @@ const type = computed(() => {
       return 2
     case "data_center":
       return 3
+    case "rotation":
+      return 4
     default:
       return 0
   }

@@ -73,7 +73,11 @@ async function isShowGift() {
 onMounted(() => {
   console.log(registerAward.value)
   if (registerAward.value) {
-    giftRef.style.height = giftRef.value.scrollHeight + "px"
+    nextTick(() => {
+      if (!giftRef.value) return
+      const dom = giftRef.value
+      dom.style.height = dom.scrollHeight + "px"
+    })
   } else {
     isShowGift()
   }

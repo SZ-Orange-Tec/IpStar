@@ -15,6 +15,7 @@ export default {
   Buy_Now: "现在购买",
   Google_Start: "使用 Google 开始",
   Locations: "地区",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
   Price: "定价",
 
   unlimited_proxy_spec: {
@@ -69,7 +70,7 @@ export default {
     case3_title: "价格监控",
     case3_desc: "持续提取电商市场价格数据，助力 AI 生成准确的价格预测和洞察。",
 
-    why_title: "为什么选择 Aproxy 的无限流量代理？?",
+    why_title: "为什么选择 IpStar 的无限流量代理？?",
     why1_title: "无限并发",
     why1_desc: "可同时从多个来源收集数据，加速 LLM 模型训练。",
     why2_title: "无限 IP 提取",

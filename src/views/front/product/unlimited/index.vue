@@ -420,7 +420,7 @@
     <!-- 不限流量套餐定价 -->
     <div class="box_wrap price">
       <div class="container space-y-6">
-        <h1 class="text-4xl font-medium text-center">{{ t(`unlimited_proxy_spec.title`) }} {{ t("Price") }}</h1>
+        <h1 class="text-4xl font-medium text-center">{{ t(`Unlimited_Residential_Proxies`) }} {{ t("Price") }}</h1>
         <p class="text-center">
           {{ t("unlimited_proxy_spec.price_desc") }}
         </p>
@@ -447,7 +447,7 @@
           </div>
         </div>
         <div class="w-full">
-          <ProductList :type="type" :tabbar="type === 0" :pack="5" />
+          <ProductList :type="1" :tabbar="false" :pack="5" />
         </div>
       </div>
     </div>

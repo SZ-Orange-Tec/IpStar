@@ -326,46 +326,43 @@
 
         <div class="content space-y-5">
           <Question>
-            <template #header> {{ t("question_spec.title1") }} </template>
+            <template #header>{{ t("mobile_proxy_spec.ques1") }}</template>
             <template #content>
-              <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
-                <template #product>
-                  <a href="https://www.ipstar.io/product" target="_blank">https://www.ipstar.io/product</a>
-                </template>
-                <template #pricing>
-                  <a href="https://www.ipstar.io/pricing" target="_blank">https://www.ipstar.io/pricing</a>
-                </template>
-              </i18n-t>
+              <p class="text-base grey-80">
+                {{ t("mobile_proxy_spec.ans1") }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title2") }} </template>
+            <template #header>{{ t("mobile_proxy_spec.ques2") }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc2") }}</p>
+              <p class="text-base grey-80">
+                {{ t("mobile_proxy_spec.ans2") }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title3") }} </template>
+            <template #header>{{ t("mobile_proxy_spec.ques3") }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc3") }}</p>
+              <p class="text-base grey-80">
+                {{ t("mobile_proxy_spec.ans3") }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title4") }} </template>
+            <template #header>{{ t("mobile_proxy_spec.ques4") }}</template>
             <template #content>
-              <p>{{ t("question_spec.desc4") }}</p>
+              <p class="text-base grey-80">
+                {{ t("mobile_proxy_spec.ans4") }}
+              </p>
             </template>
           </Question>
           <Question>
-            <template #header> {{ t("question_spec.title5") }} </template>
+            <template #header>{{ t("mobile_proxy_spec.ques5") }}</template>
             <template #content>
-              <p class="whitespace-pre-wrap">{{ t("question_spec.desc5") }}</p>
-            </template>
-          </Question>
-          <Question>
-            <template #header> {{ t("question_spec.title6") }} </template>
-            <template #content>
-              <p>{{ t("question_spec.desc6") }}</p>
+              <p class="text-base grey-80 whitespace-pre-wrap">
+                {{ t("mobile_proxy_spec.ans5") }}
+              </p>
             </template>
           </Question>
         </div>

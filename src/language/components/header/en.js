@@ -30,6 +30,7 @@ export default {
   Starting_from: "Starting from",
   Popular: "Popular",
   Hot: "Hot",
+  Day: "Day",
 
   header_spac: {
     unlimited: "Unlimited Data Transfer",

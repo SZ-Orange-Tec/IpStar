@@ -46,7 +46,7 @@
                     <UnlimitedProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/{{ t("Day") }} </span>
                 </div>
               </TabItem>
               <TabItem :value="2" class="flex-1 tab-item">
@@ -64,7 +64,7 @@
                     <DataProxyIcon :size="24" />
                   </div>
                   <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/GB </span>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/IP </span>
                 </div>
               </TabItem>
             </Tab>

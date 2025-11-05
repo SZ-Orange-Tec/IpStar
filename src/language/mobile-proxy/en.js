@@ -95,5 +95,16 @@ export default {
     footer_title: "Have a big project?",
     footer_desc: "Contact our advisors to start let your employees know about the project, investment, efficiency, and security.",
     footer_btn: "Get Start",
+
+    ques1: "What is a mobile proxy?",
+    ans1: "A mobile proxy is a proxy service that uses real mobile device IPs to simulate the environment of a mobile user. It is often used to bypass geo-restrictions and access content that is otherwise restricted.",
+    ques2: "What is the difference between a mobile proxy and a residential proxy?",
+    ans2: "The main difference is the IP source. Residential proxy IPs are from home broadband, while mobile proxy IPs are from mobile data networks. Mobile IPs are typically considered more trusted and easier to access than residential IPs.",
+    ques3: "Why are mobile proxies more trusted?",
+    ans3: "Because mobile IPs are directly assigned by carriers, they have a vast number and are dynamically changing, very close to real mobile users. Websites and apps typically have more lenient blocking policies for mobile IPs.",
+    ques4: "How is mobile proxy traffic billed?",
+    ans4: "We primarily charge by the actual amount of traffic used. This means you only pay for the data you consume, without any hidden fees or surcharges.",
+    ques5: "What are the advantages of using mobile proxies?",
+    ans5: "Cost-effective: Mobile traffic and IP resources are more expensive than residential ones, so the service price is usually higher.\nSpeed: Mobile IPs are typically faster than residential IPs, as they are directly assigned by carriers and have better network connections.\nGeolocation accuracy: Mobile IPs are more precise in locating the user's location, as they are close to the user's actual mobile device.",
   },
 }

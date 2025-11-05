@@ -15,6 +15,7 @@ export default {
   Buy_Now: "Buy Now",
   Google_Start: "Start with Google",
   Locations: "Locations",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
   Price: "Pricing",
 
   unlimited_proxy_spec: {
@@ -70,7 +71,7 @@ export default {
     case3_title: "Price Monitoring",
     case3_desc: "Continuously extract price data from e-commerce platforms, enabling AI to generate accurate price predictions and insights.",
 
-    why_title: "Why Choose Aproxy's Unlimited Traffic Proxy?",
+    why_title: "Why Choose IpStar's Unlimited Traffic Proxy?",
     why1_title: "Unlimited concurrency",
     why1_desc: "Collect data from multiple sources simultaneously, accelerating LLM model training.",
     why2_title: "Unlimited IP Extraction",

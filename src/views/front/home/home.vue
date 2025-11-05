@@ -123,7 +123,7 @@
               <div>
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /{{ t("Day") }}
                 </div>
               </div>
               <IpButton @click="toPriceSecond('unlimited')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
@@ -140,7 +140,7 @@
               <div>
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /GB
+                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
                 </div>
               </div>
               <IpButton @click="toPriceSecond('mobile')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
@@ -157,7 +157,7 @@
               <div>
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /IP
                 </div>
               </div>
               <IpButton @click="toPriceSecond('data_center')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>

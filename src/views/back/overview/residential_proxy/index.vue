@@ -39,7 +39,7 @@
           </div>
           <div class="between flex-wrap gap-2 text-sm">
             <p class="grey-60">{{ t("Consumption_Today") }}</p>
-            <button @click="isBalance = true" class="px-4 text-xs h-8 rounded-full text-yellow-600 bg-white border border-yellow-200">
+            <button @click="isBalance = true" class="px-4 text-sm h-8 rounded-full text-yellow-600 bg-white border border-yellow-200">
               {{ t("Details") }}
             </button>
           </div>
@@ -53,7 +53,7 @@
           </div>
           <div class="between flex-wrap gap-2 text-sm">
             <p class="grey-60">{{ t("Total_IPs_Available") }}</p>
-            <button @click="isOnlineIp = true" class="px-4 text-xs h-8 rounded-full text-blue-600 bg-white border border-blue-200">
+            <button @click="isOnlineIp = true" class="px-4 text-sm h-8 rounded-full text-blue-600 bg-white border border-blue-200">
               {{ t("Details") }}
             </button>
           </div>

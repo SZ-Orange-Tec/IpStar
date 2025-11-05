@@ -30,6 +30,7 @@ export default {
   perfect_for_All: "完美适用于AI",
   Popular: "最受欢迎",
   Hot: "热门",
+  Day: "天",
 
   header_spac: {
     unlimited: "流量无上限",
