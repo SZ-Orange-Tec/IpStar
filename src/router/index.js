@@ -33,6 +33,11 @@ const routes = [
         component: () => import("@/views/front/product/unlimited/index.vue"),
       },
       {
+        path: "/mobile-proxy",
+        name: "mobile-proxy",
+        component: () => import("@/views/front/product/mobile/index.vue"),
+      },
+      {
         path: "/pricing/:name",
         name: "pricing",
         component: () => import("@/views/front/pricing/pricing.vue"),

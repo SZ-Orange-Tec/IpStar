@@ -6,7 +6,7 @@
           <div class="excellent vh_center rounded h-10">
             <img loading="lazy" src="@/assets/images/product/excellent.png" alt="IpStar" width="257" height="21" />
           </div>
-          <i18n-t keypath="unlimited_proxy_spec.title" tag="h1" scope="global" class="title font-medium">
+          <i18n-t keypath="unlimited_proxy_spec.title" tag="h1" scope="global" class="title font-semibold">
             <template #place>
               <span class="linear_text title" @click="toProduct">{{ t("unlimited_proxy_spec.title_place") }}</span>
             </template>
@@ -32,13 +32,13 @@
             <!--]-->
           </ul>
           <div class="my-button v_center space-x-3">
-            <a href="/pricing/residential">
+            <a href="/pricing/unlimited">
               <IpButton type="primary" class="new-button vh_center rounded pointer box-border">
                 <span class="font-medium">{{ t("Buy_Now") }}!</span>
                 <ArrowRight class="icon" :size="18" />
               </IpButton>
             </a>
-            <a href="/login" class="">
+            <a v-if="!isLogin" href="/login" class="">
               <IpButton type="normal" class="google vh_center rounded space-x-2 pointer box-border">
                 <img
                   loading="lazy"
@@ -446,6 +446,9 @@
             <span class="grey-60">{{ t("unlimited_proxy_spec.price_note") }}</span>
           </div>
         </div>
+        <div class="w-full">
+          <ProductList :type="type" :tabbar="type === 0" :pack="5" />
+        </div>
       </div>
     </div>
 
@@ -504,7 +507,7 @@
         <div class="started" style="">
           <div class="started_title text-3xl font-medium">有一个大项目?</div>
           <div class="started_desc">与我们的顾问取得联系，开始让您的员工了解情况、投入、高效和安全。</div>
-          <a href="/zh/buy/residential/" class="started_btn vh_center box-border">
+          <a href="/pricing/unlimited" class="started_btn vh_center box-border">
             <ArrowRight class="icon" :size="20" />
             <span>开始</span>
           </a>
@@ -524,9 +527,12 @@ import { platDataIndex } from "../../../../api/home"
 import Question from "../../components/question/question.vue"
 import { useRoute } from "vue-router"
 import settingStore from "../../../../store/setting"
+import ProductList from "../../components/product_list/product_list.vue"
+import loginStore from "../../../../store/login"
 
 const { t } = useI18n()
 const { en } = settingStore()
+const { isLogin } = loginStore()
 
 const meet_active = ref(0)
 const case_active = ref(0)

@@ -1,6 +1,6 @@
 <template>
   <!-- id=HeaderGift  在header组件中用于计算HeaderGift的高度 -->
-  <div class="gift" ref="giftRef">
+  <div class="gift" ref="giftRef" v-show="registerAward && !isLogin">
     <div class="container between sm:vh_center gap-2">
       <div class="v_center gap-2">
         <Tag class="hidden md:block icon" :size="20" />
@@ -28,25 +28,55 @@ import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import settingStore from "../../../../store/setting"
+import anime from "animejs/lib/anime.es.js"
+import { platDataConfig } from "@/api/home"
+import loginStore from "../../../../store/login"
+import layoutStore from "../../../../store/layout"
 
 const { t } = useI18n()
 const router = useRouter()
-const { lang } = settingStore()
-
-const emit = defineEmits(["load"])
+const { isLogin } = loginStore()
+const { registerAward } = layoutStore()
 
 const giftRef = ref(null)
+async function isShowGift() {
+  try {
+    const start = Date.now()
+    const { data } = await platDataConfig()
+    const end = Date.now()
+    await new Promise((resolve) => {
+      if (end - start > 1000) {
+        resolve()
+      } else {
+        setTimeout(() => {
+          resolve()
+        }, 1000 - (end - start))
+      }
+    })
+    registerAward.value = data.register_award
+
+    nextTick(() => {
+      anime({
+        targets: giftRef.value,
+        height: {
+          value: [0, giftRef.value.scrollHeight],
+          easing: "easeOutQuad",
+        }, // 明确指定起始和结束值
+        duration: 200,
+      })
+    })
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
 onMounted(() => {
-  emit("load", giftRef.value.clientHeight + "px")
-})
-watch(lang, () => {
-  nextTick(() => {
-    emit("load", giftRef.value.clientHeight + "px")
-    console.log(giftRef.value.clientHeight)
-  })
-})
-onBeforeUnmount(() => {
-  emit("load", "0px")
+  console.log(registerAward.value)
+  if (registerAward.value) {
+    giftRef.style.height = giftRef.value.scrollHeight + "px"
+  } else {
+    isShowGift()
+  }
 })
 </script>
 

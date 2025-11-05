@@ -32,6 +32,16 @@ export default {
       adv2: "价格低至 ${price}/IP",
       adv3: "HTTP/socks5",
     },
+    rotation: {
+      title: "轮换住宅代理",
+      desc: "重新定义性价比：真实轮转住宅代理，体验低至 ${price}/GB 的旗舰级代理服务，为您的业务提供强大助力。",
+      adv1: "全球地理位置覆盖",
+      adv2: "无限制创建子账户",
+      adv3: "99.99%的连接成功率",
+      adv4: "<0.5秒疾速响应时间",
+      adv5: "支持HTTP(S) 和 SOCKS5",
+    },
+
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
     proxy_ip: "7200万+住宅IP",

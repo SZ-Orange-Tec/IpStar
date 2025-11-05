@@ -7,7 +7,7 @@
             <img loading="lazy" src="@/assets/images/product/excellent.png" alt="IpStar" width="257" height="21" />
           </div>
           <h1 class="title font-medium leading-none">{{ t(`product_spec.${secondName}.title`) }}</h1>
-          <p class="text-lg">{{ t(`product_spec.${secondName}.desc`) }}</p>
+          <p class="text-lg">{{ t(`product_spec.${secondName}.desc`, { price: lowest }) }}</p>
           <ul class="space-y-3 p-5">
             <li class="v_center space-x-2">
               <CheckIcon :size="18" class="success" />
@@ -15,22 +15,21 @@
             </li>
             <li class="v_center space-x-2">
               <CheckIcon :size="18" class="success" />
-              <span>{{ t(`product_spec.${secondName}.adv2`) }}</span>
+              <span>{{ t(`product_spec.${secondName}.adv2`, { price: lowest }) }}</span>
             </li>
             <li class="v_center space-x-2">
               <CheckIcon :size="18" class="success" />
-              <span>{{ t(`product_spec.${secondName}.adv3`) }}</span>
+              <span>{{ t(`product_spec.${secondName}.adv3`, { price: lowest }) }}</span>
             </li>
-            <!--]-->
           </ul>
           <div class="my-button v_center space-x-3">
-            <a href="/pricing/residential">
+            <a :href="priceLink">
               <IpButton type="primary" class="new-button vh_center rounded pointer box-border">
                 <span class="font-medium">{{ t("Buy_Now") }}!</span>
                 <ArrowRight class="icon" :size="18" />
               </IpButton>
             </a>
-            <a href="/login" class="">
+            <a v-if="!isLogin" href="/login" class="">
               <IpButton type="normal" class="google vh_center rounded space-x-2 pointer box-border">
                 <img
                   loading="lazy"
@@ -56,13 +55,23 @@
           />
           <img
             loading="lazy"
-            width="510"
-            height="387"
+            width="497"
+            height="380"
             src="@/assets/images/product/staticdata.png"
             alt="IpStar"
             class="animate__animated animate__bounceInDown"
             style="visibility: visible"
             v-if="secondName === 'data_center'"
+          />
+          <img
+            loading="lazy"
+            width="391"
+            height="431"
+            src="@/assets/images/product/isp.png"
+            alt="IpStar"
+            class="animate__animated animate__bounceInDown"
+            style="visibility: visible"
+            v-if="secondName === 'rotation'"
           />
         </div>
       </div>
@@ -253,6 +262,9 @@
             <span class="grey-60">{{ t("product_spec.price_note") }}</span>
           </div>
         </div>
+        <div class="w-full">
+          <ProductList :type="type" :tabbar="type === 0" :pack="5" />
+        </div>
       </div>
     </div>
 
@@ -416,7 +428,7 @@
         <div class="started" style="">
           <div class="started_title text-3xl font-medium">有一个大项目?</div>
           <div class="started_desc">与我们的顾问取得联系，开始让您的员工了解情况、投入、高效和安全。</div>
-          <a href="/zh/buy/residential/" class="started_btn vh_center box-border">
+          <a :href="priceLink" class="started_btn vh_center box-border">
             <ArrowRight class="icon" :size="20" />
             <span>开始</span>
           </a>
@@ -435,10 +447,15 @@ import { computed, defineAsyncComponent, onMounted, ref } from "vue"
 import { platDataIndex } from "../../../../api/home"
 import Question from "../../components/question/question.vue"
 import { useRoute } from "vue-router"
+import ProductList from "../../components/product_list/product_list.vue"
+import layoutStore from "../../../../store/layout"
+import loginStore from "../../../../store/login"
+
+const { isLogin } = loginStore()
 
 const { t } = useI18n()
 const route = useRoute()
-const nameReg = /residential|unlimited|mobile|data_center/
+const nameReg = /residential|rotation|data_center/
 const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "residential"))
 const type = computed(() => {
   switch (secondName.value) {
@@ -454,7 +471,22 @@ const type = computed(() => {
       return 0
   }
 })
-
+const priceLink = computed(() => {
+  switch (secondName.value) {
+    case "residential":
+      return "/pricing/residential"
+    case "unlimited":
+      return "/pricing/unlimited"
+    case "mobile":
+      return "/pricing/mobile"
+    case "data_center":
+      return "/pricing/data_center"
+    default:
+      return "/pricing/residential"
+  }
+})
+const { lowestPrice, getLowestPrice } = layoutStore()
+const lowest = computed(() => lowestPrice.value[secondName.value])
 // 代码
 const active = ref("go")
 const CodeText = defineAsyncComponent(() => import("@/views/doc/components/code_block/code_block.vue"))
@@ -505,6 +537,7 @@ function toThousands(num) {
 
 onMounted(() => {
   IpMap()
+  getLowestPrice()
 })
 </script>
 

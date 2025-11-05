@@ -1,9 +1,9 @@
-import header from "../components/header/zh"
-import footer from "../components/footer/zh"
-import productList from "../components/productList/zh"
-import paypopup from "../components/pay_popup/zh"
-import headerGift from "../components/headerGift/zh"
-import question from "../components/question/zh"
+import header from "../components/header/en"
+import footer from "../components/footer/en"
+import productList from "../components/productList/en"
+import paypopup from "../components/pay_popup/en"
+import headerGift from "../components/headerGift/en"
+import question from "../components/question/en"
 export default {
   ...header,
   ...footer,

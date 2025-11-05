@@ -1,7 +1,7 @@
 <template>
   <div ref="triggerRef" class="h-0" style="background: transparent"></div>
   <div class="header_box relative" :class="{ shadow: shadow }">
-    <HeaderGift v-if="registerAward && !isLogin" @load="setStickyTop" />
+    <HeaderGift />
     <header class="header" :class="{ home_header: isHome }">
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
@@ -183,9 +183,8 @@ import { useRouter, useRoute } from "vue-router"
 import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import userStore from "@/store/user"
 import { useI18n } from "vue-i18n"
-import { computed, inject, onMounted, ref } from "vue"
+import { computed, inject, nextTick, onMounted, ref } from "vue"
 import layoutStore from "@/store/layout"
-import { platDataConfig } from "@/api/home"
 import { defineAsyncComponent } from "vue"
 import ProductPop from "..//product_pop/product_pop.vue"
 import PricePop from "..//price_pop/price_pop.vue"
@@ -193,13 +192,12 @@ import PricePop from "..//price_pop/price_pop.vue"
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
-const { token, OutLogin, isLogin } = loginStore()
+const { token, OutLogin } = loginStore()
 const { lang } = settingStore()
 const { username_simple } = userStore()
-const { registerAward } = layoutStore()
 
-const homeData = inject("homeData")
-const lowestPrice = computed(() => homeData.lowestPrice / 100)
+// const homeData = inject("homeData")
+// const lowestPrice = computed(() => homeData.lowestPrice / 100)
 
 // 路由
 const activePath = computed(() => route.path)
@@ -229,18 +227,6 @@ function initShadowObserve() {
 
 // 赠送流量
 const HeaderGift = defineAsyncComponent(() => import("../headerGift/headerGift.vue"))
-async function isShowGift() {
-  try {
-    const { data } = await platDataConfig()
-    registerAward.value = data.register_award
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-const stickyTop = ref("px")
-function setStickyTop(value) {
-  stickyTop.value = value
-}
 
 // 切换语言
 async function toggleLang(locale) {
@@ -291,7 +277,6 @@ function togglePricePop() {
 
 onMounted(() => {
   initShadowObserve()
-  isShowGift()
 })
 </script>
 
