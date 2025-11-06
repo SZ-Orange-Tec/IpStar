@@ -13,6 +13,8 @@ export default {
   ...headerGift,
   ...question,
 
+  FAQ: "常见问题",
+
   pricing_spec: {
     residential: {
       title: "住宅代理 定价",
@@ -29,6 +31,10 @@ export default {
     data_center: {
       title: "静态数据中心代理 定价",
       des: "用高质量数据中心代理，低延迟无断连，确保您的业务持续高效运行",
+    },
+    rotation: {
+      title: "轮换住宅代理 定价",
+      des: "真实住宅IP，自动轮换，让数据采集与网络访问畅通无阻。",
     },
 
     plan_title: "全方位流量管理解决方案",

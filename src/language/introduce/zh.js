@@ -12,7 +12,15 @@ export default {
   ...headerGift,
   ...question,
 
-  home_spec: {
+  Residential_Proxies: "住宅代理",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
+  Phone_Proxies: "移动手机代理",
+  Data_Center_Proxies: "静态数据中心代理",
+  Rotation_Proxies: "轮换住宅代理",
+  Starting_from: "低至：",
+  Day: "天",
+
+  intro_spec: {
     country: "热门国家",
     country_desc: "探索多元化解决方案，提升业务效率与安全性",
 
@@ -26,6 +34,29 @@ export default {
     more: "用于多种业务场景",
     automatic: "应用场景",
     instant: "IpStar住宅代理，为您提供高效、安全的代理\n服务，轻松应对各种业务需求。",
+
+    proxy_title: "满足各类需求的代理服务",
+    proxy_desc: "使用易于操作、高质量且经济实惠的代理IP基础设施开启您的旅程。",
+    residential_des: "高稳定性的全球网络，可用率达99.7%。流量不过期，按需付费，为您的跨区域业务提供可靠连接。",
+    residential_adv1: "7200万+优秀住宅代理",
+    residential_adv2: "190+的位置",
+    residential_adv3: "超级匿名和闪电般的速度",
+    unlimited_des: "200+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
+    unlimited_adv1: "7200万+住宅 IP，覆盖全球190+地区",
+    unlimited_adv2: "灵活的并发和带宽管理，轻松扩展",
+    unlimited_adv3: "支持 YouTube/Github/音视频代理",
+    phone_des: "全球真实移动设备IP资源池，4G/5G网络原生出口，保障业务高稳定性与高可用性，支持公开数据分析与多元化业务需求。",
+    phone_adv1: "5百万+IPs覆盖100多个国家",
+    phone_adv2: "3G/4G/5G/LTE 移动代理网络",
+    phone_adv3: "99.9%成功率",
+    data_center_des: "高性价比的数据中心IP网络。提供充足带宽与稳定低延退连接，助力企业实现商业洞察、应用测试与性能监控。",
+    data_center_adv1: "高级静态 IP",
+    data_center_adv2: "价格低至 ${price}/IP",
+    data_center_adv3: "HTTP/socks5",
+    rotation_des: "我们提供精准匹配多样化需求的IP解决方案，并配备强大的技术支持团队，7x24小时响应，保障业务稳定运行。",
+    rotation_adv1: "全球地理位置覆盖",
+    rotation_adv2: "无限制创建子账户",
+    rotation_adv3: "99.99%的连接成功率",
 
     four1_title: "企业级数据收集",
     four1_desc: "稳定可靠的代理网络，为您的商业智能项目提供高效支持。",

@@ -141,7 +141,7 @@
             {{ t("product_spec.source_desc") }}
           </p>
           <div class="btn_box v_center">
-            <a href="/zh/buy/residential/">
+            <a :href="priceLink">
               <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
             </a>
           </div>
@@ -159,7 +159,7 @@
             {{ t("product_spec.plan_desc") }}
           </p>
           <div class="btn_box v_center space-x-3">
-            <a href="/zh/user-guide/">
+            <a href="/doc">
               <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.view_doc") }}</IpButton>
             </a>
             <div class="images">
@@ -243,7 +243,7 @@
           {{ t("Price") }}
         </h1>
         <p class="text-lg grey-80 text-center">
-          {{ t("product_spec.price_desc") }}
+          {{ t(`product_spec.${secondName}.price_desc`) }}
         </p>
         <ul class="vh_center space-x-5">
           <li class="v_center space-x-2">
@@ -281,7 +281,7 @@
           <ul class="flex flex-wrap" v-if="mapData.length">
             <li class="w-1/2 md:w-1/3 lg:w-1/4" v-for="item in mapData" :key="item.name">
               <div class="column_center rounded-lg text-lg p-5">
-                <img v-lazy :src="item.icon" alt="" width="36" height="36" />
+                <img loading="lazy" :src="item.icon" alt="" width="36" height="36" />
                 <span>{{ item.name }}</span>
                 <span>{{ item.value }} IPS+</span>
               </div>
@@ -317,7 +317,7 @@
               </li>
             </ul>
             <div class="btn_box">
-              <a href="/zh/register/">
+              <a href="/overview">
                 <IpButton type="primary_border" class="btn">{{ t("product_spec.enter_management") }}</IpButton>
               </a>
             </div>
@@ -351,26 +351,26 @@
         <div class="text-3xl font-medium text-center">{{ t("product_spec.cases_title") }}</div>
 
         <div class="list grid grid-cols-4 gap-6">
-          <a href="/zh/solution/web-scraping/" class="item space-y-4">
+          <div href="/zh/solution/web-scraping/" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case1_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case1_desc") }}</p>
-          </a>
-          <a href="/zh/solution/market-research/" class="item space-y-4"
-            ><img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
+          </div>
+          <div href="/zh/solution/market-research/" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case2_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case2_desc") }}</p>
-          </a>
-          <a href="/zh/solution/ad-verification/" class="item space-y-4">
+          </div>
+          <div href="/zh/solution/ad-verification/" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/ad.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case3_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case3_desc") }}</p>
-          </a>
-          <a href="/zh/solution/brand-protection/" class="item space-y-4">
+          </div>
+          <div href="/zh/solution/brand-protection/" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/brand.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case4_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case4_desc") }}</p>
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -485,6 +485,8 @@ const priceLink = computed(() => {
       return "/pricing/mobile"
     case "data_center":
       return "/pricing/data_center"
+    case "rotation":
+      return "/pricing/rotation"
     default:
       return "/pricing/residential"
   }

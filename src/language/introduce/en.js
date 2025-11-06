@@ -11,7 +11,17 @@ export default {
   ...paypopup,
   ...headerGift,
   ...question,
-  home_spec: {
+
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Rotation_Proxies: "Rotation Residential Proxies",
+  Starting_from: "Starting_from ",
+  Get_Now: "Get Now",
+  Day: "Day",
+
+  intro_spec: {
     country: "Popular Countries",
     country_desc: "Explore diverse solutions to enhance business efficiency and security",
 
@@ -26,6 +36,29 @@ export default {
     more: "Versatile Use Cases",
     automatic: "Applications",
     instant: "IpStar Residential Proxy offers efficient and secure proxy services,\neasily meeting diverse business needs.",
+
+    proxy_title: "Proxy Types",
+    proxy_desc: "We offer a variety of proxy types to meet your specific needs.",
+    residential_des: "Residential proxies provide real IP addresses from residential locations, ensuring anonymity and privacy.",
+    residential_adv1: "Over 72 million premium residential proxies",
+    residential_adv2: "190+ countries and 100+ cities",
+    residential_adv3: "Super anonymous and lightning-fast speed",
+    unlimited_des: "Unlimited residential proxies offer a vast pool of IP addresses, allowing for unlimited access to the internet.",
+    unlimited_adv1: "72M+ Global Residential IPs",
+    unlimited_adv2: "Scalable Bandwidth & Concurrency",
+    unlimited_adv3: "Full YouTube/GitHub Support",
+    phone_des: "Phone proxies enable you to access the internet using mobile phone numbers, perfect for bypassing geo-restrictions.",
+    phone_adv1: "5M+ IPs in 100+ Countries",
+    phone_adv2: "3G/4G/5G/LTE Mobile Proxy Network",
+    phone_adv3: "99.9% Uptime",
+    data_center_des: "Data center proxies offer stable and high-speed connections, ideal for businesses that require consistent performance.",
+    data_center_adv1: "Premium Static IPs",
+    data_center_adv2: "Starting at ${price}/IP",
+    data_center_adv3: "HTTP/SOCKS5 Supported",
+    rotation_des: "With our customer support team, you can rely on us to provide prompt and helpful assistance whenever you need it.",
+    rotation_adv1: "Global Geolocation Coverage",
+    rotation_adv2: "Unlimited Sub-account Creation",
+    rotation_adv3: "99.99% Connection Success Rate",
 
     four1_title: "Data Collection",
     four1_desc: "Stable and reliable proxies for your business intelligence projects.",

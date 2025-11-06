@@ -23,6 +23,7 @@ export default {
   product_spec: {
     residential: {
       title: "住宅代理",
+      price_desc: "住宅代理是标准代理的 高速 、 高可靠性 替代方案。升级住宅代理，今天购买就可以解除封锁。",
       desc: "来自真实住宅设备的住宅代理。高度多样化的IP。",
       adv1: "快速、可靠和道德来源的代理",
       adv2: "价格低至 ${price}/GB",
@@ -40,6 +41,7 @@ export default {
     },
     data_center: {
       title: "静态数据中心代理",
+      price_desc: "用高质量数据中心代理，低延迟无断连，确保您的业务持续高效运行",
       desc: "使用全球稳定、快速、强大的数据中心IP。",
       adv1: "高级静态 IP",
       adv2: "价格低至 ${price}/IP",
@@ -57,6 +59,7 @@ export default {
     },
     rotation: {
       title: "轮换住宅代理",
+      price_desc: "真实住宅IP，自动轮换，让数据采集与网络访问畅通无阻。",
       desc: "重新定义性价比：真实轮转住宅代理，体验低至 ${price}/GB 的旗舰级代理服务，为您的业务提供强大助力。",
       adv1: "全球地理位置覆盖",
       adv2: "无限制创建子账户",
@@ -103,7 +106,6 @@ export default {
     why6_title: "覆盖全球",
     why6_desc: "购买覆盖190个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
 
-    price_desc: "住宅代理是标准代理的 高速 、 高可靠性 替代方案。升级住宅代理，今天购买就可以解除封锁。",
     price_adv1: "平均成功率99.5%",
     price_adv2: "平均响应时间0.6s",
     price_adv3: "HTTP / SOCKS5协议",

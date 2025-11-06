@@ -1,6 +1,6 @@
 <template>
   <div class="front">
-    <HomeBg class="home_bg w-full" v-if="isHome && homeHeight" :height="homeHeight" />
+    <!-- <HomeBg class="home_bg w-full" v-if="isHome && homeHeight" :height="homeHeight" /> -->
 
     <Header />
 

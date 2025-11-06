@@ -204,7 +204,7 @@ import layoutStore from "../../../store/layout"
 
 // 路由参数
 const route = useRoute()
-const nameReg = /residential|unlimited|mobile|data_center/
+const nameReg = /residential|unlimited|mobile|data_center|rotation/
 const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "residential"))
 const type = computed(() => {
   switch (secondName.value) {
@@ -216,6 +216,8 @@ const type = computed(() => {
       return 2
     case "data_center":
       return 3
+    case "rotation":
+      return 4
     default:
       return 0
   }

@@ -5,21 +5,21 @@
       <div class="container space-y-10">
         <div class="space-y-10 text">
           <p class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap" style="line-height: 1.5">
-            {{ t(`home_spec.${secondName}.title`) }}
+            {{ t(`intro_spec.${secondName}.title`) }}
           </p>
-          <p class="opacity-90 md:whitespace-pre-wrap">{{ t(`home_spec.${secondName}.desc`) }}</p>
+          <p class="opacity-90 md:whitespace-pre-wrap">{{ t(`intro_spec.${secondName}.desc`) }}</p>
         </div>
 
         <div class="v_center space-x-5" style="align-items: stretch">
-          <IpButton type="major" class="h-10 w-40" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
-          <IpButton type="border" class="h-10 w-40" @click="router.push('/pricing')">{{ t("home_spec.view_try") }}</IpButton>
+          <IpButton type="major" class="h-10 w-40" @click="toLogin">{{ t("intro_spec.start_now") }}</IpButton>
+          <IpButton type="border" class="h-10 w-40" @click="router.push('/pricing')">{{ t("intro_spec.view_try") }}</IpButton>
         </div>
 
         <div class="flex space-x-5 text-sm">
           <ul class="space-y-5" v-for="(item, index) in tag" :key="index">
             <li class="v_center space-x-2" v-for="i in item" :key="index + '-' + i">
               <CircleCheck :size="16" class="primary" />
-              <p>{{ t(`home_spec.${secondName}.tag${i}`) }}</p>
+              <p>{{ t(`intro_spec.${secondName}.tag${i}`) }}</p>
             </li>
           </ul>
           <!-- <ul class="space-y-5">
@@ -48,8 +48,8 @@
     <div class="country box">
       <div class="container">
         <div class="space-y-5" v-lazy="showSlow">
-          <h4 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t(`home_spec.country`) }}</h4>
-          <p class="text-center">{{ t(`home_spec.country_desc`) }}</p>
+          <h4 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t(`intro_spec.country`) }}</h4>
+          <p class="text-center">{{ t(`intro_spec.country_desc`) }}</p>
         </div>
 
         <div class="country_list">
@@ -70,7 +70,7 @@
     <div class="box why_choose">
       <div class="container column_center">
         <p class="title text-lg sm:text-2xl lg:text-3xl font-bold" v-lazy="showSlow">
-          {{ t("home_spec.why") }}
+          {{ t("intro_spec.why") }}
           <span class="primary">IpStar</span>
         </p>
 
@@ -81,8 +81,8 @@
             </div>
 
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why1_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
+              <h3 class="font-bold text-center">{{ t("intro_spec.why1_title") }}</h3>
+              <p class="text-sm text-center">{{ t("intro_spec.why1_desc") }}</p>
             </div>
           </li>
           <li class="pointer flex-1 transition-colors" @click="toHomeSecond('efficient')" v-lazy="showSlow">
@@ -90,8 +90,8 @@
               <img v-lazy sizes="(max-width:90px) 96px,102px" src="@/assets/images/home/why2.png" srcset="@/assets/images/home/why2.png 96w" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why2_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
+              <h3 class="font-bold text-center">{{ t("intro_spec.why2_title") }}</h3>
+              <p class="text-sm text-center">{{ t("intro_spec.why2_desc") }}</p>
             </div>
           </li>
           <li class="pointer flex-1 transition-colors" @click="router.push('/pricing')" v-lazy="showSlow">
@@ -99,8 +99,8 @@
               <img v-lazy sizes="(max-width:90px) 105px,104px" src="@/assets/images/home/why3.png" srcset="@/assets/images/home/why3.png 105w" />
             </div>
             <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why3_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why3_desc") }}</p>
+              <h3 class="font-bold text-center">{{ t("intro_spec.why3_title") }}</h3>
+              <p class="text-sm text-center">{{ t("intro_spec.why3_desc") }}</p>
             </div>
           </li>
         </ul>
@@ -111,9 +111,9 @@
     <div class="box auto" ref="scenceRef">
       <div class="container">
         <div class="space-y-5 w-full" v-lazy="showSlow">
-          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("home_spec.cases_title") }}</h3>
+          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("intro_spec.cases_title") }}</h3>
 
-          <p class="text-center">{{ t("home_spec.cases_desc") }}</p>
+          <p class="text-center">{{ t("intro_spec.cases_desc") }}</p>
         </div>
 
         <div class="auto_content w-full" v-lazy="showSlow">
@@ -125,8 +125,8 @@
                   <img v-lazy src="@/assets/images/home/four_active1.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four1_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four1_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four1_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four1_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -137,8 +137,8 @@
                   <img v-lazy src="@/assets/images/home/four_active2.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four2_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four2_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four2_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four2_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -149,8 +149,8 @@
                   <img v-lazy src="@/assets/images/home/four_active3.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four3_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four3_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four3_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four3_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -161,8 +161,8 @@
                   <img v-lazy src="@/assets/images/home/four_active4.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four4_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four4_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four4_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four4_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -173,8 +173,8 @@
                   <img v-lazy src="@/assets/images/home/four_active5.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four5_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four5_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four5_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four5_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -185,8 +185,8 @@
                   <img v-lazy src="@/assets/images/home/four_active6.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four6_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four6_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four6_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four6_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -197,8 +197,8 @@
                   <img v-lazy src="@/assets/images/home/four_active7.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four7_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four7_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four7_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four7_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -209,8 +209,8 @@
                   <img v-lazy src="@/assets/images/home/four_active8.webp" alt="" />
                 </div>
                 <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four8_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four8_desc") }}</p>
+                  <p class="text-center font-bold">{{ t("intro_spec.four8_title") }}</p>
+                  <p class="description text-sm">{{ t("intro_spec.four8_desc") }}</p>
                 </div>
               </div>
             </li>
@@ -220,98 +220,217 @@
     </div>
 
     <!-- 代理 -->
-    <div class="box proxy" v-lazy="getLowestPrice">
+    <div class="box_wrap proxy" v-lazy="getLowestPrice">
       <div class="container">
         <div class="space-y-5">
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
-            {{ t("home_spec.proxy_title") }}
+            {{ t("intro_spec.proxy_title") }}
           </p>
-          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.proxy_desc") }}</p>
+          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("intro_spec.proxy_desc") }}</p>
         </div>
 
-        <div class="grid grid-cols-3 gap-6">
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.residential_des") }}</p>
+        <div class="content grid grid-cols-3 gap-6">
+          <div class="product_item residential">
+            <div class="info">
+              <img loading="lazy" src="@/assets/images/home/icon1.webp" width="48" height="48" />
+              <div class="text-xl font-medium mt-4 leading-none">{{ t("Residential_Proxies") }}</div>
+              <p class="mt-4">{{ t("intro_spec.residential_des") }}。</p>
+              <ul class="space-y-3 text-sm grey-80 mt-5">
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv1") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv2") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv3") }}</span>
+                </li>
+              </ul>
+              <div class="between mt-7">
+                <div class="left">
+                  <div class="text-xs">{{ t("Starting_from") }}</div>
+                  <div class="text-sm">
+                    <span class="primary">$</span>
+                    <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                    <span>/GB</span>
+                  </div>
+                </div>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <a href="/pricing/residential">
+                  <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+                </a>
+              </div>
+            </div>
+            <img loading="lazy" class="bg" src="@/assets/images/home/residential.webp" width="464" height="388" />
+          </div>
+          <div class="product_item space-y-4">
+            <img loading="lazy" src="@/assets/images/home/icon2.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Phone_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.phone_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.phone }}</b>
+                  <span>/GB</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('residential')" type="primary_border" class="h-9 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Unlimited_Residential_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/mobile">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon3.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Unlimited_Residential_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.unlimited_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /{{ t("Day") }}
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.unlimited }}</b>
+                  <span>/{{ t("Day") }}</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('unlimited')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <PhoneProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Phone_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/unlimited">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon4.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Data_Center_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.data_center_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv2", { price: lowestPrice.data_center }) }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.data_center }}</b>
+                  <span>/IP</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('mobile')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <DataProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Data_Center_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/data_center">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon5.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Rotation_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.rotation_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /IP
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                  <span>/GB</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('data_center')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3 column" style="grid-column-start: 2; grid-column-end: 4">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Customised_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.customer_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
-                <div class="text-sm"><span class="text-xl font-medium">$ ?</span> /GB</div>
-              </div>
-              <IpButton @click="openService" type="primary_border" class="h-8 px-4 text-sm">{{ t("Contact_Us") }}</IpButton>
+              <a href="/pricing/rotation">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
             </div>
+            <!---->
           </div>
         </div>
       </div>

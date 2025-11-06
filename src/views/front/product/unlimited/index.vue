@@ -393,7 +393,7 @@
               </li>
             </ul>
             <div class="btn_box v_center space-x-3">
-              <a href="/zh/user-guide/">
+              <a href="/doc">
                 <IpButton type="primary_border px-5 box-border btn">{{ t("unlimited_proxy_spec.view_doc") }}</IpButton>
               </a>
               <div class="images">

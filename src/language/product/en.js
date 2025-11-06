@@ -23,6 +23,8 @@ export default {
   product_spec: {
     residential: {
       title: "Residential Proxy",
+      price_desc:
+        "Residential proxies are standard proxy alternatives with high speed, high reliability. Upgrade to residential proxies today to remove IP blocking.",
       desc: "Residential proxies from real residential devices. Highly diverse IPs.",
       adv1: "Fast, reliable, and ethical sources of proxies",
       adv2: "Price starts at ${price}/GB",
@@ -40,6 +42,8 @@ export default {
     },
     data_center: {
       title: "Static Data Center Proxies",
+      price_desc:
+        "With high-quality datacenter proxies, you get low latency and stable connections to keep your operations running smoothly and efficiently.",
       desc: "Use stable, fast and powerful data center IP around the world.",
       adv1: "Advanced Static IP",
       adv2: "Price starts at ${price}/IP",
@@ -57,6 +61,7 @@ export default {
     },
     rotation: {
       title: "Rotating Residential Proxies",
+      price_desc: "Real residential IPs, auto-rotating for uninterrupted data collection and network access.",
       desc: "Redefining Value: Premium Rotating Residential Proxies from just ${price}/GB, powering your business.",
       adv1: "Global Geolocation Coverage",
       adv2: "Unlimited Sub-account Creation",
@@ -104,8 +109,7 @@ export default {
     why6_title: "Global Coverage",
     why6_desc: "Purchase residential IPs from 190 locations worldwide and provide country, city, and state-level geolocation services.",
 
-    price_desc:
-      "Residential proxies are standard proxy alternatives with high speed, high reliability. Upgrade to residential proxies today to remove IP blocking.",
+    price_desc: "",
     price_adv1: "Average success rate of 99.5%",
     price_adv2: "Average response time of 0.6s",
     price_adv3: "HTTP / SOCKS5 protocols",

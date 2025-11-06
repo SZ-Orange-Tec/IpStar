@@ -12,6 +12,8 @@ export default {
   ...headerGift,
   ...question,
 
+  FAQ: "FAQ",
+
   pricing_spec: {
     residential: {
       title: "Residential Proxies Price",
@@ -28,6 +30,10 @@ export default {
     data_center: {
       title: "Data Center Proxies Price",
       des: "With high-quality datacenter proxies, you get low latency and stable connections to keep your operations running smoothly and efficiently.",
+    },
+    rotation: {
+      title: "Rotation Residential Proxies Price",
+      des: "Real residential IPs, auto-rotating for uninterrupted data collection and network access.",
     },
 
     plan_title: "Total Data Control",

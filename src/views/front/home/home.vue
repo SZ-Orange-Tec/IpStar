@@ -4,17 +4,17 @@
     <div class="introduce box relative" ref="introRef">
       <div class="container column space-y-10">
         <div class="space-y-4 md:space-y-7" style="max-width: 700px">
-          <div class="space-y-1 md:space-y-4">
-            <p class="title text-lg lg:text-4xl whitespace-pre-wrap font-semibold">{{ t("home_spec.intro_title1") }}</p>
+          <div class="title space-y-1 md:space-y-4">
+            <p class="title text-lg lg:text-4xl whitespace-pre-wrap font-medium">{{ t("home_spec.intro_title1") }}</p>
             <p class="title text-lg lg:text-xl md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_title2") }}</p>
           </div>
 
-          <p class="opacity-90 md:whitespace-pre-wrap font-light">{{ t("home_spec.intro_desc") }}</p>
+          <p class="description md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
         <div class="my-16 btn_box">
           <div class="w-full column sm:v_center gap-4" v-if="!isLogin" style="align-items: stretch">
-            <IpButton type="major" class="flex-1" @click="toLogin">
+            <IpButton type="normal" class="white_btn flex-1" @click="toLogin">
               <div class="vh_center space-x-2 h-10">
                 <span>{{ t("Free_Trial") }}</span>
                 <MoveUpRight :size="14" />
@@ -23,7 +23,7 @@
             <GoogleLoginButton v-if="!isLogin" class="flex-1 h-10 md:h-auto" />
           </div>
           <div class="w-full column md:v_center gap-4" v-else style="align-items: stretch">
-            <IpButton type="major" class="h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="normal" class="white_btn font-medium h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
             <IpButton type="major" class="h-10 px-4 md:px-8 tutorial transition-color" @click="$router.push('/overview')">
               <div class="vh_center space-x-2 w-full h-full">
                 <span>{{ t("home_spec.dashboard") }}</span>
@@ -33,13 +33,13 @@
           </div>
         </div>
 
-        <div class="v_center data self-center rounded-md" v-lazy="getUserIps">
+        <!-- <div class="v_center data self-center rounded-md" v-lazy="getUserIps">
           <div class="column_center">
             <strong class="title text-center text-base md:text-xl whitespace-nowrap" style="width: 10rem; height: 2rem">
               <template v-if="partner !== -1">{{ partner }} +</template>
             </strong>
             <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.partner") }}</span>
-            <!-- <span class="description  text-xs md:text-sm whitespace-pre-wrap">{{ t("home_spec.users") }}</span> -->
+            
           </div>
           <div class="line" style="color: #eef5ff"></div>
           <div class="column_center">
@@ -48,7 +48,7 @@
             </strong>
             <span class="description text-xs md:text-sm font-light text-center">{{ t("home_spec.online") }}</span>
           </div>
-        </div>
+        </div> -->
 
         <div class="advant w-full md:column_center overflow-hidden">
           <ul class="flex !items-stretch font-normal">
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="box proxy" v-lazy="getLowestPrice">
+    <div class="box_wrap proxy" v-lazy="getLowestPrice">
       <div class="container">
         <div class="space-y-5">
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
@@ -94,89 +94,208 @@
           <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.proxy_desc") }}</p>
         </div>
 
-        <div class="grid grid-cols-3 gap-6">
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Residential_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.residential_des") }}</p>
+        <div class="content grid grid-cols-3 gap-6">
+          <div class="product_item residential">
+            <div class="info">
+              <img loading="lazy" src="@/assets/images/home/icon1.webp" width="48" height="48" />
+              <div class="text-xl font-medium mt-4 leading-none">{{ t("Residential_Proxies") }}</div>
+              <p class="mt-4">{{ t("home_spec.residential_des") }}。</p>
+              <ul class="space-y-3 text-sm grey-80 mt-5">
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("home_spec.residential_adv1") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("home_spec.residential_adv2") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("home_spec.residential_adv3") }}</span>
+                </li>
+              </ul>
+              <div class="between mt-7">
+                <div class="left">
+                  <div class="text-xs">{{ t("Starting_from") }}</div>
+                  <div class="text-sm">
+                    <span class="primary">$</span>
+                    <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                    <span>/GB</span>
+                  </div>
+                </div>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <a href="/pricing/residential">
+                  <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+                </a>
+              </div>
+            </div>
+            <img loading="lazy" class="bg" src="@/assets/images/home/residential.webp" width="464" height="388" />
+          </div>
+          <div class="product_item space-y-4">
+            <img loading="lazy" src="@/assets/images/home/icon2.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Phone_Proxies") }}</div>
+            <p class="mt-4">{{ t("home_spec.phone_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.phone_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.phone_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.phone_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.phone }}</b>
+                  <span>/GB</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('residential')" type="primary_border" class="h-9 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Unlimited_Residential_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.unlimited_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/mobile">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon3.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Unlimited_Residential_Proxies") }}</div>
+            <p class="mt-4">{{ t("home_spec.unlimited_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.unlimited_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.unlimited_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.unlimited_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.unlimited }}</span> /{{ t("Day") }}
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.unlimited }}</b>
+                  <span>/{{ t("Day") }}</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('unlimited')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <PhoneProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Phone_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.phone_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/unlimited">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon4.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Data_Center_Proxies") }}</div>
+            <p class="mt-4">{{ t("home_spec.data_center_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.data_center_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.data_center_adv2", { price: lowestPrice.data_center }) }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.data_center_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.phone }}</span> /GB
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.data_center }}</b>
+                  <span>/IP</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('mobile')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <DataProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Data_Center_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.data_center_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+              <a href="/pricing/data_center">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon5.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Rotation_Proxies") }}</div>
+            <p class="mt-4">{{ t("home_spec.rotation_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.rotation_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.rotation_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("home_spec.rotation_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
-                  <span class="text-xl font-medium">${{ lowestPrice.data_center }}</span> /IP
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                  <span>/GB</span>
                 </div>
               </div>
-              <IpButton @click="toPriceSecond('data_center')" type="primary_border" class="h-8 px-4 text-sm">{{ t("Get_Now") }}</IpButton>
-            </div>
-          </div>
-          <div class="grid-item p-5 rounded-md column space-y-3 column" style="grid-column-start: 2; grid-column-end: 4">
-            <div class="iconbox rounded-lg vh_center shrink-0">
-              <ResidentialProxyIcon class="w-6 h-6 text-primary" />
-            </div>
-            <strong class="font-medium">{{ t("Customised_Proxies") }}</strong>
-            <p class="text-sm grey-60">{{ t("home_spec.customer_des") }}</p>
 
-            <div class="between w-full" style="margin-top: auto">
-              <div>
-                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
-                <div class="text-sm"><span class="text-xl font-medium">$ ?</span> /GB</div>
-              </div>
-              <IpButton @click="openService" type="primary_border" class="h-8 px-4 text-sm">{{ t("Contact_Us") }}</IpButton>
+              <a href="/pricing/rotation">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
             </div>
+            <!---->
           </div>
         </div>
       </div>
@@ -338,61 +457,96 @@
             </li>
           </ul>
         </div>
-
-        <div class="w-full mt-8 md:mt-16 world_split column_center space-y-2 md:space-y-5" v-lazy="showSlow">
-          <i18n-t keypath="home_spec.world_title" tag="p" scope="global" class="title text-xl lg:text-3xl font-semibold">
-            <template #primary>
-              <span class="primary_text">{{ t("home_spec.world_title_slot") }}</span>
-            </template>
-          </i18n-t>
-          <p class="description text-sm text-center">{{ t("home_spec.world_desc") }}</p>
-        </div>
       </div>
     </div>
 
-    <div class="world box" v-lazy="showSlow">
-      <div class="container between">
-        <div class="img_box flex-1 hidden md:block" v-lazy="showSlow">
-          <img v-lazy src="@/assets/images/home/world.png" height="400" alt="" />
+    <div class="box_wrap location">
+      <div class="container white">
+        <div class="space-y-3">
+          <div class="text-4xl font-medium text-center">{{ t("home_spec.location_title") }}</div>
+          <div class="text-lg opacity-90 text-center">{{ t("home_spec.location_desc") }}</div>
         </div>
-
-        <div class="content h-full py-3 box-border" v-lazy="showSlow">
-          <div class="space-y-5">
-            <h3 class="primary text-lg font-semibold">{{ t("home_spec.coverage") }}</h3>
-            <p class="text-sm">{{ t("home_spec.coverage_desc") }}</p>
+        <div class="map">
+          <img loading="lazy" class="img" src="https://www.proxylite.com/_nuxt/map.BNfwdBbI.webp" width="1000" height="562" />
+          <div class="all between relative">
+            <div class="text-center space-y-5">
+              <div>{{ t("home_spec.location_dot1") }}</div>
+              <div class="text-3xl font-semibold"><span>72</span>M+</div>
+            </div>
+            <div class="text-center space-y-5">
+              <div>{{ t("home_spec.location_dot2") }}</div>
+              <div class="text-3xl font-semibold"><span>190</span>+</div>
+            </div>
+            <div class="text-center space-y-5">
+              <div>{{ t("home_spec.location_dot3") }}</div>
+              <div class="text-3xl font-semibold"><span>7,200</span></div>
+            </div>
+            <div class="text-center space-y-5">
+              <div>{{ t("home_spec.location_dot4") }}</div>
+              <div class="text-3xl font-semibold"><span>99</span>%</div>
+            </div>
           </div>
-
-          <div class="space-y-5" v-lazy="showSlow">
-            <p class="primary text-lg font-semibold">{{ t("home_spec.resources") }}</p>
-
-            <ul class="column space-y-3">
-              <li class="flex space-x-2">
-                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
-                  <Check :size="12" color="white" />
-                </div>
-                <p>{{ t("home_spec.word_adv1") }}</p>
-              </li>
-              <li class="flex space-x-2">
-                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
-                  <Check :size="12" color="white" />
-                </div>
-                <p>{{ t("home_spec.word_adv2") }}</p>
-              </li>
-              <li class="flex space-x-2">
-                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
-                  <Check :size="12" color="white" />
-                </div>
-                <p>{{ t("home_spec.word_adv3") }}</p>
-              </li>
-              <li class="flex space-x-2">
-                <div class="my-1 shrink-0 w-4 h-4 primary bg-current rounded-full vh_center">
-                  <Check :size="12" color="white" />
-                </div>
-                <p>{{ t("home_spec.word_adv4") }}</p>
-              </li>
-            </ul>
-
-            <ip-button type="major" class="h-8 px-3" @click="toHomeSecond('introduce')">{{ t("Learn_More") }}</ip-button>
+          <div class="gps_1 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_2 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_3 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_4 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_5 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_6 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_7 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="gps_8 gps">
+            <img loading="lazy" src="@/assets/images/home/position.png" width="24" height="31" />
+            <div class="dot"></div>
+          </div>
+          <div class="country country_us" :class="{ country_animtate: country_active === 0 }">
+            <div class="country_title">
+              <img loading="lazy" width="34" height="24" src="@/assets/images/product/country/USA.svg" /><span>United States</span>
+            </div>
+            <div class="country_value"><span>1,047,582</span> IPs</div>
+          </div>
+          <div class="country country_jp" :class="{ country_animtate: country_active === 1 }">
+            <div class="country_title">
+              <img loading="lazy" width="34" height="24" src="@/assets/images/product/country/Japan.svg" /><span>Japan</span>
+            </div>
+            <div class="country_value"><span>1,047,582</span> IPs</div>
+          </div>
+          <div class="country country_br" :class="{ country_animtate: country_active === 2 }">
+            <div class="country_title">
+              <img loading="lazy" width="34" height="24" src="@/assets/images/product/country/Brazil.svg" /><span>Brazil</span>
+            </div>
+            <div class="country_value"><span>1,047,582</span> IPs</div>
+          </div>
+          <div class="country country_gb" :class="{ country_animtate: country_active === 3 }">
+            <div class="country_title">
+              <img loading="lazy" width="34" height="24" src="@/assets/images/product/country/France.svg" /><span>France</span>
+            </div>
+            <div class="country_value"><span>1,047,582</span> IPs</div>
+          </div>
+          <div class="country country_au" :class="{ country_animtate: country_active === 4 }">
+            <div class="country_title">
+              <img loading="lazy" width="34" height="24" src="@/assets/images/product/country/Australia.svg" /><span>Australia</span>
+            </div>
+            <div class="country_value"><span>1,047,582</span> IPs</div>
           </div>
         </div>
       </div>
@@ -405,7 +559,7 @@
           <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
             {{ t("home_spec.app_title") }}
           </p>
-          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("home_spec.app_desc") }}</p>
+          <p v-lazy="showSlow" class="text-center md:whitespace-pre-wrap">{{ t("home_spec.app_desc") }}</p>
         </div>
 
         <IpImage :width="2376" :height="320" style="margin-top: 3rem" v-lazy="showSlow">
@@ -415,7 +569,7 @@
         <!-- <div class="w-full pack_title mt-8 md:mt-16 column_center space-y-2 md:space-y-5" v-lazy="showSlow">
           <p class="title text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
 
-          <p class="description green text-center">{{ t("home_spec.package_desc") }}</p>
+          <p class="description success text-center">{{ t("home_spec.package_desc") }}</p>
         </div> -->
       </div>
     </div>
@@ -457,7 +611,7 @@ import loginStore from "@/store/login"
 import { useRouter } from "vue-router"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { MoveRight, WandSparkles as StarIcon, ToggleLeft, Dot, Code, Laptop, Check, MoveUpRight } from "lucide-vue-next"
+import { MoveRight, WandSparkles as StarIcon, ToggleLeft, Dot, Code, Laptop, Check, MoveUpRight, ChevronLeft } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
@@ -471,13 +625,6 @@ import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 // import HomeTitle from "../components/homeTitle.vue"
 import layoutStore from "@/store/layout"
 import { platProductLowestPrices } from "@/api/product"
-import {
-  House as ResidentialProxyIcon,
-  Infinity as UnlimitedProxyIcon,
-  Smartphone as PhoneProxyIcon,
-  Database as DataProxyIcon,
-  ChevronLeft,
-} from "lucide-vue-next"
 
 // 首页canvas高度
 const homeHeight = inject("homeHeight")
@@ -585,6 +732,21 @@ function loadHoverImg() {
   import("@/assets/images/home/four_active6.webp")
   import("@/assets/images/home/four_active7.webp")
   import("@/assets/images/home/four_active8.webp")
+}
+
+// location 动效
+const country_active = ref(0)
+let country_timer = null
+function changeCountry() {
+  country_active.value = (country_active.value + 1) % 5
+
+  if (country_timer) {
+    clearTimeout(country_timer)
+  }
+
+  country_timer = setTimeout(() => {
+    changeCountry()
+  }, 2500)
 }
 
 // 累计用户
@@ -736,6 +898,7 @@ function giftPacks(e) {
 // 转换mounted
 onMounted(() => {
   setHomeHeight()
+  changeCountry()
 })
 </script>
 

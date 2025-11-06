@@ -71,7 +71,6 @@ async function isShowGift() {
 }
 
 onMounted(() => {
-  console.log(registerAward.value)
   if (registerAward.value) {
     nextTick(() => {
       if (!giftRef.value) return

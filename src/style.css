@@ -85,6 +85,9 @@
 .warn{
   color: hsl(var(--warn));
 }
+.white{
+  color: hsl(var(--colour-foreground));
+}
 .black{
   color: hsl(var(--foreground));
 }

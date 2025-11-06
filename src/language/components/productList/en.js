@@ -17,6 +17,12 @@ export default {
 
   Trial: "Trial",
 
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Rotation_Proxies: "Rotation Residential Proxies",
+
   productList_spec: {
     right1: "200+Regions, Include US",
     right2: "Regions-Select Available",

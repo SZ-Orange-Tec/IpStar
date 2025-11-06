@@ -6,8 +6,9 @@
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
           <div class="pointer" @click="navigate('/home')">
-            <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
-            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" />
+            <!-- <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
+            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" /> -->
+            <img sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
             <!-- <img
               sizes="(max-width:112px) 56px,24px"
               src="@/assets/images/logo_white.png"

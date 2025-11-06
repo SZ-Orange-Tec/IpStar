@@ -17,6 +17,12 @@ export default {
 
   Trial: "试用",
 
+  Residential_Proxies: "住宅代理",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
+  Phone_Proxies: "移动手机代理",
+  Data_Center_Proxies: "静态数据中心代理",
+  Rotation_Proxies: "轮换住宅代理",
+
   productList_spec: {
     right1: "含美欧和其他地区",
     right2: "国家可以选择",
