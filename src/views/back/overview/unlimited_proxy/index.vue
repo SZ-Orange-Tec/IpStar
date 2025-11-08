@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 column">
-    <div class="w-full p-5 board rounded">
+    <div class="w-full p-5 board rounded space-y-3">
       <!-- 头部区域 -->
-      <div class="w-full between mb-8">
+      <div class="w-full column md:between gap-3">
         <div class="v_center space-x-3">
           <div class="iconbox rounded-lg vh_center shrink-0">
             <UnlimitedProxyIcon :size="28" :stroke-width="1.5" />

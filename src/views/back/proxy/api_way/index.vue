@@ -54,8 +54,8 @@
       <div class="">
         <p class="text-base">{{ t("proxy_spec.url") }} {{ t("proxy_spec.base") }}</p>
         <div class="column md:v_center w-full gap-3 mt-2">
-          <IpInput class="flex-1 h-10 rounded" v-model="url" :placeholder="t('proxy_spec.placeholder')"></IpInput>
-          <div class="space-x-3 v_center text-sm">
+          <IpInput class="w-full h-10 rounded" v-model="url" :placeholder="t('proxy_spec.placeholder')"></IpInput>
+          <div class="space-x-3 v_center text-sm whitespace-nowrap">
             <ip-button type="primary" class="h-10 px-5" @click="copyUrl">{{ t("Copy_link") }}</ip-button>
             <ip-button type="primary_border" class="h-10 px-5" @click="openUrl">{{ t("Open_link") }}</ip-button>
           </div>

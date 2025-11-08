@@ -4,14 +4,17 @@ export default {
   ...menu,
   ...navbar,
 
-  User_Pass_Auth: "账密提取",
-  API_Auth: "API提取",
+  Rotation_Proxies: "轮换代理",
+  Manual_Auth: "手动提取",
+  API_Auth: "API 提取",
+  User_Pass: "账密组合",
   Options: "筛选项",
   Starting_from: "低至：",
   Residual_Traffic: "剩余流量",
   Expiration_time: "过期时间",
   Remaining: "剩余",
 
+  Proxy: "代理",
   Country: "国家",
   Protocol: "协议",
   Duration: "有效期",
@@ -43,6 +46,10 @@ export default {
   Example: "示例",
   Result: "结果",
 
+  Proxy_UserName: "代理用户名",
+  Proxy_Password: "代理用户密码",
+  Note: "注意",
+
   proxy_spec: {
     duration_tip: "当您使用代理时，您可以设置IP的有效期，并在有效期内使用该代理。由于它是常驻代理，因此有效期的范围可以从几个小时到几天不等。",
 
@@ -51,6 +58,28 @@ export default {
     placeholder: "点击上方按钮生成API链接",
     note1: "在浏览器或代码中请求此链接，每次均可获得一个新IP代理。更多选项，请参阅API文档和演示。",
     note2: "对于此链接的重复请求，请每次将参数“rd”更改为不同的随机字符串；否则，返回的通道将不会改变。",
+    note_proxy: "以上代理用户格式适用于住宅代理，如果你要使用其他类型的代理，代理格式略有不同，具体如下：",
+    note_proxy1: "1. 使用轮换代理，ipstr参数固定为rot，例如：",
+    note_proxy2: '2. 使用无限制代理，地区固定为"U"，例如：',
+    note_proxy3: "3. 使用移动 IP 代理，在最后加上 M 字段，例如：",
+    note_proxy_end: "移动ip代理不支持无限代理套餐，即 第四段U和第六段M不能同时出现。",
+
+    combo_title: "账密组合接入方式",
+    combo1_title: "获取代理用户信息",
+    combo1_desc: '首先，您需要在" {position} "中找到您的代理用户密码信息。',
+    combo1_position: "控制台->设置",
+    combo2_title: "拼接代理用户格式",
+    combo2_desc: "然后，根据用户信息拼接为以下格式",
+    params_desc: "上面的每个参数说明如下",
+    what_ipstr: "随机字符串，更改此部分可切换IP地址",
+    what_keeptime: "有效时间(分钟)，0表示不限制时长",
+    what_country: "国家代码(如US, BR等)",
+    what_N: "固定后缀",
+    combo2_example: "将参数顺序组合，即可得到一个代理用户，下面是实际示例",
+    combo2_tip: '切换国家时，必须同时修改"ipstr"，否则修改将无效。',
+    combo3_title: "IP池服务地址",
+    combo3_desc: "以下为可用的IP池服务地址（每个入口都是独立的IP池，建议同时在多个地址之间随机获取）：",
+    combo4_title: "实际代理参数示例",
 
     upgrade_tip: {
       front: "查看完整的api说明请先",
@@ -58,7 +87,6 @@ export default {
     },
     buy: "购买服务会员可见",
     combo: "帐密组合",
-
     // subscript: "需要订阅",
     // unlock_title: "解锁API提取",
     // unlock_desc: "解锁后，您可以通过手动提取代理通道。",

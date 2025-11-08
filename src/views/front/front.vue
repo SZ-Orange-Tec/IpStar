@@ -86,6 +86,9 @@ onMounted(() => {
     padding: 0 1rem;
     & > .container {
       padding: 2rem 0;
+      .content {
+        margin-top: 40px;
+      }
     }
   }
 }

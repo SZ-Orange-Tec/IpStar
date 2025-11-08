@@ -20,6 +20,13 @@ export default {
   Data_Center_Proxies: "Static Data Center Proxies",
   Price: "Pricing",
 
+  USA: "USA",
+  France: "France",
+  UK: "UK",
+  HongKong: "HongKong",
+  Australia: "Australia",
+  Japan: "Japan",
+
   product_spec: {
     residential: {
       title: "Residential Proxy",
@@ -62,11 +69,11 @@ export default {
     rotation: {
       title: "Rotating Residential Proxies",
       price_desc: "Real residential IPs, auto-rotating for uninterrupted data collection and network access.",
-      desc: "Redefining Value: Premium Rotating Residential Proxies from just ${price}/GB, powering your business.",
-      adv1: "Global Geolocation Coverage",
-      adv2: "Unlimited Sub-account Creation",
-      adv3: "99.99% Connection Success Rate",
-      adv4: "<0.5 Second Instant Response Time",
+      desc: "Our rotating proxy service assigns a unique IP for each request, effectively reducing the risk of bans and ensuring a higher success rate.",
+      adv1: "Assign an IP address to each request",
+      adv2: "Use a single endpoint, it's easy integration.",
+      adv3: "IAutomatically and intelligently schedules to the best IP.",
+      adv4: "More efficient product service, but no extra charge.",
       adv5: "Supports HTTP(S) and SOCKS5",
       ques1: "What are Rotating Residential Proxies?",
       ans1: "Rotating residential proxies constitute a proxy service where IP addresses originate from genuine domestic broadband networks (i.e., ‘residential’ IPs), and these addresses automatically rotate according to predetermined rules or time intervals.",
@@ -81,7 +88,7 @@ export default {
     },
     proxy_endpoints: "Proxy Endpoints",
     proxy_network: "Proxy Network",
-    proxy_ip: "7200 M+ Residential IPs",
+    proxy_ip: "9000 M+ Residential IPs",
     proxy_country: "190 Countries",
     proxy_uptime: "Uptime",
 
@@ -90,13 +97,22 @@ export default {
       "IpStar's residential proxy pool is sourced from carefully selected partners who adhere to business ethics and strict compliance guidelines. Most of IpStar's proxy networks are composed of A-level proxy models.",
     start_use: "Start Using Proxies",
 
+    expore_title: "Explore Datacenter Proxy Locations Worldwide",
+    expore_desc:
+      "Utilize global IP addresses to effortlessly access worldwide content and bypass geo-restrictions. Maintain anonymity and continuously scale your projects with our datacenter proxies.",
+    expore_expore: "Explore More",
+
+    static_title: "What is a Static Datacenter Proxy?",
+    static_desc:
+      "A static datacenter proxy routes your traffic through a datacenter network. By utilizing the powerful infrastructure and resources of data centers, it delivers high-performance proxy services characterized by exceptional speed, stability, and access to a vast pool of IP addresses.",
+
     plan_title: "Easily Integrate Our Solution into Your Project",
     plan_desc:
       "We ensure that our product is easily integrated into your scraping infrastructure. With multiple language support and ready-to-use code examples, you can start your web scraping project quickly and easily.",
     view_doc: "View Documentation",
 
     why_title: "Why Use Our Residential IP?",
-    why1_title: "7200 M+ Residential IPs for Sale",
+    why1_title: "9000 M+ Residential IPs for Sale",
     why1_desc: "We offer a highly stable residential proxy IP pool.",
     why2_title: "Zero CAPTCHA",
     why2_desc: "Optimize business resources as no captcha is required.",
@@ -108,6 +124,20 @@ export default {
     why5_desc: "No limits on concurrent sessions. Purchase residential IPs and send unlimited concurrent sessions.",
     why6_title: "Global Coverage",
     why6_desc: "Purchase residential IPs from 190 locations worldwide and provide country, city, and state-level geolocation services.",
+
+    static_why_title: "Why Use Our Static Datacenter Proxy?",
+    static_why1_title: "Exclusive IP Resources",
+    static_why1_desc: "Specific target site IP addresses, personal exclusive use.",
+    static_why2_title: "Transparent Billing",
+    static_why2_desc: "Billed by the number of IPs, no extra charges.",
+    static_why3_title: "High Success Rate",
+    static_why3_desc: "IP availability >99%, response time <0.6 seconds.",
+    static_why4_title: "Simple IP Authentication",
+    static_why4_desc: "Choose username:password authentication or IP whitelist for faster integration with your workflow.",
+    static_why5_title: "Unlimited Bandwidth",
+    static_why5_desc: "Data center proxies provide fair use policies for each IP - no extra charges.",
+    static_why6_title: "Precise Geolocation",
+    static_why6_desc: "Data center proxy IPs are located in various global locations.",
 
     price_desc: "",
     price_adv1: "Average success rate of 99.5%",

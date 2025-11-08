@@ -21,16 +21,16 @@ export default {
   unlimited_proxy_spec: {
     title: "使用无限代理扩展 {place} 集合",
     title_place: "LLM 训练数据",
-    descript: "按带宽计费，无 IP/流量限制。灵活调整并发数和带宽，轻松扩展网页抓取操作。",
-    adv1: "7200万+住宅 IP，覆盖全球190+地区",
-    adv2: "灵活的并发和带宽管理，轻松扩展",
-    adv3: "支持 YouTube/Github/音视频代理",
-    adv4: "毫秒级响应时间",
+    descript: "按天时间计费，无 IP/流量限制。灵活调整并发数和带宽，轻松扩展网页抓取操作。",
+    adv1: "9000万+住宅 IP，覆盖全球大部分地区",
+    adv2: "不限制并发和带宽",
+    adv3: "无限制流量使用",
+    adv4: "流量随心，成本可控",
 
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
-    proxy_ip: "7200万+住宅IP",
-    proxy_country: "190个国家",
+    proxy_ip: "9000万+住宅IP",
+    proxy_country: "200个国家",
     proxy_uptime: "正常运行时间",
 
     how_title: "如何通过无限代理服务实现 LLM 训练？",

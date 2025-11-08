@@ -28,7 +28,7 @@
             :page-size="size"
             :current-page="page"
             :page-sizes="[10, 25, 50]"
-            layout="total, prev, pager, next, sizes, jumper"
+            :layout="layout"
             :total="total"
           >
           </el-pagination>
@@ -39,9 +39,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
+import { inject, onMounted, ref } from "vue"
 import { platCustomerProductsV2 } from "@/api/product"
 import { useI18n } from "vue-i18n"
+
+const layout = inject("paginationLayout")
 
 const { t } = useI18n()
 // 表格数据

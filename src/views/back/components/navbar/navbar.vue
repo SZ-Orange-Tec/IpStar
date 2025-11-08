@@ -6,7 +6,7 @@
           <slot :title="name"></slot>
         </div>
 
-        <DropDown placement="bottom" class="block lg:hidden">
+        <DropDown placement="bottom" class="block md:hidden">
           <template #label="{ open }">
             <IpButton :class="{ open: open }" type="ghost" class="menu_btn">
               <Menu :size="20" />

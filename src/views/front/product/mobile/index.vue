@@ -22,14 +22,14 @@
               <span>{{ t(`mobile_proxy_spec.adv3`) }}</span>
             </li>
           </ul>
-          <div class="my-button v_center space-x-3">
-            <a href="/pricing/mobile">
+          <div class="my-button column !items-stretch sm:v_center gap-3">
+            <a href="/pricing/mobile" class="flex-1">
               <IpButton type="primary" class="new-button vh_center rounded pointer box-border">
                 <span class="font-medium">{{ t("Buy_Now") }}!</span>
                 <ArrowRight class="icon" :size="18" />
               </IpButton>
             </a>
-            <a v-if="!isLogin" href="/login" class="">
+            <a v-if="!isLogin" href="/login" class="flex-1">
               <IpButton type="normal" class="google vh_center rounded space-x-2 pointer box-border">
                 <img
                   loading="lazy"
@@ -42,11 +42,11 @@
             </a>
           </div>
         </div>
-        <div class="right">
+        <div class="right hidden md:block">
           <img
             loading="lazy"
             width="510"
-            src="@/assets/images/mobile_proxy/1m.png"
+            src="@/assets/images/mobile_proxy/1m.webp"
             alt="IpStar"
             class="animate__animated animate__bounceInDown"
             style="visibility: visible"
@@ -57,7 +57,7 @@
 
     <div class="box_wrap intro">
       <div class="container">
-        <ul class="w-full flex gap-6">
+        <ul class="w-full grid grid-cols-2 lg:grid-cols-4 flex-wrap gap-6">
           <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
             <div class="v_center space-x-3">
               <img
@@ -109,8 +109,85 @@
     </div>
 
     <div class="box_wrap position">
+      <div class="container position_flex">
+        <div class="column_center lg:v_center lg:!flex-row-reverse position_flex">
+          <div class="section_text space-y-7">
+            <!-- <img src="" alt=""> -->
+            <div class="space-y-5">
+              <h2 class="title font-medium">{{ t("mobile_proxy_spec.country_title") }}</h2>
+              <p class="grey-60 text-lg">
+                {{ t("mobile_proxy_spec.country_desc") }}
+              </p>
+            </div>
+            <div class="btn_box">
+              <a v-if="isLogin" href="/overview">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("mobile_proxy_spec.expore") }}</IpButton>
+              </a>
+              <a v-else href="/login">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("mobile_proxy_spec.expore") }}</IpButton>
+              </a>
+            </div>
+          </div>
+
+          <div class="country shrink-0">
+            <ul class="grid grid-cols-3 gap-6">
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/USA.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("USA") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 58 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 580 K+ IP</strong>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/Germany.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("Germany") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 23 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 230 K+ IP</strong>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/UK.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("UK") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 35 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 350 K+ IP</strong>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/India.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("India") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 28 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 280 K+ IP</strong>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/Canada.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("Canada") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 22 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 220 K+ IP</strong>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-2">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/Japan.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("Japan") }}</span>
+                <strong class="font-medium text-lg text-center" v-if="!en"> 42 万+ IP</strong>
+                <strong class="font-medium text-lg text-center" v-else> 420 K+ IP</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box_wrap position">
       <div class="container">
-        <div class="between position_flex">
+        <div class="column_center lg:between position_flex">
           <div class="section_text space-y-7">
             <!-- <img src="" alt=""> -->
             <div class="space-y-5">
@@ -142,9 +219,7 @@
 
     <div class="box_wrap position">
       <div class="container">
-        <div class="between position_flex">
-          <img loading="lazy" class="images" decoding="async" width="600" src="@/assets/images/mobile_proxy/netnut_illustration17.svg" alt="" />
-
+        <div class="column_center lg:v_center lg:!flex-row-reverse position_flex">
           <div class="section_text space-y-7">
             <!-- <img src="" alt=""> -->
             <div class="space-y-5">
@@ -172,6 +247,8 @@
               </li>
             </ul>
           </div>
+
+          <img loading="lazy" class="images" decoding="async" width="600" src="@/assets/images/mobile_proxy/netnut_illustration17.svg" alt="" />
         </div>
       </div>
     </div>
@@ -181,7 +258,7 @@
         <div class="title font-medium text-center">{{ t("mobile_proxy_spec.mobile_title") }}</div>
 
         <div class="content">
-          <ul class="grid grid-cols-3 gap-6">
+          <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <li class="rounded-lg p-6 space-y-4 pointer">
               <img loading="lazy" width="40" height="40" src="@/assets/images/mobile_proxy/icon-1.png" />
               <div class="text-lg font-medium">{{ t("mobile_proxy_spec.mobile1_title") }}</div>
@@ -222,7 +299,7 @@
         <div class="title font-medium text-center">{{ t("mobile_proxy_spec.network_title") }}</div>
 
         <div class="content">
-          <ul class="grid grid-cols-2 gap-6">
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <li class="rounded-lg p-6 space-y-4 pointer">
               <div class="bck orange"></div>
               <div class="v_center space-x-2">
@@ -263,7 +340,7 @@
     <div class="box_wrap advant">
       <div class="container">
         <div class="">
-          <ul class="grid grid-cols-3 gap-6">
+          <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <li class="rounded-lg p-6 space-y-4 pointer">
               <img loading="lazy" width="40" height="40" src="@/assets/images/mobile_proxy/icon-1.png" />
               <div class="text-lg font-medium">{{ t("mobile_proxy_spec.data1_title") }}</div>
@@ -372,7 +449,7 @@
     <div class="box_wrap footer">
       <div class="container">
         <img loading="lazy" id="bottom_bg" src="@/assets/images/product/bottom_bg.png" width="270" height="270" style="" />
-        <div class="started" style="">
+        <div class="started h-full" style="">
           <div class="started_title text-3xl font-medium">有一个大项目?</div>
           <div class="started_desc">与我们的顾问取得联系，开始让您的员工了解情况、投入、高效和安全。</div>
           <a href="/pricing/mobile" class="started_btn vh_center box-border">

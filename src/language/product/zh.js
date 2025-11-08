@@ -20,6 +20,13 @@ export default {
   Data_Center_Proxies: "静态数据中心代理",
   Price: "定价",
 
+  USA: "美国",
+  France: "法国",
+  UK: "英国",
+  HongKong: "香港",
+  Australia: "澳大利亚",
+  Japan: "日本",
+
   product_spec: {
     residential: {
       title: "住宅代理",
@@ -60,11 +67,11 @@ export default {
     rotation: {
       title: "轮换住宅代理",
       price_desc: "真实住宅IP，自动轮换，让数据采集与网络访问畅通无阻。",
-      desc: "重新定义性价比：真实轮转住宅代理，体验低至 ${price}/GB 的旗舰级代理服务，为您的业务提供强大助力。",
-      adv1: "全球地理位置覆盖",
-      adv2: "无限制创建子账户",
-      adv3: "99.99%的连接成功率",
-      adv4: "<0.5秒疾速响应时间",
+      desc: "轮换代理服务为每次请求分配独立IP，有效降低封禁风险，提高成功率。",
+      adv1: "每个请求分配独立IP地址",
+      adv2: "采用统一接口，轻松集成。",
+      adv3: "自动智能调度至最佳IP。",
+      adv4: "更高效的产品服务，无需额外付费",
       adv5: "支持HTTP(S) 和 SOCKS5",
       ques1: "什么是轮换住宅代理",
       ans1: "轮换住宅代理是一种代理服务，其IP地址来自于真实的家庭宽带网络（即“住宅”IP），并且这些IP地址会按照一定规则或时间间隔自动更换（即“轮换”）。",
@@ -80,20 +87,29 @@ export default {
 
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
-    proxy_ip: "7200万+住宅IP",
-    proxy_country: "190个国家",
+    proxy_ip: "9000万+住宅IP",
+    proxy_country: "200个国家",
     proxy_uptime: "正常运行时间",
 
-    source_title: "IpStar的道德来源的住宅代理",
-    source_desc: "IpStar的住宅代理池来自精心挑选的合作伙伴，这些合作伙伴坚持商业道德并严格遵守。IpStar的大部分代理网络是由A级代理模型组成的。",
+    source_title: "IpStar的合规来源的住宅代理",
+    source_desc:
+      "IpStar的住宅代理池来自精心挑选的合作伙伴，这些合作伙伴坚持商业道德并严格遵守当地法律。IpStar的大部分代理网络是由A级代理模型组成的。",
     start_use: "开始使用代理",
+
+    static_title: "什么是静态数据中心代理？",
+    static_desc:
+      "静态数据中心代理是通过与数据中心网络的连接运行的代理，利用数据中心提供的强大基础设施和资源，为用户提供代理服务。这些代理通常具有高速、稳定性和大规模的IP资源。",
+
+    expore_title: "探索全球各地的数据中心代理位置",
+    expore_desc: "使用全球IP地址，轻松访问全球内容并突破地理限制。通过数据中心代理，保持匿名并持续扩展您的项目。",
+    expore_expore: "探索更多",
 
     plan_title: "轻松将我们的解决方案集成到您的项目中",
     plan_desc: "我们确保将我们的产品集成到您的抓取基础设施中尽可能轻松。有了多种语言支持和现成的代码示例，您可以保证快速轻松地开始您的web抓取项目。",
     view_doc: "查看文档",
 
     why_title: "为什么使用我们的住宅IP?",
-    why1_title: "7200多万住宅IP待售",
+    why1_title: "9000多万住宅IP待售",
     why1_desc: "我们提供超稳定的住宅代理IP池。",
     why2_title: "零位验证码",
     why2_desc: "优化业务资源，因为不需要处理captchao",
@@ -104,7 +120,21 @@ export default {
     why5_title: "无限并发会话",
     why5_desc: "没有限制，购买住宅IP，并发送无限数量的并发会话。",
     why6_title: "覆盖全球",
-    why6_desc: "购买覆盖190个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
+    why6_desc: "购买覆盖200个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
+
+    static_why_title: "为什么使用我们的静态数据中心代理？",
+    static_why1_title: "独享 IP 资源",
+    static_why1_desc: "特定目标站点的IP地址，个人专享使用。",
+    static_why2_title: "透明计费",
+    static_why2_desc: "按 IP 个数言计费，不外收取费用。",
+    static_why3_title: "高成功率",
+    static_why3_desc: "IP 可用率>99%，响应时间<0.6S。",
+    static_why4_title: "简易IP认证",
+    static_why4_desc: "选择用户名：密码验证或IP白名单，并更快地将数护中心代理集成到您的工作流程中。",
+    static_why5_title: "无限带宽",
+    static_why5_desc: "数据中心代理每个IP 公平使用政策-无额外收费。",
+    static_why6_title: "精准定位",
+    static_why6_desc: "数据中心代理 IP 地址位于全球各个位置。",
 
     price_adv1: "平均成功率99.5%",
     price_adv2: "平均响应时间0.6s",
@@ -122,7 +152,7 @@ export default {
     enter_management: "进入管理中心",
 
     advant_title1: "免费的目标",
-    advant_desc1: "我们的住宅代理网络覆盖190个国家，并提供国家，城市，州，邮政编码，坐标和ASN目标。",
+    advant_desc1: "我们的住宅代理网络覆盖200个国家，并提供国家，城市，州，邮政编码，坐标和ASN目标。",
     advant_title2: "无限并发会话",
     advant_desc2: "在lpStar，我们不限制并发会话，所以你可以很容易地扩大你的网络抓取项目，只要需要。",
     advant_title3: "没有 IP 块或验证码",

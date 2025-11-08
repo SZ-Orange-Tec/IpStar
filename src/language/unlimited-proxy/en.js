@@ -21,11 +21,11 @@ export default {
   unlimited_proxy_spec: {
     title: "Scale {place} Collection with Unlimited Proxies",
     title_place: "LLM Training Data",
-    descript: "Billing by bandwidth, zero IP/traffic limits. Adjust concurrency and bandwidth flexibly for easy-to-scale web scraping ops.",
-    adv1: "72M+ residential IPs, covering 190+ regions worldwide",
-    adv2: "Flexible concurrency and bandwidth management for easy scaling",
-    adv3: "YouTube/Github/Audio and Video Proxy",
-    adv4: "Millisecond-level response times",
+    descript: "Billing by day/month, zero IP/traffic limits. Adjust concurrency and bandwidth flexibly for easy-to-scale web scraping ops.",
+    adv1: "9000M+ residential IPs, covering 200+ regions worldwide",
+    adv2: "No concurrency or bandwidth limits",
+    adv3: "Unlimited traffic usage, lower costs",
+    adv4: "Cost-effective traffic management",
 
     proxy_endpoints: "Proxy Endpoints",
     proxy_network: "Proxy Network",

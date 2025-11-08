@@ -2,7 +2,7 @@
   <div class="column">
     <div class="text-lg font-semibold mb-5">{{ $t("Bandwidth_Usage") }}</div>
     <div class="">
-      <div class="v_center space-x-3">
+      <div class="v_center flex-wrap gap-3">
         <div class="tab v_center text-sm rounded">
           <div
             class="pointer whitespace-nowrap h-9 px-5 v_center transition-colors duration-300"

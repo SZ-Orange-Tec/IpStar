@@ -1,7 +1,7 @@
 <template>
   <div class="unlimited_proxy">
     <div class="box_wrap banner">
-      <div class="container between">
+      <div class="container column_center lg:between">
         <div class="left space-y-5">
           <div class="excellent vh_center rounded h-10">
             <img loading="lazy" src="@/assets/images/product/excellent.png" alt="IpStar" width="257" height="21" />
@@ -31,14 +31,14 @@
             </li>
             <!--]-->
           </ul>
-          <div class="my-button v_center space-x-3">
-            <a href="/pricing/unlimited">
+          <div class="my-button column !items-stretch sm:v_center gap-3">
+            <a href="/pricing/unlimited" class="flex-1">
               <IpButton type="primary" class="new-button vh_center rounded pointer box-border">
                 <span class="font-medium">{{ t("Buy_Now") }}!</span>
                 <ArrowRight class="icon" :size="18" />
               </IpButton>
             </a>
-            <a v-if="!isLogin" href="/login" class="">
+            <a v-if="!isLogin" href="/login" class="flex-1">
               <IpButton type="normal" class="google vh_center rounded space-x-2 pointer box-border">
                 <img
                   loading="lazy"
@@ -51,7 +51,7 @@
             </a>
           </div>
         </div>
-        <div class="right">
+        <div class="right hidden md:block">
           <img
             loading="lazy"
             width="510"
@@ -67,7 +67,7 @@
 
     <div class="box_wrap intro">
       <div class="container">
-        <ul class="w-full flex gap-6">
+        <ul class="w-full grid grid-cols-2 lg:grid-cols-4 flex-wrap gap-6">
           <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
             <div class="v_center space-x-3">
               <img
@@ -122,7 +122,7 @@
       <div class="container">
         <div class="title font-medium text-center">{{ t("unlimited_proxy_spec.how_title") }}</div>
 
-        <ul class="content grid grid-cols-3 gap-6">
+        <ul class="content grid grid-cols-1 md:grid-cols-3 gap-6">
           <li class="rounded-lg box-border column_center space-y-4">
             <img loading="lazy" width="48" height="48" src="@/assets/images/unlimited_proxy/icon0.webp" />
             <div class="text-lg font-medium">{{ t("unlimited_proxy_spec.how1_title") }}</div>
@@ -151,8 +151,7 @@
           </template>
         </i18n-t>
 
-        <div class="content between position_flex">
-          <img loading="lazy" width="550" height="320" src="@/assets/images/unlimited_proxy/bg1.webp" />
+        <div class="content column_center lg:between lg:!flex-row-reverse position_flex">
           <div class="section_text space-y-5">
             <h2 class="title font-medium">{{ t("unlimited_proxy_spec.collect1_title") }}</h2>
             <p class="grey-60 text-lg">
@@ -173,6 +172,8 @@
               </li>
             </ul>
           </div>
+
+          <img loading="lazy" width="550" height="320" src="@/assets/images/unlimited_proxy/bg1.webp" />
         </div>
       </div>
     </div>
@@ -180,7 +181,7 @@
     <!-- 绕过 IP 封锁和验证码 -->
     <div class="box_wrap position">
       <div class="container">
-        <div class="between flex-row-reverse position_flex">
+        <div class="column_center lg:between position_flex">
           <div class="section_text space-y-5">
             <h2 class="title font-medium">{{ t("unlimited_proxy_spec.collect2_title") }}</h2>
             <p class="grey-60 text-lg">
@@ -212,7 +213,7 @@
       <div class="container">
         <div class="title font-medium text-center">{{ t("unlimited_proxy_spec.why_title") }}</div>
 
-        <ul class="content grid grid-cols-4 gap-6">
+        <ul class="content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <li class="space-y-4 rounded-lg box-border p-6">
             <img loading="lazy" width="40" height="40" src="@/assets/images/unlimited_proxy/choose0.webp" />
             <div class="text-lg font-medium">{{ t("unlimited_proxy_spec.why1_title") }}</div>
@@ -239,8 +240,7 @@
 
     <!-- 满足全模态 LLM 训练数据采集 -->
     <div class="box_wrap meet">
-      <div class="container between">
-        <div class="images" :class="`images${meet_active}`"></div>
+      <div class="container column_center lg:between lg:!flex-row-reverse">
         <div class="text">
           <div class="title font-medium">{{ t("unlimited_proxy_spec.collect3_title") }}</div>
           <ul class="space-y-3">
@@ -258,6 +258,11 @@
             </li>
           </ul>
         </div>
+
+        <!-- <div class="images" :class="`images${meet_active}`"></div> -->
+        <img src="@/assets/images/unlimited_proxy/bg3.webp" v-if="meet_active === 0" class="images" alt="" />
+        <img src="@/assets/images/unlimited_proxy/bg4.webp" v-else-if="meet_active === 1" class="images" alt="" />
+        <img src="@/assets/images/unlimited_proxy/bg5.webp" v-else-if="meet_active === 2" class="images" alt="" />
       </div>
     </div>
 
@@ -265,7 +270,7 @@
     <div class="box_wrap cases">
       <div class="container">
         <div class="title font-medium text-center">{{ t("unlimited_proxy_spec.cases_title") }}</div>
-        <div class="content between">
+        <div class="content column_center lg:between">
           <div class="text space-y-5">
             <p>{{ t("unlimited_proxy_spec.cases_desc") }}</p>
             <div class="list space-y-5">
@@ -275,7 +280,7 @@
                     <div class="arrow arrow0"></div>
                     <div class="name">{{ t("unlimited_proxy_spec.case1_title") }}</div>
                   </div>
-                  <p style="--height: 44px">{{ t("unlimited_proxy_spec.case1_desc") }}</p>
+                  <p style="--height: 66px">{{ t("unlimited_proxy_spec.case1_desc") }}</p>
                 </div>
               </div>
               <div class="list_item" :class="{ active: case_active === 1 }" @click="case_active = 1">
@@ -284,7 +289,7 @@
                     <div class="arrow arrow1"></div>
                     <div class="name">{{ t("unlimited_proxy_spec.case2_title") }}</div>
                   </div>
-                  <p style="--height: 44px">{{ t("unlimited_proxy_spec.case2_desc") }}</p>
+                  <p style="--height: 66px">{{ t("unlimited_proxy_spec.case2_desc") }}</p>
                 </div>
               </div>
               <div class="list_item" :class="{ active: case_active === 2 }" @click="case_active = 2">
@@ -293,12 +298,12 @@
                     <div class="arrow arrow2"></div>
                     <div class="name">{{ t("unlimited_proxy_spec.case3_title") }}</div>
                   </div>
-                  <p style="--height: 44px">{{ t("unlimited_proxy_spec.case3_desc") }}</p>
+                  <p style="--height: 66px">{{ t("unlimited_proxy_spec.case3_desc") }}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="images"></div>
+          <img src="@/assets/images/unlimited_proxy/bg6.webp" class="images" alt="" />
         </div>
       </div>
     </div>
@@ -370,8 +375,7 @@
     <!-- 无限流量代理的无缝集成 -->
     <div class="box_wrap position">
       <div class="container">
-        <div class="content between position_flex">
-          <img loading="lazy" width="550" height="320" src="@/assets/images/unlimited_proxy/bg7.webp" />
+        <div class="content column_center lg:between lg:!flex-row-reverse position_flex">
           <div class="section_text space-y-5">
             <h2 class="title font-medium">{{ t("unlimited_proxy_spec.unlimited_traffic") }}</h2>
             <ul class="space-y-2">
@@ -413,6 +417,7 @@
               </div>
             </div>
           </div>
+          <img loading="lazy" width="550" height="320" src="@/assets/images/unlimited_proxy/bg7.webp" />
         </div>
       </div>
     </div>
@@ -504,7 +509,7 @@
     <div class="box_wrap footer">
       <div class="container">
         <img loading="lazy" id="bottom_bg" src="@/assets/images/product/bottom_bg.png" width="270" height="270" style="" />
-        <div class="started" style="">
+        <div class="started h-full" style="">
           <div class="started_title text-3xl font-medium">有一个大项目?</div>
           <div class="started_desc">与我们的顾问取得联系，开始让您的员工了解情况、投入、高效和安全。</div>
           <a href="/pricing/unlimited" class="started_btn vh_center box-border">

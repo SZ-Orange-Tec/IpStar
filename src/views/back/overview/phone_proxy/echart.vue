@@ -2,7 +2,7 @@
   <div class="column">
     <div class="w-full space-y-5 column">
       <strong class="text-lg font-medium">{{ $t("Traffic_Usage") }}</strong>
-      <div class="v_center space-x-3">
+      <div class="v_center flex-wrap gap-3">
         <div class="tab v_center text-sm rounded">
           <div
             class="pointer whitespace-nowrap h-9 px-5 v_center transition-colors duration-300"

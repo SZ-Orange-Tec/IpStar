@@ -3,12 +3,14 @@ import footer from "../components/footer/en"
 import productList from "../components/productList/en"
 import paypopup from "../components/pay_popup/en"
 import headerGift from "../components/headerGift/en"
+import question from "../components/question/en"
 export default {
   ...header,
   ...footer,
   ...productList,
   ...paypopup,
   ...headerGift,
+  ...question,
 
   Learn_More: "Learn More",
   Free_Trial: "Free Trial",
@@ -23,6 +25,7 @@ export default {
   Contact_Us: "Contact Us",
   Now: "Now",
   Day: "Day",
+  FAQ: "FAQ",
 
   home_spec: {
     intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
@@ -52,7 +55,7 @@ export default {
     adv3: "All major proxy software.",
     adv4: "For API and credential retrieval.",
 
-    proxy_title: "Proxy Types",
+    proxy_title: "Agency services catering to diverse requirements",
     proxy_desc: "We offer a variety of proxy types to meet your specific needs.",
     residential_des: "Residential proxies provide real IP addresses from residential locations, ensuring anonymity and privacy.",
     residential_adv1: "Over 72 million premium residential proxies",
@@ -63,7 +66,7 @@ export default {
     unlimited_adv2: "Scalable Bandwidth & Concurrency",
     unlimited_adv3: "Full YouTube/GitHub Support",
     phone_des: "Phone proxies enable you to access the internet using mobile phone numbers, perfect for bypassing geo-restrictions.",
-    phone_adv1: "5M+ IPs in 100+ Countries",
+    phone_adv1: "2M+ IPs in 30+ Countries",
     phone_adv2: "3G/4G/5G/LTE Mobile Proxy Network",
     phone_adv3: "99.9% Uptime",
     data_center_des: "Data center proxies offer stable and high-speed connections, ideal for businesses that require consistent performance.",
@@ -75,18 +78,26 @@ export default {
     rotation_adv2: "Unlimited Sub-account Creation",
     rotation_adv3: "99.99% Connection Success Rate",
 
-    why: "Why Choose",
-    why1_title: "Massive Resource",
-    why1_desc: "Cover 200+ countries, provide 5000+ real residential proxy IPs, help enterprises easily expand global business.",
-    why2_title: "High Anonymity & Efficiency",
-    why2_desc:
-      "Genuine residential IPs effectively prevent detection and tracking, strongly protecting data privacy. High-speed, stable network for a smooth experience.",
-    why3_title: "Great Value",
-    why3_desc: "Competitive pricing with exceptional quality and reliable residential proxy services.",
-    more: "Versatile Use Cases",
-    automatic: "Applications",
-    instant: "IpStar Residential Proxy offers efficient and secure proxy services,\neasily meeting diverse business needs.",
+    plan_title: "Easily Integrate Our Solution into Your Project",
+    plan_desc:
+      "We ensure that our product is easily integrated into your scraping infrastructure. With multiple language support and ready-to-use code examples, you can start your web scraping project quickly and easily.",
+    view_doc: "View Documentation",
 
+    why_title: "Why Use Our Residential IP?",
+    why1_title: "9000 M+ Residential IPs for Sale",
+    why1_desc: "We offer a highly stable residential proxy IP pool.",
+    why2_title: "Zero CAPTCHA",
+    why2_desc: "Optimize business resources as no captcha is required.",
+    why3_title: "Zero IP Blocking",
+    why3_desc: "No more wasting time on IP blocking. Purchase residential IPs and focus on insights.",
+    why4_title: "Session Control",
+    why4_desc: "Residential proxy sales offer flexible and adjustable session control features to meet your needs.",
+    why5_title: "Unlimited Concurrent Sessions",
+    why5_desc: "No limits on concurrent sessions. Purchase residential IPs and send unlimited concurrent sessions.",
+    why6_title: "Global Coverage",
+    why6_desc: "Purchase residential IPs from 190 locations worldwide and provide country, city, and state-level geolocation services.",
+
+    cases_title: "Versatile Use Cases",
     four1_title: "Data Collection",
     four1_desc: "Stable and reliable proxies for your business intelligence projects.",
     four2_title: "SEO",

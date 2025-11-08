@@ -1,7 +1,7 @@
 <template>
   <div class="board rounded space-y-5 p-5 column">
     <div class="w-full flex flex-wrap h-8 gap-3">
-      <IpInput v-model="form.ip" :placeholder="t('Please_Enter') + ' IP'" class="h-9 rounded-md" />
+      <IpInput v-model="form.ip" :placeholder="t('data_center_spec.ip_remark')" class="h-9 rounded-md" />
       <!-- <el-select v-model="form.area" placeholder="" style="width: 160px">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
       </el-select> -->
@@ -25,9 +25,9 @@
         </template>
         <template #menu>
           <div class="menu">
-            <ul v-if="filterRegionsList.length" class="grey-60 box-border p-1 column text-sm" @click="regionChange">
+            <ul v-if="regionsList.length" class="grey-60 box-border p-1 column text-sm" @click="regionChange">
               <li
-                v-for="item in filterRegionsList"
+                v-for="item in regionsList"
                 :key="item.value"
                 :class="{ active: item.value === form.region }"
                 class="menu_item w-full box-border px-2 h-8 rounded-md pointer transition-color v_center pointer"
@@ -104,7 +104,7 @@
             :page-size="size"
             :current-page="page"
             :page-sizes="[10, 25, 50]"
-            layout="total, prev, pager, next, sizes, jumper"
+            :layout="layout"
             :total="total"
           >
           </el-pagination>
@@ -118,7 +118,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, reactive, ref } from "vue"
+import { computed, inject, nextTick, onMounted, reactive, ref } from "vue"
 import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
@@ -133,14 +133,16 @@ import settingStore from "../../../../store/setting"
 import position from "@/components/dialog/position"
 import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
 
+const layout = inject("paginationLayout")
+
 const { t } = useI18n()
 const { lang } = settingStore()
 
 // 表单
 const form = reactive({
   ip: "",
-  region: "",
-  status: "",
+  region: "all",
+  status: 0,
 })
 function Search() {
   page.value = 1
@@ -149,6 +151,7 @@ function Search() {
 
 // 状态筛选
 const statusList = ref([
+  { label: t("All") + " " + t("Status"), value: 0 },
   { label: t("Normal"), value: 1 },
   { label: t("Expired"), value: 2 },
 ])
@@ -174,12 +177,19 @@ function statusChange(e) {
 const regionsList = ref([])
 async function getRegions() {
   const { data } = await platProductRegions()
-  regionsList.value = data.map((item) => ({
+  const all = {
+    value: "all",
+    country: "",
+    zh: "全部区域",
+    en: "All Locations",
+  }
+  const target = data.map((item) => ({
     value: item.code,
     country: item.country,
     zh: item.city_cn,
     en: item.city,
   }))
+  regionsList.value = [all, ...target]
 }
 
 // 区域筛选
@@ -189,7 +199,10 @@ function filterRegion(area) {
   filterRegionsList.value = regionsList.value.filter((item) => reg.test(item[lang.value]))
 }
 const debounceFilterRegion = debounce(filterRegion, 300)
-const area_text = ref("")
+// const area_text = ref("")
+const area_text = computed(() => {
+  return regionsList.value.find((i) => i.value === form.region)?.[lang.value] ?? ""
+})
 function regionChange(e) {
   function findDom(dom) {
     if (!dom || dom.tagName === "UL") return
@@ -204,7 +217,7 @@ function regionChange(e) {
   const value = dom.dataset.value
   form.region = value
 
-  area_text.value = regionsList.value.find((item) => item.value === value)?.[lang.value] ?? ""
+  // area_text.value = regionsList.value.find((item) => item.value === value)?.[lang.value] ?? ""
 }
 
 // 表格数据
@@ -217,8 +230,8 @@ async function getTableData() {
       page_index: page.value,
       page_size: size.value,
       ip: form.ip,
-      region_code: form.region,
-      status: form.status,
+      region_code: form.region !== "all" ? form.region : "",
+      status: form.status !== 0 ? form.status : "",
     })
     total.value = data.count
     tableData.value = data.list

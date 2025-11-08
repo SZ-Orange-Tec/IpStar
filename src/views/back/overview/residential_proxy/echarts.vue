@@ -1,12 +1,12 @@
 <template>
   <div class="w-full column">
     <!-- search -->
-    <div class="v_center space-x-3">
+    <div class="v_center flex-wrap gap-3">
       <div class="tab v_center text-sm rounded">
-        <div class="pointer h-9 px-3 v_center transition-colors duration-300" @click="updateActive(0)" :class="{ active: active === 0 }">
+        <div class="pointer h-9 px-3 v_center transition-colors duration-300 ellipsis" @click="updateActive(0)" :class="{ active: active === 0 }">
           {{ t("overview_spec.day_compare") }}
         </div>
-        <div class="pointer h-9 px-3 v_center transition-colors duration-300" @click="updateActive(1)" :class="{ active: active === 1 }">
+        <div class="pointer h-9 px-3 v_center transition-colors duration-300 ellipsis" @click="updateActive(1)" :class="{ active: active === 1 }">
           {{ t("overview_spec.hour_compare") }}
         </div>
       </div>

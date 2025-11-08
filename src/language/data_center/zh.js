@@ -30,6 +30,7 @@ export default {
   Expired: "已过期",
   No_Data: "暂无数据",
   Renewal: "续费",
+  All: "全部",
 
   // billing 表格
   Order_Number: "订单号",
@@ -51,5 +52,6 @@ export default {
 
   data_center_spec: {
     des: "用高质量数据中心代理，低延迟无断连，确保您的业务持续高效运行",
+    ip_remark: "请输入 IP 或备注",
   },
 }

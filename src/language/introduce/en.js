@@ -48,7 +48,7 @@ export default {
     unlimited_adv2: "Scalable Bandwidth & Concurrency",
     unlimited_adv3: "Full YouTube/GitHub Support",
     phone_des: "Phone proxies enable you to access the internet using mobile phone numbers, perfect for bypassing geo-restrictions.",
-    phone_adv1: "5M+ IPs in 100+ Countries",
+    phone_adv1: "2M+ IPs in 30+ Countries",
     phone_adv2: "3G/4G/5G/LTE Mobile Proxy Network",
     phone_adv3: "99.9% Uptime",
     data_center_des: "Data center proxies offer stable and high-speed connections, ideal for businesses that require consistent performance.",

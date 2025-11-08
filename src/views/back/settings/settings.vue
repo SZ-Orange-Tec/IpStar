@@ -7,7 +7,7 @@
     </NavBar>
 
     <div class="w-full main flex-1 px-3 md:px-5 my-5">
-      <div class="main_container board">
+      <div class="main_container board px-5">
         <div class="tab_content space-y-5">
           <!-- 头像 -->
           <div class="headPortrait space-x-5">

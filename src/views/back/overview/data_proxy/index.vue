@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 column">
-    <div class="w-full p-5 board rounded">
+    <div class="w-full p-5 board rounded space-y-3">
       <!-- 头部区域 -->
-      <div class="w-full between mb-8">
+      <div class="w-full column md:between gap-3">
         <div class="v_center space-x-3">
           <div class="iconbox rounded-lg vh_center">
             <DataProxyIcon :size="28" :stroke-width="1.5" />
@@ -19,7 +19,7 @@
       </div>
 
       <!-- 数据卡片区域 -->
-      <div class="grid grid-cols-3 gap-6">
+      <div class="grid grid-cols-2 gap-6">
         <!-- 剩余流量卡片 -->
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">
@@ -60,7 +60,7 @@ import { useRouter } from "vue-router"
 import anime from "animejs/lib/anime.es.js"
 import Message from "@/components/message/message"
 import { roundToDecimal } from "../../../../utils/tools"
-import { platCustomerReportOverviewDataCenter } from "../../../../api/layout"
+import { platCustomerReportOverview } from "../../../../api/layout"
 import { Database as DataProxyIcon } from "lucide-vue-next"
 
 const { t } = useI18n()

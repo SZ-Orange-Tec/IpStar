@@ -18,18 +18,30 @@ export default {
   Price: "Pricing",
   FAQ: "FAQ",
 
+  USA: "USA",
+  Germany: "Germany",
+  UK: "UK",
+  India: "India",
+  Canada: "Canada",
+  Japan: "Japan",
+
   mobile_proxy_spec: {
     title: "High-speed 5G/4G/3G/LTE mobile proxy",
     descript: "Bypass IP address restrictions and geographic blocks from mobile devices to collect data at lightning speed.",
-    adv1: "5 million+ IPs cover 100+ countries",
+    adv1: "2 million+ IPs cover 30+ countries",
     adv2: "3G/4G/5G/LTE mobile proxy network",
     adv3: "99.9% success rate",
 
     proxy_endpoints: "Proxy protocols",
     proxy_network: "Proxy network",
-    proxy_ip: "7200+ residential IPs",
-    proxy_country: "190+ countries",
+    proxy_ip: "2 M+ residential IPs",
+    proxy_country: "30+ countries",
     proxy_uptime: "Uptime",
+
+    country_title: "Covering 30+ countries with 2M+ IPs",
+    country_desc:
+      "The IPStar mobile proxy network provides access to over 2 million compliantly sourced mobile IPs across more than 30 countries. You can select proxies by country, region, city, or even mobile carrier to meet your precise data collection or testing requirements.",
+    expore: "Explore All Locations",
 
     proxy_title: "Large-scale stable mobile proxy pool",
     proxy_desc: "Mobile proxy servers are located in specific regions to precisely target and bypass the most strict geographic restrictions.",

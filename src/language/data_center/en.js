@@ -31,6 +31,7 @@ export default {
   Expired: "Expired",
   No_Data: "No Data",
   Renewal: "Renewal",
+  All: "All",
 
   Order_Number: "Order Number",
   Product_Name: "Product Name",
@@ -51,5 +52,6 @@ export default {
 
   data_center_spec: {
     des: "With high-quality datacenter proxies, you get low latency and stable connections to keep your operations running smoothly and efficiently.",
+    ip_remark: "Please Enter IP Or Remark",
   },
 }

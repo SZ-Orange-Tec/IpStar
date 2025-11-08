@@ -44,7 +44,7 @@
           <div class="w-full v_center space-x-5">
             <ipButton type="border" class="flex-1" @click="router.push('/proxy?active=0')">
               <div class="vh_center space-x-2 py-3 w-full">
-                <span>{{ $t("User_Pass_Auth") }}</span>
+                <span>{{ $t("Manual_Auth") }}</span>
               </div>
             </ipButton>
             <ipButton type="border" class="flex-1">

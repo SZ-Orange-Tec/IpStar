@@ -1,7 +1,7 @@
 <template>
   <div class="pc-layout">
     <!-- 侧边栏  -->
-    <div class="sidebar relative column h-full shrink-0">
+    <div class="sidebar relative hidden md:column h-full shrink-0">
       <!-- logo -->
       <NavMenu />
     </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
+import { computed, onMounted, provide, ref } from "vue"
 // import layoutStore from "@/store/layout"
 import userStore from "@/store/user"
 import NavMenu from "./components/menu/menu.vue"
@@ -47,10 +47,15 @@ import { differenceInMinutes } from "date-fns"
 import { platDataConfig } from "@/api/home"
 import IpDialog from "@/components/dialog/index.vue"
 import IpButton from "@/components/button/button.vue"
+import useWidthTag from "../../composables/useWidthTag"
 
 const { getUserInfo } = userStore()
 
 const { t } = useI18n()
+
+const { tag: widthTag } = useWidthTag()
+const layout = computed(() => (widthTag.value === "xs" ? "total, prev, pager, next" : "total, prev, pager, next, sizes, jumper"))
+provide("paginationLayout", layout)
 
 // 赠送流量弹窗相关
 const isMask = ref(false)

@@ -34,7 +34,7 @@ export default {
     unlimited_right2: "广泛的IP池",
     unlimited_right3: "全球200+个地区随机定位",
     unlimited_right4: "不限制并发",
-    unlimited_right5: "真实动态住字代理",
+    unlimited_right5: "真实动态住宅代理",
 
     phone_right1: "支持5G/4G/3G/LTE",
     phone_right2: "自由国家定位",

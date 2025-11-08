@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 column">
-    <div class="w-full p-5 board rounded">
+    <div class="w-full p-5 board rounded space-y-3">
       <!-- 头部区域 -->
-      <div class="w-full between mb-8">
+      <div class="w-full column md:between gap-3">
         <div class="v_center space-x-3">
           <div class="iconbox rounded-lg vh_center shrink-0">
             <PhoneProxyIcon :size="28" :stroke-width="1.5" />
@@ -19,7 +19,7 @@
       </div>
 
       <!-- 数据卡片区域 -->
-      <div class="grid grid-cols-3 gap-6">
+      <div class="grid grid-cols-2 gap-6">
         <!-- 剩余流量卡片 -->
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">

@@ -14,7 +14,7 @@ export default {
     download: "click here to download",
 
     _2_2_des:
-      'Configuration is complete. You can visit "http://ip234" to test if the proxy is working and check the external IP address to confirm successful proxying.',
+      'Configuration is complete. You can visit "http://ipinfo" to test if the proxy is working and check the external IP address to confirm successful proxying.',
   },
 
   ios_spec: {
@@ -25,7 +25,7 @@ export default {
       'Log in to the App Store with a US Apple ID, search for "Shadowrocket" (commonly known as the Little Rocket) to download and install, or {link}. (Mainland Chinese users need to log in with an overseas ID, such as a US ID. US Apple IDs can be purchased on Taobao/Xianyu).',
 
     _2_2_des:
-      'Use a browser to visit "http://ip234" to test if the proxy is working. Check if the public IP address has changed to confirm successful proxying.',
+      'Use a browser to visit "http://ipinfo" to test if the proxy is working. Check if the public IP address has changed to confirm successful proxying.',
   },
 
   window_spec: {
@@ -36,7 +36,7 @@ export default {
       'Search for "Proxifier" on Google to download. Official website download address (paid): {link1}. We provide a free Chinese cracked version, {link2}.',
 
     _2_2_des:
-      'Use a browser to visit "http://ip234" to test if the proxy is working. Check if the public IP address has changed to confirm successful proxying.',
+      'Use a browser to visit "http://ipinfo" to test if the proxy is working. Check if the public IP address has changed to confirm successful proxying.',
   },
 
   code_spec: {

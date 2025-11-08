@@ -2,23 +2,27 @@
   <div class="column h-full">
     <NavBar>
       <template #default="{ title }">
-        <div>{{ title }}</div>
+        <div class="v_center space-x-2" @click="back">
+          <ChevronLeft :size="16" class="pointer" />
+          <span>{{ title }}</span>
+        </div>
+      </template>
+      <template #nav>
+        <div class="w-full">
+          <Tab v-model="active" :active-style="activeStyle" activeTextColor="hsl(var(--foreground) / 90%)" class="tab grey-60 font-medium v_center">
+            <TabItem :value="0" class="tab-item">{{ t("Manual_Auth") }}</TabItem>
+            <TabItem :value="1" class="tab-item">{{ t("API_Auth") }}</TabItem>
+            <TabItem :value="2" class="tab-item">{{ t("User_Pass") }}</TabItem>
+          </Tab>
+        </div>
       </template>
     </NavBar>
 
     <div class="flex-1 min-h-0 overflow-y-auto w-full box-border column p-6 gap-6">
-      <div class="w-full box-border board rounded px-2 py-5">
-        <Tabs v-model="active_tab" @change="handleTabChange" />
-      </div>
-
-      <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="rounded tab">
-        <TabItem :value="0" :label="t('User_Pass_Auth')" class="h-9 px-5 min-w-[140px]" />
-        <TabItem :value="1" :label="t('API_Auth')" class="h-9 px-5 min-w-[140px]" />
-      </Tab>
-
       <template v-if="is_purchase">
         <AccountWay v-if="active === 0" />
         <ApiWay v-if="active === 1" />
+        <UserPwd v-if="active === 2" />
       </template>
 
       <Lock v-else />
@@ -32,38 +36,50 @@ import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import AccountWay from "./account_way/index.vue"
 import ApiWay from "./api_way/index.vue"
+import UserPwd from "./user_pwd/index.vue"
 import Lock from "./lock.vue"
-import Tabs from "./tabs.vue"
+// import Tabs from "./tabs.vue"
 import { provide, ref } from "vue"
 import userStore from "../../../store/user"
 import { useI18n } from "vue-i18n"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
+import { ChevronLeft } from "lucide-vue-next"
 
 const { t } = useI18n()
 const route = useRoute()
 const { is_purchase } = userStore()
 
-// tabs
-const active_tab = ref(Number(route.query?.tab ?? 0))
-function handleTabChange(tab) {
-  console.log("tab change")
-}
-provide("active_tab", active_tab)
-
-// 选项卡
-const active = ref(Number(route.query?.active ?? 0)) // 0:user_pass 1:api
+// 头部nav tab
+const active = ref(0)
 const activeStyle = {
-  backgroundColor: "hsl(var(--foreground))",
-  borderRadius: "4px",
-  "--activeTextColor": "#ffffff",
-  top: 0,
+  backgroundColor: "hsl(var(--primary) / 8%)",
+  border: "1px solid hsl(var(--primary) / 90%)",
+  borderRadius: "8px",
+  transition: `all 500ms cubic-bezier(.29,1.42,.79,1)`,
   bottom: 0,
+}
+
+const router = useRouter()
+function back() {
+  try {
+    router.back()
+  } catch (error) {
+    router.push("/overview")
+  }
 }
 </script>
 
 <style lang="less" scoped>
+// .tab {
+//   padding: 6px;
+// }
 .tab {
-  padding: 6px;
   background-color: hsl(var(--background));
+  .tab-item {
+    height: 44px;
+  }
+  .tab-item + .tab-item {
+    margin-left: 36px;
+  }
 }
 </style>

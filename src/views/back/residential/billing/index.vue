@@ -39,7 +39,7 @@
             :page-size="size"
             :current-page="page"
             :page-sizes="[10, 25, 50]"
-            layout="total, prev, pager, next, sizes, jumper"
+            :layout="layout"
             :total="total"
           >
           </el-pagination>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, nextTick } from "vue"
+import { onMounted, ref, nextTick, inject } from "vue"
 import { platCustomerOrders } from "@/api/layout"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
@@ -61,6 +61,8 @@ import { formatSizeUnits } from "@/utils/tools"
 import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
 import position from "@/components/dialog/position"
 import IpTag from "@/components/tag/tag.vue"
+
+const layout = inject("paginationLayout")
 
 const { t } = useI18n()
 // 表格数据

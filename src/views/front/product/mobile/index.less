@@ -30,30 +30,33 @@
       & > ul {
         background-color: #f0f4ff;
       }
-      .my-button {
-        .new-button {
+      .my-button{
+        width: 100%;
+        max-width: 550px;
+        .new-button{
           background: #0056fb;
           height: 48px;
-          transition: all 0.3s;
-          width: 240px;
-          .icon {
+          transition: all .3s;
+          // width: 240px;
+          width: 100%;
+          .icon{
             margin-left: 6px;
-            transition: all 0.3s;
+            transition: all .3s;
           }
-          &:hover {
-            .icon {
+          &:hover{
+            .icon{
               margin-left: 12px;
             }
           }
         }
-        .google {
+        .google{
+          width: 100%;
           border: 1px solid hsl(var(--foreground));
           // color: #1f2328;
           height: 48px;
-          min-width: 250px;
-          padding: 0 20px;
-          transition: all 0.3s;
-          &:hover {
+          // min-width: 250px;
+          transition: all .3s;
+          &:hover{
             background-color: hsl(var(--foreground));
             color: hsl(var(--colour-foreground));
           }
@@ -88,6 +91,30 @@
       }
       .images{
         margin: 0 -4rem;
+      }
+      .country{
+        max-width: 550px;
+        width: 100%;
+        ul{
+          li{
+            border: 1px solid #F1F1F1 ;
+            .img_box{
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              overflow: hidden;
+              img{
+                max-width: none;
+                width: auto;
+                height: 40px;
+              }
+            }
+          }
+        }
+        // img{
+        //   width: 40;
+        //   height: 40px;
+        // }
       }
     }
     .position_flex {
@@ -158,63 +185,72 @@
     }
   }
 
-  .footer {
+  .footer{
     margin-top: 60px;
     position: relative;
-    background-image: linear-gradient(to bottom, #0b0c1b, #0b0c1b);
-    background-size: 100% 70px;
+    background-image: linear-gradient(to bottom, #0B0C1B, #0B0C1B);
+    background-size: 100% 100px;
     background-repeat: no-repeat;
     background-position: bottom;
-    .container {
+    // overflow-x: hidden;
+    .container{
       padding: 0;
       height: 322px;
       position: relative;
     }
-    #bottom_bg {
+    #bottom_bg{
       left: 200px;
       position: absolute;
       top: -60px;
       z-index: -1;
     }
-    .started {
-      background-image: url(../../../../assets/images/product/started.png);
+    .started{
+      padding: 64px 0 0 64px;
+      
+      border-radius: 6px;
+      background-color: #1A63E8;
+      background-image: url(../../../../assets/images/product/started.webp);
       background-repeat: no-repeat;
       background-size: contain;
-      height: 322px;
+      background-position: right bottom;
       left: 50%;
-      position: absolute;
-      // top: -254px;
-      // bottom: -20px;
-      transform: translate(-50%);
-      width: 1200px;
       color: hsl(var(--colour-foreground));
-      .started_title {
-        margin: 86px 0 20px 60px;
-        max-width: 580px;
-      }
-      .started_desc {
-        margin: 0 0 40px 60px;
-        max-width: 580px;
-      }
-      .started_btn {
+      .started_btn{
+        margin-top: 40px;
         background: #1bcd97;
         border-radius: 4px;
         height: 55px;
-        left: -20px;
+        left: -84px;
         width: 247px;
         padding-left: 20px;
         position: relative;
-        .icon {
+        .icon{
           position: absolute;
           left: 20px;
           top: 50%;
           transform: translateY(-50%);
-          transition: all 0.3s;
+          transition: all .3s;
         }
-        &:hover {
-          .icon {
+        &:hover{
+          .icon{
             left: 40px;
           }
+        }
+      }
+
+    }
+    @media screen and (max-width:768px) {
+      #bottom_bg{
+        left: 0px;
+        position: absolute;
+        top: -60px;
+        z-index: -1;
+      }
+      .started{
+        // background-image: none;
+        padding: 64px 0 0 32px;
+        .started_btn{
+          left: 0;
         }
       }
     }

@@ -18,18 +18,30 @@ export default {
   Price: "定价",
   FAQ: "常见问题",
 
+  USA: "美国",
+  Germany: "德国",
+  UK: "英国",
+  India: "印度",
+  Canada: "加拿大",
+  Japan: "日本",
+
   mobile_proxy_spec: {
     title: "高速5G/4G/3G/LET移动代理",
     descript: "通过移动代理从真实移动设备突破IP地址限制、地理封锁，并提速数据收集。",
-    adv1: "5百万+IPs覆盖100多个国家",
+    adv1: "2百万+IPs覆盖30多个国家",
     adv2: "3G/4G/5G/LTE 移动代理网络",
     adv3: "99.9%成功率",
 
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
-    proxy_ip: "7200万+住宅IP",
-    proxy_country: "190个国家",
+    proxy_ip: "200万+ IPs",
+    proxy_country: "30+ 国家",
     proxy_uptime: "正常运行时间",
+
+    country_title: "覆盖30多个国家2百万+IPs",
+    country_desc:
+      "IPStar的移动代理网络为您提供覆盖30多个国家2百万+合规获取的移动 IP地址。您可以根据国家、地区、城市其至移动运营商选择代理，以满足您精确的数据采集或测试需求。",
+    expore: "探索所有地点",
 
     proxy_title: "大型稳定的移动代理池",
     proxy_desc: "移动代理服务器定位特定区域，以精确定位绕过最严格的地理位置限制",
@@ -50,7 +62,7 @@ export default {
     mobile1_desc: "500万+借助快速缓存存储系统，移动代理可以解除您的计算机存储无关数据的需要，这可以大大增速您的网络连接。",
     mobile2_title: "最高匿名性",
     mobile2_desc: "IpStar的移动代理网络使用真实用户的移动设备路由网络流量，并进行自动轮换，为您提供更高的安全性、匿名性和隐私性。",
-    mobile3_title: "挖掘任何数据%",
+    mobile3_title: "挖掘任何数据",
     mobile3_desc: "无论您的用例是SEO、社交媒体运营、广告验证、价格比较还是品牌保护，IpStar轻松驾驭。",
     mobile4_title: "访问受限内容",
     mobile4_desc: "收集特定地理位置的数据，访问目标区域中的所有内容而不再担心IP被封或验证码，并轻松访问移动优先网站。",

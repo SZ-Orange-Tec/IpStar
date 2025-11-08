@@ -4,6 +4,16 @@
       <strong class="font-medium text-lg">{{ t("Options") }}</strong>
       <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         <div class="column space-y-1">
+          <p class="text-sm">{{ t("Proxy") }}</p>
+          <el-select v-model="stype" :placeholder="$t('Account')" style="max-width: 232px">
+            <el-option :value="0" :label="t('menu_spec.residential_proxy')"></el-option>
+            <el-option :value="1" :label="t('menu_spec.unlimited_proxy')"></el-option>
+            <el-option :value="2" :label="t('menu_spec.phone_proxy')"></el-option>
+            <el-option :value="4" :label="t('Rotation_Proxies')"></el-option>
+          </el-select>
+        </div>
+
+        <div class="column space-y-1">
           <p class="text-sm">{{ t("Country") }}</p>
           <el-select
             filterable
@@ -134,7 +144,6 @@ import { platAccountSelect } from "@/api/account"
 const { en } = settingStore()
 const { isProduc } = layoutStore()
 const { is_purchase } = userStore()
-const active_tab = inject("active_tab")
 
 const router = useRouter()
 const route = useRoute()
@@ -158,6 +167,7 @@ const protocolData = ref([
 ])
 const protocolVal = ref("0")
 
+const stype = ref(route.query?.type ?? 0)
 const countVal = ref(10)
 const content = ref([])
 let mes = ""
@@ -195,7 +205,7 @@ async function generate() {
         count: countVal.value,
         persistconn: 1,
         account: account.value !== accountList.value[0] ? account.value : "",
-        stype: active_tab.value,
+        stype: stype.value,
       }
       const { data } = await PlatCustomerEndPoints(params)
       btnLoading.value = false
@@ -330,6 +340,10 @@ async function getAccountList() {
     const { data } = await platAccountSelect()
     data[0] = data[0] + ` (${en.value ? "Primary account" : "主账号"})`
     accountList.value = data
+
+    if (!account.value) {
+      account.value = data[0]
+    }
   } catch (error) {
     console.log(error.message)
   }

@@ -24,27 +24,6 @@ export function platCustomerReportOverview(params) {
     params,
   })
 }
-export function platCustomerReportOverviewUnlimited(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
-export function platCustomerReportOverviewMobile(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
-export function platCustomerReportOverviewDataCenter(params) {
-  return request({
-    url: "",
-    method: "get",
-    params,
-  })
-}
 
 // 客户每日流量统计
 export function platCustomerReport(params) {

@@ -28,7 +28,7 @@
           :page-size="size"
           :current-page="page"
           :page-sizes="[10, 25, 50]"
-          layout="total, prev, pager, next, sizes, jumper"
+          :layout="layout"
           :total="total"
         >
         </el-pagination>
@@ -38,12 +38,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { inject, ref } from "vue"
 import { platCustomerStaticIps } from "@/api/product"
 import { onMounted } from "vue"
 import IpTag from "@/components/tag/tag.vue"
 import { useI18n } from "vue-i18n"
 import Message from "@/components/message/message"
+
+const layout = inject("paginationLayout")
 
 const { t } = useI18n()
 

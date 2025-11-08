@@ -3,8 +3,8 @@
     <!-- serve -->
     <div class="serve box font-normal">
       <div class="container">
-        <div class="nav flex">
-          <div class="logo">
+        <div class="nav column lg:flex">
+          <div class="logo between lg:column gap-10">
             <div>
               <img src="@/assets/images/logo_white.png" alt="" />
             </div>
@@ -17,7 +17,7 @@
             </div>
           </div>
 
-          <div class="flex-1 flex justify-between">
+          <div class="flex-1 w-full flex justify-between flex-wrap">
             <div class="space-y-3">
               <strong class="white font-medium">{{ t("Products") }}</strong>
               <ul class="list text-sm space-y-3">

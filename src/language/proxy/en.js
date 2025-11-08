@@ -4,14 +4,17 @@ export default {
   ...menu,
   ...navbar,
 
-  User_Pass_Auth: "User & Pass Auth",
+  Rotation_Proxies: "Rotation Proxies",
+  Manual_Auth: "Manual Auth",
   API_Auth: "API",
+  User_Pass: "User & Pass",
   Options: "Options",
   Starting_from: "Starting from ",
   Residual_Traffic: "Residual Traffic",
   Expiration_time: "Expiration Time",
   Remaining: "Remaining",
 
+  Proxy: "Proxy",
   Country: "Country",
   Protocol: "Protocol",
   Duration: "Duration",
@@ -43,6 +46,10 @@ export default {
   Example: "Example",
   Result: "Result",
 
+  Proxy_UserName: "Proxy User Name",
+  Proxy_Password: "Proxy User Password",
+  Note: "Note",
+
   proxy_spec: {
     duration_tip:
       "When using a proxy, you can set the IP's lifespan and use the proxy throughout that time. Since it's a resident proxy, its lifespan can range from a few hours to several days.",
@@ -52,12 +59,34 @@ export default {
     placeholder: "Click the button above to generate an API link",
     note1: "Open this link in your browser or your code to get a new IP proxy each time. For more options, see the API docs and demo.",
     note2: 'For each request, change the "rd" parameter to a random value to get a new channel.',
+    note_proxy: "The above format applies to residential proxies. For other types, the format varies slightly as follows:",
+    note_proxy1: "1. For rotating proxies, the 'ipstr' parameter is fixed as 'rot', e.g.:",
+    note_proxy2: "2. For unlimited proxies, the region is fixed as 'U', e.g.:",
+    note_proxy3: "3. For mobile IP proxies, add an 'M' field at the end, e.g.:",
+    note_proxy_end: "Mobile IP proxies do not support unlimited plans—the 'U' (segment 4) and 'M' (segment 6) cannot appear together.",
+
+    combo_title: "User & Pass Auth Document",
+    combo1_title: "Get your proxy information",
+    combo1_desc: 'First, you need to find your proxy user password information in "{position}".',
+    combo1_position: "Console->Settings",
+    combo2_title: "Concatenate proxy user format",
+    combo2_desc: "Then, concatenate the user information as follows",
+    params_desc: "Each parameter above is explained as follows",
+    what_ipstr: "Random string, change this part to switch IP address",
+    what_keeptime: "Valid time (minutes), 0 means no time limit",
+    what_country: "Country code (e.g. US, BR, etc.)",
+    what_N: "Fixed suffix",
+    combo2_example: "Concatenate the parameters in the order above to get a proxy user. Below is an actual example:",
+    combo2_tip: 'When switching countries, you must also modify "ipstr" or else the modification will be invalid.',
+    combo3_title: "IP Pool Service Address",
+    combo3_desc: "Available IP Pool Endpoints:(Each is a separate pool. For best results, rotate randomly among them.)",
+    combo4_title: "Example Proxy Parameters",
+
     upgrade_tip: {
       front: "To view the complete API documentation, please ",
       btn: "purchase the product",
     },
     buy: "Membership visibility post-purchase",
-
     combo: "Account and password",
     // subscript: "Subscription required",
     // unlock_title: "Unlock Manual Obtain",

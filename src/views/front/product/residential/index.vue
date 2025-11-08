@@ -22,14 +22,14 @@
               <span>{{ t(`product_spec.${secondName}.adv3`, { price: lowest }) }}</span>
             </li>
           </ul>
-          <div class="my-button v_center space-x-3">
-            <a :href="priceLink">
+          <div class="my-button column !items-stretch sm:v_center gap-3">
+            <a :href="priceLink" class="flex-1">
               <IpButton type="primary" class="new-button vh_center rounded pointer box-border">
                 <span class="font-medium">{{ t("Buy_Now") }}!</span>
                 <ArrowRight class="icon" :size="18" />
               </IpButton>
             </a>
-            <a v-if="!isLogin" href="/login" class="">
+            <a v-if="!isLogin" href="/login" class="flex-1">
               <IpButton type="normal" class="google vh_center rounded space-x-2 pointer box-border">
                 <img
                   loading="lazy"
@@ -42,7 +42,7 @@
             </a>
           </div>
         </div>
-        <div class="right">
+        <div class="right hidden md:block">
           <img
             loading="lazy"
             width="510"
@@ -57,7 +57,7 @@
             loading="lazy"
             width="497"
             height="380"
-            src="@/assets/images/product/staticdata.png"
+            src="@/assets/images/product/staticdata.webp"
             alt="IpStar"
             class="animate__animated animate__bounceInDown"
             style="visibility: visible"
@@ -67,7 +67,7 @@
             loading="lazy"
             width="391"
             height="431"
-            src="@/assets/images/product/isp.png"
+            src="@/assets/images/product/isp.webp"
             alt="IpStar"
             class="animate__animated animate__bounceInDown"
             style="visibility: visible"
@@ -79,7 +79,7 @@
 
     <div class="box_wrap intro">
       <div class="container">
-        <ul class="w-full flex gap-6">
+        <ul class="w-full grid grid-cols-2 lg:grid-cols-4 flex-wrap gap-6">
           <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
             <div class="v_center space-x-3">
               <img
@@ -131,17 +131,39 @@
     </div>
 
     <!-- 来源 -->
-    <div class="box_wrap position">
-      <div class="container v_center position_flex">
-        <img loading="lazy" class="section_img" src="@/assets/images/product/section_bg.webp" width="550" height="414" />
-        <div class="section_text space-y-4">
+    <div class="box_wrap position" v-if="type !== 3">
+      <div class="container column_center lg:v_center position_flex">
+        <div class="image_box vh_center shrink-0">
+          <img loading="lazy" class="section_img" src="@/assets/images/product/section_bg.webp" width="450" />
+        </div>
+        <div class="section_text space-y-4 column_center lg:column">
           <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" />
           <h2 class="font-medium">{{ t("product_spec.source_title") }}</h2>
           <p class="text-lg grey-60">
             {{ t("product_spec.source_desc") }}
           </p>
-          <div class="btn_box v_center">
-            <a :href="priceLink">
+          <div class="btn_box w-full v_center">
+            <a :href="priceLink" class="w-full">
+              <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 来源 -->
+    <div class="box_wrap position" v-else>
+      <div class="container column_center lg:v_center position_flex">
+        <div class="image_box vh_center shrink-0">
+          <img loading="lazy" class="section_img" src="@/assets/images/product/static_map.webp" width="500" />
+        </div>
+        <div class="section_text space-y-4 column_center lg:column">
+          <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" />
+          <h2 class="font-medium">{{ t("product_spec.static_title") }}</h2>
+          <p class="text-lg grey-60">
+            {{ t("product_spec.static_desc") }}
+          </p>
+          <div class="btn_box w-full v_center">
+            <a :href="priceLink" class="w-full">
               <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
             </a>
           </div>
@@ -149,33 +171,105 @@
       </div>
     </div>
 
+    <div class="box_wrap position" v-if="type === 3">
+      <div class="container position_flex">
+        <div class="column_center lg:v_center lg:!flex-row-reverse position_flex">
+          <div class="country shrink-0">
+            <ul class="grid grid-cols-3 gap-6">
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/USA.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("USA") }}</span>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/France.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("France") }}</span>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/UK.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("UK") }}</span>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/HongKong.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("HongKong") }}</span>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/Australia.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("Australia") }}</span>
+              </li>
+              <li class="column_center p-4 rounded-lg space-y-3">
+                <div class="img_box vh_center">
+                  <img src="@/assets/images/product/country/Japan.svg" alt="" />
+                </div>
+                <span class="grey-60 text-sm">{{ t("Japan") }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="section_text space-y-7">
+            <!-- <img src="" alt=""> -->
+            <div class="space-y-5">
+              <h2 class="title font-medium">{{ t("product_spec.expore_title") }}</h2>
+              <p class="grey-60 text-lg">
+                {{ t("product_spec.expore_desc") }}
+              </p>
+            </div>
+            <div class="btn_box w-full v_center">
+              <a v-if="isLogin" href="/overview" class="w-full">
+                <IpButton type="primary_border" class="px-5 box-border btn">{{ t("product_spec.expore_expore") }}</IpButton>
+              </a>
+              <a v-else href="/login" class="w-full">
+                <IpButton type="primary_border" class="px-5 box-border btn">{{ t("product_spec.expore_expore") }}</IpButton>
+              </a>
+            </div>
+            <!-- <div class="btn_box w-full v_center">
+            <a :href="priceLink" class="w-full">
+              <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
+            </a>
+          </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 方案 -->
     <div class="box_wrap position">
-      <div class="container v_center position_flex">
-        <div class="section_text space-y-5">
+      <div class="container column lg:v_center position_flex">
+        <div class="section_text space-y-5 column_center lg:column">
           <img loading="lazy" src="@/assets/images/product/code.png" width="48" height="48" />
           <h2 class="font-medium">{{ t("product_spec.plan_title") }}</h2>
           <p class="text-lg grey-60">
             {{ t("product_spec.plan_desc") }}
           </p>
-          <div class="btn_box v_center space-x-3">
+          <div class="w-full btn_box column !items-stretch lg:v_center gap-3">
             <a href="/doc">
               <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.view_doc") }}</IpButton>
             </a>
-            <div class="images">
-              <img loading="lazy" src="@/assets/images/product/see_icon1.png" width="40" height="40" />
-            </div>
-            <div class="images">
-              <img loading="lazy" src="@/assets/images/product/see_icon2.png" width="40" height="40" />
-            </div>
-            <div class="images">
-              <img loading="lazy" src="@/assets/images/product/see_icon3.png" width="40" height="40" />
-            </div>
-            <div class="images">
-              <img loading="lazy" src="@/assets/images/product/see_icon4.png" width="40" height="40" />
-            </div>
-            <div class="images">
-              <img loading="lazy" src="@/assets/images/product/see_icon5.png" width="40" height="40" />
+            <div class="flex-1 between">
+              <div class="images">
+                <img loading="lazy" src="@/assets/images/product/see_icon1.png" width="40" height="40" />
+              </div>
+              <div class="images">
+                <img loading="lazy" src="@/assets/images/product/see_icon2.png" width="40" height="40" />
+              </div>
+              <div class="images">
+                <img loading="lazy" src="@/assets/images/product/see_icon3.png" width="40" height="40" />
+              </div>
+              <div class="images">
+                <img loading="lazy" src="@/assets/images/product/see_icon4.png" width="40" height="40" />
+              </div>
+              <div class="images">
+                <img loading="lazy" src="@/assets/images/product/see_icon5.png" width="40" height="40" />
+              </div>
             </div>
           </div>
         </div>
@@ -196,10 +290,10 @@
       </div>
     </div>
 
-    <div class="box_wrap why">
+    <div class="box_wrap why" v-if="type !== 3">
       <div class="container">
         <div class="font-medium text-center text-4xl">{{ t("product_spec.why_title") }}</div>
-        <ul class="grid grid-cols-3 gap-6">
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <li class="rounded-lg p-6 space-y-4 pointer">
             <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits1.png" />
             <div class="text-lg font-medium">{{ t("product_spec.why1_title") }}</div>
@@ -229,6 +323,44 @@
             <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits6.png" />
             <div class="text-lg font-medium">{{ t("product_spec.why6_title") }}</div>
             <p>{{ t("product_spec.why6_desc") }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box_wrap why" v-else>
+      <div class="container">
+        <div class="font-medium text-center text-4xl">{{ t("product_spec.static_why_title") }}</div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits1.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why1_title") }}</div>
+            <p>{{ t("product_spec.static_why1_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits2.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why2_title") }}</div>
+            <p>{{ t("product_spec.static_why2_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits3.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why3_title") }}</div>
+            <p>{{ t("product_spec.static_why3_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits4.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why4_title") }}</div>
+            <p>{{ t("product_spec.static_why4_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits5.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why5_title") }}</div>
+            <p>{{ t("product_spec.static_why5_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits6.png" />
+            <div class="text-lg font-medium">{{ t("product_spec.static_why6_title") }}</div>
+            <p>{{ t("product_spec.static_why6_desc") }}</p>
           </li>
         </ul>
       </div>
@@ -293,12 +425,12 @@
 
     <div class="box_wrap position">
       <div class="container">
-        <div class="v_center position_flex">
-          <div class="section_text space-y-4">
+        <div class="column_center lg:v_center position_flex">
+          <div class="section_text space-y-4 column_center lg:column">
             <img loading="lazy" src="@/assets/images/product/data.png" width="48" height="48" />
             <h2 class="font-medium">{{ t("product_spec.data_title") }}</h2>
             <p class="text-lg grey-80">{{ t("product_spec.data_desc") }}</p>
-            <ul class="space-y-2">
+            <ul class="space-y-2 w-full">
               <li class="v_center space-x-3">
                 <Check :size="18" class="success" />
                 <span>{{ t("product_spec.data_adv1") }}</span>
@@ -316,17 +448,17 @@
                 <span>{{ t("product_spec.data_adv4") }}</span>
               </li>
             </ul>
-            <div class="btn_box">
+            <div class="btn_box w-full">
               <a href="/overview">
                 <IpButton type="primary_border" class="btn">{{ t("product_spec.enter_management") }}</IpButton>
               </a>
             </div>
           </div>
 
-          <img loading="lazy" class="section_img" src="@/assets/images/product/control.png" width="644" height="432" />
+          <img loading="lazy" class="section_img" src="@/assets/images/product/control.webp" width="644" height="432" />
         </div>
 
-        <ul class="control_items between !items-stretch">
+        <ul class="w-full control_items column_center lg:between !items-stretch">
           <li class="rounded-lg pointer box-border space-y-2">
             <img loading="lazy" src="@/assets/images/product/control_img1.png" width="48" height="48" />
             <div class="text-lg font-medium">{{ t("product_spec.advant_title1") }}</div>
@@ -350,7 +482,7 @@
       <div class="container">
         <div class="text-3xl font-medium text-center">{{ t("product_spec.cases_title") }}</div>
 
-        <div class="list grid grid-cols-4 gap-6">
+        <div class="list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div href="/zh/solution/web-scraping/" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case1_title") }}</div>
@@ -427,7 +559,7 @@
     <div class="box_wrap footer">
       <div class="container">
         <img loading="lazy" id="bottom_bg" src="@/assets/images/product/bottom_bg.png" width="270" height="270" style="" />
-        <div class="started" style="">
+        <div class="started h-full space-y-5" style="">
           <div class="started_title text-3xl font-medium">有一个大项目?</div>
           <div class="started_desc">与我们的顾问取得联系，开始让您的员工了解情况、投入、高效和安全。</div>
           <a :href="priceLink" class="started_btn vh_center box-border">
