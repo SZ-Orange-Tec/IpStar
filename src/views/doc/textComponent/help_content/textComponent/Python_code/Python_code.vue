@@ -29,7 +29,7 @@ import requests
   import threading
 
   def execute_socks5(proxy):
-     targetUrl = 'http://ip234.in/ip.json'
+     targetUrl = 'http://ipinfo.in/ip.json'
 
      proxyurl = 'socks5h://{user}:{password}@{server}:{port}'.format(user=proxy['user'], password=proxy['pass'], server=proxy['server'], port=proxy['port'])
      proxies = {
@@ -66,7 +66,7 @@ import requests
      return
 
   def execute_http(proxy):
-     targetUrl = 'http://ip234.in/ip.json'
+     targetUrl = 'http://ipinfo.in/ip.json'
 
      proxyurl = 'http://{user}:{password}@{server}:{port}'.format(user=proxy['user'], password=proxy['pass'], server=proxy['server'], port=proxy['port'])
      proxies = {
@@ -96,20 +96,13 @@ const codeTwo = `
 
   def get_proxy_list(protocol):
      payload = json.dumps({
-        ## apikey: 您可以在管理控制台用户设置界面找到这个参数。You can find it in the user settings menu of the management console
         'apikey':'70ba35273b46273ffbc42bac73aefd46',
-        ## 提取的IP个数，Extract IP count
         'count': 5,
-        ## 0:默认，n:保持n分钟。0: default, n: keep n minutes
         'keeptime': 0,
-        ## 代理协议, proxy protocol, 0: socks5, 1:http
         'protocol': protocol,
-        ## region: 地区代码，您可以在后台文档里找到地区参考表。Region code, you can find the region reference in the document on our website.
         'region': 'BR',
         'session': '',
-        ## 0:返回json格式, 1:返回短格式。0: return response as json format, 1: return response as short format
         'resptype': 0,
-        ## Sign = md5(apikey+protocol+count+region), 暂时不验证, Currently, we don't verify it.
         'sign': '',
      })
      headers = {
@@ -138,7 +131,7 @@ const codeTwo = `
 
 
   def execute_socks5(proxy):
-     targetUrl = 'http://ip234.in/ip.json'
+     targetUrl = 'http://ipinfo.in/ip.json'
 
      proxyurl = 'socks5h://{user}:{password}@{server}:{port}'.format(user=proxy['user'], password=proxy['pass'], server=proxy['server'], port=proxy['port'])
      proxies = {
@@ -176,7 +169,7 @@ const codeTwo = `
      return
 
   def execute_http(proxy):
-     targetUrl = 'http://ip234.in/ip.json'
+     targetUrl = 'http://ipinfo.in/ip.json'
 
      proxyurl = 'http://{user}:{password}@{server}:{port}'.format(user=proxy['user'], password=proxy['pass'], server=proxy['server'], port=proxy['port'])
      proxies = {

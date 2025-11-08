@@ -1,33 +1,33 @@
 <template>
-  <div class="menu column h-full space-y-5">
+  <div class="menu group column w-full h-full space-y-5 overflow-y-auto">
     <div class="w-full logo v_center text-2xl pointer relative" @click="$router.push('/home')" :title="t('menu_spec.back_home')">
-      <div class="back">
+      <div class="back hidden 2xl:block group-hover:block">
         <ChevronsLeft :size="20" />
       </div>
-      <img src="@/assets/images/logo.png" style="height: 36px" alt="" />
+      <img class="hidden 2xl:block group-hover:block" src="@/assets/images/logo.png" style="height: 36px" alt="" />
     </div>
-    <div class="column flex-1">
-      <ul class="space-y-1">
+    <div class="column flex-1 w-full">
+      <ul class="space-y-1 column px-3 w-full">
         <template v-for="(item, index) in menuData" :key="index">
-          <li class="v_center pointer grey text-xs" v-if="index === 1 || index === 4">
-            <em>{{ index === 1 ? "PLANS" : "PROXIES" }}</em>
-          </li>
           <li
-            class="v_center pointer space-x-2 text-[15px] font-medium"
-            v-else
+            class="box-border w-full v_center h-9 pointer space-x-2 text-[15px] font-medium menu-item"
+            v-if="item.path"
             :class="{ pitch_on: idx === index }"
             v-show="item.isShow"
             @click="jumpPath(index)"
           >
-            <component :is="item.icon" :size="16" :stroke-width="1.5"></component>
-            <p :class="idx === index ? 'color' : ''">{{ item.name }}</p>
+            <component :is="item.icon" :size="17" :stroke-width="2" class="icon shrink-0"></component>
+            <p class="hidden 2xl:block group-hover:block ellipsis" :class="idx === index ? 'color' : ''">{{ item.name }}</p>
+          </li>
+          <li class="h-9 v_center pointer grey-40 text-xs" v-else>
+            <em class="hidden 2xl:block group-hover:block">{{ item.name }}</em>
           </li>
         </template>
       </ul>
     </div>
-    <p class="tip text-sm">
+    <!-- <p class="tip text-sm">
       {{ $t("menu_spec.help") }}<span @click="$router.push('/doc')">{{ $t("menu_spec.manual") }}</span>
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -37,15 +37,19 @@ import { useRoute, useRouter } from "vue-router"
 import layoutStore from "@/store/layout"
 import { useI18n } from "vue-i18n"
 import {
-  Settings,
-  ClipboardList,
-  ShoppingCart,
-  ChartLine,
-  PrinterCheck,
-  LaptopMinimalCheck,
-  ChevronsLeft,
+  ChartLine as OverviewIcon,
+  FileCode as GetProxyIcon,
+  ShoppingCart as ComboIcon,
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
   NotepadText as WhiteListIcon,
   Contact as AccountIcon,
+  Settings as SettingsIcon,
+  BookMarked as HelpIcon,
+  MessageCircleQuestion as QuestionIcon,
+  ChevronsLeft,
 } from "lucide-vue-next"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
@@ -63,53 +67,79 @@ const menuData = ref([])
 function getSlideList() {
   menuData.value = [
     {
-      icon: ChartLine,
-      name: t("menu_spec.Overview"),
+      icon: OverviewIcon,
+      name: t("menu_spec.overview"),
       path: "/overview",
       isShow: true,
     },
-    {},
+    { name: t("menu_spec.how_to_use") },
     {
-      icon: ShoppingCart,
-      name: t("menu_spec.Products"),
-      path: "/products",
-      isShow: true,
-    },
-    {
-      icon: ClipboardList,
-      name: t("menu_spec.Billings"),
-      path: "/billings",
-      isShow: true,
-    },
-    {},
-    {
-      icon: PrinterCheck,
-      name: t("menu_spec.Proxy"),
+      icon: GetProxyIcon,
+      name: t("menu_spec.get_proxy"),
       path: "/proxy",
       isShow: true,
     },
     {
-      icon: LaptopMinimalCheck,
-      name: t("menu_spec.API"),
-      path: "/generate_api",
+      icon: ComboIcon,
+      name: t("menu_spec.purchases"),
+      path: "/purchase",
+      isShow: true,
+    },
+    { name: t("menu_spec.products") },
+    {
+      icon: ResidentialProxyIcon,
+      name: t("menu_spec.residential_proxy"),
+      path: "/residential",
       isShow: true,
     },
     {
+      icon: UnlimitedProxyIcon,
+      name: t("menu_spec.unlimited_proxy"),
+      path: "/unlimited",
+      isShow: true,
+    },
+    {
+      icon: PhoneProxyIcon,
+      name: t("menu_spec.phone_proxy"),
+      path: "/mobile",
+      isShow: true,
+    },
+    {
+      icon: DataProxyIcon,
+      name: t("menu_spec.data_proxy"),
+      path: "/data_center",
+      isShow: true,
+    },
+    { name: t("menu_spec.menu") },
+    {
       icon: WhiteListIcon,
-      name: t("Whitelist"),
+      name: t("menu_spec.white_list"),
       path: "/whitelist",
       isShow: true,
     },
     {
       icon: AccountIcon,
-      name: t("Sub_Account"),
-      path: "/account",
+      name: t("menu_spec.sub_account"),
+      path: "/sub_account",
       isShow: true,
     },
     {
-      icon: Settings,
-      name: t("menu_spec.Settings"),
+      icon: SettingsIcon,
+      name: t("menu_spec.setting"),
       path: "/settings",
+      isShow: true,
+    },
+    { name: t("menu_spec.support") },
+    {
+      icon: HelpIcon,
+      name: t("menu_spec.help"),
+      path: "/doc",
+      isShow: true,
+    },
+    {
+      icon: QuestionIcon,
+      name: t("menu_spec.question"),
+      path: "/help",
       isShow: true,
     },
   ]
@@ -135,7 +165,6 @@ function focusPath(path) {
 watch(
   () => route.path,
   (val) => {
-    console.log(val)
     focusPath(val)
   }
 )

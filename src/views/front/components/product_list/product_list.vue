@@ -1,17 +1,10 @@
 <template>
   <div class="pc-product_list">
     <!-- tabbar 个人 企业 -->
-    <Tabbar @select="changeActive" v-if="tabbar"></Tabbar>
+    <Tabbar @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
 
-    <!-- introduce 介绍 -->
-    <!-- <ul v-if="vantage" class="vantage vh_center">
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[0]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[1]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[2]") }}</li>
-      <li><img src="@/assets//pc_img/home_img/vantage.png" alt="" /> {{ t("PCProductList.vantage[3]") }}</li>
-    </ul> -->
     <div class="list">
-      <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
+      <div v-if="product_list.length" class="priceList" ref="productRef" @wheel.prevent="scrollPlugin">
         <ul class="flex gap-3">
           <li
             v-for="(item, index) in product_list"
@@ -22,17 +15,14 @@
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
-                  <span v-if="item.trial">{{ t("Trial") }}</span>
-                  <span v-if="item.unlimit">{{ item.name }}</span>
-                  <div v-else class="column_center text-base md:text-xl font-semibold">
-                    {{ item.pack_title }}
-                    <!-- <strong class="">{{ item.pack_title.split(" ")[0] }}</strong>
-                    <span>{{ item.pack_title.split(" ")[1] }}</span> -->
+                  <div class="column_center text-lg">
+                    <template v-if="type === 0 || type === 4 || type === 2">{{ item.pack_title }}</template>
+                    <template v-if="type === 1 || type === 3">{{ item.prices[0].days }} {{ t("Day") }}</template>
                   </div>
                 </div>
 
                 <!-- 折扣 -->
-                <p class="font-medium lg:font-semibold" style="height: 1.5rem">
+                <p v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
                   <template v-if="item.trial">{{ t("Free") }}</template>
                   <template v-else-if="item.prices[item.select]?.discount > 0"
                     >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
@@ -40,94 +30,117 @@
                   <template v-else>{{ item.name }}</template>
                 </p>
 
-                <!-- 免费 -->
-                <template v-if="item.trial">
-                  <p class="price text-2xl lg:text-4xl space-x-1">
-                    <strong>{{ item.pack_title.split(" ")[0] }}</strong>
-                    <span class="text-sm">{{ item.pack_title.split(" ")[1] }}</span>
-                  </p>
-                  <p class="total vh_center space-x-1">
-                    <span>{{ t("Total") }}:</span>
-                    <span>$0</span>
-                  </p>
-                  <div class="number w-full">
-                    <div class="duration text-center space-x-1 text-sm">
-                      <span>{{ t("Duration") }}:</span>
-                      <span class="font-bold text-base">30 {{ t("Day") }}</span>
-                    </div>
+                <p class="price lg:text-4xl space-x-1">
+                  <strong class="text-3xl font-semibold">${{ item.prices[item.select].unit_price / 100 }}</strong>
+                  <span class="text-sm" v-if="type === 0 || type === 4 || type === 2">/GB</span>
+                  <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
+                  <span class="text-sm" v-else-if="type === 3">/IP</span>
+                </p>
+
+                <p class="vh_center space-x-1 text-sm">
+                  <span>{{ t("Total") }}:</span>
+                  <span v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</span>
+                  <span v-else>${{ item.total }}</span>
+                </p>
+
+                <div v-if="type === 0 || type === 4" class="number w-full">
+                  <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
+                    <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                    <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
                   </div>
-                </template>
-                <!-- 不限量 -->
-                <!-- <template v-else-if="item.unlimit">
-                  <p class="price" style="margin: 36px 0 10px">
-                    ${{ item.prices[item.select].price / 100 }} <span>${{ item.prices[item.select].origin_price / 100 }}</span>
-                  </p>
-                </template> -->
-                <!-- 个人 企业 -->
-                <template v-else>
-                  <p class="price text-2xl lg:text-4xl space-x-1">
-                    <strong>${{ item.prices[item.select].unit_price / 100 }}</strong>
-                    <span class="text-sm">/GB</span>
-                  </p>
-                  <p class="total vh_center space-x-1">
-                    <span>{{ t("Total") }}:</span>
-                    <span>${{ item.prices[item.select].price / 100 }}</span>
-                  </p>
-                  <div class="number w-full">
-                    <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
-                      <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("productList_spec.Never_Expires") }}</span>
-                      <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
-                    </div>
-                    <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>
+                  <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>
+                </div>
+                <div v-if="type === 2" class="number w-full">
+                  <div class="duration text-center space-x-1 text-sm">
+                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
                   </div>
-                </template>
+                </div>
+                <div v-if="type === 3" class="w-full space-y-2" style="margin-top: 1.75rem">
+                  <Regions v-model="item.region" />
+                  <InputNumber v-model="item.number" @change="(num) => numberChange(index, num)" />
+                </div>
               </div>
 
               <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
 
-              <!-- <ul class="rights column space-y-5 text-sm font-medium" v-if="item.unlimit">
-                <li class="v_center space-x-2">
-                  <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ t("PCProductList.unlimited_rights[1]") }}</p>
-                </li>
-                <li class="v_center space-x-2">
-                  <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ t("PCProductList.unlimited_rights[2]") }}</p>
-                </li>
-                <li class="v_center space-x-2">
-                  <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ t("PCProductList.unlimited_rights[3]") }}</p>
-                </li>
-                <li class="v_center space-x-2">
-                  <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ t("PCProductList.unlimited_rights[4]") }}</p>
-                </li>
-                <li class="v_center space-x-2">
-                  <CircleCheck :size="16" class="flex-shrink-0" />
-                  <p>{{ t("PCProductList.unlimited_rights[5]") }}</p>
-                </li>
-              </ul> -->
-
-              <ul class="rights column space-y-5 text-xs lg:text-sm font-medium">
+              <ul v-if="type === 0 || type === 4" class="rights column space-y-5 text-xs lg:text-sm font-medium">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right2") }}</p>
                 </li>
                 <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right3") }}</p>
                 </li>
                 <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right4") }}</p>
                 </li>
                 <li class="hidden lg:v_center space-x-1">
-                  <CircleCheck :size="20" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
                   <p>{{ t("productList_spec.right5") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="type === 1" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.unlimited_right1") }}</p>
+                </li>
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.unlimited_right2") }}</p>
+                </li>
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.unlimited_right3") }}</p>
+                </li>
+                <li class="hidden md:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.unlimited_right4") }}</p>
+                </li>
+                <li class="hidden lg:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.unlimited_right5") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="type === 2" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.phone_right1") }}</p>
+                </li>
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.phone_right2") }}</p>
+                </li>
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.phone_right3") }}</p>
+                </li>
+                <li class="hidden md:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.phone_right4") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="type === 3" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.data_right1") }}</p>
+                </li>
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.data_right2") }}</p>
+                </li>
+                <li class="hidden sm:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.data_right3") }}</p>
+                </li>
+                <li class="hidden md:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <p>{{ t("productList_spec.data_right4") }}</p>
                 </li>
               </ul>
 
@@ -149,7 +162,17 @@
                 </div>
 
                 <!-- 折扣 -->
-                <p class="font-medium lg:font-semibold" style="height: 1.5rem">{{ t("productList_spec.Extra_discount") }}</p>
+                <div class="font-medium lg:font-semibold v_center" style="height: 2rem">
+                  <template v-if="type === 0 || type === 4 || type === 2">{{ t("productList_spec.Extra_discount") }}</template>
+                  <template v-else-if="type === 1">
+                    <strong class="text-2xl font-semibold">$ ?</strong>
+                    <span>/ {{ t("Day") }}</span>
+                  </template>
+                  <template v-else-if="type === 3">
+                    <strong class="text-2xl font-semibold">$ ?</strong>
+                    <span>/ IP</span>
+                  </template>
+                </div>
 
                 <!-- 免费 -->
                 <div
@@ -157,9 +180,19 @@
                   :class="en ? 'lg:text-xl column' : 'lg:text-2xl column_center'"
                   style="margin-top: 2rem"
                 >
-                  <span>{{ t("productList_spec.Custom1") }}</span>
-                  <span>{{ t("productList_spec.Custom2") }}</span>
-                  <span>{{ t("productList_spec.Custom3") }}</span>
+                  <template v-if="type === 0 || type === 4 || type === 2">
+                    <span>{{ t("productList_spec.Custom1") }}</span>
+                    <span>{{ t("productList_spec.Custom2") }}</span>
+                    <span>{{ t("productList_spec.Custom3") }}</span>
+                  </template>
+                  <template v-if="type === 1">
+                    <span>{{ t("productList_spec.Custom4") }}</span>
+                    <span>{{ t("productList_spec.Custom5") }}</span>
+                  </template>
+                  <template v-if="type === 3">
+                    <span>{{ t("productList_spec.Custom6") }}</span>
+                    <span>{{ t("productList_spec.Custom7") }}</span>
+                  </template>
                 </div>
               </div>
 
@@ -202,33 +235,53 @@
             <h2>{{ t("Order_detail") }}</h2>
             <ul class="detail">
               <li class="between">
+                <span>{{ t("Name") }}</span>
+                <span v-if="type === 0">{{ t("Residential_Proxies") }}</span>
+                <span v-else-if="type === 1">{{ t("Unlimited_Residential_Proxies") }}</span>
+                <span v-else-if="type === 2">{{ t("Phone_Proxies") }}</span>
+                <span v-else-if="type === 3">{{ t("Data_Center_Proxies") }}</span>
+                <span v-else-if="type === 4">{{ t("Rotation_Proxies") }}</span>
+              </li>
+              <li class="between" v-if="type === 0 || type === 4 || type === 2">
                 <span>{{ t("Traffic") }}</span>
                 <span>{{ product?.pack_size }}</span>
               </li>
-              <li class="between">
-                <span>{{ t("payPopup_spec.unit_price") }}</span>
-                <!-- <span v-if="product?.unit_price !== 0">${{ product?.unit_price / 100 }} / GB</span>
-                <span v-else>--</span> -->
-                <div class="v_center space-x-1">
-                  <span>${{ product?.unit_price / 100 }}</span>
-                  <span class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
-                  <span> / GB</span>
-                </div>
-              </li>
-              <li class="between">
-                <span>{{ t("Discount") }}</span>
-                <span>{{ product?.discount_rate }}%</span>
-              </li>
-              <li class="between">
+              <li class="between" v-else-if="type === 1 || type === 3">
                 <span>{{ t("Duration") }}</span>
                 <span>{{ product?.days }} {{ t("Day") }}</span>
               </li>
+
+              <li class="between">
+                <span>{{ t("payPopup_spec.unit_price") }}</span>
+                <div class="v_center space-x-1">
+                  <span>${{ product?.unit_price / 100 }}</span>
+                  <span v-if="type === 0 || type === 4" class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
+                  <span v-if="type === 0 || type === 4 || type === 2"> / GB</span>
+                  <span v-else-if="type === 1"> / {{ t("Day") }}</span>
+                  <span v-else-if="type === 3"> / IP</span>
+                </div>
+              </li>
+              <li class="between" v-if="type === 0 || type === 4">
+                <span>{{ t("Discount") }}</span>
+                <span>{{ product?.discount_rate }}%</span>
+              </li>
+              <li class="between" v-else-if="type === 0 || type === 2">
+                <span>{{ t("Duration") }}</span>
+                <span>{{ product?.days }} {{ t("Day") }}</span>
+              </li>
+
+              <li class="between" v-if="type === 3">
+                <span>{{ t("Locations") }}</span>
+                <span>{{ product?.region }}</span>
+              </li>
+              <li class="between" v-if="type === 3">
+                <span>{{ t("Number") }}</span>
+                <span>{{ product?.number }}</span>
+              </li>
+
               <li class="between">
                 <span>{{ t("Total") }}</span>
-                <span>
-                  <!-- <i>${{ product?.origin_price / 100 }}</i>  -->
-                  ${{ product?.price / 100 }}
-                </span>
+                <span>${{ product?.price / 100 }}</span>
               </li>
             </ul>
             <div class="btn vh_center">
@@ -255,7 +308,7 @@ import loginStore from "@/store/login"
 import { CircleCheck } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import Tabbar from "./tabbar/tabbar.vue"
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from "vue"
+import { ref, computed, onMounted, onBeforeUnmount, nextTick, defineAsyncComponent, provide, toRef, toRefs, watch } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { ChevronLeft, ChevronRight } from "lucide-vue-next"
@@ -264,19 +317,25 @@ import layoutStore from "@/store/layout"
 import settingStore from "@/store/setting"
 import position from "@/components/dialog/position"
 import { track_createOrder } from "@/utils/detect"
+import { platProductRegions } from "@/api/product"
 
-const { en } = settingStore()
+const Regions = defineAsyncComponent(() => import("./regions/regions.vue"))
+const InputNumber = defineAsyncComponent(() => import("./number/number.vue"))
+
+const { en, lang } = settingStore()
 
 const props = defineProps({
+  type: {
+    type: Number,
+    default: 0,
+    // 0=住宅代理 1=不限量住宅 2=移动手机 3=数据中心
+  },
   tabbar: {
     type: Boolean,
     default: true,
   },
-  vantage: {
-    type: Boolean,
-    default: false,
-  },
 })
+const { type } = toRefs(props)
 
 // 是否显示赠送gift
 const { isLogin } = loginStore()
@@ -287,6 +346,13 @@ const router = useRouter()
 
 const { t } = useI18n()
 
+// 最低价格
+const { lowestPrice, getLowestPrice } = layoutStore()
+const keys = ["residential", "unlimited", "phone", "data_center"]
+const lowest = computed(() => {
+  return lowestPrice.value[keys[type.value === 4 ? 0 : type.value]]
+})
+
 // 产品相关
 const loading = ref(false)
 const product_list = ref([])
@@ -296,10 +362,12 @@ let group2 = []
 let group3 = []
 async function GetProductList() {
   try {
-    const { data } = await platProductsV2()
-    const tempGroup1 = []
-    const tempGroup2 = []
-    const tempGroup3 = []
+    const { data } = await platProductsV2({
+      prd_type: props.type === 4 ? 0 : props.type,
+    })
+    const tempGroup1 = [] // 个人
+    const tempGroup2 = [] // 企业
+    const tempGroup3 = [] // 不限量
 
     let prices = null
 
@@ -344,6 +412,11 @@ async function GetProductList() {
         sel_country: item.sel_country,
         prices: item.prices,
       }
+      if (props.type === 3) {
+        obj.region = ref("lax")
+        obj.number = ref(1)
+        obj.total = ref(item.prices[0].price / 100)
+      }
 
       if (item.group === 1) {
         tempGroup1.push(obj)
@@ -375,6 +448,27 @@ async function GetProductList() {
     console.log(err.message)
   }
 }
+function numberChange(index, num) {
+  const item = product_list.value[index]
+  const price = item.prices[0].price
+  const { total } = toRefs(item)
+
+  total.value = roundToDecimal((num * price) / 100)
+}
+
+// 地区
+const regionsList = ref([])
+provide("regionsList", regionsList)
+async function getRegions() {
+  const { data } = await platProductRegions()
+  regionsList.value = data.map((item) => ({
+    value: item.code,
+    country: item.country,
+    zh: item.city_cn,
+    en: item.city,
+  }))
+}
+
 // 获取全局配置
 async function getDataConfig() {
   try {
@@ -386,7 +480,7 @@ async function getDataConfig() {
 }
 
 // 切换tab
-const showContact = ref(false)
+const showContact = ref(props.type !== 0 && props.type !== 4)
 function changeActive(index) {
   showContact.value = index === 1
 
@@ -473,6 +567,7 @@ function scrollPluginValue(op) {
 
 const initScrollTag = debounce(function () {
   const dom = productRef.value
+  if (!dom) return
   const width = dom.clientWidth
   const scrollWidth = dom.scrollWidth
   const scrollLeft = dom.scrollLeft
@@ -492,7 +587,7 @@ const initScrollTag = debounce(function () {
 const isPayPopup = ref(false)
 const order_data = ref(null)
 const payPopupRef = ref(null)
-let product
+const product = ref(null)
 function click_pay(e) {
   position.set({ x: e.clientX, y: e.clientY })
 
@@ -510,47 +605,101 @@ function click_pay(e) {
 
   const productData = {
     code: item.code,
-    days: item.prices[item.select].days,
+    days: item.prices[item.select].days > 3650 ? t("Never_Expires") : item.prices[item.select].days,
     discount_rate: item.prices[item.select].discount,
     unit_price: item.unlimit ? 0 : item.prices[item.select].unit_price,
     pack_size: item.unlimit ? t("Unlimited") : item.pack_title,
     price: item.prices[item.select].price,
     origin_price: item.prices[item.select].origin_price,
+    attr_id: item.prices[item.select].attr_id,
+  }
+
+  if (props.type === 3) {
+    productData.region_code = item.region
+    const region = regionsList.value.find((i) => i.value === item.region)
+    productData.region = region[lang.value] ?? ""
+    productData.number = item.number
+    productData.price = item.total * 100
   }
 
   // productData.origin_price = productData.price * (productData.discount_rate / 100) + productData.price
   // productData.origin_price = Math.round(productData.origin_price)
 
-  product = productData
+  product.value = productData
 
   isPayPopup.value = true
 }
 async function FoundOrder() {
-  loading.value = true
-  const item = product
+  const item = product.value
   try {
-    const { data } = await platCustomerOrder({
+    loading.value = true
+    const params = {
       pcode: item.code,
       days: item.days,
-    })
+      attr_id: item.attr_id,
+    }
+    if (props.type === 3) {
+      params.num = item.number
+      params.region_code = item.region_code
+    }
+    const { data } = await platCustomerOrder(params)
 
     track_createOrder()
+
     order_data.value = {
       order_no: data.order_no,
       order_price: data.order_price,
       order_usdt_price: data.order_usdt_price,
-      desc_3: item.pack_size,
+      desc_3: getTitleDesc(props.type),
       desc_4: "",
     }
+  } catch (err) {
+    console.log(err.message)
   } finally {
     loading.value = false
     payPopupRef.value.toggleDetail(false)
   }
 }
+function getTitleDesc(type) {
+  let desc = ""
+  switch (type) {
+    case 0:
+      desc = t("Residential_Proxies") + " " + product.value.pack_size
+      break
+    case 1:
+      desc = t("Unlimited_Residential_Proxies") + " " + product.value.days + t("days")
+      break
+    case 2:
+      desc = t("Phone_Proxies") + " " + product.value.pack_size
+      break
+    case 3:
+      desc = t("Data_Center_Proxies") + "--" + product.value.region + "[" + product.value.number + "]"
+      break
+    case 4:
+      desc = t("Rotation_Proxies") + " " + product.value.pack_size
+      break
+  }
+  return desc
+}
 
+watch(
+  type,
+  (newVal, oldVal) => {
+    if (typeof oldVal === "number") {
+      product_list.value = []
+    }
+    nextTick(() => {
+      GetProductList()
+    })
+  },
+  {
+    immediate: true,
+  }
+)
 onMounted(() => {
+  getRegions()
   getDataConfig()
-  GetProductList()
+  // GetProductList()
   window.addEventListener("resize", initScrollTag)
 })
 

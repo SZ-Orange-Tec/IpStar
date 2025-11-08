@@ -1,35 +1,29 @@
 export default {
-  Now: "Now",
-  Services: "Services",
-  Help_center: "Help Center",
-  Connect_with_us: "Connect with us",
+  Contact_Us: "Contact Us",
+  Products: "Products",
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Rotating_Proxies: "Rotating Proxies",
+  Price: "Price",
+  Scenes: "Scenes",
+  Get_Help: "Get Help",
 
-  FAQ: "FAQ",
-  Getting_Start: "Getting Start",
-  API_Reference: "API Reference",
-  Examples: "Examples",
-  Terms_Conditions: "Terms & Conditions",
   Privacy_Policy: "Privacy Policy",
-
-  Legal: "Legal",
-  Commitment: "Commitment",
+  Terms_of_Service: "Terms of Service",
+  Refund_Policy: "Refund Policy",
 
   footer_spec: {
-    explore: "explore IpStar services",
-    description: "E-commerce,network,bigdata,artifcial intelligence, \nIpStar helps you develop rapidly",
-    get_it_now: "GET IT NOW",
+    scene1: "Data Collection",
+    scene2: "SEO",
+    scene3: "Social Media",
+    scene4: "Ad Verification",
+    scene5: "AI Training",
+    scene6: "More Scenes",
+    document: "Help Documents",
+    question: "Common Questions",
 
-    Residential_Proxies: "Residential Proxies",
-    Proxy_IP_Locations: "Proxy IP Locations",
-    Proxy_API: "Proxy API",
-    Partner_Solutions: "Partner Solutions",
-    Custom_Solutions: "Custom Solutions",
-
-    privicy: "Don't Sell My Personal info",
-
-    Legal: "Legal Tips",
-    tips: "IpStar proxy services do not support direct requests within China, users must comply with the laws of your location to use IpStar services, and we may discontinue the service once risky behaviour is detected.",
-
-    copyright: "Copyright © 2025 IpStar. All rights reserved.",
+    rights: "@Copyright 2025 IPstar. All rights reserved.",
   },
 }

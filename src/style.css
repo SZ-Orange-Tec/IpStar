@@ -52,6 +52,12 @@
   .transition-color {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   }
+
+  .ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .flex>.flex-1,.v_center>.flex-1 {
@@ -78,6 +84,9 @@
 }
 .warn{
   color: hsl(var(--warn));
+}
+.white{
+  color: hsl(var(--colour-foreground));
 }
 .black{
   color: hsl(var(--foreground));
@@ -124,9 +133,9 @@ html{
   -o-tab-size: 4;
   tab-size: 4;
   font-size: 16px;
-  @media screen and (max-width:768px) {
+  /* @media screen and (max-width:768px) {
     font-size: 14px;
-  }
+  } */
 }
 
 body{

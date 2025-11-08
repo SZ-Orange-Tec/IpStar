@@ -1,5 +1,5 @@
 .input{
-  @apply outline-none focus:outline-none rounded-md h-10 px-3 text-sm;
+  @apply outline-none focus:outline-none px-3 text-sm;
   border: 1px solid hsl(var(--input-border));
   background-color: transparent;
 }

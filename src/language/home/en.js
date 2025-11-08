@@ -3,18 +3,32 @@ import footer from "../components/footer/en"
 import productList from "../components/productList/en"
 import paypopup from "../components/pay_popup/en"
 import headerGift from "../components/headerGift/en"
+import question from "../components/question/en"
 export default {
   ...header,
   ...footer,
   ...productList,
   ...paypopup,
   ...headerGift,
+  ...question,
 
   Learn_More: "Learn More",
   Free_Trial: "Free Trial",
 
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Rotation_Proxies: "Rotation Residential Proxies",
+  Starting_from: "Starting_from ",
+  Get_Now: "Get Now",
+  Contact_Us: "Contact Us",
+  Now: "Now",
+  Day: "Day",
+  FAQ: "FAQ",
+
   home_spec: {
-    intro_title1: "Unlimited Web Data Infrastructure \nPowering Global Data Operations",
+    intro_title1: "Unlimited Web Data \nPowering Global Data Operations",
     intro_title2: "",
 
     // intro_desc:
@@ -41,18 +55,49 @@ export default {
     adv3: "All major proxy software.",
     adv4: "For API and credential retrieval.",
 
-    why: "Why Choose",
-    why1_title: "Massive Resource",
-    why1_desc: "Cover 200+ countries, provide 5000+ real residential proxy IPs, help enterprises easily expand global business.",
-    why2_title: "High Anonymity & Efficiency",
-    why2_desc:
-      "Genuine residential IPs effectively prevent detection and tracking, strongly protecting data privacy. High-speed, stable network for a smooth experience.",
-    why3_title: "Great Value",
-    why3_desc: "Competitive pricing with exceptional quality and reliable residential proxy services.",
-    more: "Versatile Use Cases",
-    automatic: "Applications",
-    instant: "IpStar Residential Proxy offers efficient and secure proxy services,\neasily meeting diverse business needs.",
+    proxy_title: "Agency services catering to diverse requirements",
+    proxy_desc: "We offer a variety of proxy types to meet your specific needs.",
+    residential_des: "Residential proxies provide real IP addresses from residential locations, ensuring anonymity and privacy.",
+    residential_adv1: "Over 72 million premium residential proxies",
+    residential_adv2: "190+ countries and 100+ cities",
+    residential_adv3: "Super anonymous and lightning-fast speed",
+    unlimited_des: "Unlimited residential proxies offer a vast pool of IP addresses, allowing for unlimited access to the internet.",
+    unlimited_adv1: "72M+ Global Residential IPs",
+    unlimited_adv2: "Scalable Bandwidth & Concurrency",
+    unlimited_adv3: "Full YouTube/GitHub Support",
+    phone_des: "Phone proxies enable you to access the internet using mobile phone numbers, perfect for bypassing geo-restrictions.",
+    phone_adv1: "2M+ IPs in 30+ Countries",
+    phone_adv2: "3G/4G/5G/LTE Mobile Proxy Network",
+    phone_adv3: "99.9% Uptime",
+    data_center_des: "Data center proxies offer stable and high-speed connections, ideal for businesses that require consistent performance.",
+    data_center_adv1: "Premium Static IPs",
+    data_center_adv2: "Starting at ${price}/IP",
+    data_center_adv3: "HTTP/SOCKS5 Supported",
+    rotation_des: "With our customer support team, you can rely on us to provide prompt and helpful assistance whenever you need it.",
+    rotation_adv1: "Global Geolocation Coverage",
+    rotation_adv2: "Unlimited Sub-account Creation",
+    rotation_adv3: "99.99% Connection Success Rate",
 
+    plan_title: "Easily Integrate Our Solution into Your Project",
+    plan_desc:
+      "We ensure that our product is easily integrated into your scraping infrastructure. With multiple language support and ready-to-use code examples, you can start your web scraping project quickly and easily.",
+    view_doc: "View Documentation",
+
+    why_title: "Why Use Our Residential IP?",
+    why1_title: "9000 M+ Residential IPs for Sale",
+    why1_desc: "We offer a highly stable residential proxy IP pool.",
+    why2_title: "Zero CAPTCHA",
+    why2_desc: "Optimize business resources as no captcha is required.",
+    why3_title: "Zero IP Blocking",
+    why3_desc: "No more wasting time on IP blocking. Purchase residential IPs and focus on insights.",
+    why4_title: "Session Control",
+    why4_desc: "Residential proxy sales offer flexible and adjustable session control features to meet your needs.",
+    why5_title: "Unlimited Concurrent Sessions",
+    why5_desc: "No limits on concurrent sessions. Purchase residential IPs and send unlimited concurrent sessions.",
+    why6_title: "Global Coverage",
+    why6_desc: "Purchase residential IPs from 190 locations worldwide and provide country, city, and state-level geolocation services.",
+
+    cases_title: "Versatile Use Cases",
     four1_title: "Data Collection",
     four1_desc: "Stable and reliable proxies for your business intelligence projects.",
     four2_title: "SEO",
@@ -70,17 +115,12 @@ export default {
     four8_title: "AI Training",
     four8_desc: "Access global public data to accelerate AI model training.",
 
-    world_title: "Worldwide {primary} Proxy",
-    world_title_slot: "Point to Point",
-    world_desc: "We offer various locations to meet your business needs.",
-    coverage: "Accurate coverage",
-    coverage_desc:
-      "90 million real residential agency IPs,helping covering over 200 countries and providing over enterprise easily expand their global business.",
-    resources: "Premium resources",
-    word_adv1: "lected high-quality IP resources",
-    word_adv2: "And continuously optimize the IP pool",
-    word_adv3: "Ensure a smooth and stable online experience",
-    word_adv4: "Enhance user experience",
+    location_title: "Residential proxy IPs from around the world",
+    location_desc: "Covering over 190 countries and regions globally. Over 72 million active IPs updated daily, with 99.5% availability.",
+    location_dot1: "Dynamic IP address",
+    location_dot2: "City location",
+    location_dot3: "High-speed server",
+    location_dot4: "Success rate",
 
     app_title: "Easily integrate our solutions to your \nprojects your use case",
     app_desc:
@@ -93,6 +133,9 @@ export default {
     ad_tech: "Ad Tech",
     serp_seo: "SERP & SEO",
     finance: "Finance",
+
+    explore: "explore IpStar services",
+    explore_desc: "E-commerce,network,bigdata,artifcial intelligence, IpStar helps you develop rapidly",
 
     package_title: "Choose The Package that \n fits your needs",
     package_desc: "IpStar offers you a variety of flexible and practical plans.",

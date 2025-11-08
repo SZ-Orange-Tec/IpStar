@@ -1,6 +1,6 @@
 <template>
   <div class="front">
-    <HomeBg class="home_bg w-full" v-if="homeHeight" :height="homeHeight" />
+    <!-- <HomeBg class="home_bg w-full" v-if="isHome && homeHeight" :height="homeHeight" /> -->
 
     <Header />
 
@@ -13,16 +13,14 @@
 <script setup>
 import Header from "./components/header/header.vue"
 import Footer from "./components/footer/footer.vue"
-import { onMounted, provide, reactive, ref } from "vue"
+import { computed, onMounted, provide, reactive, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
-import layoutStore from "../../store/layout"
 import HomeBg from "./components/homeBg.vue"
-
-const { setLowestPrice } = layoutStore()
 
 const homeHeight = ref(0)
 provide("homeHeight", homeHeight)
+const isHome = computed(() => route.path === "/home")
 
 // 预加载
 function loadLogin() {
@@ -56,13 +54,10 @@ async function getHomeData() {
     homeData.onlineIp = onlineIp
     homeData.ipsCount = ipsCount
     homeData.countrys = countrys
-
-    setLowestPrice(lowestPrice)
   } catch (error) {
     console.log(error.message)
   }
 }
-provide("homeData", homeData)
 getHomeData()
 
 onMounted(() => {
@@ -73,4 +68,28 @@ onMounted(() => {
 
 <style lang="less" scoped>
 @import url("./front.less");
+</style>
+
+<style lang="less">
+.box_wrap {
+  padding: 0 2.5rem;
+  & > .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 0;
+    .content {
+      margin-top: 60px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+    & > .container {
+      padding: 2rem 0;
+      .content {
+        margin-top: 40px;
+      }
+    }
+  }
+}
 </style>

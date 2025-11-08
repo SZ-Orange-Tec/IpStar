@@ -1,13 +1,14 @@
 <template>
   <div ref="triggerRef" class="h-0" style="background: transparent"></div>
-  <div class="header_box" :class="{ shadow: shadow }">
-    <HeaderGift v-if="registerAward && !isLogin" @load="setStickyTop" />
+  <div class="header_box relative" :class="{ shadow: shadow }">
+    <HeaderGift />
     <header class="header" :class="{ home_header: isHome }">
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
-          <div>
-            <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
-            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" />
+          <div class="pointer" @click="navigate('/home')">
+            <!-- <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
+            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" /> -->
+            <img sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
             <!-- <img
               sizes="(max-width:112px) 56px,24px"
               src="@/assets/images/logo_white.png"
@@ -17,21 +18,28 @@
           </div>
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li
-              @click="navigate('/home')"
-              class="slider_bck slider_bck_center h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/home' }"
+              @mouseenter="toggleProductPop"
+              @mouseleave="toggleProductPop"
             >
-              {{ $t("Home") }}
+              <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
+                <div>{{ $t("Products") }}</div>
+                <ChevronDown :class="{ rotate180: productPopShow }" :size="18" />
+              </div>
+              <ProductPop v-model="productPopShow" />
             </li>
             <li
-              @click="navigate('/pricing')"
-              class="slider_bck slider_bck_center h-full v_center pointer transition-color"
+              class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/pricing' }"
+              @mouseenter="togglePricePop"
+              @mouseleave="togglePricePop"
             >
-              <div class="v_center space-x-1">
+              <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Pricing") }}</div>
-                <div v-if="lowestPrice" class="tag text-xs rounded-full font-semibold">${{ lowestPrice }}/GB</div>
+                <ChevronDown :class="{ rotate180: pricePopShow }" :size="18" />
               </div>
+              <PricePop v-model="pricePopShow" />
             </li>
             <li
               @click="navigate('/relation')"
@@ -51,7 +59,7 @@
         </div>
 
         <div class="v_center h-full space-x-3">
-          <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
+          <!-- <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
                 <Menu :size="18" />
@@ -89,11 +97,11 @@
                 </li>
               </ul>
             </template>
-          </DropDown>
+          </DropDown> -->
 
           <div class="v_center space-x-3 shink-0">
             <!-- 语言 -->
-            <DropDown placement="bottom" class="shink-0">
+            <DropDown placement="bottom" class="hidden lg:block shink-0">
               <template #label="{ open }">
                 <IpButton :class="{ open: open }" type="normal" class="user_icon">
                   <div class="vh_center space-x-2 shrink-0 w-full h-full">
@@ -131,7 +139,7 @@
                     <div class="slider_bck slider_bck_left">
                       <p class="username hidden md:block">{{ username_simple }}</p>
                     </div>
-                    <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+                    <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform hidden lg:block" />
                   </div>
                 </IpButton>
               </template>
@@ -159,11 +167,17 @@
                 </ul>
               </template>
             </DropDown>
+
+            <div class="block lg:hidden" @click="headerShow = true">
+              <Menu :size="24" :strokeWidth="2.5" />
+            </div>
           </div>
         </div>
       </div>
     </header>
   </div>
+
+  <HeaderPop v-if="headerShow" v-model="headerShow" />
 </template>
 
 <script setup>
@@ -176,21 +190,25 @@ import { useRouter, useRoute } from "vue-router"
 import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import userStore from "@/store/user"
 import { useI18n } from "vue-i18n"
-import { computed, inject, onMounted, ref } from "vue"
+import { computed, inject, nextTick, onMounted, ref } from "vue"
 import layoutStore from "@/store/layout"
-import { platDataConfig } from "@/api/home"
 import { defineAsyncComponent } from "vue"
+import ProductPop from "../product_pop/product_pop.vue"
+import PricePop from "../price_pop/price_pop.vue"
+import HeaderPop from "../header_pop/index.vue"
 
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
-const { token, OutLogin, isLogin } = loginStore()
+const { token, OutLogin } = loginStore()
 const { lang } = settingStore()
 const { username_simple } = userStore()
-const { registerAward } = layoutStore()
 
-const homeData = inject("homeData")
-const lowestPrice = computed(() => homeData.lowestPrice / 100)
+// const show = /localhost/.test(window.location.href)
+const headerShow = ref(false)
+
+// const homeData = inject("homeData")
+// const lowestPrice = computed(() => homeData.lowestPrice / 100)
 
 // 路由
 const activePath = computed(() => route.path)
@@ -220,18 +238,6 @@ function initShadowObserve() {
 
 // 赠送流量
 const HeaderGift = defineAsyncComponent(() => import("../headerGift/headerGift.vue"))
-async function isShowGift() {
-  try {
-    const { data } = await platDataConfig()
-    registerAward.value = data.register_award
-  } catch (err) {
-    console.log(err.message)
-  }
-}
-const stickyTop = ref("px")
-function setStickyTop(value) {
-  stickyTop.value = value
-}
 
 // 切换语言
 async function toggleLang(locale) {
@@ -256,8 +262,6 @@ function userDropChange(status) {
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
-  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
-  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
 }
 // 预加载前台
 async function loadFront() {
@@ -271,9 +275,19 @@ function signOut() {
   OutLogin()
 }
 
+// 气泡
+const productPopShow = ref(false)
+function toggleProductPop() {
+  productPopShow.value = !productPopShow.value
+}
+
+const pricePopShow = ref(false)
+function togglePricePop() {
+  pricePopShow.value = !pricePopShow.value
+}
+
 onMounted(() => {
   initShadowObserve()
-  isShowGift()
 })
 </script>
 

@@ -1,0 +1,286 @@
+<template>
+  <div v-if="show">
+    <div class="product_pop" ref="container">
+      <div class="main black rounded-lg">
+        <div class="grey-40 font-medium">{{ t("Proxy_Solutions") }}</div>
+        <div class="split w-full"></div>
+        <div class="w-full">
+          <div class="grid grid-cols-2 gap-4">
+            <a href="/product/residential" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <ResidentialProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="v_center space-x-2">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Residential_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">90M+Ips</ip-tag>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Residential_Proxies_Adv") }}</p>
+              </div>
+            </a>
+            <a href="/product/rotation" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <RotatingProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="v_center space-x-2">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Rotating_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">{{ t("Hot") }}</ip-tag>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Rotating_Proxies_Adv") }}</p>
+              </div>
+            </a>
+            <a href="/mobile-proxy" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <PhoneProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Phone_Proxies") }}</strong>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Phone_Proxies_Adv") }}</p>
+              </div>
+            </a>
+            <a href="/unlimited-residential-proxy" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="v_center space-x-2">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Unlimited_Residential_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">{{ t("perfect_for_All") }}</ip-tag>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Unlimited_Residential_Proxies_Adv") }}</p>
+              </div>
+            </a>
+            <a href="/product/data_center" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <DataProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Data_Center_Proxies") }}</strong>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Data_Center_Proxies_Adv") }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { useI18n } from "vue-i18n"
+import {
+  House as ResidentialProxyIcon,
+  Rotate3D as RotatingProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
+  ChevronLeft,
+} from "lucide-vue-next"
+import IpTag from "@/components/tag/tag.vue"
+import anime from "animejs/lib/anime.es.js"
+import { roundToDecimal } from "@/utils/tools"
+import { nextTick, onMounted, ref, toRefs, watch } from "vue"
+import { useRouter } from "vue-router"
+
+const { t } = useI18n()
+const router = useRouter()
+
+const show = ref(false)
+
+const props = defineProps({
+  modelValue: Boolean,
+})
+const { modelValue } = toRefs(props)
+const emit = defineEmits(["update:modelValue"])
+
+watch(
+  modelValue,
+  (val) => {
+    if (val) {
+      show.value = val
+      computeWidth()
+      nextTick(() => {
+        open()
+      })
+    } else {
+      close()
+    }
+  }
+  // { immediate: true }
+)
+
+// 开启 关闭动画
+const container = ref(null)
+const width = ref(0)
+function computeWidth() {
+  const app = document.getElementById("app")
+  width.value = app.clientWidth + "px"
+}
+function close() {
+  const target = container.value
+
+  target.parentNode.style.backgroundColor = "hsl(var(--dialog-wrap) / 0%)"
+
+  return new Promise((resolve) => {
+    anime({
+      targets: target,
+      opacity: {
+        value: [1, 0],
+        easing: "easeInQuart",
+      }, // 明确指定起始和结束值
+      // width: {
+      //   value: [window.innerWidth, 0],
+      //   easing: "easeInQuart",
+      // },
+      duration: 150,
+      complete: () => {
+        show.value = false
+        emit("update:modelValue", false)
+        resolve()
+      },
+    })
+  })
+}
+function open() {
+  const target = container.value
+
+  target.parentNode.style.backgroundColor = "hsl(var(--dialog-wrap) / 90%)"
+
+  anime({
+    targets: target,
+    opacity: {
+      value: [0, 1],
+      easing: "easeOutQuad",
+    }, // 明确指定起始和结束值
+    // width: {
+    //   value: [0, window.innerWidth],
+    //   easing: "easeOutQuad",
+    // },
+    duration: 300,
+  })
+}
+
+// 跳转二级页面
+function toHomeSecond(name) {
+  router.push({
+    name: "introduce",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+
+onMounted(() => {
+  if (modelValue.value) {
+    show.value = true
+    computeWidth()
+    nextTick(() => {
+      open()
+    })
+  }
+})
+</script>
+
+<style lang="less" scoped>
+.iconbox {
+  width: 40px;
+  height: 40px;
+  background-color: hsl(var(--primary) / 8%);
+  background-color: #eff6ff;
+  position: relative;
+  transition: background-color 0.3s ease-in-out;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: hsl(var(--primary) / 20%);
+    border-radius: 50%;
+  }
+}
+.product_pop {
+  box-sizing: border-box;
+  padding-top: 10px;
+  // width: 100vw;
+  position: absolute;
+  // top: 100%;
+  left: -40px;
+  top: 100%;
+  .main {
+    padding: 20px 40px 40px;
+    box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
+    transform-origin: center center;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+    // max-width: 1200px;
+    width: 820px;
+    margin: 0 auto;
+    .split {
+      margin: 10px 0 20px;
+      height: 1px;
+      background-color: hsl(var(--border));
+    }
+    .grid {
+      margin: 0 -12px;
+      & > a {
+        width: 100%;
+        height: 100%;
+        padding: 16px 12px;
+        transition: background-color 0.3s;
+        // p {
+        //   height: 40px;
+        //   display: -webkit-box;
+        //   -webkit-line-clamp: 2;
+        //   -webkit-box-orient: vertical;
+        //   overflow: hidden;
+        //   text-overflow: ellipsis;
+        // }
+        &:hover {
+          background-color: hsl(var(--primary) / 8%);
+          .iconbox {
+            background-color: #ffffff;
+          }
+          .slider_bck {
+            color: hsl(var(--primary));
+            &::after {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.slider_bck {
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 1px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+
+    background-color: hsl(var(--primary) / 80%);
+    transition: all 0.3s;
+  }
+}
+.slider_bck_left {
+  &::after {
+    left: 0;
+    transform-origin: left center;
+  }
+}
+</style>

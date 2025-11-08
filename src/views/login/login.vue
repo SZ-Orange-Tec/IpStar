@@ -130,10 +130,7 @@ const loading = ref(false)
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
-  await import(/*webpackChunkName:'products'*/ "@/views/back/products/products.vue")
-  await import(/*webpackChunkName:'billings'*/ "@/views/back/billings/billings.vue")
   await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
-  await import(/*webpackChunkName:'api'*/ "@/views/back/API/api.vue")
   await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
 }
 

@@ -1,1471 +1,233 @@
 <template>
-  <div class="pc-overview column">
+  <div class="h-full column">
     <NavBar>
       <template #default="{ title }">
-        <div class="place v_center space-x-2">
-          <ip-button type="ghost" icon class="h-8 w-8" @click="updateActiveIndex(0)" v-if="activeIndex !== 0">
+        <div v-if="isBalance" class="v_center space-x-1">
+          <IpButton type="ghost" class="h-8 w-8 vh_center" @click="isBalance = false">
             <ChevronLeft />
-          </ip-button>
-          <span>{{ title }}</span>
+          </IpButton>
+          <span>{{ t("Consumption_Details") }}</span>
         </div>
+        <div v-else-if="isOnlineIp" class="v_center space-x-1">
+          <IpButton type="ghost" class="h-8 w-8 vh_center" @click="isOnlineIp = false">
+            <ChevronLeft />
+          </IpButton>
+          <span>{{ t("Online_IP") }}</span>
+        </div>
+        <div v-else>{{ title }}</div>
       </template>
     </NavBar>
 
-    <div class="w-full main flex-1 px-3 md:px-5 mt-5">
-      <!-- 我的订阅 -->
-      <div class="subscribe column xl:flex items-stretch w-full gap-5" v-show="activeIndex === 0">
-        <!-- 左边概览 -->
-        <div class="echarts_left w-full column gap-5">
-          <!-- 剩余流量 消耗 IP总数 -->
-          <div class="flow gap-3 md:gap-5">
-            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
-              <div class="box_top w-full between">
-                <p class="">{{ $t("overview_spec.Residual_Traffic") }}</p>
-                <img class="hidden md:block" src="@/assets/images/overview/Gauge.png" width="36" />
-                <!-- <Gauge :size="50" color="#ffcc53" /> -->
-              </div>
-              <div class="box_bottom v_center">
-                <div class="number">
-                  <div v-if="unlimited">
-                    <span>{{ $t("Unlimited") }}</span>
+    <div v-if="isBalance" class="box-border flex-1 min-h-0 w-full p-6">
+      <Balance />
+    </div>
+
+    <div v-else-if="isOnlineIp" class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6">
+      <OnlineIP />
+    </div>
+
+    <div v-else class="main flex-1 min-h-0 overflow-y-auto w-full flex p-6 gap-5">
+      <div class="flex-1 min-w-0 space-y-5">
+        <div class="board px-2 py-5 rounded">
+          <keep-alive>
+            <Tab class="tab" v-model="active" :active-style="activeStyle">
+              <TabItem :value="0" class="flex-1 tab-item">
+                <div :class="{ focus: active === 0 }" class="pointer flex-1 column p-5 rounded-md" data-active="0">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <ResidentialProxyIcon :size="24" />
                   </div>
-                  <NumberCounter v-else :value="quantityOfFlow.remain.num" :unit="quantityOfFlow.remain.unit" />
-                  <div class="h-8 block sm:hidden"></div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.residential_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.residential }}/GB </span>
                 </div>
-              </div>
-            </div>
-
-            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
-              <div class="box_top w-full between">
-                <p>{{ $t("overview_spec.Consumption_Today") }}</p>
-                <img class="hidden md:block" src="@/assets/images/overview/control.png" width="36" />
-                <!-- <SlidersVertical :size="40" color="hsl(var(--major))" /> -->
-              </div>
-              <div class="box_bottom column sm:between pointer">
-                <p class="number">
-                  <NumberCounter :value="quantityOfFlow.consume.num" :unit="quantityOfFlow.consume.unit" />
-                </p>
-                <ip-button type="primary_border" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(2)">
-                  {{ $t("Details") }}
-                </ip-button>
-                <!-- <div class="btn v_center" @click="updateActiveIndex(2)">{{ $t("overview_spec.detail") }}</div> -->
-              </div>
-            </div>
-
-            <div class="box rounded-md flex-1 column_between space-y-5 p-2 sm:p-4 board">
-              <div class="box_top between">
-                <p>{{ $t("overview_spec.Total_IPs_Available") }}</p>
-              </div>
-              <div class="box_bottom column sm:between w-full">
-                <p class="number">
-                  <NumberCounter :value="quantityOfFlow.remain.count" :unit="quantityOfFlow.consume.count" />
-                </p>
-                <ip-button type="primary_border" class="px-2 md:px-5 h-8 text-xs md:text-sm" @click="updateActiveIndex(1)">
-                  {{ $t("Details") }}
-                </ip-button>
-                <!-- <div class="btn v_center pointer" @click="updateActiveIndex(1)">{{ $t("overview_spec.detail") }}</div> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- 流量消耗趋势 -->
-          <div class="w-full column md:flex gap-5 items-stretch echart_table" :class="{ echart_table_layout: isDashboard }">
-            <!-- 新手引导 -->
-            <div v-if="!isDashboard" class="new_guide rounded-md w-full md:flex-1 column !items-stretch space-y-7">
-              <div class="text-lg md:text-xl font-semibold">
-                <span class="primary">{{ $t("overview_spec.welcome1") }}</span>
-                {{ $t("overview_spec.welcome2") }}
-              </div>
-              <div class="split"></div>
-
-              <div class="space-y-2" style="margin-top: 0">
-                <div class="space-y-2">
-                  <p class="black font-semibold text-lg">1. {{ $t("overview_spec.proxy_title") }}</p>
-                </div>
-
-                <div class="w-full" style="max-width: 55rem">
-                  <div class="column md:v_center !items-stretch gap-2">
-                    <CopyItem class="flex-1" :label="$t('overview_spec.port')" text="9139(http) 9135(socks5)" />
-                    <CopyItem class="flex-1" :label="$t('overview_spec.proxy_user')" :text="proxy_user" />
-                    <CopyItem class="flex-1" :label="$t('overview_spec.proxy_pass')" :text="proxy_pass" />
+              </TabItem>
+              <TabItem :value="1" class="flex-1 tab-item">
+                <div :class="{ focus: active === 1 }" class="pointer flex-1 column p-5 rounded-md" data-active="1">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <UnlimitedProxyIcon :size="24" />
                   </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/{{ t("Day") }} </span>
                 </div>
-              </div>
-
-              <div class="space-y-3">
-                <div class="space-y-2">
-                  <p class="black font-semibold text-lg">2. {{ $t("overview_spec.test1") }}</p>
-                  <p class="text-sm">{{ $t("overview_spec.test2") }}</p>
-                </div>
-
-                <div>
-                  <div class="w-full column !items-stretch space-y-4" style="max-width: 55rem">
-                    <CodeItem v-for="item in ipPools" :key="item.label" :label="item.label" :text="item.text" />
+              </TabItem>
+              <TabItem :value="2" class="flex-1 tab-item">
+                <div :class="{ focus: active === 2 }" class="pointer flex-1 column p-5 rounded-md" data-active="2">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <PhoneProxyIcon :size="24" />
                   </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.phone_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.phone }}/GB </span>
                 </div>
-              </div>
-
-              <div class="space-y-2">
-                <div class="space-y-2">
-                  <p class="black font-semibold text-lg">3. {{ $t("overview_spec.obtxy_title") }}</p>
+              </TabItem>
+              <TabItem :value="3" class="flex-1 tab-item">
+                <div :class="{ focus: active === 3 }" class="pointer flex-1 column p-5 rounded-md" data-active="3">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <DataProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
+                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/IP </span>
                 </div>
-
-                <div class="btn_list space-y-5">
-                  <p class="text-sm">{{ $t("overview_spec.way") }}</p>
-                  <div class="v_center space-x-5">
-                    <div @click="$router.push('/proxy')" class="font-semibold pointer green_btn btn vh_center rounded flex-1">
-                      {{ $t("menu_spec.Proxy") }}
-                    </div>
-                    <div @click="$router.push('/generate_api')" class="font-semibold pointer yellow_btn btn vh_center rounded flex-1">
-                      {{ $t("menu_spec.API") }}
-                    </div>
-                    <div @click="$router.push('/generate_api?active=1')" class="font-semibold pointer blue_btn btn vh_center rounded flex-1">
-                      {{ $t("menu_spec.Account_and_password") }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-else class="echart column space-y-5 w-full md:flex-1">
-              <div class="card flex-1 rounded-md board column space-y-2">
-                <div class="label column" style="align-items: stretch">
-                  <!-- 文字 -->
-                  <div class="text v_center space-x-5" ref="textRef">
-                    <div @click="selectEchart(0)" class="pointer transition-colors" :class="{ active: echartIndex === 0 }">
-                      {{ $t("overview_spec.day_compare") }}
-                    </div>
-                    <div @click="selectEchart(1)" class="pointer transition-colors" :class="{ active: echartIndex === 1 }">
-                      {{ $t("overview_spec.hour_compare") }}
-                    </div>
-                  </div>
-                  <!-- 滑块 -->
-                  <div class="slider rounded-full relative">
-                    <div class="bar rounded-full absolute" :style="barStyle"></div>
-                  </div>
-                </div>
-
-                <div class="w-full flex-1 column relative">
-                  <div v-show="echartIndex === 0" class="outflow_echart flex-1 w-full rounded-md relative">
-                    <!-- 时间选择 -->
-                    <div class="w-full h-full" id="echartDay" v-show="tableData.length > 0"></div>
-                    <div class="null_data" v-show="!tableData.length > 0">
-                      <el-empty description="No Data"></el-empty>
-                    </div>
-                    <Picker class="echart_picker" @dateChange="dateChange" />
-                  </div>
-
-                  <div v-show="echartIndex === 1" class="day_echart flex-1 w-full relative rounded-md">
-                    <div class="w-full h-full" id="echartTime" v-show="!Nodata"></div>
-                    <div class="null_data" v-show="Nodata">
-                      <el-empty description="No Data"></el-empty>
-                    </div>
-                    <div class="v_center picker">
-                      <Calendar :size="16" />
-                      <el-date-picker
-                        v-model="timeVal"
-                        type="date"
-                        prefix-icon="null"
-                        @change="input"
-                        format="YYYY-MM-DD"
-                        :clearable="false"
-                        placeholder="option date"
-                        style="width: 110px"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div v-if="isDashboard" class="table_box xl:hidden board">
-              <el-table :data="tableData" v-if="tableData.length > 0">
-                <el-table-column prop="date" :label="$t('Date')"></el-table-column>
-                <el-table-column prop="flow" :label="$t('Traffic')">
-                  <template #default="scope">
-                    <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
-                  </template>
-                </el-table-column>
-              </el-table>
-              <div class="null_data" v-else>
-                <el-empty description="No Data"></el-empty>
-              </div>
-            </div>
-          </div>
+              </TabItem>
+            </Tab>
+          </keep-alive>
         </div>
-        <!-- 右边通知 -->
-        <div v-if="isDashboard" class="right h-full hidden xl:column space-y-5">
-          <div class="notice board" v-if="noticeText">
-            <h2 class="text-base font-bold">{{ $t("Notifications") }}</h2>
-            <div class="notice_box">
-              <div ref="noticeText" :class="{ scroll: isNoticeScroll }">
-                <p class="text-sm">{{ noticeText }}</p>
-              </div>
-              <div class="mark"></div>
-            </div>
-          </div>
 
-          <div class="board how_use between px-4 w-full rounded-md pointer" @click="isDashboard = false">
-            <strong class="font-medium">{{ $t("overview_spec.how_use") }}</strong>
-            <ChevronRight :size="14" />
-          </div>
-
-          <div class="date_flow table_box flex-1 min-h-0 board">
-            <el-table :data="tableData" height="100%" style="width: 100%; border-radius: 10px" v-if="tableData.length > 0">
-              <el-table-column prop="date" :label="$t('Date')"></el-table-column>
-              <el-table-column prop="flow" :label="$t('Traffic')">
-                <template #default="scope">
-                  <p>{{ scope.row.flow }} <i class="unit">GB</i></p>
-                </template>
-              </el-table-column>
-            </el-table>
-            <div class="null_data" v-else>
-              <el-empty description="No Data"></el-empty>
-            </div>
-          </div>
-        </div>
-        <div v-else class="right h-full hidden xl:column space-y-5">
-          <div class="w-full price board column_center px-4 py-5 rounded-md space-y-3">
-            <div class="v_center space-x-2">
-              <img src="@/assets/images/products/house.webp" width="30" height="30" alt="" />
-              <strong>{{ $t("overview_spec.guide_title") }}</strong>
-            </div>
-            <p class="text-sm text-center">{{ $t("overview_spec.guide_des") }}</p>
-
-            <div class="text-sm v_center space-x-2">
-              <div class="v_center space-x-1">
-                <span class="grey-60">{{ $t("overview_spec.lowest") }}</span>
-                <strong>${{ lowestPrice / 100 }}/GB</strong>
-              </div>
-              <span class="tag text-xs font-medium px-2 rounded-full v_center">{{ $t("Never_Expires") }}</span>
-            </div>
-
-            <ip-button type="primary" @click="$router.push('/products?buy=1')" class="h-9 w-full text-sm" style="max-width: 400px">
-              <div class="vh_center space-x-2">
-                <ShoppingCart :size="14" />
-                <span>{{ $t("Buy_now") }}</span>
-              </div>
-            </ip-button>
-          </div>
-
-          <div class="resource board ounded-md w-full">
-            <div class="header v_center space-x-2 px-5">
-              <Book :size="14" class="primary" />
-              <strong class="font-semibold">{{ $t("Resources") }}</strong>
-            </div>
-            <div class="px-3 pb-5">
-              <p class="text-sm h-10 v_center px-2">{{ $t("overview_spec.guide_learn") }}</p>
-              <ul class="text-[15px]">
-                <li class="between h-10 px-2 rounded-md pointer" @click="isDashboard = true">
-                  <div class="v_center space-x-2">
-                    <FileText :size="18" />
-                    <span>{{ $t("Statistics") }}</span>
-                  </div>
-                  <ChevronRight :size="14" />
-                </li>
-                <li class="between h-10 px-2 rounded-md pointer" @click="$router.push('/doc')">
-                  <div class="v_center space-x-2">
-                    <ShieldUser :size="18" />
-                    <span>{{ $t("User_Guide") }}</span>
-                  </div>
-                  <ChevronRight :size="14" />
-                </li>
-                <li class="between h-10 px-2 rounded-md pointer" @click="$router.push('/help')">
-                  <div class="v_center space-x-2">
-                    <MessageCircleQuestion :size="18" />
-                    <span>{{ $t("FAQ") }}</span>
-                  </div>
-                  <ChevronRight :size="14" />
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="w-full service column_center board rounded-md py-5 px-5 space-y-4 text-sm">
-            <img src="@/assets/images/overview/chatPop.svg" width="30" alt="" />
-            <p class="text-center font-medium">{{ $t("overview_spec.service_des") }}</p>
-            <p class="font-normal">{{ $t("Email") }}：support@ipstar.io</p>
-
-            <div class="v_center w-full or space-x-3 grey-40">{{ $t("Or") }}</div>
-
-            <ip-button @click="openService" type="border" class="h-9 w-full text-sm">{{ $t("overview_spec.contact") }}</ip-button>
-          </div>
+        <div>
+          <keep-alive>
+            <component :is="activeComponent" />
+          </keep-alive>
         </div>
       </div>
 
-      <!-- 平台在线IP -->
-      <div class="ip w-full space-y-5" v-show="activeIndex === 1">
-        <div class="ip_echart w-full board">
-          <div id="ipEchart" v-show="hasIpData"></div>
-          <div class="null_data" v-show="!hasIpData">
-            <el-empty description="No Data"></el-empty>
-          </div>
-          <Picker class="echart_picker" :defaultDate="ipdefault" :pickerOptions="pickerOptions" @dateChange="ipDateChange" />
-        </div>
-
-        <div class="table_box w-full rounded-md space-y-5 board">
-          <el-table :data="network" border>
-            <el-table-column :label="$t('overview_spec.Country_or_Region')" min-width="200">
-              <template #default="scope">
-                <span :class="['flag-icon', 'flag-icon-' + scope.row.code]"></span>
-                <span style="margin-left: 10px">{{ lang === "zh" ? scope.row.country_cn : scope.row.country }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('overview_spec.Country_Code')" min-width="150">
-              <template #default="scope">
-                <p style="text-transform: uppercase">{{ scope.row.code }}</p>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('overview_spec.Number_of_country_IPs')" prop="ips_count" min-width="200"></el-table-column>
-            <el-table-column :label="$t('overview_spec.Network_Status')" min-width="400">
-              <template #default="scope">
-                <tableProgress :percent="scope.row.avaiable" type="network"></tableProgress>
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('Load')" min-width="400">
-              <template #default="scope">
-                <tableProgress :percent="scope.row.used" type="load"></tableProgress>
-              </template>
-            </el-table-column>
-          </el-table>
-          <ip-button type="border" class="h-8 px-3" v-if="network.length < page.total" @click="viewMore">
-            {{ $t("overview_spec.View_More") }}
-          </ip-button>
-        </div>
-      </div>
-
-      <!-- 余额明细 -->
-      <div class="balance w-full column board p-5 rounded-md space-y-3" v-show="activeIndex === 2">
-        <div class="search" v-if="activeIndex === 2">
-          <el-date-picker v-model="balanceDate" :editable="false" :clearable="false" type="date" format="YYYY-MM-DD" style="width: 8rem" />
-        </div>
-        <div class="table_box w-full">
-          <el-table highlight-current-row v-loading="loading" :data="balanceData" style="width: 100%">
-            <!-- <el-table-column prop="name" :label="$t('PCProducts.tableHeader.name')"></el-table-column> -->
-            <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="datetime" :label="$t('Date')" min-width="100"></el-table-column>
-            <el-table-column prop="pack_size" :label="$t('Traffic')" min-width="100">
-              <template #default="scope">
-                <span :style="{ color: scope.row.log_type == 0 ? '#f14c36' : '#0dbc79' }">{{ scope.row.pack_size }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="new_ip_count" :label="$t('overview_spec.Number_of_new_Ips')" min-width="200"></el-table-column>
-            <el-table-column prop="request_ip_count" :label="$t('overview_spec.Number_Of_IPs')" min-width="200"></el-table-column>
-            <el-table-column prop="request_count" :label="$t('overview_spec.Number_Of_Requests')" min-width="220"></el-table-column>
-            <el-table-column :label="$t('Type')" min-width="140">
-              <template #default="scope">
-                <span v-if="scope.row.log_type == 0" style="color: #f14c36">{{ $t("overview_spec.consumption") }}</span>
-                <span v-else-if="scope.row.log_type == 1" style="color: #0dbc79">{{ $t("overview_spec.recharge") }}</span>
-                <span v-else-if="scope.row.log_type == 2" style="color: #0dbc79">{{ $t("overview_spec.rewards") }}</span>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-        <!-- 分页 -->
-        <div class="w-full pagination flex justify-end h-8">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="tabPage"
-            :page-size="tabSize"
-            layout="total, prev, pager, next, jumper"
-            :total="tabTotal"
-          >
-          </el-pagination>
-        </div>
+      <div class="rightSide hidden xl:block">
+        <RightSide />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import {
-  platCustomerReportOverview,
-  platCustomerReport,
-  platCustomerReportRealTime,
-  IpDataList,
-  CountryList,
-  CustomerBalances,
-  Notice,
-} from "@/api/layout"
-import { formatSizeUnits, getDate, addZero } from "@/utils/tools"
-// 国家国旗
-
-import userStore from "@/store/user"
-import settingStore from "@/store/setting"
+<script setup>
+import { useI18n } from "vue-i18n"
 import NavBar from "../components/navbar/navbar.vue"
-import Picker from "../components/picker/picker.vue"
-import NumberCounter from "@/views/front/components/NumberCounter/NumberCounter.vue"
-import tableProgress from "../components/progress/progress.vue"
-import {
-  Calendar,
-  ChevronLeft,
-  ChevronRight,
-  Gauge,
-  SlidersVertical,
-  Check,
-  Book,
-  FileText,
-  ShieldUser,
-  MessageCircleQuestion,
-  ShoppingCart,
-} from "lucide-vue-next"
+import { computed, onMounted, provide, reactive, ref } from "vue"
+import ResidentialProxy from "./residential_proxy/index.vue"
+import UnlimitedProxy from "./unlimited_proxy/index.vue"
+import PhoneProxy from "./phone_proxy/index.vue"
+import DataProxy from "./data_proxy/index.vue"
+import RightSide from "./rightSide.vue"
+import Tab from "@/components/tabbar/tab.vue"
+import TabItem from "@/components/tabbar/tab-item.vue"
+import Balance from "./balance/index.vue"
+import OnlineIP from "./onlineIP/index.vue"
 import IpButton from "@/components/button/button.vue"
-import { roundToDecimal } from "../../../utils/tools"
-import CopyItem from "./copyItem.vue"
-import CodeItem from "./codeItem.vue"
-import { platDataNodes } from "../../../api/home"
-import layoutStore from "../../../store/layout"
-// import * as echarts from 'echarts'
-let echart = null
-export default {
-  name: "OverView",
-  components: {
-    Check,
-    NavBar,
-    Picker,
-    NumberCounter,
-    tableProgress,
-    Calendar,
-    ChevronLeft,
-    ChevronRight,
-    IpButton,
-    Gauge,
-    SlidersVertical,
-    CopyItem,
-    CodeItem,
-    Book,
-    FileText,
-    ShoppingCart,
-    ShieldUser,
-    MessageCircleQuestion,
-  },
-  data() {
-    this.page = {
-      index: 1,
-      size: 20,
-      total: 0,
-    }
-    this.tableHeaderStyle = {
-      "background-color": "#f9f7f5",
-      color: "#353535",
-      "font-size": "14px",
-    }
-    return {
-      isDashboard: this.isUsed,
-      // ip池
-      ipPools: [
-        "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv3.connpnt134.com:9135 https://ipinfo.io",
-        "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv2.connpnt134.com:9135 https://ipinfo.io",
-        "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
-        "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv5.connpnt134.com:9135 https://ipinfo.io",
-      ],
-      // ip直线图选择的开始日期
-      ipStartDate: "",
-      pickerOptions: Object.freeze({
-        disabledDate(time) {
-          const now = getDate(new Date())
-          const DAY = 1000 * 60 * 60 * 24
-          const yesterday = new Date(now + " 00:00:00").getTime() - DAY
-          const str = time.getTime()
-          return str + DAY * 30 < yesterday || str > yesterday
-        },
-        onPick: ({ maxDate, minDate }) => {
-          if (maxDate) {
-            this.ipStartDate = ""
-          } else {
-            this.ipStartDate = minDate
-          }
-        },
-      }),
-      // tabbar index
-      activeIndex: 0,
-      echartIndex: 0,
-      hasIpData: false,
-      // ip折线图默认时间
-      ipdefault: [],
-      // 国家地区负载表
-      network: [],
-      // 获取国家地区表格loading
-      isNetwork: false,
-      // 表格流量数据
-      tableData: [],
-      // 用户流量
-      quantityOfFlow: {
-        remain: {
-          num: null,
-          unit: null,
-          count: null,
-        },
-        consume: {
-          num: "",
-          unit: "",
-          count: "",
-        },
-      },
-      // loading
-      loadingEchart: null,
-      loadingLine: null,
-      loadingTable: null,
-      // 时间选择
-      timeVal: new Date(),
-      // nodata
-      Nodata: false,
-      // 余额表格loading
-      loading: false,
-      // 余额表格data
-      balanceData: [],
-      tabTotal: 10,
-      tabPage: 1,
-      tabSize: 10,
-      // 余额表筛选日期参数
-      balanceDate: new Date(),
-      // 通知
-      noticeText: "",
-      // 通知滚动
-      isNoticeScroll: false,
-      barStyle: { width: 0, left: 0 },
-    }
-  },
-  created() {
-    const DAY = 1000 * 60 * 60 * 24
-    const yesterday = new Date(Date.now() - DAY)
-    const enddate = new Date(yesterday - DAY * 9)
-    const start = getDate(enddate)
-    const end = getDate(yesterday)
-    this.ipdefault = [start, end]
-  },
-  mounted() {
-    // 用户 流量 与消耗  ip
-    Promise.all([this.getUserQuantity(), this.initOnlineIp()]).then((res) => {
-      const data = res[0]
-      const count = res[1]
+import {
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
+  ChevronLeft,
+} from "lucide-vue-next"
+import { platProductLowestPrices } from "@/api/product"
 
-      const obj = {
-        remain: this.splitUnit(data.remain),
-        consume: this.splitUnit(data.consume),
-      }
-      obj.remain.count = count.split("-")[0]
-      obj.consume.count = count.split("-")[1]
+const { t } = useI18n()
 
-      this.quantityOfFlow = obj
-    })
-    // 实时统计
-    if (this.isDashboard) {
-      this.getRealTime(new Date())
-      // 通知
-      this.getNotice()
-      // 初始化echart滑块
-      this.selectEchart(0)
-    } else {
-      this.getIpPool()
-    }
-    // // 国家列表
-    this.getCountryList()
-
-    // 加载国家国旗
-    import("flag-icon-css/css/flag-icons.css")
-  },
-  methods: {
-    openService() {
-      // window.$crisp.push(["do", "chat:show"])
-      window.$crisp.push(["do", "chat:open"])
-    },
-    async getIpPool() {
-      try {
-        const result = []
-        const proto = ["HTTP(s)", "SOCKS5"]
-        const host = ["pv3.connpnt134.com", "pv5.connpnt134.com", "pv2.connpnt134.com", "pv4.connpnt134.com"]
-        const countrys = [
-          { en: "US", zh: "美国", code: "US" },
-          { en: "Germany", zh: "德国", code: "DE" },
-          { en: "Russia", zh: "俄罗斯", code: "RU" },
-          { en: "Random", zh: "随机", code: "N" },
-        ]
-        host.forEach((serve, index) => {
-          const country = countrys[index]
-          const name = country[this.lang] ?? country.en
-          const code = country.code
-
-          const idx = index % 2
-          const port = idx === 0 ? 9139 : 9135
-          result.push({
-            label: `${name} ${proto[index % 2]}：`,
-            text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${this.proxy_user}-123RsAYBc-0-${code}-N:${
-              this.proxy_pass
-            }@${serve}:${port} https://ipinfo.io -vv`,
-          })
-        })
-        this.ipPools = result
-      } catch (err) {
-        console.log(err.message)
-      }
-    },
-    selectEchart(index) {
-      this.echartIndex = index
-
-      const parentLeft = this.$refs.textRef.getBoundingClientRect().left
-
-      const sonLeft = this.$refs.textRef.children[index].getBoundingClientRect().left
-      const offsetleft = sonLeft - parentLeft
-
-      const width = this.$refs.textRef.children[index].clientWidth
-
-      this.barStyle = {
-        width: `${width}px`,
-        left: `${offsetleft}px`,
-      }
-    },
-    // 获取通知
-    async getNotice() {
-      try {
-        const { data } = await Notice()
-        const notice = {
-          zh: data.zh_cn,
-          en: data.en,
-          ru: data.ru,
-        }
-        this.noticeText = notice[this.lang]
-        this.$nextTick(() => {
-          this.noticeScroll()
-        })
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    // 通知滚动
-    noticeScroll() {
-      const notice = this.$refs.noticeText
-      // if(notice.clientHeight)
-      const limit = notice.parentNode.clientHeight
-      const noticeHeight = notice.clientHeight
-      if (noticeHeight > limit - 40) {
-        this.isNoticeScroll = true
-        const duration = Math.ceil(((noticeHeight - limit) / limit) * 7) + 7
-        notice.style = `--parentHeight:${limit - 20}px;animation-duration:${duration}s`
-      }
-    },
-    handleCurrentChange(val) {
-      this.tabPage = val
-      this.getBalanceData()
-    },
-    // 获取流量数据
-    async getBalanceData() {
-      try {
-        this.loading = true
-        const { data } = await CustomerBalances({
-          page_index: this.tabPage,
-          page_size: this.tabSize,
-          day_date: getDate(this.balanceDate),
-        })
-        this.tabTotal = data.count
-
-        const arr = data.list.map((item) => {
-          item.pack_size = item.pack_size > 0 ? "+" + formatSizeUnits(item.pack_size) : "-" + formatSizeUnits(Math.abs(item.pack_size))
-          return item
-        })
-        this.balanceData = Object.freeze(arr)
-        this.loading = false
-      } catch (err) {
-        console.log(err)
-        this.loading = false
-      }
-    },
-    // 修改activeIndex
-    updateActiveIndex(index) {
-      this.activeIndex = index
-      if (index === 2 && !this.balanceData.length) {
-        this.getBalanceData()
-      }
-    },
-    // 在线ip数量初始化
-    async initOnlineIp() {
-      const start = this.ipdefault[0]
-      const end = this.ipdefault[1]
-
-      const iplist = await this.getIpdataList(start, end)
-      this.iplist = iplist
-      const count = iplist[iplist.length - 1]?.count ?? 0
-      let number
-      if (this.lang === "zh") {
-        number = Math.round((count / 10000) * 100) / 100
-        number += "-万"
-      } else {
-        number = Math.round(count / 1000)
-        number += "-K"
-      }
-      return number
-    },
-    // 初始化 实时echarts
-    async setEchart(xData, serData) {
-      const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
-
-      const myEchart = echart.init(document.getElementById("echartDay"))
-      const option = {
-        title: {
-          text: this.en ? "5-Day Comparison" : "5 天对比",
-          textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
-          padding: [20, 0, 0, 20],
-        },
-        grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
-
-        dataZoom: [
-          {
-            show: true,
-            start: 0,
-            end: 100,
-            bottom: 10,
-            right: 8,
-            left: 30,
-            height: 20,
-            borderColor: "transparent",
-            showDetail: false,
-            fillerColor: "rgba(39, 114, 240, .3)",
-            backgroundColor: "rgba(39, 114, 240, 0.1)",
-            handleStyle: {
-              color: "rgba(39, 114, 240, 0.57)",
-            },
-            moveHandleSize: 0,
-            moveHandleStyle: {
-              opacity: 1,
-            },
-            dataBackground: {
-              areaStyle: {
-                color: "rgba(39, 114, 240, 1)",
-              },
-            },
-          },
-          {
-            type: "inside",
-            dataBackground: "#0ff",
-            showDetail: false,
-          },
-        ],
-        xAxis: {
-          type: "category",
-          axisLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            margin: 30,
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#666",
-          },
-          data: xData(),
-        },
-        yAxis: {
-          // max: 4,
-          axisLabel: {
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#666",
-            margin: 30,
-            formatter(val) {
-              return `${val}GB`
-            },
-          },
-          axisTick: {
-            // y轴刻度线
-            show: false,
-          },
-          splitLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-              type: "dashed", // 虚线
-            },
-          },
-        },
-        tooltip: {
-          trigger: "axis",
-          padding: [12, 17, 20, 23],
-          textStyle: { color: "#424242" },
-          renderMode: "html",
-          className: "tooltip",
-          axisPointer: {
-            lineStyle: {
-              color: "rgba(39, 114, 240, 1)",
-            },
-          },
-          formatter() {
-            return null
-          },
-        },
-        series: [
-          {
-            type: "line",
-            smooth: true,
-            showSymbol: false, // 开启移入显示 具体数值
-            areaStyle: {
-              // 覆盖区域的渐变色
-              color: {
-                type: "linear",
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: "rgba(39, 114, 240,0.7)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 0.5,
-                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
-                  },
-                ],
-                global: false, // 缺省为 false
-              },
-            },
-            showAllSymbol: true,
-            // symbol: 'image://路径',
-            // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-            symbolSize: 10,
-            label: {
-              show: true,
-              position: "top",
-              textStyle: {
-                color: "#191D26",
-                fontSize: 14,
-              },
-              formatter: function (res) {
-                if (res.value) {
-                  return res.value + "GB"
-                } else {
-                  return 0
-                }
-              },
-            },
-            // 关闭 提示框
-            // tooltip: {
-            //   show: false
-            // },
-            lineStyle: {
-              color: "rgba(39, 114, 240, 1)",
-            },
-            data: serData(),
-          },
-        ],
-      }
-      myEchart.setOption(option)
-      // console.log(option, 'option')
-      // this.loadingEchart.close()
-      this.dateEchartResize = () => {
-        myEchart.resize()
-      }
-      window.addEventListener("resize", this.dateEchartResize)
-    },
-    // 初始化 line_echarts
-    async setLine(xData, serData) {
-      const { default: echart } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
-
-      const myEchart = echart.init(document.getElementById("echartTime"))
-      const option = {
-        title: {
-          text: this.en ? "Real time traffic" : "实时流量",
-          textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
-          padding: [20, 0, 0, 20],
-        },
-        grid: { left: 60, top: 60, bottom: 40, right: 60, containLabel: true },
-        dataZoom: [
-          {
-            show: true,
-            start: 0,
-            end: 100,
-            bottom: 10,
-            right: 8,
-            left: 30,
-            height: 20,
-            borderColor: "transparent",
-            showDetail: false,
-            fillerColor: "rgba(39, 114, 240, .3)",
-            backgroundColor: "rgba(39, 114, 240, 0.1)",
-            handleStyle: {
-              color: "rgba(39, 114, 240, 0.57)",
-            },
-            moveHandleSize: 0,
-            moveHandleStyle: {
-              opacity: 1,
-            },
-            dataBackground: {
-              areaStyle: {
-                color: "rgba(39, 114, 240, 1)",
-              },
-            },
-          },
-          {
-            type: "inside",
-            dataBackground: "#0ff",
-            showDetail: false,
-          },
-        ],
-        xAxis: {
-          type: "category",
-          axisLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            margin: 30,
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#666",
-          },
-          data: xData(),
-        },
-        yAxis: {
-          // max: 4,
-          axisLabel: {
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#666",
-            margin: 30,
-            formatter(val) {
-              return `${val}MB`
-            },
-          },
-          axisTick: {
-            // y轴刻度线
-            show: false,
-          },
-          splitLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-              type: "dashed", // 虚线
-            },
-          },
-        },
-        tooltip: {
-          trigger: "axis",
-          padding: [12, 17, 20, 23],
-          textStyle: { color: "#424242" },
-          renderMode: "html",
-          className: "tooltip",
-          axisPointer: {
-            lineStyle: {
-              // type: 'solid',
-              // width: 3,
-              color: "rgba(39, 114, 240,1)",
-            },
-          },
-          formatter() {
-            return null
-          },
-        },
-        series: [
-          {
-            type: "line",
-            smooth: true,
-            showSymbol: false, // 开启移入显示 具体数值
-            areaStyle: {
-              // 覆盖区域的渐变色
-              color: {
-                type: "linear",
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: "rgba(39, 114, 240, 0)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 0.5,
-                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
-                  },
-                ],
-                global: false, // 缺省为 false
-              },
-            },
-            showAllSymbol: true,
-            // symbol: 'image://路径',
-            symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-            symbolSize: 20,
-            label: {
-              show: true,
-              position: "top",
-              textStyle: {
-                color: "#191D26",
-                fontSize: 14,
-              },
-              formatter: function (res) {
-                if (res.value) {
-                  return res.value + "MB"
-                } else {
-                  return 0
-                }
-              },
-            },
-            // 关闭 提示框
-            // tooltip: {
-            //   show: false
-            // },
-            lineStyle: {
-              color: "rgba(39, 114, 240,1)",
-            },
-            data: serData(),
-          },
-        ],
-      }
-      myEchart.setOption(option)
-      // this.loadingLine.close()
-      this.lineEchartResize = () => {
-        myEchart.resize()
-      }
-      window.addEventListener("resize", this.lineEchartResize)
-    },
-    async setIpEchart(data) {
-      const ip = data.reduce(
-        (pre, next) => {
-          pre.date.push(next.date)
-          pre.count.push(next.count)
-          return pre
-        },
-        { date: [], count: [] }
-      )
-      const ipdom = document.getElementById("ipEchart")
-      if (echart === null) {
-        const { default: _ } = await import(/* webpackChunkName:'echarts' */ "@/utils/echarts")
-        echart = _.init(ipdom)
-      }
-      const lang = this.lang
-      const title = this.$t("Online") + " IP"
-      // console.log(title)
-      const option = {
-        title: {
-          text: title,
-          textStyle: { color: "#999", fontSize: 16, fontWeight: "normal" },
-          padding: [20, 0, 0, 20],
-        },
-        grid: {
-          top: 60,
-          left: 80,
-          bottom: 80,
-          right: 30,
-        },
-        xAxis: {
-          type: "category",
-          axisLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            margin: 20,
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#666",
-          },
-          data: ip.date,
-        },
-        yAxis: {
-          // max: 4,
-          axisLabel: {
-            fontFamily: "Roboto",
-            fontSize: 12,
-            color: "#B5B5B5",
-            margin: 30,
-            formatter(val) {
-              if (val > 1000000) {
-                return `${val / 1000000} M`
-              } else if (val > 1000) {
-                return `${val / 1000} K`
-              } else {
-                return val
-              }
-            },
-          },
-          axisTick: {
-            // y轴刻度线
-            show: false,
-          },
-          splitLine: {
-            lineStyle: {
-              color: "#B5B5B5",
-              type: "dashed", // 虚线
-            },
-          },
-        },
-        dataZoom: [
-          {
-            show: true,
-            start: 0,
-            end: 100,
-            bottom: 10,
-            right: 30,
-            left: 30,
-            height: 20,
-            borderColor: "transparent",
-            showDetail: false,
-            fillerColor: "rgba(39, 114, 240, .3)",
-            backgroundColor: "rgba(39, 114, 240, 0.1)",
-            handleStyle: {
-              color: "rgba(39, 114, 240, 0.57)",
-            },
-            moveHandleSize: 0,
-            moveHandleStyle: {
-              opacity: 1,
-            },
-            dataBackground: {
-              areaStyle: {
-                color: "rgba(39, 114, 240, 1)",
-              },
-            },
-          },
-          {
-            type: "inside",
-            dataBackground: "#0ff",
-            showDetail: false,
-          },
-        ],
-        series: [
-          {
-            type: "line",
-            // showSymbol: false, // 开启移入显示 具体数值
-            // showAllSymbol: true,
-            // symbolSize: 10,
-            // symbol: 'rect',
-            symbolSize: 8, // 拐点大小
-            symbol: "circle",
-            itemStyle: {
-              color: "#e5e7eb",
-              // borderColor: '#fce5c1',
-              // borderWidth: 5,
-              shadowColor: "rgba(39, 114, 240, 0.5)",
-              shadowBlur: 6,
-              // shadowOffsetX: -3,
-              // shadowOffsetY: -3
-            },
-
-            areaStyle: {
-              color: {
-                type: "linear",
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 0.5,
-                    color: "rgba(39, 114, 240, 0.2)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(39, 114, 240, 0)", // 100% 处的颜色
-                  },
-                ],
-                global: false, // 缺省为 false
-              },
-            },
-            label: {
-              show: true,
-              position: "top",
-              textStyle: {
-                color: "#666666",
-                fontSize: 14,
-              },
-              formatter(res) {
-                const val = res.value
-                if (val > 1000000) {
-                  return `${roundToDecimal(val / 1000000)} M`
-                } else if (val > 1000) {
-                  return `${roundToDecimal(val / 1000)} K`
-                } else {
-                  return val
-                }
-              },
-            },
-            // 关闭 提示框
-            // tooltip: {
-            //   show: false
-            // },
-            lineStyle: {
-              color: "rgba(39, 114, 240,1)",
-            },
-            data: ip.count,
-          },
-        ],
-      }
-      if (echart === null) {
-        echart.setOption(option)
-        this.ipEchartResize = () => {
-          echart.resize()
-        }
-        window.addEventListener("resize", this.ipEchartResize)
-      } else {
-        echart.clear()
-        echart.setOption(option)
-        window.removeEventListener("resize", this.ipEchartResize)
-        this.ipEchartResize = () => {
-          echart.resize()
-        }
-        window.addEventListener("resize", this.ipEchartResize)
-      }
-    },
-    // 获取ip时间表
-    async getIpdataList(start, end) {
-      try {
-        const { data } = await IpDataList({
-          start_date: start,
-          end_date: end,
-        })
-        // this.iplist = Object.freeze(data)
-        const iplist = data.toReversed()
-        if (data.length) {
-          this.hasIpData = true
-        }
-        return iplist
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    // 获取国家数据
-    async getCountryList() {
-      const scrollTop = this.$el.parentNode.scrollTop
-      try {
-        this.isNetwork = true
-        let arr = this.network
-        const { data } = await CountryList({
-          page_index: this.page.index,
-          page_size: this.page.size,
-        })
-        this.page.total = data.count
-        const list = data.list.map((item) => {
-          item.code = item.code.toLowerCase()
-          return item
-        })
-        arr = arr.concat(list)
-        this.network = Object.freeze(arr)
-        this.isNetwork = false
-        this.$nextTick(() => {
-          this.$el.parentNode.scrollTop = scrollTop
-        })
-      } catch (err) {
-        console.log(err)
-        this.isNetwork = false
-      }
-    },
-    async ipDateChange({ endDate, starDate }) {
-      const startDay = +starDate.day
-      const endDay = +endDate.day
-      const start = `${starDate.year}-${starDate.month < 10 ? "0" + starDate.month : starDate.month}-${startDay < 10 ? "0" + startDay : startDay}`
-      const end = `${endDate.year}-${endDate.month < 10 ? "0" + endDate.month : endDate.month}-${endDay < 10 ? "0" + endDay : endDay}`
-      const iplist = await this.getIpdataList(start, end)
-      this.iplist = iplist
-      this.$nextTick(() => {
-        this.setIpEchart(iplist)
-      })
-    },
-    // 查看更多
-    viewMore() {
-      this.page.index++
-      this.getCountryList()
-    },
-    // 时间选择
-    async dateChange({ endDate, starDate }) {
-      let { data } = await platCustomerReport({
-        start_time: `${starDate.year}-${addZero(starDate.month)}-${addZero(starDate.day)}`,
-        end_time: `${endDate.year}-${addZero(endDate.month)}-${addZero(endDate.day)}`,
-      })
-      // const newArr = []
-      data = data.sort((a, b) => {
-        return b.date_short < a.date_short ? -1 : 1
-      })
-      this.tableData = data.map((item) => {
-        return {
-          date: item.date_short,
-          flow: item.pack_size,
-        }
-      })
-      // console.log(data, 'data')
-    },
-    // 获取 用户剩余流量 && 今日消耗
-    async getUserQuantity() {
-      try {
-        const { data } = await platCustomerReportOverview()
-        return data
-      } catch (err) {
-        console.log(err)
-        return {
-          consume: "",
-          remain: "",
-        }
-      }
-    },
-    // 获取实时统计的数据
-    async getRealTime(date) {
-      try {
-        let { data } = await platCustomerReportRealTime({
-          start_time: `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} 00:00:00`,
-          end_time: `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())} 23:59:59`,
-        })
-        if (!data.length) {
-          this.Nodata = true
-        } else {
-          this.Nodata = false
-        }
-        data = data.sort((a, b) => {
-          return b.time < a.time ? 1 : -1
-        })
-        this.setLine(
-          () => {
-            return data.map((item) => item.time)
-          },
-          () => {
-            return data.map((item) => item.pack_size)
-          }
-        )
-      } catch {}
-    },
-    // 切割单位
-    splitUnit(str) {
-      if (!str) {
-        return { num: "0.00", unit: "MB" }
-      }
-      const num = str.split(" ")[0]
-      const unit = str.split(" ")[1]
-      return { num, unit }
-    },
-    // 时间选择
-    input(val) {
-      this.getRealTime(val)
-    },
-  },
-  watch: {
-    tableData: {
-      handler(val) {
-        if (val.length > 0) {
-          this.$nextTick(() => {
-            this.setEchart(
-              () => {
-                // const newArr =
-                // return newArr.sort((a, b) => { return b < a ? 1 : -1 })
-                return this.tableData.map((item) => item.date)
-              },
-              () => {
-                return this.tableData.map((item) => item.flow)
-              }
-            )
-          })
-        } else {
-          // this.loadingEchart.close()
-        }
-      },
-      deep: true,
-    },
-    activeIndex(val) {
-      if (val === 1) {
-        this.$nextTick(() => {
-          this.setIpEchart(this.iplist)
-        })
-      }
-    },
-    ipStartDate(val) {
-      console.log(val)
-      if (!val) {
-        this.pickerOptions = Object.freeze({
-          disabledDate(time) {
-            const now = getDate(new Date())
-            const DAY = 1000 * 60 * 60 * 24
-            const yesterday = new Date(now + " 00:00:00").getTime() - DAY
-            const str = time.getTime()
-            return str + DAY * 30 < yesterday || str > yesterday
-          },
-          onPick: ({ maxDate, minDate }) => {
-            if (maxDate) {
-              this.ipStartDate = ""
-            } else {
-              this.ipStartDate = minDate
-            }
-          },
-        })
-      } else {
-        const start = val.getTime()
-        const now = new Date(getDate(new Date()) + " 00:00:00")
-        const DAY = 1000 * 60 * 60 * 24
-        const yesterday = now.getTime() - DAY
-        this.pickerOptions = Object.freeze({
-          disabledDate(time) {
-            const str = time.getTime()
-            return str !== start && str !== yesterday
-          },
-          onPick: ({ maxDate, minDate }) => {
-            if (maxDate) {
-              this.ipStartDate = ""
-            } else {
-              this.ipStartDate = minDate
-            }
-          },
-        })
-      }
-    },
-    balanceDate(val) {
-      this.getBalanceData()
-    },
-    isDashboard(val) {
-      this.$nextTick(() => {
-        if (val) {
-          this.getRealTime(new Date())
-          // 通知
-          this.getNotice()
-          // 初始化echart滑块
-          this.selectEchart(0)
-        } else {
-          this.getIpPool()
-        }
-      })
-    },
-  },
-  beforeDestroy() {
-    echart = null
-    window.removeEventListener("resize", this.ipEchartResize)
-    window.removeEventListener("resize", this.dateEchartResize)
-    window.removeEventListener("resize", this.lineEchartResize)
-  },
-  setup() {
-    const { lang, en } = settingStore()
-    const { lowestPrice, getLowestPrice } = layoutStore()
-    if (!lowestPrice.value) {
-      getLowestPrice()
-    }
-    const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()
-    return {
-      en,
-      lang,
-      unlimited,
-      isUsed,
-      proxy_user,
-      proxy_pass,
-      lowestPrice,
-    }
-  },
+// tabbar
+const active = ref(0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
+const activeStyle = {
+  backgroundColor: "hsl(var(--primary) / 8%)",
+  border: "1px solid hsl(var(--primary) / 90%)",
+  borderRadius: "8px",
+  transition: `all 500ms cubic-bezier(.29,1.42,.79,1)`,
+  top: 0,
+  bottom: 0,
 }
+function selectActive(e) {
+  if (e.target.tagName === "UL") return
+
+  function findLi(dom) {
+    if (dom.tagName === "LI") return dom
+    return findLi(dom.parentElement)
+  }
+
+  const li = findLi(e.target)
+  const value = +li.dataset.active
+  if (typeof value !== "number") return
+
+  active.value = value
+}
+const activeComponent = computed(() => {
+  switch (active.value) {
+    case 0:
+      return ResidentialProxy
+    case 1:
+      return UnlimitedProxy
+    case 2:
+      return PhoneProxy
+    case 3:
+      return DataProxy
+    default:
+      return ResidentialProxy
+  }
+})
+
+// 切换余额详情
+const isBalance = ref(false)
+provide("isBalance", isBalance)
+
+const isOnlineIp = ref(false)
+provide("isOnlineIp", isOnlineIp)
+
+// 最低价格
+const lowestPrice = ref({
+  residential: "0.00",
+  unlimited: "0.00",
+  phone: "0.00",
+  data_center: "0.00",
+})
+async function getLowestPrice() {
+  try {
+    const { data } = await platProductLowestPrices()
+    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const target = {}
+    data.forEach(({ prd_type, unit_price }) => {
+      const key = keys[prd_type]
+      target[key] = unit_price / 100
+    })
+    lowestPrice.value = target
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+onMounted(() => {
+  getLowestPrice()
+})
 </script>
 
 <style lang="less" scoped>
-@import url("./overview.less");
+.tab {
+  @media screen and (max-width: 1024px) {
+    overflow-x: auto;
+  }
+  .tab-item {
+    min-width: 200px;
+  }
+  .focus {
+    .iconbox {
+      background-color: #ffffff;
+    }
+  }
+}
+
+.iconbox {
+  width: 40px;
+  height: 40px;
+  background-color: hsl(var(--primary) / 8%);
+  background-color: #eff6ff;
+  position: relative;
+  transition: background-color 0.3s ease-in-out;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: hsl(var(--primary) / 20%);
+    border-radius: 50%;
+  }
+}
+.rightSide {
+  width: 380px;
+  @media screen and (max-width: 1620px) {
+    width: 340px;
+  }
+  @media screen and (max-width: 1536px) {
+    width: 320px;
+  }
+  @media screen and (max-width: 1280px) {
+    width: 280px;
+  }
+}
 </style>

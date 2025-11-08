@@ -5,21 +5,21 @@
       <div class="container space-y-10">
         <div class="space-y-10 text">
           <p class="title text-lg sm:text-2xl lg:text-3xl font-bold md:whitespace-pre-wrap" style="line-height: 1.5">
-            {{ t(`home_spec.${secondName}.title`) }}
+            {{ t(`intro_spec.${secondName}.title`) }}
           </p>
-          <p class="opacity-90 md:whitespace-pre-wrap">{{ t(`home_spec.${secondName}.desc`) }}</p>
+          <p class="opacity-90 md:whitespace-pre-wrap">{{ t(`intro_spec.${secondName}.desc`) }}</p>
         </div>
 
         <div class="v_center space-x-5" style="align-items: stretch">
-          <IpButton type="major" class="h-10 w-40" @click="toLogin">{{ t("home_spec.start_now") }}</IpButton>
-          <IpButton type="border" class="h-10 w-40" @click="router.push('/pricing')">{{ t("home_spec.view_try") }}</IpButton>
+          <IpButton type="major" class="h-10 w-40" @click="toLogin">{{ t("intro_spec.start_now") }}</IpButton>
+          <IpButton type="border" class="h-10 w-40" @click="router.push('/pricing')">{{ t("intro_spec.view_try") }}</IpButton>
         </div>
 
         <div class="flex space-x-5 text-sm">
           <ul class="space-y-5" v-for="(item, index) in tag" :key="index">
             <li class="v_center space-x-2" v-for="i in item" :key="index + '-' + i">
               <CircleCheck :size="16" class="primary" />
-              <p>{{ t(`home_spec.${secondName}.tag${i}`) }}</p>
+              <p>{{ t(`intro_spec.${secondName}.tag${i}`) }}</p>
             </li>
           </ul>
           <!-- <ul class="space-y-5">
@@ -47,9 +47,9 @@
     <!-- 国家ip -->
     <div class="country box">
       <div class="container">
-        <div class="space-y-5" v-lazy="showSlow">
-          <h4 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t(`home_spec.country`) }}</h4>
-          <p class="text-center">{{ t(`home_spec.country_desc`) }}</p>
+        <div class="space-y-5">
+          <h4 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t(`intro_spec.country`) }}</h4>
+          <p class="text-center">{{ t(`intro_spec.country_desc`) }}</p>
         </div>
 
         <div class="country_list">
@@ -66,182 +66,319 @@
       </div>
     </div>
 
-    <!-- 为什么选择 -->
-    <div class="box why_choose">
-      <div class="container column_center">
-        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold" v-lazy="showSlow">
-          {{ t("home_spec.why") }}
-          <span class="primary">IpStar</span>
-        </p>
-
-        <ul class="three column gap-8 md:v_center">
-          <li class="pointer flex-1 transition-colors" @click="toHomeSecond('introduce')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:105px) 105px,89px" src="@/assets/images/home/why1.png" srcset="@/assets/images/home/why1.png 105w" />
-            </div>
-
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why1_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why1_desc") }}</p>
-            </div>
+    <div class="box_wrap why">
+      <div class="container">
+        <div class="font-medium text-center text-3xl">{{ t("home_spec.why_title") }}</div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits1.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why1_title") }}</div>
+            <p>{{ t("home_spec.why1_desc") }}</p>
           </li>
-          <li class="pointer flex-1 transition-colors" @click="toHomeSecond('efficient')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:90px) 96px,102px" src="@/assets/images/home/why2.png" srcset="@/assets/images/home/why2.png 96w" />
-            </div>
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why2_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why2_desc") }}</p>
-            </div>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits2.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why2_title") }}</div>
+            <p>{{ t("home_spec.why2_desc") }}</p>
           </li>
-          <li class="pointer flex-1 transition-colors" @click="router.push('/pricing')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:90px) 105px,104px" src="@/assets/images/home/why3.png" srcset="@/assets/images/home/why3.png 105w" />
-            </div>
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("home_spec.why3_title") }}</h3>
-              <p class="text-sm text-center">{{ t("home_spec.why3_desc") }}</p>
-            </div>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits3.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why3_title") }}</div>
+            <p>{{ t("home_spec.why3_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits4.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why4_title") }}</div>
+            <p>{{ t("home_spec.why4_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits5.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why5_title") }}</div>
+            <p>{{ t("home_spec.why5_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits6.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why6_title") }}</div>
+            <p>{{ t("home_spec.why6_desc") }}</p>
           </li>
         </ul>
       </div>
     </div>
 
     <!-- 覆盖多种应用场景 -->
-    <div class="box auto">
+    <div class="box_wrap cases" ref="scenceRef">
       <div class="container">
-        <div class="space-y-5 w-full" v-lazy="showSlow">
-          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("home_spec.cases_title") }}</h3>
+        <div class="title text-3xl font-medium text-center">{{ t("intro_spec.cases_title") }}</div>
 
-          <p class="text-center">{{ t("home_spec.cases_desc") }}</p>
-        </div>
-
-        <div class="auto_content w-full" v-lazy="showSlow">
-          <ul class="four flex" v-lazy="loadHoverImg">
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('data_collection')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four1.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active1.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four1_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four1_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('search_engine')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four2.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active2.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four2_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four2_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('social_media')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four3.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active3.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four3_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four3_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('ecommerce')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four4.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active4.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four4_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four4_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('market')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four5.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active5.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four5_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four5_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('bill')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four6.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active6.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four6_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four6_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('brand')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four7.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active7.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four7_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four7_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('ai_model')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four8.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active8.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("home_spec.four8_title") }}</p>
-                  <p class="description text-sm">{{ t("home_spec.four8_desc") }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="w-full pack_title column_center space-y-5" v-lazy="showSlow">
-          <p class="title text-lg sm:text-2xl lg:text-3xl font-bold text-center md:whitespace-pre-wrap">{{ t("home_spec.package_title") }}</p>
-
-          <p class="description green">{{ t("home_spec.package_desc") }}</p>
+        <div class="content list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="/home/data_collection" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four1_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four1_desc") }}</p>
+          </a>
+          <a href="/home/search_engine" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/seo.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four2_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four2_desc") }}</p>
+          </a>
+          <a href="/home/social_media" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/media.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four3_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four3_desc") }}</p>
+          </a>
+          <a href="/home/ecommerce" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/commerce.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four4_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four4_desc") }}</p>
+          </a>
+          <a href="/home/market" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four5_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four5_desc") }}</p>
+          </a>
+          <a href="/home/bill" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/ad.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four6_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four6_desc") }}</p>
+          </a>
+          <a href="/home/brand" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/brand.png" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four7_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four7_desc") }}</p>
+          </a>
+          <a href="/home/ai_model" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/ai.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four8_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four8_desc") }}</p>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- package -->
-    <div class="package box">
-      <div class="container" v-lazy="showSlow">
-        <div class="packlist" v-lazy="() => (isProduct = true)">
-          <ProductList :tabbar="false" :pack="pack" v-if="isProduct"></ProductList>
+    <!-- 代理 -->
+    <div class="box_wrap proxy" v-lazy="getLowestPrice">
+      <div class="container">
+        <div class="space-y-5">
+          <p class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
+            {{ t("intro_spec.proxy_title") }}
+          </p>
+          <p class="text-center text-sm md:whitespace-pre-wrap">{{ t("intro_spec.proxy_desc") }}</p>
+        </div>
+
+        <div class="content grid grid-cols-3 gap-6">
+          <div class="product_item residential">
+            <div class="info">
+              <img loading="lazy" src="@/assets/images/home/icon1.webp" width="48" height="48" />
+              <div class="text-xl font-medium mt-4 leading-none">{{ t("Residential_Proxies") }}</div>
+              <p class="mt-4">{{ t("intro_spec.residential_des") }}。</p>
+              <ul class="space-y-3 text-sm grey-80 mt-5">
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv1") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv2") }}</span>
+                </li>
+                <li class="v_center space-x-2">
+                  <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                    <Check :size="10" :stroke-width="3" class="white" />
+                  </div>
+                  <span>{{ t("intro_spec.residential_adv3") }}</span>
+                </li>
+              </ul>
+              <div class="between mt-7">
+                <div class="left">
+                  <div class="text-xs">{{ t("Starting_from") }}</div>
+                  <div class="text-sm">
+                    <span class="primary">$</span>
+                    <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                    <span>/GB</span>
+                  </div>
+                </div>
+
+                <a href="/pricing/residential">
+                  <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+                </a>
+              </div>
+            </div>
+            <img loading="lazy" class="bg" src="@/assets/images/home/residential.webp" width="464" height="388" />
+          </div>
+          <div class="product_item space-y-4">
+            <img loading="lazy" src="@/assets/images/home/icon2.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Phone_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.phone_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.phone_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
+                <div class="text-sm">
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.phone }}</b>
+                  <span>/GB</span>
+                </div>
+              </div>
+
+              <a href="/pricing/mobile">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon3.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Unlimited_Residential_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.unlimited_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.unlimited_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
+                <div class="text-sm">
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.unlimited }}</b>
+                  <span>/{{ t("Day") }}</span>
+                </div>
+              </div>
+
+              <a href="/pricing/unlimited">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon4.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Data_Center_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.data_center_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv2", { price: lowestPrice.data_center }) }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.data_center_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
+                <div class="text-sm">
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.data_center }}</b>
+                  <span>/IP</span>
+                </div>
+              </div>
+
+              <a href="/pricing/data_center">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
+          <div class="product_item">
+            <img loading="lazy" src="@/assets/images/home/icon5.webp" width="48" height="48" />
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("Rotation_Proxies") }}</div>
+            <p class="mt-4">{{ t("intro_spec.rotation_des") }}。</p>
+            <ul class="space-y-3 text-sm grey-80 mt-5">
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv1") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv2") }}</span>
+              </li>
+              <li class="v_center space-x-2">
+                <div class="bg-current success vh_center w-4 h-4 rounded-full">
+                  <Check :size="10" :stroke-width="3" class="white" />
+                </div>
+                <span>{{ t("intro_spec.rotation_adv3") }}</span>
+              </li>
+            </ul>
+            <div class="between mt-7">
+              <div class="left">
+                <div class="text-xs">{{ t("Starting_from") }}</div>
+                <div class="text-sm">
+                  <span class="primary">$</span>
+                  <b class="text-xl primary">{{ lowestPrice.residential }}</b>
+                  <span>/GB</span>
+                </div>
+              </div>
+
+              <a href="/pricing/rotation">
+                <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
+              </a>
+            </div>
+            <!---->
+          </div>
         </div>
       </div>
     </div>
 
     <div class="box question">
       <div class="container space-y-10">
-        <div class="title" v-lazy="showSlow">
+        <div class="title">
           <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("FAQ") }}</h3>
         </div>
 
         <div class="content space-y-5">
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title1") }} </template>
             <template #content>
               <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
@@ -254,31 +391,31 @@
               </i18n-t>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title2") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc2") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title3") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc3") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title4") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc4") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title5") }} </template>
             <template #content>
               <p class="whitespace-pre-wrap">{{ t("question_spec.desc5") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title6") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc6") }}</p>
@@ -312,6 +449,14 @@ import position from "../../../components/dialog/position"
 // import HomeTitle from "../components/homeTitle.vue"
 import Question from "../components/question/question.vue"
 import layoutStore from "../../../store/layout"
+import { platProductLowestPrices } from "@/api/product"
+import {
+  House as ResidentialProxyIcon,
+  Infinity as UnlimitedProxyIcon,
+  Smartphone as PhoneProxyIcon,
+  Database as DataProxyIcon,
+  ChevronLeft,
+} from "lucide-vue-next"
 
 const router = useRouter()
 const route = useRoute()
@@ -321,15 +466,16 @@ const { isLogin, token } = loginStore()
 const { registerAward } = layoutStore()
 
 // 路由参数
-const nameReg = /general|efficient|data_collection|search_engine|social_media|ecommerce|market|bill|brand|ai_model/
+const nameReg =
+  /general|efficient|data_collection|search_engine|social_media|ecommerce|market|bill|brand|ai_model|residential|unlimited|mobile|data_center/
 const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "general"))
 
 const tag = computed(() => {
-  return secondName.value === "efficient"
+  return /efficient|mobile|data_center/.test(secondName.value)
     ? [[1, 2, 3]]
     : secondName.value === "data_collection"
     ? [[1, 2]]
-    : secondName.value === "general"
+    : /general|residential/.test(secondName.value)
     ? [
         [1, 2, 3],
         [4, 5, 6],
@@ -339,10 +485,6 @@ const tag = computed(() => {
         [3, 4],
       ]
 })
-
-// 异步组件
-const isProduct = ref(false) // 是否加载product
-const ProductList = defineAsyncComponent(() => import("../components/product_list/product_list.vue"))
 
 // 转换data为ref
 const astrict = ref({
@@ -464,12 +606,24 @@ function toHomeSecond(name) {
     },
   })
 }
+function toPriceSecond(name) {
+  router.push({
+    name: "pricing",
+    params: {
+      name: name,
+    },
+  })
+  close()
+}
+function openService() {
+  // window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:open"])
+}
 
 // 累计用户
 // const totalUser = ref(-1)
 const partner = ref(-1)
 const onlineIps = ref(-1)
-const lowestPrice = ref(0.25)
 async function getUserIps() {
   try {
     const result = homeData ?? (await platDataIndex())
@@ -478,7 +632,6 @@ async function getUserIps() {
 
     partner.value = 0
     onlineIps.value = 0
-    lowestPrice.value = data.lowest_price ? data.lowest_price / 100 : 0.25
     // 逐渐递增动画
     nextTick(() => {
       const ipObj = { charged: 0 }
@@ -602,8 +755,46 @@ function scroll() {
   fn()
 }
 
+// 最低价格
+const lowestPrice = ref({
+  residential: "0.00",
+  unlimited: "0.00",
+  phone: "0.00",
+  data_center: "0.00",
+})
+async function getLowestPrice() {
+  try {
+    const { data } = await platProductLowestPrices()
+    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const target = {}
+    data.forEach(({ prd_type, unit_price }) => {
+      const key = keys[prd_type]
+      target[key] = unit_price / 100
+    })
+    lowestPrice.value = target
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+// 滚动
+const scenceRef = ref()
+function scrollToScence() {
+  const top = scenceRef.value.getBoundingClientRect().top
+  console.log(top)
+  window.scrollBy({
+    top: top,
+    behavior: "smooth",
+  })
+}
+
 onMounted(() => {
   IpMap()
+  if (/#scence/.test(window.location.href)) {
+    setTimeout(() => {
+      scrollToScence()
+    }, 300)
+  }
 })
 // 转换mounted
 // onMounted(() => {

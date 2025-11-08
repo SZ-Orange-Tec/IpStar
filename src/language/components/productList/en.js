@@ -7,11 +7,21 @@ export default {
   Order: "Order",
   Most_popular: "Most Popular",
   Duration: "Duration",
+  Locations: "Locations",
+  Number: "Number",
+  Name: "Name",
+  Never_Expires: "Never Expires",
 
   Personal: "Personal",
   Enterprise: "Enterprise",
 
   Trial: "Trial",
+
+  Residential_Proxies: "Residential Proxies",
+  Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
+  Phone_Proxies: "Phone Proxies",
+  Data_Center_Proxies: "Data Center Proxies",
+  Rotation_Proxies: "Rotation Residential Proxies",
 
   productList_spec: {
     right1: "200+Regions, Include US",
@@ -19,6 +29,22 @@ export default {
     right3: "Unlimited Bandwidth",
     right4: "Concurrency 500+",
     right5: "Support Socks5/Http|Https",
+
+    unlimited_right1: "Unlimited Traffic",
+    unlimited_right2: "Large IP Pool",
+    unlimited_right3: "200+ Global Locations",
+    unlimited_right4: "Unlimited Concurrency",
+    unlimited_right5: "Real Dynamic Residential Proxies",
+
+    phone_right1: "Supports 5G/4G/3G/LTE",
+    phone_right2: "Unrestricted international roaming",
+    phone_right3: "Pay-as-you-go pricing with no expiry date",
+    phone_right4: "24/7 support",
+
+    data_right1: "Avg. 99.5% Success Rates",
+    data_right2: "HTTP/SOCKS5",
+    data_right3: "IP renew available",
+    data_right4: "Reliable ISPs",
 
     Never_Expires: "Never Expires",
 
@@ -29,6 +55,13 @@ export default {
     Custom1: "Custom Plans",
     Custom2: "Custom Regions",
     Custom3: "Custom Demands",
+
+    Custom4: "Custom Concurrency",
+    Custom5: "Custom Bandwidth",
+
+    Custom6: "Custom Bitrate",
+    Custom7: "Custom Number",
+
     Service: "Contact Us",
   },
 }

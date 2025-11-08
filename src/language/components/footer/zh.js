@@ -1,35 +1,29 @@
 export default {
-  Now: "现在",
-  Services: "服务",
-  Help_center: "帮助中心",
-  Connect_with_us: "联系我们",
+  Contact_Us: "联系我们",
+  Products: "产品",
+  Residential_Proxies: "住宅代理",
+  Unlimited_Residential_Proxies: "不限量住宅代理",
+  Phone_Proxies: "移动手机代理",
+  Data_Center_Proxies: "静态数据中心代理",
+  Rotating_Proxies: "轮换代理",
+  Price: "定价",
+  Scenes: "应用场景",
+  Get_Help: "获取帮助",
 
-  FAQ: "常见问题",
-  Getting_Start: "入门指南",
-  API_Reference: "API 参考",
-  Examples: "示例",
-  Terms_Conditions: "条款与条件",
   Privacy_Policy: "隐私政策",
-
-  Legal: "法律",
-  Commitment: "承诺",
+  Terms_of_Service: "服务条款",
+  Refund_Policy: "退款政策",
 
   footer_spec: {
-    explore: "探索 IpStar 服务",
-    description: "电子商务、网络、大数据、人工智能，\nIpStar助您快速发展",
-    get_it_now: "立即获取",
+    scene1: "企业级数据收集",
+    scene2: "搜索引擎优化",
+    scene3: "社交媒体管理",
+    scene4: "广告验证",
+    scene5: "AI 大模型训练",
+    scene6: "更多用例",
+    document: "帮助文档",
+    question: "常见问题",
 
-    Residential_Proxies: "住宅代理",
-    Proxy_IP_Locations: "代理 IP 位置",
-    Proxy_API: "代理 API",
-    Partner_Solutions: "合作伙伴解决方案",
-    Custom_Solutions: "定制解决方案",
-
-    privicy: "不要出售我的个人信息",
-
-    Legal: "法律提示",
-    tips: "IpStar 代理服务不支持直接在中国境内请求，用户使用 IpStar 服务必须遵守您所在地的法律，一旦发现风险行为，我们可能会中断服务。",
-
-    copyright: "© 版权所有 2025 IpStar。| 保留一切权利",
+    rights: "© 版权所有 2025 IpStar。",
   },
 }

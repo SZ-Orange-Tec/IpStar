@@ -10,13 +10,14 @@
     @focus="focus"
     @blur="blur"
     @input="change"
+    :style="{ 'border-width': border ? '1px' : '0px' }"
   />
 </template>
 
 <script setup>
 import { ref, toRefs, defineModel } from "vue"
 
-const input = defineModel({ type: String })
+const input = defineModel()
 
 const props = defineProps({
   type: {
@@ -35,11 +36,15 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  border: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const { maxlength, placeholder, type } = toRefs(props)
 
-const emit = defineEmits(["input"])
+const emit = defineEmits(["input", "change"])
 // 只读
 const readonly = ref(true)
 function focus() {
@@ -50,6 +55,7 @@ function blur() {
 }
 function change(e) {
   emit("input", e.target.value)
+  emit("change", e.target.value)
 }
 
 defineExpose({

@@ -1,10 +1,10 @@
 <template>
   <div class="pc-collapse" ref="collapseRef" :style="`height:${bol ? height : titleDom}px;`">
     <header class="title dom between text-sm" :class="{ select: bol }">
-      <p class="title">{{ info?.title }}</p>
+      <p class="font-medium text-lg">{{ info?.title }}</p>
       <ChevronRight :size="18" :class="{ down: bol }" style="transition: transform 0.3s" />
     </header>
-    <div class="content_text text-sm space-y-3" @click.stop="fn" v-if="info?.type !== 'download'">
+    <div class="content_text space-y-3" @click.stop="fn" v-if="info?.type !== 'download'">
       <p v-for="(item, index) in info?.p" :key="index">
         <span v-if="item.type !== 'a'">{{ item.txt }}</span
         ><i v-if="item.type === 'followUp'" @click="goto(item.idx)">...>></i>
