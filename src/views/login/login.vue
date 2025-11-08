@@ -131,7 +131,14 @@ async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
   await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
+  await import(/*webpackChunkName:'purchase'*/ "@/views/back/purchase/purchase.vue")
+  await import(/*webpackChunkName:'residential'*/ "@/views/back/residential/residential.vue")
+  await import(/*webpackChunkName:'unlimited'*/ "@/views/back/unlimited/unlimited.vue")
+  await import(/*webpackChunkName:'mobile'*/ "@/views/back/mobile/mobile.vue")
+  await import(/*webpackChunkName:'data_center'*/ "@/views/back/data_center/data_center.vue")
   await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
+  await import(/*webpackChunkName:'whitelist'*/ "@/views/back/whitelist/whitelist.vue")
+  await import(/*webpackChunkName:'account'*/ "@/views/back/account/index.vue")
 }
 
 async function getGraphicCode() {

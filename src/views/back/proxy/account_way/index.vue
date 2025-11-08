@@ -5,7 +5,7 @@
       <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         <div class="column space-y-1">
           <p class="text-sm">{{ t("Proxy") }}</p>
-          <el-select v-model="stype" :placeholder="$t('Account')" style="max-width: 232px">
+          <el-select @change="changeStype" v-model="stype" :placeholder="$t('Account')" style="max-width: 232px">
             <el-option :value="0" :label="t('menu_spec.residential_proxy')"></el-option>
             <el-option :value="1" :label="t('menu_spec.unlimited_proxy')"></el-option>
             <el-option :value="2" :label="t('menu_spec.phone_proxy')"></el-option>
@@ -60,6 +60,7 @@
             v-model.trim="countVal"
             @input="countChange"
             style="max-width: 232px"
+            :disabled="stype === 4"
           ></el-input>
         </div>
 
@@ -168,7 +169,11 @@ const protocolData = ref([
 const protocolVal = ref("0")
 
 const stype = ref(route.query?.type ?? 0)
-const countVal = ref(10)
+function changeStype(type) {
+  stype.value = type
+  countVal.value = type === 4 ? 1 : 10
+}
+const countVal = ref(stype === 4 ? 1 : 10)
 const content = ref([])
 let mes = ""
 const btnLoading = ref(false)

@@ -255,7 +255,7 @@ async function setLine(xData, serData) {
         },
         showAllSymbol: true,
         // symbol: 'image://路径',
-        symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
+        // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
         symbolSize: 20,
         label: {
           show: true,
