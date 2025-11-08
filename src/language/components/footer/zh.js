@@ -5,6 +5,7 @@ export default {
   Unlimited_Residential_Proxies: "不限量住宅代理",
   Phone_Proxies: "移动手机代理",
   Data_Center_Proxies: "静态数据中心代理",
+  Rotating_Proxies: "轮换代理",
   Price: "定价",
   Scenes: "应用场景",
   Get_Help: "获取帮助",

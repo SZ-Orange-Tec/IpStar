@@ -19,7 +19,7 @@
       </div>
 
       <!-- 数据卡片区域 -->
-      <div class="grid grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- 剩余流量卡片 -->
         <div class="bg-green-50 rounded-lg p-5 space-y-2">
           <div class="v_center space-x-2">

@@ -47,7 +47,7 @@
     <!-- 国家ip -->
     <div class="country box">
       <div class="container">
-        <div class="space-y-5" v-lazy="showSlow">
+        <div class="space-y-5">
           <h4 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t(`intro_spec.country`) }}</h4>
           <p class="text-center">{{ t(`intro_spec.country_desc`) }}</p>
         </div>
@@ -66,155 +66,90 @@
       </div>
     </div>
 
-    <!-- 为什么选择 -->
-    <div class="box why_choose">
-      <div class="container column_center">
-        <p class="title text-lg sm:text-2xl lg:text-3xl font-bold" v-lazy="showSlow">
-          {{ t("intro_spec.why") }}
-          <span class="primary">IpStar</span>
-        </p>
-
-        <ul class="three column gap-8 md:v_center">
-          <li class="pointer flex-1 transition-colors" @click="toHomeSecond('introduce')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:105px) 105px,89px" src="@/assets/images/home/why1.png" srcset="@/assets/images/home/why1.png 105w" />
-            </div>
-
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("intro_spec.why1_title") }}</h3>
-              <p class="text-sm text-center">{{ t("intro_spec.why1_desc") }}</p>
-            </div>
+    <div class="box_wrap why">
+      <div class="container">
+        <div class="font-medium text-center text-3xl">{{ t("home_spec.why_title") }}</div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits1.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why1_title") }}</div>
+            <p>{{ t("home_spec.why1_desc") }}</p>
           </li>
-          <li class="pointer flex-1 transition-colors" @click="toHomeSecond('efficient')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:90px) 96px,102px" src="@/assets/images/home/why2.png" srcset="@/assets/images/home/why2.png 96w" />
-            </div>
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("intro_spec.why2_title") }}</h3>
-              <p class="text-sm text-center">{{ t("intro_spec.why2_desc") }}</p>
-            </div>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits2.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why2_title") }}</div>
+            <p>{{ t("home_spec.why2_desc") }}</p>
           </li>
-          <li class="pointer flex-1 transition-colors" @click="router.push('/pricing')" v-lazy="showSlow">
-            <div class="img_box vh_center">
-              <img v-lazy sizes="(max-width:90px) 105px,104px" src="@/assets/images/home/why3.png" srcset="@/assets/images/home/why3.png 105w" />
-            </div>
-            <div class="column_center space-y-3 px-3 content">
-              <h3 class="font-bold text-center">{{ t("intro_spec.why3_title") }}</h3>
-              <p class="text-sm text-center">{{ t("intro_spec.why3_desc") }}</p>
-            </div>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits3.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why3_title") }}</div>
+            <p>{{ t("home_spec.why3_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits4.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why4_title") }}</div>
+            <p>{{ t("home_spec.why4_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits5.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why5_title") }}</div>
+            <p>{{ t("home_spec.why5_desc") }}</p>
+          </li>
+          <li class="rounded-lg p-6 space-y-4 pointer">
+            <img loading="lazy" width="40" height="40" src="@/assets/images/product/merits6.png" />
+            <div class="text-lg font-medium">{{ t("home_spec.why6_title") }}</div>
+            <p>{{ t("home_spec.why6_desc") }}</p>
           </li>
         </ul>
       </div>
     </div>
 
     <!-- 覆盖多种应用场景 -->
-    <div class="box auto" ref="scenceRef">
+    <div class="box_wrap cases" ref="scenceRef">
       <div class="container">
-        <div class="space-y-5 w-full" v-lazy="showSlow">
-          <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("intro_spec.cases_title") }}</h3>
+        <div class="title text-3xl font-medium text-center">{{ t("intro_spec.cases_title") }}</div>
 
-          <p class="text-center">{{ t("intro_spec.cases_desc") }}</p>
-        </div>
-
-        <div class="auto_content w-full" v-lazy="showSlow">
-          <ul class="four flex" v-lazy="loadHoverImg">
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('data_collection')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four1.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active1.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four1_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four1_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('search_engine')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four2.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active2.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four2_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four2_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('social_media')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four3.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active3.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four3_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four3_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('ecommerce')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four4.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active4.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four4_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four4_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('market')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four5.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active5.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four5_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four5_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('bill')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four6.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active6.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four6_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four6_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('brand')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four7.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active7.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four7_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four7_desc") }}</p>
-                </div>
-              </div>
-            </li>
-            <li class="w-1/2 md:w-1/3 lg:w-1/4" @click="toHomeSecond('ai_model')">
-              <div class="pointer transition-colors space-y-5">
-                <div class="img_box vh_center" :width="300" :height="270">
-                  <img v-lazy src="@/assets/images/home/four8.webp" alt="" />
-                  <img v-lazy src="@/assets/images/home/four_active8.webp" alt="" />
-                </div>
-                <div class="content flex-1 space-y-2">
-                  <p class="text-center font-bold">{{ t("intro_spec.four8_title") }}</p>
-                  <p class="description text-sm">{{ t("intro_spec.four8_desc") }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
+        <div class="content list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="/home/data_collection" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four1_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four1_desc") }}</p>
+          </a>
+          <a href="/home/search_engine" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/seo.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four2_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four2_desc") }}</p>
+          </a>
+          <a href="/home/social_media" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/media.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four3_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four3_desc") }}</p>
+          </a>
+          <a href="/home/ecommerce" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/commerce.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four4_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four4_desc") }}</p>
+          </a>
+          <a href="/home/market" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four5_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four5_desc") }}</p>
+          </a>
+          <a href="/home/bill" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/ad.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four6_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four6_desc") }}</p>
+          </a>
+          <a href="/home/brand" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/brand.png" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four7_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four7_desc") }}</p>
+          </a>
+          <a href="/home/ai_model" class="item space-y-4">
+            <img loading="lazy" width="36" height="36" src="@/assets/images/product/ai.webp" />
+            <div class="font-medium text-lg">{{ t("intro_spec.four8_title") }}</div>
+            <p class="grey-80">{{ t("intro_spec.four8_desc") }}</p>
+          </a>
         </div>
       </div>
     </div>
@@ -223,10 +158,10 @@
     <div class="box_wrap proxy" v-lazy="getLowestPrice">
       <div class="container">
         <div class="space-y-5">
-          <p v-lazy="showSlow" class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
+          <p class="text-xl lg:text-3xl font-semibold text-center md:whitespace-pre-wrap">
             {{ t("intro_spec.proxy_title") }}
           </p>
-          <p v-lazy="showSlow" class="text-center text-sm md:whitespace-pre-wrap">{{ t("intro_spec.proxy_desc") }}</p>
+          <p class="text-center text-sm md:whitespace-pre-wrap">{{ t("intro_spec.proxy_desc") }}</p>
         </div>
 
         <div class="content grid grid-cols-3 gap-6">
@@ -438,12 +373,12 @@
 
     <div class="box question">
       <div class="container space-y-10">
-        <div class="title" v-lazy="showSlow">
+        <div class="title">
           <h3 class="title text-center text-lg sm:text-2xl lg:text-3xl font-bold">{{ t("FAQ") }}</h3>
         </div>
 
         <div class="content space-y-5">
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title1") }} </template>
             <template #content>
               <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
@@ -456,31 +391,31 @@
               </i18n-t>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title2") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc2") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title3") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc3") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title4") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc4") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title5") }} </template>
             <template #content>
               <p class="whitespace-pre-wrap">{{ t("question_spec.desc5") }}</p>
             </template>
           </Question>
-          <Question v-lazy="showSlow">
+          <Question>
             <template #header> {{ t("question_spec.title6") }} </template>
             <template #content>
               <p>{{ t("question_spec.desc6") }}</p>

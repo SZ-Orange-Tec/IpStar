@@ -5,6 +5,7 @@ export default {
   Contact: "Contact",
   Help: "Help",
   Sign_in: "Sign in",
+  Register: "Register",
   Sign_out: "Sign out",
   Overview: "Overview",
   Products: "Products",
@@ -13,6 +14,7 @@ export default {
   API: "API Obtain",
   Settings: "Settings",
   Dashboard: "Dashboard",
+  Language: "Language",
 
   Proxy_Solutions: "Proxy Solutions",
   Agent_Price: "Agent Price",

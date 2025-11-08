@@ -157,7 +157,7 @@
           <img loading="lazy" class="section_img" src="@/assets/images/product/static_map.webp" width="500" />
         </div>
         <div class="section_text space-y-4 column_center lg:column">
-          <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" />
+          <!-- <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" /> -->
           <h2 class="font-medium">{{ t("product_spec.static_title") }}</h2>
           <p class="text-lg grey-60">
             {{ t("product_spec.static_desc") }}
@@ -171,7 +171,7 @@
       </div>
     </div>
 
-    <div class="box_wrap position" v-if="type === 3">
+    <div class="box_wrap position" v-if="type === 3" style="margin: 100px 0 60px">
       <div class="container position_flex">
         <div class="column_center lg:v_center lg:!flex-row-reverse position_flex">
           <div class="country shrink-0">
@@ -483,26 +483,26 @@
         <div class="text-3xl font-medium text-center">{{ t("product_spec.cases_title") }}</div>
 
         <div class="list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div href="/zh/solution/web-scraping/" class="item space-y-4">
+          <a href="/home/data_collection" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case1_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case1_desc") }}</p>
-          </div>
-          <div href="/zh/solution/market-research/" class="item space-y-4">
+          </a>
+          <a href="/home/market" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case2_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case2_desc") }}</p>
-          </div>
-          <div href="/zh/solution/ad-verification/" class="item space-y-4">
+          </a>
+          <a href="/home/bill" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/ad.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case3_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case3_desc") }}</p>
-          </div>
-          <div href="/zh/solution/brand-protection/" class="item space-y-4">
+          </a>
+          <a href="/home/brand" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/brand.png" />
             <div class="font-medium text-lg">{{ t("product_spec.case4_title") }}</div>
             <p class="grey-80">{{ t("product_spec.case4_desc") }}</p>
-          </div>
+          </a>
         </div>
       </div>
     </div>

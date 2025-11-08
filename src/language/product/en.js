@@ -51,10 +51,10 @@ export default {
       title: "Static Data Center Proxies",
       price_desc:
         "With high-quality datacenter proxies, you get low latency and stable connections to keep your operations running smoothly and efficiently.",
-      desc: "Use stable, fast and powerful data center IP around the world.",
+      desc: "With our data centre proxy service, you gain unlimited bandwidth and pay per IP address.",
       adv1: "Advanced Static IP",
-      adv2: "Price starts at ${price}/IP",
-      adv3: "HTTP/socks5",
+      adv2: "Rapid and stable with unlimited data",
+      adv3: "IP address has high freshness",
       ques1: "What is a static data center proxy?",
       ans1: "Static data center proxy refers to a fixed IP proxy solution provided by a professional data center. Its biggest feature is that the IP address remains constant during the use period, which is particularly suitable for various business needs that require long-term stable IP connection.",
       ques2: "Billing method description",

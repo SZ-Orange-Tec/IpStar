@@ -2,7 +2,7 @@
 
   // background-color: hsl(var(--page-background));
   min-height: 760px;
-  background-color: #E7F4FF;
+  background-color: #fff;
   &>.box{
     padding: 0 2.5rem;
     @media screen and (max-width:640px) {
@@ -41,16 +41,23 @@
         padding: 0.5rem 0.75rem 0.75rem;
         border-radius: 8px;
         background-color: hsl(var(--background));
-        border: 1px solid transparent;
+        border: 1px solid #D9DDEA;
       
 
         @media screen and (min-width:768px) {
           padding: 0.75rem 1.25rem 1.25rem;
         }
+
+        &:hover{
+          box-shadow: 0 0.6rem 1.4rem #18459c14;
+        }
       }
 
       &>.active {
-        box-shadow: 0 5px 16px 0 #BCE0FF;
+        &>h1{
+          color: hsl(var(--primary));
+        }
+        box-shadow: 0 0.6rem 1.4rem #18459c14;
       }
     }
 

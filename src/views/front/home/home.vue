@@ -5,11 +5,11 @@
       <div class="container column space-y-10">
         <div class="space-y-4 md:space-y-7" style="max-width: 700px">
           <div class="title space-y-1 md:space-y-4">
-            <p class="text-2xl lg:text-4xl whitespace-pre-wrap font-semibold lg:font-medium">{{ t("home_spec.intro_title1") }}</p>
+            <p class="whitespace-pre-wrap font-medium lg:font-medium">{{ t("home_spec.intro_title1") }}</p>
             <!-- <p class="title text-lg lg:text-xl md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_title2") }}</p> -->
           </div>
 
-          <p class="description md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_desc") }}</p>
+          <p class="text-lg opacity-80 md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
         <div class="btn_box">
@@ -531,46 +531,46 @@
         <div class="title text-3xl font-medium text-center">{{ t("home_spec.cases_title") }}</div>
 
         <div class="content list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div href="/zh/solution/web-scraping/" class="item space-y-4">
+          <a href="/home/data_collection" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/web.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four1_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four1_desc") }}</p>
-          </div>
-          <div href="/zh/solution/market-research/" class="item space-y-4">
+          </a>
+          <a href="/home/search_engine" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/seo.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four2_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four2_desc") }}</p>
-          </div>
-          <div href="/zh/solution/ad-verification/" class="item space-y-4">
+          </a>
+          <a href="/home/social_media" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/media.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four3_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four3_desc") }}</p>
-          </div>
-          <div href="/zh/solution/brand-protection/" class="item space-y-4">
+          </a>
+          <a href="/home/ecommerce" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/commerce.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four4_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four4_desc") }}</p>
-          </div>
-          <div href="/zh/solution/web-scraping/" class="item space-y-4">
+          </a>
+          <a href="/home/market" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/marketing.png" />
             <div class="font-medium text-lg">{{ t("home_spec.four5_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four5_desc") }}</p>
-          </div>
-          <div href="/zh/solution/market-research/" class="item space-y-4">
+          </a>
+          <a href="/home/bill" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/ad.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four6_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four6_desc") }}</p>
-          </div>
-          <div href="/zh/solution/ad-verification/" class="item space-y-4">
+          </a>
+          <a href="/home/brand" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/brand.png" />
             <div class="font-medium text-lg">{{ t("home_spec.four7_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four7_desc") }}</p>
-          </div>
-          <div href="/zh/solution/brand-protection/" class="item space-y-4">
+          </a>
+          <a href="/home/ai_model" class="item space-y-4">
             <img loading="lazy" width="36" height="36" src="@/assets/images/product/ai.webp" />
             <div class="font-medium text-lg">{{ t("home_spec.four8_title") }}</div>
             <p class="grey-80">{{ t("home_spec.four8_desc") }}</p>
-          </div>
+          </a>
         </div>
       </div>
     </div>

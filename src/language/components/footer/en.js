@@ -5,6 +5,7 @@ export default {
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
   Phone_Proxies: "Phone Proxies",
   Data_Center_Proxies: "Data Center Proxies",
+  Rotating_Proxies: "Rotating Proxies",
   Price: "Price",
   Scenes: "Scenes",
   Get_Help: "Get Help",

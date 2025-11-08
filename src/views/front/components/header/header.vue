@@ -59,7 +59,7 @@
         </div>
 
         <div class="v_center h-full space-x-3">
-          <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
+          <!-- <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
             <template #label="{ open }">
               <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
                 <Menu :size="18" />
@@ -97,11 +97,11 @@
                 </li>
               </ul>
             </template>
-          </DropDown>
+          </DropDown> -->
 
           <div class="v_center space-x-3 shink-0">
             <!-- 语言 -->
-            <DropDown placement="bottom" class="shink-0">
+            <DropDown placement="bottom" class="hidden lg:block shink-0">
               <template #label="{ open }">
                 <IpButton :class="{ open: open }" type="normal" class="user_icon">
                   <div class="vh_center space-x-2 shrink-0 w-full h-full">
@@ -139,7 +139,7 @@
                     <div class="slider_bck slider_bck_left">
                       <p class="username hidden md:block">{{ username_simple }}</p>
                     </div>
-                    <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
+                    <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform hidden lg:block" />
                   </div>
                 </IpButton>
               </template>
@@ -167,11 +167,17 @@
                 </ul>
               </template>
             </DropDown>
+
+            <div class="block lg:hidden" @click="headerShow = true">
+              <Menu :size="24" :strokeWidth="2.5" />
+            </div>
           </div>
         </div>
       </div>
     </header>
   </div>
+
+  <HeaderPop v-if="headerShow" v-model="headerShow" />
 </template>
 
 <script setup>
@@ -187,8 +193,9 @@ import { useI18n } from "vue-i18n"
 import { computed, inject, nextTick, onMounted, ref } from "vue"
 import layoutStore from "@/store/layout"
 import { defineAsyncComponent } from "vue"
-import ProductPop from "..//product_pop/product_pop.vue"
-import PricePop from "..//price_pop/price_pop.vue"
+import ProductPop from "../product_pop/product_pop.vue"
+import PricePop from "../price_pop/price_pop.vue"
+import HeaderPop from "../header_pop/index.vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -196,6 +203,9 @@ const { t } = useI18n()
 const { token, OutLogin } = loginStore()
 const { lang } = settingStore()
 const { username_simple } = userStore()
+
+// const show = /localhost/.test(window.location.href)
+const headerShow = ref(false)
 
 // const homeData = inject("homeData")
 // const lowestPrice = computed(() => homeData.lowestPrice / 100)

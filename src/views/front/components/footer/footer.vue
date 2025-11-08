@@ -22,16 +22,19 @@
               <strong class="white font-medium">{{ t("Products") }}</strong>
               <ul class="list text-sm space-y-3">
                 <li class="pointer">
-                  <a href="/home/residential">{{ t("Residential_Proxies") }}</a>
+                  <a href="/product/residentail">{{ t("Residential_Proxies") }}</a>
                 </li>
                 <li class="pointer">
-                  <a href="/home/unlimited">{{ t("Unlimited_Residential_Proxies") }}</a>
+                  <a href="/product/rotating">{{ t("Rotating_Proxies") }}</a>
                 </li>
                 <li class="pointer">
-                  <a href="/home/mobile">{{ t("Phone_Proxies") }}</a>
+                  <a href="/mobile-proxy">{{ t("Phone_Proxies") }}</a>
                 </li>
                 <li class="pointer">
-                  <a href="/home/data_center">{{ t("Data_Center_Proxies") }}</a>
+                  <a href="/unlimited-residential-proxy">{{ t("Unlimited_Residential_Proxies") }}</a>
+                </li>
+                <li class="pointer">
+                  <a href="/product/data_center">{{ t("Data_Center_Proxies") }}</a>
                 </li>
               </ul>
             </div>
@@ -101,7 +104,8 @@
             <a href="/refund.html">{{ t("Refund_Policy") }}</a>
           </div>
 
-          <div>{{ t("footer_spec.rights") }}</div>
+          <div v-if="en">@Copyright 2025 IPstar. All rights reserved.</div>
+          <div v-else>© 版权所有 2025 IpStar。</div>
         </div>
       </div>
     </div>
@@ -123,6 +127,7 @@ const { isLogin } = loginStore()
 
 const router = useRouter()
 const { t } = useI18n()
+const { en } = settingsStore()
 
 // 邮箱跳转
 function gotoEmail() {

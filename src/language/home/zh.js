@@ -28,7 +28,7 @@ export default {
   FAQ: "常见问题",
 
   home_spec: {
-    intro_title1: "高质量IP代理，大数据业务引擎",
+    intro_title1: "高质 IP 代理，数据业务引擎",
     intro_title2: "纯净、安全、稳定，您的首选全球数据业务伙伴",
 
     intro_desc:

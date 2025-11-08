@@ -4,7 +4,7 @@
       <div class="container column_center space-y-10">
         <i18n-t keypath="help_spec.title" tag="p" scope="global" class="text-lg sm:text-2xl lg:text-3xl title">
           <template #title>
-            <span class="major">{{ t("help_spec.title_slot") }}</span>
+            <span>{{ t("help_spec.title_slot") }}</span>
           </template>
         </i18n-t>
 
@@ -17,12 +17,12 @@
             :key="index"
             @click="selectBlock(index)"
           >
-            <h1 class="font-medium text-sm lg:text-lg title">{{ item.h1 }}</h1>
-            <p class="text-xs lg:text-sm description">{{ item.p }}</p>
+            <h1 class="font-medium text-lg">{{ item.h1 }}</h1>
+            <p class="grey-80">{{ item.p }}</p>
           </div>
         </div>
 
-        <IpButton type="major" class="btn px-10 h-10" @click="gotoDocum">
+        <IpButton type="primary" class="btn px-10 h-10" @click="gotoDocum">
           <p>{{ t("help_spec.more") }}</p>
         </IpButton>
 
@@ -53,10 +53,9 @@
         </template>
       </div>
     </div>
-    <div class="background">
-      <!-- <StarPlay /> -->
+    <!-- <div class="background">
       <img src="@/assets/images/help/bg.webp" alt="" />
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -5,6 +5,7 @@ export default {
   Contact: "联系",
   Help: "帮助",
   Sign_in: "登录",
+  Register: "注册",
   Sign_out: "退出登录",
   Overview: "概览",
   Products: "产品",
@@ -13,6 +14,7 @@ export default {
   API: "API 提取",
   Settings: "设置",
   Dashboard: "个人中心",
+  Language: "语言",
 
   Proxy_Solutions: "代理解决方案",
   Agent_Price: "代理价格",
