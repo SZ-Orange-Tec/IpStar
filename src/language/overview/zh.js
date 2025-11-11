@@ -16,7 +16,7 @@ export default {
   Unlimited: "无限制",
   User_Guide: "用户指南",
   Traffic_Usage: "流量使用",
-  Manual_Auth: "手动提取",
+  User_Pass_Auth: "账密提取",
   API_Auth: "API提取",
   Bandwidth_Usage: "带宽使用",
   Concurrent_Usage: "并发使用",

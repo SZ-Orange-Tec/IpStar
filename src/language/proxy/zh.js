@@ -5,7 +5,7 @@ export default {
   ...navbar,
 
   Rotation_Proxies: "轮换代理",
-  Manual_Auth: "手动提取",
+  User_Pass_Auth: "账密提取",
   API_Auth: "API 提取",
   User_Pass: "账密组合",
   Options: "筛选项",
@@ -49,6 +49,7 @@ export default {
   Proxy_UserName: "代理用户名",
   Proxy_Password: "代理用户密码",
   Note: "注意",
+  Expample: "示例",
 
   proxy_spec: {
     duration_tip: "当您使用代理时，您可以设置IP的有效期，并在有效期内使用该代理。由于它是常驻代理，因此有效期的范围可以从几个小时到几天不等。",

@@ -90,6 +90,7 @@ import loginStore from "../../../../store/login"
 import { useRoute, useRouter } from "vue-router"
 import { loadLocaleMessages, setI18nLanguage } from "@/language/index"
 import settingStore from "../../../../store/setting"
+import { nextTick } from "vue"
 
 const show = defineModel()
 const router = useRouter()
@@ -100,14 +101,16 @@ const { isLogin, OutLogin } = loginStore()
 
 // 退出
 function signOut() {
-  show.value = false
   OutLogin()
+  nextTick(() => {
+    show.value = false
+  })
 }
 
 // 跳转
-function navigate(url) {
+async function navigate(url) {
+  await router.push(url)
   show.value = false
-  router.push(url)
 }
 
 // 切换语言

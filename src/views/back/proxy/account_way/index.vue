@@ -40,7 +40,13 @@
         <div class="column space-y-1">
           <p class="text-sm">IP {{ t("Duration") }}</p>
           <div class="space-x-3 v_center">
-            <el-cascader v-model="IPtime" :options="IPtimeOption" :append-to-body="false" @change="IPtimeChange"></el-cascader>
+            <el-cascader
+              :disabled="stype === 4"
+              v-model="IPtime"
+              :options="IPtimeOption"
+              :append-to-body="false"
+              @change="IPtimeChange"
+            ></el-cascader>
             <el-popover placement="bottom" width="300" trigger="hover">
               <div>
                 <p>{{ t("proxy_spec.duration_tip") }}</p>
@@ -97,7 +103,7 @@
 
       <!-- 表格 -->
       <div class="table_box w-full">
-        <el-table class="w-full" :data="tableData" height="440" v-loading="btnLoading">
+        <el-table class="w-full" :data="tableData" v-loading="btnLoading">
           <el-table-column prop="server" :label="t('Server')" min-width="160"></el-table-column>
           <el-table-column prop="port" :label="t('Port')" min-width="100"></el-table-column>
           <el-table-column prop="user" :label="t('User')" min-width="300"></el-table-column>
@@ -121,6 +127,8 @@
         <span class="primary pointer" @click="goToDocument">{{ t("proxy_spec.api_tip.btn") }}</span>
       </p> -->
     </div>
+
+    <UserPwd />
   </div>
 </template>
 
@@ -141,6 +149,7 @@ import { ShoppingCart, ArrowLeftRight, HelpCircle } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import copyText from "../../../../utils/copyText"
 import { platAccountSelect } from "@/api/account"
+import UserPwd from "../user_pwd/index.vue"
 
 const { en } = settingStore()
 const { isProduc } = layoutStore()
@@ -172,6 +181,7 @@ const stype = ref(route.query?.type ?? 0)
 function changeStype(type) {
   stype.value = type
   countVal.value = type === 4 ? 1 : 10
+  IPtime.value = type === 4 ? "0" : IPtime.value
 }
 const countVal = ref(stype === 4 ? 1 : 10)
 const content = ref([])
@@ -362,7 +372,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .table_box {
-  max-height: calc(100% - 44px);
+  // max-height: calc(100% - 44px);
   :deep(.el-table) {
     height: 100%;
     border: 1px solid #ebeef5;

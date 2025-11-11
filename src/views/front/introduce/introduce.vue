@@ -164,7 +164,7 @@
           <p class="text-center text-sm md:whitespace-pre-wrap">{{ t("intro_spec.proxy_desc") }}</p>
         </div>
 
-        <div class="content grid grid-cols-3 gap-6">
+        <div class="content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="product_item residential">
             <div class="info">
               <img loading="lazy" src="@/assets/images/home/icon1.webp" width="48" height="48" />

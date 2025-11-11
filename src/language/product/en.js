@@ -64,7 +64,7 @@ export default {
       ques4: "Service performance characteristics",
       ans4: "Static data center proxy has significant performance advantages:\nProvide high-speed and stable network connection\nExcellent data processing capabilities\nParticularly suitable for large-scale data collection needs\nUsers can flexibly choose HTTP or SOCKS5 protocol for access according to specific project requirements.",
       ques5: "Usage guide",
-      ans5: "The opening and use process is very simple:\n① Complete platform account registration\n② Purchase the required proxy service package\n③ Quick access through basic authentication information (username + password)",
+      ans5: "Our rotating residential proxies automatically assign a new IP for each request, significantly improving request success rates while substantially reducing the risk of being blocked.",
     },
     rotation: {
       title: "Rotating Residential Proxies",

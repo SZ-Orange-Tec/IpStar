@@ -10,9 +10,8 @@
       <template #nav>
         <div class="w-full">
           <Tab v-model="active" :active-style="activeStyle" activeTextColor="hsl(var(--foreground) / 90%)" class="tab grey-60 font-medium v_center">
-            <TabItem :value="0" class="tab-item">{{ t("Manual_Auth") }}</TabItem>
+            <TabItem :value="0" class="tab-item">{{ t("User_Pass_Auth") }}</TabItem>
             <TabItem :value="1" class="tab-item">{{ t("API_Auth") }}</TabItem>
-            <TabItem :value="2" class="tab-item">{{ t("User_Pass") }}</TabItem>
           </Tab>
         </div>
       </template>
@@ -22,7 +21,6 @@
       <template v-if="is_purchase">
         <AccountWay v-if="active === 0" />
         <ApiWay v-if="active === 1" />
-        <UserPwd v-if="active === 2" />
       </template>
 
       <Lock v-else />
@@ -36,7 +34,7 @@ import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
 import AccountWay from "./account_way/index.vue"
 import ApiWay from "./api_way/index.vue"
-import UserPwd from "./user_pwd/index.vue"
+
 import Lock from "./lock.vue"
 // import Tabs from "./tabs.vue"
 import { provide, ref } from "vue"

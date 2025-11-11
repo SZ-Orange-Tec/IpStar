@@ -27,7 +27,7 @@
   user-select: none;
   box-shadow: 0 0 0 1px hsl(var(--primary));
 }
-.primary_border:hover {
+.primary_border:hover:not(.disabled) {
   background-color: hsl(var(--primary));
   color: hsl(var(--colour-foreground));
 }

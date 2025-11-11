@@ -7,10 +7,14 @@ export default {
   Discount: "折扣",
   Total: "合计",
   Submit: "提交",
+  Alipay: "支付宝",
+  Or: "或",
+  Wechat_Pay: "微信支付",
 
   payPopup_spec: {
     strip: "Stripe、借记卡、信用卡(Visa、MasterCard、银联、JCB…)",
     usdt: "加密币 USDT-TRC20 支付",
+    alipay_weixin: "支付宝/微信支付",
 
     tip: "您填写支付信息的UI由第三方支付平台(strip、paypal或bitpay)的官方插件支持，我们不能也不会收集您的信用卡或其他支付信息。",
 

@@ -9,10 +9,10 @@
       </div>
     </div>
 
-    <div class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">
+    <IpButton type="primary" class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">
       <span class="ip-loading" v-if="btnLoading"></span>
       <span>{{ t("Confirm") }}</span>
-    </div>
+    </IpButton>
 
     <div class="back v_center space-x-2 pointer px-5" @click="emit('back')">
       <img src="@/assets/images/login/back.png" alt="back" width="18" height="18" />
@@ -25,6 +25,7 @@
 import { ref, computed, nextTick } from "vue"
 import settingStore from "@/store/setting"
 import Message from "@/components/message/message"
+import IpButton from "@/components/button/button.vue"
 import { Mail as MailIcon } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 

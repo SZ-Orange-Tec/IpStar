@@ -5,8 +5,8 @@ export default {
   ...navbar,
 
   Rotation_Proxies: "Rotation Proxies",
-  Manual_Auth: "Manual Auth",
-  API_Auth: "API",
+  User_Pass_Auth: "User & Pass Auth",
+  API_Auth: "API Auth",
   User_Pass: "User & Pass",
   Options: "Options",
   Starting_from: "Starting from ",
@@ -49,6 +49,7 @@ export default {
   Proxy_UserName: "Proxy User Name",
   Proxy_Password: "Proxy User Password",
   Note: "Note",
+  Expample: "Expample",
 
   proxy_spec: {
     duration_tip:

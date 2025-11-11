@@ -27,20 +27,23 @@
       }
     }
   }
+
   .introduce {
-    background: #335EEA;
     // background-color: hsl(var(--primary));
     color: hsl(var(--colour-foreground));
-    border-radius: 0 0 20px 20px;
-    overflow: hidden;
+    position: relative;
+    // overflow: hidden;
     .container {
       position: relative;
       z-index: 1;
       background-image: url("../../../assets/images/home/cover.webp");
       background-repeat: no-repeat;
       background-position: right center;
-      background-size: 450px auto;
-      padding: 6rem 0;
+      background-size: 420px auto;
+      padding: 4rem 0;
+      @media screen and (max-width: 768px) {
+        padding: 4rem 0;
+      }
       @media screen and (max-width: 1024px) {
         background-image: none;
       }
@@ -51,7 +54,34 @@
         color: #fff;
         font-size: 40px;
         @media screen and (max-width: 768px) {
-          font-size: 25px;
+          font-size: 35px;
+        }
+        .star{
+          display: inline-flex;
+          align-items: center;
+          white-space: nowrap;
+          img{
+            width: 38px;
+            height: 38px;
+          }
+          // padding: 0 12px;
+          // background-image: url("../../../assets/images/home/sparkle-filled.png");
+          // background-repeat: no-repeat;
+          // background-position: top right;
+          // background-size: 30px 30px;
+        }
+        .bi{
+          display: inline-flex;
+          padding: 0 12px;
+          background-image: url("../../../assets/images/home/sparkles.png");
+          background-repeat: no-repeat;
+          background-position: top right;
+          background-size: 20px 20px;
+        }
+        .and{
+          font-family: "Poppins", sans-serif;
+          display: inline-flex;
+          padding: 0 4px;
         }
       }
       .description {
@@ -62,9 +92,18 @@
         margin-top: 4rem;
         width: 100%;
         max-width: 640px;
-        .white_btn {
-          background-color: hsl(var(--colour-foreground));
-          color: #0056fb;
+        .green_btn {
+          background-color: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.85);
+          color: #fff;
+          
+          .arrow{
+            transition: transform 0.1s ease-out;
+          }
+          &:hover {
+            font-size: 18px;
+            border-color: rgba(255, 255, 255, 1);
+          }
         }
       }
 
@@ -139,29 +178,46 @@
       }
     }
 
-    & > .background {
+    .left_radius,.right_radius{
+      width: 40px;
+      height: 40px;
+      background-color: hsl(var(--background));
       position: absolute;
-      width: 100%;
-      // height: 100px;
-      top: -60px;
-      left: 0;
+      bottom: 0;
       overflow: hidden;
-      *{
-        display: block;
-        height: auto;
-        width: 100%;
-      }
-      svg{
-        overflow: hidden;
-        vertical-align: middle;
+      &::before{
+        content: "";
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: hsl(var(--primary));
+        position: absolute;
       }
     }
+    .left_radius{
+      left: 0;
+      &::before{
+        right: -40px;
+        top: -40px;
+      }
+    }
+    .right_radius{
+      right: 0;
+      &::before{
+        left: -40px;
+        top: -40px;
+      }
+    }
+
   }
 
   .proxy {
     // background-color: hsl(var(--background));
     background-color: #ffffff;
     // background: linear-gradient(to bottom, transparent, #fff);
+    .containee{
+      padding-top: 9rem;
+    }
     .content {
       .product_item {
         border: 1px solid #e9edf4;
@@ -209,7 +265,7 @@
 
   .position{
     .container{
-      padding: 64px 0 36px;
+      // padding: 64px 0 36px;
       .section_text{
         .btn_box{
           margin-top: 48px;
@@ -400,6 +456,7 @@
     margin-top: 4rem;
     @media screen and (max-width: 768px) {
       height: 960px;
+      border-radius: 20px;
     }
     .container{
       overflow-x: hidden;
@@ -573,12 +630,8 @@
     }
   }
 
-  .package {
-    background-color: hsl(var(--primary));
-    & > .container {
-      min-height: 400px;
-      // padding: 4rem 0;
-    }
+  .app{
+    margin-top: 3rem;
   }
 
   .cases{

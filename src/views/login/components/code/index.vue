@@ -3,7 +3,7 @@
     <div class="form space-y-5 w-full column">
       <div>
         <p class="text-sm">{{ t("login_spec.label3", { email: account }) }}</p>
-        <p class="text-xs" style="color: hsl(var(--foreground) / 70%);">{{ t("login_spec.email_tip") }}</p>
+        <p class="text-xs" style="color: hsl(var(--foreground) / 70%)">{{ t("login_spec.email_tip") }}</p>
       </div>
       <div class="input_group w-full">
         <label for="code">
@@ -26,10 +26,10 @@
       <span class="pointer"></span>
     </div> -->
 
-    <div class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading }">
+    <IpButton type="primary" class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading }">
       <span class="ip-loading" v-if="btnLoading"></span>
       <span>{{ t("Next") }}</span>
-    </div>
+    </IpButton>
 
     <div class="back v_center space-x-2 pointer px-5" @click="emit('back')">
       <img src="@/assets/images/login/back.png" alt="back" width="18" height="18" />

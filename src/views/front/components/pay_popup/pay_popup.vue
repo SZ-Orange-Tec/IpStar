@@ -17,21 +17,30 @@
           </div>
           <!-- 支付方式 -->
           <div class="pay_manner" v-if="processIdx === 1">
-            <ul class="choice_area">
-              <li @click="selectPay('stripe')">
+            <ul class="choice_area space-y-3">
+              <li @click="selectPay('stripe')" class="v_center space-x-2">
                 <img v-if="isManmer === 1" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
                 <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
-                <img src="@/assets/img/stripe.png" alt="" class="img_choice" />
-                <p>{{ $t("payPopup_spec.strip") }}</p>
+                <img src="@/assets/images/pay/Stripe.svg" width="20" height="20" alt="" />
+                <p class="ellipsis">{{ $t("payPopup_spec.strip") }}</p>
               </li>
-              <li @click="selectPay('coingate')">
+              <li @click="selectPay('alipay')" class="v_center space-x-2">
+                <img v-if="isManmer === 2" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
+                <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
+                <img src="@/assets/images/pay/alipay.svg" width="20" height="20" alt="" />
+                <span>{{ $t("Alipay") }}</span>
+                <!-- <span>{{ $t("Or") }}</span> -->
+                <img src="@/assets/images/pay/weixin.svg" width="20" height="20" alt="" />
+                <span>{{ $t("Wechat_Pay") }}</span>
+              </li>
+              <li @click="selectPay('coingate')" class="v_center space-x-2">
                 <img v-if="isManmer === 3" src="@/assets/img/pitch on.png" alt="" class="icon_img_choice" />
                 <img v-else src="@/assets/img/Not selected.png" alt="" class="icon_img_choice" />
-                <img src="@/assets/img/taida.png" alt="" class="img_coingate_pay" />
-                <p>{{ $t("payPopup_spec.usdt") }}</p>
+                <img src="@/assets/images/pay/USDT.svg" width="20" height="20" alt="" />
+                <p class="ellipsis">{{ $t("payPopup_spec.usdt") }}</p>
               </li>
             </ul>
-            <p class="whitespace-pre-wrap">{{ $t("payPopup_spec.tip") }}</p>
+            <p class="whitespace-pre-wrap text-sm grey-60">{{ $t("payPopup_spec.tip") }}</p>
           </div>
           <!-- paypal支付 -->
           <div class="pay_result" v-if="processIdx === 2 && isManmer === 2">
@@ -206,6 +215,7 @@ async function stripeCheck() {
       order_no: props.order_data.order_no,
       success_url: successUrl,
       cancel_url: location.href,
+      payments: isManmer.value === 1 ? ["card", "alipay", "wechat_pay"] : ["alipay", "wechat_pay"],
     })
     if (data.pay_url) {
       window.location.href = data.pay_url
@@ -404,7 +414,7 @@ function onApprove(data, actions) {
 
 function next() {
   btnLoading.value = true
-  if (isManmer.value === 1 && processIdx.value === 1) {
+  if ((isManmer.value === 1 || isManmer.value === 2) && processIdx.value === 1) {
     stripeCheck()
     return
   }
@@ -495,7 +505,7 @@ function stepProcess() {
 function selectPay(type) {
   if (type === "stripe") {
     isManmer.value = 1
-  } else if (type === "paypal") {
+  } else if (type === "alipay") {
     isManmer.value = 2
   } else if (type === "coingate") {
     isManmer.value = 3

@@ -196,7 +196,7 @@
                 </div>
               </div>
 
-              <IpButton @click="openService" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+              <IpButton @click="openService" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
                 {{ t("productList_spec.Service") }}
               </IpButton>
             </div>
@@ -225,6 +225,18 @@
         <ChevronRight :size="20" :stroke-width="2" />
       </IpButton>
       <!-- div -->
+    </div>
+
+    <div class="support column_center space-y-3">
+      <p class="text-sm">{{ t("productList_spec.support") }}</p>
+      <div class="v_center space-x-6">
+        <img height="25" src="@/assets/images/pay/support/visa.svg" alt="" />
+        <img height="25" src="@/assets/images/pay/support/mastercard.svg" alt="" />
+        <img height="25" src="@/assets/images/pay/support/alipay.svg" alt="" />
+        <img height="25" src="@/assets/images/pay/support/union.svg" alt="" />
+        <img height="25" src="@/assets/images/pay/support/weixin.svg" alt="" />
+        <img height="25" src="@/assets/images/pay/support/usdt.svg" alt="" />
+      </div>
     </div>
 
     <!-- 支付弹窗 -->

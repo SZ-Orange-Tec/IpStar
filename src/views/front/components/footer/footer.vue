@@ -10,10 +10,31 @@
             </div>
             <div class="contact space-y-1">
               <strong class="white font-medium">{{ t("Contact_Us") }}</strong>
-              <a href="mailto:support@ipstar.io" class="v_center space-x-2">
+              <RouterLink to="mailto:support@ipstar.io" class="v_center space-x-2">
                 <Mail :size="16" class="leading-none" />
                 <p>support@ipstar.io</p>
-              </a>
+              </RouterLink>
+
+              <div class="v_center space-x-2 pay">
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/visa.svg" alt="" />
+                </div>
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/mastercard.svg" alt="" />
+                </div>
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/alipay.svg" alt="" />
+                </div>
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/union.svg" alt="" />
+                </div>
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/weixin.svg" alt="" />
+                </div>
+                <div class="pay-item v_center">
+                  <img height="25" src="@/assets/images/pay/usdt.svg" alt="" />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -22,19 +43,19 @@
               <strong class="white font-medium">{{ t("Products") }}</strong>
               <ul class="list text-sm space-y-3">
                 <li class="pointer">
-                  <a href="/product/residentail">{{ t("Residential_Proxies") }}</a>
+                  <RouterLink to="/product/residentail">{{ t("Residential_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/product/rotating">{{ t("Rotating_Proxies") }}</a>
+                  <RouterLink to="/product/rotating">{{ t("Rotating_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/mobile-proxy">{{ t("Phone_Proxies") }}</a>
+                  <RouterLink to="/mobile-proxy">{{ t("Phone_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/unlimited-residential-proxy">{{ t("Unlimited_Residential_Proxies") }}</a>
+                  <RouterLink to="/unlimited-residential-proxy">{{ t("Unlimited_Residential_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/product/data_center">{{ t("Data_Center_Proxies") }}</a>
+                  <RouterLink to="/product/data_center">{{ t("Data_Center_Proxies") }}</RouterLink>
                 </li>
               </ul>
             </div>
@@ -43,16 +64,16 @@
               <strong class="white font-medium">{{ t("Price") }}</strong>
               <ul class="list text-sm space-y-3">
                 <li class="pointer">
-                  <a href="/pricing/residential">{{ t("Residential_Proxies") }}</a>
+                  <RouterLink to="/pricing/residential">{{ t("Residential_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/pricing/unlimited">{{ t("Unlimited_Residential_Proxies") }}</a>
+                  <RouterLink to="/pricing/unlimited">{{ t("Unlimited_Residential_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/pricing/mobile">{{ t("Phone_Proxies") }}</a>
+                  <RouterLink to="/pricing/mobile">{{ t("Phone_Proxies") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/pricing/data_center">{{ t("Data_Center_Proxies") }}</a>
+                  <RouterLink to="/pricing/data_center">{{ t("Data_Center_Proxies") }}</RouterLink>
                 </li>
               </ul>
             </div>
@@ -61,22 +82,22 @@
               <strong class="white font-medium">{{ t("Scenes") }}</strong>
               <ul class="list text-sm space-y-3">
                 <li class="pointer">
-                  <a href="/home/data_collection">{{ t("footer_spec.scene1") }}</a>
+                  <RouterLink to="/home/data_collection">{{ t("footer_spec.scene1") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/home/search_engine">{{ t("footer_spec.scene2") }}</a>
+                  <RouterLink to="/home/search_engine">{{ t("footer_spec.scene2") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/home/social_media">{{ t("footer_spec.scene3") }}</a>
+                  <RouterLink to="/home/social_media">{{ t("footer_spec.scene3") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/home/bill">{{ t("footer_spec.scene4") }}</a>
+                  <RouterLink to="/home/bill">{{ t("footer_spec.scene4") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/home/ai_model">{{ t("footer_spec.scene5") }}</a>
+                  <RouterLink to="/home/ai_model">{{ t("footer_spec.scene5") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/home/market#scence">{{ t("footer_spec.scene6") }}</a>
+                  <RouterLink to="/home/market#scence">{{ t("footer_spec.scene6") }}</RouterLink>
                 </li>
               </ul>
             </div>
@@ -85,10 +106,10 @@
               <strong class="white font-medium">{{ t("Get_Help") }}</strong>
               <ul class="list text-sm space-y-3">
                 <li class="pointer">
-                  <a href="/doc">{{ t("footer_spec.document") }}</a>
+                  <RouterLink to="/doc">{{ t("footer_spec.document") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <a href="/help">{{ t("footer_spec.question") }}</a>
+                  <RouterLink to="/help">{{ t("footer_spec.question") }}</RouterLink>
                 </li>
               </ul>
             </div>

@@ -16,7 +16,7 @@ export default {
   Unlimited: "Unlimited",
   User_Guide: "User Guide",
   Traffic_Usage: "Traffic Usage",
-  Manual_Auth: "Manual Auth",
+  User_Pass_Auth: "User & Pass Auth",
   API_Auth: "API Auth",
   Bandwidth_Usage: "Bandwidth Usage",
   Concurrent_Usage: "Concurrent Usage",

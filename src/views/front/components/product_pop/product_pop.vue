@@ -5,8 +5,8 @@
         <div class="grey-40 font-medium">{{ t("Proxy_Solutions") }}</div>
         <div class="split w-full"></div>
         <div class="w-full">
-          <div class="grid grid-cols-2 gap-4">
-            <a href="/product/residential" class="v_center space-x-3 pointer rounded">
+          <div class="grid grid-cols-2 gap-4" @click="close">
+            <RouterLink to="/product/residential" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <ResidentialProxyIcon class="w-6 h-6 text-primary" />
               </div>
@@ -17,8 +17,8 @@
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Residential_Proxies_Adv") }}</p>
               </div>
-            </a>
-            <a href="/product/rotation" class="v_center space-x-3 pointer rounded">
+            </RouterLink>
+            <RouterLink to="/product/rotation" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <RotatingProxyIcon class="w-6 h-6 text-primary" />
               </div>
@@ -29,8 +29,8 @@
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Rotating_Proxies_Adv") }}</p>
               </div>
-            </a>
-            <a href="/mobile-proxy" class="v_center space-x-3 pointer rounded">
+            </RouterLink>
+            <RouterLink to="/mobile-proxy" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <PhoneProxyIcon class="w-6 h-6 text-primary" />
               </div>
@@ -40,8 +40,8 @@
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Phone_Proxies_Adv") }}</p>
               </div>
-            </a>
-            <a href="/unlimited-residential-proxy" class="v_center space-x-3 pointer rounded">
+            </RouterLink>
+            <RouterLink to="/unlimited-residential-proxy" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <UnlimitedProxyIcon class="w-6 h-6 text-primary" />
               </div>
@@ -52,8 +52,8 @@
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Unlimited_Residential_Proxies_Adv") }}</p>
               </div>
-            </a>
-            <a href="/product/data_center" class="v_center space-x-3 pointer rounded">
+            </RouterLink>
+            <RouterLink to="/product/data_center" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <DataProxyIcon class="w-6 h-6 text-primary" />
               </div>
@@ -63,7 +63,7 @@
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Data_Center_Proxies_Adv") }}</p>
               </div>
-            </a>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ import IpTag from "@/components/tag/tag.vue"
 import anime from "animejs/lib/anime.es.js"
 import { roundToDecimal } from "@/utils/tools"
 import { nextTick, onMounted, ref, toRefs, watch } from "vue"
-import { useRouter } from "vue-router"
+import { useRouter, RouterLink } from "vue-router"
 
 const { t } = useI18n()
 const router = useRouter()

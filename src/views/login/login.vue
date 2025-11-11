@@ -5,7 +5,7 @@
     <!-- </div> -->
 
     <div class="box w-full">
-      <div class="container column_center md:between gap-5">
+      <div class="container column_center md:between md:!flex-row-reverse gap-5">
         <div class="form column rounded-lg">
           <div class="title w-full text-center">
             <template v-if="/^forget/.test(status)">{{ t("login_spec.forgot") }}</template>
@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div class="right column w-full">
+        <div class="right column">
           <div class="img_box flex-1 hidden md:block">
             <img
               sizes="(max-width: 1024px) 290px, 400px"
@@ -50,15 +50,15 @@
           </div>
 
           <div class="welcome space-y-5 column !items-end py-10">
-            <ip-button type="border" class="back_btn" @click="toHome">
-              <div class="v_center space-x-1">
+            <ip-button type="primary_border" class="h-8 back_btn" @click="toHome">
+              <div class="v_center space-x-1 leading-none">
+                <ChevronLeft :size="14"></ChevronLeft>
                 <span class="text-sm">{{ t("Home") }}</span>
-                <ChevronRight :size="18"></ChevronRight>
               </div>
             </ip-button>
             <div class="text-lg sm:text-2xl lg:text-3xl v_center sm:column sm:!items-end gap-2">
-              <div class="primary">{{ t("login_spec.your") }}</div>
-              <div class="text-base major">IPSTAR!</div>
+              <div class="black">{{ t("login_spec.your") }}</div>
+              <div class="text-base primary">IPSTAR!</div>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@ import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { ChevronRight } from "lucide-vue-next"
+import { ChevronRight, ChevronLeft } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import { platCustomerResetpass } from "../../api/login"
 import useWindowHeight from "../../composables/useWindowHeight"

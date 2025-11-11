@@ -1,7 +1,7 @@
 <template>
   <!-- id=HeaderGift  在header组件中用于计算HeaderGift的高度 -->
   <div class="gift" ref="giftRef" v-show="registerAward && !isLogin">
-    <div class="container between sm:vh_center gap-2">
+    <div class="container between flex-wrap md:vh_center gap-1 md:gap-3">
       <div class="v_center gap-2">
         <Tag class="hidden md:block icon" :size="20" />
         <i18n-t keypath="gift_spec.sign_up" tag="p" scope="global" class="text-xs sm:text-base">
@@ -11,11 +11,15 @@
         </i18n-t>
       </div>
 
-      <div class="btn v_center rounded-full text-xs md:text-sm whitespace-nowrap">
+      <!-- <div class="btn v_center rounded-full text-xs md:text-sm whitespace-nowrap">
         <div class="text h-full rounded-full hidden lg:v_center">{{ t("Limited_Time_Only") }}</div>
         <div @click="router.push('/login')" class="trial font-medium px-5 h-full v_center rounded-full pointer transition-color">
           {{ t("Free_Trial") }}
         </div>
+      </div> -->
+      <div class="link_btn v_center space-x-1 pointer text-sm md:text-base" @click="router.push('/login')">
+        <span class="font-medium">{{ t("Free_Trial") }}</span>
+        <MoveRight :size="16" class="arrow" />
       </div>
     </div>
   </div>
@@ -32,6 +36,7 @@ import anime from "animejs/lib/anime.es.js"
 import { platDataConfig } from "@/api/home"
 import loginStore from "../../../../store/login"
 import layoutStore from "../../../../store/layout"
+import { MoveRight } from "lucide-vue-next"
 
 const { t } = useI18n()
 const router = useRouter()
@@ -80,6 +85,7 @@ onMounted(() => {
   } else {
     isShowGift()
   }
+  console.log("headerGift")
 })
 </script>
 

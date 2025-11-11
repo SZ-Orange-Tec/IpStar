@@ -1,7 +1,9 @@
 <template>
   <div class="relative">
     <router-view v-slot="{ Component }">
-      <component :is="Component" />
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
     </router-view>
   </div>
 </template>
@@ -9,6 +11,9 @@
 <script setup>
 import { onMounted } from "vue"
 import { track_active } from "@/utils/detect"
+import { useRoute } from "vue-router"
+
+const route = useRoute()
 
 // function captureError(e){
 //   console.log('enter')
@@ -78,4 +83,17 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0.6;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+</style>

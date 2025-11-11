@@ -28,7 +28,7 @@ export default {
   FAQ: "FAQ",
 
   home_spec: {
-    intro_title1: "Unlimited Web Data \nPowering Global Data Operations",
+    intro_title1: "Unlimited Web Data For {bi} {and} {ai}",
     intro_title2: "",
 
     // intro_desc:

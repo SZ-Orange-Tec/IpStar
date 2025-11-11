@@ -63,5 +63,7 @@ export default {
     Custom7: "Custom Number",
 
     Service: "Contact Us",
+
+    support: "We accept these payment methods:",
   },
 }

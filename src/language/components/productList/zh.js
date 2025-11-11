@@ -63,5 +63,7 @@ export default {
     Custom7: "定制数量",
 
     Service: "联系客服",
+
+    support: "我们接受以下付款方式：",
   },
 }

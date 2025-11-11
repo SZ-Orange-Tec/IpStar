@@ -55,6 +55,21 @@
         }
       }
     }
+
+    .link_btn{
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color 0.3s ease-in-out;
+      .arrow{
+        transition: transform 0.3s ease-in-out;
+      }
+      &:hover{
+        color: hsl(var(--primary));
+        .arrow{
+          transform: translateX(4px);
+        }
+      }
+    }
   }
   // background-color: #004047;
 }

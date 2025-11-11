@@ -6,22 +6,17 @@
       <div class="container flex w-full h-full">
         <div class="flex-1 v_center h-full min-w-0">
           <div class="pointer" @click="navigate('/home')">
-            <!-- <img v-show="!isHome || (isHome && shadow)" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
-            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" /> -->
-            <img sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
-            <!-- <img
-              sizes="(max-width:112px) 56px,24px"
-              src="@/assets/images/logo_white.png"
-              srcset="@/assets/images/logo_white.png 56w, @/assets/images/logo_white@2x.png 112w"
-              style="height: 36px"
-            /> -->
+            <img v-show="isHome && !shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo_white.png" style="height: 36px" />
+            <img v-show="isHome && shadow" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
+            <img v-show="!isHome" sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" />
+            <!-- <img sizes="(max-width:112px) 56px,24px" src="@/assets/images/logo.png" style="height: 36px" /> -->
           </div>
           <ul class="navigator hidden lg:v_center h-full whitespace-nowrap font-medium" @mouseenter="loadFront">
             <li
               class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/home' }"
-              @mouseenter="toggleProductPop"
-              @mouseleave="toggleProductPop"
+              @mouseenter="openProductPop"
+              @mouseleave="closeProductPop"
             >
               <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Products") }}</div>
@@ -32,8 +27,8 @@
             <li
               class="h-full v_center pointer transition-color relative"
               :class="{ active: activePath === '/pricing' }"
-              @mouseenter="togglePricePop"
-              @mouseleave="togglePricePop"
+              @mouseenter="openPricePop"
+              @mouseleave="closePricePop"
             >
               <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
                 <div>{{ $t("Pricing") }}</div>
@@ -125,7 +120,7 @@
 
             <!-- 登录 -->
             <div class="btn_sum" v-if="!token">
-              <IpButton type="primary" class="h-8 text-sm px-5" @click="$router.push('/login')">{{ t("Sign_in") }}</IpButton>
+              <div class="btn v_center h-8 text-sm px-5 rounded pointer" @click="$router.push('/login')">{{ t("Sign_in") }}</div>
               <!-- <el-button @click="$router.push('/sign_in')">{{$t('PCHeader.btnSumOne')}} <i class="el-icon-right"></i> </el-button> -->
               <!-- <el-button type="primary" @click="$router.push('/register')">{{$t('PCHeader.btnSumTwo')}}</el-button> -->
             </div>
@@ -262,10 +257,26 @@ function userDropChange(status) {
 async function loadBack() {
   await import(/*webpackChunkName:'layout'*/ "@/views/back/layout.vue")
   await import(/*webpackChunkName:'overview'*/ "@/views/back/overview/overview.vue")
+  await import(/*webpackChunkName:'proxy'*/ "@/views/back/proxy/proxy.vue")
+  await import(/*webpackChunkName:'purchase'*/ "@/views/back/purchase/purchase.vue")
+  await import(/*webpackChunkName:'residential'*/ "@/views/back/residential/residential.vue")
+  await import(/*webpackChunkName:'unlimited'*/ "@/views/back/unlimited/unlimited.vue")
+  await import(/*webpackChunkName:'mobile'*/ "@/views/back/mobile/mobile.vue")
+  await import(/*webpackChunkName:'data_center'*/ "@/views/back/data_center/data_center.vue")
+  await import(/*webpackChunkName:'settings'*/ "@/views/back/settings/settings.vue")
+  await import(/*webpackChunkName:'whitelist'*/ "@/views/back/whitelist/whitelist.vue")
+  await import(/*webpackChunkName:'account'*/ "@/views/back/account/index.vue")
+}
+async function loadProduct() {
+  await import(/*webpackChunkName:'product_general'*/ "@/views/front/product/residential/index.vue")
+  await import(/*webpackChunkName:'product_unlimited'*/ "@/views/front/product/unlimited/index.vue")
+  await import(/*webpackChunkName:'product_mobile'*/ "@/views/front/product/mobile/index.vue")
+}
+async function loadPrice() {
+  await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
 }
 // 预加载前台
 async function loadFront() {
-  await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
   await import(/*webpackChunkName:'relation'*/ "@/views/front/relation/relation.vue")
   await import(/*webpackChunkName:'help'*/ "@/views/front/help/help.vue")
 }
@@ -277,13 +288,25 @@ function signOut() {
 
 // 气泡
 const productPopShow = ref(false)
-function toggleProductPop() {
-  productPopShow.value = !productPopShow.value
+function openProductPop() {
+  productPopShow.value = true
+  loadProduct()
+}
+function closeProductPop(e) {
+  if (e.target.tagName === "LI") {
+    productPopShow.value = false
+  }
 }
 
 const pricePopShow = ref(false)
-function togglePricePop() {
-  pricePopShow.value = !pricePopShow.value
+function openPricePop() {
+  pricePopShow.value = true
+  loadPrice()
+}
+function closePricePop(e) {
+  if (e.target.tagName === "LI") {
+    pricePopShow.value = false
+  }
 }
 
 onMounted(() => {

@@ -1,23 +1,38 @@
 <template>
   <div class="home w-full">
     <!-- 介绍 -->
-    <div class="introduce box relative" ref="introRef">
+    <div class="introduce box_wrap relative" ref="introRef">
       <div class="container column space-y-10">
         <div class="space-y-4 md:space-y-7" style="max-width: 700px">
           <div class="title space-y-1 md:space-y-4">
-            <p class="whitespace-pre-wrap font-medium lg:font-medium">{{ t("home_spec.intro_title1") }}</p>
+            <i18n-t keypath="home_spec.intro_title1" tag="div" scope="global" class="md:whitespace-pre-wrap font-medium">
+              <template #ai>
+                <div class="star space-x-1">
+                  <span class="">AI</span>
+                  <!-- <img class="shrink-0" src="@/assets/images/home/sparkle-filled.png" alt="" /> -->
+                  <img class="shrink-0" src="@/assets/images/home/star.webp" alt="" />
+                </div>
+              </template>
+              <template #and>
+                <span class="and">&</span>
+              </template>
+              <template #bi>
+                <span>BI</span>
+              </template>
+            </i18n-t>
+            <!-- <p class="whitespace-pre-wrap font-medium lg:font-medium">{{ t("home_spec.intro_title1") }}</p> -->
             <!-- <p class="title text-lg lg:text-xl md:whitespace-pre-wrap font-normal">{{ t("home_spec.intro_title2") }}</p> -->
           </div>
 
-          <p class="text-lg opacity-80 md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
+          <p class="font-normal opacity-90 md:whitespace-pre-wrap">{{ t("home_spec.intro_desc") }}</p>
         </div>
 
         <div class="btn_box">
           <div class="w-full column sm:v_center gap-4" v-if="!isLogin" style="align-items: stretch">
-            <IpButton type="normal" class="white_btn flex-1" @click="toLogin">
+            <IpButton type="success" class="green_btn flex-1" @click="toLogin">
               <div class="vh_center space-x-2 h-10">
                 <span>{{ t("Free_Trial") }}</span>
-                <MoveUpRight :size="14" />
+                <MoveUpRight :size="16" class="arrow" />
               </div>
             </IpButton>
             <GoogleLoginButton v-if="!isLogin" class="flex-1 h-10 md:h-auto" />
@@ -51,7 +66,7 @@
         </div> -->
 
         <div class="advant w-full overflow-hidden">
-          <ul class="flex !items-stretch font-normal text-xs">
+          <ul class="flex !items-stretch font-normal text-sm md:text-xs">
             <li class="v_center space-x-1 rounded-full">
               <Plug :size="16" />
               <!-- <div class="icon shrink-0 vh_center rounded-full"> -->
@@ -79,18 +94,8 @@
           </ul>
         </div>
       </div>
-
-      <div class="background">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1738 487">
-          <path d="M0 0h1420.92s713.43 457.505 0 485.868C707.502 514.231 0 0 0 0z" fill="url(#paint0_linear)"></path>
-          <defs>
-            <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="0" x2="1049.98" y1="0" y2="912.68">
-              <stop stop-color="currentColor" stop-opacity=".075"></stop>
-              <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+      <div class="left_radius"></div>
+      <div class="right_radius"></div>
     </div>
 
     <div class="box_wrap proxy" v-lazy="getLowestPrice">
@@ -402,7 +407,7 @@
         </div>
         <div class="map">
           <img loading="lazy" class="img" src="https://www.proxylite.com/_nuxt/map.BNfwdBbI.webp" />
-          <div class="hidden md:between all relative">
+          <div class="hidden md:between all relative mt-5">
             <div class="text-center space-y-5">
               <div>{{ t("home_spec.location_dot1") }}</div>
               <div class="text-3xl font-semibold"><span>90</span>M+</div>
@@ -483,7 +488,7 @@
             <div class="country_value"><span>1,047,582</span> IPs</div>
           </div>
         </div>
-        <div class="w-full mt-5 md:hidden all grid grid-cols-2 gap-6 relative">
+        <div class="w-full md:hidden grid grid-cols-2 gap-6 relative">
           <div class="text-center space-y-5">
             <div>{{ t("home_spec.location_dot1") }}</div>
             <div class="text-3xl font-semibold"><span>90</span>M+</div>
@@ -681,6 +686,7 @@ import {
   MapPin,
   Fingerprint,
   KeyRound,
+  Sparkle,
 } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import vLazy from "@/directive/lazy"
@@ -695,16 +701,7 @@ import GoogleLoginButton from "../components/googleLoginBtn/index.vue"
 // import HomeTitle from "../components/homeTitle.vue"
 import layoutStore from "@/store/layout"
 import { platProductLowestPrices } from "@/api/product"
-
-// 首页canvas高度
-const homeHeight = inject("homeHeight")
-const introRef = ref()
-function setHomeHeight() {
-  if (!introRef.value) return
-  const bottom = introRef.value.getBoundingClientRect().bottom
-  const top = document.body.getBoundingClientRect().top
-  homeHeight.value = bottom - top + 60
-}
+import Header from "../components/header/header.vue"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -983,7 +980,6 @@ function giftPacks(e) {
 
 // 转换mounted
 onMounted(() => {
-  setHomeHeight()
   changeCountry()
 })
 </script>

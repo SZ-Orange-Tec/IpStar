@@ -1,5 +1,5 @@
 <template>
-  <div class="front">
+  <div class="front" id="front">
     <!-- <HomeBg class="home_bg w-full" v-if="isHome && homeHeight" :height="homeHeight" /> -->
 
     <Header />
@@ -7,6 +7,18 @@
     <router-view />
 
     <Footer />
+
+    <div class="linear_bg" v-if="isHome">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1738 487">
+        <path d="M0 0h1420.92s713.43 457.505 0 485.868C707.502 514.231 0 0 0 0z" fill="url(#paint0_linear)"></path>
+        <defs>
+          <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="0" x2="1049.98" y1="0" y2="912.68">
+            <stop stop-color="currentColor" stop-opacity=".075"></stop>
+            <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -17,10 +29,6 @@ import { computed, onMounted, provide, reactive, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { platDataIndex } from "../../api/home"
 import HomeBg from "./components/homeBg.vue"
-
-const homeHeight = ref(0)
-provide("homeHeight", homeHeight)
-const isHome = computed(() => route.path === "/home")
 
 // 预加载
 function loadLogin() {
@@ -35,6 +43,8 @@ const router = useRouter()
 if (!route.path || route.path === "/") {
   router.replace("/home")
 }
+const isHome = computed(() => route.path === "/home")
+console.log(isHome.value)
 
 // 首页数据
 const homeData = reactive({

@@ -44,7 +44,7 @@
           <div class="w-full v_center space-x-5">
             <ipButton type="border" class="flex-1" @click="router.push('/proxy?active=0')">
               <div class="vh_center space-x-2 py-3 w-full">
-                <span>{{ $t("Manual_Auth") }}</span>
+                <span>{{ $t("User_Pass_Auth") }}</span>
               </div>
             </ipButton>
             <ipButton type="border" class="flex-1">
@@ -102,7 +102,7 @@ async function getIpPool() {
         label: `${name} ${proto[index % 2]}：`,
         text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-123RsAYBc-0-${code}-N:${
           proxy_pass.value
-        }@${serve}:${port} https://ipinfo.io`,
+        }@${serve}:${port} https://ipinfo.io -vv`,
       })
     })
     ipPools.value = result

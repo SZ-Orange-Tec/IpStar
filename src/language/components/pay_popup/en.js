@@ -7,10 +7,14 @@ export default {
   Discount: "Discount",
   Total: "Total",
   Submit: "Submit",
+  Alipay: "Alipay",
+  Or: "Or",
+  Wechat_Pay: "Wechat Pay",
 
   payPopup_spec: {
     strip: "Stripe, Debit & Credit Card (Visa,MasterCard,UnionPay,JCB...)",
     usdt: "Crypto coins,USDT",
+    alipay_weixin: "Alipay,Wechat Pay",
 
     tip: "The UI you are going to fill in the payment info is powerd by the official plug-ins of third-party payment platforms(strip,paypal or bitpay), and we cannot and will not collect your credit card or other payment information.",
 
