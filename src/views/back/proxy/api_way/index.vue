@@ -6,7 +6,7 @@
       <div class="space-y-1">
         <span>{{ t("Count") }}</span>
         <div class="countbox column gap-3 sm:flex">
-          <el-slider v-model="count" show-input :min="min_count" :disabled="stype === 4" :max="max_count" />
+          <el-slider v-model="count" show-input :min="min_count" :disabled="stype === 3" :max="max_count" />
           <!-- <div class="slider-demo-block">
            </div>
            <SliderCount v-model="count" :min="min_count" :max="max_count" />
@@ -45,7 +45,7 @@
         </div>
         <div class="space-y-1">
           <span>IP {{ t("Duration") }}</span>
-          <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间" :disabled="stype === 4">
+          <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间" :disabled="stype === 3">
             <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </div>
@@ -200,8 +200,9 @@ const formInline = ref({
 const stype = ref(route.query?.type ?? 0)
 function changeStype(type) {
   stype.value = type
-  count.value = type === 4 ? 1 : 50
-  IPtime.value = type === 4 ? "0" : IPtime.value
+  count.value = type === 3 ? 1 : 50
+  IPtime.value = type === 3 ? "0" : IPtime.value
+  url.value = ""
 }
 
 const IPtime = ref("0") // duration

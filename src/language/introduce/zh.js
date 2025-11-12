@@ -103,7 +103,7 @@ export default {
       tag2: "免费代理试用",
       tag3: "API/账密组合提取",
       tag4: "HTTP(S)/SOCKS5 &自定义",
-      tag5: "所有流行的代理软件和APP",
+      tag5: "支持所有流行的代理软件和APP",
       tag6: "轮换和粘性会话",
     },
     efficient: {

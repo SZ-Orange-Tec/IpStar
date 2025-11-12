@@ -49,7 +49,7 @@ export default {
     // adv2: "所有流行的代理软件和APP。",
     // adv4: "支持API和账密组合提取。",
     adv1: "支持 HTTP / SOCKS5",
-    adv2: "所有流行的代理软件。",
+    adv2: "支持所有流行的代理软件。",
     adv3: "支持指纹浏览器。",
     adv4: "支持 API 和账密提取。",
 

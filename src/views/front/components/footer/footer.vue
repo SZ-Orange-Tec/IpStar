@@ -6,7 +6,7 @@
         <div class="nav column lg:flex">
           <div class="logo between lg:column gap-10">
             <div>
-              <img src="@/assets/images/logo_white.png" alt="" />
+              <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
             </div>
             <div class="contact space-y-1">
               <strong class="white font-medium">{{ t("Contact_Us") }}</strong>

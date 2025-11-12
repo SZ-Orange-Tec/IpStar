@@ -8,7 +8,7 @@
           <ChevronLeft />
         </ip-button>
         <!-- <span>IPSTAR</span> -->
-        <img src="@/assets/images/logo.png" style="height: 36px" alt="" />
+        <img src="@/assets/images/logo.webp" style="height: 30px" alt="" />
       </div>
 
       <div class="flex lg:hidden" style="justify-content: flex-end; margin-top: 0">
