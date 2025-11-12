@@ -227,6 +227,7 @@ async function stripeCheck() {
     }
   } catch (err) {
     console.log(err)
+    btnLoading.value = false
   }
 }
 

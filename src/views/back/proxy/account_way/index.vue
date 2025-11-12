@@ -5,7 +5,7 @@
       <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         <div class="column space-y-1">
           <p class="text-sm">{{ t("Proxy") }}</p>
-          <el-select @change="changeStype" v-model="stype" :placeholder="$t('Account')" style="max-width: 232px">
+          <el-select @change="changeStype" v-model="stype" :placeholder="$t('Proxy')" style="max-width: 232px">
             <el-option :value="0" :label="t('menu_spec.residential_proxy')"></el-option>
             <el-option :value="1" :label="t('menu_spec.unlimited_proxy')"></el-option>
             <el-option :value="2" :label="t('menu_spec.phone_proxy')"></el-option>

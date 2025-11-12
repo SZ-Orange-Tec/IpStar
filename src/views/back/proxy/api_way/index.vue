@@ -6,7 +6,7 @@
       <div class="space-y-1">
         <span>{{ t("Count") }}</span>
         <div class="countbox column gap-3 sm:flex">
-          <el-slider v-model="count" show-input :min="min_count" :max="max_count" />
+          <el-slider v-model="count" show-input :min="min_count" :disabled="stype === 4" :max="max_count" />
           <!-- <div class="slider-demo-block">
            </div>
            <SliderCount v-model="count" :min="min_count" :max="max_count" />
@@ -15,6 +15,16 @@
       </div>
 
       <div class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div class="space-y-1">
+          <span>{{ t("Proxy") }}</span>
+          <el-select @change="changeStype" v-model="stype" :placeholder="$t('Proxy')">
+            <el-option :value="0" :label="t('menu_spec.residential_proxy')"></el-option>
+            <el-option :value="1" :label="t('menu_spec.unlimited_proxy')"></el-option>
+            <el-option :value="2" :label="t('menu_spec.phone_proxy')"></el-option>
+            <el-option :value="3" :label="t('Rotation_Proxies')"></el-option>
+          </el-select>
+        </div>
+
         <div class="space-y-1">
           <span>{{ t("Country") }}</span>
           <el-select filterable v-model="formInline.country" :filter-method="dataFilter" @visible-change="changeCountry" placeholder="国家">
@@ -35,7 +45,7 @@
         </div>
         <div class="space-y-1">
           <span>IP {{ t("Duration") }}</span>
-          <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间">
+          <el-select v-model="formInline.IPtime" placeholder="IP 轮换时间" :disabled="stype === 4">
             <el-option v-for="item in IPtimeOption" :key="item.value" :value="item.value" :label="item.label"></el-option>
           </el-select>
         </div>
@@ -164,12 +174,13 @@ import layoutStore from "@/store/layout"
 import "element-plus/es/components/message-box/style/css"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import Confirm from "@/components/confirm/confirm"
 import position from "@/components/dialog/position"
 import IpButton from "@/components/button/button.vue"
 import IpInput from "@/components/input/input.vue"
 
+const route = useRoute()
 const router = useRouter()
 const { en } = settingStore()
 const { isProduc } = layoutStore()
@@ -185,6 +196,13 @@ const formInline = ref({
   format: "0",
   IPtime: "0",
 })
+
+const stype = ref(route.query?.type ?? 0)
+function changeStype(type) {
+  stype.value = type
+  count.value = type === 4 ? 1 : 50
+  IPtime.value = type === 4 ? "0" : IPtime.value
+}
 
 const IPtime = ref("0") // duration
 const IPtimeOption = ref()
@@ -323,7 +341,9 @@ async function generateURL(e) {
   const sign = md5(apiKey.value + protocol + countVal + region)
   const params = `?apikey=${
     apiKey.value
-  }&count=${countVal}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&rd=${Date.now()}`
+  }&count=${countVal}&protocol=${protocol}&region=${region}&resptype=${resptype}&sign=${sign}&keeptime=${keepTime}&proxytype=${
+    stype.value
+  }&rd=${Date.now()}`
   url.value = baseUrl + params
 }
 
