@@ -54,7 +54,7 @@ export default {
   Email: "Email",
 
   overview_spec: {
-    residential_adv: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+    residential_adv: "90 M+ secure residential proxies, high anonymity, and low detection rate.",
     unlimited_adv: "Flexible IP rotation and session control, enjoy unlimited residential proxy traffic.",
     mobile_adv:
       "Using real carrier 4G/5G network egress, it provides true-to-life simulation of mobile traffic environments, empowering ad validation, market analytics, and app testing.",
@@ -88,7 +88,7 @@ export default {
     account_password: "Account and Password",
 
     guide_title: "Residential Proxies",
-    guide_des: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+    guide_des: "90 M+ secure residential proxies, high anonymity, and low detection rate.",
     lowest: "Lowest price:",
     guide_learn: "Learn how to use your Residential Proxy",
     service_des: "If you have any questions or suggestions, please feel free to contact us.",

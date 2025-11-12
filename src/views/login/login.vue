@@ -50,15 +50,15 @@
           </div>
 
           <div class="welcome space-y-5 column !items-end py-10">
-            <ip-button type="primary_border" class="h-8 back_btn" @click="toHome">
-              <div class="v_center space-x-1 leading-none">
-                <ChevronLeft :size="14"></ChevronLeft>
-                <span class="text-sm">{{ t("Home") }}</span>
+            <ip-button type="link" class="h-8" @click="toHome">
+              <div class="v_center space-x-1 hover:space-x-2 leading-none">
+                <ArrowLeft :size="14"></ArrowLeft>
+                <span class="text-sm transition-all duration-300">{{ t("Back_Home") }}</span>
               </div>
             </ip-button>
-            <div class="text-lg sm:text-2xl lg:text-3xl v_center sm:column sm:!items-end gap-2">
+            <div class="text-lg sm:text-2xl lg:text-3xl hidden md:column sm:!items-end gap-2">
               <div class="black">{{ t("login_spec.your") }}</div>
-              <div class="text-base primary">IPSTAR!</div>
+              <div class="primary">IPSTAR!</div>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@ import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { ChevronRight, ChevronLeft } from "lucide-vue-next"
+import { ChevronRight, ChevronLeft, ArrowLeft } from "lucide-vue-next"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import { platCustomerResetpass } from "../../api/login"
 import useWindowHeight from "../../composables/useWindowHeight"

@@ -38,7 +38,7 @@
             <GoogleLoginButton v-if="!isLogin" class="flex-1 h-10 md:h-auto" />
           </div>
           <div class="w-full column md:v_center gap-4" v-else style="align-items: stretch">
-            <IpButton type="normal" class="white_btn font-medium h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
+            <IpButton type="normal" class="green_btn font-medium h-10 px-4 md:px-8" @click="giftPacks">{{ t("home_spec.more_try") }}</IpButton>
             <IpButton type="major" class="h-10 px-4 md:px-8 tutorial transition-color" @click="$router.push('/overview')">
               <div class="vh_center space-x-2 w-full h-full">
                 <span>{{ t("home_spec.dashboard") }}</span>

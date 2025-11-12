@@ -1,6 +1,6 @@
 <template>
   <div class="board rounded space-y-5 p-5 column">
-    <div class="w-full flex flex-wrap h-8 gap-3">
+    <div class="w-full flex flex-wrap gap-3">
       <IpInput v-model="form.ip" :placeholder="t('data_center_spec.ip_remark')" class="h-9 rounded-md" />
       <!-- <el-select v-model="form.area" placeholder="" style="width: 160px">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>

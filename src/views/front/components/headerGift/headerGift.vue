@@ -1,7 +1,7 @@
 <template>
   <!-- id=HeaderGift  在header组件中用于计算HeaderGift的高度 -->
-  <div class="gift" ref="giftRef" v-show="registerAward && !isLogin">
-    <div class="container between flex-wrap md:vh_center gap-1 md:gap-3">
+  <div class="gift" ref="giftRef" v-if="show">
+    <div class="container v_center flex-wrap md:vh_center gap-1 md:gap-3">
       <div class="v_center gap-2">
         <Tag class="hidden md:block icon" :size="20" />
         <i18n-t keypath="gift_spec.sign_up" tag="p" scope="global" class="text-xs sm:text-base">
@@ -21,6 +21,10 @@
         <span class="font-medium">{{ t("Free_Trial") }}</span>
         <MoveRight :size="16" class="arrow" />
       </div>
+
+      <div class="close pointer vh_center white">
+        <CloseIcon :size="14" @click="close" />
+      </div>
     </div>
   </div>
 </template>
@@ -36,7 +40,7 @@ import anime from "animejs/lib/anime.es.js"
 import { platDataConfig } from "@/api/home"
 import loginStore from "../../../../store/login"
 import layoutStore from "../../../../store/layout"
-import { MoveRight } from "lucide-vue-next"
+import { MoveRight, X as CloseIcon } from "lucide-vue-next"
 
 const { t } = useI18n()
 const router = useRouter()
@@ -60,20 +64,50 @@ async function isShowGift() {
     })
     registerAward.value = data.register_award
 
-    nextTick(() => {
-      anime({
-        targets: giftRef.value,
-        height: {
-          value: [0, giftRef.value.scrollHeight],
-          easing: "easeOutQuad",
-        }, // 明确指定起始和结束值
-        duration: 200,
-      })
-    })
+    open()
   } catch (err) {
     console.log(err.message)
   }
 }
+
+// 关闭
+const local_show = Boolean(Number(sessionStorage.getItem("showGift") ?? 1))
+const show = ref(local_show && registerAward.value && !isLogin.value)
+function open() {
+  show.value = local_show && registerAward.value && !isLogin.value
+
+  if (!show.value) return
+
+  nextTick(() => {
+    anime({
+      targets: giftRef.value,
+      height: {
+        value: [0, giftRef.value.scrollHeight],
+        easing: "easeOutQuad",
+      }, // 明确指定起始和结束值
+      duration: 100,
+    })
+  })
+}
+function close() {
+  anime({
+    targets: giftRef.value,
+    height: {
+      value: [giftRef.value.scrollHeight, 0],
+      easing: "easeOutQuad",
+    }, // 明确指定起始和结束值
+    duration: 100,
+    complete: () => {
+      show.value = false
+      sessionStorage.setItem("showGift", Number(show.value))
+    },
+  })
+}
+watch(isLogin, () => {
+  if (!isLogin.value) {
+    open()
+  }
+})
 
 onMounted(() => {
   if (registerAward.value) {

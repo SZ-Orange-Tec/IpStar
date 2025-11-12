@@ -35,23 +35,23 @@
       </div>
 
       <div class="v_center space-x-3 h-full">
-        <IpButton type="normal" class="user_icon" v-if="isProduc">
+        <!-- <IpButton type="normal" class="user_icon" v-if="isProduc">
           <div class="v_center space-x-2 pointer" @click="toPay('list')">
             <ClipboardList :size="16" />
             <div class="slider_bck slider_bck_left">
               <p class="hidden sm:block">{{ t("My_product_list") }}</p>
             </div>
           </div>
-        </IpButton>
+        </IpButton> -->
 
-        <IpButton type="normal" class="user_icon" v-else>
+        <!-- <IpButton type="normal" class="user_icon" v-else>
           <div class="v_center space-x-2 pointer" @click="toPay('buy')">
             <ComboIcon :size="16" />
             <div class="slider_bck slider_bck_left">
               <p class="hidden sm:block">{{ t("Order_new") }}</p>
             </div>
           </div>
-        </IpButton>
+        </IpButton> -->
 
         <div class="split"></div>
 

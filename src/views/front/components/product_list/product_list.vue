@@ -15,7 +15,7 @@
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
-                  <div class="column_center text-lg">
+                  <div class="column_center">
                     <template v-if="type === 0 || type === 4 || type === 2">{{ item.pack_title }}</template>
                     <template v-if="type === 1 || type === 3">{{ item.prices[0].days }} {{ t("Day") }}</template>
                   </div>
@@ -37,8 +37,8 @@
                   <span class="text-sm" v-else-if="type === 3">/IP</span>
                 </p>
 
-                <p class="vh_center space-x-1 text-sm">
-                  <span>{{ t("Total") }}:</span>
+                <p class="vh_center space-x-1 text-[13px]">
+                  <span class="grey-60">{{ t("Total") }}:</span>
                   <span v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</span>
                   <span v-else>${{ item.total }}</span>
                 </p>
@@ -63,89 +63,89 @@
 
               <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
 
-              <ul v-if="type === 0 || type === 4" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+              <ul v-if="type === 0 || type === 4" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.right2") }}</p>
                 </li>
                 <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.right3") }}</p>
                 </li>
                 <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.right4") }}</p>
                 </li>
                 <li class="hidden lg:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 1" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+              <ul v-else-if="type === 1" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right1") }}</p>
                 </li>
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right2") }}</p>
                 </li>
                 <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right3") }}</p>
                 </li>
                 <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right4") }}</p>
                 </li>
                 <li class="hidden lg:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 2" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+              <ul v-else-if="type === 2" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.phone_right1") }}</p>
                 </li>
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.phone_right2") }}</p>
                 </li>
                 <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.phone_right3") }}</p>
                 </li>
                 <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.phone_right4") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 3" class="rights column space-y-5 text-xs lg:text-sm font-medium">
+              <ul v-else-if="type === 3" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.data_right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.data_right2") }}</p>
                 </li>
                 <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.data_right3") }}</p>
                 </li>
                 <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block" />
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.data_right4") }}</p>
                 </li>
               </ul>
 
               <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
-                {{ item.trial ? t("Get") : t("Order") }}
+                {{ item.trial ? t("Get") : t("Order_Now") }}
               </IpButton>
             </div>
 
@@ -154,15 +154,15 @@
               <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>
           </li>
-          <li v-if="showContact && isLogin" class="common">
+          <li v-if="showContact && isLogin" class="common contcat">
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4">
-                <div class="package_name vh_center rounded-full">
+                <div class="package_name whitespace-nowrap vh_center rounded-full">
                   <div>{{ t("productList_spec.Need_more") }}?</div>
                 </div>
 
                 <!-- 折扣 -->
-                <div class="font-medium lg:font-semibold v_center" style="height: 2rem">
+                <!-- <div class="font-medium lg:font-semibold v_center" style="height: 2rem">
                   <template v-if="type === 0 || type === 4 || type === 2">{{ t("productList_spec.Extra_discount") }}</template>
                   <template v-else-if="type === 1">
                     <strong class="text-2xl font-semibold">$ ?</strong>
@@ -172,26 +172,22 @@
                     <strong class="text-2xl font-semibold">$ ?</strong>
                     <span>/ IP</span>
                   </template>
-                </div>
+                </div> -->
 
                 <!-- 免费 -->
-                <div
-                  class="whitespace-nowrap font-semibold text-xl w-full space-y-5"
-                  :class="en ? 'lg:text-xl column' : 'lg:text-2xl column_center'"
-                  style="margin-top: 2rem"
-                >
+                <div class="text text-sm black font-medium w-full space-y-5" :class="en ? 'column' : 'column_center'">
                   <template v-if="type === 0 || type === 4 || type === 2">
-                    <span>{{ t("productList_spec.Custom1") }}</span>
-                    <span>{{ t("productList_spec.Custom2") }}</span>
-                    <span>{{ t("productList_spec.Custom3") }}</span>
+                    <p>{{ t("productList_spec.Custom1") }}</p>
+                    <!-- <span>{{ t("productList_spec.Custom2") }}</span>
+                    <span>{{ t("productList_spec.Custom3") }}</span> -->
                   </template>
                   <template v-if="type === 1">
-                    <span>{{ t("productList_spec.Custom4") }}</span>
-                    <span>{{ t("productList_spec.Custom5") }}</span>
+                    <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
+                    <!-- <span>{{ t("productList_spec.Custom5") }}</span> -->
                   </template>
                   <template v-if="type === 3">
-                    <span>{{ t("productList_spec.Custom6") }}</span>
-                    <span>{{ t("productList_spec.Custom7") }}</span>
+                    <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
+                    <!-- <span>{{ t("productList_spec.Custom7") }}</span> -->
                   </template>
                 </div>
               </div>

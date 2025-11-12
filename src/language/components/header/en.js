@@ -23,7 +23,7 @@ export default {
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
   Phone_Proxies: "Phone Proxies",
   Data_Center_Proxies: "Static Data Center Proxies",
-  Residential_Proxies_Adv: "9000+ secure residential proxies, high anonymity, and low detection rate.",
+  Residential_Proxies_Adv: "90 M+ secure residential proxies, high anonymity, and low detection rate.",
   Rotating_Proxies_Adv: "Automatic IP rotation, suitable for data collection, market research, and other business scenarios.",
   Unlimited_Residential_Proxies_Adv: "Flexible IP rotation and session control, enjoy unlimited residential proxy traffic.",
   Phone_Proxies_Adv: "Global pool of authentic mobile device IP addresses.",

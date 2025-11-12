@@ -1,6 +1,6 @@
 <template>
   <div class="pc-son-account column space-y-4">
-    <div class="w-full between">
+    <div class="w-full between flex-wrap gap-3">
       <div class="v_center space-x-2 input">
         <el-input clearable v-model="searchForm.account" @input="searchDebounce" :placeholder="t('account_spec.sub_account')"></el-input>
         <el-select v-model="searchForm.status" @change="search" :placeholder="t('account_spec.status')">
@@ -109,7 +109,7 @@
     </div>
     <div class="w-full flex justify-end mt-3">
       <el-pagination
-        layout="total,prev, pager, next, sizes "
+        :layout="layout"
         :total="page.total"
         :current-page="page.index"
         size="default"
@@ -301,7 +301,7 @@ import { platCustomer } from "@/api/login"
 import { debounce, formatSizeUnits } from "@/utils/tools"
 import { Shuffle, SquarePen, Plus } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
-import { ref, reactive, computed, onMounted, nextTick } from "vue"
+import { ref, reactive, computed, onMounted, nextTick, inject } from "vue"
 import { useRouter } from "vue-router"
 import settingStore from "@/store/setting"
 import userStore from "@/store/user"
@@ -309,6 +309,8 @@ import layoutStore from "@/store/layout"
 import Message from "@/components/message/message"
 import Confirm from "@/components/confirm/confirm"
 import { useI18n } from "vue-i18n"
+
+const layout = inject("paginationLayout")
 
 const { t } = useI18n()
 const { en } = settingStore()

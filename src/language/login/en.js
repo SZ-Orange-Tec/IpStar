@@ -1,5 +1,6 @@
 export default {
   Sign_in: "Sign in",
+  Sign_up: "Sign up",
   Email: "Email",
   Next: "Next",
   Password: "Password",
@@ -11,7 +12,7 @@ export default {
   Confirm: "Confirm",
   Logging_in: "Logging in",
 
-  Home: "Home",
+  Back_Home: "Back to Home",
 
   login_spec: {
     Or: "Or sign in with",
@@ -20,7 +21,7 @@ export default {
     label3: 'A verification code has been sent to "{email}" , please check it.',
     label4: "Set your login password.",
     label5: "Please confirm your email, a verification code will be sent shortly.",
-    email_tip: 'Please pay attention to check your “spam” folder.',
+    email_tip: "Please pay attention to check your “spam” folder.",
     forgot: "Reset",
 
     your: "SIGN IN TO YOUR",

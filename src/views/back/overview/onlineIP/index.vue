@@ -1,7 +1,7 @@
 <template>
   <div class="w-full space-y-6">
     <div class="w-full board relative p-5 space-y-3 rounded column">
-      <div class="v_center space-x-3">
+      <div class="v_center flex-wrap gap-3">
         <div class="tab v_center text-sm rounded">
           <div
             class="pointer whitespace-nowrap h-9 px-5 v_center transition-colors duration-300"

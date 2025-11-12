@@ -1,5 +1,6 @@
 export default {
   Sign_in: "登录",
+  Sign_up: "注册",
   Email: "邮箱",
   Next: "下一步",
   Password: "密码",
@@ -11,7 +12,7 @@ export default {
   Confirm: "确认",
   Logging_in: "正在登录",
 
-  Home: "首页",
+  Back_Home: "返回首页",
 
   login_spec: {
     Or: "其他方式登录",

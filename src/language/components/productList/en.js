@@ -4,7 +4,7 @@ export default {
   Total: "Total",
   OFF: "OFF",
   Get: "Get",
-  Order: "Order",
+  Order_Now: "Order Now",
   Most_popular: "Most Popular",
   Duration: "Duration",
   Locations: "Locations",
@@ -51,13 +51,13 @@ export default {
     permanent: "Unlimited Package",
 
     Need_more: "Need More",
-    Extra_discount: "Extra Discount",
-    Custom1: "Custom Plans",
-    Custom2: "Custom Regions",
-    Custom3: "Custom Demands",
+    Extra_discount: "More Discount?",
+    Custom1: "More Discount? Custom Plans,Custom Regions,Custom Demands, pls contact us immediately!",
+    // Custom2: "Custom Regions",
+    // Custom3: "Custom Demands",
 
-    Custom4: "Custom Concurrency",
-    Custom5: "Custom Bandwidth",
+    Custom4: "Customized according to your needs, pls contact us immediately!",
+    // Custom5: "Custom Bandwidth",
 
     Custom6: "Custom Bitrate",
     Custom7: "Custom Number",

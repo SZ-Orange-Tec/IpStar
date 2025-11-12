@@ -7,7 +7,7 @@
       <el-tab-pane :label="t('account_spec.realtime')" name="realTime"></el-tab-pane>
     </el-tabs>
 
-    <div class="search v_center space-x-2">
+    <div class="search v_center flex-wrap gap-3">
       <el-date-picker
         v-if="activeTab === 'realTime'"
         v-model="searchForm.day"
@@ -62,7 +62,7 @@
 
     <div class="flex justify-end" v-if="activeTab !== 'realTime'">
       <el-pagination
-        layout="total prev, pager, next,sizes"
+        :layout="layout"
         :total="page.total"
         :current-page="page.index"
         :page-sizes="[10, 20, 30, 40]"
@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, onMounted, onBeforeUnmount, nextTick, getCurrentInstance } from "vue"
+import { ref, reactive, watch, onMounted, onBeforeUnmount, nextTick, getCurrentInstance, inject } from "vue"
 import { platAccountAssignRecord, platAccountRealTime, platAccountSelect, platAccountUsage } from "@/api/account"
 import { debounce, formatSizeUnits } from "@/utils/tools"
 import { format } from "date-fns"
@@ -84,6 +84,8 @@ import userStore from "../../../../store/user"
 const { t } = useI18n()
 const { isAdmin } = userStore()
 const { proxy } = getCurrentInstance()
+
+const layout = inject("paginationLayout")
 
 // 响应式数据
 const Nodata = ref(false)

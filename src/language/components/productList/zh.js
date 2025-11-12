@@ -4,7 +4,7 @@ export default {
   Total: "合计",
   OFF: "折扣",
   Get: "获取",
-  Order: "订购",
+  Order_Now: "立即订购",
   Most_popular: "最受\n欢迎",
   Duration: "有效期",
   Locations: "地区",
@@ -52,12 +52,12 @@ export default {
 
     Need_more: "需要更多",
     Extra_discount: "额外折扣",
-    Custom1: "定制套餐",
-    Custom2: "定制地区",
-    Custom3: "定制需求",
+    Custom1: "更多折扣？定制套餐，定制地区，定制需求，请联系我们！",
+    // Custom2: "定制地区",
+    // Custom3: "定制需求",
 
-    Custom4: "定制并发",
-    Custom5: "定制带宽",
+    Custom4: "可以根据您的需求定制，请联系我们！",
+    // Custom5: "定制带宽",
 
     Custom6: "定制位量",
     Custom7: "定制数量",

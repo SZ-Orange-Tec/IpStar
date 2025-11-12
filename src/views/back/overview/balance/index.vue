@@ -36,7 +36,7 @@
           :page-size="size"
           :current-page="page"
           :page-sizes="[10, 25, 50]"
-          layout="total, prev, pager, next, sizes, jumper"
+          :layout="layout"
           :total="total"
         >
         </el-pagination>
@@ -46,13 +46,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
+import { inject, onMounted, ref } from "vue"
 import { CustomerBalances } from "../../../../api/layout"
 import { format } from "date-fns"
 import IpButton from "@/components/button/button.vue"
 import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
+
+const layout = inject("paginationLayout")
 
 // 获取流量数据
 const day = ref(new Date())
