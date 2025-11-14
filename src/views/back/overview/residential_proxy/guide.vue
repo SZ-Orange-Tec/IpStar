@@ -100,7 +100,7 @@ async function getIpPool() {
       const port = idx === 0 ? 9139 : 9135
       result.push({
         label: `${name} ${proto[index % 2]}：`,
-        text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-123RsAYBc-0-${code}-N:${
+        text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-${generatePassword(9)}-0-${code}-N:${
           proxy_pass.value
         }@${serve}:${port} https://ipinfo.io -vv`,
       })
@@ -109,6 +109,17 @@ async function getIpPool() {
   } catch (err) {
     console.log(err.message)
   }
+}
+function generatePassword(num) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  let password = ""
+
+  for (let i = 0; i < num; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length)
+    password += chars[randomIndex]
+  }
+
+  return password
 }
 
 onMounted(() => {

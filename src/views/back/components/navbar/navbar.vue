@@ -246,17 +246,7 @@ const menuData = [
   },
 ]
 function jumpPath(path) {
-  if (path === "/products") {
-    isProduc.value = false
-  }
   router.push(path)
-}
-
-function toPay(key) {
-  isProduc.value = key !== "list"
-  if (route.path !== "/products") {
-    router.push("/products")
-  }
 }
 
 // 切换语言

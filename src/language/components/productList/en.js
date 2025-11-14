@@ -27,7 +27,7 @@ export default {
     right1: "200+Regions, Include US",
     right2: "Regions-Select Available",
     right3: "Unlimited Bandwidth",
-    right4: "Concurrency 500+",
+    right4: "Concurrency {num}+",
     right5: "Support Socks5/Http|Https",
 
     unlimited_right1: "Unlimited Traffic",

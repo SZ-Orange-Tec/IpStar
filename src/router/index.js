@@ -170,17 +170,21 @@ const router = createRouter({
 })
 
 const loginPath = /\/overview|\/products|\/billings|\/proxy|\/api|\/settings/
-
-router.beforeEach(async (to, from, next) => {
+function checkLogin(path) {
   const { isLogin } = loginStore()
+  const token = localStorage.getItem("token")
+  return isLogin.value || Boolean(token)
+}
+router.beforeEach(async (to, from, next) => {
+  const isLogin = checkLogin()
 
   if (to.name) {
     await loadLocaleMessages(to.name)
   }
 
-  if (!isLogin.value && loginPath.test(to.path)) {
+  if (!isLogin && loginPath.test(to.path)) {
     next("/login")
-  } else if (isLogin.value && to.path === "/login") {
+  } else if (isLogin && to.path === "/login") {
     next("/home")
   }
 

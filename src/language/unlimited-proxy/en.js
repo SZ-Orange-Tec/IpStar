@@ -112,7 +112,7 @@ export default {
       "Yes, Unlimited Proxy provides API access, you can select the appropriate proxy type and generate API link in your personal center for your convenience.",
     ques5_title: "Does the unlimited proxy support multiple concurrent connections?",
     ques5_desc:
-      "Our default number of ports is 2000 during the purchase term. If you need more number of ports you can contact customer service to increase it.",
+      "During the purchase period, we do not limit concurrent connections. The platform defaults to 3,000 ports. Contact support to configure additional ports if needed.",
 
     footer_title: "Have a large project?",
     footer_desc: "Get in touch with our consultants to start keeping your employees informed, engaged, productive and safe.",

@@ -27,7 +27,7 @@ export default {
     right1: "含美欧和其他地区",
     right2: "国家可以选择",
     right3: "带宽不限制",
-    right4: "并发数500+",
+    right4: "并发数{num}+",
     right5: "Socks5/Http|Https",
 
     unlimited_right1: "不限流量",

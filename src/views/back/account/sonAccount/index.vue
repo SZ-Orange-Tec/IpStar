@@ -807,7 +807,7 @@ async function downloadTxt(row) {
 
 function toProduct() {
   isProduc.value = true
-  router.push("/products")
+  router.push("/residential")
 }
 
 // 生命周期钩子

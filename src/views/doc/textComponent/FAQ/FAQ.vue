@@ -27,10 +27,10 @@
           <p class="title2">{{ t("faq_spec._2_4_title") }}</p>
           <i18n-t keypath="faq_spec._2_4_des" tag="div" scope="global" class="content">
             <template #link1>
-              <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>
+              <a href="https://www.ipstar.io/pricing/residential">https://www.ipstar.io/pricing/residential</a>
             </template>
             <template #link2>
-              <a href="https://www.ipstar.io/pricing">https://www.ipstar.io/pricing</a>
+              <a href="https://www.ipstar.io/pricing/residential">https://www.ipstar.io/pricing/residential</a>
             </template>
           </i18n-t>
         </div>

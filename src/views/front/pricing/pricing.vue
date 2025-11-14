@@ -140,10 +140,10 @@
             <template #content>
               <i18n-t keypath="question_spec.desc1" class="whitespace-pre-wrap" tag="p" scope="global">
                 <template #product>
-                  <a href="https://www.ipstar.io/product" target="_blank">https://www.ipstar.io/product</a>
+                  <a href="https://www.ipstar.io/product/residential" target="_blank">https://www.ipstar.io/product/residential</a>
                 </template>
                 <template #pricing>
-                  <a href="https://www.ipstar.io/pricing" target="_blank">https://www.ipstar.io/pricing</a>
+                  <a href="https://www.ipstar.io/pricing/residential" target="_blank">https://www.ipstar.io/pricing/residential</a>
                 </template>
               </i18n-t>
             </template>

@@ -36,6 +36,9 @@ async function ErrorMsg(code) {
 _request.interceptors.request.use(
   (config) => {
     const { token } = loginStore()
+    if (!token.value) {
+      token.value = localStorage.getItem("token")
+    }
     if (token.value) {
       config.headers.Authorization = `Bearer ${token.value}`
     }

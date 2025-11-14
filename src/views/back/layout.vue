@@ -17,21 +17,42 @@
     <!-- <div class="mask" v-if="isMask"> -->
 
     <IpDialog v-model="isMask" class="mask">
-      <div class="mask_content column_center space-y-7">
-        <img src="../../assets/pc_img/layout_img/Gift bag.webp" alt="Gift bag" />
-        <h2 class="text-lg md:text-xl">{{ t("navbar_spec.gift") }}</h2>
-        <div class="w-full">
-          <p :class="lang" class="text-base">{{ t("navbar_spec.expire") }}</p>
+      <div class="mask_content space-y-5">
+        <header class="text-3xl font-semibold">{{ t("gift_spec.title") }} <span class="success">IpStar!</span></header>
+        <i18n-t tag="p" keypath="gift_spec.desc" scope="global" class="des">
+          <template #traffic>
+            <span class="primary font-semibold">{{ giftText }}</span>
+          </template>
+        </i18n-t>
+        <ul class="advant grid grid-cols-3 gap-4 rounded-lg">
+          <li class="column_center space-y-2">
+            <div class="icon_box vh_center">
+              <img src="@/assets/images/overview/buy.png" alt="" />
+            </div>
+            <div class="text-center font-medium">{{ t("gift_spec.adv1") }}</div>
+          </li>
+          <li class="column_center space-y-2">
+            <div class="icon_box vh_center">
+              <img src="@/assets/images/overview/kpi.png" alt="" />
+            </div>
+            <div class="text-center font-medium">{{ t("gift_spec.adv2") }}</div>
+          </li>
+          <li class="column_center space-y-2">
+            <div class="icon_box vh_center">
+              <img src="@/assets/images/overview/proxy.png" alt="" />
+            </div>
+            <div class="text-center font-medium">{{ t("gift_spec.adv3") }}</div>
+          </li>
+        </ul>
+        <div class="btn_box flex gap-5 text-sm">
+          <IpButton type="primary_border" class="vh_center h-10" @click="isMask = false"> {{ t("gift_spec.cancel") }} </IpButton>
+          <IpButton type="primary" class="vh_center h-10" @click="openContact"> {{ t("gift_spec.confirm") }} </IpButton>
         </div>
-        <div class="w-full space-y-5 text-sm">
-          <IpButton type="primary" class="w-full h-10" @click="isMask = false">
-            {{ t("navbar_spec.start_use") }}
-          </IpButton>
-          <IpButton type="border" class="w-full h-10 primary-btn transition-colors" @click="toTutorial">
-            {{ t("navbar_spec.view_tutorial") }}
-          </IpButton>
-          <!-- <p @click="closeMask">{{ t("navbar_spec.get") }}</p> -->
+
+        <div class="close vh_center pointer transition-color" @click="isMask = false">
+          <CloseIcon :size="16" />
         </div>
+        <img loading="lazy" width="220" src="@/assets/images/overview/gift2.webp" class="hot" />
       </div>
     </IpDialog>
   </div>
@@ -48,8 +69,14 @@ import { platDataConfig } from "@/api/home"
 import IpDialog from "@/components/dialog/index.vue"
 import IpButton from "@/components/button/button.vue"
 import useWidthTag from "../../composables/useWidthTag"
+import { X as CloseIcon } from "lucide-vue-next"
+import layoutStore from "../../store/layout"
+import { formatSizeUnits } from "../../utils/tools"
+import Menu from "./components/menu/menu.vue"
 
-const { username, getUserInfo } = userStore()
+const { getUserInfo } = userStore()
+const { gift } = layoutStore()
+const giftText = computed(() => formatSizeUnits(gift.value))
 
 const { t } = useI18n()
 
@@ -61,17 +88,20 @@ provide("paginationLayout", layout)
 const isMask = ref(false)
 async function judgeMask() {
   try {
-    const { create_time } = await getUserInfo()
+    const { create_time, pack_remain, username } = await getUserInfo()
 
     const { data } = await platDataConfig()
     const hasAward = data.register_award
 
     const isNew = isNewUser(create_time)
-    const newUserMask = sessionStorage.getItem("newUserMask")
+    const newUserMask = sessionStorage.getItem("newUserMask") === username
 
     if (isNew && !newUserMask && hasAward) {
+      if (!gift.value) {
+        gift.value = pack_remain * 1024
+      }
       isMask.value = true
-      sessionStorage.setItem("newUserMask", 1)
+      sessionStorage.setItem("newUserMask", username)
     }
   } catch (err) {
     console.log(err.message)
@@ -79,9 +109,13 @@ async function judgeMask() {
 }
 function isNewUser(create_time) {
   const date = new Date(create_time)
-  const utc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())
+  // const utc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())
 
-  return differenceInMinutes(new Date(), new Date(utc)) < 3
+  return differenceInMinutes(new Date(), date) < 3
+}
+function openContact() {
+  isMask.value = false
+  window.$crisp.push(["do", "chat:open"])
 }
 
 // 跳转教程
@@ -107,8 +141,8 @@ async function loadBack() {
 
 // 生命周期钩子
 onMounted(() => {
-  // judgeMask()
-  !username.value && getUserInfo()
+  judgeMask()
+  // !username.value && getUserInfo()
 })
 </script>
 

@@ -94,7 +94,7 @@ import { checkCustomer, platCaptcha, platCustomerLogin, platCustomerRegister, pl
 import { track_register } from "@/utils/detect"
 import loginStore from "@/store/login"
 import settingsStore from "@/store/setting"
-import { onMounted, ref } from "vue"
+import { nextTick, onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
 import { useI18n } from "vue-i18n"
@@ -185,7 +185,9 @@ async function next(func) {
           token.value = data.token
 
           await getUserInfo()
-          router.push("/overview")
+          nextTick(() => {
+            router.push("/overview")
+          })
 
           Message({
             type: "success",
@@ -213,7 +215,10 @@ async function next(func) {
           token.value = data.token
 
           await getUserInfo()
-          router.push("/overview")
+
+          nextTick(() => {
+            router.push("/overview")
+          })
 
           track_register()
         }
@@ -262,7 +267,9 @@ async function next(func) {
         token.value = data.token
 
         await getUserInfo()
-        router.push("/overview")
+        nextTick(() => {
+          router.push("/overview")
+        })
 
         Message({
           type: "success",

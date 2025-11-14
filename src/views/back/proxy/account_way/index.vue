@@ -159,10 +159,6 @@ const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
 
-function toBuy() {
-  isProduc.value = true
-  router.push("/products")
-}
 // 响应式状态
 
 const protocolData = ref([

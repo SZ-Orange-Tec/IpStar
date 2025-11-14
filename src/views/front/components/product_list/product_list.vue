@@ -78,7 +78,7 @@
                 </li>
                 <li class="hidden md:v_center space-x-1">
                   <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
-                  <p>{{ t("productList_spec.right4") }}</p>
+                  <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
                 </li>
                 <li class="hidden lg:v_center space-x-1">
                   <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />

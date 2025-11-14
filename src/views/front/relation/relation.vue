@@ -41,7 +41,7 @@
             <div class="top flex space-x-2" style="align-items: flex-start">
               <img class="flex-shrink-0" src="@/assets/images/relation/icon.png" width="30" height="30" alt="" />
               <div class="column space-y-2">
-                <p class="title text-base major">{{ t("relation_spec.serve") }}</p>
+                <p class="title text-base success">{{ t("relation_spec.serve") }}</p>
                 <p class="description text-sm">{{ t("relation_spec.serve_des") }}</p>
               </div>
             </div>

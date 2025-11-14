@@ -100,18 +100,15 @@ export default {
     },
     // 确认退出
     drop_out() {
-      this.isProduc = false
-      this.$router.push("/products")
+      this.$router.push("/purchase")
     },
   },
   setup() {
     const { username, is_purchase: isPurchase, updateUserInfo } = userStore()
-    const { isProduc } = layoutStore()
     return {
       username,
       isPurchase,
       updateUserInfo,
-      isProduc,
     }
   },
   // 销毁

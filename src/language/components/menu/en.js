@@ -19,4 +19,14 @@ export default {
 
     back_home: "Back to Home",
   },
+
+  gift_spec: {
+    title: "Welcome to ",
+    desc: "IpStar is committed to becoming your most reliable business partner! Now you have received {traffic} free traffic for trial!",
+    adv1: "Customizable Package",
+    adv2: "High-Quality Proxies",
+    adv3: "Professional Technical Team",
+    cancel: "OK",
+    confirm: "Contact For More Free Traffic",
+  },
 }

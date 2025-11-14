@@ -327,7 +327,7 @@ async function generateURL(e) {
       cancelText: t("Cancel"),
       success: () => {
         isProduc.value = true
-        router.push("/products")
+        router.push("/residential")
       },
     })
     return

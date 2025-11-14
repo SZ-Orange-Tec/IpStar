@@ -4,7 +4,7 @@
       <div class="back hidden 2xl:block group-hover:block">
         <ChevronsLeft :size="20" />
       </div>
-      <img class="hidden 2xl:block group-hover:block" src="@/assets/images/logo.webp" style="height: 30px" alt="" />
+      <img class="hidden 2xl:block group-hover:block" src="@/assets/images/logo.webp" style="height: 36px" alt="" />
     </div>
     <div class="column flex-1 w-full">
       <ul class="space-y-1 column px-3 w-full">
