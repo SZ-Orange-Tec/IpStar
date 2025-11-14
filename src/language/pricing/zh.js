@@ -18,7 +18,7 @@ export default {
   pricing_spec: {
     residential: {
       title: "住宅代理 定价",
-      des: "拥抱全球网络：拥有200+国家真实住宅IP的强大优势",
+      des: "拥抱全球网络：拥有190+国家真实住宅IP的强大优势",
     },
     unlimited: {
       title: "不限量住宅代理 定价",
@@ -45,7 +45,7 @@ export default {
     plan_tag4: "子账号权限管理",
 
     resource_title: "全球顶级优质代理资源",
-    resource_desc: "我们提供千万级优质住宅代理IP池，实时更新来自200多个国家的真实家庭住宅IP，确保高效率、低延迟，同时保障数据安全，维护超高私密性。",
+    resource_desc: "我们提供千万级优质住宅代理IP池，实时更新来自190多个国家的真实家庭住宅IP，确保高效率、低延迟，同时保障数据安全，维护超高私密性。",
     resource_tag1: "海量选择，全球覆盖",
     resource_tag2: "实时更新，稳定可靠",
     resource_tag3: "高效连接，快速响应",

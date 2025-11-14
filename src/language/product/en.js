@@ -89,7 +89,7 @@ export default {
     proxy_endpoints: "Proxy Endpoints",
     proxy_network: "Proxy Network",
     proxy_ip: "9000 M+ Residential IPs",
-    proxy_country: "190 Countries",
+    proxy_country: "190+ Countries",
     proxy_uptime: "Uptime",
 
     source_title: "IpStar's Ethically Sourced Residential Proxies",
@@ -123,7 +123,7 @@ export default {
     why5_title: "Unlimited Concurrent Sessions",
     why5_desc: "No limits on concurrent sessions. Purchase residential IPs and send unlimited concurrent sessions.",
     why6_title: "Global Coverage",
-    why6_desc: "Purchase residential IPs from 190 locations worldwide and provide country, city, and state-level geolocation services.",
+    why6_desc: "Purchase residential IPs from 190+ locations worldwide and provide country, city, and state-level geolocation services.",
 
     static_why_title: "Why Use Our Static Datacenter Proxy?",
     static_why1_title: "Exclusive IP Resources",
@@ -156,7 +156,7 @@ export default {
     enter_management: "Enter Management Center",
 
     advant_title1: "Free Targets",
-    advant_desc1: "Our residential proxy network covers 190 countries and provides country, city, state, zip code, coordinates, and ASN targets.",
+    advant_desc1: "Our residential proxy network covers 190+ countries and provides country, city, state, zip code, coordinates, and ASN targets.",
     advant_title2: "Unlimited Concurrent Sessions",
     advant_desc2: "On IpStar, we do not limit concurrent sessions, so you can easily expand your web scraping project as needed.",
     advant_title3: "No IP Block or CAPTCHA",
@@ -171,5 +171,7 @@ export default {
     case3_desc: "Precise geolocation proxies. Test ads, optimize CPA, and verify links to real desktop and mobile devices' IP addresses.",
     case4_title: "Brand Protection",
     case4_desc: "Discover and clear fraudulent products online, maintain company reputation, and increase customer loyalty.",
+
+    ques_title: "Frequently Asked Questions",
   },
 }

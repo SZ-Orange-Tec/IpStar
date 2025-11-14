@@ -28,6 +28,6 @@ export default {
 
   residential_spec: {
     title: "Residential Proxies Pricing",
-    des: "Access the Global Web: The Power of 200+ Countries of Residential IPs.",
+    des: "Access the Global Web: The Power of 190+ Countries of Residential IPs.",
   },
 }

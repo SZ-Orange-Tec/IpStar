@@ -32,7 +32,7 @@ export default {
 
     unlimited_right1: "不限流量",
     unlimited_right2: "广泛的IP池",
-    unlimited_right3: "全球200+个地区随机定位",
+    unlimited_right3: "全球190+个地区随机定位",
     unlimited_right4: "不限制并发",
     unlimited_right5: "真实动态住宅代理",
 

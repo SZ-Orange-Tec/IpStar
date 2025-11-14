@@ -30,7 +30,7 @@ export default {
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
     proxy_ip: "9000万+住宅IP",
-    proxy_country: "200个国家",
+    proxy_country: "190+ 国家",
     proxy_uptime: "正常运行时间",
 
     how_title: "如何通过无限代理服务实现 LLM 训练？",

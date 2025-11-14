@@ -17,7 +17,7 @@ export default {
   pricing_spec: {
     residential: {
       title: "Residential Proxies Price",
-      des: "Embrace the Global Web: 200+ Countries of Residential IPs",
+      des: "Embrace the Global Web: 190+ Countries of Residential IPs",
     },
     unlimited: {
       title: "Unlimited Residential Proxies Price",
@@ -45,7 +45,7 @@ export default {
 
     resource_title: "Premium Global Proxies",
     resource_desc:
-      "Access tens of millions of premium, continuously updated household IPs from 200+ countries. High speed, low latency, and maximum privacy.",
+      "Access tens of millions of premium, continuously updated household IPs from 190+ countries. High speed, low latency, and maximum privacy.",
     resource_tag1: "Global Coverage",
     resource_tag2: "Stable & Reliable",
     resource_tag3: "Fast & Responsive",

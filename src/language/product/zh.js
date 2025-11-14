@@ -88,7 +88,7 @@ export default {
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
     proxy_ip: "9000万+住宅IP",
-    proxy_country: "200个国家",
+    proxy_country: "190+ 国家",
     proxy_uptime: "正常运行时间",
 
     source_title: "IpStar的合规来源的住宅代理",
@@ -120,7 +120,7 @@ export default {
     why5_title: "无限并发会话",
     why5_desc: "没有限制，购买住宅IP，并发送无限数量的并发会话。",
     why6_title: "覆盖全球",
-    why6_desc: "购买覆盖200个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
+    why6_desc: "购买覆盖190多个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
 
     static_why_title: "为什么使用我们的静态数据中心代理？",
     static_why1_title: "独享 IP 资源",
@@ -152,7 +152,7 @@ export default {
     enter_management: "进入管理中心",
 
     advant_title1: "免费的目标",
-    advant_desc1: "我们的住宅代理网络覆盖200个国家，并提供国家，城市，州，邮政编码，坐标和ASN目标。",
+    advant_desc1: "我们的住宅代理网络覆盖190多个国家，并提供国家，城市，州，邮政编码，坐标和ASN目标。",
     advant_title2: "无限并发会话",
     advant_desc2: "在lpStar，我们不限制并发会话，所以你可以很容易地扩大你的网络抓取项目，只要需要。",
     advant_title3: "没有 IP 块或验证码",

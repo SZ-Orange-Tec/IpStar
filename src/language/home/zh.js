@@ -59,7 +59,7 @@ export default {
     residential_adv1: "9000万+优秀住宅代理",
     residential_adv2: "190+的位置",
     residential_adv3: "超级匿名和闪电般的速度",
-    unlimited_des: "200+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
+    unlimited_des: "190+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
     unlimited_adv1: "9000万+住宅 IP，覆盖全球190+地区",
     unlimited_adv2: "灵活的并发和带宽管理，轻松扩展",
     unlimited_adv3: "支持 YouTube/Github/音视频代理",
@@ -92,7 +92,7 @@ export default {
     why5_title: "无限并发会话",
     why5_desc: "没有限制，购买住宅IP，并发送无限数量的并发会话。",
     why6_title: "覆盖全球",
-    why6_desc: "购买覆盖200个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
+    why6_desc: "购买覆盖190多个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
 
     cases_title: "用于多种业务场景",
     four1_title: "企业级数据收集",

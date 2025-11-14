@@ -414,7 +414,7 @@
             </div>
             <div class="text-center space-y-5">
               <div>{{ t("home_spec.location_dot2") }}</div>
-              <div class="text-3xl font-semibold"><span>200</span>+</div>
+              <div class="text-3xl font-semibold"><span>190</span>+</div>
             </div>
             <div class="text-center space-y-5">
               <div>{{ t("home_spec.location_dot3") }}</div>
@@ -495,7 +495,7 @@
           </div>
           <div class="text-center space-y-5">
             <div>{{ t("home_spec.location_dot2") }}</div>
-            <div class="text-3xl font-semibold"><span>200</span>+</div>
+            <div class="text-3xl font-semibold"><span>190</span>+</div>
           </div>
           <div class="text-center space-y-5">
             <div>{{ t("home_spec.location_dot3") }}</div>

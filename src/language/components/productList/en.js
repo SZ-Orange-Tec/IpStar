@@ -24,7 +24,7 @@ export default {
   Rotation_Proxies: "Rotation Residential Proxies",
 
   productList_spec: {
-    right1: "200+Regions, Include US",
+    right1: "190+Regions, Include US",
     right2: "Regions-Select Available",
     right3: "Unlimited Bandwidth",
     right4: "Concurrency {num}+",
@@ -32,7 +32,7 @@ export default {
 
     unlimited_right1: "Unlimited Traffic",
     unlimited_right2: "Large IP Pool",
-    unlimited_right3: "200+ Global Locations",
+    unlimited_right3: "190+ Global Locations",
     unlimited_right4: "Unlimited Concurrency",
     unlimited_right5: "Real Dynamic Residential Proxies",
 

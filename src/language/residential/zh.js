@@ -28,6 +28,6 @@ export default {
 
   residential_spec: {
     title: "住宅代理 定价",
-    des: "拥抱全球网络：拥有200+国家真实住宅IP的强大优势",
+    des: "拥抱全球网络：拥有190+国家真实住宅IP的强大优势",
   },
 }

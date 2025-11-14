@@ -16,7 +16,7 @@ export default {
 
   login_spec: {
     Or: "其他方式登录",
-    label1: "9000多万真实住宅ip覆盖全球200多个国家。",
+    label1: "9000多万真实住宅ip覆盖全球190多个国家。",
     label2: "输入以下信息",
     label3: '验证码已发送至"{email}"',
     label4: "请设置你的登录密码",

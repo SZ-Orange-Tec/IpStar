@@ -36,7 +36,7 @@ export default {
     why5_title: "无限并发会话",
     why5_desc: "没有限制，购买住宅IP，并发送无限数量的并发会话。",
     why6_title: "覆盖全球",
-    why6_desc: "购买覆盖200个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
+    why6_desc: "购买覆盖多个地点的住宅IP，并提供国家、城市和州级地理选择服务。",
 
     proxy_title: "满足各类需求的代理服务",
     proxy_desc: "使用易于操作、高质量且经济实惠的代理IP基础设施开启您的旅程。",
@@ -44,7 +44,7 @@ export default {
     residential_adv1: "9000万+优秀住宅代理",
     residential_adv2: "190+的位置",
     residential_adv3: "超级匿名和闪电般的速度",
-    unlimited_des: "200+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
+    unlimited_des: "190+国家地区真实住宅IP，专属代理服务器，无限流量，支持超高并发请求。",
     unlimited_adv1: "9000万+住宅 IP，覆盖全球190+地区",
     unlimited_adv2: "灵活的并发和带宽管理，轻松扩展",
     unlimited_adv3: "支持 YouTube/Github/音视频代理",
@@ -98,7 +98,7 @@ export default {
     view_try: "查看定价",
     general: {
       title: "来自全球的纯净住宅代理",
-      desc: "覆盖200+国家，提供9000万+真实住宅代理IP，助力企业轻松实现全球业务拓展",
+      desc: "覆盖190+国家，提供9000万+真实住宅代理IP，助力企业轻松实现全球业务拓展",
       tag1: "按消耗GB计费",
       tag2: "免费代理试用",
       tag3: "API/账密组合提取",
