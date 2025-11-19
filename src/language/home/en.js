@@ -84,7 +84,7 @@ export default {
     view_doc: "View Documentation",
 
     why_title: "Why Use Our Residential IP?",
-    why1_title: "9000 M+ Residential IPs for Sale",
+    why1_title: "90 M+ Residential IPs for Sale",
     why1_desc: "We offer a highly stable residential proxy IP pool.",
     why2_title: "Zero CAPTCHA",
     why2_desc: "Optimize business resources as no captcha is required.",

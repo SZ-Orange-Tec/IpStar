@@ -68,7 +68,7 @@ export default {
 
     combo_title: "User & Pass Auth Document",
     combo1_title: "Get your proxy information",
-    combo1_desc: 'First, you need to find your proxy user password information in "{position}".',
+    combo1_desc: 'Below is your proxy user password information, you can find it in "{position}".',
     combo1_position: "Console->Settings",
     combo2_title: "Concatenate proxy user format",
     combo2_desc: "Then, concatenate the user information as follows",

@@ -67,7 +67,7 @@ export default {
 
     combo_title: "账密组合接入方式",
     combo1_title: "获取代理用户信息",
-    combo1_desc: '首先，您需要在" {position} "中找到您的代理用户密码信息。',
+    combo1_desc: '以下是您的代理用户密码信息，可以在" {position} "中找到。',
     combo1_position: "控制台->设置",
     combo2_title: "拼接代理用户格式",
     combo2_desc: "然后，根据用户信息拼接为以下格式",

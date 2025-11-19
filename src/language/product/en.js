@@ -88,7 +88,7 @@ export default {
     },
     proxy_endpoints: "Proxy Endpoints",
     proxy_network: "Proxy Network",
-    proxy_ip: "9000 M+ Residential IPs",
+    proxy_ip: "90 M+ Residential IPs",
     proxy_country: "190+ Countries",
     proxy_uptime: "Uptime",
 
@@ -112,7 +112,7 @@ export default {
     view_doc: "View Documentation",
 
     why_title: "Why Use Our Residential IP?",
-    why1_title: "9000 M+ Residential IPs for Sale",
+    why1_title: "90 M+ Residential IPs for Sale",
     why1_desc: "We offer a highly stable residential proxy IP pool.",
     why2_title: "Zero CAPTCHA",
     why2_desc: "Optimize business resources as no captcha is required.",

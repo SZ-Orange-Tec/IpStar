@@ -14,7 +14,7 @@
             class="tab grey-60 font-medium v_center"
           >
             <TabItem :value="0" class="tab-item">{{ t("Price") }}</TabItem>
-            <TabItem :value="1" class="tab-item">{{ t("Get_Proxy") }}</TabItem>
+            <!-- <TabItem :value="1" class="tab-item">{{ t("Get_Proxy") }}</TabItem> -->
             <TabItem :value="2" class="tab-item">IP {{ t("Management") }}</TabItem>
             <TabItem :value="3" class="tab-item">{{ t("Billing") }}</TabItem>
           </Tab>

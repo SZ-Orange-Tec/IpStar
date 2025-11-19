@@ -22,7 +22,7 @@ export default {
     title: "Scale {place} Collection with Unlimited Proxies",
     title_place: "LLM Training Data",
     descript: "Billing by day/month, zero IP/traffic limits. Adjust concurrency and bandwidth flexibly for easy-to-scale web scraping ops.",
-    adv1: "9000M+ residential IPs, covering 190+ regions worldwide",
+    adv1: "90 M+ residential IPs, covering 190+ regions worldwide",
     adv2: "No concurrency or bandwidth limits",
     adv3: "Unlimited traffic usage, lower costs",
     adv4: "Cost-effective traffic management",
