@@ -6,10 +6,10 @@ import en from "./home/en"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
 
-const language = navigator.language
+const language = navigator.language.toLowerCase()
 const langMap = {
-  "zh-CN": "zh",
-  "en-US": "en",
+  "zh-cn": "zh",
+  "en-us": "en",
 }
 let locale = localStorage.getItem("lang")
 if (locale !== "en" && locale !== "zh") {
