@@ -65,5 +65,7 @@ export default {
     Service: "Contact Us",
 
     support: "We accept these payment methods:",
+
+    hot_limit: "Only 48 hours",
   },
 }

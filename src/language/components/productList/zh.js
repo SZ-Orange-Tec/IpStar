@@ -65,5 +65,7 @@ export default {
     Service: "联系客服",
 
     support: "我们接受以下付款方式：",
+
+    hot_limit: "限时两天",
   },
 }

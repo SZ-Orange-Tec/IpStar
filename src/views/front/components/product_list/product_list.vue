@@ -12,6 +12,7 @@
             :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
             class="transition-color"
           >
+            <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div>
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
@@ -22,22 +23,28 @@
                 </div>
 
                 <!-- 折扣 -->
-                <p v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
-                  <template v-if="item.trial">{{ t("Free") }}</template>
-                  <template v-else-if="item.prices[item.select]?.discount > 0"
-                    >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
-                  >
-                  <template v-else>{{ item.name }}</template>
-                </p>
+                <div v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
+                  <div class="hot_off vh_center px-3 whitespace-nowrap rounded-full" v-if="item.hot && item.prices[item.select].discount_active > 0">
+                    {{ item.prices[item.select].discount + "%" }} {{ t("OFF") }} + {{ item.prices[item.select].discount_active + "%" }} {{ t("OFF") }}
+                  </div>
+                  <div class="h-8 v_center" v-else>
+                    <template v-if="item.trial">{{ t("Free") }}</template>
+                    <template v-else-if="item.prices[item.select]?.discount > 0"
+                      >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
+                    >
+                    <template v-else>{{ item.name }}</template>
+                  </div>
+                </div>
 
                 <p class="price lg:text-4xl space-x-1">
+                  <span class="origin text-[13px]" v-if="item.hot">${{ item.prices[item.select].origin_price / 100 }}</span>
                   <strong class="text-3xl font-semibold">${{ item.prices[item.select].unit_price / 100 }}</strong>
                   <span class="text-sm" v-if="type === 0 || type === 4 || type === 2">/GB</span>
                   <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
                   <span class="text-sm" v-else-if="type === 3">/IP</span>
                 </p>
 
-                <p class="vh_center space-x-1 text-[13px]">
+                <p class="vh_center space-x-1 text-[13px] total">
                   <span class="grey-60">{{ t("Total") }}:</span>
                   <span v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</span>
                   <span v-else>${{ item.total }}</span>
@@ -398,8 +405,15 @@ async function GetProductList() {
           const key = String(i.days)
           const origin = prices[key]
           const price = i.unit_price
+          const origin_price = i.origin_price
           i.discount = roundToDecimal(((origin - price) / origin) * 100, 0)
           i.origin_price = origin
+          if (item.promo_type === 1) {
+            // 活动 48% off 按原价计算
+            i.discount = roundToDecimal(((origin - origin_price) / origin) * 100, 0)
+            i.discount_active = roundToDecimal(((origin_price - price) / origin_price) * 100, 0)
+            i.origin_price = origin_price
+          }
           return i
         })
       }
