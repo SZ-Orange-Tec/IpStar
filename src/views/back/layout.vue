@@ -18,35 +18,38 @@
 
     <IpDialog v-model="isMask" class="mask">
       <div class="mask_content space-y-5">
-        <header class="text-3xl font-semibold">{{ t("gift_spec.title") }} <span class="success">IpStar!</span></header>
-        <i18n-t tag="p" keypath="gift_spec.desc" scope="global" class="des">
-          <template #traffic>
-            <span class="primary font-semibold">{{ giftText }}</span>
-          </template>
-        </i18n-t>
+        <header class="text-3xl font-semibold">{{ t("mask_spec.title") }} <span class="success">IpStar!</span></header>
+        <p class="des">
+          {{ t("mask_spec.desc") }}
+          <i18n-t tag="span" keypath="mask_spec.desc2" scope="global" v-if="gift !== 0">
+            <template #traffic>
+              <span class="primary font-semibold">{{ giftText }}</span>
+            </template>
+          </i18n-t>
+        </p>
         <ul class="advant grid grid-cols-3 gap-4 rounded-lg">
           <li class="column_center space-y-2">
             <div class="icon_box vh_center">
               <img src="@/assets/images/overview/buy.png" alt="" />
             </div>
-            <div class="text-center font-medium">{{ t("gift_spec.adv1") }}</div>
+            <div class="text-center font-medium">{{ t("mask_spec.adv1") }}</div>
           </li>
           <li class="column_center space-y-2">
             <div class="icon_box vh_center">
               <img src="@/assets/images/overview/kpi.png" alt="" />
             </div>
-            <div class="text-center font-medium">{{ t("gift_spec.adv2") }}</div>
+            <div class="text-center font-medium">{{ t("mask_spec.adv2") }}</div>
           </li>
           <li class="column_center space-y-2">
             <div class="icon_box vh_center">
               <img src="@/assets/images/overview/proxy.png" alt="" />
             </div>
-            <div class="text-center font-medium">{{ t("gift_spec.adv3") }}</div>
+            <div class="text-center font-medium">{{ t("mask_spec.adv3") }}</div>
           </li>
         </ul>
         <div class="btn_box flex gap-5 text-sm">
-          <IpButton type="primary_border" class="vh_center h-10" @click="isMask = false"> {{ t("gift_spec.cancel") }} </IpButton>
-          <IpButton type="primary" class="vh_center h-10" @click="openContact"> {{ t("gift_spec.confirm") }} </IpButton>
+          <IpButton type="primary_border" class="vh_center h-10" @click="isMask = false"> {{ t("mask_spec.cancel") }} </IpButton>
+          <IpButton type="primary" class="vh_center h-10" @click="openContact"> {{ t("mask_spec.confirm") }} </IpButton>
         </div>
 
         <div class="close vh_center pointer transition-color" @click="isMask = false">

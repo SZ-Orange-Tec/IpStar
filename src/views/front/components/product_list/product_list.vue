@@ -4,7 +4,7 @@
     <Tabbar @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
 
     <div class="list">
-      <div v-if="product_list.length" class="priceList" ref="productRef" @wheel.prevent="scrollPlugin">
+      <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
         <ul class="flex gap-3">
           <li
             v-for="(item, index) in product_list"

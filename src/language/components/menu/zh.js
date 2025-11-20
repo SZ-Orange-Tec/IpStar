@@ -19,9 +19,10 @@ export default {
 
     back_home: "返回首页",
   },
-  gift_spec: {
+  mask_spec: {
     title: "欢迎加入 ",
-    desc: "IpStar 致力于成为您最可靠的商业伙伴！现已赠你 {traffic} 免费流量进行试用！",
+    desc: "IpStar 致力于成为您最可靠的商业伙伴！",
+    desc2: "现已赠你 {traffic} 免费流量进行试用！",
     adv1: "可定制套餐",
     adv2: "高品质代理",
     adv3: "专业技术团队",
