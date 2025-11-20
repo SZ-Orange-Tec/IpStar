@@ -1,0 +1,223 @@
+BR: Brazil
+AR: Argentina
+AZ: Azerbaijan
+YT: Mayotte
+SX: Netherlands Saint Martin
+BG: Bulgaria
+SN: Senegal
+BB: Barbados
+TL: East Timor
+CI: Ivory Coast
+XK: Kosovo
+SL: Sierra Leone
+GL: Greenland
+VN: Vietnam
+VE: Venezuela
+FJ: Fiji
+WF: Wallis and Futuna Islands
+BO: Bolivia
+TN: Tunisia
+GE: Georgia
+MW: Malawi
+KR: Korea
+CL: Chile
+CA: Canada
+BZ: Belize
+AT: Austria
+AE: United Arab Emirates
+BN: Brunei
+AW: Aruba
+MM: Myanmar
+DO: Dominica
+LC: Saint Lucia
+TG: Togo
+SZ: Eswatini
+ID: Indonesia
+BY: Belarus
+EE: Estonia
+BT: Bhutan
+IR: Iran
+TJ: Tajikistan
+GG: Guernsey Island
+ET: Ethiopia
+TH: Thailand
+PY: Paraguay
+MO: Macao,China
+FK: Falkland Islands
+CN: China
+WS: Samoa
+TZ: Tanzania
+GF: French Guyana
+RS: Serbia
+OM: Oman
+MU: Mauritius
+MZ: Mozambique
+GQ: Equatorial Guinea
+AU: Australia
+GP: Guadeloupe
+NO: Norway
+KM: Comoros
+MF: French Saint Martin
+BE: Belgium
+AF: Afghanistan
+BI: Burundi
+LT: Lithuania
+GR: Greece
+MP: Northern Mariana Islands
+CG: The Republic of the Congo
+MY: Malaysia
+PE: Peru
+AO: Angola
+RW: Rwanda
+EG: Egypt
+BA: Bosnia and Herzegovina
+YE: Yemen
+LU: Luxembourg
+RU: Russia
+DZ: Algeria
+KG: Kyrgyzstan
+BM: Bermuda
+CD: Democratic Republic of the Congo
+SI: Slovenia
+EC: Ecuador
+SY: Syria
+ML: Mali
+MA: Morocco
+SE: Sweden
+GD: Grenada
+MC: Monaco
+QA: Qatar
+HN: Honduras
+VG: British Virgin Islands
+SO: Somalia
+CO: Colombia
+SA: Saudi Arabia
+LV: Latvia
+LR: Liberia
+KZ: Kazakhstan
+LB: Lebanon
+MQ: Martinique
+KY: Cayman Islands
+DE: Germany
+LK: Sri Lanka
+RE: Reunion Island
+NA: Namibia
+PW: Palau
+BH: Bahrain
+SD: Sudan
+GH: Ghana
+AI: Anguilla
+PK: Pakistan
+GY: Guyana
+MG: Madagascar
+TO: Tonga
+TR: Türkiye
+KW: Kuwait
+VC: Saint Vincent and the Grenadines
+SB: Solomon Islands
+UY: Uruguay
+PH: Philippines
+6: US Virgin Islands
+CU: Cuba
+HU: Hungary
+TT: Trinidad and Tobago
+NG: Nigeria
+AS: American Samoa
+IE: Ireland
+MN: Mongolia
+AD: Andorra
+BJ: Benin
+MH: Marshall Islands
+PT: Portugal
+LA: Laos
+UG: Uganda
+UA: Ukraine
+UZ: Uzbekistan
+VU: Vanuatu
+IT: Italy
+PA: Panama
+JM: Jamaica
+AG: Antigua and Barbuda
+HR: Croatia
+KE: Kenya
+TC: Turks and Caicos Islands
+US: America
+SR: Suriname
+BF: Burkina Faso
+JP: Japan
+FI: Finland
+GT: Guatemala
+SM: San Marino
+KH: Cambodia
+PS: Palestine
+NE: Niger
+PL: Poland
+DM: Dominica
+ZW: Zimbabwe
+AM: Armenia
+SV: El Salvador
+DK: Denmark
+IS: Iceland
+MD: Moldova
+NI: Nicaragua
+LS: Lesotho
+BD: Bangladesh
+LI: Liechtenstein
+PF: French Polynesia
+NZ: New Zealand
+HK: Hong Kong, China
+MV: Maldives
+CK: Cook Islands
+SK: Slovakia
+KN: Saint Kitts and Nevis
+ZM: Zambia
+SG: Singapore
+BS: The Bahamas
+MS: Montserrat Island
+CY: Cyprus
+CR: Costa Rica
+CV: Cape Verde
+ST: Sao Tome and Principe
+
+US State Code
+
+USAL: Alabama
+USWV: West Virginia
+USAK: Alaska
+USWI: Wisconsin
+USAZ: Arizona
+USAR: Arkansas
+USCA: California
+USCO: Colorado
+USCT: Connecticut
+USDE: Delaware
+USGA: Georgia
+USHI: Hawaii
+USID: Idaho
+USIL: Illinois
+USIN: Indiana
+USKS: Kansas
+USKY: Kentucky
+USLA: Louisiana
+USME: Maine
+USMD: Maryland
+USMI: Michigan
+USMN: Minnesota
+USMS: Mississippi
+USMO: Missouri
+USMT: Montana
+USNV: Nevada
+USNH: New Hampshire
+USNJ: New Jersey
+USNM: New Mexico
+USNY: New York
+USND: North Dakota
+USOH: Ohio
+USOK: Oklahoma
+USOR: Oregon
+USPA: Pennsylvania
+USSC: South Carolina
+USSD: South Dakota
+USTN: Tennessee
+USTX: Texas
+USUT: Utah

@@ -82,6 +82,7 @@ export default {
     combo3_title: "IP Pool Service Address",
     combo3_desc: "Available IP Pool Endpoints:(Each is a separate pool. For best results, rotate randomly among them.)",
     combo4_title: "Example Proxy Parameters",
+    download_country: "Download Country Code",
 
     upgrade_tip: {
       front: "To view the complete API documentation, please ",

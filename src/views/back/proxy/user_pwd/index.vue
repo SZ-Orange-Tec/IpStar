@@ -40,6 +40,12 @@
           <div class="v_center">
             <strong class="font-medium black" style="width: 120px">country</strong>
             <span>{{ t("proxy_spec.what_country") }}</span>
+            <a class="primary underline ml-5" href="/country_code_en.txt" download="country_code_en.txt" v-if="en">{{
+              t("proxy_spec.download_country")
+            }}</a>
+            <a class="primary underline ml-5" href="/country_code_zh.txt" download="country_code_zh.txt" v-else>{{
+              t("proxy_spec.download_country")
+            }}</a>
           </div>
           <div class="v_center">
             <strong class="font-medium black" style="width: 120px">N</strong>

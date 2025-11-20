@@ -81,6 +81,7 @@ export default {
     combo3_title: "IP池服务地址",
     combo3_desc: "以下为可用的IP池服务地址（每个入口都是独立的IP池，建议同时在多个地址之间随机获取）：",
     combo4_title: "实际代理参数示例",
+    download_country: "下载完整国家代码",
 
     upgrade_tip: {
       front: "查看完整的api说明请先",
