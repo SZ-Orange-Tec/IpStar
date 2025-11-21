@@ -93,7 +93,7 @@ export default {
     price_adv1: "平均成功率99.5%",
     price_adv2: "平均响应时间0.6s",
     price_adv3: "HTTP / SOCKS5协议",
-    price_note: "注：因政策原因，中国大陆地区暂不支持该服务",
+    price_note: "注：因政策原因，不支持从中国大陆地区访问我们的服务。",
 
     ques_title: "解决你的使用问题",
     ques1_title: "什么是不限流量代理？",

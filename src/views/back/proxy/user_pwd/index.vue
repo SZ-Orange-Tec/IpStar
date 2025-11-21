@@ -102,10 +102,10 @@
         </div>
 
         <h4>SOCKS5 {{ t("Expample") }}：</h4>
-        <div class="info-box">curl --socks5 {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv5.connpnt134.com:9135 https://ipinfo.io</div>
+        <div class="info-box">curl --socks5 {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv4.connpnt134.com:9135 https://ipinfo.io</div>
 
         <h4>HTTP {{ t("Expample") }}：</h4>
-        <div class="info-box">curl -x {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv5.connpnt134.com:9139 https://ipinfo.io</div>
+        <div class="info-box">curl -x {{ proxy_user }}-12345678-0-BR-N:{{ proxy_pass }}@pv4.connpnt134.com:9139 https://ipinfo.io</div>
       </div>
     </div>
   </div>

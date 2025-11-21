@@ -76,15 +76,15 @@ const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()
 // ip池
 const ipPools = ref([
   "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv3.connpnt134.com:9135 https://ipinfo.io",
-  "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv2.connpnt134.com:9135 https://ipinfo.io",
+  "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
   "curl -x u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
-  "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv5.connpnt134.com:9135 https://ipinfo.io",
+  "curl --socks5 u2084euvahm-123RsAYBc-0-US-N:vae4draucd6p@pv4.connpnt134.com:9135 https://ipinfo.io",
 ])
 async function getIpPool() {
   try {
     const result = []
     const proto = ["HTTP(s)", "SOCKS5"]
-    const host = ["pv3.connpnt134.com", "pv5.connpnt134.com", "pv2.connpnt134.com", "pv4.connpnt134.com"]
+    const host = ["pv3.connpnt134.com", "pv4.connpnt134.com", "pv4.connpnt134.com", "pv4.connpnt134.com"]
     const countrys = [
       { en: "US", zh: "美国", code: "US" },
       { en: "Germany", zh: "德国", code: "DE" },
