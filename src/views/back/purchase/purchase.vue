@@ -16,7 +16,7 @@
       </template>
     </NavBar>
 
-    <div class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6">
+    <div class="box-border flex-1 min-h-0 overflow-y-auto w-full p-4 md:p-6">
       <keep-alive>
         <component :is="activeComponent" />
       </keep-alive>

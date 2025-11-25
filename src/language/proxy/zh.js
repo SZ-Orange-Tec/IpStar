@@ -57,7 +57,7 @@ export default {
     url: "您的专属API URL",
     base: "（IP地址检测基于ipinfo.io）",
     placeholder: "点击上方按钮生成API链接",
-    note1: "在浏览器或代码中请求此链接，每次均可获得一个新IP代理。更多选项，请参阅API文档和演示。",
+    note1: "在浏览器或代码中请求此链接，每次均可获得一组新的IP代理参数。更多选项，请参阅API文档和演示。",
     note2: "对于此链接的重复请求，请每次将参数“rd”更改为不同的随机字符串；否则，返回的通道将不会改变。",
     note_proxy: "以上代理用户格式适用于住宅代理，如果你要使用其他类型的代理，代理格式略有不同，具体如下：",
     note_proxy1: "1. 使用轮换代理，ipstr参数固定为rot，例如：",
@@ -67,7 +67,7 @@ export default {
 
     combo_title: "账密组合接入方式",
     combo1_title: "获取代理用户信息",
-    combo1_desc: '以下是您的代理用户密码信息，可以在" {position} "中找到。',
+    combo1_desc: '以下是您的代理用户密码信息，可以在" {position} "中找到和维护。',
     combo1_position: "控制台->设置",
     combo2_title: "拼接代理用户格式",
     combo2_desc: "然后，根据用户信息拼接为以下格式",

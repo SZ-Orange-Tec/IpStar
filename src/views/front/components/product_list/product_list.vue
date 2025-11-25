@@ -93,11 +93,11 @@
                 </li>
               </ul>
               <ul v-else-if="type === 1" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
-                <li class="flex space-x-1">
+                <li class="hidden sm:flex space-x-1">
                   <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right1") }}</p>
                 </li>
-                <li class="flex space-x-1">
+                <li class="hidden sm:flex space-x-1">
                   <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
                   <p>{{ t("productList_spec.unlimited_right2") }}</p>
                 </li>
@@ -156,7 +156,7 @@
               </IpButton>
             </div>
 
-            <div class="hot text-center text-xs vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
+            <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
             <div class="bg_img">
               <img src="@/assets/images/pricing/hover.png" alt="" />
             </div>
@@ -210,8 +210,8 @@
         </ul>
       </div>
       <!-- 骨架屏 -->
-      <div v-else class="priceList column">
-        <ul class="flex gap-3">
+      <div v-else class="md:w-full priceList column">
+        <ul class="w-full flex gap-3">
           <li class="skeletion_box" v-for="item in 5" :key="item">
             <div class="card skeletion space-y-5">
               <div style="width: 40%"></div>

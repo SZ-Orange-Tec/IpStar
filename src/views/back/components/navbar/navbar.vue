@@ -112,7 +112,7 @@
         </DropDown>
       </div>
     </div>
-    <div class="nav_bottom px-3 md:px-5">
+    <div class="nav_bottom px-3 md:px-5 max-w-full overflow-x-auto">
       <slot name="nav"></slot>
     </div>
   </div>

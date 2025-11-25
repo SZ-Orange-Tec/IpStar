@@ -17,8 +17,8 @@
       </template>
     </NavBar>
 
-    <div class="flex-1 min-h-0 overflow-y-auto w-full box-border column p-6 gap-6">
-      <template v-if="is_purchase">
+    <div class="flex-1 min-h-0 overflow-y-auto w-full box-border column p-4 md:p-6 gap-6">
+      <template v-if="is_purchase || hasRemain">
         <AccountWay v-if="active === 0" />
         <ApiWay v-if="active === 1" />
       </template>
@@ -37,7 +37,7 @@ import ApiWay from "./api_way/index.vue"
 
 import Lock from "./lock.vue"
 // import Tabs from "./tabs.vue"
-import { provide, ref } from "vue"
+import { computed, provide, ref } from "vue"
 import userStore from "../../../store/user"
 import { useI18n } from "vue-i18n"
 import { useRoute, useRouter } from "vue-router"
@@ -45,7 +45,11 @@ import { ChevronLeft } from "lucide-vue-next"
 
 const { t } = useI18n()
 const route = useRoute()
-const { is_purchase } = userStore()
+const { is_purchase, userInfo } = userStore()
+
+const hasRemain = computed(() => {
+  return userInfo?.mobi_remain > 0 || userInfo?.pack_remain > 0
+})
 
 // 头部nav tab
 const active = ref(0)

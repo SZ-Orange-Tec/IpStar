@@ -18,15 +18,15 @@
       </template>
     </NavBar>
 
-    <div v-if="isBalance" class="box-border flex-1 min-h-0 w-full p-6">
+    <div v-if="isBalance" class="box-border flex-1 min-h-0 w-full p-4 md:p-6">
       <Balance />
     </div>
 
-    <div v-else-if="isOnlineIp" class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6">
+    <div v-else-if="isOnlineIp" class="box-border flex-1 min-h-0 overflow-y-auto w-full p-4 md:p-6">
       <OnlineIP />
     </div>
 
-    <div v-else class="main flex-1 min-h-0 overflow-y-auto w-full flex p-6 gap-5">
+    <div v-else class="main flex-1 min-h-0 overflow-y-auto w-full flex p-4 md:p-6 gap-5">
       <div class="flex-1 min-w-0 space-y-5">
         <div class="board px-2 py-5 rounded">
           <keep-alive>

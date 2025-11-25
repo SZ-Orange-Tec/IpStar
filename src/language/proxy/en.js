@@ -58,7 +58,7 @@ export default {
     url: "Your exclusive API URL",
     base: "(IP address detection is based on ipinfo.io)",
     placeholder: "Click the button above to generate an API link",
-    note1: "Open this link in your browser or your code to get a new IP proxy each time. For more options, see the API docs and demo.",
+    note1: "Use this link to get new proxy IPs every time. See the API docs for more.",
     note2: 'For each request, change the "rd" parameter to a random value to get a new channel.',
     note_proxy: "The above format applies to residential proxies. For other types, the format varies slightly as follows:",
     note_proxy1: "1. For rotating proxies, the 'ipstr' parameter is fixed as 'rot', e.g.:",
@@ -68,7 +68,7 @@ export default {
 
     combo_title: "User & Pass Auth Document",
     combo1_title: "Get your proxy information",
-    combo1_desc: 'Below is your proxy user password information, you can find it in "{position}".',
+    combo1_desc: 'Here are your proxy login details. You can find and manage them under "{position}".',
     combo1_position: "Console->Settings",
     combo2_title: "Concatenate proxy user format",
     combo2_desc: "Then, concatenate the user information as follows",
