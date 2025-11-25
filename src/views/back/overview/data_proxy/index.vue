@@ -14,7 +14,7 @@
         </div>
         <div class="flex space-x-4">
           <ip-button @click="router.push('/data_center')" class="h-9 text-sm min-w-[120px] px-5" type="black">{{ t("Add_funds") }}</ip-button>
-          <ip-button @click="router.push('/proxy')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button>
+          <!-- <ip-button @click="router.push('/proxy?type=3')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button> -->
         </div>
       </div>
 

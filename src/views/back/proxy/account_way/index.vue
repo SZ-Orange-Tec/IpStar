@@ -173,7 +173,7 @@ const protocolData = ref([
 ])
 const protocolVal = ref("0")
 
-const stype = ref(route.query?.type ?? 0)
+const stype = ref(route.query?.type ? +route.query?.type : 0)
 function changeStype(type) {
   stype.value = type
   countVal.value = type === 4 ? 1 : 10

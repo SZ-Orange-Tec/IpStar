@@ -118,6 +118,8 @@ const online_ip_unit = computed(() => {
   return !en.value ? "万" : " K"
 })
 watch(en, () => {
+  const online = !en.value ? Math.floor(online_ip.value ?? 15308000 / 10000) : Math.floor(online_ip.value ?? 15308000 / 1000)
+  online_ip.value = 0
   nextTick(() => {
     numberAnimation(online, (charged) => {
       online_ip.value = Math.floor(charged)

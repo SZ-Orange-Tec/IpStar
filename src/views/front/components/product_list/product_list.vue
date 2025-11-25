@@ -210,7 +210,7 @@
         </ul>
       </div>
       <!-- 骨架屏 -->
-      <div v-else class="md:w-full priceList column">
+      <div v-else class="w-full md:w-auto priceList column">
         <ul class="w-full flex gap-3">
           <li class="skeletion_box" v-for="item in 5" :key="item">
             <div class="card skeletion space-y-5">

@@ -1,6 +1,6 @@
 <template>
   <div class="column">
-    <div class="text-lg font-semibold mb-5">{{ $t("Bandwidth_Usage") }}</div>
+    <div class="text-lg font-semibold mb-5">{{ t("Bandwidth_Usage") }}</div>
     <div class="">
       <div class="v_center flex-wrap gap-3">
         <div class="tab v_center text-sm rounded">
@@ -9,14 +9,14 @@
             @click="updateActive(0)"
             :class="{ active: active === 0 }"
           >
-            7 {{ $t("Day") }}
+            7 {{ t("Day") }}
           </div>
           <div
             class="pointer whitespace-nowrap h-9 px-5 v_center transition-colors duration-300"
             @click="updateActive(1)"
             :class="{ active: active === 1 }"
           >
-            30 {{ $t("Day") }}
+            30 {{ t("Day") }}
           </div>
         </div>
         <el-date-picker
@@ -27,11 +27,11 @@
           class="transition-all duration-300"
           style="height: 36px; width: 260px"
         />
-        <ip-button type="primary" class="h-9 px-5 text-sm" @click="getDayLineData">{{ $t("Search") }}</ip-button>
+        <ip-button type="primary" class="h-9 px-5 text-sm" @click="getDayLineData">{{ t("Search") }}</ip-button>
       </div>
     </div>
 
-    <div class="w-full column relative echart">
+    <div class="w-full column relative echart mt-6">
       <div class="w-full h-full relative" v-loading="loading">
         <div class="w-full h-full" id="echartTime" v-show="show"></div>
         <div class="w-full h-full vh_center" v-show="!show">
@@ -48,6 +48,9 @@ import IpButton from "@/components/button/button.vue"
 import { addDays, format } from "date-fns"
 import { platCustomerReport } from "@/api/layout"
 import { roundToDecimal } from "../../../../utils/tools"
+import { useI18n } from "vue-i18n"
+
+const { t } = useI18n()
 
 // tab
 const active = ref(0) // 0:按天 1：按时
@@ -78,10 +81,10 @@ async function getDayLineData() {
     })
     data = data.map((item) => {
       const flow = item.pack_size * 1024 // mb
-      const Day = 86400000
+      const Day = 86400
       return {
         date: item.date_short,
-        flow: roundToDecimal(flow / Day, 2),
+        flow: roundToDecimal((flow / Day) * 8, 2),
       }
     })
     show.value = data.length > 0
@@ -121,67 +124,38 @@ async function setEchart(xData, serData) {
     //   textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
     //   padding: [20, 0, 0, 20],
     // },
-    grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
-
-    dataZoom: [
-      {
-        show: true,
-        start: 0,
-        end: 100,
-        bottom: 10,
-        right: 8,
-        left: 30,
-        height: 20,
-        borderColor: "transparent",
-        showDetail: false,
-        fillerColor: "rgba(39, 114, 240, .3)",
-        backgroundColor: "rgba(39, 114, 240, 0.1)",
-        handleStyle: {
-          color: "rgba(39, 114, 240, 0.57)",
-        },
-        moveHandleSize: 0,
-        moveHandleStyle: {
-          opacity: 1,
-        },
-        dataBackground: {
-          areaStyle: {
-            color: "rgba(39, 114, 240, 1)",
-          },
-        },
-      },
-      {
-        type: "inside",
-        dataBackground: "#0ff",
-        showDetail: false,
-      },
-    ],
+    grid: { left: "left", top: 20, right: 40, bottom: 10, containLabel: true },
     xAxis: {
       type: "category",
+      boundaryGap: false,
       axisLine: {
         lineStyle: {
           color: "#B5B5B5",
         },
       },
       axisTick: {
-        show: false,
+        lineStyle: {
+          color: "#3B82F6",
+        },
       },
       axisLabel: {
-        margin: 30,
+        margin: 16,
         fontFamily: "Roboto",
         fontSize: 12,
-        color: "#666",
+        color: "#7F8188",
       },
       data: xData(),
     },
     yAxis: {
+      type: "value",
       // max: 4,
       axisLabel: {
         fontFamily: "Roboto",
-        fontSize: 12,
-        color: "#666",
-        margin: 30,
+        fontSize: 14,
+        color: "#7F8188",
+        margin: 12,
         formatter(val) {
-          return `${val} Mbps`
+          return val <= 1 ? val.toFixed(2) : val
         },
       },
       axisTick: {
@@ -190,31 +164,44 @@ async function setEchart(xData, serData) {
       },
       splitLine: {
         lineStyle: {
-          color: "#B5B5B5",
-          type: "dashed", // 虚线
+          color: "#E0E6F1",
+          type: "solid", // 虚线
         },
       },
     },
     tooltip: {
       trigger: "axis",
-      padding: [12, 17, 20, 23],
-      textStyle: { color: "#424242" },
+      padding: 10,
+      textStyle: { color: "7F8188" },
       renderMode: "html",
-      className: "tooltip",
+      appendTo: document.body,
       axisPointer: {
         lineStyle: {
-          color: "rgba(39, 114, 240, 1)",
+          color: "#B9BEC9",
         },
       },
-      formatter() {
-        return null
+      formatter(params) {
+        const { name, value } = params[0]
+
+        const useage = value + " Mbps"
+
+        const html = `
+        <div class="grey-60 font-medium" style="font-family: Outfit, Noto Sans SC, sans-serif, serif">
+          <span>${name}</span>
+          <p>
+            ${t("Bandwidth_Usage")}:
+            <span class="black font-medium">${useage}</span>
+          </p>
+        </div>`
+
+        return html
       },
     },
     series: [
       {
         type: "line",
         smooth: true,
-        showSymbol: false, // 开启移入显示 具体数值
+        // showSymbol: false, // 开启移入显示 具体数值
         areaStyle: {
           // 覆盖区域的渐变色
           color: {
@@ -240,31 +227,15 @@ async function setEchart(xData, serData) {
             global: false, // 缺省为 false
           },
         },
-        showAllSymbol: true,
+        // showAllSymbol: true,
         // symbol: 'image://路径',
         // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-        symbolSize: 10,
+        symbolSize: 5,
         label: {
-          show: true,
-          position: "top",
-          textStyle: {
-            color: "#191D26",
-            fontSize: 14,
-          },
-          formatter: function (res) {
-            if (res.value) {
-              return res.value + "GB"
-            } else {
-              return 0
-            }
-          },
+          show: false,
         },
-        // 关闭 提示框
-        // tooltip: {
-        //   show: false
-        // },
         lineStyle: {
-          color: "rgba(39, 114, 240, 1)",
+          color: "#3B82F6",
         },
         data: serData(),
       },
@@ -275,6 +246,7 @@ async function setEchart(xData, serData) {
 
 onMounted(() => {
   updateActive(0)
+  getDayLineData()
 })
 
 onBeforeUnmount(() => {
@@ -294,6 +266,6 @@ onBeforeUnmount(() => {
 }
 
 .echart {
-  height: 400px;
+  height: 300px;
 }
 </style>

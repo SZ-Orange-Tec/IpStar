@@ -14,7 +14,7 @@
         </div>
         <div class="flex space-x-4">
           <ip-button @click="router.push('/mobile')" class="h-9 text-sm min-w-[120px] px-5" type="black">{{ t("Add_funds") }}</ip-button>
-          <ip-button @click="router.push('/proxy')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button>
+          <ip-button @click="router.push('/proxy?type=2')" class="h-9 text-sm min-w-[120px] px-5" type="border">{{ t("Start_now") }}</ip-button>
         </div>
       </div>
 
@@ -47,18 +47,22 @@
       </div>
     </div>
 
-    <div class="w-full py-5 px-6 board rounded">
-      <Echart />
-      <!-- <Bandwidth v-show="active === 0" />
-      <Concurrent v-show="active === 1" /> -->
+    <Tab v-model="active" :active-style="activeStyle" activeTextColor="#ffffff" class="p-2 rounded tab text-sm">
+      <TabItem :value="0" :label="t('User_Guide')" class="h-9 px-5 min-w-[140px]" />
+      <TabItem :value="1" :label="t('Traffic_Usage')" class="h-9 px-5 min-w-[140px]" />
+    </Tab>
+
+    <div class="w-full p-5 board rounded">
+      <Guide v-show="active === 0" />
+      <Echarts v-show="active === 1" />
     </div>
   </div>
 </template>
 
 <script setup>
 import ipButton from "@/components/button/button.vue"
-import Echart from "./echart.vue"
-import { nextTick, onActivated, onMounted, ref } from "vue"
+// import Echart from "./echart.vue"
+import { nextTick, onActivated, onMounted, provide, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { Smartphone as PhoneProxyIcon } from "lucide-vue-next"
 import { useRouter } from "vue-router"
@@ -66,9 +70,24 @@ import anime from "animejs/lib/anime.es.js"
 import Message from "@/components/message/message"
 import { roundToDecimal } from "@/utils/tools"
 import { platCustomerReportOverview } from "@/api/layout"
+import Tab from "@/components/tabbar/tab.vue"
+import TabItem from "@/components/tabbar/tab-item.vue"
+import Guide from "../residential_proxy/guide.vue"
+import Echarts from "../residential_proxy/echarts.vue"
 
 const { t } = useI18n()
 const router = useRouter()
+
+// 切换tab
+const active = ref(0) // 0:guide 1:echart
+const activeStyle = {
+  backgroundColor: "hsl(var(--foreground))",
+  borderRadius: "4px",
+  "--activeTextColor": "#ffffff",
+  top: 0,
+  bottom: 0,
+}
+provide("active", active)
 
 // 获取流量数据
 const remain_num = ref(0)

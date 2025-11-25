@@ -52,7 +52,7 @@ const hasRemain = computed(() => {
 })
 
 // 头部nav tab
-const active = ref(0)
+const active = ref(route.query?.active ? Number(route.query?.active) : 0)
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

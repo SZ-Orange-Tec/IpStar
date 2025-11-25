@@ -88,7 +88,7 @@ import { roundToDecimal } from "../../../../utils/tools"
 import { CountryList } from "../../../../api/layout"
 
 const { t } = useI18n()
-const { lang } = settingStore()
+const { lang, en } = settingStore()
 
 // ip搜索
 const dayRange = ref([addDays(new Date(), -6), new Date()])
@@ -128,45 +128,71 @@ async function setIpEchart(data) {
   }
 
   const option = {
-    grid: {
-      top: 40,
-      left: 60,
-      bottom: 40,
-      right: 40,
-    },
+    grid: { left: "left", top: 20, right: 40, bottom: 10, containLabel: true },
+
+    // dataZoom: [
+    //   {
+    //     show: true,
+    //     start: 0,
+    //     end: 100,
+    //     bottom: 10,
+    //     right: 8,
+    //     left: 30,
+    //     height: 20,
+    //     borderColor: "transparent",
+    //     showDetail: false,
+    //     fillerColor: "rgba(39, 114, 240, .3)",
+    //     backgroundColor: "rgba(39, 114, 240, 0.1)",
+    //     handleStyle: {
+    //       color: "rgba(39, 114, 240, 0.57)",
+    //     },
+    //     moveHandleSize: 0,
+    //     moveHandleStyle: {
+    //       opacity: 1,
+    //     },
+    //     dataBackground: {
+    //       areaStyle: {
+    //         color: "rgba(39, 114, 240, 1)",
+    //       },
+    //     },
+    //   },
+    //   {
+    //     type: "inside",
+    //     dataBackground: "#0ff",
+    //     showDetail: false,
+    //   },
+    // ],
     xAxis: {
       type: "category",
+      boundaryGap: false,
       axisLine: {
         lineStyle: {
           color: "#B5B5B5",
         },
       },
       axisTick: {
-        show: false,
+        lineStyle: {
+          color: "#3B82F6",
+        },
       },
       axisLabel: {
-        margin: 20,
+        margin: 8,
         fontFamily: "Roboto",
         fontSize: 12,
-        color: "#666",
+        color: "#7F8188",
       },
       data: ip.date,
     },
     yAxis: {
+      type: "value",
       // max: 4,
       axisLabel: {
         fontFamily: "Roboto",
-        fontSize: 12,
-        color: "#B5B5B5",
-        margin: 30,
+        fontSize: 14,
+        color: "#7F8188",
+        margin: 12,
         formatter(val) {
-          if (val > 1000000) {
-            return `${val / 1000000} M`
-          } else if (val > 1000) {
-            return `${val / 1000} K`
-          } else {
-            return val
-          }
+          return en.value ? roundToDecimal(val / 1000000, 2) : roundToDecimal(val / 10000, 2)
         },
       },
       axisTick: {
@@ -175,63 +201,46 @@ async function setIpEchart(data) {
       },
       splitLine: {
         lineStyle: {
-          color: "#B5B5B5",
-          type: "dashed", // 虚线
+          color: "#E0E6F1",
+          type: "solid", // 虚线
         },
       },
     },
-    dataZoom: [
-      {
-        show: true,
-        start: 0,
-        end: 100,
-        bottom: 10,
-        right: 30,
-        left: 30,
-        height: 20,
-        borderColor: "transparent",
-        showDetail: false,
-        fillerColor: "rgba(39, 114, 240, .3)",
-        backgroundColor: "rgba(39, 114, 240, 0.1)",
-        handleStyle: {
-          color: "rgba(39, 114, 240, 0.57)",
-        },
-        moveHandleSize: 0,
-        moveHandleStyle: {
-          opacity: 1,
-        },
-        dataBackground: {
-          areaStyle: {
-            color: "rgba(39, 114, 240, 1)",
-          },
+    tooltip: {
+      trigger: "axis",
+      padding: 10,
+      textStyle: { color: "7F8188" },
+      renderMode: "html",
+      appendTo: document.body,
+      axisPointer: {
+        lineStyle: {
+          color: "#B9BEC9",
         },
       },
-      {
-        type: "inside",
-        dataBackground: "#0ff",
-        showDetail: false,
+      formatter(params) {
+        const { name, value } = params[0]
+
+        const useage = en.value ? roundToDecimal(value / 1000000, 2) + " M" : roundToDecimal(value / 10000, 2) + " 万"
+
+        const html = `
+        <div class="grey-60 font-medium" style="font-family: Outfit, Noto Sans SC, sans-serif, serif">
+          <span>${name}</span>
+          <p>
+            ${t("Online_IP")}:
+            <span class="black font-medium">${useage}</span>
+          </p>
+        </div>`
+
+        return html
       },
-    ],
+    },
     series: [
       {
         type: "line",
+        smooth: true,
         // showSymbol: false, // 开启移入显示 具体数值
-        // showAllSymbol: true,
-        // symbolSize: 10,
-        // symbol: 'rect',
-        symbolSize: 8, // 拐点大小
-        symbol: "circle",
-        itemStyle: {
-          color: "#e5e7eb",
-          // borderColor: '#fce5c1',
-          // borderWidth: 5,
-          shadowColor: "rgba(39, 114, 240, 0.5)",
-          shadowBlur: 6,
-          // shadowOffsetX: -3,
-          // shadowOffsetY: -3
-        },
-
         areaStyle: {
+          // 覆盖区域的渐变色
           color: {
             type: "linear",
             x: 0,
@@ -241,11 +250,11 @@ async function setIpEchart(data) {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
+                color: "rgba(39, 114, 240,0.7)", // 0% 处的颜色
               },
               {
                 offset: 0.5,
-                color: "rgba(39, 114, 240, 0.2)", // 0% 处的颜色
+                color: "rgba(39, 114, 240, 0.5)", // 0% 处的颜色
               },
               {
                 offset: 1,
@@ -255,30 +264,15 @@ async function setIpEchart(data) {
             global: false, // 缺省为 false
           },
         },
+        // showAllSymbol: true,
+        // symbol: 'image://路径',
+        // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
+        symbolSize: 5,
         label: {
-          show: true,
-          position: "top",
-          textStyle: {
-            color: "#666666",
-            fontSize: 14,
-          },
-          formatter(res) {
-            const val = res.value
-            if (val > 1000000) {
-              return `${roundToDecimal(val / 1000000)} M`
-            } else if (val > 1000) {
-              return `${roundToDecimal(val / 1000)} K`
-            } else {
-              return val
-            }
-          },
+          show: false,
         },
-        // 关闭 提示框
-        // tooltip: {
-        //   show: false
-        // },
         lineStyle: {
-          color: "rgba(39, 114, 240,1)",
+          color: "#3B82F6",
         },
         data: ip.count,
       },

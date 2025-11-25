@@ -120,6 +120,7 @@ const activeStyle = {
   top: 0,
   bottom: 0,
 }
+provide("proxyType", active)
 function selectActive(e) {
   if (e.target.tagName === "UL") return
 

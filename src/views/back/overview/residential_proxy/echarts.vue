@@ -23,7 +23,7 @@
     </div>
 
     <!-- echart -->
-    <div class="w-full column relative echart" v-loading="loading">
+    <div class="w-full column relative echart mt-6" v-loading="loading">
       <div v-show="active === 0" class="w-full h-full rounded-md relative">
         <div class="w-full h-full" id="echartDay" v-show="showDay"></div>
         <div class="null_data w-full h-full" v-show="!showDay">
@@ -49,9 +49,13 @@ import { addDays, format } from "date-fns"
 import { useI18n } from "vue-i18n"
 import settingStore from "../../../../store/setting"
 import { watch } from "vue"
+import { roundToDecimal } from "../../../../utils/tools"
 
 const { en } = settingStore()
 const { t } = useI18n()
+
+// props
+const proxyType = inject("proxyType", 0)
 
 // tab
 const active = ref(0) // 0:按天 1：按时
@@ -72,6 +76,7 @@ function updateActive(index) {
 // 搜索
 let oldDay
 const dayRange = ref()
+// const day = ref()
 const loading = ref(false)
 function search() {
   // oldDay = dayRange.value
@@ -95,13 +100,14 @@ async function getRealTime(date = new Date()) {
     let { data } = await platCustomerReportRealTime({
       start_time: `${day} 00:00:00`,
       end_time: `${day} 23:59:59`,
+      prd_type: proxyType.value,
     })
     timeLineData.value = data
     if (!timeLineData.value.length) return
 
-    data = data.sort((a, b) => {
-      return b.time < a.time ? 1 : -1
-    })
+    // data = data.sort((a, b) => {
+    //   return new Date(day + " " + b.time).getTime() < new Date(day + " " + a.time).getTime() ? 1 : -1
+    // })
     setLine(
       () => {
         return data.map((item) => item.time)
@@ -128,71 +134,82 @@ async function setLine(xData, serData) {
     timeEchart.clear()
   }
   const option = {
-    title: {
-      text: en.value ? "Real time traffic" : "实时流量",
-      textStyle: { color: "#999999", fontSize: 14, fontWeight: "normal" },
-      padding: [20, 0, 0, 20],
-    },
-    grid: { left: 60, top: 60, bottom: 40, right: 60, containLabel: true },
-    dataZoom: [
-      {
-        show: true,
-        start: 0,
-        end: 100,
-        bottom: 10,
-        right: 8,
-        left: 30,
-        height: 20,
-        borderColor: "transparent",
-        showDetail: false,
-        fillerColor: "rgba(39, 114, 240, .3)",
-        backgroundColor: "rgba(39, 114, 240, 0.1)",
-        handleStyle: {
-          color: "rgba(39, 114, 240, 0.57)",
-        },
-        moveHandleSize: 0,
-        moveHandleStyle: {
-          opacity: 1,
-        },
-        dataBackground: {
-          areaStyle: {
-            color: "rgba(39, 114, 240, 1)",
-          },
-        },
-      },
-      {
-        type: "inside",
-        dataBackground: "#0ff",
-        showDetail: false,
-      },
-    ],
+    // title: {
+    //   text: "单位 / (GB)",
+    //   textAlign: "center",
+    //   left: 40,
+    //   textVerticalAlign: "top",
+    //   textStyle: {
+    //     color: "rgba(146,147,153,.5)",
+    //     fontSize: 10,
+    //     fontWeight: "normal",
+    //     ontFamily: "Outfit, Noto Sans SC, sans-serif, serif",
+    //   },
+    // },
+    grid: { left: "left", top: 20, right: 40, bottom: 10, containLabel: true },
+    // dataZoom: [
+    //   {
+    //     show: true,
+    //     start: 0,
+    //     end: 100,
+    //     bottom: 10,
+    //     right: 8,
+    //     left: 30,
+    //     height: 20,
+    //     borderColor: "transparent",
+    //     showDetail: false,
+    //     fillerColor: "rgba(39, 114, 240, .3)",
+    //     backgroundColor: "rgba(39, 114, 240, 0.1)",
+    //     handleStyle: {
+    //       color: "rgba(39, 114, 240, 0.57)",
+    //     },
+    //     moveHandleSize: 0,
+    //     moveHandleStyle: {
+    //       opacity: 1,
+    //     },
+    //     dataBackground: {
+    //       areaStyle: {
+    //         color: "rgba(39, 114, 240, 1)",
+    //       },
+    //     },
+    //   },
+    //   {
+    //     type: "inside",
+    //     dataBackground: "#0ff",
+    //     showDetail: false,
+    //   },
+    // ],
     xAxis: {
       type: "category",
+      boundaryGap: false,
       axisLine: {
         lineStyle: {
-          color: "#B5B5B5",
+          color: "#E6E7F1",
         },
       },
       axisTick: {
-        show: false,
+        lineStyle: {
+          color: "#E0E6F1",
+        },
       },
       axisLabel: {
-        margin: 30,
+        margin: 8,
         fontFamily: "Roboto",
         fontSize: 12,
-        color: "#666",
+        color: "#7F8188",
       },
       data: xData(),
     },
     yAxis: {
+      type: "value",
       // max: 4,
       axisLabel: {
         fontFamily: "Roboto",
         fontSize: 12,
-        color: "#666",
-        margin: 30,
+        color: "#7F8188",
+        margin: 12,
         formatter(val) {
-          return `${val}MB`
+          return val <= 1 ? val.toFixed(2) : val
         },
       },
       axisTick: {
@@ -201,33 +218,44 @@ async function setLine(xData, serData) {
       },
       splitLine: {
         lineStyle: {
-          color: "#B5B5B5",
-          type: "dashed", // 虚线
+          color: "#E0E6F1",
+          type: "solid", // 虚线
         },
       },
     },
     tooltip: {
       trigger: "axis",
-      padding: [12, 17, 20, 23],
-      textStyle: { color: "#424242" },
+      padding: 10,
+      textStyle: { color: "7F8188" },
       renderMode: "html",
-      className: "tooltip",
+      appendTo: document.body,
       axisPointer: {
         lineStyle: {
-          // type: 'solid',
-          // width: 3,
-          color: "rgba(39, 114, 240,1)",
+          color: "#B9BEC9",
         },
       },
-      formatter() {
-        return null
+      formatter(params) {
+        const { name, value } = params[0]
+
+        const useage = value.toFixed(2) + "GB"
+
+        const html = `
+        <div class="grey-60 font-medium" style="font-family: Outfit, Noto Sans SC, sans-serif, serif">
+          <span>${name}</span>
+          <p>
+            ${t("Traffic_Usage")}:
+            <span class="black font-medium">${useage}</span>
+          </p>
+        </div>`
+
+        return html
       },
     },
     series: [
       {
         type: "line",
         smooth: true,
-        showSymbol: false, // 开启移入显示 具体数值
+        // showSymbol: false, // 开启移入显示 具体数值
         areaStyle: {
           // 覆盖区域的渐变色
           color: {
@@ -239,7 +267,7 @@ async function setLine(xData, serData) {
             colorStops: [
               {
                 offset: 0,
-                color: "rgba(39, 114, 240, 0)", // 0% 处的颜色
+                color: "rgba(39, 114, 240, 0.8)", // 0% 处的颜色
               },
               {
                 offset: 0.5,
@@ -253,31 +281,12 @@ async function setLine(xData, serData) {
             global: false, // 缺省为 false
           },
         },
-        showAllSymbol: true,
-        // symbol: 'image://路径',
-        // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-        symbolSize: 20,
+        symbolSize: 5,
         label: {
-          show: true,
-          position: "top",
-          textStyle: {
-            color: "#191D26",
-            fontSize: 14,
-          },
-          formatter: function (res) {
-            if (res.value) {
-              return res.value + "MB"
-            } else {
-              return 0
-            }
-          },
+          show: false,
         },
-        // 关闭 提示框
-        // tooltip: {
-        //   show: false
-        // },
         lineStyle: {
-          color: "rgba(39, 114, 240,1)",
+          color: "#3B82F6",
         },
         data: serData(),
       },
@@ -298,13 +307,14 @@ async function getDayLineData() {
     let { data } = await platCustomerReport({
       start_time: format(dayRange.value[0], "yyyy-MM-dd"),
       end_time: format(dayRange.value[1], "yyyy-MM-dd"),
+      prd_type: proxyType.value,
     })
-    data = data.sort((a, b) => {
-      return b.date_short < a.date_short ? -1 : 1
-    })
+    // data = data.sort((a, b) => {
+    //   return new Date(b.date_short).getTime() < new Date(a.date_short).getTime() ? -1 : 1
+    // })
     dayLine.value = data.map((item) => {
       return {
-        date: item.date_short,
+        date: item.date,
         flow: item.pack_size,
       }
     })
@@ -337,72 +347,71 @@ async function setEchart(xData, serData) {
   }
 
   const option = {
-    title: {
-      text: en.value ? "5-Day Comparison" : "5 天对比",
-      textStyle: { color: "#999999", fontSize: 16, fontWeight: "normal" },
-      padding: [20, 0, 0, 20],
-    },
-    grid: { left: 40, top: 60, bottom: 40, right: 60, containLabel: true },
+    grid: { left: "left", top: 20, right: 40, bottom: 10, containLabel: true },
 
-    dataZoom: [
-      {
-        show: true,
-        start: 0,
-        end: 100,
-        bottom: 10,
-        right: 8,
-        left: 30,
-        height: 20,
-        borderColor: "transparent",
-        showDetail: false,
-        fillerColor: "rgba(39, 114, 240, .3)",
-        backgroundColor: "rgba(39, 114, 240, 0.1)",
-        handleStyle: {
-          color: "rgba(39, 114, 240, 0.57)",
-        },
-        moveHandleSize: 0,
-        moveHandleStyle: {
-          opacity: 1,
-        },
-        dataBackground: {
-          areaStyle: {
-            color: "rgba(39, 114, 240, 1)",
-          },
-        },
-      },
-      {
-        type: "inside",
-        dataBackground: "#0ff",
-        showDetail: false,
-      },
-    ],
+    // dataZoom: [
+    //   {
+    //     show: true,
+    //     start: 0,
+    //     end: 100,
+    //     bottom: 10,
+    //     right: 8,
+    //     left: 30,
+    //     height: 20,
+    //     borderColor: "transparent",
+    //     showDetail: false,
+    //     fillerColor: "rgba(39, 114, 240, .3)",
+    //     backgroundColor: "rgba(39, 114, 240, 0.1)",
+    //     handleStyle: {
+    //       color: "rgba(39, 114, 240, 0.57)",
+    //     },
+    //     moveHandleSize: 0,
+    //     moveHandleStyle: {
+    //       opacity: 1,
+    //     },
+    //     dataBackground: {
+    //       areaStyle: {
+    //         color: "rgba(39, 114, 240, 1)",
+    //       },
+    //     },
+    //   },
+    //   {
+    //     type: "inside",
+    //     dataBackground: "#0ff",
+    //     showDetail: false,
+    //   },
+    // ],
     xAxis: {
       type: "category",
+      boundaryGap: false,
       axisLine: {
         lineStyle: {
           color: "#B5B5B5",
         },
       },
       axisTick: {
-        show: false,
+        lineStyle: {
+          color: "#3B82F6",
+        },
       },
       axisLabel: {
-        margin: 30,
+        margin: 8,
         fontFamily: "Roboto",
         fontSize: 12,
-        color: "#666",
+        color: "#7F8188",
       },
       data: xData(),
     },
     yAxis: {
+      type: "value",
       // max: 4,
       axisLabel: {
         fontFamily: "Roboto",
-        fontSize: 12,
-        color: "#666",
-        margin: 30,
+        fontSize: 14,
+        color: "#7F8188",
+        margin: 12,
         formatter(val) {
-          return `${val}GB`
+          return val <= 1 ? val.toFixed(2) : val
         },
       },
       axisTick: {
@@ -411,31 +420,44 @@ async function setEchart(xData, serData) {
       },
       splitLine: {
         lineStyle: {
-          color: "#B5B5B5",
-          type: "dashed", // 虚线
+          color: "#E0E6F1",
+          type: "solid", // 虚线
         },
       },
     },
     tooltip: {
       trigger: "axis",
-      padding: [12, 17, 20, 23],
-      textStyle: { color: "#424242" },
+      padding: 10,
+      textStyle: { color: "7F8188" },
       renderMode: "html",
-      className: "tooltip",
+      appendTo: document.body,
       axisPointer: {
         lineStyle: {
-          color: "rgba(39, 114, 240, 1)",
+          color: "#B9BEC9",
         },
       },
-      formatter() {
-        return null
+      formatter(params) {
+        const { name, value } = params[0]
+
+        const useage = value.toFixed(2) + "GB"
+
+        const html = `
+        <div class="grey-60 font-medium" style="font-family: Outfit, Noto Sans SC, sans-serif, serif">
+          <span>${name}</span>
+          <p>
+            ${t("Traffic_Usage")}:
+            <span class="black font-medium">${useage}</span>
+          </p>
+        </div>`
+
+        return html
       },
     },
     series: [
       {
         type: "line",
         smooth: true,
-        showSymbol: false, // 开启移入显示 具体数值
+        // showSymbol: false, // 开启移入显示 具体数值
         areaStyle: {
           // 覆盖区域的渐变色
           color: {
@@ -461,31 +483,15 @@ async function setEchart(xData, serData) {
             global: false, // 缺省为 false
           },
         },
-        showAllSymbol: true,
+        // showAllSymbol: true,
         // symbol: 'image://路径',
         // symbol: `image://${new URL("../../../assets/pc_img/overview_img/peak point.png", import.meta.url).href}`,
-        symbolSize: 10,
+        symbolSize: 5,
         label: {
-          show: true,
-          position: "top",
-          textStyle: {
-            color: "#191D26",
-            fontSize: 14,
-          },
-          formatter: function (res) {
-            if (res.value) {
-              return res.value + "GB"
-            } else {
-              return 0
-            }
-          },
+          show: false,
         },
-        // 关闭 提示框
-        // tooltip: {
-        //   show: false
-        // },
         lineStyle: {
-          color: "rgba(39, 114, 240, 1)",
+          color: "#3B82F6",
         },
         data: serData(),
       },
@@ -527,6 +533,6 @@ onBeforeUnmount(() => {
 }
 
 .echart {
-  height: 400px;
+  height: 300px;
 }
 </style>

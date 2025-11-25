@@ -42,13 +42,13 @@
         <div class="btn_list space-y-5 pb-5">
           <p class="text-sm">{{ $t("overview_spec.way") }}</p>
           <div class="w-full v_center space-x-5">
-            <ipButton type="border" class="flex-1" @click="router.push('/proxy?active=0')">
+            <ipButton type="border" class="flex-1" @click="router.push('/proxy?type=' + proxyType)">
               <div class="vh_center space-x-2 py-3 w-full">
                 <span>{{ $t("User_Pass_Auth") }}</span>
               </div>
             </ipButton>
             <ipButton type="border" class="flex-1">
-              <div class="vh_center space-x-2 py-3 w-full" @click="router.push('/proxy?active=1')">
+              <div class="vh_center space-x-2 py-3 w-full" @click="router.push({ path: '/proxy', query: { type: proxyType, active: 1 } })">
                 <span>{{ $t("API_Auth") }}</span>
               </div>
             </ipButton>
@@ -62,7 +62,7 @@
 <script setup>
 import CopyItem from "./copyItem.vue"
 import CodeItem from "./codeItem.vue"
-import { onMounted, ref } from "vue"
+import { inject, onMounted, ref } from "vue"
 import userStore from "@/store/user"
 import settingStore from "@/store/setting"
 import IpButton from "@/components/button/button.vue"
@@ -70,6 +70,9 @@ import { useRouter } from "vue-router"
 
 const { lang } = settingStore()
 const router = useRouter()
+
+// props
+const proxyType = inject("proxyType", 0)
 
 // 用户代理信息
 const { unlimited, isUsed, proxy_user, proxy_pass } = userStore()
@@ -100,9 +103,9 @@ async function getIpPool() {
       const port = idx === 0 ? 9139 : 9135
       result.push({
         label: `${name} ${proto[index % 2]}：`,
-        text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-${generatePassword(9)}-0-${code}-N:${
-          proxy_pass.value
-        }@${serve}:${port} https://ipinfo.io -vv`,
+        text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-${generatePassword(9)}-0-${code}-N${
+          proxyType.value === 2 ? "-M" : ""
+        }:${proxy_pass.value}@${serve}:${port} https://ipinfo.io -vv`,
       })
     })
     ipPools.value = result
