@@ -23,6 +23,7 @@ export default {
   Never_Expire: "Never Expire",
   Days: "Days",
   Product_Name: "Product Name",
+  Timeout: "Timeout",
   Unpaid: "Unpaid",
   Paid: "Paid",
   Pay: "Pay",

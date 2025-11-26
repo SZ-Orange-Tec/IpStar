@@ -67,5 +67,11 @@ export default {
     support: "我们接受以下付款方式：",
 
     hot_limit: "限时两天",
+
+    custom_pack: "定制套餐",
+    pending: "等待付款",
+    h: "小时",
+    m: "分",
+    pay_now: "立即支付",
   },
 }

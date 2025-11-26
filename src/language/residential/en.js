@@ -22,8 +22,9 @@ export default {
   Action: "Action",
   Never_Expire: "Never Expire",
   Days: "Days",
-  Unpaid: "未支付",
-  Paid: "已支付",
+  Timeout: "Timeout",
+  Unpaid: "Unpaid",
+  Paid: "Paid",
   Pay: "Pay",
 
   residential_spec: {

@@ -46,6 +46,7 @@ export default {
   Action: "Action",
   Never_Expire: "Never Expire",
   Days: "Days",
+  Timeout: "Timeout",
   Unpaid: "Unpaid",
   Paid: "Paid",
   Pay: "Pay",

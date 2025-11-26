@@ -23,6 +23,7 @@ export default {
   Never_Expire: "永久有效",
   Days: "天",
   Product_Name: "产品名称",
+  Timeout: "超时",
   Unpaid: "未支付",
   Paid: "已支付",
   Pay: "支付",

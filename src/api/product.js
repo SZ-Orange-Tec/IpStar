@@ -60,3 +60,12 @@ export function platCustomerOrdersRenewal(data) {
     data,
   })
 }
+
+// 用户自定义订单
+export function platCustomerCustomOrder(params) {
+  return request({
+    url: "plat/customer/custom-order",
+    method: "get",
+    params,
+  })
+}

@@ -6,7 +6,7 @@
       </template>
     </NavBar>
 
-    <div class="w-full px-5">
+    <div class="w-full sm:px-4 lg:px-6">
       <SonAccount class="board p-5 mt-5 rounded-md" />
       <AccountDetail class="board p-5 my-5 rounded-md" />
     </div>

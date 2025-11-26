@@ -22,6 +22,7 @@ export default {
   Action: "操作",
   Never_Expire: "永久有效",
   Days: "天",
+  Timeout: "超时",
   Unpaid: "未支付",
   Paid: "已支付",
   Pay: "支付",

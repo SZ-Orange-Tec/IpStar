@@ -67,5 +67,11 @@ export default {
     support: "We accept these payment methods:",
 
     hot_limit: "Only 48 hours",
+
+    custom_pack: "Custom",
+    pending: "Unpaid",
+    h: "h",
+    m: "m",
+    pay_now: "Pay Now",
   },
 }

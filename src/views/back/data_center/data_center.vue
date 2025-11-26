@@ -22,7 +22,7 @@
       </template>
     </NavBar>
 
-    <div class="box-border flex-1 min-h-0 overflow-y-auto w-full p-6">
+    <div class="box-border flex-1 min-h-0 overflow-y-auto w-full sm:p-4 lg:p-6">
       <Price v-if="active === 0" />
       <!-- <GetProxy v-if="active === 1" /> -->
       <Management v-if="active === 2" />

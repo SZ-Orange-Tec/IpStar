@@ -5,7 +5,7 @@
         <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">{{ t("menu_spec.data_proxy") }} {{ t("Price") }}</p>
         <p class="text-lg desc text-center">{{ t("data_center_spec.des") }}</p>
       </div>
-      <div class="w-full mt-5">
+      <div class="-mx-5 md:m-0">
         <ProductList :type="3" :tabbar="false" :pack="5" />
       </div>
     </div>

@@ -19,14 +19,15 @@
           <el-table-column :label="t('Status')" min-width="120">
             <template #default="scope">
               <div class="flex">
-                <IpTag v-if="scope.row.is_paid == 0" type="netural" class="rounded-full font-medium">{{ t("Unpaid") }}</IpTag>
+                <IpTag v-if="scope.row.status === 3" type="warn" class="rounded-full font-medium">{{ t("Timeout") }}</IpTag>
+                <IpTag v-else-if="scope.row.is_paid == 0" type="netural" class="rounded-full font-medium">{{ t("Unpaid") }}</IpTag>
                 <IpTag v-else-if="scope.row.is_paid == 1" type="success" class="rounded-full font-medium">{{ t("Paid") }}</IpTag>
               </div>
             </template>
           </el-table-column>
           <el-table-column prop="size" :label="t('Action')" min-width="120">
             <template #default="scope">
-              <ip-button v-if="scope.row.is_paid !== 1" :data-index="scope.$index" type="link" @click="toPay">{{ $t("Pay") }}</ip-button>
+              <ip-button v-if="scope.row.status === 0" :data-index="scope.$index" type="link" @click="toPay">{{ $t("Pay") }}</ip-button>
             </template>
           </el-table-column>
         </el-table>

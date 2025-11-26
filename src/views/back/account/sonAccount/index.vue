@@ -75,7 +75,7 @@
         </el-table-column>
         <el-table-column :label="t('account_spec.operation')" min-width="240px" fixed="right">
           <template #default="scope">
-            <div class="flex gap-2">
+            <div class="column md:flex gap-2">
               <span class="pointer primary whitespace-nowrap" @click="$router.push('/proxy?account=' + scope.row.cuscode)">
                 {{ t("account_spec.obtain_proxy") }}
               </span>

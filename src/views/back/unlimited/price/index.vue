@@ -5,9 +5,9 @@
         <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">
           {{ t("menu_spec.unlimited_proxy") }} {{ t("Price") }}
         </p>
-        <p class="text-lg">{{ t("residential_spec.des") }}</p>
+        <p class="text-lg text-center">{{ t("residential_spec.des") }}</p>
       </div>
-      <div class="w-full mt-5">
+      <div class="-mx-5 md:m-0">
         <ProductList :type="1" :tabbar="false" :pack="5" />
       </div>
     </div>

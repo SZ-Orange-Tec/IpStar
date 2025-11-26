@@ -205,7 +205,7 @@ async function stripeCheck() {
     const price = props.order_data.order_price
     const type = isManmer.value
     const origin =
-      process.env.NODE_ENV === "production"
+      import.meta.env.MODE === "production"
         ? "https://www." + location.host.replace("www.", "") + "/stripe.html"
         : "https://test.tomato-proxy.com/stripe.html"
 

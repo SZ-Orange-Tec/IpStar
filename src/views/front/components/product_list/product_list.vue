@@ -12,7 +12,6 @@
             :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
             class="transition-color"
           >
-            <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div>
             <div class="card column_center space-y-5 lg:space-y-10">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
@@ -24,7 +23,10 @@
 
                 <!-- 折扣 -->
                 <div v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
-                  <div class="hot_off vh_center px-3 whitespace-nowrap rounded-full" v-if="item.hot && item.prices[item.select].discount_active > 0">
+                  <div
+                    class="hot_off vh_center px-4 whitespace-nowrap rounded-full text-sm"
+                    v-if="item.hot && item.prices[item.select].discount_active > 0"
+                  >
                     {{ item.prices[item.select].discount + "%" }} {{ t("OFF") }} + {{ item.prices[item.select].discount_active + "%" }} {{ t("OFF") }}
                   </div>
                   <div class="h-8 v_center" v-else>
@@ -35,6 +37,8 @@
                     <template v-else>{{ item.name }}</template>
                   </div>
                 </div>
+
+                <div v-else-if="type === 2 && customPack" class="font-medium" style="height: 1.5rem"></div>
 
                 <p class="price lg:text-4xl space-x-1">
                   <span class="origin text-[13px]" v-if="item.hot">${{ item.prices[item.select].origin_price / 100 }}</span>
@@ -151,14 +155,141 @@
                 </li>
               </ul>
 
+              <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
+              <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div>
+
               <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
                 {{ item.trial ? t("Get") : t("Order_Now") }}
               </IpButton>
             </div>
+          </li>
 
-            <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
-            <div class="bg_img">
-              <img src="@/assets/images/pricing/hover.png" alt="" />
+          <li class="custom" v-if="customPack">
+            <div class="vh_center h-8 text-white">{{ t("productList_spec.custom_pack") }}</div>
+            <div class="card column_center space-y-5 lg:space-y-10">
+              <div class="top w-full column_center space-y-4">
+                <div class="package_name vh_center rounded-full">{{ customPack.product_name }}</div>
+
+                <!-- 折扣 -->
+                <div class="font-medium" style="height: 1.5rem">
+                  <CountdownDiscount :time="customPack.last_time" @clear="customPack = null" />
+                </div>
+
+                <p class="price lg:text-4xl space-x-1">
+                  <strong class="text-3xl font-semibold">$ {{ customPack.unit_price / 100 }}</strong>
+                  <span class="text-sm">/GB</span>
+                </p>
+
+                <p class="vh_center space-x-1 text-[13px] total">
+                  <span class="grey-60">{{ t("Total") }}:</span>
+                  <span>${{ customPack.order_price / 100 }}</span>
+                </p>
+
+                <div v-if="customPack.product_type === 0 || customPack.product_type === 4" class="number w-full">
+                  <div class="duration text-center space-x-1 text-sm">
+                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                  </div>
+                </div>
+                <div v-if="customPack.product_type === 2" class="number w-full">
+                  <div class="duration text-center space-x-1 text-sm">
+                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                  </div>
+                </div>
+                <div v-if="customPack.product_type === 3" class="w-full space-y-2" style="margin-top: 1.75rem">
+                  <Regions v-model="customPack.region" />
+                  <InputNumber v-model="customPack.number" @change="(num) => numberChange(index, num)" />
+                </div>
+              </div>
+
+              <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
+
+              <ul
+                v-if="customPack.product_type === 0 || customPack.product_type === 4"
+                class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80"
+              >
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.right1") }}</p>
+                </li>
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.right2") }}</p>
+                </li>
+                <li class="hidden sm:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.right3") }}</p>
+                </li>
+                <li class="hidden md:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
+                </li>
+                <li class="hidden lg:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.right5") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="customPack.product_type === 1" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.unlimited_right1") }}</p>
+                </li>
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.unlimited_right2") }}</p>
+                </li>
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.unlimited_right3") }}</p>
+                </li>
+                <li class="hidden md:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.unlimited_right4") }}</p>
+                </li>
+                <li class="hidden lg:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.unlimited_right5") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="customPack.product_type === 2" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.phone_right1") }}</p>
+                </li>
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.phone_right2") }}</p>
+                </li>
+                <li class="hidden sm:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.phone_right3") }}</p>
+                </li>
+                <li class="hidden md:flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.phone_right4") }}</p>
+                </li>
+              </ul>
+              <ul v-else-if="customPack.product_type === 3" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.data_right1") }}</p>
+                </li>
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.data_right2") }}</p>
+                </li>
+                <li class="hidden sm:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.data_right3") }}</p>
+                </li>
+                <li class="hidden md:v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <p>{{ t("productList_spec.data_right4") }}</p>
+                </li>
+              </ul>
+
+              <IpButton @click="payCustomPack" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+                {{ t("productList_spec.pay_now") }}
+              </IpButton>
             </div>
           </li>
           <li v-if="showContact && isLogin" class="common contcat">
@@ -203,9 +334,6 @@
                 {{ t("productList_spec.Service") }}
               </IpButton>
             </div>
-            <div class="bg_img">
-              <img src="@/assets/images/pricing/hover.png" alt="" />
-            </div>
           </li>
         </ul>
       </div>
@@ -232,7 +360,7 @@
 
     <div class="support column_center space-y-3">
       <p class="text-sm">{{ t("productList_spec.support") }}</p>
-      <div class="v_center space-x-6">
+      <div class="vh_center flex-wrap gap-6">
         <img height="25" src="@/assets/images/pay/support/visa.svg" alt="" />
         <img height="25" src="@/assets/images/pay/support/mastercard.svg" alt="" />
         <img height="25" src="@/assets/images/pay/support/alipay.svg" alt="" />
@@ -332,7 +460,10 @@ import layoutStore from "@/store/layout"
 import settingStore from "@/store/setting"
 import position from "@/components/dialog/position"
 import { track_createOrder } from "@/utils/detect"
-import { platProductRegions } from "@/api/product"
+import { platProductRegions, platCustomerCustomOrder } from "@/api/product"
+import { formatSizeUnits } from "../../../../utils/tools"
+
+const CountdownDiscount = defineAsyncComponent(() => import("./CountdownDiscount.vue"))
 
 const Regions = defineAsyncComponent(() => import("./regions/regions.vue"))
 const InputNumber = defineAsyncComponent(() => import("./number/number.vue"))
@@ -476,6 +607,54 @@ function numberChange(index, num) {
   const { total } = toRefs(item)
 
   total.value = roundToDecimal((num * price) / 100)
+}
+
+// 自定义套餐
+const customPack = ref()
+async function GetCustomPack() {
+  try {
+    const { data } = await platCustomerCustomOrder({
+      prd_type: type.value,
+    })
+    if (data.order_price <= 0 || data.order_usdt_price <= 0) return
+    if (data.last_time && new Date(data.last_time).getTime() < Date.now()) return
+
+    data.packsize = data.packsize ? roundToDecimal(data.packsize / 1024 / 1024) : Number(data.product_name.split(" ")[0])
+    customPack.value = {
+      ...data,
+      unit_price: roundToDecimal(data.order_price / data.packsize, 2),
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+async function payCustomPack() {
+  try {
+    const lastTime = customPack.value.last_time
+    if (lastTime && new Date(lastTime).getTime() < Date.now()) {
+      Message({
+        message: en.value ? "Payment for the custom package is no longer available." : "定制套餐支付时间已过期",
+        type: "warning",
+      })
+      return
+    }
+    product.value = {
+      ...customPack.value,
+      days: t("Never_Expires"),
+      pack_size: customPack.value.product_name,
+    }
+    order_data.value = {
+      order_no: customPack.value.order_no,
+      order_price: customPack.value.order_price,
+      order_usdt_price: customPack.value.order_usdt_price,
+      desc_3: getTitleDesc(customPack.value.product_type),
+      desc_4: "",
+    }
+    isPayPopup.value = true
+    payPopupRef.value.toggleDetail(false)
+  } catch (err) {
+    console.log(err.message)
+  }
 }
 
 // 地区
@@ -709,9 +888,13 @@ watch(
   (newVal, oldVal) => {
     if (typeof oldVal === "number") {
       product_list.value = []
+      customPack.value = null
     }
     nextTick(() => {
       GetProductList()
+      if (isLogin.value) {
+        GetCustomPack()
+      }
     })
   },
   {

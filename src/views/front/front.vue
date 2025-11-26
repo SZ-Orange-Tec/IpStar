@@ -73,6 +73,7 @@ getHomeData()
 onMounted(() => {
   // 预加载登录页
   window.addEventListener("load", loadLogin)
+  console.log(import.meta.env.MODE)
 })
 </script>
 

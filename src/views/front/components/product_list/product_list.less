@@ -8,10 +8,10 @@
 		width: 100%;
 		// max-width: 1570px;
 		margin: auto;
-    @media screen and (max-width:640px){
-      width: calc(100% + 40px);
-      margin: 0 -20px;
-    }
+    // @media screen and (max-width:640px){
+    //   width: calc(100% + 40px);
+    //   margin: 0 -20px;
+    // }
 		display: flex;
     flex-direction: column;
 		align-items: flex-start;
@@ -55,14 +55,14 @@
           display: block;
 					width: 210px;
 					min-width: 210px;
+          padding: 2px;
+          padding-top: 32px;
           // height: 100%;
-          padding: 2.25rem 1rem;
-          background-color: hsl(var(--background));
-					border-radius: 20px;
-          color: hsl(var(--foreground));
+          
+          
           position: relative;
-          box-shadow: 0px 5px 16px 0px rgba(187,187,187,0.57);
-          // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+
           @media screen and (max-width:1024px) {
             width: 180px;
             min-width: 180px;
@@ -70,17 +70,22 @@
           @media screen and (max-width:768px) {
             width: calc(calc(100% - 24px) / 3);
             min-width:0;
-            padding: 1.75rem 1rem;
+            // padding: 1.75rem 1rem;
           }
           @media screen and (max-width:640px) {
             width: calc(calc(100% - 12px) / 2);
             min-width:0;
-            padding: 1.75rem 1rem;
+            // padding: 1.75rem 1rem;
           }
+          
+          // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          
           .tag{
+            margin-top: 0;
             position: absolute;
             top: -14px;
             left: 50%;
+            z-index: 2;
             transform: translateX(-50%);
             color: hsl(var(--colour-foreground));
             width: auto;
@@ -93,8 +98,13 @@
           }
 					&>.card{
 						position: relative;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            padding: 2.25rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0px 5px 16px 0px rgba(187,187,187,0.57);
+          
             z-index: 1;
-
 						&>.top{
               
               transition: color .2s;
@@ -244,22 +254,6 @@
             color: hsl(var(--colour-foreground));
             z-index: 1;
           }
-          .bg_img{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity .3s .15s;
-            overflow: hidden;
-            &>img{
-              width: 100%;
-              height: auto;
-            }
-          }
 
           &:hover:not(.skeletion_box){
 
@@ -274,24 +268,6 @@
                 background-color: hsl(var(--success));
               }
             }
-            // background-color: #1d1d1d;
-            // color: hsl(var(--foreground));
-            // background-color: hsl(var(--neutral));
-            // background-image: url("../../../../assets/images/pricing/hover.png");
-            // background-repeat: no-repeat;
-            // background-size: 100%;
-            // .bg_img{
-            //   z-index: 0;
-            //   opacity: 1;
-            // }
-
-            // :deep(.pc-stepNumber){
-            //   color: hsl(var(--success));
-            //   background-color: hsl(var(--foreground));
-            //   .border-btn{
-            //     color: hsl(var(--success));
-            //   }
-            // }
           }
 				}
         &>li.hidden{
@@ -301,7 +277,7 @@
         &>li.popular{
 
           .hot_off{
-            height: 32px;
+            height: 36px;
             background-color: #FFF3F8;
             color: #E65455;
           }
@@ -319,6 +295,11 @@
             background-color: #D5182D !important;
             color: #fff !important;
           }
+        }
+
+        &>li.custom{
+          padding-top: 0px;
+          background: linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--success)) 100%);
         }
 
         &>li.contcat{
