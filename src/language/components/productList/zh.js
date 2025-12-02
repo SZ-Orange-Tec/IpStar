@@ -32,7 +32,7 @@ export default {
 
     unlimited_right1: "不限流量",
     unlimited_right2: "广泛的IP池",
-    unlimited_right3: "全球190+个地区随机定位",
+    unlimited_right3: "全球80+个地区随机定位",
     unlimited_right4: "不限制并发",
     unlimited_right5: "真实动态住宅代理",
 
@@ -66,7 +66,7 @@ export default {
 
     support: "我们接受以下付款方式：",
 
-    hot_limit: "限时两天",
+    hot_limit: "限时特惠",
 
     custom_pack: "定制套餐",
     pending: "等待付款",

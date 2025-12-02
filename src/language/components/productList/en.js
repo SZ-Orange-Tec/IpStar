@@ -32,7 +32,7 @@ export default {
 
     unlimited_right1: "Unlimited Traffic",
     unlimited_right2: "Large IP Pool",
-    unlimited_right3: "190+ Global Locations",
+    unlimited_right3: "80+ Global Locations",
     unlimited_right4: "Unlimited Concurrency",
     unlimited_right5: "Real Dynamic Residential Proxies",
 
@@ -66,7 +66,7 @@ export default {
 
     support: "We accept these payment methods:",
 
-    hot_limit: "Only 48 hours",
+    hot_limit: "Limited Time Offer",
 
     custom_pack: "Custom",
     pending: "Unpaid",

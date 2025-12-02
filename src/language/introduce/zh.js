@@ -49,7 +49,7 @@ export default {
     unlimited_adv2: "灵活的并发和带宽管理，轻松扩展",
     unlimited_adv3: "支持 YouTube/Github/音视频代理",
     phone_des: "全球真实移动设备IP资源池，4G/5G网络原生出口，保障业务高稳定性与高可用性，支持公开数据分析与多元化业务需求。",
-    phone_adv1: "2百万+IPs覆盖30多个国家",
+    phone_adv1: "3百万+IPs覆盖30多个国家",
     phone_adv2: "3G/4G/5G/LTE 移动代理网络",
     phone_adv3: "99.9%成功率",
     data_center_des: "高性价比的数据中心IP网络。提供充足带宽与稳定低延退连接，助力企业实现商业洞察、应用测试与性能监控。",

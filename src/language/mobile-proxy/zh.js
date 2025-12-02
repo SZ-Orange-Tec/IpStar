@@ -28,19 +28,19 @@ export default {
   mobile_proxy_spec: {
     title: "高速5G/4G/3G/LET移动代理",
     descript: "通过移动代理从真实移动设备突破IP地址限制、地理封锁，并提速数据收集。",
-    adv1: "2百万+IPs覆盖30多个国家",
+    adv1: "3百万+IPs覆盖30多个国家",
     adv2: "3G/4G/5G/LTE 移动代理网络",
     adv3: "99.9%成功率",
 
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
-    proxy_ip: "200万+ IPs",
+    proxy_ip: "300万+ IPs",
     proxy_country: "30+ 国家",
     proxy_uptime: "正常运行时间",
 
-    country_title: "覆盖30多个国家2百万+IPs",
+    country_title: "覆盖30多个国家3百万+IPs",
     country_desc:
-      "IPStar的移动代理网络为您提供覆盖30多个国家2百万+合规获取的移动 IP地址。您可以根据国家、地区、城市其至移动运营商选择代理，以满足您精确的数据采集或测试需求。",
+      "IPStar的移动代理网络为您提供覆盖30多个国家3百万+合规获取的移动 IP地址。您可以根据国家、地区、城市其至移动运营商选择代理，以满足您精确的数据采集或测试需求。",
     expore: "探索所有地点",
 
     proxy_title: "大型稳定的移动代理池",
