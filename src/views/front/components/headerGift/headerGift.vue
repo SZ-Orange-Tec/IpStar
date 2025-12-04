@@ -5,7 +5,11 @@
       <div v-if="registerAward && !isLogin" class="gift_content v_center flex-wrap md:vh_center gap-1 md:gap-3" ref="registerRef">
         <div class="v_center gap-2">
           <Tag class="hidden md:block icon" :size="20" />
-          <p class="text-xs sm:text-base">{{ t("gift_spec.sign_up") }}</p>
+          <i18n-t keypath="gift_spec.sign_up" tag="p" class="text-xs sm:text-base">
+            <template #gift>
+              <span class="primary font-medium">{{ giftText }}</span>
+            </template>
+          </i18n-t>
         </div>
 
         <div class="link_btn v_center space-x-1 pointer text-sm md:text-base" @click="router.push('/login')">
@@ -38,7 +42,7 @@
 
 <script setup>
 import { Tag } from "lucide-vue-next"
-import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 // import { onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
@@ -48,11 +52,13 @@ import { platDataConfig } from "@/api/home"
 import loginStore from "../../../../store/login"
 import layoutStore from "../../../../store/layout"
 import { MoveRight, X as CloseIcon } from "lucide-vue-next"
+import { formatSizeUnits } from "../../../../utils/tools"
 
 const { t } = useI18n()
 const router = useRouter()
 const { isLogin } = loginStore()
-const { registerAward } = layoutStore()
+const { registerAward, gift } = layoutStore()
+const giftText = computed(() => formatSizeUnits(gift.value))
 
 const giftRef = ref(null)
 async function isShowGift() {
@@ -70,6 +76,7 @@ async function isShowGift() {
       }
     })
     registerAward.value = data.register_award
+    gift.value = data.award_packsize ?? 0
 
     open()
   } catch (err) {
