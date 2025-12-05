@@ -2,6 +2,7 @@ export default {
   Free: "Free",
   Day: "Day",
   Total: "Total",
+  Pay_Only: "Pay Only",
   OFF: "OFF",
   Get: "Get",
   Order_Now: "Order Now",
@@ -73,5 +74,7 @@ export default {
     h: "h",
     m: "m",
     pay_now: "Pay Now",
+
+    new_user_activity: "New users: 30% off, 3 days only.",
   },
 }

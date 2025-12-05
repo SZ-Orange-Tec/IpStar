@@ -1,5 +1,7 @@
 import { computed, reactive, toRefs } from "vue"
 import { platProductLowestPrices } from "@/api/product"
+import { platDataConfig } from "../api/home"
+import { formatSizeUnits } from "../utils/tools"
 
 const state = reactive({
   path: "", // 路由路径
@@ -9,6 +11,9 @@ const state = reactive({
   ), // 最低价格
   gift: 0, // 注册奖励礼包 KB
   registerAward: false, // 是否有注册奖励
+  promotion: false,
+  register_days: 0,
+  discount_rate: 0,
 })
 const getters = {
   lowest_price_residential: computed((state) => state.lowestPrice.residential),
@@ -32,6 +37,19 @@ const actions = {
       })
       state.lowestPrice = target
       localStorage.setItem("lowest_price", JSON.stringify(target))
+    } catch (error) {
+      console.log(error.message)
+    }
+  },
+  async getConfig() {
+    try {
+      const { data } = await platDataConfig()
+      state.registerAward = data.register_award
+      state.gift = data.award_packsize ?? 0
+      state.promotion = data.promotion_info.promotion
+      state.register_days = data.promotion_info.register_days
+      state.discount_rate = data.promotion_info.discount_rate
+      return data
     } catch (error) {
       console.log(error.message)
     }

@@ -68,7 +68,6 @@ import userStore from "@/store/user"
 import NavMenu from "./components/menu/menu.vue"
 import { useI18n } from "vue-i18n"
 import { differenceInMinutes } from "date-fns"
-import { platDataConfig } from "@/api/home"
 import IpDialog from "@/components/dialog/index.vue"
 import IpButton from "@/components/button/button.vue"
 import useWidthTag from "../../composables/useWidthTag"
@@ -78,7 +77,7 @@ import { formatSizeUnits } from "../../utils/tools"
 import Menu from "./components/menu/menu.vue"
 
 const { getUserInfo } = userStore()
-const { gift } = layoutStore()
+const { gift, getConfig } = layoutStore()
 const giftText = computed(() => formatSizeUnits(gift.value))
 
 const { t } = useI18n()
@@ -93,7 +92,7 @@ async function judgeMask() {
   try {
     const { create_time, pack_remain, username } = await getUserInfo()
 
-    const { data } = await platDataConfig()
+    const { data } = await getConfig()
     const hasAward = data.register_award
 
     const isNew = isNewUser(create_time)

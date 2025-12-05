@@ -12,7 +12,7 @@
             :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
             class="transition-color"
           >
-            <div class="card column_center space-y-5 lg:space-y-10">
+            <div class="card column_center space-y-5">
               <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
                 <div class="package_name vh_center rounded-full">
                   <div class="column_center">
@@ -23,13 +23,13 @@
 
                 <!-- 折扣 -->
                 <div v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
-                  <div
+                  <!-- <div
                     class="hot_off vh_center px-4 whitespace-nowrap rounded-full text-sm"
                     v-if="item.hot && item.prices[item.select].discount_active > 0"
                   >
                     {{ item.prices[item.select].discount + "%" }} {{ t("OFF") }} + {{ item.prices[item.select].discount_active + "%" }} {{ t("OFF") }}
-                  </div>
-                  <div class="h-8 v_center" v-else>
+                  </div> -->
+                  <div class="h-8 v_center">
                     <template v-if="item.trial">{{ t("Free") }}</template>
                     <template v-else-if="item.prices[item.select]?.discount > 0"
                       >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
@@ -41,7 +41,12 @@
                 <div v-else-if="type === 2 && customPack" class="font-medium" style="height: 1.5rem"></div>
 
                 <p class="price lg:text-4xl space-x-1">
-                  <span class="origin text-[13px]" v-if="item.hot">${{ item.prices[item.select].origin_price / 100 }}</span>
+                  <span class="origin text-[13px] grey-60 line-through" v-if="item.hot">
+                    <!-- 总价和实付金额相等才显示 -->
+                    <template v-if="item.prices[item.select].price === item.prices[item.select].actual_price">
+                      ${{ item.prices[item.select].origin_price / 100 }}
+                    </template>
+                  </span>
                   <strong class="text-3xl font-semibold">${{ item.prices[item.select].unit_price / 100 }}</strong>
                   <span class="text-sm" v-if="type === 0 || type === 4 || type === 2">/GB</span>
                   <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
@@ -50,9 +55,25 @@
 
                 <p class="vh_center space-x-1 text-[13px] total">
                   <span class="grey-60">{{ t("Total") }}:</span>
-                  <span v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</span>
-                  <span v-else>${{ item.total }}</span>
+                  <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
+                  <template v-else>${{ item.total }}</template>
                 </p>
+
+                <div v-if="type === 0 && item.prices[item.select].price !== item.prices[item.select].actual_price" class="column_center space-y-1">
+                  <p class="vh_center space-x-1 text-[13px] total">
+                    <span class="black">{{ t("Pay_Only") }}:</span>
+                    <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].actual_price / 100 }}</span>
+                  </p>
+                  <i18n-t
+                    keypath="productList_spec.new_user_activity"
+                    tag="span"
+                    scope="global"
+                    class="v_center rounded-md py-1 text-xs px-2 success success_border"
+                  >
+                    <template #off>{{ discount_rate_text }}</template>
+                    <template #day>{{ register_days }}</template>
+                  </i18n-t>
+                </div>
 
                 <div v-if="type === 0 || type === 4" class="number w-full">
                   <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
@@ -156,7 +177,7 @@
               </ul>
 
               <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
-              <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div>
+              <!-- <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div> -->
 
               <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
                 {{ item.trial ? t("Get") : t("Order_Now") }}
@@ -485,7 +506,8 @@ const { type } = toRefs(props)
 
 // 是否显示赠送gift
 const { isLogin } = loginStore()
-const { registerAward, gift } = layoutStore()
+const { registerAward, gift, register_days, discount_rate } = layoutStore()
+const discount_rate_text = computed(() => (en.value ? 100 - discount_rate.value + "%" : discount_rate.value / 10))
 const showGift = computed(() => !isLogin.value && registerAward.value)
 
 const router = useRouter()
@@ -537,6 +559,7 @@ async function GetProductList() {
           const origin = prices[key]
           const price = i.unit_price
           const origin_price = i.origin_price
+          i.actual_price = i.pay_price
           i.discount = roundToDecimal(((origin - price) / origin) * 100, 0)
           i.origin_price = origin
           if (item.promo_type === 1) {
@@ -671,14 +694,14 @@ async function getRegions() {
 }
 
 // 获取全局配置
-async function getDataConfig() {
-  try {
-    const { data } = await platDataConfig()
-    registerAward.value = data.register_award
-  } catch (err) {
-    console.log(err)
-  }
-}
+// async function getDataConfig() {
+//   try {
+//     const { data } = await platDataConfig()
+//     registerAward.value = data.register_award
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 // 切换tab
 const showContact = ref(props.type !== 0 && props.type !== 4)
@@ -810,7 +833,7 @@ function click_pay(e) {
     discount_rate: item.prices[item.select].discount,
     unit_price: item.unlimit ? 0 : item.prices[item.select].unit_price,
     pack_size: item.unlimit ? t("Unlimited") : item.pack_title,
-    price: item.prices[item.select].price,
+    price: item.prices[item.select].pay_price,
     origin_price: item.prices[item.select].origin_price,
     attr_id: item.prices[item.select].attr_id,
   }
@@ -903,7 +926,7 @@ watch(
 )
 onMounted(() => {
   getRegions()
-  getDataConfig()
+  // getDataConfig()
   // GetProductList()
   window.addEventListener("resize", initScrollTag)
 })

@@ -5,8 +5,11 @@ export default {
   gift_spec: {
     sign_up: "注册即可获得 {gift} 的免费流量试用。机会不可错过！",
 
-    hot_active: "新用户特惠！住宅代理限定套餐 {discount} {' | '} 最高达 {off}",
-    hot_discount: "额外再打七折",
-    hot_off: "33%折扣",
+    // hot_active: "新用户特惠！住宅代理限定套餐 {discount} {' | '} 最高达 {off}",
+    // hot_discount: "额外再打七折",
+    // hot_off: "33%折扣",
+    hot_active: "新用户特惠！住宅代理限定套餐 {discount} {' | '} {off}",
+    hot_discount: "额外再打{num}折",
+    hot_off: "活动限时{num}天！",
   },
 }

@@ -17,7 +17,7 @@
           <MoveRight :size="16" class="arrow" />
         </div>
       </div>
-      <div class="gift_content hot v_center flex-wrap md:vh_center gap-1 md:gap-3" ref="hotRef">
+      <!-- <div class="gift_content hot v_center flex-wrap md:vh_center gap-1 md:gap-3" ref="hotRef">
         <div class="v_center space-x-3">
           <img src="@/assets/images/home/sale.png" width="35" alt="" />
           <i18n-t keypath="gift_spec.hot_active" tag="p" scope="global" class="text-xs sm:text-base">
@@ -26,6 +26,25 @@
             </template>
             <template #off>
               <span class="font-medium" style="color: #2eddff"> {{ t("gift_spec.hot_off") }} </span>
+            </template>
+          </i18n-t>
+        </div>
+
+        <div class="red_btn rounded-full h-8 px-5 text-sm v_center pointer transition-colors duration-300" @click="toBuy">{{ t("Buy_Now") }}</div>
+      </div> -->
+      <div v-if="promotion" class="gift_content hot v_center flex-wrap md:vh_center gap-1 md:gap-3" ref="hotRef">
+        <div class="v_center space-x-3">
+          <img src="@/assets/images/home/sale.png" width="35" alt="" />
+          <i18n-t keypath="gift_spec.hot_active" tag="p" scope="global" class="text-xs sm:text-base">
+            <template #discount>
+              <i18n-t keypath="gift_spec.hot_discount" tag="span" scope="global" class="font-medium" style="color: #ffd075">
+                <template #num>{{ discount_rate_text }}</template>
+              </i18n-t>
+            </template>
+            <template #off>
+              <i18n-t keypath="gift_spec.hot_off" tag="span" scope="global" class="font-medium" style="color: #2eddff">
+                <template #num>{{ register_days }}</template>
+              </i18n-t>
             </template>
           </i18n-t>
         </div>
@@ -57,14 +76,16 @@ import { formatSizeUnits } from "../../../../utils/tools"
 const { t } = useI18n()
 const router = useRouter()
 const { isLogin } = loginStore()
-const { registerAward, gift } = layoutStore()
-const giftText = computed(() => formatSizeUnits(gift.value))
+const { en } = settingStore()
+const { registerAward, gift, promotion, register_days, discount_rate, getConfig } = layoutStore()
 
+const giftText = computed(() => formatSizeUnits(gift.value))
+const discount_rate_text = computed(() => (en.value ? 100 - discount_rate.value + "%" : discount_rate.value / 10))
 const giftRef = ref(null)
 async function isShowGift() {
   try {
     const start = Date.now()
-    const { data } = await platDataConfig()
+    await getConfig()
     const end = Date.now()
     await new Promise((resolve) => {
       if (end - start > 1000) {
@@ -75,8 +96,8 @@ async function isShowGift() {
         }, 1000 - (end - start))
       }
     })
-    registerAward.value = data.register_award
-    gift.value = data.award_packsize ?? 0
+    // registerAward.value = data.register_award
+    // gift.value = data.award_packsize ?? 0
 
     open()
   } catch (err) {

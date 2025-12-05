@@ -5,8 +5,8 @@ export default {
   gift_spec: {
     sign_up: "Sign up to receive a {gift} free data trial. Experience it now!",
 
-    hot_active: "New User Special: Stack an {discount}. Your total discount? {off}",
-    hot_discount: "EXTRA 30% OFF",
-    hot_off: "Up to 33%%",
+    hot_active: "New User Exclusive: {discount} Residential Proxy Plans – {off}",
+    hot_discount: "{num} off",
+    hot_off: "{num} Days Only!",
   },
 }
