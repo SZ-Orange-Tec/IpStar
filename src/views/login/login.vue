@@ -41,15 +41,16 @@
 
         <div class="right column">
           <div class="img_box flex-1 hidden md:block">
-            <img
+            <!-- <img
               sizes="(max-width: 1024px) 290px, 400px"
-              src="@/assets/images/login/bg-logo.png"
+              src="@/assets/images/login/bg-logo-new.webp"
               srcset="@/assets/images/login/bg-logo.png 290w, @/assets/images/login/bg-logo@2x.png 580w"
               alt=""
-            />
+            /> -->
+            <img src="@/assets/images/login/bg-logo-new.webp" alt="" />
           </div>
 
-          <div class="welcome space-y-5 column !items-end py-10">
+          <div class="welcome space-y-5 column !items-end py-5">
             <ip-button type="link" class="h-8" @click="toHome">
               <div class="v_center space-x-1 hover:space-x-2 leading-none">
                 <ArrowLeft :size="14"></ArrowLeft>

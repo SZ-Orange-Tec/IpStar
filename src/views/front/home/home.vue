@@ -3,7 +3,7 @@
     <!-- 介绍 -->
     <div class="introduce box_wrap relative" ref="introRef">
       <div class="container column space-y-10">
-        <div class="space-y-4 md:space-y-7" style="max-width: 700px">
+        <div class="space-y-4 md:space-y-7" style="max-width: 670px">
           <div class="title space-y-1 md:space-y-4">
             <i18n-t keypath="home_spec.intro_title1" tag="div" scope="global" class="md:whitespace-pre-wrap font-medium">
               <template #ai>
