@@ -92,7 +92,7 @@ async function judgeMask() {
   try {
     const { create_time, pack_remain, username } = await getUserInfo()
 
-    const { data } = await getConfig()
+    const data = await getConfig()
     const hasAward = data.register_award
 
     const isNew = isNewUser(create_time)
