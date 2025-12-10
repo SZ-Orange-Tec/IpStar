@@ -252,7 +252,7 @@ onMounted(() => {
   top: 100%;
   .main {
     padding: 20px 40px 40px;
-    width: 820px;
+    width: 900px;
     margin: 0 auto;
     box-shadow: 0 2px 8px 0 rgba(48, 39, 73, 0.08);
     transform-origin: center center;

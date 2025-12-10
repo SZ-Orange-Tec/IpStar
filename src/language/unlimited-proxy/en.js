@@ -16,7 +16,7 @@ export default {
   Google_Start: "Start with Google",
   Locations: "Locations",
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
-  Price: "Pricing",
+  Price: "Plans",
 
   unlimited_proxy_spec: {
     title: "Scale {place} Collection with Unlimited Proxies",

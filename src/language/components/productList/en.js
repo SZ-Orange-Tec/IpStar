@@ -2,7 +2,6 @@ export default {
   Free: "Free",
   Day: "Day",
   Total: "Total",
-  Pay_Only: "Pay Only",
   OFF: "OFF",
   Get: "Get",
   Order_Now: "Order Now",
@@ -76,5 +75,7 @@ export default {
     pay_now: "Pay Now",
 
     new_user_activity: "New users: 30% off, 3 days only.",
+    pay_only_price: "Promo price",
+    pay_only_total: "Promo payment",
   },
 }

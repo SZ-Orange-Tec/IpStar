@@ -16,23 +16,23 @@ export default {
 
   pricing_spec: {
     residential: {
-      title: "Residential Proxies Price",
+      title: "Residential Proxies Plans",
       des: "Embrace the Global Web: 190+ Countries of Residential IPs",
     },
     unlimited: {
-      title: "Unlimited Residential Proxies Price",
+      title: "Unlimited Residential Proxies Plans",
       des: "Unlimited IP addresses, high bandwidth, no data caps—tailored for large-scale data collection.",
     },
     mobile: {
-      title: "Phone Proxies Price",
+      title: "Phone Proxies Plans",
       des: "Over 2 million premium mobile IPs, worldwide coverage. Get reliable access and conquer complex network environments.",
     },
     data_center: {
-      title: "Data Center Proxies Price",
+      title: "Data Center Proxies Plans",
       des: "With high-quality datacenter proxies, you get low latency and stable connections to keep your operations running smoothly and efficiently.",
     },
     rotation: {
-      title: "Rotation Residential Proxies Price",
+      title: "Rotation Residential Proxies Plans",
       des: "Real residential IPs, auto-rotating for uninterrupted data collection and network access.",
     },
 

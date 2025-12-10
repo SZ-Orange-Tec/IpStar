@@ -59,7 +59,8 @@
             </ip-button>
             <div class="text-lg sm:text-2xl lg:text-3xl hidden md:column sm:!items-end gap-2">
               <div class="black">{{ t("login_spec.your") }}</div>
-              <div class="primary">IPSTAR!</div>
+              <!-- <div class="primary">IPSTAR!</div> -->
+              <img src="@/assets/images/logo.webp" style="height: 30px" />
             </div>
           </div>
         </div>

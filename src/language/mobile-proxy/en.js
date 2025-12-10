@@ -15,7 +15,8 @@ export default {
   Buy_Now: "Buy Now",
   Google_Start: "Start with Google",
   Locations: "Locations",
-  Price: "Pricing",
+  Price: "Plans",
+
   FAQ: "FAQ",
 
   USA: "USA",

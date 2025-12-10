@@ -19,7 +19,6 @@ export default {
   Unlimited: "Unlimited",
   Concurrency: "Concurrency",
   Bandwidth: "Bandwidth",
-  Price: "Price",
   Never_Expire: "Never Expire",
 
   purchase_spec: {},

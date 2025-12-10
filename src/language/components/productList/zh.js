@@ -2,7 +2,6 @@ export default {
   Free: "免费",
   Day: "天",
   Total: "合计",
-  Pay_Only: "优惠后支付",
   OFF: "折扣",
   Get: "获取",
   Order_Now: "立即订购",
@@ -76,5 +75,8 @@ export default {
     pay_now: "立即支付",
 
     new_user_activity: "新用户额外{off}折活动，限时{day}天",
+
+    pay_only_price: "活动价格",
+    pay_only_total: "优惠后支付",
   },
 }

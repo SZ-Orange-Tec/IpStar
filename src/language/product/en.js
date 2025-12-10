@@ -18,7 +18,7 @@ export default {
   Residential_Proxies: "Residential Proxies",
   Rotating_Proxies: "Rotating Proxies",
   Data_Center_Proxies: "Static Data Center Proxies",
-  Price: "Pricing",
+  Price: "Plans",
 
   USA: "USA",
   France: "France",

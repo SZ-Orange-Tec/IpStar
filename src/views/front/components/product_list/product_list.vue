@@ -40,35 +40,55 @@
 
                 <div v-else-if="type === 2 && customPack" class="font-medium" style="height: 1.5rem"></div>
 
+                <!-- 单价 -->
                 <p class="price lg:text-4xl space-x-1">
-                  <span class="origin text-[13px] grey-60 line-through" v-if="item.hot">
-                    <!-- 总价和实付金额相等才显示 -->
+                  <!-- 总价和实付金额相等才显示 -->
+                  <!-- <span class="origin text-[13px] grey-60 line-through" v-if="item.hot">
                     <template v-if="item.prices[item.select].price === item.prices[item.select].actual_price">
                       ${{ item.prices[item.select].origin_price / 100 }}
                     </template>
-                  </span>
-                  <strong class="text-3xl font-semibold">${{ item.prices[item.select].unit_price / 100 }}</strong>
-                  <span class="text-sm" v-if="type === 0 || type === 4 || type === 2">/GB</span>
+                  </span> -->
+                  <strong
+                    class="text-3xl font-semibold"
+                    :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
+                    >${{ item.prices[item.select].unit_price / 100 }}</strong
+                  >
+                  <!-- <span class="text-base font-semibold text-[#d5182d]" v-if="item.prices[item.select].price !== item.prices[item.select].actual_price"
+                    >${{ item.prices[item.select].unit_origin_price / 100 }}</span
+                  > -->
+                  <span
+                    class="text-sm"
+                    :class="{ 'text-slate-400  line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
+                    v-if="type === 0 || type === 4 || type === 2"
+                    >/GB</span
+                  >
                   <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
                   <span class="text-sm" v-else-if="type === 3">/IP</span>
                 </p>
 
+                <!-- 总计 -->
                 <p class="vh_center space-x-1 text-[13px] total">
                   <span class="grey-60">{{ t("Total") }}:</span>
                   <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
                   <template v-else>${{ item.total }}</template>
                 </p>
 
-                <div v-if="type === 0 && item.prices[item.select].price !== item.prices[item.select].actual_price" class="column_center space-y-1">
-                  <p class="vh_center space-x-1 text-[13px] total">
-                    <span class="black">{{ t("Pay_Only") }}:</span>
-                    <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].actual_price / 100 }}</span>
-                  </p>
+                <div v-if="type === 0 && item.prices[item.select].price !== item.prices[item.select].actual_price" class="column_center">
+                  <div class="column !items-stretch">
+                    <p class="v_center space-x-1 text-[13px] total">
+                      <span class="black">{{ t("productList_spec.pay_only_price") }}:</span>
+                      <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].unit_origin_price / 100 }} / GB</span>
+                    </p>
+                    <p class="v_center space-x-1 text-[13px] total">
+                      <span class="black">{{ t("productList_spec.pay_only_total") }}:</span>
+                      <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].actual_price / 100 }}</span>
+                    </p>
+                  </div>
                   <i18n-t
                     keypath="productList_spec.new_user_activity"
                     tag="span"
                     scope="global"
-                    class="v_center rounded-md py-1 text-xs px-2 success success_border"
+                    class="v_center rounded-md py-1 text-xs px-2 success success_border mt-2"
                   >
                     <template #off>{{ discount_rate_text }}</template>
                     <template #day>{{ register_days }}</template>
@@ -558,16 +578,20 @@ async function GetProductList() {
           const key = String(i.days)
           const origin = prices[key]
           const price = i.unit_price
-          const origin_price = i.origin_price
+          // const origin_price = i.origin_price
+          i.has_discount = i.pay_price === i.price
           i.actual_price = i.pay_price
           i.discount = roundToDecimal(((origin - price) / origin) * 100, 0)
           i.origin_price = origin
-          if (item.promo_type === 1) {
-            // 活动 48% off 按原价计算
-            i.discount = roundToDecimal(((origin - origin_price) / origin) * 100, 0)
-            i.discount_active = roundToDecimal(((origin_price - price) / origin_price) * 100, 0)
-            i.origin_price = origin_price
-          }
+
+          const pack_size = roundToDecimal(item.pack_size / 1024 / 1024, 0)
+          i.unit_origin_price = roundToDecimal(i.actual_price / pack_size, 0)
+          // if (item.promo_type === 1) {
+          //   // 活动 48% off 按原价计算
+          //   i.discount = roundToDecimal(((origin - origin_price) / origin) * 100, 0)
+          //   i.discount_active = roundToDecimal(((origin_price - price) / origin_price) * 100, 0)
+          //   i.origin_price = origin_price
+          // }
           return i
         })
       }

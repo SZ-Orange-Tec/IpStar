@@ -17,7 +17,7 @@ export default {
   Language: "Language",
 
   Proxy_Solutions: "Proxy Solutions",
-  Agent_Price: "Agent Price",
+  Agent_Price: "Agent Plans",
   Residential_Proxies: "Residential Proxies",
   Rotating_Proxies: "Rotating Proxies",
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",
