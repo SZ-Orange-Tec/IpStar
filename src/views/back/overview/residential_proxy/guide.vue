@@ -105,7 +105,7 @@ async function getIpPool() {
         label: `${name} ${proto[index % 2]}：`,
         text: `curl -${index % 2 === 0 ? "x" : "-socks5"} ${proxy_user.value}-${generatePassword(9)}-0-${code}-N${
           proxyType.value === 2 ? "-M" : ""
-        }:${proxy_pass.value}@${serve}:${port} https://ipinfo.io -vv`,
+        }:${proxy_pass.value}@${serve}:${port} https://ipinfo.io`,
       })
     })
     ipPools.value = result

@@ -112,6 +112,7 @@ function open() {
   show.value = local_show
 
   if (!show.value) return
+  if (!(registerAward.value && !isLogin.value) && !promotion.value) return
 
   nextTick(() => {
     anime({

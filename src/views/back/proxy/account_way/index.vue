@@ -248,7 +248,7 @@ async function generate() {
 }
 function generateCurl(item) {
   const { password, port, server, user } = item
-  const url = `curl -${protocolVal.value === "0" ? "-socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io --vv`
+  const url = `curl -${protocolVal.value === "0" ? "-socks5" : "x"} ${user}:${password}@${server}:${port} https://ipinfo.io`
   return url
 }
 
