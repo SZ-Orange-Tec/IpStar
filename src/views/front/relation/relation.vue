@@ -54,35 +54,59 @@
                 </IpButton>
               </div>
 
-              <div class="way flex-1 vh_center pointer whitespace-nowrap" @click="toEmail">support@ipstar.io</div>
+              <div class="way flex-1 hidden sm:vh_center pointer whitespace-nowrap" @click="toEmail">support@ipstar.io</div>
 
-              <div class="way flex-1 vh_center space-x-2">
-                <span>{{ t("Follow_us_on") }}</span>
-                <!-- <IpButton type="ghost" circle class="w-8 h-8" @click="toTwitter">
-                  <Twitter :size="20" color="hsl(var(--primary))" :stroke-width="2" />
-                </IpButton> -->
+              <div class="way flex-1 vh_center space-x-1">
+                <span>{{ t("Follow_us_on") }}:</span>
+                <div class="relative">
+                  <span class="success pointer hover:opacity-70" @click="openGT">{{ t("TG_channel") }}</span>
+                  <div class="new rounded-full px-1 text-xs font-medium white shrink-0">New</div>
+                </div>
+
+                <!-- <el-tooltip class="item" placement="top">
+                  <template #content>
+                    <div>
+                      <img src="@/assets/images/relation/tg.png" alt="" />
+                    </div>
+                  </template>
+                  <span class="success pointer hover:opacity-70">TG 频道</span>
+                </el-tooltip> -->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <IpDialog v-model="isQRcode" class="mask">
+      <div class="mask_content space-y-5 column_center">
+        <div class="image_box">
+          <img src="@/assets/images/relation/tg.webp" alt="" />
+        </div>
+        <p class="font-semibold text-lg text-[#53845F] tracking-wider">@GLOBAL_IP_PROXT</p>
+        <div class="close vh_center pointer transition-color black" @click="isQRcode = false">
+          <CloseIcon :size="16" />
+        </div>
+      </div>
+    </IpDialog>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
 import Message from "@/components/message/message"
 import { platCustomerLeaveMessage } from "@/api/home"
 import settingStore from "@/store/setting"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
-import { Twitter, ArrowRight, MessageCircleMore } from "lucide-vue-next"
+import position from "@/components/dialog/position"
+import IpDialog from "@/components/dialog/index.vue"
+import { Twitter, ArrowRight, MessageCircleMore, X as CloseIcon } from "lucide-vue-next"
 
 import "element-plus/es/components/message-box/style/css"
 // import StarPlay from "@/views/front/components/starPlay/gptstar.vue"
 import Confirm from "@/components/confirm/confirm"
-import position from "../../../components/dialog/position"
+import { isMobile } from "../../../utils/tools"
 
 const { t } = useI18n()
 const { en } = settingStore()
@@ -137,20 +161,17 @@ function sendInfo(e) {
 function bgLoaded(e) {
   e.target.parentNode.style.opacity = 1
 }
-// twitter
-function toTwitter() {
-  window.open("https://twitter.com/Ipflare913")
+
+// GT 二维码
+const isQRcode = ref(false)
+function openGT(e) {
+  if (isMobile()) {
+    window.open("https://t.me/global_ip_proxy")
+  } else {
+    position.set({ x: e.clientX, y: e.clientY })
+    isQRcode.value = true
+  }
 }
-
-// // what
-// const whatsapp = () => {
-//   window.open("https://web.whatsapp.com/send?phone=85253457877")
-// }
-
-// // 访问 facebook
-// const facebook = () => {
-//   window.open("https://www.facebook.com/profile.php?id=100087652609159")
-// }
 
 // srisp 即时聊天
 function toCrisp() {
@@ -161,6 +182,10 @@ function toCrisp() {
 function toEmail() {
   window.open("mailto:support@ipstar.io")
 }
+
+onMounted(() => {
+  import("@/assets/images/relation/tg.webp")
+})
 </script>
 
 <style lang="less" scoped>

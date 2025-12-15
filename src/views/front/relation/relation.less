@@ -118,6 +118,13 @@
           .way{
             height: 80px;
             // color: hsl(var(--foreground) / 90%);
+            .new{
+              background-color: #BC141B;
+              position: absolute;
+              right: -30px;
+              top: -10px;
+              height: 18px;
+            }
           }
           .way+.way{
             border-left: 1px solid hsl(var(--foreground) / 20%);
@@ -130,6 +137,46 @@
 
     }
     
+  }
+
+
+  .mask{
+    :deep(.dialog_container){
+      margin: 15vh 0;
+    }
+    .mask_content {
+      width: 100vw;
+      max-width: 400px;
+      // background: linear-gradient(87deg, #e9eeff, #fff);
+      background: #fff;
+      border-radius: 12px;
+      position: relative;
+      padding: 30px 30px 36px;
+      box-sizing: border-box;
+      position: relative;
+      .image_box{
+        width: 300px;
+        height: 300px;
+      }
+      .close {
+        margin-top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: transparent;
+        color: hsl(var(--foreground) / 60%);
+        z-index: 1;
+        &:hover {
+          color: hsl(var(--foreground) / 100%);
+          background-color: hsl(var(--neutral) / 10%);
+        }
+      }
+  
+      
+    }
   }
 
   

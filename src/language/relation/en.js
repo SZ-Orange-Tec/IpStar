@@ -12,6 +12,7 @@ export default {
   Send_message: "Send Message",
 
   Email: "Email",
+  TG_channel: "TG channel",
 
   relation_spec: {
     title: "Send us {info} directly!",

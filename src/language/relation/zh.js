@@ -12,6 +12,7 @@ export default {
   Send_message: "发送信息",
 
   Email: "邮箱",
+  TG_channel: "TG 频道",
 
   relation_spec: {
     title: "直接给我们发{info}!",
