@@ -83,7 +83,7 @@
         <div class="image_box">
           <img src="@/assets/images/relation/tg.webp" alt="" />
         </div>
-        <p class="font-semibold text-lg text-[#53845F] tracking-wider">@GLOBAL_IP_PROXT</p>
+        <p class="font-semibold text-lg text-[#53845F] tracking-wider">@GLOBAL_IP_PROXY</p>
         <div class="close vh_center pointer transition-color black" @click="isQRcode = false">
           <CloseIcon :size="16" />
         </div>
