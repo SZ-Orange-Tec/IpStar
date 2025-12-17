@@ -930,18 +930,6 @@ function merchantScroll() {
 
 // 去购买
 const { isProduc, registerAward } = layoutStore()
-function goToPay() {
-  if (isLogin.value) {
-    isProduc.value = true
-    router.push("/products")
-  } else {
-    Message({
-      message: "Please login first",
-      type: "warning",
-    })
-    router.push("/login")
-  }
-}
 
 // 展示套餐数量
 const pack = computed(() => {
@@ -950,10 +938,6 @@ const pack = computed(() => {
 
 function toLogin() {
   router.push("/login")
-  // Message({
-  //   type: "info",
-  //   message: t("gift_spec.sign_up", { gift: "50M" }),
-  // })
 }
 function giftPacks(e) {
   // 领取礼包

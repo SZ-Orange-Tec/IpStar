@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router"
-import { loadLocaleMessages } from "../language"
+import { loadLocaleMessages, setI18nLanguage } from "../language"
 import Front from "@/views/front/front.vue"
 import Home from "@/views/front/home/home.vue"
 import loginStore from "../store/login"
@@ -10,45 +10,46 @@ const routes = [
   // 前台板块
   {
     name: "front",
+    path: "/:locale?",
     component: Front,
     children: [
       {
-        path: "/home",
+        path: "home",
         name: "home",
         component: Home,
       },
       {
-        path: "/home/:name",
+        path: "home/:name",
         name: "introduce",
         component: () => import("@/views/front/introduce/introduce.vue"),
       },
       {
-        path: "/product/:name",
+        path: "product/:name",
         name: "product",
         component: () => import("@/views/front/product/residential/index.vue"),
       },
       {
-        path: "/unlimited-residential-proxy",
+        path: "unlimited-residential-proxy",
         name: "unlimited-proxy",
         component: () => import("@/views/front/product/unlimited/index.vue"),
       },
       {
-        path: "/mobile-proxy",
+        path: "mobile-proxy",
         name: "mobile-proxy",
         component: () => import("@/views/front/product/mobile/index.vue"),
       },
       {
-        path: "/pricing/:name",
+        path: "pricing/:name",
         name: "pricing",
         component: () => import("@/views/front/pricing/pricing.vue"),
       },
       {
-        path: "/relation",
+        path: "relation",
         name: "relation",
         component: () => import("@/views/front/relation/relation.vue"),
       },
       {
-        path: "/help",
+        path: "help",
         name: "help",
         component: () => import("@/views/front/help/help.vue"),
       },
@@ -63,65 +64,66 @@ const routes = [
   // 后台板块
   {
     name: "back",
+    path: "/:locale?",
     meta: { index: 4, keepAlive: true },
     component: () => import("@/views/back/layout.vue"),
     children: [
       {
-        path: "/overview",
+        path: "overview",
         name: "overview",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/overview/overview.vue"),
       },
       {
-        path: "/proxy",
+        path: "proxy",
         name: "proxy",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/proxy/proxy.vue"),
       },
       {
-        path: "/purchase",
+        path: "purchase",
         name: "purchase",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/purchase/purchase.vue"),
       },
       {
-        path: "/residential",
+        path: "residential",
         name: "residential",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/residential/residential.vue"),
       },
       {
-        path: "/unlimited",
+        path: "unlimited",
         name: "unlimited",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/unlimited/unlimited.vue"),
       },
       {
-        path: "/mobile",
+        path: "mobile",
         name: "mobile",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/mobile/mobile.vue"),
       },
       {
-        path: "/data_center",
+        path: "data_center",
         name: "data_center",
         meta: { index: 11, keepAlive: false },
         component: () => import("@/views/back/data_center/data_center.vue"),
       },
       {
-        path: "/settings",
+        path: "settings",
         name: "settings",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/settings/settings.vue"),
       },
       {
-        path: "/whitelist",
+        path: "whitelist",
         name: "whitelist",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/whitelist/whitelist.vue"),
       },
       {
-        path: "/sub_account",
+        path: "sub_account",
         name: "account",
         meta: { index: 14, keepAlive: false },
         component: () => import("@/views/back/account/index.vue"),
@@ -177,6 +179,10 @@ function checkLogin(path) {
 }
 router.beforeEach(async (to, from, next) => {
   const isLogin = checkLogin()
+
+  if (to.params?.locale && to.params.locale === "zh") {
+    setI18nLanguage("zh")
+  }
 
   if (to.name) {
     await loadLocaleMessages(to.name)

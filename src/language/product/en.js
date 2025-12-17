@@ -37,7 +37,7 @@ export default {
       adv2: "Price starts at ${price}/GB",
       adv3: "Very stable proxies with 99.5% uptime",
       ques1: "What are Rotating Residential Proxies?",
-      ans1: "Rotating Residential Proxies are provided by Internet Service Providers (ISP). Each residential IP is a Rotating IP with selectable country and city, which helps users to perform precise geolocation and information access efficiently and securely. ProxyLite provides real residential IPs with a high connection success rate of around 99.5%.",
+      ans1: "Rotating Residential Proxies are provided by Internet Service Providers (ISP). Each residential IP is a Rotating IP with selectable country and city, which helps users to perform precise geolocation and information access efficiently and securely. IpStar provides real residential IPs with a high connection success rate of around 99.5%.",
       ques2: "What are the advantages of Rotating Residential Proxies in data crawling?",
       ans2: "Rotating Residential Proxies effectively avoids blocking and anti-crawling mechanisms by constantly changing addresses, increasing the success rate of data crawling tasks. The high anonymity and flexible geolocation features are especially good for large-scale data crawling, ad verification and market analysis.",
       ques3: "What are the limitations of using Rotating Residential Proxies?",

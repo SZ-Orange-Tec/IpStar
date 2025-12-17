@@ -81,7 +81,7 @@ export default {
     why4_desc: "无论是小型语言模型还是大型 LLM，我们的无限代理服务都能轻松满足扩展需求。",
 
     app_title: "探索我们对所有 LLM 工作流的兼容性",
-    app_desc: "ProxyLite 提供用于 LLM 训练数据收集的无限流量代理 IP 方案！立即开始挖掘数据价值",
+    app_desc: "IpStar 提供用于 LLM 训练数据收集的无限流量代理 IP 方案！立即开始挖掘数据价值",
     unlimited_traffic: "无限流量代理的无缝集成",
     app_adv1: "面向开发者的集成和文档",
     app_adv2: "端点构建器",

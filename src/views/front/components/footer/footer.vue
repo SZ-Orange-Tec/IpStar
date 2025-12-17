@@ -137,7 +137,6 @@
 import { useRouter } from "vue-router"
 import loginStore from "@/store/login"
 import { Sparkles } from "lucide-vue-next"
-import Message from "@/components/message/message"
 import IpButton from "@/components/button/button.vue"
 import { Mail } from "lucide-vue-next"
 import layoutStore from "@/store/layout"

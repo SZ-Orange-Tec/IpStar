@@ -350,7 +350,7 @@ async function handleSubmit(e) {
   if (error.type === "card_error" || error.type === "validation_error") {
     Message({
       type: "warning",
-      message: error.message,
+      message: error?.message,
     })
   } else {
     Message({

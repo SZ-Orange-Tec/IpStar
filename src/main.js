@@ -10,9 +10,12 @@ import i18n from "./language/index"
 import { createApp } from "vue"
 import "./style.css"
 import App from "./App.vue"
+import { createHead } from "unhead/client"
 
 // const pinia = createPinia();
 const app = createApp(App)
+
+window.__UNHEAD__ = createHead()
 
 // sentry 前端监控
 // import * as Sentry from "@sentry/vue";

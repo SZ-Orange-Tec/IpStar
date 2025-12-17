@@ -12,8 +12,59 @@
 import { onMounted } from "vue"
 import { track_active } from "@/utils/detect"
 import { useRoute } from "vue-router"
+import { useHead, useSeoMeta } from "unhead"
+import { useI18n } from "vue-i18n"
 
 const route = useRoute()
+
+const { t, locale } = useI18n()
+const lang = locale.value === "en" ? "en-US" : "zh-CN"
+const entry = locale.value === "en" ? "https://ipstar.io/home" : "https://ipstar.io/zh/home"
+useHead(window.__UNHEAD__, {
+  htmlAttrs: { lang },
+  link: [
+    { rel: "canonical", href: entry },
+    { rel: "icon", href: "/icon/favicon.ico", sizes: "any" },
+    { rel: "icon", href: "/icon/favicon.svg", sizes: "any", type: "image/svg+xml" },
+    { rel: "apple-touch-icon", sizes: "180x180", href: "/icon/apple-touch-icon.png" },
+  ],
+  title: t("site.title"),
+  meta: [
+    { name: "description", content: t("site.description") },
+    { name: "keywords", content: t("site.keywords") },
+    // { name: "theme-color", content: "#0000FF" },
+    // { name: "color-scheme", content: "light dark" },
+  ],
+  ogType: "website",
+  ogUrl: entry,
+  ogLocale: lang,
+  ogSiteName: "IpStar",
+
+  // 社交分享SEO
+  ogTitle: t("site.title"),
+  ogDescription: t("site.description"),
+  twitterTitle: t("site.title"),
+  twitterDescription: t("site.description"),
+  // no longer explicitly used by X but may be useful for SEO
+  twitterSite: "@example",
+  twitterCreator: "@example",
+  // og image
+  ogImage: {
+    url: "/icon/web-app-manifest-192x192.png",
+    width: 192,
+    height: 192,
+    alt: "Ipstar.io",
+    type: "image/png",
+  },
+  twitterImage: {
+    url: "/icon/web-app-manifest-192x192.png",
+    width: 192,
+    height: 192,
+    alt: "Ipstar.io",
+    type: "image/png",
+  },
+  twitterCard: "summary", // or summary
+})
 
 // function captureError(e){
 //   console.log('enter')

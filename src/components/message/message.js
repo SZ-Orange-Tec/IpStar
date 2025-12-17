@@ -66,6 +66,8 @@ function Message(options) {
     })
   }
 
+  if (!message) return
+
   addMessage().then(() => {
     setTimeout(() => {
       removeMessage()

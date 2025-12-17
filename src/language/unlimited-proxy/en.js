@@ -83,7 +83,7 @@ export default {
       "Whether you're working with a small language model or a large LLM, our unlimited proxy service can easily accommodate your growing needs.",
 
     app_title: "Explore Compatibility with All LLM Workflows",
-    app_desc: "ProxyLite provides unlimited traffic proxy IP solutions for LLM training data collection! Start mining data value now",
+    app_desc: "IpStar provides unlimited traffic proxy IP solutions for LLM training data collection! Start mining data value now",
     unlimited_traffic: "Unlimited Traffic Proxy Seamless Integration",
     app_adv1: "Developer-Friendly Integration and Documentation",
     app_adv2: "Endpoint Builder",
