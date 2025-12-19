@@ -85,7 +85,18 @@
           <template #label="{ open }">
             <IpButton :class="{ open: open }" type="normal" class="user_icon">
               <div class="v_center shrink-0 space-x-2 h-full">
-                <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+                <div class="relative">
+                  <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+                  <div class="absolute -right-1 -top-1" v-if="userStatus === 0">
+                    <el-tooltip effect="light" placement="bottom">
+                      <CircleAlert :size="16" class="warn" :strokeWidth="3.2" />
+                      <template #content>
+                        <div class="text-sm" style="max-width: 220px">{{ t("navbar_spec.ban") }}</div>
+                      </template>
+                      <div></div>
+                    </el-tooltip>
+                  </div>
+                </div>
                 <div class="slider_bck slider_bck_left">
                   <p class="username hidden md:block">{{ username_simple }}</p>
                 </div>
@@ -138,6 +149,7 @@ import {
   ClipboardList,
   Globe as LangIcon,
   LogOut as SignOutIcon,
+  CircleAlert,
 } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import { computed, ref } from "vue"
@@ -154,7 +166,7 @@ import { watch } from "vue"
 const router = useRouter()
 const route = useRoute()
 const { isProduc } = layoutStore()
-const { username_simple } = userStore()
+const { username_simple, status: userStatus } = userStore()
 const { lang } = settingStore()
 const { OutLogin } = loginStore()
 

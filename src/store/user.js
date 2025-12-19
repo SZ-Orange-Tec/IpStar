@@ -16,6 +16,7 @@ const getters = {
   isAdmin: computed(() => state.userInfo?.admin === 2),
   subPrefix: computed(() => state.userInfo?.sub_prefix ?? ""),
   unlimited_time: computed(() => state.userInfo?.unlimited_time ?? ""),
+  status: computed(() => state.userInfo?.status ?? 1),
 
   username_simple: computed(() =>
     (state.userInfo?.username?.length ?? 0) > 15

@@ -130,7 +130,18 @@
               <template #label="{ open }">
                 <IpButton :class="{ open: open }" type="normal" class="user_icon">
                   <div class="v_center shrink-0 space-x-2 h-full">
-                    <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+                    <div class="relative">
+                      <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
+                      <div class="absolute -right-1 -top-1" v-if="userStatus === 0">
+                        <el-tooltip effect="light" placement="bottom">
+                          <CircleAlert :size="16" class="warn" :strokeWidth="3.2" />
+                          <template #content>
+                            <div class="text-sm" style="max-width: 220px">{{ t("header_spac.ban") }}</div>
+                          </template>
+                          <div></div>
+                        </el-tooltip>
+                      </div>
+                    </div>
                     <div class="slider_bck slider_bck_left">
                       <p class="username hidden md:block">{{ username_simple }}</p>
                     </div>
@@ -140,13 +151,6 @@
               </template>
               <template #menu>
                 <ul class="menu text-sm">
-                  <!-- <li @click="navigate('/overview')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("Overview") }}</li>
-                  <li @click="navigate('/products')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("Products") }}</li>
-                  <li @click="navigate('/billings')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("Billings") }}</li>
-                  <li @click="navigate('/proxy')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("Proxy") }}</li>
-                  <li @click="navigate('/generate_api')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("API") }}</li>
-                  <li @click="navigate('/settings')" class="menu_item px-2 rounded pointer transition-color v_center">{{ t("Settings") }}</li> -->
-
                   <li @click="navigate('/overview')" class="menu_item px-2 rounded pointer transition-color v_center">
                     <div class="v_center space-x-2">
                       <UserCenterIcon :size="16" />
@@ -178,7 +182,15 @@
 <script setup>
 import DropDown from "@/components/dropdown/dropdown.vue"
 import IpButton from "@/components/button/button.vue"
-import { CircleUser, Menu, ChevronDown, Globe as LangIcon, LayoutDashboard as UserCenterIcon, LogOut as SignOutIcon } from "lucide-vue-next"
+import {
+  CircleUser,
+  Menu,
+  ChevronDown,
+  Globe as LangIcon,
+  LayoutDashboard as UserCenterIcon,
+  LogOut as SignOutIcon,
+  CircleAlert,
+} from "lucide-vue-next"
 import loginStore from "@/store/login"
 import settingStore from "@/store/setting"
 import { useRouter, useRoute } from "vue-router"
@@ -197,7 +209,7 @@ const route = useRoute()
 const { t } = useI18n()
 const { token, OutLogin } = loginStore()
 const { lang } = settingStore()
-const { username_simple } = userStore()
+const { username_simple, status: userStatus } = userStore()
 
 // const show = /localhost/.test(window.location.href)
 const headerShow = ref(false)

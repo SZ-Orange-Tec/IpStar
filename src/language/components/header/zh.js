@@ -38,5 +38,7 @@ export default {
     unlimited: "流量无上限",
     performance: "独享高性能数据中心",
     native: "原生",
+
+    ban: "检测到您当前账号存在异常行为，已暂停使用，如果您有疑问，请联系客服。",
   },
 }

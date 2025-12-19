@@ -38,5 +38,7 @@ export default {
     unlimited: "Unlimited Data Transfer",
     performance: "High-Performance",
     native: "Native",
+
+    ban: "Account temporarily suspended due to unusual activity. Contact support to restore access.",
   },
 }

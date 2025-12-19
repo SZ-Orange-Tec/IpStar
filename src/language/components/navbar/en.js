@@ -8,5 +8,7 @@ export default {
     expire: "You can set up a secure and reliable residential proxy service through manual extraction, API extraction, and other methods.",
     start_use: "Start using",
     view_tutorial: "View tutorial",
+
+    ban: "Account temporarily suspended due to unusual activity. Contact support to restore access.",
   },
 }

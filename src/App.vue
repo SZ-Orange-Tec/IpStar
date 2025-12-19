@@ -124,11 +124,36 @@ function initGoogleTrack(count = 2) {
     }
   }
 }
+// google 追踪代码
+function initGoogleTrack2(count = 2) {
+  const script = document.createElement("script")
+  script.id = "google"
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-20D3CNNJ9R"
+  document.body.append(script)
+
+  script.onload = function () {
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    window.gtag = gtag
+
+    gtag("js", new Date())
+    gtag("config", "G-20D3CNNJ9R")
+  }
+
+  script.onerror = function () {
+    if (count > 0) {
+      initGoogleTrack2(--count)
+    }
+  }
+}
 
 onMounted(() => {
   // 等待所有资源加载完成
   window.addEventListener("load", () => {
     initGoogleTrack()
+    initGoogleTrack2()
     initCrisp()
   })
 })
