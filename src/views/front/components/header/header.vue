@@ -132,7 +132,7 @@
                   <div class="v_center shrink-0 space-x-2 h-full">
                     <div class="relative">
                       <img src="@/assets/images/home/user.png" width="30" height="30" alt="" />
-                      <div class="absolute -right-1 -top-1" v-if="userStatus === 0">
+                      <div class="absolute -right-1 -top-1 bg-white/90 rounded-xl" v-if="userStatus === 0">
                         <el-tooltip effect="light" placement="bottom">
                           <CircleAlert :size="16" class="warn" :strokeWidth="3.2" />
                           <template #content>
@@ -219,7 +219,7 @@ const headerShow = ref(false)
 
 // 路由
 const activePath = computed(() => route.path)
-const isHome = computed(() => "/home" === activePath.value)
+const isHome = computed(() => /home/.test(activePath.value))
 function navigate(path) {
   // 跳转路由
   if (route.path === path) {

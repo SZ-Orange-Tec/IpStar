@@ -175,6 +175,7 @@ function openGT(e) {
 
 // srisp 即时聊天
 function toCrisp() {
+  window.$crisp.push(["do", "chat:show"])
   window.$crisp.push(["do", "chat:open"])
 }
 

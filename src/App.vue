@@ -14,6 +14,7 @@ import { track_active } from "@/utils/detect"
 import { useRoute } from "vue-router"
 import { useHead, useSeoMeta } from "unhead"
 import { useI18n } from "vue-i18n"
+import { isPrerendering } from "./utils/tools"
 
 const route = useRoute()
 
@@ -89,12 +90,12 @@ function initCrisp() {
   ;(function () {
     const d = document
     const s = d.createElement("script")
+    s.id = "crisp"
     s.src = "https://client.crisp.chat/l.js"
     s.async = 1
     d.getElementsByTagName("head")[0].appendChild(s)
   })()
   // 更换颜色
-  window.$crisp.push(["config", "color:theme", ["orange"]])
 }
 
 // google 追踪代码
@@ -127,7 +128,7 @@ function initGoogleTrack(count = 2) {
 // google 追踪代码
 function initGoogleTrack2(count = 2) {
   const script = document.createElement("script")
-  script.id = "google"
+  script.id = "google2"
   script.src = "https://www.googletagmanager.com/gtag/js?id=G-20D3CNNJ9R"
   document.body.append(script)
 
@@ -152,9 +153,11 @@ function initGoogleTrack2(count = 2) {
 onMounted(() => {
   // 等待所有资源加载完成
   window.addEventListener("load", () => {
-    initGoogleTrack()
-    initGoogleTrack2()
-    initCrisp()
+    if (!isPrerendering()) {
+      initGoogleTrack()
+      initGoogleTrack2()
+      initCrisp()
+    }
   })
 })
 </script>

@@ -692,7 +692,7 @@ import {
 import vLazy from "@/directive/lazy"
 import IpImage from "@/components/image/image.vue"
 import anime from "animejs/lib/anime.es.js"
-import { roundToDecimal } from "@/utils/tools"
+import { roundToDecimal, formatSizeUnits } from "@/utils/tools"
 import { track_gift } from "@/utils/detect"
 import Confirm from "@/components/confirm/confirm"
 import Message from "@/components/message/message"
@@ -730,7 +730,8 @@ const direction = ref("右")
 const merchantTime = ref(null)
 
 // 最低价格
-const { lowestPrice, getLowestPrice } = layoutStore()
+const { lowestPrice, getLowestPrice, gift } = layoutStore()
+const giftText = computed(() => formatSizeUnits(gift.value))
 
 // 代码
 const active = ref("go")
@@ -906,7 +907,7 @@ function toPriceSecond(name) {
   close()
 }
 function openService() {
-  // window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:show"])
   window.$crisp.push(["do", "chat:open"])
 }
 
@@ -948,8 +949,9 @@ function giftPacks(e) {
     Confirm({
       title: en.value ? "Prompt" : "温馨提示",
       message: en.value
-        ? "We have already granted you a default authorization of 50M for testing traffic. You can contact us to apply for an additional 500M of testing traffic."
-        : "我们已经默认授权给您50M的测试流量，您可以联系我们申请额外500M的测试流量。",
+        ? (gift.value > 0 ? `We have already granted you a default authorization of ${giftText.value} for testing traffic.` : "") +
+          " You can contact us to apply for an additional 500M of testing traffic."
+        : (gift.value > 0 ? `我们已经默认授权给您 ${giftText.value} 的测试流量` : "") + "您可以联系我们申请额外500M的测试流量。",
       cancelText: en.value ? "Later" : "以后再说",
       confirmText: en.value ? "Contact Now" : "立即联系",
       success: () => {

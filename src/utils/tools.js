@@ -50,6 +50,13 @@ export function isMobile() {
   var isPhone = /mobile/i.test(info)
   return isPhone
 }
+// 预渲染判断函数
+export const isPrerendering = () => {
+  if (typeof window === "undefined") return false // SSR环境
+
+  const ua = navigator.userAgent.toLowerCase()
+  return ua.includes("prerender") || ua.includes("headless") || ua.includes("chrome-lighthouse") || document.visibilityState === "prerender"
+}
 // 添零
 export function addZero(num) {
   if (num < 10 && num.toString().length === 1) {

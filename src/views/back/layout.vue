@@ -117,6 +117,7 @@ function isNewUser(create_time) {
 }
 function openContact() {
   isMask.value = false
+  window.$crisp.push(["do", "chat:show"])
   window.$crisp.push(["do", "chat:open"])
 }
 
