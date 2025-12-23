@@ -8,8 +8,8 @@ export default {
     // hot_active: "新用户特惠！住宅代理限定套餐 {discount} {' | '} 最高达 {off}",
     // hot_discount: "额外再打七折",
     // hot_off: "33%折扣",
-    hot_active: "新用户特惠！住宅代理限定套餐 {discount} {' | '} {off}",
-    hot_discount: "额外再打{num}折",
+    hot_active: "年终大促销活动！套餐全部 {discount} {' | '} {off}",
+    hot_discount: "{num}折",
     hot_off: "活动限时{num}天！",
   },
 }

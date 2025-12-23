@@ -75,7 +75,7 @@ export default {
     pay_now: "Pay Now",
 
     new_user_activity: "New users: 30% off, 3 days only.",
-    pay_only_price: "Promo price",
-    pay_only_total: "Promo payment",
+    pay_only_price: "Promo Price",
+    pay_only_total: "Promo Payment",
   },
 }

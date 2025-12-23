@@ -67,7 +67,10 @@
                 </p>
 
                 <!-- 总计 -->
-                <p class="vh_center space-x-1 text-[13px] total">
+                <p
+                  class="vh_center space-x-1 text-[13px] total"
+                  :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
+                >
                   <span class="grey-60">{{ t("Total") }}:</span>
                   <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
                   <template v-else>${{ item.total }}</template>
@@ -78,13 +81,16 @@
                   class="column_center"
                 >
                   <div class="column !items-stretch">
-                    <p class="v_center space-x-1 text-[13px] total">
+                    <p class="align-bottom space-x-1 text-[13px] total">
                       <span class="black">{{ t("productList_spec.pay_only_price") }}:</span>
-                      <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].unit_origin_price / 100 }} / GB</span>
+                      <span class="font-medium text-base" style="color: #d5182d">
+                        ${{ item.prices[item.select].unit_origin_price / 100 }}
+                        <span class="black font-normal text-xs">/ GB</span>
+                      </span>
                     </p>
-                    <p class="v_center space-x-1 text-[13px] total">
+                    <p class="v_center space-x-1 text-[13px] total mt-2">
                       <span class="black">{{ t("productList_spec.pay_only_total") }}:</span>
-                      <span class="font-medium" style="color: #d5182d">${{ item.prices[item.select].actual_price / 100 }}</span>
+                      <span class="black">${{ item.prices[item.select].actual_price / 100 }}</span>
                     </p>
                   </div>
                   <i18n-t
@@ -94,7 +100,7 @@
                     class="v_center rounded-md py-1 text-xs px-2 success success_border mt-2"
                   >
                     <template #off>{{ discount_rate_text }}</template>
-                    <template #day>{{ register_days }}</template>
+                    <template #day>{{ activity_days }}</template>
                   </i18n-t>
                 </div>
 
@@ -529,7 +535,7 @@ const { type } = toRefs(props)
 
 // 是否显示赠送gift
 const { isLogin } = loginStore()
-const { registerAward, gift, register_days, discount_rate } = layoutStore()
+const { registerAward, gift, activity_days, discount_rate } = layoutStore()
 const discount_rate_text = computed(() => (en.value ? 100 - discount_rate.value + "%" : discount_rate.value / 10))
 const showGift = computed(() => !isLogin.value && registerAward.value)
 

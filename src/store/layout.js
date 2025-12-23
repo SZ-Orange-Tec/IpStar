@@ -12,7 +12,7 @@ const state = reactive({
   gift: 0, // 注册奖励礼包 KB
   registerAward: false, // 是否有注册奖励
   promotion: false,
-  register_days: 0,
+  activity_days: 0,
   discount_rate: 0,
 })
 const getters = {
@@ -47,7 +47,7 @@ const actions = {
       state.registerAward = data.register_award
       state.gift = data.award_packsize ?? 0
       state.promotion = data.promotion_info.promotion
-      state.register_days = data.promotion_info.register_days
+      state.activity_days = data.promotion_info.activity_days
       state.discount_rate = data.promotion_info.discount_rate
       return data
     } catch (error) {

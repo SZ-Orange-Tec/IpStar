@@ -43,7 +43,7 @@
             </template>
             <template #off>
               <i18n-t keypath="gift_spec.hot_off" tag="span" scope="global" class="font-medium" style="color: #2eddff">
-                <template #num>{{ register_days }}</template>
+                <template #num>{{ activity_days }}</template>
               </i18n-t>
             </template>
           </i18n-t>
@@ -77,7 +77,7 @@ const { t } = useI18n()
 const router = useRouter()
 const { isLogin } = loginStore()
 const { en } = settingStore()
-const { registerAward, gift, promotion, register_days, discount_rate, getConfig } = layoutStore()
+const { registerAward, gift, promotion, activity_days, discount_rate, getConfig } = layoutStore()
 
 const giftText = computed(() => formatSizeUnits(gift.value))
 const discount_rate_text = computed(() => (en.value ? 100 - discount_rate.value + "%" : discount_rate.value / 10))
