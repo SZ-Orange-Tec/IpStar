@@ -234,7 +234,9 @@ async function generate() {
           curl: generateCurl(obj),
         }
       })
-      mes = data.toString()
+      mes = data.reduce((pre, next) => {
+        return pre + "\n" + next
+      })
     } else {
       Message({
         message: en.value ? "Please fill in the information completely" : "请填写完整信息",
@@ -308,17 +310,12 @@ function sortCountry(arr) {
   return [first].concat(arr)
 }
 
-function copy() {
-  const input = document.createElement("input")
-  input.value = mes
-  document.body.appendChild(input)
-  input.select()
-  document.execCommand("copy")
+async function copy() {
+  await copyText(mes)
   Message({
     message: en.value ? "Copy success" : "复制成功",
     type: "success",
   })
-  document.body.removeChild(input)
 }
 
 const dataFilter = debounce(function (val) {

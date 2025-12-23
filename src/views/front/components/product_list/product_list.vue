@@ -73,7 +73,10 @@
                   <template v-else>${{ item.total }}</template>
                 </p>
 
-                <div v-if="type === 0 && item.prices[item.select].price !== item.prices[item.select].actual_price" class="column_center">
+                <div
+                  v-if="(type === 0 || type === 2) && item.prices[item.select].price !== item.prices[item.select].actual_price"
+                  class="column_center"
+                >
                   <div class="column !items-stretch">
                     <p class="v_center space-x-1 text-[13px] total">
                       <span class="black">{{ t("productList_spec.pay_only_price") }}:</span>

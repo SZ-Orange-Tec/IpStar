@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="close pointer vh_center white">
+    <div class="close pointer vh_center white" v-if="(registerAward && !isLogin) || promotion">
       <CloseIcon :size="14" @click="close" />
     </div>
   </div>
