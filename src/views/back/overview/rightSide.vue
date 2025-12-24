@@ -70,18 +70,13 @@
 
 <script setup>
 import { ChevronRight, Book, FileText, ShieldUser, MessageCircleQuestion, ShoppingCart } from "lucide-vue-next"
-import layoutStore from "@/store/layout"
+
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 import IpButton from "@/components/button/button.vue"
 
 const { t } = useI18n()
 const router = useRouter()
-
-const { lowestPrice, getLowestPrice } = layoutStore()
-if (!lowestPrice.value) {
-  getLowestPrice()
-}
 
 function openService() {
   window.$crisp.push(["do", "chat:show"])

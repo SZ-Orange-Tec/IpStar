@@ -5,7 +5,7 @@
 
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
-        <ul class="flex gap-3">
+        <ul class="column_center sm:flex sm:!items-stretch gap-3">
           <li
             v-for="(item, index) in product_list"
             :key="item.id"
@@ -95,7 +95,7 @@
                   </div>
                   <i18n-t
                     keypath="productList_spec.new_user_activity"
-                    tag="span"
+                    tag="div"
                     scope="global"
                     class="v_center rounded-md py-1 text-xs px-2 success success_border mt-2"
                   >
@@ -124,83 +124,83 @@
 
               <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
 
-              <ul v-if="type === 0 || type === 4" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+              <ul v-if="type === 0 || type === 4" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right2") }}</p>
                 </li>
-                <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right3") }}</p>
                 </li>
-                <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
                 </li>
-                <li class="hidden lg:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 1" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+              <ul v-else-if="type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right1") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right2") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right3") }}</p>
                 </li>
-                <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right4") }}</p>
                 </li>
-                <li class="hidden lg:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 2" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+              <ul v-else-if="type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right1") }}</p>
                 </li>
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right2") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right3") }}</p>
                 </li>
-                <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right4") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 3" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+              <ul v-else-if="type === 3" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right2") }}</p>
                 </li>
-                <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right3") }}</p>
                 </li>
-                <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right4") }}</p>
                 </li>
               </ul>
@@ -255,84 +255,84 @@
 
               <ul
                 v-if="customPack.product_type === 0 || customPack.product_type === 4"
-                class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80"
+                class="rights column space-y-3 text-[13px] font-normal grey-80"
               >
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right2") }}</p>
                 </li>
-                <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right3") }}</p>
                 </li>
-                <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
                 </li>
-                <li class="hidden lg:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="customPack.product_type === 1" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+              <ul v-else-if="customPack.product_type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right1") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right2") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right3") }}</p>
                 </li>
                 <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right4") }}</p>
                 </li>
                 <li class="hidden lg:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.unlimited_right5") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="customPack.product_type === 2" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+              <ul v-else-if="customPack.product_type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right1") }}</p>
                 </li>
                 <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right2") }}</p>
                 </li>
-                <li class="hidden sm:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="flex space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right3") }}</p>
                 </li>
                 <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.phone_right4") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="customPack.product_type === 3" class="rights column space-y-3 text-xs lg:text-[13px] font-normal grey-80">
+              <ul v-else-if="customPack.product_type === 3" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right1") }}</p>
                 </li>
                 <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right2") }}</p>
                 </li>
-                <li class="hidden sm:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right3") }}</p>
                 </li>
-                <li class="hidden md:v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 hidden lg:block success" />
+                <li class="v_center space-x-1">
+                  <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right4") }}</p>
                 </li>
               </ul>
@@ -393,7 +393,7 @@
           <li class="skeletion_box" v-for="item in 5" :key="item">
             <div class="card skeletion space-y-5">
               <div style="width: 40%"></div>
-              <div style="width: 100%" v-for="col in 12" :key="col"></div>
+              <div style="width: 100%" v-for="col in 11" :key="col"></div>
               <div style="width: 60%"></div>
             </div>
           </li>

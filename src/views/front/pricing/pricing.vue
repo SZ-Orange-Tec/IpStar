@@ -7,10 +7,10 @@
         <div class="column_center">
           <div class="header column_center">
             <div class="column_center space-y-3">
-              <p class="text-xl sm:text-2xl lg:text-4xl title md:whitespace-pre-wrap font-semibold">
+              <p class="text-4xl md:whitespace-pre-wrap font-semibold text-center">
                 {{ t(`pricing_spec.${secondName}.title`) }}
               </p>
-              <p class="text-lg">{{ t(`pricing_spec.${secondName}.des`) }}</p>
+              <p class="text-lg text-center">{{ t(`pricing_spec.${secondName}.des`) }}</p>
             </div>
 
             <Tabbar v-if="type === 0 || type === 4" @select="changeActive" class="tabbar text-base"></Tabbar>
