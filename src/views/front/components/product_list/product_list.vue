@@ -76,6 +76,7 @@
                   <template v-else>${{ item.total }}</template>
                 </p>
 
+                <!-- 活动 -->
                 <div
                   v-if="(type === 0 || type === 2) && item.prices[item.select].price !== item.prices[item.select].actual_price"
                   class="column_center"
@@ -97,7 +98,7 @@
                     keypath="productList_spec.new_user_activity"
                     tag="div"
                     scope="global"
-                    class="v_center rounded-md py-1 text-xs px-2 success success_border mt-2"
+                    class="text-center rounded-md py-1 text-xs px-2 success success_border mt-2"
                   >
                     <template #off>{{ discount_rate_text }}</template>
                     <template #day>{{ activity_days }}</template>

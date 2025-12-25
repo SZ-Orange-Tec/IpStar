@@ -5,32 +5,73 @@ type="text/xsl" href="https://www.tboxn.com/wp-content/plugins/xml-sitemap-feed/
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ipstar.io/home</loc>
-    <lastmod>2025-12-17 10:44:00</lastmod>
+    <lastmod>2025-12-25 14:00:00</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipstar.io/home"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipstar.io/zh/home"/>
   </url>
   <url>
+    <loc>https://ipstar.io/product/residential</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/product/residential"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/product/residential"/>
+  </url>
+  <url>
+    <loc>https://ipstar.io/product/rotation</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/product/rotation"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/product/rotation"/>
+  </url>
+  <url>
+    <loc>https://ipstar.io/product/data_center</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/product/data_center"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/product/data_center"/>
+  </url>
+  <url>
+    <loc>https://ipstar.io/mobile-proxy</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/mobile-proxy"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/mobile-proxy"/>
+  </url>
+  <url>
+    <loc>https://ipstar.io/unlimited-residential-proxy</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/unlimited-residential-proxy"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/unlimited-residential-proxy"/>
+  </url>
+  <url>
     <loc>https://ipstar.io/pricing/residential</loc>
-    <lastmod>2025-12-17 10:44:00</lastmod>
+    <lastmod>2025-12-25 14:00:00</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/pricing/residential"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/pricing/residential"/>
   </url>
-  <!-- <url>
+  <url>
     <loc>https://ipstar.io/pricing/mobile</loc>
-    <lastmod>2025-12-16 14:55:00</lastmod>
+    <lastmod>2025-12-25 14:00:00</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/pricing/mobile"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/pricing/mobile"/>
   </url>
   <url>
     <loc>https://ipstar.io/pricing/unlimited</loc>
-    <lastmod>2025-12-16 14:55:00</lastmod>
+    <lastmod>2025-12-25 14:00:00</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/pricing/unlimited"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/pricing/unlimited"/>
   </url>
   <url>
     <loc>https://ipstar.io/pricing/data_center</loc>
-    <lastmod>2025-12-16 14:55:00</lastmod>
+    <lastmod>2025-12-25 14:00:00</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/pricing/data_center"/>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/pricing/data_center"/>
-  </url> -->
+  </url>
+  <url>
+    <loc>https://ipstar.io/help</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/help"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ipstar.io/zh/help"/>
+  </url>
+  <url>
+    <loc>https://ipstar.io/login</loc>
+    <lastmod>2025-12-25 14:00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ipstar.io/login"/>
+  </url>
 </urlset>

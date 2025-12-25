@@ -74,7 +74,7 @@ export default {
     m: "分",
     pay_now: "立即支付",
 
-    new_user_activity: "新用户额外{off}折活动，限时{day}天",
+    new_user_activity: "促销活动为期 {day} 天",
 
     pay_only_price: "活动价格",
     pay_only_total: "优惠后支付",

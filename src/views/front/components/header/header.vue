@@ -219,7 +219,7 @@ const headerShow = ref(false)
 
 // 路由
 const activePath = computed(() => route.path)
-const isHome = computed(() => /home/.test(activePath.value))
+const isHome = computed(() => /home\/?$/.test(activePath.value))
 function navigate(path) {
   // 跳转路由
   if (route.path === path) {
