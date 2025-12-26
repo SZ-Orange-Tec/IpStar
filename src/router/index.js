@@ -58,6 +58,11 @@ const routes = [
         name: "country",
         component: () => import("@/views/front/country/index.vue"),
       },
+      {
+        path: "country/:code",
+        name: "country_detail",
+        component: () => import("@/views/front/country/detail.vue"),
+      },
     ],
   },
   // 登录板块

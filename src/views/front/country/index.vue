@@ -4,7 +4,7 @@
     <div class="box_wrap banner banner">
       <div class="container between">
         <div class="left max-w-xl w-full">
-          <h1 class="text-3xl lg:text-5xl font-medium leading-none">{{ t("country_spec.banner_title") }}</h1>
+          <h1 class="text-3xl lg:text-5xl font-semibold leading-none">{{ t("country_spec.banner_title") }}</h1>
           <p class="text-base lg:text-lg grey-80 mt-5">{{ t("country_spec.banner_desc") }}</p>
 
           <div class="flex w-full mt-8">
@@ -34,7 +34,7 @@
           <ul class="grid grid-cols-4" v-if="mapData.length">
             <li class="v_center space-x-3 py-5" v-for="item in mapData" :key="item.name">
               <div class="w-9 h-9 shrink-0">
-                <img v-lazy :src="item.icon" alt="" />
+                <img loading="lazy" :src="item.icon" alt="" />
               </div>
               <div>
                 <strong class="text-base font-medium">{{ item.name }}</strong>
@@ -84,6 +84,7 @@ import { platDataIndex } from "@/api/home"
 import anime from "animejs/lib/anime.es.js"
 import { CountryList } from "../../../api/layout"
 import settingStore from "../../../store/setting"
+import { useRoute } from "vue-router"
 // 加载国家国旗
 import("flag-icon-css/css/flag-icons.css")
 
@@ -169,7 +170,9 @@ async function getCountries() {
   const { index, size, total } = page
   if (total !== 0 && index * size >= total) {
     loading.value = false
+    return
   }
+  if (window.location.pathname !== "/country") return
 
   const { data } = await CountryList({
     orderby: "continent",
@@ -209,5 +212,14 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import url("./index.less");
+.banner {
+  background-color: #f4f9ff;
+  background-image: url("../../../assets/images/country/location_banner_bg.png");
+  background-size: 100% 100%;
+  height: 560px;
+  width: 100%;
+  .container {
+    padding: 0;
+  }
+}
 </style>

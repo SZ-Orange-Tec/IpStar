@@ -5,7 +5,7 @@
         <div class="flex-1 min-w-0">
           <div class="grey-40 font-medium between">
             <span>{{ t("Proxy_Location") }}</span>
-            <div class="v_center space-x-2 slider_bck slider_bck_left">
+            <div class="v_center space-x-2 slider_bck slider_bck_left" @click="router.push('/country')">
               <strong class="font-medium">{{ t("All_Regions") }}</strong>
               <MoveRight />
             </div>
@@ -205,9 +205,9 @@ function open() {
 const router = useRouter()
 function toCountry(name) {
   router.push({
-    name: "country",
+    name: "country_detail",
     params: {
-      name: name,
+      code: name.toLowerCase(),
     },
   })
   close()
