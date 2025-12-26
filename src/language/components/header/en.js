@@ -2,6 +2,7 @@ export default {
   Home: "Home",
   Products: "Products",
   Pricing: "Pricing",
+  Resources: "Resources",
   Contact: "Contact",
   Help: "Help",
   Sign_in: "Sign in",
@@ -34,11 +35,31 @@ export default {
   Hot: "Hot",
   Day: "Day",
 
+  Proxy_Location: "Proxy Location",
+  All_Regions: "All_Regions",
+  United_States: "United States",
+  France: "France",
+  Germany: "Germany",
+  Brazil: "Brazil",
+  United_Kingdom: "United Kingdom",
+  Japan: "Japan",
+  South_Korea: "South Korea",
+  Australia: "Australia",
+  Netherlands: "Netherlands",
+  Mexico: "Mexico",
+  Blog: "Blog",
+  Proxy_Detection_Tool: "Proxy Detection Tool",
+  IP_Lookup: "IP Lookup",
+
   header_spac: {
     unlimited: "Unlimited Data Transfer",
     performance: "High-Performance",
     native: "Native",
 
     ban: "Account temporarily suspended due to unusual activity. Contact support to restore access.",
+
+    blog_desc: "Offering practical guides, trend insights and in-depth analysis within the proxy sector.",
+    proxy_tool: "Swiftly and efficiently verify your IP address to circumvent potential errors.",
+    lookup: "Professional service for querying detailed IP address location and network information.",
   },
 }

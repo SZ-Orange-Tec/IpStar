@@ -37,6 +37,18 @@
               <PricePop v-model="pricePopShow" />
             </li>
             <li
+              class="h-full v_center pointer transition-color relative"
+              :class="{ active: activePath === '/resource' }"
+              @mouseenter="openResourcePop"
+              @mouseleave="closeResourcePop"
+            >
+              <div class="v_center space-x-2 h-full slider_bck slider_bck_center">
+                <div>{{ $t("Resources") }}</div>
+                <ChevronDown :class="{ rotate180: resourcePopShow }" :size="18" />
+              </div>
+              <ResourcePop v-model="resourcePopShow" />
+            </li>
+            <li
               @click="navigate('/relation')"
               class="slider_bck slider_bck_center h-full v_center pointer transition-color"
               :class="{ active: activePath === '/relation' }"
@@ -54,46 +66,6 @@
         </div>
 
         <div class="v_center h-full space-x-3">
-          <!-- <DropDown placement="bottom" class="block lg:hidden" @onChange="loadFront">
-            <template #label="{ open }">
-              <IpButton :class="{ open: open }" type="ghost" class="icon_btn">
-                <Menu :size="18" />
-              </IpButton>
-            </template>
-            <template #menu>
-              <ul class="menu p-2 text-sm">
-                <li
-                  @click="navigate('/home')"
-                  :class="{ active: activePath === '/home' }"
-                  class="menu_item px-2 rounded-md pointer transition-color v_center"
-                >
-                  {{ t("Home") }}
-                </li>
-                <li
-                  @click="navigate('/pricing')"
-                  :class="{ active: activePath === '/pricing' }"
-                  class="menu_item px-2 rounded-md pointer transition-color v_center"
-                >
-                  {{ t("Pricing") }}
-                </li>
-                <li
-                  @click="navigate('/relation')"
-                  :class="{ active: activePath === '/relation' }"
-                  class="menu_item px-2 rounded-md pointer transition-color v_center"
-                >
-                  {{ t("Contact") }}
-                </li>
-                <li
-                  @click="navigate('/help')"
-                  :class="{ active: activePath === '/help' }"
-                  class="menu_item px-2 rounded-md pointer transition-color v_center"
-                >
-                  {{ t("Help") }}
-                </li>
-              </ul>
-            </template>
-          </DropDown> -->
-
           <div class="v_center space-x-3 shink-0">
             <!-- 语言 -->
             <DropDown placement="bottom" class="hidden lg:block shink-0">
@@ -203,6 +175,7 @@ import { defineAsyncComponent } from "vue"
 import ProductPop from "../product_pop/product_pop.vue"
 import PricePop from "../price_pop/price_pop.vue"
 import HeaderPop from "../header_pop/index.vue"
+import ResourcePop from "../resource_pop/index.vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -287,6 +260,9 @@ async function loadProduct() {
 async function loadPrice() {
   await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
 }
+async function loadResource() {
+  await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
+}
 // 预加载前台
 async function loadFront() {
   await import(/*webpackChunkName:'relation'*/ "@/views/front/relation/relation.vue")
@@ -318,6 +294,17 @@ function openPricePop() {
 function closePricePop(e) {
   if (e.target.tagName === "LI") {
     pricePopShow.value = false
+  }
+}
+
+const resourcePopShow = ref(false)
+function openResourcePop() {
+  resourcePopShow.value = true
+  loadResource()
+}
+function closeResourcePop(e) {
+  if (e.target.tagName === "LI") {
+    resourcePopShow.value = false
   }
 }
 

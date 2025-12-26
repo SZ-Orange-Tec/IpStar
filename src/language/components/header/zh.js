@@ -2,6 +2,7 @@ export default {
   Home: "首页",
   Products: "产品",
   Pricing: "价格",
+  Resources: "资源",
   Contact: "联系",
   Help: "帮助",
   Sign_in: "登录",
@@ -34,11 +35,31 @@ export default {
   Hot: "热门",
   Day: "天",
 
+  Proxy_Location: "代理位置",
+  All_Regions: "所有地区",
+  United_States: "美国",
+  France: "法国",
+  Germany: "德国",
+  Brazil: "巴西",
+  United_Kingdom: "英国",
+  Japan: "日本",
+  South_Korea: "韩国",
+  Australia: "澳大利亚",
+  Netherlands: "荷兰",
+  Mexico: "墨西哥",
+  Blog: "博客",
+  Proxy_Detection_Tool: "代理检测工具",
+  IP_Lookup: "IP 查找",
+
   header_spac: {
     unlimited: "流量无上限",
     performance: "独享高性能数据中心",
     native: "原生",
 
     ban: "检测到您当前账号存在异常行为，已暂停使用，如果您有疑问，请联系客服。",
+
+    blog_desc: "提供代理领域的实践指南、趋势洞察与深度见解。",
+    proxy_tool: "快速高效地检查您的IP，避免潜在错误。",
+    lookup: "专业查询IP地址的详细归属地与网络信息",
   },
 }
