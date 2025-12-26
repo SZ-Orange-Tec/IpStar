@@ -53,6 +53,11 @@ const routes = [
         name: "help",
         component: () => import("@/views/front/help/help.vue"),
       },
+      {
+        path: "country",
+        name: "country",
+        component: () => import("@/views/front/country/index.vue"),
+      },
     ],
   },
   // 登录板块

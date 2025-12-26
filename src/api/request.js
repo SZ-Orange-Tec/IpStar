@@ -74,7 +74,7 @@ _request.interceptors.response.use(
   (error) => {
     const { OutLogin } = loginStore()
     const { en } = settingStore()
-    if (prevCode === error.response.data.code) {
+    if (prevCode === error?.response?.data?.code) {
       return Promise.reject(error)
     } else {
       prevCode = error.response.data.code
