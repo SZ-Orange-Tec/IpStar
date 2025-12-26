@@ -1,7 +1,7 @@
 <template>
   <div class="pc-product_list">
     <!-- tabbar 个人 企业 -->
-    <Tabbar @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
+    <Tabbar class="mx-auto" @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
 
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
