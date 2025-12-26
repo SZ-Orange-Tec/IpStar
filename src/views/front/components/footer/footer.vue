@@ -4,7 +4,8 @@
     <div class="serve box font-normal">
       <div class="container">
         <div class="nav column lg:flex">
-          <div class="logo between lg:column gap-10">
+          <!-- logo -->
+          <div class="logo column sm:between lg:column gap-10">
             <div>
               <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
             </div>
@@ -38,7 +39,8 @@
             </div>
           </div>
 
-          <div class="flex-1 w-full flex justify-between flex-wrap">
+          <!-- 页面 -->
+          <div class="flex-1 w-full flex gap-3 justify-between flex-wrap">
             <div class="space-y-3">
               <strong class="white font-medium">{{ t("Products") }}</strong>
               <ul class="list text-sm space-y-3">
@@ -110,6 +112,24 @@
                 </li>
                 <li class="pointer">
                   <RouterLink to="/help">{{ t("footer_spec.question") }}</RouterLink>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-3">
+              <strong class="white font-medium">{{ t("Resources") }}</strong>
+              <ul class="list text-sm space-y-3">
+                <li class="pointer">
+                  <RouterLink to="/country">{{ t("Proxy_Location") }}</RouterLink>
+                </li>
+                <li class="pointer">
+                  <RouterLink to="/blog">{{ t("Blog") }}</RouterLink>
+                </li>
+                <li class="pointer">
+                  <RouterLink to="/proxy-detection-Tool">{{ t("Proxy_Detection_Tool") }}</RouterLink>
+                </li>
+                <li class="pointer">
+                  <RouterLink to="/ip-lookup">{{ t("IP_Lookup") }}</RouterLink>
                 </li>
               </ul>
             </div>

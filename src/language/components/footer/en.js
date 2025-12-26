@@ -14,6 +14,12 @@ export default {
   Terms_of_Service: "Terms of Service",
   Refund_Policy: "Refund Policy",
 
+  Resources: "Resources",
+  Proxy_Location: "Proxy Location",
+  Blog: "Blog",
+  Proxy_Detection_Tool: "Proxy Detection Tool",
+  IP_Lookup: "IP Lookup",
+
   footer_spec: {
     scene1: "Data Collection",
     scene2: "SEO",

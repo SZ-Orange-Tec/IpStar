@@ -14,6 +14,12 @@ export default {
   Terms_of_Service: "服务条款",
   Refund_Policy: "退款政策",
 
+  Resources: "资源",
+  Proxy_Location: "代理位置",
+  Blog: "博客",
+  Proxy_Detection_Tool: "代理检测工具",
+  IP_Lookup: "IP 查找",
+
   footer_spec: {
     scene1: "企业级数据收集",
     scene2: "搜索引擎优化",
