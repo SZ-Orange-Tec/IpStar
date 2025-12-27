@@ -261,7 +261,10 @@ async function loadPrice() {
   await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
 }
 async function loadResource() {
-  await import(/*webpackChunkName:'pricing'*/ "@/views/front/pricing/pricing.vue")
+  await import(/*webpackChunkName:'country'*/ "@/views/front/country/index.vue")
+  await import(/*webpackChunkName:'country_detail'*/ "@/views/front/country/detail.vue")
+  await import(/*webpackChunkName:'ipaddress'*/ "@/views/front/ipaddress/index.vue")
+  await import(/*webpackChunkName:'proxy-checker'*/ "@/views/front/proxy-checker/index.vue")
 }
 // 预加载前台
 async function loadFront() {
