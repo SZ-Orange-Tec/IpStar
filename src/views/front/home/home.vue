@@ -108,7 +108,7 @@
         </div>
 
         <div class="content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="product_item residential">
+          <div class="product_item residential col-span-1 md:col-span-2">
             <div class="info">
               <img loading="lazy" src="@/assets/images/home/icon1.webp" width="48" height="48" />
               <div class="text-xl font-medium mt-4 leading-none">{{ t("Residential_Proxies") }}</div>

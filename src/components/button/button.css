@@ -62,7 +62,6 @@
 }
 
 .border{
-  border-radius: 6px;
   box-shadow: 0 0 0 1px hsl(var(--border));
 }
 .border:hover,.border:focus{

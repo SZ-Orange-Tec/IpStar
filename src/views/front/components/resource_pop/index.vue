@@ -86,7 +86,7 @@
 
           <div>
             <ul class="content w-full column space-y-1">
-              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/blog')">
+              <!-- <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/blog')">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <FilePen class="" />
                 </div>
@@ -94,8 +94,8 @@
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Blog") }}</strong>
                   <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("header_spac.blog_desc") }}</p>
                 </div>
-              </li>
-              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/proxy-detection-Tool')">
+              </li> -->
+              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/proxy-checker')">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <ShieldCheck class="" />
                 </div>
@@ -104,7 +104,7 @@
                   <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("header_spac.proxy_tool") }}</p>
                 </div>
               </li>
-              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/ip-lookup')">
+              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/ipaddress')">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <ScanSearch class="" />
                 </div>

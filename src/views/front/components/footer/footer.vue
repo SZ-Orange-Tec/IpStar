@@ -122,14 +122,14 @@
                 <li class="pointer">
                   <RouterLink to="/country">{{ t("Proxy_Location") }}</RouterLink>
                 </li>
-                <li class="pointer">
+                <!-- <li class="pointer">
                   <RouterLink to="/blog">{{ t("Blog") }}</RouterLink>
+                </li> -->
+                <li class="pointer">
+                  <RouterLink to="/proxy-checker">{{ t("Proxy_Detection_Tool") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <RouterLink to="/proxy-detection-Tool">{{ t("Proxy_Detection_Tool") }}</RouterLink>
-                </li>
-                <li class="pointer">
-                  <RouterLink to="/ip-lookup">{{ t("IP_Lookup") }}</RouterLink>
+                  <RouterLink to="/ipaddress">{{ t("IP_Lookup") }}</RouterLink>
                 </li>
               </ul>
             </div>

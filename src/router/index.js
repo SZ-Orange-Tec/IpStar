@@ -68,6 +68,11 @@ const routes = [
         name: "ipaddress",
         component: () => import("@/views/front/ipaddress/index.vue"),
       },
+      {
+        path: "proxy-checker",
+        name: "proxy-checker",
+        component: () => import("@/views/front/proxy-checker/index.vue"),
+      },
     ],
   },
   // 登录板块
@@ -186,7 +191,7 @@ const router = createRouter({
   },
 })
 
-const loginPath = /\/overview|\/products|\/billings|\/proxy|\/api|\/settings/
+const loginPath = /\/overview|\/products|\/billings|\/proxy$|\/api|\/settings/
 function checkLogin(path) {
   const { isLogin } = loginStore()
   const token = localStorage.getItem("token")

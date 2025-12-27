@@ -9,7 +9,7 @@
           <span class="text-3xl lg:text-4xl font-semibold mt-6">{{ ips }} IPs</span>
 
           <p class="text-base lg:text-lg grey-80 mt-6">{{ t("country_detail.banner_desc") }}</p>
-          <IpButton type="primary" class="h-11 px-10 rounded-lg mt-12">{{ t("Get_Start_Now") }}</IpButton>
+          <IpButton @click="toUse" type="primary" class="h-11 px-10 rounded-lg mt-12">{{ t("Get_Start_Now") }}</IpButton>
         </div>
         <div class="right hidden md:block">
           <img loading="lazy" width="661" height="320" src="@/assets/images/country/country_banner.png" style="visibility: visible" />
@@ -161,9 +161,12 @@ import { CountryList } from "../../../api/layout"
 import { Thousands } from "../../../utils/tools"
 import settingStore from "../../../store/setting"
 import { platDataIndex } from "../../../api/home"
+import { useRouter } from "vue-router"
+import loginStore from "../../../store/login"
 
 const { t } = useI18n()
 const { en } = settingStore()
+const { isLogin } = loginStore()
 
 const route = useRoute()
 const code = computed(() => route.params.code ?? "us")
@@ -214,6 +217,16 @@ async function countryIps(countries) {
       icon: countryImg[key].default,
     }
   })
+}
+
+// 跳转
+const router = useRouter()
+function toUse() {
+  if (isLogin.vlaue) {
+    router.push("/overview")
+  } else {
+    router.push("/login")
+  }
 }
 
 onMounted(() => {

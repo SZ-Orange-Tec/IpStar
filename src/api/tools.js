@@ -8,3 +8,11 @@ export function platToolsIpDetail(params) {
     params,
   })
 }
+// IP信息详情
+export function platToolsProxyChecker(data) {
+  return request({
+    url: "/plat/tools/proxies/checker",
+    method: "post",
+    data,
+  })
+}

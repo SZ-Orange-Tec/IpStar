@@ -17,7 +17,7 @@
               <span class="text-[15px] grey-80 text-center">{{ t("country_spec.banner_region") }}</span>
             </div>
           </div>
-          <IpButton type="primary" class="h-11 px-10 rounded-lg mt-16">{{ t("country_spec.banner_btn") }}</IpButton>
+          <IpButton @click="toUse" type="primary" class="h-11 px-10 rounded-lg mt-16">{{ t("country_spec.banner_btn") }}</IpButton>
         </div>
         <div class="right hidden md:block">
           <img loading="lazy" width="560" height="560" src="@/assets/images/country/location_banne.png" style="visibility: visible" />
@@ -84,12 +84,14 @@ import { platDataIndex } from "@/api/home"
 import anime from "animejs/lib/anime.es.js"
 import { CountryList } from "../../../api/layout"
 import settingStore from "../../../store/setting"
-import { useRoute } from "vue-router"
+import { useRouter } from "vue-router"
+import loginStore from "../../../store/login"
 // 加载国家国旗
 import("flag-icon-css/css/flag-icons.css")
 
 const { t } = useI18n()
 const { en } = settingStore()
+const { isLogin } = loginStore()
 
 // 首页数据
 const ips = ref(0)
@@ -205,6 +207,17 @@ async function getCountries() {
     getCountries()
   })
 }
+
+// 跳转
+const router = useRouter()
+function toUse() {
+  if (isLogin.vlaue) {
+    router.push("/overview")
+  } else {
+    router.push("/login")
+  }
+}
+
 onMounted(() => {
   IndexData()
   getCountries()
