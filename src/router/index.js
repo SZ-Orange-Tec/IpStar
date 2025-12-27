@@ -63,6 +63,11 @@ const routes = [
         name: "country_detail",
         component: () => import("@/views/front/country/detail.vue"),
       },
+      {
+        path: "ipaddress",
+        name: "ipaddress",
+        component: () => import("@/views/front/ipaddress/index.vue"),
+      },
     ],
   },
   // 登录板块
