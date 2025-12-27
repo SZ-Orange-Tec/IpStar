@@ -1,5 +1,5 @@
 <template>
-  <div class="board rounded space-y-5 p-5 column">
+  <div class="h-full board rounded space-y-5 p-5 column">
     <div class="w-full flex flex-wrap gap-3">
       <IpInput v-model="form.ip" :placeholder="t('data_center_spec.ip_remark')" class="h-9 rounded-md" />
       <!-- <el-select v-model="form.area" placeholder="" style="width: 160px">
@@ -68,6 +68,14 @@
       </DropDown>
 
       <IpButton class="text-sm px-5 h-9 rounded-md" @click="Search">{{ $t("Search") }}</IpButton>
+
+      <IpButton class="h-9 px-5" type="primary" @click="exportProxy" :disabled="exporting || loading">
+        <div class="v_center space-x-2 text-sm">
+          <Download v-show="!exporting" :size="15" />
+          <span v-show="exporting" class="ip-loading"></span>
+          <span>{{ t("Export") }}</span>
+        </div>
+      </IpButton>
     </div>
     <div class="w-full flex-1 min-h-0 box-border board rounded space-y-3">
       <div class="table_box">
@@ -123,7 +131,7 @@ import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
-import { ChevronDown } from "lucide-vue-next"
+import { ChevronDown, Download } from "lucide-vue-next"
 import { debounce } from "../../../../utils/tools"
 import { platCustomerStaticIps, platCustomerOrdersRenewal } from "@/api/product"
 import IpTag from "@/components/tag/tag.vue"
@@ -136,7 +144,7 @@ import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
 const layout = inject("paginationLayout")
 
 const { t } = useI18n()
-const { lang } = settingStore()
+const { en, lang } = settingStore()
 
 // 表单
 const form = reactive({
@@ -229,7 +237,7 @@ async function getTableData() {
     const { data } = await platCustomerStaticIps({
       page_index: page.value,
       page_size: size.value,
-      ip: form.ip,
+      keywords: form.ip,
       region_code: form.region !== "all" ? form.region : "",
       status: form.status !== 0 ? form.status : "",
     })
@@ -257,6 +265,59 @@ function handleCurrentChange(val) {
 function handleSizeChange(val) {
   size.value = val
   getTableData()
+}
+
+// 导出数据
+const exporting = ref(false)
+async function exportProxy() {
+  if (loading.value || exporting.value) return
+  if (total.value <= 0) {
+    Message({
+      type: "warning",
+      message: en.value ? "No data available for export!" : "暂无数据可供导出！",
+    })
+    return
+  }
+  try {
+    exporting.value = true
+    const {
+      data: { list },
+    } = await platCustomerStaticIps({
+      page_index: 1,
+      page_size: total.value,
+      keywords: form.ip,
+      region_code: form.region !== "all" ? form.region : "",
+      status: form.status !== 0 ? form.status : "",
+    })
+
+    const text = list.reduce((pre, next) => {
+      pre += (pre.length > 0 ? "\n" : "") + `${next.ip}:${next.port}:${next.username}:${next.password}`
+      return pre
+    }, "")
+
+    // 导出文件
+    const blob = new Blob([text], { type: "text/txt" })
+    const filename = `${t("List_of_Proxies")}_${list.length}.txt`
+    const {
+      default: { saveAs },
+    } = await import(/* webpackChunkName: 'file-saver' */ "file-saver")
+
+    saveAs(blob, filename)
+
+    exporting.value = false
+
+    Message({
+      type: "success",
+      message: en.value ? "Export Successful!" : "导出成功！",
+    })
+  } catch (error) {
+    exporting.value = false
+    console.log(error.message)
+    Message({
+      type: "warning",
+      message: "Download failed",
+    })
+  }
 }
 
 // 续费
@@ -329,6 +390,7 @@ onMounted(() => {
   transform: rotate(180deg);
 }
 .table_box {
+  height: 100%;
   max-height: calc(100% - 44px);
   :deep(.el-table) {
     height: 100%;

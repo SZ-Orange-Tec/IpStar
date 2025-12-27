@@ -31,6 +31,8 @@ export default {
   No_Data: "暂无数据",
   Renewal: "续费",
   All: "全部",
+  Export: "导出",
+  List_of_Proxies: "代理列表",
 
   // billing 表格
   Order_Number: "订单号",

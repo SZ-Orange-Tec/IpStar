@@ -39,13 +39,14 @@ import Management from "./management/index.vue"
 import Billing from "./billing/index.vue"
 import { useI18n } from "vue-i18n"
 import { ref } from "vue"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 
 const { t } = useI18n()
 const router = useRouter()
+const route = useRoute()
 
 // 头部nav tab
-const active = ref(0) // 0:Price 1:Get_Proxy 2:IP Management 3:Billing
+const active = ref(route.query?.active ? Number(route.query?.active) : 0) // 2:IP Management 3:Billing
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

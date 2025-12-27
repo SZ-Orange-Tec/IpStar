@@ -32,6 +32,8 @@ export default {
   No_Data: "No Data",
   Renewal: "Renewal",
   All: "All",
+  Export: "Export",
+  List_of_Proxies: "List of Proxies",
 
   Order_Number: "Order Number",
   Product_Name: "Product Name",
