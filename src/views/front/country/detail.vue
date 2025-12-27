@@ -230,7 +230,6 @@ function toUse() {
 }
 
 onMounted(() => {
-  getCountryIps()
   IndexData()
 })
 </script>
