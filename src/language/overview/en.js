@@ -99,5 +99,7 @@ export default {
     service_des: "If you have any questions or suggestions, please feel free to contact us.",
     contact: "Contact Us",
     how_use: "Learn how to get started quickly",
+
+    no_china: "Please test in a network environment outside mainland China.",
   },
 }

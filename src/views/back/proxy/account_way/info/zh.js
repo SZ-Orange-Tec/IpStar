@@ -179,18 +179,18 @@ export const country = [
     label: "PY-巴拉圭",
     value: "PY",
   },
-  {
-    label: "MO-中国澳门",
-    value: "MO",
-  },
+  // {
+  //   label: "MO-中国澳门",
+  //   value: "MO",
+  // },
   {
     label: "FK-福克兰群岛",
     value: "FK",
   },
-  {
-    label: "CN-中国",
-    value: "CN",
-  },
+  // {
+  //   label: "CN-中国",
+  //   value: "CN",
+  // },
   {
     label: "WS-萨摩亚",
     value: "WS",
@@ -671,10 +671,10 @@ export const country = [
     label: "NZ-新西兰",
     value: "NZ",
   },
-  {
-    label: "HK-中国香港",
-    value: "HK",
-  },
+  // {
+  //   label: "HK-中国香港",
+  //   value: "HK",
+  // },
   {
     label: "MV-马尔代夫",
     value: "MV",

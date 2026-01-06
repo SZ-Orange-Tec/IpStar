@@ -122,9 +122,9 @@
                 <li class="pointer">
                   <RouterLink to="/country">{{ t("Proxy_Location") }}</RouterLink>
                 </li>
-                <!-- <li class="pointer">
-                  <RouterLink to="/blog">{{ t("Blog") }}</RouterLink>
-                </li> -->
+                <li class="pointer">
+                  <a href="/blog">{{ t("Blog") }}</a>
+                </li>
                 <li class="pointer">
                   <RouterLink to="/proxy-checker">{{ t("Proxy_Detection_Tool") }}</RouterLink>
                 </li>

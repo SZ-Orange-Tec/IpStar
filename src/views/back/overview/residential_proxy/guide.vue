@@ -25,6 +25,7 @@
         <div class="space-y-2">
           <p class="black font-semibold text-lg">2. {{ $t("overview_spec.test1") }}</p>
           <p class="text-sm">{{ $t("overview_spec.test2") }}</p>
+          <p class="major text-sm">{{ $t("overview_spec.no_china") }}</p>
         </div>
 
         <div>

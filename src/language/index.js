@@ -36,7 +36,7 @@ const i18n = createI18n({
         title: "Ipstar.io: Professional Global IP Proxy Service.",
         description: "Access Rotating Residential, Static & Mobile IPs via HTTP/SOCKS5. Unlimited concurrency for scraping on Windows, Mac & Mobile.",
         keywords:
-          "IpStar,Proxy Service,Secure Browsing,Fast Internet Access,Anonymous Surfing,Bypass Geo-Restrictions,Privacy Protection,High-Speed Proxy,Multi-Device Support,Online Security,Large Model,Data Collection,Free Trial,VPN Alternative,Internet Freedom",
+          "IpStar,Proxy Service,proxy scraper,unblock site,Secure Browsing,Fast Internet Access,Anonymous Surfing,Bypass Geo-Restrictions,Privacy Protection,High-Speed Proxy,Multi-Device Support,Online Security,Large Model,Data Collection,Free Trial,VPN Alternative,Internet Freedom",
       },
     },
   },

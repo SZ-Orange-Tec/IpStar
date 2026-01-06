@@ -98,5 +98,7 @@ export default {
     service_des: "如果您有任何问题或建议，请随时与我们联系。",
     contact: "立即咨询",
     how_use: "了解如何快速开始",
+
+    no_china: "请在非中国大陆的网络环境下测试",
   },
 }

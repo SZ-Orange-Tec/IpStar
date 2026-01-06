@@ -53,7 +53,7 @@
               </li>
               <li class="w-1/2 v_center space-x-3 rounded-lg" @click="toCountry('KR')">
                 <div class="w-6 h-6 vh_center rounded-full overflow-hidden">
-                  <img src="@/assets/images/home/country/France.png" alt="" />
+                  <img src="@/assets/images/home/country/South_Korea.png" alt="" />
                 </div>
                 <span>{{ t("South_Korea") }}</span>
               </li>
@@ -85,8 +85,8 @@
           <div class="split w-full"></div>
 
           <div>
-            <ul class="content w-full column space-y-1">
-              <!-- <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/blog')">
+            <div class="content w-full column space-y-1">
+              <a href="/blog" class="w-full px-3 py-2 rounded-lg v_center gap-3">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <FilePen class="" />
                 </div>
@@ -94,8 +94,8 @@
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Blog") }}</strong>
                   <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("header_spac.blog_desc") }}</p>
                 </div>
-              </li> -->
-              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/proxy-checker')">
+              </a>
+              <RouterLink to="/proxy-checker" class="w-full px-3 py-2 rounded-lg v_center gap-3">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <ShieldCheck class="" />
                 </div>
@@ -103,8 +103,8 @@
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Proxy_Detection_Tool") }}</strong>
                   <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("header_spac.proxy_tool") }}</p>
                 </div>
-              </li>
-              <li class="w-full px-3 py-2 rounded-lg v_center gap-3" @click="router.push('/ipaddress')">
+              </RouterLink>
+              <RouterLink to="/ipaddress" class="w-full px-3 py-2 rounded-lg v_center gap-3">
                 <div class="iconbox rounded-lg vh_center shrink-0">
                   <ScanSearch class="" />
                 </div>
@@ -112,8 +112,8 @@
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("IP_Lookup") }}</strong>
                   <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("header_spac.lookup") }}</p>
                 </div>
-              </li>
-            </ul>
+              </RouterLink>
+            </div>
           </div>
         </div>
       </div>
@@ -268,7 +268,8 @@ onMounted(() => {
     }
     .content {
       // column-gap: 25px;
-      & > li {
+      & > li,
+      a {
         width: 100%;
         height: 100%;
         padding: 16px 12px;

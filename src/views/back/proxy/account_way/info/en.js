@@ -180,18 +180,18 @@ export const country = [
     label: "PY-Paraguay",
     value: "PY",
   },
-  {
-    label: "MO-Macao,China",
-    value: "MO",
-  },
+  // {
+  //   label: "MO-Macao,China",
+  //   value: "MO",
+  // },
   {
     label: "FK-Falkland Islands",
     value: "FK",
   },
-  {
-    label: "CN-China",
-    value: "CN",
-  },
+  // {
+  //   label: "CN-China",
+  //   value: "CN",
+  // },
   {
     label: "WS-Samoa",
     value: "WS",
@@ -672,10 +672,10 @@ export const country = [
     label: "NZ-New Zealand",
     value: "NZ",
   },
-  {
-    label: "HK-Hong Kong, China",
-    value: "HK",
-  },
+  // {
+  //   label: "HK-Hong Kong, China",
+  //   value: "HK",
+  // },
   {
     label: "MV-Maldives",
     value: "MV",
