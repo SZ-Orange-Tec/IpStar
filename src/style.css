@@ -104,6 +104,10 @@
   color: hsl(var(--foreground) / 20%);
 }
 
+.himg{
+  width: auto;
+  max-width: none;
+}
 
 
 .ip-loading {

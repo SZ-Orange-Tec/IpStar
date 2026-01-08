@@ -4,7 +4,7 @@ export default {
   Pricing: "价格",
   Resources: "资源",
   Contact: "联系",
-  Help: "帮助",
+  Help_Center: "帮助中心",
   Sign_in: "登录",
   Register: "注册",
   Sign_out: "退出登录",

@@ -47,7 +47,9 @@
               srcset="@/assets/images/login/bg-logo.png 290w, @/assets/images/login/bg-logo@2x.png 580w"
               alt=""
             /> -->
-            <img src="@/assets/images/login/bg-logo-new.webp" alt="" />
+            <IpImage :width="1024" :height="851">
+              <img src="@/assets/images/login/bg-logo-new.webp" alt="" />
+            </IpImage>
           </div>
 
           <div class="welcome space-y-5 column !items-end py-5">
@@ -107,6 +109,7 @@ import { platCustomerResetpass } from "../../api/login"
 import useWindowHeight from "../../composables/useWindowHeight"
 import vLazy from "@/directive/lazy"
 import userStore from "../../store/user"
+import IpImage from "@/components/image/image.vue"
 
 const { t } = useI18n()
 

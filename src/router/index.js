@@ -73,6 +73,11 @@ const routes = [
         name: "proxy-checker",
         component: () => import("@/views/front/proxy-checker/index.vue"),
       },
+      {
+        path: "help-center",
+        name: "help-center",
+        component: () => import("@/views/front/help-center/help-center.vue"),
+      },
     ],
   },
   // 登录板块

@@ -70,6 +70,10 @@ async function getHomeData() {
 }
 getHomeData()
 
+// 首页高度变化
+const headerHeight = ref(0)
+provide("HeaderHeight", headerHeight)
+
 onMounted(() => {
   // 预加载登录页
   window.addEventListener("load", loadLogin)

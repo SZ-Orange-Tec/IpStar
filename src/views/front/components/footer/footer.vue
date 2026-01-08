@@ -111,7 +111,7 @@
                   <RouterLink to="/doc">{{ t("footer_spec.document") }}</RouterLink>
                 </li>
                 <li class="pointer">
-                  <RouterLink to="/help">{{ t("footer_spec.question") }}</RouterLink>
+                  <RouterLink to="/help-center">{{ t("Help_Center") }}</RouterLink>
                 </li>
               </ul>
             </div>

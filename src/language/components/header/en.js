@@ -4,7 +4,7 @@ export default {
   Pricing: "Pricing",
   Resources: "Resources",
   Contact: "Contact",
-  Help: "Help",
+  Help_Center: "Help Center",
   Sign_in: "Sign in",
   Register: "Register",
   Sign_out: "Sign out",

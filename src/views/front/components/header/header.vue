@@ -1,6 +1,6 @@
 <template>
   <div ref="triggerRef" class="h-0" style="background: transparent"></div>
-  <div class="header_box relative" :class="{ shadow: shadow }">
+  <div id="Header" class="header_box relative" :class="{ shadow: shadow && activePath !== '/help-center' }">
     <HeaderGift />
     <header class="header" :class="{ home_header: isHome }">
       <div class="container flex w-full h-full">
@@ -48,19 +48,19 @@
               </div>
               <ResourcePop v-model="resourcePopShow" />
             </li>
-            <li
+            <!-- <li
               @click="navigate('/relation')"
               class="slider_bck slider_bck_center h-full v_center pointer transition-color"
               :class="{ active: activePath === '/relation' }"
             >
               {{ $t("Contact") }}
-            </li>
+            </li> -->
             <li
-              @click="navigate('/help')"
+              @click="navigate('/help-center')"
               class="slider_bck slider_bck_center h-full v_center pointer transition-color"
-              :class="{ active: activePath === '/help' }"
+              :class="{ active: activePath === '/help-center' }"
             >
-              {{ $t("Help") }}
+              {{ $t("Help_Center") }}
             </li>
           </ul>
         </div>

@@ -61,7 +61,7 @@
 
 <script setup>
 import { Tag } from "lucide-vue-next"
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch, inject } from "vue"
 // import { onMounted, ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
@@ -105,6 +105,15 @@ async function isShowGift() {
   }
 }
 
+// header 高度
+const HeaderHeight = inject("HeaderHeight")
+function computedHeaderHeight() {
+  const dom = document.getElementById("Header")
+  const height = dom.clientHeight
+  console.log("height", height)
+  HeaderHeight.value = height
+}
+
 // 关闭
 const local_show = Boolean(Number(sessionStorage.getItem("showGift") ?? 1))
 const show = ref(local_show)
@@ -124,6 +133,7 @@ function open() {
       duration: 300,
       complete: () => {
         startTimeout()
+        computedHeaderHeight()
       },
     })
   })
@@ -139,6 +149,8 @@ function close() {
     complete: () => {
       show.value = false
       sessionStorage.setItem("showGift", Number(show.value))
+
+      computedHeaderHeight()
     },
   })
 }
@@ -219,6 +231,8 @@ onMounted(() => {
   } else {
     isShowGift()
   }
+
+  computedHeaderHeight()
 })
 </script>
 

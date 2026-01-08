@@ -1,0 +1,98 @@
+.help-center{
+  .menu {
+    position: sticky;
+    // top: 72px;
+    box-shadow: 0 2px 8px 0 #f3f3f7;
+    
+    .menu_item {
+      transition: color 0.2s;
+      position: relative;
+      &::after{
+        content: "";
+        width: 100%;
+        height: 3px;
+        border-radius: 4px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: transparent;
+        transition: background-color 0.2s;
+      }
+    }
+    .active {
+      color: hsl(var(--foreground));
+      &::after{
+        background-color: hsl(var(--primary));
+      }
+
+    }
+  }
+  .quick_start{
+    .content{
+      background: #f9fafe;
+      border-radius: 8px;
+      border: 1px solid #e2e4f2;
+      padding: 30px;
+      box-sizing: border-box;
+      .split{
+        height: 1px;
+        border-bottom: 2px dashed hsl(var(--foreground) / 20%);
+      }
+    }
+  }
+
+  .question{
+    .content{
+      :deep(.question){
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .contact{
+    // background-color: #325ce4;
+    color: hsl(var(--colour-foreground));
+    background-image: url("../../../assets/images/help/concat_bck.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  .mask{
+    :deep(.dialog_container){
+      margin: 15vh 0;
+    }
+    .mask_content {
+      width: 100vw;
+      max-width: 400px;
+      // background: linear-gradient(87deg, #e9eeff, #fff);
+      background: #fff;
+      border-radius: 12px;
+      position: relative;
+      padding: 30px 30px 36px;
+      box-sizing: border-box;
+      position: relative;
+      .image_box{
+        width: 300px;
+        height: 300px;
+      }
+      .close {
+        margin-top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: transparent;
+        color: hsl(var(--foreground) / 60%);
+        z-index: 1;
+        &:hover {
+          color: hsl(var(--foreground) / 100%);
+          background-color: hsl(var(--neutral) / 10%);
+        }
+      }
+  
+      
+    }
+  }
+}
