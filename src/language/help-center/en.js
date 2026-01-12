@@ -18,7 +18,7 @@ export default {
   Learn_More: "Learn More",
 
   help_spec: {
-    title: "What can we {title} you with?",
+    title: "What can we help you with?",
     guide_desc: "What is a residential proxy and how do you use one?",
     quick_title: "Hi, welcome to the IPStar platform!",
     quick_desc: "Easily create, deploy, and manage your IPs to help you quickly and efficiently access data sources.",

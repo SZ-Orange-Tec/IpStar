@@ -13,17 +13,17 @@
 
     <div class="box_wrap bg-white menu" :style="{ top: top }">
       <div class="w-full vh_center">
-        <ul class="v_center h-16 text-lg gap-20">
-          <li :class="{ active: active === 0 }" @click="changeActive(0)" class="pointer h-full v_center menu_item text-gray-600 font-medium">
+        <ul class="between flex-nowrap whitespace-nowrap sm:text-lg w-full max-w-3xl">
+          <li :class="{ active: active === 0 }" @click="changeActive(0)" class="pointer px-5 h-16 v_center menu_item text-gray-600 font-medium">
             {{ t("Quick_Start_Guide") }}
           </li>
-          <li :class="{ active: active === 1 }" @click="changeActive(1)" class="pointer h-full v_center menu_item text-gray-600 font-medium">
+          <li :class="{ active: active === 1 }" @click="changeActive(1)" class="pointer px-5 h-16 v_center menu_item text-gray-600 font-medium">
             {{ t("Frequently_Asked_Questions") }}
           </li>
-          <li :class="{ active: active === 2 }" @click="changeActive(2)" class="pointer h-full v_center menu_item text-gray-600 font-medium">
+          <li :class="{ active: active === 2 }" @click="changeActive(2)" class="pointer px-5 h-16 v_center menu_item text-gray-600 font-medium">
             {{ t("User_Guide") }}
           </li>
-          <li :class="{ active: active === 3 }" @click="changeActive(3)" class="pointer h-full v_center menu_item text-gray-600 font-medium">
+          <li :class="{ active: active === 3 }" @click="changeActive(3)" class="pointer px-5 h-16 v_center menu_item text-gray-600 font-medium">
             {{ t("Contact_Us") }}
           </li>
         </ul>
@@ -40,21 +40,21 @@
           <p class="text-sm mt-3">{{ t("help_spec.quick_desc") }}</p>
           <div class="w-full my-6">
             <ul class="flex items-start flex-wrap gap-6">
-              <li class="flex-1">
+              <li class="flex-1 !min-w-[250px] shrink-0">
                 <div class="v_center space-x-6">
                   <img src="@/assets/images/help/guide1.png" class="himg h-[60px]" alt="" />
                   <div class="flex-1 split"></div>
                 </div>
                 <p class="text-slate-500 text-sm mt-3">{{ t("help_spec.quick_step1") }}</p>
               </li>
-              <li class="flex-1">
+              <li class="flex-1 !min-w-[250px] shrink-0">
                 <div class="v_center space-x-5">
                   <img src="@/assets/images/help/guide2.png" class="himg h-[60px]" alt="" />
                   <div class="flex-1 split"></div>
                 </div>
                 <p class="text-slate-500 text-sm mt-3">{{ t("help_spec.quick_step2") }}</p>
               </li>
-              <li class="flex-1">
+              <li class="flex-1 !min-w-[250px] shrink-0">
                 <div class="v_center space-x-5">
                   <img src="@/assets/images/help/guide3.png" class="himg h-[60px]" alt="" />
                   <div class="flex-1 split"></div>
@@ -70,7 +70,7 @@
                   </template>
                 </i18n-t>
               </li>
-              <li class="flex-1">
+              <li class="flex-1 !min-w-[250px] shrink-0">
                 <div class="v_center space-x-5">
                   <img src="@/assets/images/help/guide4.png" class="himg h-[60px]" alt="" />
                   <div class="flex-1 split"></div>
@@ -87,7 +87,7 @@
       <div class="container column_center">
         <h1 class="text-3xl lg:text-4xl font-medium leading-none">{{ t("help_spec.ques_title") }}</h1>
         <p class="text-base lg:text-lg grey-80 mt-5">{{ t("help_spec.ques_desc") }}</p>
-        <div class="content w-full grid grid-cols-2 gap-x-4 gap-y-4 items-start">
+        <div class="content w-full grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-4 items-start">
           <Question class="w-full h-auto">
             <template #header> {{ t("help_spec.ques1_ask") }} </template>
             <template #content>
@@ -164,7 +164,7 @@
         <h1 class="text-3xl lg:text-4xl font-medium leading-none">{{ t("User_Guide") }}</h1>
         <p class="text-base lg:text-lg grey-80 mt-5">{{ t("help_spec.guide_des") }}</p>
 
-        <div class="content w-full grid grid-cols-2 gap-x-4 gap-y-4 items-start">
+        <div class="content w-full grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-4 items-start">
           <Question class="w-full">
             <template #header> {{ t("help_spec.guide1_ask") }} </template>
             <template #content>
@@ -232,22 +232,22 @@
       <div class="container column_center">
         <h1 class="text-3xl lg:text-4xl font-medium leading-none white">{{ t("help_spec.contact_title") }}</h1>
         <div class="content w-full column_center">
-          <ul class="between w-full max-w-4xl">
-            <li class="v_center space-x-5" @click="toEmail">
+          <ul class="between flex-wrap gap-14 w-full max-w-4xl">
+            <li class="v_center px-5 min-w-[220px] space-x-5" @click="toEmail">
               <img class="pointer" src="@/assets/images/help/contact1.png" width="60" height="60" alt="" />
               <div class="column space-y-1">
                 <p class="text-sm opacity-80">{{ t("help_spec.contact1_title") }}</p>
                 <strong class="font-medium pointer">{{ t("help_spec.contact1_answer") }}</strong>
               </div>
             </li>
-            <li class="v_center space-x-5" @click="openGT">
+            <li class="v_center px-5 min-w-[220px] space-x-5" @click="openGT">
               <img class="rounded-lg pointer" src="@/assets/images/help/contact2.png" width="60" height="60" alt="" />
               <div class="column space-y-1">
                 <p class="text-sm opacity-80">{{ t("help_spec.contact2_title") }}</p>
                 <strong class="font-medium pointer">{{ t("help_spec.contact2_answer") }}</strong>
               </div>
             </li>
-            <li class="v_center space-x-5" @click="toCrisp">
+            <li class="v_center px-5 min-w-[220px] space-x-5" @click="toCrisp">
               <img class="pointer" src="@/assets/images/help/contact3.png" width="60" height="60" alt="" />
               <div class="column space-y-1">
                 <p class="text-sm opacity-80">{{ t("help_spec.contact3_title") }}</p>
