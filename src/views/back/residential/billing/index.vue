@@ -90,7 +90,7 @@ async function getTableData() {
         ...item,
         amount: "$ " + item.amount / 100,
         days_txt: item.days > 3560 || item.days < 0 ? t("Never_Expire") : item.days + " " + t("Days"),
-        textlist: [`Price:${item.amount / 100}/GB`, `${item.package_title} included`, item.amount],
+        textlist: [`Price:${item.amount / 100}/GB`, t("payPopup_spec.included", { traffic: item.package_title }), item.amount],
       }
     })
   } catch (error) {

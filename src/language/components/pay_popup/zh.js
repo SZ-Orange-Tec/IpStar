@@ -31,5 +31,6 @@ export default {
     usdt11: "您无需做任何其他事情！您可以关闭此窗口额",
 
     unit_price: "单价",
+    included: "包含 {traffic}",
   },
 }

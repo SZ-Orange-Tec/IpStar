@@ -5,18 +5,26 @@
         <component :is="Component" />
       </transition>
     </router-view>
+
+    <DialogNewUserReward v-model="showNewUserAward"></DialogNewUserReward>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { onMounted, provide, ref } from "vue"
 import { track_active } from "@/utils/detect"
 import { useRoute } from "vue-router"
 import { useHead, useSeoMeta } from "unhead"
 import { useI18n } from "vue-i18n"
 import { isPrerendering } from "./utils/tools"
+import DialogNewUserReward from "./views/front/components/dialog/newUserReward.vue"
+import layoutStore from "./store/layout"
+import loginStore from "./store/login"
+import userStore from "./store/user"
 
 const route = useRoute()
+const { isLogin } = loginStore()
+const { getUserInfo } = userStore()
 
 const { t, locale } = useI18n()
 const lang = locale.value === "en" ? "en-US" : "zh-CN"
@@ -76,6 +84,14 @@ useHead(window.__UNHEAD__, {
 //   window.addEventListener('error',captureError)
 //   window.addEventListener('unhandledrejection', captureError);
 // })
+
+const showNewUserAward = ref(false)
+function openNewUserAward() {
+  if (!newer_promotion.value.promotion) return
+
+  showNewUserAward.value = true
+}
+const { newer_promotion, getConfig } = layoutStore()
 
 // 聊天助手
 function initCrisp() {
@@ -149,6 +165,20 @@ function initGoogleTrack2(count = 2) {
     }
   }
 }
+function initClarity() {
+  ;(function (c, l, a, r, i, t, y) {
+    c[a] =
+      c[a] ||
+      function () {
+        ;(c[a].q = c[a].q || []).push(arguments)
+      }
+    t = l.createElement(r)
+    t.async = 1
+    t.src = "https://www.clarity.ms/tag/" + i
+    y = l.getElementsByTagName(r)[0]
+    y.parentNode.insertBefore(t, y)
+  })(window, document, "clarity", "script", "v0m1iyuxoj")
+}
 
 onMounted(() => {
   // 等待所有资源加载完成
@@ -157,7 +187,17 @@ onMounted(() => {
       initGoogleTrack()
       initGoogleTrack2()
       initCrisp()
+      initClarity()
     }
+  })
+
+  if (isLogin.value) {
+    getUserInfo()
+  }
+  getConfig().then(() => {
+    setTimeout(() => {
+      openNewUserAward()
+    }, 1500)
   })
 })
 </script>

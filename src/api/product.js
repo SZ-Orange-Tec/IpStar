@@ -69,3 +69,12 @@ export function platCustomerCustomOrder(params) {
     params,
   })
 }
+
+// 用户自定义订单
+export function platNewUserAwardOrder(data) {
+  return request({
+    url: "/plat/customer/order/newer-promtion",
+    method: "post",
+    data,
+  })
+}

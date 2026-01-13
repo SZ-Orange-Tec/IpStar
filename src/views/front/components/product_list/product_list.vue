@@ -5,7 +5,31 @@
 
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
+        <!-- 新用户充值活动 -->
+
         <ul class="column_center sm:flex sm:!items-stretch gap-3">
+          <li class="newUserAward" v-if="newer_promotion.promotion && (type === 0 || type === 4)">
+            <div class="mask_bck h-full rounded relative p-2 bg-[#a993f9]">
+              <div class="mask_content bg-white w-full h-full rounded column_center pt-10 pb-2 px-2">
+                <h1 class="text-xl font-medium">{{ t("award_title") }}</h1>
+                <div class="text-4xl text-[#d355c7] mt-6">
+                  <strong class="text-7xl font-medium">{{ newer_promotion.name_count }}</strong>
+                  <span class="font-semibold">{{ newer_promotion.name_unit }}</span>
+                </div>
+                <div class="text-3xl mt-6 text-[#524499] flex items-end space-x-5 align-baseline">
+                  <span class="font-semibold">{{ t("Only") }}</span>
+                  <strong class="text-7xl font-medium">${{ newer_promotion.price / 100 }}</strong>
+                </div>
+                <p class="underline text-sm text-center mt-10 w-full max-w-[300px] font-medium">
+                  {{ t("award_desc", { total: newer_promotion.residential_size, mobile: newer_promotion.mobile_size, days: newer_promotion.days }) }}
+                </p>
+                <IpButton @click="buyNewUserAward" type="primary" class="px-5 min-w-[180px] vh_center h-11 mt-6 !bg-[#524499]">{{
+                  t("Buy_Now")
+                }}</IpButton>
+                <p class="text-[10px] mt-6 text-center">{{ t("award_tip") }}</p>
+              </div>
+            </div>
+          </li>
           <li
             v-for="(item, index) in product_list"
             :key="item.id"
@@ -427,7 +451,32 @@
         <template #detail>
           <div class="order_detail">
             <h2>{{ t("Order_detail") }}</h2>
-            <ul class="detail">
+            <ul class="detail" v-if="product.isAward">
+              <li class="between">
+                <span>{{ t("Name") }}</span>
+                <span>{{ t("award_title") }}</span>
+              </li>
+              <li class="between" v-if="type === 0 || type === 4 || type === 2">
+                <span>{{ t("Traffic") }}</span>
+                <span>
+                  {{ t("Residential_Proxies") }} {{ newer_promotion.residential_size }}
+                  +
+                  {{ t("Phone_Proxies") }} {{ newer_promotion.mobile_size }}
+                </span>
+              </li>
+              <li class="between">
+                <span>{{ t("Duration") }}</span>
+                <span>{{ t("Never_Expires") }}</span>
+              </li>
+              <!-- <li class="text-sm grey-60 translate-y-5" style="font-size: 14px">
+                {{ t("award_desc", { total: newer_promotion.total_size, mobile: newer_promotion.mobile_size, days: newer_promotion.days }) }}
+              </li> -->
+              <li class="between">
+                <span>{{ t("Total") }}</span>
+                <span>${{ product?.price / 100 }}</span>
+              </li>
+            </ul>
+            <ul class="detail" v-else>
               <li class="between">
                 <span>{{ t("Name") }}</span>
                 <span v-if="type === 0">{{ t("Residential_Proxies") }}</span>
@@ -479,7 +528,13 @@
               </li>
             </ul>
             <div class="btn vh_center">
-              <ip-button type="primary" class="px-3 h-10" @click="FoundOrder">
+              <ip-button v-if="product.isAward" type="primary" class="px-3 h-10" @click="orderNewUserAward">
+                <div class="v_center space-x-2">
+                  <span class="ip-loading" v-if="loading"></span>
+                  <span>{{ t("Submit") }}</span>
+                </div>
+              </ip-button>
+              <ip-button v-else type="primary" class="px-3 h-10" @click="FoundOrder">
                 <div class="v_center space-x-2">
                   <span class="ip-loading" v-if="loading"></span>
                   <span>{{ t("Submit") }}</span>
@@ -513,6 +568,7 @@ import position from "@/components/dialog/position"
 import { track_createOrder } from "@/utils/detect"
 import { platProductRegions, platCustomerCustomOrder } from "@/api/product"
 import { formatSizeUnits } from "../../../../utils/tools"
+import { platNewUserAwardOrder } from "../../../../api/product"
 
 const CountdownDiscount = defineAsyncComponent(() => import("./CountdownDiscount.vue"))
 
@@ -520,6 +576,7 @@ const Regions = defineAsyncComponent(() => import("./regions/regions.vue"))
 const InputNumber = defineAsyncComponent(() => import("./number/number.vue"))
 
 const { en, lang } = settingStore()
+const layout = layoutStore()
 
 const props = defineProps({
   type: {
@@ -534,9 +591,12 @@ const props = defineProps({
 })
 const { type } = toRefs(props)
 
+// 是否显示注册奖励
+const { newer_promotion } = layout
+
 // 是否显示赠送gift
 const { isLogin } = loginStore()
-const { registerAward, gift, activity_days, discount_rate } = layoutStore()
+const { registerAward, gift, activity_days, discount_rate } = layout
 const discount_rate_text = computed(() => (en.value ? 100 - discount_rate.value + "%" : discount_rate.value / 10))
 const showGift = computed(() => !isLogin.value && registerAward.value)
 
@@ -545,7 +605,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 // 最低价格
-const { lowestPrice, getLowestPrice } = layoutStore()
+const { lowestPrice, getLowestPrice } = layout
 const keys = ["residential", "unlimited", "phone", "data_center"]
 const lowest = computed(() => {
   return lowestPrice.value[keys[type.value === 4 ? 0 : type.value]]
@@ -856,7 +916,7 @@ function click_pay(e) {
   if (!isLogin.value) {
     router.push("/login")
     Message({
-      type: "warning",
+      type: "info",
       message: en.value ? "Please login first" : "请先登录",
     })
     return
@@ -959,6 +1019,47 @@ watch(
     immediate: true,
   }
 )
+
+// 新手奖励下单
+function buyNewUserAward() {
+  if (!isLogin.value) {
+    router.push("/login")
+    Message({
+      type: "info",
+      message: t("login_first"),
+    })
+    return
+  }
+  product.value = {
+    isAward: true,
+    code: newer_promotion.value.code,
+    days: newer_promotion.value.days,
+    pack_size: t("Residential_Proxies") + newer_promotion.value.residential_size + "+" + t("Phone_Proxies") + newer_promotion.value.mobile_size,
+    price: newer_promotion.value.price,
+  }
+  isPayPopup.value = true
+}
+async function orderNewUserAward() {
+  try {
+    loading.value = true
+    const { data } = await platNewUserAwardOrder({
+      pcode: product.value.code,
+    })
+    order_data.value = {
+      order_no: data.order_no,
+      order_price: data.order_price,
+      order_usdt_price: data.order_usdt_price,
+      desc_3: product.value.pack_size,
+      desc_4: "",
+    }
+    payPopupRef.value.toggleDetail(false)
+  } catch (error) {
+    console.log(error.message)
+  } finally {
+    loading.value = false
+  }
+}
+
 onMounted(() => {
   getRegions()
   // getDataConfig()

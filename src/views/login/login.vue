@@ -110,6 +110,8 @@ import useWindowHeight from "../../composables/useWindowHeight"
 import vLazy from "@/directive/lazy"
 import userStore from "../../store/user"
 import IpImage from "@/components/image/image.vue"
+import Confirm from "@/components/confirm/confirm.js"
+import layoutStore from "../../store/layout"
 
 const { t } = useI18n()
 
@@ -117,6 +119,7 @@ const router = useRouter()
 const { token } = loginStore()
 const { en } = settingsStore()
 const { getUserInfo } = userStore()
+const { getConfig } = layoutStore()
 
 const { height } = useWindowHeight()
 
@@ -185,14 +188,34 @@ async function next(func) {
             captcha_id: captchaId,
             captcha_value: input,
           })
+          if (data.auth_status === 0) {
+            Confirm({
+              title: t("auth_account_title"),
+              type: "info",
+              message: t("auth_account_desc"),
+              showCancel: false,
+              confirmText: t("OK"),
+              success: () => {
+                router.push("/home")
+              },
+            })
+            return
+          }
           // 保存token
           localStorage.setItem("token", data.token)
           token.value = data.token
 
           await getUserInfo()
-          nextTick(() => {
-            router.push("/overview")
-          })
+          const config = await getConfig()
+          if (config.newer_promotion.promotion) {
+            nextTick(() => {
+              router.replace("/residential")
+            })
+          } else {
+            nextTick(() => {
+              router.replace("/overview")
+            })
+          }
 
           Message({
             type: "success",
@@ -215,15 +238,34 @@ async function next(func) {
             password: password.value,
             code: code.value,
           })
+          if (data.auth_status === 0) {
+            Confirm({
+              title: t("auth_account_title"),
+              type: "info",
+              message: t("auth_account_desc"),
+              showCancel: false,
+              confirmText: t("OK"),
+              success: () => {
+                router.push("/home")
+              },
+            })
+            return
+          }
           // 保存token
           localStorage.setItem("token", data.token)
           token.value = data.token
 
           await getUserInfo()
-
-          nextTick(() => {
-            router.push("/overview")
-          })
+          const config = await getConfig()
+          if (config.newer_promotion.promotion) {
+            nextTick(() => {
+              router.push("/residential")
+            })
+          } else {
+            nextTick(() => {
+              router.push("/overview")
+            })
+          }
 
           track_register()
         }

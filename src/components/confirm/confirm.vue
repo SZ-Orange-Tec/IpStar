@@ -7,6 +7,9 @@
             <template v-if="type === 'warn'">
               <TriangleAlert class="warn-icon" :size="18" />
             </template>
+            <template v-if="type === 'info'">
+              <Info class="text-amber-500" :size="18" />
+            </template>
             <p class="font-medium">{{ title }}</p>
           </div>
 
@@ -40,7 +43,7 @@
 import IpDialog from "@/components/dialog/index.vue"
 import IpButton from "@/components/button/button.vue"
 import IpInput from "@/components/Input/Input.vue"
-import { TriangleAlert, X as CloseIcon } from "lucide-vue-next"
+import { TriangleAlert, X as CloseIcon, Info } from "lucide-vue-next"
 import { ref, defineModel } from "vue"
 
 const show = defineModel({ type: Boolean })

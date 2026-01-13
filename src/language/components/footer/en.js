@@ -1,5 +1,6 @@
 export default {
   Contact_Us: "Contact Us",
+  About_Us: "About Us",
   Products: "Products",
   Residential_Proxies: "Residential Proxies",
   Unlimited_Residential_Proxies: "Unlimited Residential Proxies",

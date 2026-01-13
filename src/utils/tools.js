@@ -42,7 +42,7 @@ export function formatSizeUnits(kb) {
     unitIndex++
   }
 
-  return `${kb.toFixed(2)} ${units[unitIndex]}`
+  return `${kb.toFixed(2).replace(/\.00$/, "")} ${units[unitIndex]}`
 }
 // 是否是手机端
 export function isMobile() {

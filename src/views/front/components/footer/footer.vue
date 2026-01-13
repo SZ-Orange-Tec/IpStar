@@ -5,18 +5,33 @@
       <div class="container">
         <div class="nav column lg:flex">
           <!-- logo -->
-          <div class="logo column sm:between lg:column gap-10">
+          <div class="logo column sm:between lg:column gap-5">
             <div>
               <img src="@/assets/images/logo_white.webp" style="height: 36px" alt="" />
             </div>
-            <div class="contact space-y-1">
-              <strong class="white font-medium">{{ t("Contact_Us") }}</strong>
-              <RouterLink to="mailto:support@ipstar.io" class="v_center space-x-2">
-                <Mail :size="16" class="leading-none" />
-                <p>support@ipstar.io</p>
-              </RouterLink>
+            <div class="contact">
+              <div class="column space-y-2">
+                <strong class="white font-medium">{{ t("Contact_Us") }}</strong>
+                <RouterLink to="mailto:support@ipstar.io" class="v_center space-x-2">
+                  <Mail :size="16" class="leading-none" />
+                  <p>support@ipstar.io</p>
+                </RouterLink>
+              </div>
 
-              <div class="v_center space-x-2 pay">
+              <div class="mt-4 column space-y-3">
+                <strong class="white font-medium">{{ t("About_Us") }}</strong>
+
+                <div class="v_center space-x-4 pay">
+                  <a href="https://x.com/ipstar_proxy" class="pay-item v_center pointer hover:bg-slate-500">
+                    <img height="25" src="@/assets/images/pay/twitter.svg" alt="" />
+                  </a>
+                  <div @click="openGT" class="pay-item v_center pointer hover:bg-slate-500">
+                    <img height="25" src="@/assets/images/pay/telegram.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="v_center space-x-2 pay mt-4">
                 <div class="pay-item v_center">
                   <img height="25" src="@/assets/images/pay/visa.svg" alt="" />
                 </div>
@@ -150,6 +165,18 @@
         </div>
       </div>
     </div>
+
+    <IpDialog v-model="isQRcode" class="mask">
+      <div class="mask_content space-y-5 column_center">
+        <div class="image_box">
+          <img src="@/assets/images/relation/tg.webp" alt="" />
+        </div>
+        <p class="font-semibold text-lg text-[#53845F] tracking-wider">@GLOBAL_IP_PROXY</p>
+        <div class="close vh_center pointer transition-color black" @click="isQRcode = false">
+          <CloseIcon :size="16" />
+        </div>
+      </div>
+    </IpDialog>
   </footer>
 </template>
 
@@ -158,12 +185,16 @@ import { useRouter } from "vue-router"
 import loginStore from "@/store/login"
 import { Sparkles } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
-import { Mail } from "lucide-vue-next"
+import IpDialog from "@/components/dialog/index.vue"
+import { isMobile } from "@/utils/tools"
+import { Mail, X as CloseIcon } from "lucide-vue-next"
 import layoutStore from "@/store/layout"
 import settingsStore from "@/store/setting"
 import HomeTitle from "../homeTitle.vue"
 import { useI18n } from "vue-i18n"
 const { isLogin } = loginStore()
+import { ref } from "vue"
+import position from "@/components/dialog/position"
 
 const router = useRouter()
 const { t } = useI18n()
@@ -172,6 +203,17 @@ const { en } = settingsStore()
 // 邮箱跳转
 function gotoEmail() {
   window.open("mailto:support@ipstar.io")
+}
+
+// GT 二维码
+const isQRcode = ref(false)
+function openGT(e) {
+  if (isMobile()) {
+    window.open("https://t.me/global_ip_proxy")
+  } else {
+    position.set({ x: e.clientX, y: e.clientY })
+    isQRcode.value = true
+  }
 }
 </script>
 

@@ -12,6 +12,18 @@ const state = reactive({
   promotion: false,
   activity_days: 0,
   discount_rate: 0,
+  // 新用户注册奖励
+  newer_promotion: {
+    promotion: false,
+    days: 0,
+    name_count: "",
+    name_unit: "",
+    price: 100,
+    code: "",
+    total_size: 0,
+    mobile_size: 0,
+    residential_size: 0,
+  },
 })
 const getters = {
   lowest_price_residential: computed((state) => state.lowestPrice.residential),
@@ -42,6 +54,18 @@ const actions = {
       state.promotion = data.promotion_info.promotion
       state.activity_days = data.promotion_info.activity_days
       state.discount_rate = data.promotion_info.discount_rate
+
+      state.newer_promotion = {
+        promotion: data.newer_promotion.promotion,
+        days: data.newer_promotion.activity_days,
+        name_count: data.newer_promotion.product_name.split(/\s/)[0],
+        name_unit: data.newer_promotion.product_name.split(/\s/)[1],
+        price: data.newer_promotion.product_price,
+        code: data.newer_promotion.product_code,
+        total_size: formatSizeUnits(data.newer_promotion.total_size),
+        mobile_size: formatSizeUnits(data.newer_promotion.mobile_size),
+        residential_size: formatSizeUnits(data.newer_promotion.residential_size),
+      }
       return data
     } catch (error) {
       console.log(error.message)

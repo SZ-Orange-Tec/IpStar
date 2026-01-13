@@ -2,6 +2,8 @@
 import { createI18n } from "vue-i18n"
 import zh from "./home/zh"
 import en from "./home/en"
+import dialogNewUserAwardzh from "./components/dialogNewUserAward/zh"
+import dialogNewUserAwarden from "./components/dialogNewUserAward/en"
 // import HomeMessage from "./home/index"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
@@ -22,6 +24,7 @@ const i18n = createI18n({
   messages: {
     zh: {
       ...zh,
+      ...dialogNewUserAwardzh,
       site: {
         title: "Ipstar.io 专业全球 IP 代理服务商",
         description:
@@ -32,6 +35,7 @@ const i18n = createI18n({
     },
     en: {
       ...en,
+      ...dialogNewUserAwarden,
       site: {
         title: "Ipstar.io: Professional Global IP Proxy Service.",
         description: "Access Rotating Residential, Static & Mobile IPs via HTTP/SOCKS5. Unlimited concurrency for scraping on Windows, Mac & Mobile.",

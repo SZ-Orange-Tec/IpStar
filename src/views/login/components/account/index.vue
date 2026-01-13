@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, computed, inject } from "vue"
+import { ref, computed, inject, nextTick } from "vue"
 import { useRouter } from "vue-router"
 import { platDataConfig } from "@/api/home"
 import { GithubLogin, GoogleLogin } from "@/api/login"
@@ -64,6 +64,7 @@ import { useI18n } from "vue-i18n"
 import { track_register } from "@/utils/detect"
 import IpButton from "@/components/button/button.vue"
 import userStore from "../../../../store/user"
+import layoutStore from "../../../../store/layout"
 
 const { t } = useI18n()
 
@@ -77,6 +78,7 @@ const router = useRouter()
 const { token } = loginStore()
 const { lang } = settingStore()
 const { getUserInfo } = userStore()
+const { getConfig } = layoutStore()
 
 const btnLoading = ref(false)
 
@@ -136,8 +138,16 @@ function handlerGoogleLogin() {
           track_register()
 
           await getUserInfo()
-
-          router.replace("/overview")
+          const config = await getConfig()
+          if (config.newer_promotion.promotion) {
+            nextTick(() => {
+              router.replace("/residential")
+            })
+          } else {
+            nextTick(() => {
+              router.replace("/overview")
+            })
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -189,8 +199,16 @@ function handlerGithubLogin() {
           track_register()
 
           await getUserInfo()
-
-          router.replace("/overview")
+          const config = await getConfig()
+          if (config.newer_promotion.promotion) {
+            nextTick(() => {
+              router.replace("/residential")
+            })
+          } else {
+            nextTick(() => {
+              router.replace("/overview")
+            })
+          }
         })
         .catch((err) => {
           console.log(err)

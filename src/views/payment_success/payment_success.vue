@@ -39,7 +39,7 @@ export default {
       time: null,
       minTime: null,
       // 加载状态
-      loading: false,
+      loading: true,
       num: 10,
       // 是否购买完成
       is_paid: false,
@@ -54,22 +54,27 @@ export default {
     this.begin()
   },
   methods: {
-    begin() {
-      this.loading = true
-      // 查询订单是否支付完成
-      this.payment_order()
-        .then(({ data }) => {
-          this.time = setInterval(() => {
-            if (this.is_paid) {
-              clearInterval(this.time)
-              return
-            }
-            this.payment_order()
-          }, 5000)
-        })
-        .catch(() => {
-          this.loading = false
-        })
+    async begin() {
+      clearTimeout(this.time)
+      const { data } = await this.payment_order()
+      if (data.is_paid) {
+        this.loading = false
+        this.resuceTime()
+        return
+      }
+      this.time = setTimeout(() => {
+        this.begin()
+      }, 1500)
+    },
+    resuceTime() {
+      if (this.num <= 0) {
+        this.drop_out()
+        return
+      }
+      this.time = setTimeout(() => {
+        this.num--
+        this.resuceTime()
+      }, 1000)
     },
     // 查询订单是否完成
     async payment_order() {
@@ -86,15 +91,8 @@ export default {
         if (this.username && !this.isPurchase) {
           // 更新本地用户数据
           await this.updateUserInfo()
+          await this.getConfig()
         }
-        this.loading = false
-        this.minTime = setInterval(() => {
-          if (this.num === 0) {
-            this.drop_out()
-            return
-          }
-          this.num--
-        }, 1000)
       }
       return res
     },
@@ -105,10 +103,12 @@ export default {
   },
   setup() {
     const { username, is_purchase: isPurchase, updateUserInfo } = userStore()
+    const { getConfig } = layoutStore()
     return {
       username,
       isPurchase,
       updateUserInfo,
+      getConfig,
     }
   },
   // 销毁

@@ -31,5 +31,6 @@ export default {
     usdt11: "There is nothing else you need to do! You may close this window.",
 
     unit_price: "Unit Price",
+    included: "{traffic} included",
   },
 }

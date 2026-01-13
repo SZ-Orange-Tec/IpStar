@@ -1,5 +1,6 @@
 export default {
   Contact_Us: "联系我们",
+  About_Us: "了解我们",
   Products: "产品",
   Residential_Proxies: "住宅代理",
   Unlimited_Residential_Proxies: "不限量住宅代理",
