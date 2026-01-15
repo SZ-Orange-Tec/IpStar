@@ -3,7 +3,7 @@
     <div class="form w-full">
       <div class="w-full space-y-5">
         <p class="text-sm">{{ t("login_spec.label4") }}</p>
-        <div class="v_center input_box space-x-2 px-3 transition-color">
+        <label class="v_center input_box space-x-2 px-3 transition-color">
           <Lock :size="18" class="flex-shrink-0 icon" />
           <input
             :type="showPassword ? 'text' : 'password'"
@@ -16,7 +16,7 @@
             <Eye v-if="!showPassword" :size="18" />
             <EyeOff v-else :size="18" />
           </ip-button>
-        </div>
+        </label>
       </div>
     </div>
 

@@ -2,11 +2,11 @@
   <div class="login_account column space-y-5">
     <div class="form w-full space-y-5">
       <p class="text-sm">{{ t("login_spec.label5") }}</p>
-      <div class="v_center space-x-2 input_box transition-color">
+      <label class="v_center space-x-2 input_box transition-color">
         <MailIcon :size="18" class="flex-shrink-0 icon" />
         <input type="text" v-model.trim="email" ref="inputRef" class="flex-1 text-sm" :disabled="disabled" :placeholder="t('Email')" />
         <span class="edit pointer text-sm" v-if="disabled" @click="openEdit">编辑</span>
-      </div>
+      </label>
     </div>
 
     <IpButton type="primary" class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">

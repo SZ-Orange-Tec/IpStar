@@ -2,10 +2,10 @@
   <div class="login_account space-y-5">
     <div class="form space-y-5">
       <p class="text-sm">{{ t("login_spec.label1") }}</p>
-      <div class="v_center input_box transition-color">
+      <label class="v_center input_box transition-color">
         <MailIcon :size="18" class="flex-shrink-0 icon" />
         <input type="text" v-model.trim="email" class="flex-1 text-sm" :placeholder="t('Email')" />
-      </div>
+      </label>
     </div>
 
     <IpButton type="primary" class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">

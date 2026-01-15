@@ -3,7 +3,7 @@
     <div class="w-full form space-y-6">
       <div class="w-full space-y-5">
         <p class="text-sm">{{ t("login_spec.label2") }}</p>
-        <div class="v_center input_box space-x-2 px-3 transition-color">
+        <label class="v_center input_box space-x-2 px-3 transition-color">
           <Lock :size="18" class="flex-shrink-0 icon" />
           <input
             :type="showPassword ? 'text' : 'password'"
@@ -16,15 +16,15 @@
             <Eye v-if="!showPassword" :size="18" />
             <EyeOff v-else :size="18" />
           </ip-button>
-        </div>
+        </label>
       </div>
 
       <div class="w-full space-y-2">
         <div class="w-full flex space-x-3">
-          <div class="flex-1 v_center input_box space-x-2 px-3 transition-color">
+          <label class="flex-1 v_center input_box space-x-2 px-3 transition-color">
             <ShieldCheck :size="18" class="flex-shrink-0 icon" />
             <input type="text" v-model.trim="code" class="flex-1 text-sm" :placeholder="t('Verification_code')" />
-          </div>
+          </label>
           <div class="image flex-shink-0" style="height: 44px">
             <img :src="image" class="image" height="44" alt="graphic code" @click="emit('updateCaptcha')" />
           </div>
