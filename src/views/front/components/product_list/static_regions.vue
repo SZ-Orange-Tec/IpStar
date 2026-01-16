@@ -1,11 +1,11 @@
 <template>
-  <div class="regios box-border w-full h-8 between px-2 rounded gap-4">
-    <span class="grey-60 whitespace-nowrap">{{ t("Locations") }}</span>
+  <div class="regios box-border w-full h-8 between px-2 rounded">
+    <span class="grey-60">{{ t("Locations") }}</span>
 
-    <DropDown placement="bottom" class="flex-1 min-w-0 shink-0 dropdown" :max-height="300">
+    <DropDown placement="bottom" class="shink-0 dropdown" :max-height="300">
       <template #label="{ open }">
         <div class="black between space-x-1 shrink-0 w-full h-9 pointer">
-          <div class="whitespace-nowrap truncate flex-1 min-w-0 text-right" :class="{ 'grey-60': !region_text }">{{ region_text }}</div>
+          <div :class="{ 'grey-60': !region_text }">{{ region_text }}</div>
           <ChevronDown :size="16" :class="{ rotate180: open }" class="transition-transform" />
         </div>
       </template>
@@ -31,7 +31,7 @@ import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
 import { ChevronDown } from "lucide-vue-next"
 import { computed, inject, onMounted, ref } from "vue"
-import settingStore from "../../../../../store/setting"
+import settingStore from "@/store/setting"
 
 const { t } = useI18n()
 const { lang } = settingStore()

@@ -49,6 +49,7 @@ import {
   Settings as SettingsIcon,
   BookMarked as HelpIcon,
   MessageCircleQuestion as QuestionIcon,
+  MapPin as StaticResidentialProxyIcon,
   ChevronsLeft,
 } from "lucide-vue-next"
 import settingStore from "@/store/setting"
@@ -110,6 +111,12 @@ function getSlideList() {
       path: "/data_center",
       isShow: true,
     },
+    {
+      icon: StaticResidentialProxyIcon,
+      name: t("menu_spec.static_proxy"),
+      path: "/static",
+      isShow: true,
+    },
     { name: t("menu_spec.menu") },
     {
       icon: WhiteListIcon,
@@ -166,7 +173,7 @@ watch(
   () => route.path,
   (val) => {
     focusPath(val)
-  }
+  },
 )
 watch(lang, (val) => {
   getSlideList()

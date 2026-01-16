@@ -78,6 +78,13 @@ export default {
     rotation_adv2: "Unlimited Sub-account Creation",
     rotation_adv3: "99.99% Connection Success Rate",
 
+    static_title: "Static Residential Proxy",
+    static_desc:
+      "Global ISP active static IP resource pool, 100% simulating genuine human browsing behaviour, delivering a pristine proxy environment with exceptionally high weighting.",
+    static_adv1: "Authentic ISP residential proxy IP addresses",
+    static_adv2: "Purely dedicated, zero tolerance for misuse",
+    static_adv3: "Permanent static IP addresses, unlimited traffic",
+
     plan_title: "Easily Integrate Our Solution into Your Project",
     plan_desc:
       "We ensure that our product is easily integrated into your scraping infrastructure. With multiple language support and ready-to-use code examples, you can start your web scraping project quickly and easily.",

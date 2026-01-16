@@ -7,6 +7,7 @@ export default {
   Phone_Proxies: "Phone Proxies",
   Data_Center_Proxies: "Data Center Proxies",
   Rotating_Proxies: "Rotating Proxies",
+  Static_Residential_Proxies: "Static Residential Proxies",
   Price: "Price",
   Scenes: "Scenes",
   Get_Help: "Get Help",

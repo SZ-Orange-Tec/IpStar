@@ -34,6 +34,15 @@ export function platProductRegions(params) {
   })
 }
 
+// 静态IP区域
+export function platProductStaticRegions(params) {
+  return request({
+    url: "/plat/products/static-regions",
+    method: "get",
+    params,
+  })
+}
+
 // 产品最低价格列表
 export function platProductLowestPrices(params) {
   return request({
@@ -51,11 +60,28 @@ export function platCustomerStaticIps(params) {
     params,
   })
 }
+// 客户静态IP列表
+export function platCustomerStaticIps2(params) {
+  return request({
+    url: "/plat/customer/static-ips",
+    method: "get",
+    params,
+  })
+}
 
 // IP续费
 export function platCustomerOrdersRenewal(data) {
   return request({
     url: "/plat/customer/orders/ip-renewal",
+    method: "post",
+    data,
+  })
+}
+
+// 静态IP续费
+export function platCustomerOrdersStaticRenewal(data) {
+  return request({
+    url: "/plat/customer/orders/static-ip-renewal",
     method: "post",
     data,
   })

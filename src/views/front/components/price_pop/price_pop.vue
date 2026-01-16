@@ -5,7 +5,7 @@
         <div class="grey-40 font-medium">{{ t("Agent_Price") }}</div>
         <div class="split w-full"></div>
         <div class="w-full">
-          <ul class="grid grid-cols-2 gap-5">
+          <ul class="grid grid-cols-2 gap-4">
             <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('residential')">
               <div class="iconbox rounded-lg vh_center shrink-0">
                 <ResidentialProxyIcon class="w-6 h-6 text-primary" />
@@ -20,6 +20,23 @@
                 <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
                 <div class="text-sm">
                   <span class="text-xl font-medium">${{ lowestPrice.residential }}</span> /GB
+                </div>
+              </div>
+            </li>
+            <li class="v_center space-x-3 pointer rounded" @click="toPriceSecond('static')">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <StaticResidentialProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="column space-y-1">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Static_Residential_Proxies") }}</strong>
+                  <ip-tag type="success" class="rounded-full font-normal">{{ t("Exclusive") }}</ip-tag>
+                </div>
+              </div>
+              <div class="right column_center">
+                <span class="text-xs grey-60">{{ t("Starting_from") }}</span>
+                <div class="text-sm">
+                  <span class="text-xl font-medium">${{ lowestPrice.static }}</span> /IP
                 </div>
               </div>
             </li>
@@ -88,6 +105,7 @@ import {
   Infinity as UnlimitedProxyIcon,
   Smartphone as PhoneProxyIcon,
   Database as DataProxyIcon,
+  MapPin as StaticResidentialProxyIcon,
   ChevronLeft,
 } from "lucide-vue-next"
 import IpTag from "@/components/tag/tag.vue"
@@ -119,7 +137,7 @@ watch(
     } else {
       close()
     }
-  }
+  },
   // { immediate: true }
 )
 
@@ -185,7 +203,7 @@ const lowestPrice = ref({
 async function getLowestPrice() {
   try {
     const { data } = await platProductLowestPrices()
-    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const keys = ["residential", "unlimited", "phone", "data_center", "static"]
     const target = {}
     data.forEach(({ prd_type, unit_price }) => {
       const key = keys[prd_type]

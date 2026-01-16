@@ -35,6 +35,10 @@ export default {
       title: "Rotation Residential Proxies Plans",
       des: "Real residential IPs, auto-rotating for uninterrupted data collection and network access.",
     },
+    static: {
+      title: "Static Residential Proxies",
+      des: "Static residential proxies are a fast, highly reliable alternative to standard residential proxies. Upgrade to static residential—unblock access with a purchase today.",
+    },
 
     plan_title: "Total Data Control",
     plan_desc: "Easily track your data usage in real-time. Our dashboard helps you monitor proxy stats and stay on budget.",

@@ -22,6 +22,7 @@ export default {
   Phone_Proxies: "Phone Proxies",
   Data_Center_Proxies: "Data Center Proxies",
   Rotation_Proxies: "Rotation Residential Proxies",
+  Static_Residential_Proxies: "Static Residential Proxies",
 
   productList_spec: {
     right1: "190+Regions, Include US",

@@ -136,6 +136,12 @@ const routes = [
         component: () => import("@/views/back/data_center/data_center.vue"),
       },
       {
+        path: "static",
+        name: "static",
+        meta: { index: 11, keepAlive: false },
+        component: () => import("@/views/back/static/static.vue"),
+      },
+      {
         path: "settings",
         name: "settings",
         meta: { index: 14, keepAlive: false },

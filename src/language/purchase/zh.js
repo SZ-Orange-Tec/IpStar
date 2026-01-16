@@ -7,6 +7,7 @@ export default {
   ...navbar,
 
   Size: "总量",
+  Number: "数量",
   Price: "价格",
   Status: "状态",
   Consume: "消耗",

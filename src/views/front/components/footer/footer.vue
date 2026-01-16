@@ -74,6 +74,9 @@
                 <li class="pointer">
                   <RouterLink to="/product/data_center">{{ t("Data_Center_Proxies") }}</RouterLink>
                 </li>
+                <li class="pointer">
+                  <RouterLink to="/product/static">{{ t("Static_Residential_Proxies") }}</RouterLink>
+                </li>
               </ul>
             </div>
 
@@ -91,6 +94,9 @@
                 </li>
                 <li class="pointer">
                   <RouterLink to="/pricing/data_center">{{ t("Data_Center_Proxies") }}</RouterLink>
+                </li>
+                <li class="pointer">
+                  <RouterLink to="/pricing/static">{{ t("Static_Residential_Proxies") }}</RouterLink>
                 </li>
               </ul>
             </div>

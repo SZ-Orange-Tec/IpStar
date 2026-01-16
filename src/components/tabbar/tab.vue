@@ -2,7 +2,9 @@
   <div class="tabbar-container">
     <div class="tabbar-wrapper relative flex w-full">
       <!-- 活动背景指示器 -->
-      <div class="active-bg" :style="activeBgStyle"></div>
+      <div class="w-full h-full absolute overflow-x-hidden">
+        <div class="active-bg" :style="activeBgStyle"></div>
+      </div>
 
       <!-- 插槽，用于放置tab-item子组件 -->
       <slot></slot>

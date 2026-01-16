@@ -1,6 +1,6 @@
 export default {
   award_title: "新用户首充礼包！",
-  award_desc: "套餐包含{total}住宅代理和{mobile}移动代理永久流量\n单用户仅一次购买机会，限时{days}天",
+  award_desc: "套餐包含{total}住宅代理和{mobile}移动代理永久流量\n此套餐每个用户都有一次购买机会，请在{days}天内购买",
   award_tip: "为保障用户的合法权益，请勿重复注册账号，套取流量，一旦发现将永久封禁全部关联账号",
   Only: "仅需",
   Buy_Now: "立即购买",

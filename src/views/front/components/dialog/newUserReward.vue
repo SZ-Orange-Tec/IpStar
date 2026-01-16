@@ -12,7 +12,7 @@
             <span class="font-semibold">{{ t("Only") }}</span>
             <strong class="text-6xl md:text-7xl xl:text-9xl font-medium">${{ newer_promotion.price / 100 }}</strong>
           </div>
-          <p class="underline text-center mt-10 max-w-[360px] font-medium">
+          <p class="underline mt-10 max-w-[360px] font-medium">
             {{ t("award_desc", { total: newer_promotion.residential_size, mobile: newer_promotion.mobile_size, days: newer_promotion.days }) }}
           </p>
           <IpButton @click="buyNewUserAward" type="primary" class="px-5 min-w-[180px] vh_center h-11 mt-6 !bg-[#524499]">{{ t("Buy_Now") }}</IpButton>

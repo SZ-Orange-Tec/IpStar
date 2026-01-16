@@ -27,6 +27,9 @@ export default {
   Australia: "Australia",
   Japan: "Japan",
 
+  Help_Center: "Help Center",
+  Online_Support: "Online Support",
+
   product_spec: {
     residential: {
       title: "Residential Proxy",
@@ -86,6 +89,25 @@ export default {
       ques5: "What is the IP rotation frequency of Rotating Residential Proxies?",
       ans5: "Our Rotating Residential Proxies support flexible IP rotation options, you can set the frequency of IP rotation according to your needs, e.g. every 5 minutes, every 15 minutes, and so on.",
     },
+    static: {
+      title: "Static Residential Proxies",
+      price_desc:
+        "Static residential proxies are a fast, highly reliable alternative to standard residential proxies. Upgrade to static residential—unblock access with a purchase today.",
+      desc: "Enjoy stable and secure internet connections whilst scraping data from any website.",
+      adv1: "From the world's leading ISP providers",
+      adv2: "100% residential IP",
+      adv3: "Exceptionally stable proxies with 99.5% uptime",
+      ques1: "What is a static residential proxy?",
+      ans1: "A static residential proxy is a real IP address assigned by a local Internet Service Provider (ISP). Static residential proxies are highly secure, and are generally more reliable.",
+      ques2: "How to check if the IP is static residential proxy?",
+      ans2: "Different proxy websites have different detection libraries. The detection results of 911proxy are based on {link}. 911proxy does not recognize the detection results of Chinese websites.",
+      ques3: "Where can you get your static residential IP after purchasing it?",
+      ans3: "Please refer to the {help_center}, which contains detailed usage and integration instructions. If you have any questions, pleasefeel free to contact us via email:{email} or the official website {service}",
+      ques4: "Are there any data usage limits for each package?",
+      ans4: "Rotating Residential Package: Based on your purchase needs, there are no data usage limits within the validity period of the data you’ve purchased.\nUnlimited Residential Package: There are no data usage limits during the validity period of your purchased package.\nStatic Residential Package: You purchase based on the required duration, and the plan includes data usage fees with no data usage limits.",
+      ques5: "What protocols are supported?",
+      ans5: "We support both HTTP and SOCKS5 protocols to meet your needs as much as possible.",
+    },
     proxy_endpoints: "Proxy Endpoints",
     proxy_network: "Proxy Network",
     proxy_ip: "90 M+ Residential IPs",
@@ -105,6 +127,14 @@ export default {
     static_title: "What is a Static Datacenter Proxy?",
     static_desc:
       "A static datacenter proxy routes your traffic through a datacenter network. By utilizing the powerful infrastructure and resources of data centers, it delivers high-performance proxy services characterized by exceptional speed, stability, and access to a vast pool of IP addresses.",
+
+    isp_title: "Large-scale and stable static residential proxy network",
+    isp_desc:
+      "Wherever you require it globally, we can provide authentic static residential IPs. Covering over 90 million original residential IPs worldwide. Industry-leading speed with reliable, stable operation – no disconnections or interruptions.",
+    isp_adv1: "Authentic static residential IPs from across the globe",
+    isp_adv2: "Rapid static residential IPs",
+    isp_adv3: "Coverage spanning 195 countries",
+    isp_adv4: "Free servers optimised for 4K streaming speeds",
 
     plan_title: "Easily Integrate Our Solution into Your Project",
     plan_desc:

@@ -62,6 +62,13 @@ export default {
     rotation_adv2: "Unlimited Sub-account Creation",
     rotation_adv3: "99.99% Connection Success Rate",
 
+    static_title: "Static Residential Proxy",
+    static_desc:
+      "Global ISP active static IP resource pool, 100% simulating genuine human browsing behaviour, delivering a pristine proxy environment with exceptionally high weighting.",
+    static_adv1: "Authentic ISP residential proxy IP addresses",
+    static_adv2: "Purely dedicated, zero tolerance for misuse",
+    static_adv3: "Permanent static IP addresses, unlimited traffic",
+
     four1_title: "Data Collection",
     four1_desc: "Stable and reliable proxies for your business intelligence projects.",
     four2_title: "SEO",

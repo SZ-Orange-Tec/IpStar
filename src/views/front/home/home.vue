@@ -272,26 +272,26 @@
           </div>
           <div class="product_item">
             <img loading="lazy" src="@/assets/images/home/icon5.webp" width="48" height="48" />
-            <div class="text-lg font-medium mt-4 leading-none">{{ t("Rotation_Proxies") }}</div>
-            <p class="mt-4">{{ t("home_spec.rotation_des") }}。</p>
+            <div class="text-lg font-medium mt-4 leading-none">{{ t("home_spec.static_title") }}</div>
+            <p class="mt-4">{{ t("home_spec.static_desc") }}。</p>
             <ul class="space-y-3 text-sm grey-80 mt-5">
               <li class="v_center space-x-2">
                 <div class="bg-current success vh_center w-4 h-4 rounded-full">
                   <Check :size="10" :stroke-width="3" class="white" />
                 </div>
-                <span>{{ t("home_spec.rotation_adv1") }}</span>
+                <span>{{ t("home_spec.static_adv1") }}</span>
               </li>
               <li class="v_center space-x-2">
                 <div class="bg-current success vh_center w-4 h-4 rounded-full">
                   <Check :size="10" :stroke-width="3" class="white" />
                 </div>
-                <span>{{ t("home_spec.rotation_adv2") }}</span>
+                <span>{{ t("home_spec.static_adv2") }}</span>
               </li>
               <li class="v_center space-x-2">
                 <div class="bg-current success vh_center w-4 h-4 rounded-full">
                   <Check :size="10" :stroke-width="3" class="white" />
                 </div>
-                <span>{{ t("home_spec.rotation_adv3") }}</span>
+                <span>{{ t("home_spec.static_adv3") }}</span>
               </li>
             </ul>
             <div class="between mt-7">
@@ -299,12 +299,12 @@
                 <div class="text-xs">{{ t("Starting_from") }}</div>
                 <div class="text-sm">
                   <span class="primary">$</span>
-                  <b class="text-xl primary">{{ lowestPrice.residential }}</b>
-                  <span>/GB</span>
+                  <b class="text-xl primary">{{ lowestPrice.static }}</b>
+                  <span>/IP</span>
                 </div>
               </div>
 
-              <a href="/pricing/rotation">
+              <a href="/pricing/static">
                 <IpButton type="primary_border" class="h-10 px-5">{{ t("Get_Now") }}</IpButton>
               </a>
             </div>

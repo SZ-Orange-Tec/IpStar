@@ -6,7 +6,7 @@ import { formatSizeUnits } from "../utils/tools"
 const state = reactive({
   path: "", // 路由路径
   isProduc: false, // 是否显示产品页
-  lowestPrice: { residential: "0.00", unlimited: "0.00", phone: "0.00", data_center: "0.00" }, // 最低价格
+  lowestPrice: { residential: "0.00", unlimited: "0.00", phone: "0.00", data_center: "0.00", static: "0.00" }, // 最低价格
   gift: 0, // 注册奖励礼包 KB
   registerAward: false, // 是否有注册奖励
   promotion: false,
@@ -35,7 +35,7 @@ const actions = {
   async getLowestPrice() {
     try {
       const { data } = await platProductLowestPrices()
-      const keys = ["residential", "unlimited", "phone", "data_center"]
+      const keys = ["residential", "unlimited", "phone", "data_center", "static"]
       const target = {}
       data.forEach(({ prd_type, unit_price }) => {
         const key = keys[prd_type]

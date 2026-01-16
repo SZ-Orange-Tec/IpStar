@@ -9,6 +9,7 @@ export default {
     unlimited_proxy: "不限量住宅代理",
     phone_proxy: "移动手机代理",
     data_proxy: "数据中心代理",
+    static_proxy: "静态住宅代理",
     menu: "菜单",
     white_list: "白名单",
     sub_account: "子账号",

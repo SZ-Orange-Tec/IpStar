@@ -57,7 +57,7 @@ async function getTableData() {
     } = await platCustomerProductsV2({
       page_index: page.value,
       page_size: size.value,
-      prd_type: 3,
+      prd_type: 4,
     })
 
     total.value = count

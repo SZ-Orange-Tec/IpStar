@@ -7,6 +7,7 @@ export default {
   Phone_Proxies: "移动手机代理",
   Data_Center_Proxies: "静态数据中心代理",
   Rotating_Proxies: "轮换代理",
+  Static_Residential_Proxies: "静态住宅代理",
   Price: "定价",
   Scenes: "应用场景",
   Get_Help: "获取帮助",

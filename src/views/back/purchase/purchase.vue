@@ -9,6 +9,7 @@
           <Tab v-model="active" :active-style="activeStyle" activeTextColor="hsl(var(--foreground) / 90%)" class="tab grey-60 font-medium v_center">
             <TabItem :value="0" class="tab-item">{{ t("menu_spec.residential_proxy") }}</TabItem>
             <TabItem :value="1" class="tab-item">{{ t("menu_spec.unlimited_proxy") }}</TabItem>
+            <TabItem :value="4" class="tab-item">{{ t("menu_spec.static_proxy") }}</TabItem>
             <TabItem :value="2" class="tab-item">{{ t("menu_spec.phone_proxy") }}</TabItem>
             <TabItem :value="3" class="tab-item">{{ t("menu_spec.data_proxy") }}</TabItem>
           </Tab>
@@ -32,6 +33,7 @@ import ResidentialProxy from "./residential_proxy/index.vue"
 import UnlimitedProxy from "./unlimited_proxy/index.vue"
 import PhoneProxy from "./phone_proxy/index.vue"
 import DataCenterProxy from "./data_proxy/index.vue"
+import StaticProxy from "./static/index.vue"
 import { useI18n } from "vue-i18n"
 import { ref } from "vue"
 import { computed } from "vue"
@@ -73,6 +75,8 @@ const activeComponent = computed(() => {
       return PhoneProxy
     case 3:
       return DataCenterProxy
+    case 4:
+      return StaticProxy
     default:
       return ResidentialProxy
   }

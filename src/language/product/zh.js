@@ -16,6 +16,7 @@ export default {
   Google_Start: "使用 Google 开始",
   Locations: "地区",
   Residential_Proxies: "住宅代理",
+  Static_Residential_Proxies: "静态住宅代理",
   Rotating_Proxies: "轮换代理",
   Data_Center_Proxies: "静态数据中心代理",
   Price: "定价",
@@ -26,6 +27,9 @@ export default {
   HongKong: "香港",
   Australia: "澳大利亚",
   Japan: "日本",
+
+  Help_Center: "帮助中心",
+  Online_Support: "在线客服",
 
   product_spec: {
     residential: {
@@ -84,6 +88,24 @@ export default {
       ques5: "轮换住宅代理的IP轮换频率是多少？",
       ans5: "我们的轮换住宅代理为每个请求自动分配新 IP，极大提升请求成功率，同时显著降低被屏蔽风险。",
     },
+    static: {
+      title: "静态住宅代理",
+      price_desc: "静态住宅代理是标准住宅代理的高速、高可靠性替代方案。升级静态住宅，今天购买就可以解除封锁。",
+      desc: "享受稳定和安全的互联网连接，并从任何网站抓取数据。",
+      adv1: "来自全球顶级的ISP服务商",
+      adv2: "100% 住宅 IP",
+      adv3: "非常稳定的代理与99.5%的正常运行时间",
+      ques1: "什么是静态住宅代理？",
+      ans1: "静态住宅代理是由当地互联网服务提供者（ISP）分配的真实的IP位址。静态住宅代理具有高安全性，通常更加可靠。",
+      ques2: "如何检查ip是否为静态住宅代理？",
+      ans2: "不同的代理网站检测库不一样，IpStar 的检测结果以{link}为准。IpStar 不认可中文类网站的检测结果。",
+      ques3: "静态住宅ip购买后在哪里获取？",
+      ans3: "请参考官网{help_center}，其中包含详细的使用和集成说明。如果您有任何疑问，请随时通过邮箱：{email} 或者官网{service}联系我们",
+      ques4: "各套餐流量是否受限制?",
+      ans4: "动态住宅套餐：根据您的购买需求，您已经购买的流量有效期内没有使用限制。\n无限流量套餐：在您购买的套餐有效期内，不限流量使用。\n静态住宅套餐：根据您所需要时长购买，套餐已包含流量费用，不限制流量使用。",
+      ques5: "支持什么协议？",
+      ans5: "我们支持http和socks5两种协议方式，尽可能满足您的需求。",
+    },
 
     proxy_endpoints: "代理协议",
     proxy_network: "代理网络",
@@ -99,6 +121,14 @@ export default {
     static_title: "什么是静态数据中心代理？",
     static_desc:
       "静态数据中心代理是通过与数据中心网络的连接运行的代理，利用数据中心提供的强大基础设施和资源，为用户提供代理服务。这些代理通常具有高速、稳定性和大规模的IP资源。",
+
+    isp_title: "大型且稳定的静态住宅代理网络",
+    isp_desc:
+      "在全球任何国家或地区，只要您需要，我们都可以为您提供真实的静态住宅IP。覆盖全球9000万+个原创住宅IP。业界最快，运行可靠稳定，不掉线、不中断。",
+    isp_adv1: "来自世界各地的真实静态住宅IP ",
+    isp_adv2: "快速静态住宅IP",
+    isp_adv3: "覆盖195个国家",
+    isp_adv4: "4K速度优化的免费服务器",
 
     expore_title: "探索全球各地的数据中心代理位置",
     expore_desc: "使用全球IP地址，轻松访问全球内容并突破地理限制。通过数据中心代理，保持匿名并持续扩展您的项目。",

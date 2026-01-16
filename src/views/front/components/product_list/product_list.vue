@@ -41,7 +41,7 @@
                 <div class="package_name vh_center rounded-full">
                   <div class="column_center">
                     <template v-if="type === 0 || type === 4 || type === 2">{{ item.pack_title }}</template>
-                    <template v-if="type === 1 || type === 3">{{ item.prices[0].days }} {{ t("Day") }}</template>
+                    <template v-if="type === 1 || type === 3 || type === 5">{{ item.prices[0].days }} {{ t("Day") }}</template>
                   </div>
                 </div>
 
@@ -87,7 +87,7 @@
                     >/GB</span
                   >
                   <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
-                  <span class="text-sm" v-else-if="type === 3">/IP</span>
+                  <span class="text-sm" v-else-if="type === 3 || type === 5">/IP</span>
                 </p>
 
                 <!-- 总计 -->
@@ -141,7 +141,7 @@
                     <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
                   </div>
                 </div>
-                <div v-if="type === 3" class="w-full space-y-2" style="margin-top: 1.75rem">
+                <div v-if="type === 3 || type === 5" class="w-full space-y-2" style="margin-top: 1.75rem">
                   <Regions v-model="item.region" />
                   <InputNumber v-model="item.number" @change="(num) => numberChange(index, num)" />
                 </div>
@@ -211,7 +211,7 @@
                   <p>{{ t("productList_spec.phone_right4") }}</p>
                 </li>
               </ul>
-              <ul v-else-if="type === 3" class="rights column space-y-3 text-[13px] font-normal grey-80">
+              <ul v-else-if="type === 3 || type === 5" class="rights column space-y-3 text-[13px] font-normal grey-80">
                 <li class="v_center space-x-1">
                   <CircleCheck :size="16" class="flex-shrink-0 success" />
                   <p>{{ t("productList_spec.data_right1") }}</p>
@@ -398,7 +398,7 @@
                     <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
                     <!-- <span>{{ t("productList_spec.Custom5") }}</span> -->
                   </template>
-                  <template v-if="type === 3">
+                  <template v-if="type === 3 || type === 5">
                     <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
                     <!-- <span>{{ t("productList_spec.Custom7") }}</span> -->
                   </template>
@@ -484,12 +484,13 @@
                 <span v-else-if="type === 2">{{ t("Phone_Proxies") }}</span>
                 <span v-else-if="type === 3">{{ t("Data_Center_Proxies") }}</span>
                 <span v-else-if="type === 4">{{ t("Rotation_Proxies") }}</span>
+                <span v-else-if="type === 5">{{ t("Static_Residential_Proxies") }}</span>
               </li>
               <li class="between" v-if="type === 0 || type === 4 || type === 2">
                 <span>{{ t("Traffic") }}</span>
                 <span>{{ product?.pack_size }}</span>
               </li>
-              <li class="between" v-else-if="type === 1 || type === 3">
+              <li class="between" v-else-if="type === 1 || type === 3 || type === 5">
                 <span>{{ t("Duration") }}</span>
                 <span>{{ product?.days }} {{ t("Day") }}</span>
               </li>
@@ -501,7 +502,7 @@
                   <span v-if="type === 0 || type === 4" class="grey" style="text-decoration: line-through">${{ product?.origin_price / 100 }}</span>
                   <span v-if="type === 0 || type === 4 || type === 2"> / GB</span>
                   <span v-else-if="type === 1"> / {{ t("Day") }}</span>
-                  <span v-else-if="type === 3"> / IP</span>
+                  <span v-else-if="type === 3 || type === 5"> / IP</span>
                 </div>
               </li>
               <li class="between" v-if="type === 0 || type === 4">
@@ -513,11 +514,11 @@
                 <span>{{ product?.days }} {{ t("Day") }}</span>
               </li>
 
-              <li class="between" v-if="type === 3">
+              <li class="between" v-if="type === 3 || type === 5">
                 <span>{{ t("Locations") }}</span>
                 <span>{{ product?.region }}</span>
               </li>
-              <li class="between" v-if="type === 3">
+              <li class="between" v-if="type === 3 || type === 5">
                 <span>{{ t("Number") }}</span>
                 <span>{{ product?.number }}</span>
               </li>
@@ -566,7 +567,7 @@ import layoutStore from "@/store/layout"
 import settingStore from "@/store/setting"
 import position from "@/components/dialog/position"
 import { track_createOrder } from "@/utils/detect"
-import { platProductRegions, platCustomerCustomOrder } from "@/api/product"
+import { platProductRegions, platProductStaticRegions, platCustomerCustomOrder } from "@/api/product"
 import { formatSizeUnits } from "../../../../utils/tools"
 import { platNewUserAwardOrder } from "../../../../api/product"
 
@@ -606,7 +607,7 @@ const { t } = useI18n()
 
 // 最低价格
 const { lowestPrice, getLowestPrice } = layout
-const keys = ["residential", "unlimited", "phone", "data_center"]
+const keys = ["residential", "unlimited", "phone", "data_center", "static"]
 const lowest = computed(() => {
   return lowestPrice.value[keys[type.value === 4 ? 0 : type.value]]
 })
@@ -621,7 +622,7 @@ let group3 = []
 async function GetProductList() {
   try {
     const { data } = await platProductsV2({
-      prd_type: props.type === 4 ? 0 : props.type,
+      prd_type: props.type === 4 ? 0 : props.type === 5 ? 4 : props.type,
     })
     const tempGroup1 = [] // 个人
     const tempGroup2 = [] // 企业
@@ -682,8 +683,8 @@ async function GetProductList() {
         sel_country: item.sel_country,
         prices: item.prices,
       }
-      if (props.type === 3) {
-        obj.region = ref("lax")
+      if (props.type === 3 || props.type === 5) {
+        obj.region = ref(type.value === 3 ? "lax" : "US")
         obj.number = ref(1)
         obj.total = ref(item.prices[0].price / 100)
       }
@@ -778,12 +779,13 @@ async function payCustomPack() {
 const regionsList = ref([])
 provide("regionsList", regionsList)
 async function getRegions() {
-  const { data } = await platProductRegions()
+  const isStatic = type.value === 5
+  const { data } = isStatic ? await platProductStaticRegions() : await platProductRegions()
   regionsList.value = data.map((item) => ({
     value: item.code,
     country: item.country,
-    zh: item.city_cn,
-    en: item.city,
+    zh: isStatic ? item.country_cn : item.city_cn,
+    en: isStatic ? item.country : item.city,
   }))
 }
 
@@ -856,7 +858,7 @@ const scrollPlugin = throttle(
     }
   },
   150,
-  true
+  true,
 )
 
 function scrollPluginValue(op) {
@@ -933,7 +935,7 @@ function click_pay(e) {
     attr_id: item.prices[item.select].attr_id,
   }
 
-  if (props.type === 3) {
+  if (props.type === 3 || props.type === 5) {
     productData.region_code = item.region
     const region = regionsList.value.find((i) => i.value === item.region)
     productData.region = region[lang.value] ?? ""
@@ -957,7 +959,7 @@ async function FoundOrder() {
       days: item.days,
       attr_id: item.attr_id,
     }
-    if (props.type === 3) {
+    if (props.type === 3 || props.type === 5) {
       params.num = item.number
       params.region_code = item.region_code
     }
@@ -996,6 +998,8 @@ function getTitleDesc(type) {
       break
     case 4:
       desc = t("Rotation_Proxies") + " " + product.value.pack_size
+    case 5:
+      desc = t("Static_Residential_Proxies") + "--" + product.value.region + "[" + product.value.number + "]"
       break
   }
   return desc
@@ -1017,7 +1021,7 @@ watch(
   },
   {
     immediate: true,
-  }
+  },
 )
 
 // 新手奖励下单

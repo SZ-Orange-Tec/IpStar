@@ -18,16 +18,16 @@
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Residential_Proxies_Adv") }}</p>
               </div>
             </RouterLink>
-            <RouterLink to="/product/rotation" class="v_center space-x-3 pointer rounded">
+            <RouterLink to="/product/static" class="v_center space-x-3 pointer rounded">
               <div class="iconbox rounded-lg vh_center shrink-0">
-                <RotatingProxyIcon class="w-6 h-6 text-primary" />
+                <StaticResidentialProxyIcon class="w-6 h-6 text-primary" />
               </div>
               <div class="space-y-1 flex-1 min-w-0">
                 <div class="v_center space-x-2">
-                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Rotating_Proxies") }}</strong>
-                  <ip-tag type="success rounded-full font-medium">{{ t("Hot") }}</ip-tag>
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Static_Residential_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">{{ t("Exclusive") }}</ip-tag>
                 </div>
-                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Rotating_Proxies_Adv") }}</p>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Static_Proxies_Adv") }}</p>
               </div>
             </RouterLink>
             <RouterLink to="/mobile-proxy" class="v_center space-x-3 pointer rounded">
@@ -39,6 +39,18 @@
                   <strong class="font-medium slider_bck slider_bck_left">{{ t("Phone_Proxies") }}</strong>
                 </div>
                 <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Phone_Proxies_Adv") }}</p>
+              </div>
+            </RouterLink>
+            <RouterLink to="/product/rotation" class="v_center space-x-3 pointer rounded">
+              <div class="iconbox rounded-lg vh_center shrink-0">
+                <RotatingProxyIcon class="w-6 h-6 text-primary" />
+              </div>
+              <div class="space-y-1 flex-1 min-w-0">
+                <div class="v_center space-x-2">
+                  <strong class="font-medium slider_bck slider_bck_left">{{ t("Rotating_Proxies") }}</strong>
+                  <ip-tag type="success rounded-full font-medium">{{ t("Hot") }}</ip-tag>
+                </div>
+                <p class="grey-80 text-[13px] whitespace-normal font-normal leading-4">{{ t("Rotating_Proxies_Adv") }}</p>
               </div>
             </RouterLink>
             <RouterLink to="/unlimited-residential-proxy" class="v_center space-x-3 pointer rounded">
@@ -79,6 +91,7 @@ import {
   Infinity as UnlimitedProxyIcon,
   Smartphone as PhoneProxyIcon,
   Database as DataProxyIcon,
+  MapPin as StaticResidentialProxyIcon,
   ChevronLeft,
 } from "lucide-vue-next"
 import IpTag from "@/components/tag/tag.vue"
@@ -110,7 +123,7 @@ watch(
     } else {
       close()
     }
-  }
+  },
   // { immediate: true }
 )
 

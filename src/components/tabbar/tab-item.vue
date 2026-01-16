@@ -70,7 +70,7 @@ onMounted(() => {
   z-index: 1;
   cursor: pointer;
   transition: color 0.3s;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   display: inline-flex;
   align-items: center;
   justify-content: center;

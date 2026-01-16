@@ -26,6 +26,8 @@ export default {
   Expiration_time: "Expiration Time",
   Remaining: "Remaining",
   Used: "Used",
+  Address: "Address",
+  Number: "Number",
   Port: "Port",
   Username: "Username",
   Password: "Password",
@@ -33,6 +35,7 @@ export default {
   Status: "Status",
   Normal: "Normal",
   Expired: "Expired",
+  Allocating: "Allocating",
   Export: "Export",
   List_of_Proxies: "List of Proxies",
 
@@ -64,6 +67,7 @@ export default {
     mobile_adv:
       "Using real carrier 4G/5G network egress, it provides true-to-life simulation of mobile traffic environments, empowering ad validation, market analytics, and app testing.",
     data_center_adv: "Using our data center proxy, enjoy unlimited bandwidth at a fixed price per IP.",
+    static_adv: "High-quality static residential proxies provide a continuous, unchanging IP address.",
     day_compare: "Daily comparison",
     hour_compare: "Hourly report",
 
@@ -101,5 +105,7 @@ export default {
     how_use: "Learn how to get started quickly",
 
     no_china: "Please test in a network environment outside mainland China.",
+
+    allocate_tip: "We're working on your allocation now. Due to high demand, it will take about 2 hours. Thank you for your patience!",
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="h-full board rounded space-y-5 p-5 column">
     <div class="w-full flex flex-wrap gap-3">
-      <IpInput v-model="form.ip" :placeholder="t('data_center_spec.ip_remark')" class="h-9 rounded-md" />
+      <IpInput v-model="form.ip" :placeholder="t('static_spec.ip_remark')" class="h-9 rounded-md" />
       <!-- <el-select v-model="form.area" placeholder="" style="width: 160px">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
       </el-select> -->
@@ -80,21 +80,41 @@
     <div class="w-full flex-1 min-h-0 box-border board rounded space-y-3">
       <div class="table_box">
         <el-table :data="tableData" style="width: 100%" v-loading="loading">
-          <el-table-column prop="ip" :label="$t('Ip_Address')" min-width="120"></el-table-column>
+          <el-table-column prop="address" :label="$t('Address')" min-width="120"></el-table-column>
           <el-table-column prop="port" :label="$t('Port')" min-width="120"></el-table-column>
-          <el-table-column prop="region_code" :label="$t('Locations')" min-width="120"></el-table-column>
           <el-table-column prop="username" :label="$t('Username')" min-width="120"></el-table-column>
           <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
-          <!-- <el-table-column prop="size" :label="$t('API_link')" min-width="120"></el-table-column> -->
+          <el-table-column prop="region_code" :label="$t('Locations')" min-width="120"></el-table-column>
           <el-table-column prop="create_time" :label="$t('Purchase_time')" min-width="120"></el-table-column>
           <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="120"></el-table-column>
-          <el-table-column :label="$t('Status')">
+          <el-table-column :label="$t('Status')" min-width="120">
             <template #default="scope">
+              <div class="v_center space-x-2" v-if="scope.row.status === 0">
+                <el-tag type="info">{{ $t("Allocating") }}</el-tag>
+                <el-popover placement="top" width="300" trigger="hover">
+                  <div>
+                    <p>{{ $t("static_spec.allocate_tip") }}</p>
+                  </div>
+                  <template #reference>
+                    <Info :size="16" color="hsl(var(--primary))" class="pointer" />
+                  </template>
+                </el-popover>
+              </div>
               <el-tag v-if="scope.row.status === 1" type="success">{{ $t("Normal") }}</el-tag>
               <el-tag v-if="scope.row.status === 2" type="danger">{{ $t("Expired") }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="remark" :label="$t('Remark')" min-width="120"></el-table-column>
+          <!-- <el-table-column prop="remark" :label="$t('Remark')" min-width="120"></el-table-column> -->
+          <el-table-column label="curl" min-width="160">
+            <template #default="{ row }">
+              <div class="group w-full v_center space-x-1" v-if="row.curl">
+                <p class="truncate flex-1">{{ row.curl }}</p>
+                <div @click="copyCurl(row.curl)" class="shrink-0 invisible group-hover:visible pointer hover:text-blue-700">
+                  <Copy :size="12" />
+                </div>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column :label="$t('Action')" min-width="120">
             <template #default="scope">
               <ip-button v-if="scope.row.status === 1" :data-index="scope.$index" type="link" @click="renewal">{{ $t("Renewal") }}</ip-button>
@@ -131,15 +151,16 @@ import IpInput from "@/components/input/input.vue"
 import IpButton from "@/components/button/button.vue"
 import DropDown from "@/components/dropdown/dropdown.vue"
 import { useI18n } from "vue-i18n"
-import { ChevronDown, Download } from "lucide-vue-next"
+import { ChevronDown, Download, Info, Copy } from "lucide-vue-next"
 import { debounce } from "../../../../utils/tools"
-import { platCustomerStaticIps, platCustomerOrdersRenewal } from "@/api/product"
+import { platCustomerStaticIps2, platCustomerOrdersStaticRenewal } from "@/api/product"
 import IpTag from "@/components/tag/tag.vue"
 import Message from "@/components/message/message"
-import { platProductRegions } from "@/api/product"
+import { platProductStaticRegions } from "@/api/product"
 import settingStore from "../../../../store/setting"
 import position from "@/components/dialog/position"
 import PayPopup from "@/views/front/components/pay_popup/pay_popup.vue"
+import copyText from "@/utils/copyText"
 
 const layout = inject("paginationLayout")
 
@@ -150,7 +171,7 @@ const { en, lang } = settingStore()
 const form = reactive({
   ip: "",
   region: "all",
-  status: 0,
+  status: -1,
 })
 function Search() {
   page.value = 1
@@ -159,7 +180,8 @@ function Search() {
 
 // 状态筛选
 const statusList = ref([
-  { label: t("All") + " " + t("Status"), value: 0 },
+  { label: t("All") + " " + t("Status"), value: -1 },
+  { label: t("Allocating"), value: 0 },
   { label: t("Normal"), value: 1 },
   { label: t("Expired"), value: 2 },
 ])
@@ -167,6 +189,7 @@ const status_text = computed(() => {
   return statusList.value.find((i) => i.value === form.status)?.label ?? ""
 })
 function statusChange(e) {
+  debugger
   function findDom(dom) {
     if (!dom || dom.tagName === "UL") return
     if (dom.tagName === "LI") {
@@ -184,7 +207,7 @@ function statusChange(e) {
 // 获取区域
 const regionsList = ref([])
 async function getRegions() {
-  const { data } = await platProductRegions()
+  const { data } = await platProductStaticRegions()
   const all = {
     value: "all",
     country: "",
@@ -194,8 +217,8 @@ async function getRegions() {
   const target = data.map((item) => ({
     value: item.code,
     country: item.country,
-    zh: item.city_cn,
-    en: item.city,
+    zh: item.country_cn,
+    en: item.country,
   }))
   regionsList.value = [all, ...target]
 }
@@ -234,7 +257,7 @@ const loading = ref(false)
 async function getTableData() {
   try {
     loading.value = true
-    const { data } = await platCustomerStaticIps({
+    const { data } = await platCustomerStaticIps2({
       page_index: page.value,
       page_size: size.value,
       keywords: form.ip,
@@ -242,14 +265,28 @@ async function getTableData() {
       status: form.status !== 0 ? form.status : "",
     })
     total.value = data.count
-    tableData.value = data.list
+    tableData.value = data.list.map((item) => {
+      const allocating = item.status === 0
+      return {
+        id: item.id,
+        address: allocating ? "*" : "pv8.connpnt134.com",
+        port: allocating ? "*" : item.port,
+        username: allocating ? "*" : item.username,
+        password: allocating ? "*" : item.password,
+        curl: allocating ? "" : `curl --socks5 ${item.username}:${item.password}@pv8.connpnt134.com:${item.port} https://ipinfo.io`,
+        region_code: item.region_code,
+        expire_time: item.expire_time,
+        create_time: item.create_time,
+        status: item.status,
+      }
+    })
     loading.value = false
   } catch (error) {
     loading.value = false
     console.log(error.message)
     Message({
       type: "warning",
-      message: "platCustomerStaticIps failed",
+      message: "platCustomerStaticIps2 failed",
     })
   }
 }
@@ -282,7 +319,7 @@ async function exportProxy() {
     exporting.value = true
     const {
       data: { list },
-    } = await platCustomerStaticIps({
+    } = await platCustomerStaticIps2({
       page_index: 1,
       page_size: total.value,
       keywords: form.ip,
@@ -328,7 +365,7 @@ async function renewal(e) {
     position.set({ x: e.clientX, y: e.clientY })
 
     const { id } = tableData.value[+index]
-    const { data } = await platCustomerOrdersRenewal({
+    const { data } = await platCustomerOrdersStaticRenewal({
       id,
     })
 
@@ -337,7 +374,7 @@ async function renewal(e) {
     console.log(error.message)
     Message({
       type: "warning",
-      message: "platCustomerStaticIps failed",
+      message: "platCustomerStaticIps2 failed",
     })
   }
 }
@@ -357,6 +394,14 @@ function toPay(data) {
   isPayPopup.value = true
   nextTick(() => {
     payPopupRef.value.toggleDetail(false)
+  })
+}
+
+async function copyCurl(curl) {
+  await copyText(curl)
+  Message({
+    type: "success",
+    message: t("Copy_Success"),
   })
 }
 

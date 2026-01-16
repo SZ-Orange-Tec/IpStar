@@ -22,6 +22,7 @@ export default {
   Phone_Proxies: "移动手机代理",
   Data_Center_Proxies: "静态数据中心代理",
   Rotation_Proxies: "轮换住宅代理",
+  Static_Residential_Proxies: "静态住宅代理",
 
   productList_spec: {
     right1: "含美欧和其他地区",

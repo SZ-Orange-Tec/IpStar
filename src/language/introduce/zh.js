@@ -61,6 +61,12 @@ export default {
     rotation_adv2: "无限制创建子账户",
     rotation_adv3: "99.99%的连接成功率",
 
+    static_title: "静态住宅代理",
+    static_desc: "全球ISP活跃静态IP资源池，100%模拟真人访问行为，提供极高权重的纯净代理环境。",
+    static_adv1: "真实ISP住宅代理IP地址",
+    static_adv2: "纯净独享，拒绝滥用",
+    static_adv3: "永久静态IP地址，不限制流量",
+
     four1_title: "企业级数据收集",
     four1_desc: "稳定可靠的代理网络，为您的商业智能项目提供高效支持。",
     four2_title: "搜索引擎优化",

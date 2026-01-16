@@ -31,40 +31,49 @@
         <div class="board px-2 py-5 rounded">
           <keep-alive>
             <Tab class="tab" v-model="active" :active-style="activeStyle">
-              <TabItem :value="0" class="flex-1 tab-item">
+              <TabItem :value="0" class="flex-1 tab-item h-full">
                 <div :class="{ focus: active === 0 }" class="pointer flex-1 column p-5 rounded-md" data-active="0">
                   <div class="iconbox rounded-lg vh_center mb-2">
                     <ResidentialProxyIcon :size="24" />
                   </div>
-                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.residential_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.residential }}/GB </span>
+                  <strong class="font-medium text-sm leading-none">{{ t("menu_spec.residential_proxy") }}</strong>
+                  <span class="grey-80 text-xs mt-2">{{ $t("Starting_from") }} ${{ lowestPrice.residential }}/GB </span>
                 </div>
               </TabItem>
-              <TabItem :value="1" class="flex-1 tab-item">
+              <TabItem :value="1" class="flex-1 tab-item h-full">
                 <div :class="{ focus: active === 1 }" class="pointer flex-1 column p-5 rounded-md" data-active="1">
                   <div class="iconbox rounded-lg vh_center mb-2">
                     <UnlimitedProxyIcon :size="24" />
                   </div>
-                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.unlimited_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/{{ t("Day") }} </span>
+                  <strong class="font-medium text-sm leading-none">{{ t("menu_spec.unlimited_proxy") }}</strong>
+                  <span class="grey-80 text-xs mt-2">{{ $t("Starting_from") }} ${{ lowestPrice.unlimited }}/{{ t("Day") }} </span>
                 </div>
               </TabItem>
-              <TabItem :value="2" class="flex-1 tab-item">
+              <TabItem :value="4" class="flex-1 tab-item h-full">
+                <div :class="{ focus: active === 4 }" class="pointer flex-1 column p-5 rounded-md" data-active="4">
+                  <div class="iconbox rounded-lg vh_center mb-2">
+                    <StaticResidentialProxyIcon :size="24" />
+                  </div>
+                  <strong class="font-medium text-sm leading-none">{{ t("menu_spec.static_proxy") }}</strong>
+                  <span class="grey-80 text-xs mt-2">{{ $t("Starting_from") }} ${{ lowestPrice.static }} / IP</span>
+                </div>
+              </TabItem>
+              <TabItem :value="2" class="flex-1 tab-item h-full">
                 <div :class="{ focus: active === 2 }" class="pointer flex-1 column p-5 rounded-md" data-active="2">
                   <div class="iconbox rounded-lg vh_center mb-2">
                     <PhoneProxyIcon :size="24" />
                   </div>
-                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.phone_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.phone }}/GB </span>
+                  <strong class="font-medium text-sm leading-none">{{ t("menu_spec.phone_proxy") }}</strong>
+                  <span class="grey-80 text-xs mt-2">{{ $t("Starting_from") }} ${{ lowestPrice.phone }}/GB </span>
                 </div>
               </TabItem>
-              <TabItem :value="3" class="flex-1 tab-item">
+              <TabItem :value="3" class="flex-1 tab-item h-full">
                 <div :class="{ focus: active === 3 }" class="pointer flex-1 column p-5 rounded-md" data-active="3">
                   <div class="iconbox rounded-lg vh_center mb-2">
                     <DataProxyIcon :size="24" />
                   </div>
-                  <strong class="font-medium text-[15px] leading-6">{{ t("menu_spec.data_proxy") }}</strong>
-                  <span class="grey-80 text-xs">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/IP </span>
+                  <strong class="font-medium text-sm leading-none">{{ t("menu_spec.data_proxy") }}</strong>
+                  <span class="grey-80 text-xs mt-2">{{ $t("Starting_from") }} ${{ lowestPrice.data_center }}/IP </span>
                 </div>
               </TabItem>
             </Tab>
@@ -93,6 +102,7 @@ import ResidentialProxy from "./residential_proxy/index.vue"
 import UnlimitedProxy from "./unlimited_proxy/index.vue"
 import PhoneProxy from "./phone_proxy/index.vue"
 import DataProxy from "./data_proxy/index.vue"
+import StaticPrxy from "./static/index.vue"
 import RightSide from "./rightSide.vue"
 import Tab from "@/components/tabbar/tab.vue"
 import TabItem from "@/components/tabbar/tab-item.vue"
@@ -104,6 +114,7 @@ import {
   Infinity as UnlimitedProxyIcon,
   Smartphone as PhoneProxyIcon,
   Database as DataProxyIcon,
+  MapPin as StaticResidentialProxyIcon,
   ChevronLeft,
 } from "lucide-vue-next"
 import { platProductLowestPrices } from "@/api/product"
@@ -111,7 +122,7 @@ import { platProductLowestPrices } from "@/api/product"
 const { t } = useI18n()
 
 // tabbar
-const active = ref(0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
+const active = ref(0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy 4:static
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",
@@ -145,6 +156,8 @@ const activeComponent = computed(() => {
       return PhoneProxy
     case 3:
       return DataProxy
+    case 4:
+      return StaticPrxy
     default:
       return ResidentialProxy
   }
@@ -167,7 +180,7 @@ const lowestPrice = ref({
 async function getLowestPrice() {
   try {
     const { data } = await platProductLowestPrices()
-    const keys = ["residential", "unlimited", "phone", "data_center"]
+    const keys = ["residential", "unlimited", "phone", "data_center", "static"]
     const target = {}
     data.forEach(({ prd_type, unit_price }) => {
       const key = keys[prd_type]
@@ -186,11 +199,11 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .tab {
+  overflow-x: auto;
   @media screen and (max-width: 1024px) {
-    overflow-x: auto;
   }
   .tab-item {
-    min-width: 200px;
+    min-width: 180px;
   }
   .focus {
     .iconbox {
@@ -225,7 +238,7 @@ onMounted(() => {
     width: 340px;
   }
   @media screen and (max-width: 1536px) {
-    width: 320px;
+    width: 300px;
   }
   @media screen and (max-width: 1280px) {
     width: 280px;

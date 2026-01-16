@@ -9,6 +9,7 @@ export default {
     unlimited_proxy: "Unlimited Residential Proxy",
     phone_proxy: "Phone Proxy",
     data_proxy: "Data Center Proxy",
+    static_proxy: "Static Residential Proxies",
     menu: "Menu",
     white_list: "IP Whitelist",
     sub_account: "Sub-account",

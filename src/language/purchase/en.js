@@ -7,6 +7,7 @@ export default {
   ...navbar,
 
   Size: "Size",
+  Number: "Number",
   Price: "Price",
   Status: "Status",
   Consume: "Consume",

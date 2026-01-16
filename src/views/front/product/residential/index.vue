@@ -73,6 +73,16 @@
             style="visibility: visible"
             v-if="secondName === 'rotation'"
           />
+          <img
+            loading="lazy"
+            width="463"
+            height="433"
+            src="@/assets/images/product/static.png"
+            alt="IpStar"
+            class="animate__animated animate__bounceInDown"
+            style="visibility: visible"
+            v-if="secondName === 'static'"
+          />
         </div>
       </div>
     </div>
@@ -131,18 +141,56 @@
     </div>
 
     <!-- 来源 -->
-    <div class="box_wrap position" v-if="type !== 3">
+    <div class="box_wrap position" v-if="type === 3">
       <div class="container column_center lg:v_center position_flex">
         <div class="image_box vh_center shrink-0">
-          <img loading="lazy" class="section_img" src="@/assets/images/product/section_bg.webp" width="450" />
+          <img loading="lazy" class="section_img" src="@/assets/images/product/static_map.webp" width="500" />
         </div>
         <div class="section_text space-y-4 column_center lg:column">
-          <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" />
-          <h2 class="font-medium">{{ t("product_spec.source_title") }}</h2>
+          <!-- <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" /> -->
+          <h2 class="font-medium">{{ t("product_spec.static_title") }}</h2>
           <p class="text-lg grey-60">
-            {{ t("product_spec.source_desc") }}
+            {{ t("product_spec.static_desc") }}
           </p>
           <div class="btn_box w-full v_center">
+            <a :href="priceLink" class="w-full">
+              <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 来源 -->
+    <div class="box_wrap position" v-else-if="type === 5">
+      <div class="container column_center lg:v_center position_flex">
+        <div class="image_box vh_center shrink-0">
+          <img loading="lazy" class="section_img" src="@/assets/images/product/static_map.png" width="500" />
+        </div>
+        <div class="section_text column_center lg:column">
+          <h2 class="font-medium">{{ t("product_spec.isp_title") }}</h2>
+          <p class="text-base grey-60 my-5">
+            {{ t("product_spec.isp_desc") }}
+          </p>
+          <ul class="column space-y-2">
+            <li class="v_center space-x-2">
+              <Check :size="16" class="success" />
+              <span>{{ t("product_spec.isp_adv1") }}</span>
+            </li>
+            <li class="v_center space-x-2">
+              <Check :size="16" class="success" />
+              <span>{{ t("product_spec.isp_adv2") }}</span>
+            </li>
+            <li class="v_center space-x-2">
+              <Check :size="16" class="success" />
+              <span>{{ t("product_spec.isp_adv3") }}</span>
+            </li>
+            <li class="v_center space-x-2">
+              <Check :size="16" class="success" />
+              <span>{{ t("product_spec.isp_adv4") }}</span>
+            </li>
+          </ul>
+
+          <div class="btn_box w-full v_center mt-3">
             <a :href="priceLink" class="w-full">
               <IpButton type="primary_border px-5 box-border btn">{{ t("product_spec.start_use") }}</IpButton>
             </a>
@@ -154,13 +202,13 @@
     <div class="box_wrap position" v-else>
       <div class="container column_center lg:v_center position_flex">
         <div class="image_box vh_center shrink-0">
-          <img loading="lazy" class="section_img" src="@/assets/images/product/static_map.webp" width="500" />
+          <img loading="lazy" class="section_img" src="@/assets/images/product/section_bg.webp" width="450" />
         </div>
         <div class="section_text space-y-4 column_center lg:column">
-          <!-- <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" /> -->
-          <h2 class="font-medium">{{ t("product_spec.static_title") }}</h2>
+          <img loading="lazy" src="@/assets/images/product/position.png" width="48" height="48" />
+          <h2 class="font-medium">{{ t("product_spec.source_title") }}</h2>
           <p class="text-lg grey-60">
-            {{ t("product_spec.static_desc") }}
+            {{ t("product_spec.source_desc") }}
           </p>
           <div class="btn_box w-full v_center">
             <a :href="priceLink" class="w-full">
@@ -372,6 +420,7 @@
           <template v-if="type === 0">{{ t("Residential_Proxies") }}</template>
           <template v-else-if="type === 3">{{ t("Data_Center_Proxies") }}</template>
           <template v-else-if="type === 4">{{ t("Rotating_Proxies") }}</template>
+          <template v-else-if="type === 5">{{ t("Static_Residential_Proxies") }}</template>
           {{ t("Price") }}
         </h1>
         <p class="text-lg grey-80 text-center">
@@ -511,7 +560,60 @@
       <div class="container">
         <div class="text-3xl font-medium text-center">{{ t("product_spec.ques_title") }}</div>
 
-        <div class="content space-y-5">
+        <div class="content space-y-5" v-if="secondName === 'static'">
+          <Question>
+            <template #header>{{ t(`product_spec.${secondName}.ques1`) }}</template>
+            <template #content>
+              <p class="text-base grey-80">
+                {{ t(`product_spec.${secondName}.ans1`) }}
+              </p>
+            </template>
+          </Question>
+          <Question>
+            <template #header>{{ t(`product_spec.${secondName}.ques2`) }}</template>
+            <template #content>
+              <i18n-t :keypath="`product_spec.${secondName}.ans2`" scope="global" tag="p" class="text-base grey-80">
+                <template #link>
+                  <a href="https://ipinfo.io/">ipinfo.io</a>
+                </template>
+              </i18n-t>
+            </template>
+          </Question>
+          <Question>
+            <template #header>{{ t(`product_spec.${secondName}.ques3`) }}</template>
+            <template #content>
+              <i18n-t :keypath="`product_spec.${secondName}.ans3`" scope="global" tag="p" class="text-base grey-80">
+                <template #help_center>
+                  <RouterLink to="/help-center" class="lowercase">{{ t("Help_Center") }}</RouterLink>
+                </template>
+                <template #email>
+                  <a to="mailto:support@ipstar.io">support@ipstar.io</a>
+                </template>
+                <template #service>
+                  <a @click.stop="openService" class="lowercase">{{ t("Online_Support") }}</a>
+                </template>
+              </i18n-t>
+            </template>
+          </Question>
+          <Question>
+            <template #header>{{ t(`product_spec.${secondName}.ques4`) }}</template>
+            <template #content>
+              <p class="text-base grey-80 whitespace-pre-wrap">
+                {{ t(`product_spec.${secondName}.ans4`) }}
+              </p>
+            </template>
+          </Question>
+          <Question>
+            <template #header>{{ t(`product_spec.${secondName}.ques5`) }}</template>
+            <template #content>
+              <p class="text-base grey-80 whitespace-pre-wrap">
+                {{ t(`product_spec.${secondName}.ans5`) }}
+              </p>
+            </template>
+          </Question>
+        </div>
+
+        <div class="content space-y-5" v-else>
           <Question>
             <template #header>{{ t(`product_spec.${secondName}.ques1`) }}</template>
             <template #content>
@@ -580,7 +682,7 @@ import IpButton from "@/components/button/button.vue"
 import { computed, defineAsyncComponent, onMounted, ref } from "vue"
 import { platDataIndex } from "../../../../api/home"
 import Question from "../../components/question/question.vue"
-import { useRoute } from "vue-router"
+import { RouterLink, useRoute } from "vue-router"
 import ProductList from "../../components/product_list/product_list.vue"
 import layoutStore from "../../../../store/layout"
 import loginStore from "../../../../store/login"
@@ -589,7 +691,7 @@ const { isLogin } = loginStore()
 
 const { t } = useI18n()
 const route = useRoute()
-const nameReg = /residential|rotation|data_center/
+const nameReg = /residential|rotation|data_center|static/
 const secondName = computed(() => (nameReg.test(route.params.name) ? route.params.name : "residential"))
 const type = computed(() => {
   switch (secondName.value) {
@@ -603,6 +705,8 @@ const type = computed(() => {
       return 3
     case "rotation":
       return 4
+    case "static":
+      return 5
     default:
       return 0
   }
@@ -619,6 +723,8 @@ const priceLink = computed(() => {
       return "/pricing/data_center"
     case "rotation":
       return "/pricing/rotation"
+    case "static":
+      return "/pricing/static"
     default:
       return "/pricing/residential"
   }
@@ -671,6 +777,13 @@ function toThousands(num) {
   integerPart = integerPart.replace(reg, ",")
 
   return integerPart + decimalPart
+}
+
+function openService(e) {
+  window.$crisp.push(["do", "chat:show"])
+  window.$crisp.push(["do", "chat:open"])
+
+  e.preventDefault()
 }
 
 onMounted(() => {
