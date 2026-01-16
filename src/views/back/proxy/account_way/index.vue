@@ -282,7 +282,7 @@ const IPtimeOption = ref()
 // 获取国家/时长数据
 async function getData() {
   let { country, duration } = en.value ? await import("./info/en") : await import("./info/zh")
-  allCountry = country
+  allCountry = country.filter((i) => i.value.length < 3)
   countryData.value = sortCountry(country)
   countryVal.value = country[0].value
 
@@ -291,6 +291,8 @@ async function getData() {
   // 加载国家国旗
   import("flag-icon-css/css/flag-icons.css")
 }
+watch(en, () => getData())
+
 //按首字母排序国家
 function sortCountry(arr) {
   const first = arr[0]
