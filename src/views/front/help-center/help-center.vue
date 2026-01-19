@@ -240,13 +240,7 @@
                 <strong class="font-medium pointer">{{ t("help_spec.contact1_answer") }}</strong>
               </div>
             </li>
-            <!-- <li class="v_center px-5 min-w-[220px] space-x-5" @click="openGT">
-              <img class="rounded-lg pointer" src="@/assets/images/help/contact2.png" width="60" height="60" alt="" />
-              <div class="column space-y-1">
-                <p class="text-sm opacity-80">{{ t("help_spec.contact2_title") }}</p>
-                <strong class="font-medium pointer">{{ t("help_spec.contact2_answer") }}</strong>
-              </div>
-            </li> -->
+
             <li class="v_center px-5 min-w-[220px] space-x-5" @click="toCrisp">
               <img class="pointer" src="@/assets/images/help/contact3.png" width="60" height="60" alt="" />
               <div class="column space-y-1">
@@ -257,6 +251,13 @@
                     <MoveRight :size="14" class="white" />
                   </IpButton>
                 </div>
+              </div>
+            </li>
+            <li class="v_center px-5 min-w-[220px] space-x-5" @click="openGT">
+              <img class="rounded-lg pointer" src="@/assets/images/help/contact2.png" width="60" height="60" alt="" />
+              <div class="column space-y-1">
+                <p class="text-sm opacity-80">{{ t("help_spec.contact2_title") }}</p>
+                <strong class="font-medium pointer">{{ t("help_spec.contact2_answer") }}</strong>
               </div>
             </li>
           </ul>
