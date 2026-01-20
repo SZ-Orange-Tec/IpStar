@@ -91,7 +91,7 @@ export default {
     static: {
       title: "静态住宅代理",
       price_desc: "静态住宅代理是标准住宅代理的高速、高可靠性替代方案。升级静态住宅，今天购买就可以解除封锁。",
-      desc: "享受稳定和安全的互联网连接，并从任何网站抓取数据。",
+      desc: "静态住宅IP代理（ISP），提供高速连接与无限带宽。",
       adv1: "来自全球顶级的ISP服务商",
       adv2: "100% 住宅 IP",
       adv3: "非常稳定的代理与99.5%的正常运行时间",
@@ -112,6 +112,8 @@ export default {
     proxy_ip: "9000万+住宅IP",
     proxy_country: "190+ 国家",
     proxy_uptime: "正常运行时间",
+    proxy2_ip: "50万+住宅IP",
+    proxy2_country: "20+ 国家",
 
     source_title: "IpStar的合规来源的住宅代理",
     source_desc:
@@ -125,10 +127,10 @@ export default {
     isp_title: "大型且稳定的静态住宅代理网络",
     isp_desc:
       "在全球任何国家或地区，只要您需要，我们都可以为您提供真实的静态住宅IP。覆盖全球9000万+个原创住宅IP。业界最快，运行可靠稳定，不掉线、不中断。",
-    isp_adv1: "来自世界各地的真实静态住宅IP ",
+    isp_adv1: "来自世界各地运营商的静态住宅IP ",
     isp_adv2: "快速静态住宅IP",
     isp_adv3: "覆盖195个国家",
-    isp_adv4: "4K速度优化的免费服务器",
+    isp_adv4: "无限带宽无限流量",
 
     expore_title: "探索全球各地的数据中心代理位置",
     expore_desc: "使用全球IP地址，轻松访问全球内容并突破地理限制。通过数据中心代理，保持匿名并持续扩展您的项目。",

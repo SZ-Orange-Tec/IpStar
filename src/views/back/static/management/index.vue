@@ -269,11 +269,11 @@ async function getTableData() {
       const allocating = item.status === 0
       return {
         id: item.id,
-        address: allocating ? "*" : "pv8.connpnt134.com",
+        address: allocating ? "*" : item.ip,
         port: allocating ? "*" : item.port,
         username: allocating ? "*" : item.username,
         password: allocating ? "*" : item.password,
-        curl: allocating ? "" : `curl --socks5 ${item.username}:${item.password}@pv8.connpnt134.com:${item.port} https://ipinfo.io`,
+        curl: allocating ? "" : `curl --socks5 ${item.username}:${item.password}@${item.ip}:${item.port} https://ipinfo.io`,
         region_code: item.region_code,
         expire_time: item.expire_time,
         create_time: item.create_time,

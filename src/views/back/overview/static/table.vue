@@ -54,6 +54,10 @@
         </el-pagination>
       </div>
     </div>
+
+    <div v-if="curl" class="pb-10">
+      <CodeItem :label="t('overview_spec.static_quick_test')" :text="curl"></CodeItem>
+    </div>
   </div>
 </template>
 
@@ -68,6 +72,7 @@ import Message from "@/components/message/message"
 import { Download } from "lucide-vue-next"
 import IpButton from "@/components/button/button.vue"
 import settingStore from "../../../../store/setting"
+import CodeItem from "../residential_proxy/codeItem.vue"
 
 const layout = inject("paginationLayout")
 
@@ -89,9 +94,12 @@ async function getTableData() {
     total.value = count
     tableData.value = list.map((item) => {
       const allocating = item.status === 0
+      if (!curl.value && !allocating) {
+        curl.value = `curl --socks5 ${item.username}:${item.password}@${item.ip}:${item.port} https://ipinfo.io`
+      }
       return {
         id: item.id,
-        address: allocating ? "*" : "pv8.connpnt134.com",
+        address: allocating ? "*" : item.ip,
         port: allocating ? "*" : item.port,
         username: allocating ? "*" : item.username,
         password: allocating ? "*" : item.password,
@@ -116,6 +124,7 @@ async function getTableData() {
 const total = ref(10)
 const page = ref(1)
 const size = ref(10)
+const curl = ref("")
 function handleCurrentChange(val) {
   page.value = val
   getTableData()

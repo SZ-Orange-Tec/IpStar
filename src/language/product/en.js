@@ -93,7 +93,7 @@ export default {
       title: "Static Residential Proxies",
       price_desc:
         "Static residential proxies are a fast, highly reliable alternative to standard residential proxies. Upgrade to static residential—unblock access with a purchase today.",
-      desc: "Enjoy stable and secure internet connections whilst scraping data from any website.",
+      desc: "Static (ISP) residential proxies with high speed and unlimited bandwidth.",
       adv1: "From the world's leading ISP providers",
       adv2: "100% residential IP",
       adv3: "Exceptionally stable proxies with 99.5% uptime",
@@ -113,6 +113,8 @@ export default {
     proxy_ip: "90 M+ Residential IPs",
     proxy_country: "190+ Countries",
     proxy_uptime: "Uptime",
+    proxy2_ip: "500 K+ Residential IPs",
+    proxy2_country: "20+ Countries",
 
     source_title: "IpStar's Ethically Sourced Residential Proxies",
     source_desc:
@@ -131,10 +133,10 @@ export default {
     isp_title: "Large-scale and stable static residential proxy network",
     isp_desc:
       "Wherever you require it globally, we can provide authentic static residential IPs. Covering over 90 million original residential IPs worldwide. Industry-leading speed with reliable, stable operation – no disconnections or interruptions.",
-    isp_adv1: "Authentic static residential IPs from across the globe",
+    isp_adv1: "Static residential IPs from carriers worldwide",
     isp_adv2: "Rapid static residential IPs",
-    isp_adv3: "Coverage spanning 195 countries",
-    isp_adv4: "Free servers optimised for 4K streaming speeds",
+    isp_adv3: "Coverage across 195 countries",
+    isp_adv4: "Unlimited bandwidth, unlimited traffic",
 
     plan_title: "Easily Integrate Our Solution into Your Project",
     plan_desc:

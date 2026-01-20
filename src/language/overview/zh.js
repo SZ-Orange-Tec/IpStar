@@ -105,5 +105,7 @@ export default {
     no_china: "请在非中国大陆的网络环境下测试",
 
     allocate_tip: "正在努力为您调配中...由于当前库存火爆，大概需要 2 小时才能完成分配，感谢您的理解！",
+
+    static_quick_test: "静态住宅代理 IP 快速测试示例：",
   },
 }

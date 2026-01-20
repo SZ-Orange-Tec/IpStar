@@ -107,5 +107,7 @@ export default {
     no_china: "Please test in a network environment outside mainland China.",
 
     allocate_tip: "We're working on your allocation now. Due to high demand, it will take about 2 hours. Thank you for your patience!",
+
+    static_quick_test: "Static Residential Proxy IP Quick Test Example：",
   },
 }

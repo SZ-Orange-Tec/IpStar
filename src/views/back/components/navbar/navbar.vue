@@ -182,6 +182,7 @@ function getName() {
     "/unlimited": t("menu_spec.unlimited_proxy"),
     "/mobile": t("menu_spec.phone_proxy"),
     "/data_center": t("menu_spec.data_proxy"),
+    "/static": t("menu_spec.static_proxy"),
     "/whitelist": t("menu_spec.white_list"),
     "/sub_account": t("menu_spec.sub_account"),
     "/settings": t("menu_spec.setting"),

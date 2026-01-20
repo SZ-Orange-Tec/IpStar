@@ -87,7 +87,60 @@
       </div>
     </div>
 
-    <div class="box_wrap intro">
+    <div class="box_wrap intro" v-if="type === 5">
+      <div class="container">
+        <ul class="w-full grid grid-cols-2 lg:grid-cols-4 flex-wrap gap-6">
+          <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
+            <div class="v_center space-x-3">
+              <img
+                loading="lazy"
+                width="16"
+                height="16"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAm5JREFUWEfFlz9oFEEUxr93s1ubSjStGPQKGxst1IAISWF35nJBMKBoFQULrQIpxULxGkG0iuS8M4JgkYQU/iu0EMRCixPbCAFBGxVuZp/M7u25tzub21lX9sq9ee/7zbw338wQSv6Rtf4SV9DFPjDGATUexIstELYwgS9YIs8mZ3aARm8KHtXAOA3wbrMIbYPwDBVeRctdzwIyGmCWj4HlTTCOZEk4GEN4C3Ku4RG93ikuHaDDAqvyFoDLVsLJwU3UnKuYIWXKYwa4yLvwXT0G+NQ/ivfDaRNj4gzu0Y94viSAP3O1Vpx4KEmbqInp+EokAeqyCeaFYmaeyNJEx70S/ToMoBvOk6/+k3iQtuIcjzbmMEC998a6221p9e5ou0cHhRnE632usGabL3U8oQumMaNnCEyHPvF3BeryPpjPFwNAD1EV59DFIUj5PpGT6AHazgX9PQDQ9vpJfU13OBusvri25Fl1HZ53IxlN26iKvdq2A4A53g8puzYy5rER8bq6BOa7AJu9xnEmsEKfgz8bfAJKvjAmJToLV7xDTz4F40B6zWkZB8W8fxiNEtdJhDOJFr3sA8gGFK+kJJ9Cx93APO/BL/ncDGEx81BE0BxaTisDAH0DiZNo0wczRA5xfwWGAHYogU+cBpFTPFGCTE0Yg/gpF1B1FjPXPF7foSbMvA0jEGHCLA2XNILYNtQDMhtRBCKXuK5o3Ij8rWhhxUS/wfwRwOFc3mG0Yn8VyjyMNEDpx7GGmOndKeAemFaZERcSHVb6lUxDlHopDRdPr8QTdbuA+2GOa3m0gqU9TOJtVNrTLA5S2uM0l+WNDvoDmkRFMFVo+94AAAAASUVORK5CYII="
+              />
+              <span>{{ t("product_spec.proxy_endpoints") }}</span>
+            </div>
+            <p class="text-lg font-medium">HTTP / SOCKS5</p>
+          </li>
+          <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
+            <div class="v_center space-x-3">
+              <img
+                loading="lazy"
+                width="16"
+                height="16"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAm5JREFUWEfFlz9oFEEUxr93s1ubSjStGPQKGxst1IAISWF35nJBMKBoFQULrQIpxULxGkG0iuS8M4JgkYQU/iu0EMRCixPbCAFBGxVuZp/M7u25tzub21lX9sq9ee/7zbw338wQSv6Rtf4SV9DFPjDGATUexIstELYwgS9YIs8mZ3aARm8KHtXAOA3wbrMIbYPwDBVeRctdzwIyGmCWj4HlTTCOZEk4GEN4C3Ku4RG93ikuHaDDAqvyFoDLVsLJwU3UnKuYIWXKYwa4yLvwXT0G+NQ/ivfDaRNj4gzu0Y94viSAP3O1Vpx4KEmbqInp+EokAeqyCeaFYmaeyNJEx70S/ToMoBvOk6/+k3iQtuIcjzbmMEC998a6221p9e5ou0cHhRnE632usGabL3U8oQumMaNnCEyHPvF3BeryPpjPFwNAD1EV59DFIUj5PpGT6AHazgX9PQDQ9vpJfU13OBusvri25Fl1HZ53IxlN26iKvdq2A4A53g8puzYy5rER8bq6BOa7AJu9xnEmsEKfgz8bfAJKvjAmJToLV7xDTz4F40B6zWkZB8W8fxiNEtdJhDOJFr3sA8gGFK+kJJ9Cx93APO/BL/ncDGEx81BE0BxaTisDAH0DiZNo0wczRA5xfwWGAHYogU+cBpFTPFGCTE0Yg/gpF1B1FjPXPF7foSbMvA0jEGHCLA2XNILYNtQDMhtRBCKXuK5o3Ij8rWhhxUS/wfwRwOFc3mG0Yn8VyjyMNEDpx7GGmOndKeAemFaZERcSHVb6lUxDlHopDRdPr8QTdbuA+2GOa3m0gqU9TOJtVNrTLA5S2uM0l+WNDvoDmkRFMFVo+94AAAAASUVORK5CYII="
+              /><span>{{ t("product_spec.proxy_network") }}</span>
+            </div>
+            <p class="text-lg font-medium">{{ t("product_spec.proxy2_ip") }}</p>
+          </li>
+          <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
+            <div class="v_center space-x-3">
+              <img
+                loading="lazy"
+                width="16"
+                height="16"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAm5JREFUWEfFlz9oFEEUxr93s1ubSjStGPQKGxst1IAISWF35nJBMKBoFQULrQIpxULxGkG0iuS8M4JgkYQU/iu0EMRCixPbCAFBGxVuZp/M7u25tzub21lX9sq9ee/7zbw338wQSv6Rtf4SV9DFPjDGATUexIstELYwgS9YIs8mZ3aARm8KHtXAOA3wbrMIbYPwDBVeRctdzwIyGmCWj4HlTTCOZEk4GEN4C3Ku4RG93ikuHaDDAqvyFoDLVsLJwU3UnKuYIWXKYwa4yLvwXT0G+NQ/ivfDaRNj4gzu0Y94viSAP3O1Vpx4KEmbqInp+EokAeqyCeaFYmaeyNJEx70S/ToMoBvOk6/+k3iQtuIcjzbmMEC998a6221p9e5ou0cHhRnE632usGabL3U8oQumMaNnCEyHPvF3BeryPpjPFwNAD1EV59DFIUj5PpGT6AHazgX9PQDQ9vpJfU13OBusvri25Fl1HZ53IxlN26iKvdq2A4A53g8puzYy5rER8bq6BOa7AJu9xnEmsEKfgz8bfAJKvjAmJToLV7xDTz4F40B6zWkZB8W8fxiNEtdJhDOJFr3sA8gGFK+kJJ9Cx93APO/BL/ncDGEx81BE0BxaTisDAH0DiZNo0wczRA5xfwWGAHYogU+cBpFTPFGCTE0Yg/gpF1B1FjPXPF7foSbMvA0jEGHCLA2XNILYNtQDMhtRBCKXuK5o3Ij8rWhhxUS/wfwRwOFc3mG0Yn8VyjyMNEDpx7GGmOndKeAemFaZERcSHVb6lUxDlHopDRdPr8QTdbuA+2GOa3m0gqU9TOJtVNrTLA5S2uM0l+WNDvoDmkRFMFVo+94AAAAASUVORK5CYII="
+              /><span>{{ t("Locations") }}</span>
+            </div>
+            <p class="text-lg font-medium">{{ t("product_spec.proxy2_country") }}</p>
+          </li>
+          <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
+            <div class="v_center space-x-3">
+              <img
+                loading="lazy"
+                width="16"
+                height="16"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAm5JREFUWEfFlz9oFEEUxr93s1ubSjStGPQKGxst1IAISWF35nJBMKBoFQULrQIpxULxGkG0iuS8M4JgkYQU/iu0EMRCixPbCAFBGxVuZp/M7u25tzub21lX9sq9ee/7zbw338wQSv6Rtf4SV9DFPjDGATUexIstELYwgS9YIs8mZ3aARm8KHtXAOA3wbrMIbYPwDBVeRctdzwIyGmCWj4HlTTCOZEk4GEN4C3Ku4RG93ikuHaDDAqvyFoDLVsLJwU3UnKuYIWXKYwa4yLvwXT0G+NQ/ivfDaRNj4gzu0Y94viSAP3O1Vpx4KEmbqInp+EokAeqyCeaFYmaeyNJEx70S/ToMoBvOk6/+k3iQtuIcjzbmMEC998a6221p9e5ou0cHhRnE632usGabL3U8oQumMaNnCEyHPvF3BeryPpjPFwNAD1EV59DFIUj5PpGT6AHazgX9PQDQ9vpJfU13OBusvri25Fl1HZ53IxlN26iKvdq2A4A53g8puzYy5rER8bq6BOa7AJu9xnEmsEKfgz8bfAJKvjAmJToLV7xDTz4F40B6zWkZB8W8fxiNEtdJhDOJFr3sA8gGFK+kJJ9Cx93APO/BL/ncDGEx81BE0BxaTisDAH0DiZNo0wczRA5xfwWGAHYogU+cBpFTPFGCTE0Yg/gpF1B1FjPXPF7foSbMvA0jEGHCLA2XNILYNtQDMhtRBCKXuK5o3Ij8rWhhxUS/wfwRwOFc3mG0Yn8VyjyMNEDpx7GGmOndKeAemFaZERcSHVb6lUxDlHopDRdPr8QTdbuA+2GOa3m0gqU9TOJtVNrTLA5S2uM0l+WNDvoDmkRFMFVo+94AAAAASUVORK5CYII="
+              /><span>{{ t("product_spec.proxy_uptime") }}</span>
+            </div>
+            <p class="text-lg font-medium">99.5%</p>
+          </li>
+          <!--]-->
+        </ul>
+      </div>
+    </div>
+
+    <div class="box_wrap intro" v-else>
       <div class="container">
         <ul class="w-full grid grid-cols-2 lg:grid-cols-4 flex-wrap gap-6">
           <li class="flex-1 shrink-0 rounded-lg box-border px-6 py-5 space-y-4">
@@ -180,10 +233,10 @@
               <Check :size="16" class="success" />
               <span>{{ t("product_spec.isp_adv2") }}</span>
             </li>
-            <li class="v_center space-x-2">
+            <!-- <li class="v_center space-x-2">
               <Check :size="16" class="success" />
               <span>{{ t("product_spec.isp_adv3") }}</span>
-            </li>
+            </li> -->
             <li class="v_center space-x-2">
               <Check :size="16" class="success" />
               <span>{{ t("product_spec.isp_adv4") }}</span>
