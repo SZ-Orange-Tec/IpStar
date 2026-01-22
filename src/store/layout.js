@@ -66,6 +66,8 @@ const actions = {
         mobile_size: formatSizeUnits(data.newer_promotion.mobile_size),
         residential_size: formatSizeUnits(data.newer_promotion.residential_size),
       }
+
+      console.log(state.newer_promotion)
       return data
     } catch (error) {
       console.log(error.message)

@@ -13,11 +13,11 @@
               <p class="text-lg text-center">{{ t(`pricing_spec.${secondName}.des`) }}</p>
             </div>
 
-            <Tabbar v-if="type === 0 || type === 4" @select="changeActive" class="tabbar text-base"></Tabbar>
+            <!-- <Tabbar v-if="type === 0 || type === 4" @select="changeActive" class="tabbar text-base"></Tabbar> -->
           </div>
 
           <div class="product w-full relative">
-            <ProductList :type="type" :tabbar="false" :pack="pack" ref="product"></ProductList>
+            <ProductList :type="type" :tabbar="type === 0 || type === 4" :pack="pack" ref="product"></ProductList>
           </div>
         </div>
       </div>

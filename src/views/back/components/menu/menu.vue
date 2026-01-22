@@ -1,14 +1,14 @@
 <template>
-  <div class="menu group column w-full h-full space-y-5 overflow-y-auto">
+  <div class="menu group column w-full h-full overflow-y-auto">
     <div
-      class="w-full logo pl-7 v_center text-2xl pointer relative opacity-0 2xl:opacity-100 group-hover:opacity-100 transition-opacity duration-100"
+      class="w-full logo pl-3 v_center text-2xl pointer relative opacity-0 2xl:opacity-100 group-hover:opacity-100 transition-opacity duration-100"
       @click="$router.push('/home')"
       :title="t('menu_spec.back_home')"
     >
-      <div class="back">
+      <!-- <div class="back">
         <ChevronsLeft :size="20" />
-      </div>
-      <img src="@/assets/images/logo.webp" class="himg" style="height: 36px" alt="" />
+      </div> -->
+      <img src="@/assets/images/logo.webp" class="himg" style="height: 26px" alt="" />
     </div>
     <div class="column flex-1 w-full">
       <ul class="space-y-1 column w-full" ref="menuRef">

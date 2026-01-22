@@ -1,14 +1,19 @@
 <template>
   <div class="pc-product_list">
     <!-- tabbar 个人 企业 -->
-    <Tabbar class="mx-auto" @select="changeActive" v-if="tabbar" :lowest="lowest"></Tabbar>
+    <Tabbar
+      class="mx-auto transition-opacity duration-300"
+      @select="changeActive"
+      v-if="tabbar"
+      :lowest="lowest"
+      :style="{ opacity: !newerActive || showAllPack ? 1 : 0 }"
+    ></Tabbar>
 
     <div class="list">
       <div v-if="product_list.length" class="priceList" ref="productRef" @wheel="scrollPlugin">
-        <!-- 新用户充值活动 -->
-
-        <ul class="column_center sm:flex sm:!items-stretch gap-3">
-          <li class="newUserAward" v-if="newer_promotion.promotion && (type === 0 || type === 4)">
+        <TransList class="column_center sm:flex sm:!items-stretch gap-3">
+          <!-- 新用户充值活动 -->
+          <li class="newUserAward" v-if="newerActive" key="award">
             <div class="mask_bck h-full rounded relative p-2 bg-[#a993f9]">
               <div class="mask_content bg-white w-full h-full rounded column_center pt-10 pb-2 px-2">
                 <h1 class="text-xl font-medium">{{ t("award_title") }}</h1>
@@ -30,387 +35,410 @@
               </div>
             </div>
           </li>
-          <li
-            v-for="(item, index) in product_list"
-            :key="item.id"
-            :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
-            class="transition-color"
-          >
-            <div class="card column_center space-y-5">
-              <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
-                <div class="package_name vh_center rounded-full">
-                  <div class="column_center">
-                    <template v-if="type === 0 || type === 4 || type === 2">{{ item.pack_title }}</template>
-                    <template v-if="type === 1 || type === 3 || type === 5">{{ item.prices[0].days }} {{ t("Day") }}</template>
-                  </div>
-                </div>
 
-                <!-- 折扣 -->
-                <div v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
-                  <!-- <div
+          <template v-if="newerActive && !showAllPack">
+            <li class="newUserAward" key="award-mask">
+              <div class="h-full vh_center rounded-lg relative p-2 bg-white border-2 border-gray-200 mask">
+                <div class="column_center">
+                  <h1 class="text-xl font-medium">更多常规套餐</h1>
+                  <ul class="vh_center space-x-3 mt-5">
+                    <li>4 GB</li>
+                    <li class="h-3 w-px text-gray-500 bg-current"></li>
+                    <li>30 GB</li>
+                    <li class="h-3 w-px text-gray-500 bg-current"></li>
+                    <li>60 GB</li>
+                    <li class="h-3 w-px text-gray-500 bg-current"></li>
+                    <li>120 GB</li>
+                  </ul>
+
+                  <ip-button type="primary_border" class="h-11 rounded w-full mt-5" @click="showAllPack = true">
+                    <div class="v_center space-x-2">
+                      <span>查看全部价格</span>
+                      <MoveRight :size="16" />
+                    </div>
+                  </ip-button>
+
+                  <p class="text-gray-500 mt-5">需要更多流量？点击展开完整列表</p>
+                </div>
+              </div>
+            </li>
+          </template>
+
+          <template v-else-if="!newerActive || showAllPack">
+            <!-- 平常套餐 -->
+            <li
+              v-for="(item, index) in product_list"
+              :key="item.id"
+              :class="[{ hidden: !showGift && item.trial }, item.hot ? 'popular' : 'common']"
+              class="transition-color"
+            >
+              <div class="card column_center space-y-5">
+                <div class="top w-full column_center space-y-4" :class="{ top_unlimit: item.unlimit }">
+                  <div class="package_name vh_center rounded-full">
+                    <div class="column_center">
+                      <template v-if="type === 0 || type === 4 || type === 2">{{ item.pack_title }}</template>
+                      <template v-if="type === 1 || type === 3 || type === 5">{{ item.prices[0].days }} {{ t("Day") }}</template>
+                    </div>
+                  </div>
+
+                  <!-- 折扣 -->
+                  <div v-if="type === 0 || type === 4" class="font-medium lg:font-semibold" style="height: 1.5rem">
+                    <!-- <div
                     class="hot_off vh_center px-4 whitespace-nowrap rounded-full text-sm"
                     v-if="item.hot && item.prices[item.select].discount_active > 0"
                   >
                     {{ item.prices[item.select].discount + "%" }} {{ t("OFF") }} + {{ item.prices[item.select].discount_active + "%" }} {{ t("OFF") }}
                   </div> -->
-                  <div class="h-8 v_center">
-                    <template v-if="item.trial">{{ t("Free") }}</template>
-                    <template v-else-if="item.prices[item.select]?.discount > 0"
-                      >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
-                    >
-                    <template v-else>{{ item.name }}</template>
+                    <div class="h-8 v_center">
+                      <template v-if="item.trial">{{ t("Free") }}</template>
+                      <template v-else-if="item.prices[item.select]?.discount > 0"
+                        >{{ item.prices[item.select]?.discount + "%" }} {{ t("OFF") }}</template
+                      >
+                      <template v-else>{{ item.name }}</template>
+                    </div>
                   </div>
-                </div>
 
-                <div v-else-if="type === 2 && customPack" class="font-medium" style="height: 1.5rem"></div>
+                  <div v-else-if="type === 2 && customPack" class="font-medium" style="height: 1.5rem"></div>
 
-                <!-- 单价 -->
-                <p class="price lg:text-4xl space-x-1">
-                  <!-- 总价和实付金额相等才显示 -->
-                  <!-- <span class="origin text-[13px] grey-60 line-through" v-if="item.hot">
+                  <!-- 单价 -->
+                  <p class="price lg:text-4xl space-x-1">
+                    <!-- 总价和实付金额相等才显示 -->
+                    <!-- <span class="origin text-[13px] grey-60 line-through" v-if="item.hot">
                     <template v-if="item.prices[item.select].price === item.prices[item.select].actual_price">
                       ${{ item.prices[item.select].origin_price / 100 }}
                     </template>
                   </span> -->
-                  <strong
-                    class="text-3xl font-semibold"
-                    :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
-                    >${{ item.prices[item.select].unit_price / 100 }}</strong
-                  >
-                  <!-- <span class="text-base font-semibold text-[#d5182d]" v-if="item.prices[item.select].price !== item.prices[item.select].actual_price"
+                    <strong
+                      class="text-3xl font-semibold"
+                      :class="{
+                        'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price,
+                      }"
+                      >${{ item.prices[item.select].unit_price / 100 }}</strong
+                    >
+                    <!-- <span class="text-base font-semibold text-[#d5182d]" v-if="item.prices[item.select].price !== item.prices[item.select].actual_price"
                     >${{ item.prices[item.select].unit_origin_price / 100 }}</span
                   > -->
-                  <span
-                    class="text-sm"
-                    :class="{ 'text-slate-400  line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
-                    v-if="type === 0 || type === 4 || type === 2"
-                    >/GB</span
+                    <span
+                      class="text-sm"
+                      :class="{ 'text-slate-400  line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
+                      v-if="type === 0 || type === 4 || type === 2"
+                      >/GB</span
+                    >
+                    <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
+                    <span class="text-sm" v-else-if="type === 3 || type === 5">/IP</span>
+                  </p>
+
+                  <!-- 总计 -->
+                  <p
+                    class="vh_center space-x-1 text-[13px] total"
+                    :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
                   >
-                  <span class="text-sm" v-else-if="type === 1">/{{ t("Day") }}</span>
-                  <span class="text-sm" v-else-if="type === 3 || type === 5">/IP</span>
-                </p>
+                    <span class="grey-60">{{ t("Total") }}:</span>
+                    <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
+                    <template v-else>${{ item.total }}</template>
+                  </p>
 
-                <!-- 总计 -->
-                <p
-                  class="vh_center space-x-1 text-[13px] total"
-                  :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
-                >
-                  <span class="grey-60">{{ t("Total") }}:</span>
-                  <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
-                  <template v-else>${{ item.total }}</template>
-                </p>
-
-                <!-- 活动 -->
-                <div
-                  v-if="(type === 0 || type === 2) && item.prices[item.select].price !== item.prices[item.select].actual_price"
-                  class="column_center"
-                >
-                  <div class="column !items-stretch">
-                    <p class="align-bottom space-x-1 text-[13px] total">
-                      <span class="black">{{ t("productList_spec.pay_only_price") }}:</span>
-                      <span class="font-medium text-base" style="color: #d5182d">
-                        ${{ item.prices[item.select].unit_origin_price / 100 }}
-                        <span class="black font-normal text-xs">/ GB</span>
-                      </span>
-                    </p>
-                    <p class="v_center space-x-1 text-[13px] total mt-2">
-                      <span class="black">{{ t("productList_spec.pay_only_total") }}:</span>
-                      <span class="black">${{ item.prices[item.select].actual_price / 100 }}</span>
-                    </p>
-                  </div>
-                  <i18n-t
-                    keypath="productList_spec.new_user_activity"
-                    tag="div"
-                    scope="global"
-                    class="text-center rounded-md py-1 text-xs px-2 success success_border mt-2"
+                  <!-- 活动 -->
+                  <div
+                    v-if="(type === 0 || type === 2) && item.prices[item.select].price !== item.prices[item.select].actual_price"
+                    class="column_center"
                   >
-                    <template #off>{{ discount_rate_text }}</template>
-                    <template #day>{{ activity_days }}</template>
-                  </i18n-t>
+                    <div class="column !items-stretch">
+                      <p class="align-bottom space-x-1 text-[13px] total">
+                        <span class="black">{{ t("productList_spec.pay_only_price") }}:</span>
+                        <span class="font-medium text-base" style="color: #d5182d">
+                          ${{ item.prices[item.select].unit_origin_price / 100 }}
+                          <span class="black font-normal text-xs">/ GB</span>
+                        </span>
+                      </p>
+                      <p class="v_center space-x-1 text-[13px] total mt-2">
+                        <span class="black">{{ t("productList_spec.pay_only_total") }}:</span>
+                        <span class="black">${{ item.prices[item.select].actual_price / 100 }}</span>
+                      </p>
+                    </div>
+                    <i18n-t
+                      keypath="productList_spec.new_user_activity"
+                      tag="div"
+                      scope="global"
+                      class="text-center rounded-md py-1 text-xs px-2 success success_border mt-2"
+                    >
+                      <template #off>{{ discount_rate_text }}</template>
+                      <template #day>{{ activity_days }}</template>
+                    </i18n-t>
+                  </div>
+
+                  <div v-if="type === 0 || type === 4" class="number w-full">
+                    <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
+                      <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                      <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
+                    </div>
+                    <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>
+                  </div>
+                  <div v-if="type === 2" class="number w-full">
+                    <div class="duration text-center space-x-1 text-sm">
+                      <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                    </div>
+                  </div>
+                  <div v-if="type === 3 || type === 5" class="w-full space-y-2" style="margin-top: 1.75rem">
+                    <Regions v-model="item.region" />
+                    <InputNumber v-model="item.number" @change="(num) => numberChange(index, num)" />
+                  </div>
                 </div>
 
-                <div v-if="type === 0 || type === 4" class="number w-full">
-                  <div v-if="item.prices.length === 1" class="duration text-center space-x-1 text-sm">
-                    <span v-if="item.prices[0].days > 3650" class="font-medium text-base">{{ t("Never_Expires") }}</span>
-                    <span v-else class="font-bold text-base">{{ item.prices[0].days }} {{ t("Day") }}</span>
-                  </div>
-                  <setpNumber v-else :list="item.prices" v-model:select="item.select"></setpNumber>
-                </div>
-                <div v-if="type === 2" class="number w-full">
-                  <div class="duration text-center space-x-1 text-sm">
-                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
-                  </div>
-                </div>
-                <div v-if="type === 3 || type === 5" class="w-full space-y-2" style="margin-top: 1.75rem">
-                  <Regions v-model="item.region" />
-                  <InputNumber v-model="item.number" @change="(num) => numberChange(index, num)" />
-                </div>
+                <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
+
+                <ul v-if="type === 0 || type === 4" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right1") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right2") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right3") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right5") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right1") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right2") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right3") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right4") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right5") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right1") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right2") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right3") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right4") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="type === 3 || type === 5" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right1") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right2") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right3") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right4") }}</p>
+                  </li>
+                </ul>
+
+                <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
+                <!-- <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div> -->
+
+                <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+                  {{ item.trial ? t("Get") : t("Order_Now") }}
+                </IpButton>
               </div>
+            </li>
 
-              <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
+            <!-- 自定义套餐 -->
+            <li class="custom" v-if="customPack" key="custom">
+              <div class="vh_center h-8 text-white">{{ t("productList_spec.custom_pack") }}</div>
+              <div class="card column_center space-y-5 lg:space-y-10">
+                <div class="top w-full column_center space-y-4">
+                  <div class="package_name vh_center rounded-full">{{ customPack.product_name }}</div>
 
-              <ul v-if="type === 0 || type === 4" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right1") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right2") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right3") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right5") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right1") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right2") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right3") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right4") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right5") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right1") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right2") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right3") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right4") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="type === 3 || type === 5" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right1") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right2") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right3") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right4") }}</p>
-                </li>
-              </ul>
+                  <!-- 折扣 -->
+                  <div class="font-medium" style="height: 1.5rem">
+                    <CountdownDiscount :time="customPack.last_time" @clear="customPack = null" />
+                  </div>
 
-              <div class="hot text-center text-xs hidden sm:vh_center font-medium whitespace-pre-wrap" v-if="item.hot">{{ t("Most_popular") }}</div>
-              <!-- <div class="tag px-5 whitespace-nowrap text-sm" v-if="type === 0 && item.hot">{{ t("productList_spec.hot_limit") }}</div> -->
+                  <p class="price lg:text-4xl space-x-1">
+                    <strong class="text-3xl font-semibold">$ {{ customPack.unit_price / 100 }}</strong>
+                    <span class="text-sm">/GB</span>
+                  </p>
 
-              <IpButton @click="click_pay" :data-index="index" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
-                {{ item.trial ? t("Get") : t("Order_Now") }}
-              </IpButton>
-            </div>
-          </li>
+                  <p class="vh_center space-x-1 text-[13px] total">
+                    <span class="grey-60">{{ t("Total") }}:</span>
+                    <span>${{ customPack.order_price / 100 }}</span>
+                  </p>
 
-          <li class="custom" v-if="customPack">
-            <div class="vh_center h-8 text-white">{{ t("productList_spec.custom_pack") }}</div>
-            <div class="card column_center space-y-5 lg:space-y-10">
-              <div class="top w-full column_center space-y-4">
-                <div class="package_name vh_center rounded-full">{{ customPack.product_name }}</div>
-
-                <!-- 折扣 -->
-                <div class="font-medium" style="height: 1.5rem">
-                  <CountdownDiscount :time="customPack.last_time" @clear="customPack = null" />
-                </div>
-
-                <p class="price lg:text-4xl space-x-1">
-                  <strong class="text-3xl font-semibold">$ {{ customPack.unit_price / 100 }}</strong>
-                  <span class="text-sm">/GB</span>
-                </p>
-
-                <p class="vh_center space-x-1 text-[13px] total">
-                  <span class="grey-60">{{ t("Total") }}:</span>
-                  <span>${{ customPack.order_price / 100 }}</span>
-                </p>
-
-                <div v-if="customPack.product_type === 0 || customPack.product_type === 4" class="number w-full">
-                  <div class="duration text-center space-x-1 text-sm">
-                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                  <div v-if="customPack.product_type === 0 || customPack.product_type === 4" class="number w-full">
+                    <div class="duration text-center space-x-1 text-sm">
+                      <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                    </div>
+                  </div>
+                  <div v-if="customPack.product_type === 2" class="number w-full">
+                    <div class="duration text-center space-x-1 text-sm">
+                      <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
+                    </div>
+                  </div>
+                  <div v-if="customPack.product_type === 3" class="w-full space-y-2" style="margin-top: 1.75rem">
+                    <Regions v-model="customPack.region" />
+                    <InputNumber v-model="customPack.number" @change="(num) => numberChange(index, num)" />
                   </div>
                 </div>
-                <div v-if="customPack.product_type === 2" class="number w-full">
-                  <div class="duration text-center space-x-1 text-sm">
-                    <span class="font-medium text-base">{{ t("Never_Expires") }}</span>
-                  </div>
-                </div>
-                <div v-if="customPack.product_type === 3" class="w-full space-y-2" style="margin-top: 1.75rem">
-                  <Regions v-model="customPack.region" />
-                  <InputNumber v-model="customPack.number" @change="(num) => numberChange(index, num)" />
-                </div>
+
+                <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
+
+                <ul
+                  v-if="customPack.product_type === 0 || customPack.product_type === 4"
+                  class="rights column space-y-3 text-[13px] font-normal grey-80"
+                >
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right1") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right2") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right3") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.right5") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="customPack.product_type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right1") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right2") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right3") }}</p>
+                  </li>
+                  <li class="hidden md:flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right4") }}</p>
+                  </li>
+                  <li class="hidden lg:flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.unlimited_right5") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="customPack.product_type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right1") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right2") }}</p>
+                  </li>
+                  <li class="flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right3") }}</p>
+                  </li>
+                  <li class="hidden md:flex space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.phone_right4") }}</p>
+                  </li>
+                </ul>
+                <ul v-else-if="customPack.product_type === 3" class="rights column space-y-3 text-[13px] font-normal grey-80">
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right1") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right2") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right3") }}</p>
+                  </li>
+                  <li class="v_center space-x-1">
+                    <CircleCheck :size="16" class="flex-shrink-0 success" />
+                    <p>{{ t("productList_spec.data_right4") }}</p>
+                  </li>
+                </ul>
+
+                <IpButton @click="payCustomPack" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+                  {{ t("productList_spec.pay_now") }}
+                </IpButton>
               </div>
+            </li>
+            <!-- 联系我们 -->
+            <li v-if="showContact && isLogin" class="common contcat" key="contcat">
+              <div class="card column_center space-y-5 lg:space-y-10">
+                <div class="top w-full column_center space-y-4">
+                  <div class="package_name whitespace-nowrap vh_center rounded-full">
+                    <div>{{ t("productList_spec.Need_more") }}?</div>
+                  </div>
 
-              <!-- <p class="title v_center" v-if="item.unlimit">{{ t("PCProductList.unlimited_rights[0]") }}</p> -->
-
-              <ul
-                v-if="customPack.product_type === 0 || customPack.product_type === 4"
-                class="rights column space-y-3 text-[13px] font-normal grey-80"
-              >
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right1") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right2") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right3") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right4", { num: showContact ? 2000 : 600 }) }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.right5") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="customPack.product_type === 1" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right1") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right2") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right3") }}</p>
-                </li>
-                <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right4") }}</p>
-                </li>
-                <li class="hidden lg:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.unlimited_right5") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="customPack.product_type === 2" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right1") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right2") }}</p>
-                </li>
-                <li class="flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right3") }}</p>
-                </li>
-                <li class="hidden md:flex space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.phone_right4") }}</p>
-                </li>
-              </ul>
-              <ul v-else-if="customPack.product_type === 3" class="rights column space-y-3 text-[13px] font-normal grey-80">
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right1") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right2") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right3") }}</p>
-                </li>
-                <li class="v_center space-x-1">
-                  <CircleCheck :size="16" class="flex-shrink-0 success" />
-                  <p>{{ t("productList_spec.data_right4") }}</p>
-                </li>
-              </ul>
-
-              <IpButton @click="payCustomPack" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
-                {{ t("productList_spec.pay_now") }}
-              </IpButton>
-            </div>
-          </li>
-          <li v-if="showContact && isLogin" class="common contcat">
-            <div class="card column_center space-y-5 lg:space-y-10">
-              <div class="top w-full column_center space-y-4">
-                <div class="package_name whitespace-nowrap vh_center rounded-full">
-                  <div>{{ t("productList_spec.Need_more") }}?</div>
-                </div>
-
-                <!-- 折扣 -->
-                <!-- <div class="font-medium lg:font-semibold v_center" style="height: 2rem">
-                  <template v-if="type === 0 || type === 4 || type === 2">{{ t("productList_spec.Extra_discount") }}</template>
-                  <template v-else-if="type === 1">
-                    <strong class="text-2xl font-semibold">$ ?</strong>
-                    <span>/ {{ t("Day") }}</span>
-                  </template>
-                  <template v-else-if="type === 3">
-                    <strong class="text-2xl font-semibold">$ ?</strong>
-                    <span>/ IP</span>
-                  </template>
-                </div> -->
-
-                <!-- 免费 -->
-                <div class="text text-sm black font-medium w-full space-y-5" :class="en ? 'column' : 'column_center'">
-                  <template v-if="type === 0 || type === 4 || type === 2">
-                    <p>{{ t("productList_spec.Custom1") }}</p>
-                    <!-- <span>{{ t("productList_spec.Custom2") }}</span>
+                  <!-- 免费 -->
+                  <div class="text text-sm black font-medium w-full space-y-5" :class="en ? 'column' : 'column_center'">
+                    <template v-if="type === 0 || type === 4 || type === 2">
+                      <p>{{ t("productList_spec.Custom1") }}</p>
+                      <!-- <span>{{ t("productList_spec.Custom2") }}</span>
                     <span>{{ t("productList_spec.Custom3") }}</span> -->
-                  </template>
-                  <template v-if="type === 1">
-                    <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
-                    <!-- <span>{{ t("productList_spec.Custom5") }}</span> -->
-                  </template>
-                  <template v-if="type === 3 || type === 5">
-                    <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
-                    <!-- <span>{{ t("productList_spec.Custom7") }}</span> -->
-                  </template>
+                    </template>
+                    <template v-if="type === 1">
+                      <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
+                      <!-- <span>{{ t("productList_spec.Custom5") }}</span> -->
+                    </template>
+                    <template v-if="type === 3 || type === 5">
+                      <span class="whitespace-pre-wrap font-medium text-sm">{{ t("productList_spec.Custom4") }}</span>
+                      <!-- <span>{{ t("productList_spec.Custom7") }}</span> -->
+                    </template>
+                  </div>
                 </div>
-              </div>
 
-              <IpButton @click="openService" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
-                {{ t("productList_spec.Service") }}
-              </IpButton>
-            </div>
-          </li>
-        </ul>
+                <IpButton @click="openService" type="link" circle class="text-sm border-btn rounded-full px-4 font-medium">
+                  {{ t("productList_spec.Service") }}
+                </IpButton>
+              </div>
+            </li>
+          </template>
+        </TransList>
       </div>
       <!-- 骨架屏 -->
       <div v-else class="w-full md:w-auto priceList column">
@@ -561,7 +589,7 @@ import Tabbar from "./tabbar/tabbar.vue"
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, defineAsyncComponent, provide, toRef, toRefs, watch } from "vue"
 import { useRouter } from "vue-router"
 import Message from "@/components/message/message"
-import { ChevronLeft, ChevronRight } from "lucide-vue-next"
+import { ChevronLeft, ChevronRight, MoveRight } from "lucide-vue-next"
 import { useI18n } from "vue-i18n"
 import layoutStore from "@/store/layout"
 import settingStore from "@/store/setting"
@@ -570,6 +598,7 @@ import { track_createOrder } from "@/utils/detect"
 import { platProductRegions, platProductStaticRegions, platCustomerCustomOrder } from "@/api/product"
 import { formatSizeUnits } from "../../../../utils/tools"
 import { platNewUserAwardOrder } from "../../../../api/product"
+import TransList from "./transList.vue"
 
 const CountdownDiscount = defineAsyncComponent(() => import("./CountdownDiscount.vue"))
 
@@ -590,11 +619,14 @@ const props = defineProps({
     default: true,
   },
 })
-const { type } = toRefs(props)
+const { type, tabbar } = toRefs(props)
 
 // 是否显示注册奖励
 const { newer_promotion } = layout
 
+// 新用户优惠奖励
+const newerActive = computed(() => newer_promotion.value.promotion && (type.value === 0 || type.value === 4))
+const showAllPack = ref(false)
 // 是否显示赠送gift
 const { isLogin } = loginStore()
 const { registerAward, gift, activity_days, discount_rate } = layout
