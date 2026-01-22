@@ -1,7 +1,7 @@
 <template>
   <div class="w-full space-y-5">
     <div class="w-full between">
-      <strong class="text-lg font-medium">{{ t("List_of_Proxies") }}</strong>
+      <strong class="text-lg font-medium">{{ t("Proxy_List") }}</strong>
       <IpButton class="h-9 px-4" type="primary" @click="exportProxy" :disabled="exporting || loading">
         <div class="v_center space-x-2 text-sm">
           <Download v-show="!exporting" :size="15" />
@@ -13,13 +13,13 @@
 
     <div class="table_box">
       <el-table :data="tableData" :height="500" v-loading="loading">
-        <el-table-column prop="address" :label="$t('Address')"></el-table-column>
-        <el-table-column prop="port" :label="$t('Port')"></el-table-column>
-        <el-table-column prop="username" :label="$t('Username')"></el-table-column>
-        <el-table-column prop="password" :label="$t('Password')"></el-table-column>
-        <el-table-column prop="region_code" :label="$t('Locations')"></el-table-column>
-        <el-table-column prop="expire_time" :label="$t('Expiration_time')"></el-table-column>
-        <el-table-column :label="$t('Status')">
+        <el-table-column prop="address" :label="$t('Address')" min-width="160"></el-table-column>
+        <el-table-column prop="port" :label="$t('Port') + '(S5/HTTP)'" min-width="160"></el-table-column>
+        <el-table-column prop="username" :label="$t('Username')" min-width="160"></el-table-column>
+        <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
+        <el-table-column prop="region_code" :label="$t('Locations')" min-width="90"></el-table-column>
+        <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="160"></el-table-column>
+        <el-table-column :label="$t('Status')" min-width="140">
           <template #default="scope">
             <div class="v_center space-x-2" v-if="scope.row.status === 0">
               <el-tag type="info">{{ $t("Allocating") }}</el-tag>
@@ -100,7 +100,7 @@ async function getTableData() {
       return {
         id: item.id,
         address: allocating ? "*" : item.ip,
-        port: allocating ? "*" : item.port,
+        port: allocating ? "*" : "9135 / 9139",
         username: allocating ? "*" : item.username,
         password: allocating ? "*" : item.password,
         region_code: item.region_code,

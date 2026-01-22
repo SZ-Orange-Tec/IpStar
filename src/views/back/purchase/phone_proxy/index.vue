@@ -24,6 +24,11 @@
           <el-table-column prop="days" :label="$t('Duration')" min-width="120"></el-table-column>
           <el-table-column prop="start_time" :label="$t('Start_date')" min-width="180"></el-table-column>
           <el-table-column prop="expire_time" :label="$t('Expire_date')" min-width="180"></el-table-column>
+          <el-table-column :label="$t('Operate')" min-width="100">
+            <template #default>
+              <ip-button type="link" @click="toUse">{{ $t("Go_Use") }}</ip-button>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
 
@@ -50,6 +55,8 @@
 import { inject, onMounted, ref } from "vue"
 import { platCustomerProductsV2 } from "@/api/product"
 import { useI18n } from "vue-i18n"
+import IpButton from "@/components/button/button.vue"
+import { useRouter } from "vue-router"
 
 const layout = inject("paginationLayout")
 
@@ -115,6 +122,11 @@ function handleCurrentChange(val) {
 function handleSizeChange(val) {
   size.value = val
   getTableData()
+}
+
+const router = useRouter()
+function toUse() {
+  router.push("/proxy?type=2")
 }
 
 onMounted(() => {

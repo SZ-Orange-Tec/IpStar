@@ -21,6 +21,8 @@ export default {
   Concurrency: "Concurrency",
   Bandwidth: "Bandwidth",
   Never_Expire: "Never Expire",
+  Operate: "Operate",
+  Go_Use: "Use",
 
   purchase_spec: {},
 }

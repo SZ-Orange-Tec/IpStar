@@ -7,7 +7,7 @@ export default {
   Starting_from: "低至：",
   Add_funds: "充值",
   Start_now: "开始使用",
-  Management: "管理",
+  Proxy_List: "代理列表",
   Residual_Traffic: "剩余流量",
   Consumption_Today: "今日消耗",
   Total_IPs_Available: "在线 IP 总数",

@@ -132,7 +132,7 @@ export default {
 
     isp_title: "Large-scale and stable static residential proxy network",
     isp_desc:
-      "Wherever you require it globally, we can provide authentic static residential IPs. Covering over 90 million original residential IPs worldwide. Industry-leading speed with reliable, stable operation – no disconnections or interruptions.",
+      "Wherever you require it globally, we can provide authentic static residential IPs. Covering over 500 thousand original residential IPs worldwide. Industry-leading speed with reliable, stable operation – no disconnections or interruptions.",
     isp_adv1: "Static residential IPs from carriers worldwide",
     isp_adv2: "Rapid static residential IPs",
     isp_adv3: "Coverage across 195 countries",

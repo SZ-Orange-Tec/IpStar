@@ -7,7 +7,6 @@
 
   &>.logo {
     height: 50px;
-    padding-left: 28px;
     .back{
       opacity: 0;
       position: absolute;
@@ -31,11 +30,14 @@
     }
   }
 
+  .pitch_on {
+    background-color: hsl(var(--primary) / 8%);
+  }
+
   &>.column {
 
     &>ul {
-      &>li.menu-item{
-        padding-left: 12px;
+      .menu-item{
         .icon{
           color: hsl(var(--foreground) / 60%);
         }
@@ -46,11 +48,8 @@
           }
         }
         &:hover{
-          background-color: hsl(var(--primary) / 5%);
+          background-color: hsl(var(--primary) / 8%);
         }
-      }
-      &>.pitch_on {
-        background-color: hsl(var(--primary) / 5%);
       }
     }
   }
@@ -60,7 +59,7 @@
     top: 0;
     left: 0;
     z-index: 99;
-    width: 66px;
+    width: 50px;
     transition: all .36s ease;
     // width: 260px;
     &:hover{

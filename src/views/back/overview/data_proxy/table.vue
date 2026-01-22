@@ -13,13 +13,13 @@
 
     <div class="table_box">
       <el-table :data="tableData" :height="500" v-loading="loading">
-        <el-table-column prop="ip" label="IP"> </el-table-column>
-        <el-table-column prop="port" :label="$t('Port')"> </el-table-column>
-        <el-table-column prop="username" :label="$t('Username')"> </el-table-column>
-        <el-table-column prop="password" :label="$t('Password')"> </el-table-column>
-        <el-table-column prop="region_code" :label="$t('Locations')"> </el-table-column>
-        <el-table-column prop="expire_time" :label="$t('Expiration_time')"> </el-table-column>
-        <el-table-column :label="$t('Status')">
+        <el-table-column prop="ip" label="IP" min-width="120"> </el-table-column>
+        <el-table-column prop="port" :label="$t('Port')" min-width="100"> </el-table-column>
+        <el-table-column prop="username" :label="$t('Username')" min-width="120"> </el-table-column>
+        <el-table-column prop="password" :label="$t('Password')" min-width="120"> </el-table-column>
+        <el-table-column prop="region_code" :label="$t('Locations')" min-width="100"> </el-table-column>
+        <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="160"> </el-table-column>
+        <el-table-column :label="$t('Status')" min-width="120">
           <template #default="scope">
             <el-tag v-if="scope.row.status === 1" type="success">{{ $t("Normal") }}</el-tag>
             <el-tag v-if="scope.row.status === 2" type="danger">{{ $t("Expired") }}</el-tag>

@@ -98,7 +98,11 @@ export default {
     },
     // 确认退出
     drop_out() {
-      this.$router.push("/purchase")
+      let { proxy = 0 } = this.$route.query
+      proxy = Number(proxy)
+      if (proxy === 5) proxy = 4
+      const serch = proxy ? `?active=${proxy}` : ""
+      this.$router.push(`/purchase${serch}`)
     },
   },
   setup() {

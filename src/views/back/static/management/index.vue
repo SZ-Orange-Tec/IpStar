@@ -80,13 +80,13 @@
     <div class="w-full flex-1 min-h-0 box-border board rounded space-y-3">
       <div class="table_box">
         <el-table :data="tableData" style="width: 100%" v-loading="loading">
-          <el-table-column prop="address" :label="$t('Address')" min-width="120"></el-table-column>
-          <el-table-column prop="port" :label="$t('Port')" min-width="120"></el-table-column>
-          <el-table-column prop="username" :label="$t('Username')" min-width="120"></el-table-column>
+          <el-table-column prop="address" :label="$t('Address')" min-width="160"></el-table-column>
+          <el-table-column prop="port" :label="$t('Port') + '(S5/HTTP)'" min-width="140"></el-table-column>
+          <el-table-column prop="username" :label="$t('Username')" min-width="170"></el-table-column>
           <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
-          <el-table-column prop="region_code" :label="$t('Locations')" min-width="120"></el-table-column>
-          <el-table-column prop="create_time" :label="$t('Purchase_time')" min-width="120"></el-table-column>
-          <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="120"></el-table-column>
+          <el-table-column prop="region_code" :label="$t('Locations')" min-width="100"></el-table-column>
+          <!-- <el-table-column prop="create_time" :label="$t('Purchase_time')" min-width="160"></el-table-column> -->
+          <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="160"></el-table-column>
           <el-table-column :label="$t('Status')" min-width="120">
             <template #default="scope">
               <div class="v_center space-x-2" v-if="scope.row.status === 0">
@@ -189,7 +189,6 @@ const status_text = computed(() => {
   return statusList.value.find((i) => i.value === form.status)?.label ?? ""
 })
 function statusChange(e) {
-  debugger
   function findDom(dom) {
     if (!dom || dom.tagName === "UL") return
     if (dom.tagName === "LI") {
@@ -270,7 +269,7 @@ async function getTableData() {
       return {
         id: item.id,
         address: allocating ? "*" : item.ip,
-        port: allocating ? "*" : item.port,
+        port: allocating ? "*" : "9135 / 9139",
         username: allocating ? "*" : item.username,
         password: allocating ? "*" : item.password,
         curl: allocating ? "" : `curl --socks5 ${item.username}:${item.password}@${item.ip}:${item.port} https://ipinfo.io`,

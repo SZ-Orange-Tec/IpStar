@@ -204,12 +204,13 @@ async function stripeCheck() {
     const orderNo = props.order_data.order_no
     const price = props.order_data.order_price
     const type = isManmer.value
+    const proxy = props.order_data.type
     const origin =
       import.meta.env.VITE_MODE === "production"
         ? "https://www." + location.host.replace("www.", "") + "/stripe.html"
         : "https://test.tomato-proxy.com/stripe.html"
 
-    const successUrl = `${origin}?pre=${pre}&orderNo=${orderNo}&type=${type}&price=${price}`
+    const successUrl = `${origin}?pre=${pre}&orderNo=${orderNo}&type=${type}&price=${price}&proxy=${proxy}`
 
     const { data } = await platPaymentStripe({
       order_no: props.order_data.order_no,

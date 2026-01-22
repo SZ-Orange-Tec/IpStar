@@ -1,9 +1,14 @@
 export default {
+  Plans: "Plans",
+  Get_Proxy: "Get Proxy",
+  Billing: "Billing",
+  Proxy_List: "Proxy List",
+
   menu_spec: {
     overview: "Overview",
     how_to_use: "How to Use",
     get_proxy: "Get Proxy",
-    purchases: "Purchases",
+    purchases: "My Plans",
     products: "Products",
     residential_proxy: "Residential Proxy",
     unlimited_proxy: "Unlimited Residential Proxy",

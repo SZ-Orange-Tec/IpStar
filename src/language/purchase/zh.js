@@ -22,6 +22,8 @@ export default {
   Bandwidth: "带宽",
   Price: "价格",
   Never_Expire: "永久有效",
+  Operate: "操作",
+  Go_Use: "去使用",
 
   purchase_spec: {},
 }

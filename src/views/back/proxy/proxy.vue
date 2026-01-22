@@ -9,9 +9,17 @@
       </template>
       <template #nav>
         <div class="w-full">
-          <Tab v-model="active" :active-style="activeStyle" activeTextColor="hsl(var(--foreground) / 90%)" class="tab grey-60 font-medium v_center">
+          <Tab
+            v-model="active"
+            @change="activeChange"
+            :active-style="activeStyle"
+            activeTextColor="hsl(var(--foreground) / 90%)"
+            class="tab grey-60 font-medium v_center"
+          >
             <TabItem :value="0" class="tab-item">{{ t("User_Pass_Auth") }}</TabItem>
             <TabItem :value="1" class="tab-item">{{ t("API_Auth") }}</TabItem>
+            <TabItem :value="2" class="tab-item">{{ t("menu_spec.data_proxy") }}</TabItem>
+            <TabItem :value="3" class="tab-item">{{ t("menu_spec.static_proxy") }}</TabItem>
           </Tab>
         </div>
       </template>
@@ -67,6 +75,15 @@ function back() {
     router.back()
   } catch (error) {
     router.push("/overview")
+  }
+}
+
+function activeChange() {
+  if (active.value === 2) {
+    // 切换到账密提取页时，默认选中账密提取
+    router.push("/data_center?active=2")
+  } else if (active.value === 3) {
+    router.push("/static?active=2")
   }
 }
 </script>

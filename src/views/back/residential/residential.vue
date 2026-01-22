@@ -7,6 +7,7 @@
       <template #nav>
         <div class="w-full">
           <Tab
+            ref="tabRef"
             v-model="active"
             :active-style="activeStyle"
             @change="activeChange"
@@ -35,14 +36,19 @@ import Price from "./price/index.vue"
 // import GetProxy from "./proxy/index.vue"
 import Billing from "./billing/index.vue"
 import { useI18n } from "vue-i18n"
-import { ref } from "vue"
-import { useRouter } from "vue-router"
+import { computed, ref, watch } from "vue"
+import { useRoute, useRouter } from "vue-router"
 
 const { t } = useI18n()
 const router = useRouter()
-
+const route = useRoute()
+const tabRef = ref(false)
+const queryActive = computed(() => (route.query?.active ? Number(route.query?.active) : 0))
+watch(queryActive, (val) => {
+  tabRef.value.handleTabClick(val)
+})
 // 头部nav tab
-const active = ref(0) // 0:Price 1:Get_Proxy 2:Billing
+const active = ref(queryActive.value) // 0:Price 1:Get_Proxy 2:Billing
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

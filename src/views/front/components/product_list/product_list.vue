@@ -765,6 +765,7 @@ async function payCustomPack() {
       order_no: customPack.value.order_no,
       order_price: customPack.value.order_price,
       order_usdt_price: customPack.value.order_usdt_price,
+      type: type.value,
       desc_3: getTitleDesc(customPack.value.product_type),
       desc_4: "",
     }
@@ -971,6 +972,7 @@ async function FoundOrder() {
       order_no: data.order_no,
       order_price: data.order_price,
       order_usdt_price: data.order_usdt_price,
+      type: type.value,
       desc_3: getTitleDesc(props.type),
       desc_4: "",
     }
@@ -1053,6 +1055,7 @@ async function orderNewUserAward() {
       order_no: data.order_no,
       order_price: data.order_price,
       order_usdt_price: data.order_usdt_price,
+      type: type.value,
       desc_3: product.value.pack_size,
       desc_4: "",
     }

@@ -157,7 +157,7 @@ onMounted(() => {
 .sidebar {
   width: 260px;
   @media screen and (max-width: 1536px) {
-    width: 66px;
+    width: 50px;
   }
 }
 .board {

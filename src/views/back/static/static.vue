@@ -7,6 +7,7 @@
       <template #nav>
         <div class="w-full">
           <Tab
+            ref="tabRef"
             v-model="active"
             :active-style="activeStyle"
             @change="activeChange"
@@ -15,7 +16,7 @@
           >
             <TabItem :value="0" class="tab-item">{{ t("Price") }}</TabItem>
             <!-- <TabItem :value="1" class="tab-item">{{ t("Get_Proxy") }}</TabItem> -->
-            <TabItem :value="2" class="tab-item">IP {{ t("Management") }}</TabItem>
+            <TabItem :value="2" class="tab-item">{{ t("Proxy_List") }}</TabItem>
             <TabItem :value="3" class="tab-item">{{ t("Billing") }}</TabItem>
           </Tab>
         </div>
@@ -38,15 +39,19 @@ import Management from "./management/index.vue"
 // import GetProxy from "./proxy/index.vue"
 import Billing from "./billing/index.vue"
 import { useI18n } from "vue-i18n"
-import { ref } from "vue"
+import { computed, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 
 const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
-
+const tabRef = ref(false)
+const queryActive = computed(() => (route.query?.active ? Number(route.query?.active) : 0))
+watch(queryActive, (val) => {
+  tabRef.value.handleTabClick(val)
+})
 // 头部nav tab
-const active = ref(route.query?.active ? Number(route.query?.active) : 0) // 2:IP Management 3:Billing
+const active = ref(queryActive.value) // 2:IP Management 3:Billing
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

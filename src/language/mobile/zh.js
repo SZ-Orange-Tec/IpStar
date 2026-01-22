@@ -8,7 +8,7 @@ export default {
   ...productList,
   ...paypopup,
 
-  Price: "定价",
+  Plans: "套餐",
   Get_Proxy: "获取代理",
   Billing: "订单",
 

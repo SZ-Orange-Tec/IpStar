@@ -26,7 +26,7 @@ import { computed, inject, ref, toRefs } from "vue"
 
 const props = defineProps({
   lowest: {
-    type: Number || String,
+    type: [Number, String],
     default: 0,
   },
 })

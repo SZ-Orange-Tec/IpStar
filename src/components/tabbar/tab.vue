@@ -152,6 +152,7 @@ onUnmounted(() => {
 // 暴露方法供父组件调用
 defineExpose({
   updateActiveBgStyle,
+  handleTabClick,
   tabItems,
 })
 </script>

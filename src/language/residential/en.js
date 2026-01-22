@@ -8,7 +8,7 @@ export default {
   ...productList,
   ...paypopup,
 
-  Price: "Price",
+  Plans: "Plans",
   Get_Proxy: "Get Proxy",
   Billing: "Billing",
 

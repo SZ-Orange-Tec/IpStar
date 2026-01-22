@@ -8,10 +8,10 @@ export default {
   ...productList,
   ...paypopup,
 
-  Price: "定价",
+  Plans: "套餐",
   Get_Proxy: "获取代理",
   Billing: "订单",
-  Management: "管理",
+  Proxy_List: "代理列表",
 
   // ip 管理
   Please_Enter: "请输入",

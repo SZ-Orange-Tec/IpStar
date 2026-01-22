@@ -37,11 +37,13 @@ import StaticProxy from "./static/index.vue"
 import { useI18n } from "vue-i18n"
 import { ref } from "vue"
 import { computed } from "vue"
+import { useRoute } from "vue-router"
 
 const { t } = useI18n()
 
 // tabbar
-const active = ref(0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
+const route = useRoute()
+const active = ref(route.query?.active ? Number(route.query?.active) : 0) // 0:residential_proxy 1:unlimited_proxy 2:phone_proxy 3:data_proxy
 const activeStyle = {
   backgroundColor: "hsl(var(--primary) / 8%)",
   border: "1px solid hsl(var(--primary) / 90%)",

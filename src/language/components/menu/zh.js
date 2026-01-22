@@ -1,4 +1,9 @@
 export default {
+  Plans: "套餐",
+  Get_Proxy: "获取代理",
+  Billing: "订单",
+  Proxy_List: "代理列表",
+
   menu_spec: {
     overview: "概览",
     how_to_use: "如何使用",

@@ -7,7 +7,7 @@ export default {
   Starting_from: "Starting from:",
   Add_funds: "Add Funds",
   Start_now: "Start Now",
-  Management: "Management",
+  Proxy_List: "Proxy List",
   Residual_Traffic: "Residual Traffic",
   Consumption_Today: "Consumption Today",
   Total_IPs_Available: "Total IPs Available",
