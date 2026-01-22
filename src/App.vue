@@ -88,6 +88,7 @@ useHead(window.__UNHEAD__, {
 const showNewUserAward = ref(false)
 function openNewUserAward() {
   if (!newer_promotion.value.promotion) return
+  if (route.path === "/residential") return
 
   showNewUserAward.value = true
 }

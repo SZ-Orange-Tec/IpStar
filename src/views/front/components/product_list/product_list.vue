@@ -40,7 +40,7 @@
             <li class="newUserAward" key="award-mask">
               <div class="h-full vh_center rounded-lg relative p-2 bg-white border-2 border-gray-200 mask">
                 <div class="column_center">
-                  <h1 class="text-xl font-medium">更多常规套餐</h1>
+                  <h1 class="text-xl font-medium">{{ t("productList_spec.newer_mask1") }}</h1>
                   <ul class="vh_center space-x-3 mt-5">
                     <li>4 GB</li>
                     <li class="h-3 w-px text-gray-500 bg-current"></li>
@@ -53,12 +53,12 @@
 
                   <ip-button type="primary_border" class="h-11 rounded w-full mt-5" @click="showAllPack = true">
                     <div class="v_center space-x-2">
-                      <span>查看全部价格</span>
+                      <span>{{ t("productList_spec.newer_mask2") }}</span>
                       <MoveRight :size="16" />
                     </div>
                   </ip-button>
 
-                  <p class="text-gray-500 mt-5">需要更多流量？点击展开完整列表</p>
+                  <p class="text-gray-500 mt-5">{{ t("productList_spec.newer_mask3") }}</p>
                 </div>
               </div>
             </li>

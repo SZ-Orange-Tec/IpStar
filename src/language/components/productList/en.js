@@ -78,5 +78,9 @@ export default {
     new_user_activity: "The promotion lasts for {day} days.",
     pay_only_price: "Promo Price",
     pay_only_total: "Promo Payment",
+
+    newer_mask1: "More Plans",
+    newer_mask2: "View All",
+    newer_mask3: "Need more data? Click to expand the full list",
   },
 }

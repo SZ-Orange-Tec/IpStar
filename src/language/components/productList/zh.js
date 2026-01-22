@@ -79,5 +79,9 @@ export default {
 
     pay_only_price: "活动价格",
     pay_only_total: "优惠后支付",
+
+    newer_mask1: "更多常规套餐",
+    newer_mask2: "查看全部价格",
+    newer_mask3: "需要更多流量？点击展开完整列表",
   },
 }
