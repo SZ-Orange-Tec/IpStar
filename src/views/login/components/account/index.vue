@@ -4,11 +4,11 @@
       <p class="text-sm">{{ t("login_spec.label1") }}</p>
       <label class="v_center input_box transition-color">
         <MailIcon :size="18" class="flex-shrink-0 icon" />
-        <input type="text" v-model.trim="email" class="flex-1 text-sm" :placeholder="t('Email')" />
+        <input autofocus type="text" v-model.trim="email" class="flex-1 text-sm" :placeholder="t('Email')" />
       </label>
     </div>
 
-    <IpButton type="primary" class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading }">
+    <IpButton type="primary" class="btn pointer vh_center space-x-2 transition-color" @click="submit" :class="{ disabled: btnLoading || !email }">
       <span class="ip-loading" v-if="btnLoading"></span>
       <span>{{ t("Next") }}</span>
     </IpButton>
@@ -117,7 +117,7 @@ function handlerGoogleLogin() {
       "/google.html&client_id=" +
       import.meta.env.VITE_GOOGLE_CLIENT_ID,
     "Google",
-    "width=500, height=600,left=700,top=150"
+    "width=500, height=600,left=700,top=150",
   )
   getGoogleInfo = debounce((event) => {
     if (event.data.from === "google") {
@@ -176,7 +176,7 @@ function handlerGithubLogin() {
       location.host.replace("www.", "") +
       "/github.html",
     "Github",
-    "width=500, height=600,left=700,top=150"
+    "width=500, height=600,left=700,top=150",
   )
   getGithubInfo = debounce((event) => {
     if (event.data.from === "github") {

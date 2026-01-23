@@ -134,8 +134,8 @@
                     :class="{ 'text-slate-400 !font-normal line-through': item.prices[item.select].price !== item.prices[item.select].actual_price }"
                   >
                     <span class="grey-60">{{ t("Total") }}:</span>
-                    <template v-if="type !== 3">${{ item.prices[item.select].price / 100 }}</template>
-                    <template v-else>${{ item.total }}</template>
+                    <template v-if="type === 3 || type === 5">${{ item.total }}</template>
+                    <template v-else>${{ item.prices[item.select].price / 100 }}</template>
                   </p>
 
                   <!-- 活动 -->
@@ -1048,6 +1048,7 @@ watch(
     }
     nextTick(() => {
       GetProductList()
+      getRegions()
       if (isLogin.value) {
         GetCustomPack()
       }

@@ -14,11 +14,11 @@
     <div class="table_box">
       <el-table :data="tableData" :height="500" v-loading="loading">
         <el-table-column prop="address" :label="$t('Address')" min-width="160"></el-table-column>
-        <el-table-column prop="port" :label="$t('Port') + '(S5/HTTP)'" min-width="160"></el-table-column>
-        <el-table-column prop="username" :label="$t('Username')" min-width="160"></el-table-column>
+        <el-table-column prop="port" :label="$t('Port') + '(S5/HTTP)'" min-width="140"></el-table-column>
+        <el-table-column prop="username" :label="$t('Username')" min-width="170"></el-table-column>
         <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
         <el-table-column prop="region_code" :label="$t('Locations')" min-width="90"></el-table-column>
-        <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="160"></el-table-column>
+        <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="170"></el-table-column>
         <el-table-column :label="$t('Status')" min-width="140">
           <template #default="scope">
             <div class="v_center space-x-2" v-if="scope.row.status === 0">

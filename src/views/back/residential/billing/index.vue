@@ -3,9 +3,9 @@
     <div class="w-full box-border p-5 board rounded table_box space-y-3">
       <div class="table_box">
         <el-table :data="tableData" style="width: 100%" v-loading="loading">
-          <el-table-column prop="order_no" :label="t('Order_Number')" min-width="140"></el-table-column>
-          <el-table-column prop="create_time" :label="t('Order_Date')" min-width="120"></el-table-column>
-          <el-table-column prop="pay_time" :label="t('Payment_Date')" min-width="120"></el-table-column>
+          <el-table-column prop="order_no" :label="t('Order_Number')" min-width="170"></el-table-column>
+          <el-table-column prop="create_time" :label="t('Order_Date')" min-width="170"></el-table-column>
+          <el-table-column prop="pay_time" :label="t('Payment_Date')" min-width="170"></el-table-column>
           <el-table-column :label="t('Validity_Period')" min-width="120">
             <template #default="scope">
               <span v-if="scope.row.days < 0 || scope.row.days > 3560">{{ t("Never_Expire") }}</span>

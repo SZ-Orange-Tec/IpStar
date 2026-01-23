@@ -86,7 +86,7 @@
           <el-table-column prop="password" :label="$t('Password')" min-width="120"></el-table-column>
           <el-table-column prop="region_code" :label="$t('Locations')" min-width="100"></el-table-column>
           <!-- <el-table-column prop="create_time" :label="$t('Purchase_time')" min-width="160"></el-table-column> -->
-          <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="160"></el-table-column>
+          <el-table-column prop="expire_time" :label="$t('Expiration_time')" min-width="170"></el-table-column>
           <el-table-column :label="$t('Status')" min-width="120">
             <template #default="scope">
               <div class="v_center space-x-2" v-if="scope.row.status === 0">
