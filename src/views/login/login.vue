@@ -112,11 +112,12 @@ import userStore from "../../store/user"
 import IpImage from "@/components/image/image.vue"
 import Confirm from "@/components/confirm/confirm.js"
 import layoutStore from "../../store/layout"
+import { typeOf } from "../../utils/tools"
 
 const { t } = useI18n()
 
 const router = useRouter()
-const { token } = loginStore()
+const { token, afterLoginPath } = loginStore()
 const { en } = settingsStore()
 const { getUserInfo } = userStore()
 const { getConfig } = layoutStore()
@@ -209,11 +210,11 @@ async function next(func) {
           const config = await getConfig()
           if (config.newer_promotion.promotion) {
             nextTick(() => {
-              router.replace("/residential")
+              router.replace(afterLoginPath.value ?? "/residential")
             })
           } else {
             nextTick(() => {
-              router.replace("/overview")
+              router.replace(afterLoginPath.value ?? "/overview")
             })
           }
 
@@ -259,11 +260,11 @@ async function next(func) {
           const config = await getConfig()
           if (config.newer_promotion.promotion) {
             nextTick(() => {
-              router.push("/residential")
+              router.replace(afterLoginPath.value ?? "/residential")
             })
           } else {
             nextTick(() => {
-              router.push("/overview")
+              router.push(afterLoginPath.value ?? "/overview")
             })
           }
 
@@ -315,7 +316,7 @@ async function next(func) {
 
         await getUserInfo()
         nextTick(() => {
-          router.push("/overview")
+          router.push(afterLoginPath.value ?? "/overview")
         })
 
         Message({
@@ -363,10 +364,6 @@ function back() {
 function toHome() {
   router.push("/home")
 }
-
-onMounted(() => {
-  loadBack()
-})
 </script>
 
 <style lang="less" scoped>

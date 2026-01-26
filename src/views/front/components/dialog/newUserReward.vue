@@ -86,7 +86,7 @@ import { ref } from "vue"
 
 const { t } = useI18n()
 const { newer_promotion } = layoutStore()
-const { isLogin } = loginStore()
+const { isLogin, afterLoginPath } = loginStore()
 
 const show = defineModel()
 function close() {
@@ -118,6 +118,7 @@ const product = ref(null)
 const loading = ref(false)
 function buyNewUserAward() {
   if (!isLogin.value) {
+    afterLoginPath.value = "/residential"
     router.push("/login")
     close()
     Message({

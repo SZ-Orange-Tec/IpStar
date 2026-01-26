@@ -3,6 +3,9 @@ import userStore from "./user"
 
 const state = reactive({
   token: localStorage.getItem("token") || "",
+
+  // 登录后的事件
+  afterLoginPath: null,
 })
 
 const getters = {

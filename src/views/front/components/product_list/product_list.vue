@@ -607,6 +607,7 @@ const InputNumber = defineAsyncComponent(() => import("./number/number.vue"))
 
 const { en, lang } = settingStore()
 const layout = layoutStore()
+const { afterLoginPath } = loginStore()
 
 const props = defineProps({
   type: {
@@ -949,6 +950,8 @@ function click_pay(e) {
   const item = product_list.value[index]
 
   if (!isLogin.value) {
+    const paths = ["/residential", "/unlimited", "/mobile", "/data_center", "/residential", "/static"]
+    afterLoginPath.value = paths[+type.value] ?? "/overview"
     router.push("/login")
     Message({
       type: "info",
