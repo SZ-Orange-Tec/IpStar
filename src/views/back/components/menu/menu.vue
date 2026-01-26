@@ -208,7 +208,7 @@ function getSlideList() {
       idx: "help",
     },
   ]
-  focusPath(route.path)
+  // focusPath(route.path)
 }
 function selectMenu(e) {
   const index = +e.currentTarget.dataset.index
@@ -246,7 +246,7 @@ function toggleMenu(index, content) {
   menuData.value = menu
 }
 function jumpPath(path) {
-  focusPath(path)
+  // focusPath(path)
   router.push(path)
 }
 function focusPath(path) {
@@ -280,12 +280,12 @@ function focusPath(path) {
   }
 }
 
-// watch(
-//   () => route.path,
-//   (val) => {
-//     focusPath(val)
-//   },
-// )
+watch(
+  () => route.fullPath,
+  (val) => {
+    focusPath(val)
+  },
+)
 watch(lang, (val) => {
   getSlideList()
 })

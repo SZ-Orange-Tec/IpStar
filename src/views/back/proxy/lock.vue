@@ -19,31 +19,13 @@
 <script setup>
 import IpButton from "@/components/button/button.vue"
 import { ShoppingCart } from "lucide-vue-next"
-import { inject } from "vue"
 import { useI18n } from "vue-i18n"
 import { useRouter } from "vue-router"
 
 const { t } = useI18n()
 
 const router = useRouter()
-const active = inject("active_tab")
 function toBuy() {
-  switch (active.value) {
-    case 0:
-      router.push("/residential")
-      break
-    case 1:
-      router.push("/unlimited")
-      break
-    case 2:
-      router.push("/mobile")
-      break
-    case 3:
-      router.push("/data_center")
-      break
-    default:
-      router.push("/residential")
-      break
-  }
+  router.push("/residential?active=0")
 }
 </script>

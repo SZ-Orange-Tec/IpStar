@@ -29,6 +29,19 @@
               <ip-button type="link" @click="toUse">{{ $t("Go_Use") }}</ip-button>
             </template>
           </el-table-column>
+          <template #empty>
+            <div class="column_center space-y-5 py-10" v-if="!loading && tableData.length < 1">
+              <p class="text-gray-500 leading-none">{{ t("purchase_spec.empty") }}</p>
+              <RouterLink to="/mobile?active=0">
+                <ip-button type="black" class="px-5 h-9 text-sm">
+                  <div class="vh_center space-x-2">
+                    <ShoppingCart :size="14" />
+                    <span>{{ t("Buy_Now") }}</span>
+                  </div>
+                </ip-button>
+              </RouterLink>
+            </div>
+          </template>
         </el-table>
       </div>
 
@@ -57,6 +70,7 @@ import { platCustomerProductsV2 } from "@/api/product"
 import { useI18n } from "vue-i18n"
 import IpButton from "@/components/button/button.vue"
 import { useRouter } from "vue-router"
+import { ShoppingCart } from "lucide-vue-next"
 
 const layout = inject("paginationLayout")
 

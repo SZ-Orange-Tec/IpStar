@@ -24,5 +24,9 @@ export default {
   Operate: "Operate",
   Go_Use: "Use",
 
-  purchase_spec: {},
+  Buy_Now: "Buy Now",
+
+  purchase_spec: {
+    empty: "No purchase records found",
+  },
 }

@@ -25,5 +25,9 @@ export default {
   Operate: "操作",
   Go_Use: "去使用",
 
-  purchase_spec: {},
+  Buy_Now: "立即购买",
+
+  purchase_spec: {
+    empty: "没有找到购买记录",
+  },
 }
