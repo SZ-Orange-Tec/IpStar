@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <IpButton class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading }">
+    <IpButton class="btn pointer vh_center space-x-2" @click="submit" :class="{ disabled: btnLoading || !password || code.length < 5 }">
       <span class="ip-loading" v-if="btnLoading"></span>
       <span>{{ t("Next") }}</span>
     </IpButton>
