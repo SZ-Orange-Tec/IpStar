@@ -8,6 +8,8 @@ import dialogNewUserAwarden from "./components/dialogNewUserAward/en"
 import setting from "@/store/setting"
 import { nextTick } from "vue"
 
+const { lang } = setting()
+
 const language = navigator.language.toLowerCase()
 const langMap = {
   "zh-cn": "zh",
@@ -47,6 +49,7 @@ const i18n = createI18n({
   warnHtmlInMessage: false,
   warnHtmlMessage: false,
 })
+lang.value = locale
 localStorage.setItem("lang", locale)
 
 // 设置语言
