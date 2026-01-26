@@ -75,7 +75,7 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "next"])
 
 const router = useRouter()
-const { token } = loginStore()
+const { token, afterLoginPath } = loginStore()
 const { lang } = settingStore()
 const { getUserInfo } = userStore()
 const { getConfig } = layoutStore()
@@ -141,11 +141,11 @@ function handlerGoogleLogin() {
           const config = await getConfig()
           if (config.newer_promotion.promotion) {
             nextTick(() => {
-              router.replace("/residential")
+              router.replace(afterLoginPath.value ?? "/residential")
             })
           } else {
             nextTick(() => {
-              router.replace("/overview")
+              router.replace(afterLoginPath.value ?? "/overview")
             })
           }
         })
@@ -202,11 +202,11 @@ function handlerGithubLogin() {
           const config = await getConfig()
           if (config.newer_promotion.promotion) {
             nextTick(() => {
-              router.replace("/residential")
+              router.replace(afterLoginPath.value ?? "/residential")
             })
           } else {
             nextTick(() => {
-              router.replace("/overview")
+              router.replace(afterLoginPath.value ?? "/overview")
             })
           }
         })
