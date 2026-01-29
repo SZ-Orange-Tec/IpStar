@@ -130,9 +130,9 @@ export default {
     static_desc:
       "A static datacenter proxy routes your traffic through a datacenter network. By utilizing the powerful infrastructure and resources of data centers, it delivers high-performance proxy services characterized by exceptional speed, stability, and access to a vast pool of IP addresses.",
 
-    isp_title: "Large-scale and stable static residential proxy network",
+    isp_title: "Pure and stable static residential proxy IP network",
     isp_desc:
-      "Wherever you require it globally, we can provide authentic static residential IPs. Covering over 500 thousand original residential IPs worldwide. Industry-leading speed with reliable, stable operation – no disconnections or interruptions.",
+      "Our static residential IPs originate from multiple leading global ISPs, encompassing over 500,000 authentic residential IP addresses worldwide. Tailor your package selection to precisely match your operational requirements, delivering industry-leading standards with high purity, rapid performance, and steadfast reliability—guaranteed without disconnections or interruptions.",
     isp_adv1: "Static residential IPs from carriers worldwide",
     isp_adv2: "Rapid static residential IPs",
     isp_adv3: "Coverage across 195 countries",

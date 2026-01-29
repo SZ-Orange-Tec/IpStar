@@ -191,9 +191,9 @@ async function next(func) {
           })
           if (data.auth_status === 0) {
             Confirm({
-              title: t("auth_account_title"),
+              title: t("auth_account_login"),
               type: "info",
-              message: t("auth_account_desc"),
+              message: t("auth_account_desc2"),
               showCancel: false,
               confirmText: t("OK"),
               success: () => {

@@ -65,6 +65,7 @@ import { track_register } from "@/utils/detect"
 import IpButton from "@/components/button/button.vue"
 import userStore from "../../../../store/user"
 import layoutStore from "../../../../store/layout"
+import Confirm from "@/components/confirm/confirm.js"
 
 const { t } = useI18n()
 
@@ -131,6 +132,19 @@ function handlerGoogleLogin() {
       googleLoading.value = true
       GoogleLogin(params)
         .then(async (res) => {
+          if (res.data.auth_status === 0) {
+            Confirm({
+              title: t("auth_account_login"),
+              type: "info",
+              message: t("auth_account_desc2"),
+              showCancel: false,
+              confirmText: t("OK"),
+              success: () => {
+                router.push("/home")
+              },
+            })
+            return
+          }
           // 存储token
           token.value = res.data.token
           localStorage.setItem("token", res.data.token)
@@ -192,6 +206,20 @@ function handlerGithubLogin() {
       githubLoading.value = true
       GithubLogin(params)
         .then(async (res) => {
+          if (res.data.auth_status === 0) {
+            Confirm({
+              title: t("auth_account_login"),
+              type: "info",
+              message: t("auth_account_desc2"),
+              showCancel: false,
+              confirmText: t("OK"),
+              success: () => {
+                router.push("/home")
+              },
+            })
+            return
+          }
+
           // 存储token
           localStorage.setItem("token", res.data.token)
           token.value = res.data.token

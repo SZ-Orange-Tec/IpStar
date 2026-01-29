@@ -1096,6 +1096,8 @@ async function orderNewUserAward() {
       desc_4: "",
     }
     payPopupRef.value.toggleDetail(false)
+
+    track_createOrder()
   } catch (error) {
     console.log(error.message)
   } finally {

@@ -13,5 +13,8 @@ export default {
   auth_account_title: "Registration submitted successfully.",
   auth_account_desc:
     "To ensure platform security and user rights, your account is now under manual review. The result will be sent to your email within 24 hours. Thank you for your patience.",
+  auth_account_login: "Your account has been restricted from logging in.",
+  auth_account_desc2:
+    "To safeguard your account security and rights, we have implemented login restrictions on your account. To restore normal access, please contact customer service for assistance.",
   OK: "OK",
 }
